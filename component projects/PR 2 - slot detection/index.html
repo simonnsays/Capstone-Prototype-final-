@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+  <title>Red Rectangle Detection</title>
+</head>
+
+<body>
+  <label for="imageInput">Choose an image:</label>
+  <input type="file" id="imageInput" accept="image/*" />
+  <br>
+  <label for="widthInput">Width:</label>
+  <input type="number" id="widthInput" value="0" />
+  <label for="heightInput">Height:</label>
+  <input type="number" id="heightInput" value="0" />
+  <button onclick="resizeImage()">Resize Image</button>
+  <br>
+  <canvas id="myCanvas"></canvas>
+
+  <script async src="https://docs.opencv.org/master/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+
+  <script>
+    let src;
+    let canvasWidth = 0;
+    let canvasHeight = 0;
+
+    const OpenCVHandler = {
+      onOpenCvReady: function () {
+        console.log('OpenCV.js is ready.');
+        document.getElementById('imageInput').addEventListener('change', this.handleImage.bind(this), false);
+      },
+
+      handleImage: function (e) {
+        console.log('Image selected.');
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d', {
+          willReadFrequently: true
+        });
+
+        const img = new Image();
+        img.onload = function () {
+          console.log('Image loaded.');
+          canvasWidth = img.width;
+          canvasHeight = img.height;
+          canvas.width = canvasWidth;
+          canvas.height = canvasHeight;
+          ctx.drawImage(img, 0, 0, img.width, img.height);
+
+          // Convert the canvas image to an OpenCV image
+          src = cv.imread(canvas);
+
+          // Detect and draw bounding boxes around red rectangles
+          OpenCVHandler.detectRedRectangles();
+        };
+
+        img.src = URL.createObjectURL(e.target.files[0]);
+      },
+
+      detectRedRectangles: function () {
+        console.log('Detecting red rectangles.');
+        // Convert the image to the HSV color space
+        const hsv = new cv.Mat();
+        cv.cvtColor(src, hsv, cv.COLOR_RGBA2RGB);
+        cv.cvtColor(hsv, hsv, cv.COLOR_RGB2HSV);
+
+        // Define the range of red color in HSV
+        const lowerRed = new cv.Mat(hsv.rows, hsv.cols, hsv.type(), [0, 100, 100, 0]);
+        const upperRed = new cv.Mat(hsv.rows, hsv.cols, hsv.type(), [10, 255, 255, 255]);
+
+        // Create a mask for the red color
+        const mask = new cv.Mat();
+        cv.inRange(hsv, lowerRed, upperRed, mask);
+
+        // Find contours in the mask
+        const contours = new cv.MatVector();
+        const hierarchy = new cv.Mat();
+        cv.findContours(mask, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+
+        // Create an array to store information about each detected rectangle
+        const detectedRectangles = [];
+
+        // Log the number of contours found
+        console.log('Number of contours found:', contours.size());
+
+        // Draw bounding boxes around detected red rectangles and store information
+        for (let i = 0; i < contours.size(); ++i) {
+          const color = new cv.Scalar(0, 255, 0, 255); // Green color
+          const rect = cv.boundingRect(contours.get(i));
+
+          // Draw the rectangle on the canvas
+          cv.rectangle(src, new cv.Point(rect.x, rect.y), new cv.Point(rect.x + rect.width, rect.y + rect.height), color, 2);
+
+          // Store information about the rectangle in the array
+          const rectangleInfo = {
+            x: rect.x,
+            y: rect.y,
+            width: rect.width,
+            height: rect.height
+          };
+
+          detectedRectangles.push(rectangleInfo);
+        }
+
+        // Draw the result on the canvas
+        cv.imshow('myCanvas', src);
+
+        // Log information about detected rectangles
+        console.log('Detected rectangles:', detectedRectangles);
+
+        // Release memory
+        hsv.delete();
+        lowerRed.delete();
+        upperRed.delete();
+        mask.delete();
+        contours.delete();
+        hierarchy.delete();
+      }
+    };
+
+    function onOpenCvReady() {
+      console.log('OpenCV.js loading completed.');
+      OpenCVHandler.onOpenCvReady();
+    }
+
+    function resizeImage() {
+      const newWidth = parseInt(document.getElementById('widthInput').value);
+      const newHeight = parseInt(document.getElementById('heightInput').value);
+
+      if (newWidth > 0 && newHeight > 0) {
+        canvasWidth = newWidth;
+        canvasHeight = newHeight;
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d', {
+          willReadFrequently: true
+        });
+
+        // Resize the OpenCV image
+        const resized = new cv.Mat();
+        cv.resize(src, resized, new cv.Size(canvasWidth, canvasHeight), 0, 0, cv.INTER_LINEAR);
+
+        // Draw the resized image onto the canvas
+        cv.imshow(canvas, resized);
+
+        // Release memory
+        resized.delete();
+
+        // Update the OpenCV image with the resized canvas
+        src.delete();
+        src = cv.imread(canvas);
+
+        // Detect and draw bounding boxes around red rectangles
+        OpenCVHandler.detectRedRectangles();
+      } else {
+        alert('Please enter valid width and height values.');
+      }
+    }
+  </script>
+</body>
+
+</html>

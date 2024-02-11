@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500&display=swap');
+
+:root {
+    --blue: #334155;
+    --light-lime: #abd699;
+    --fresh-lemon: #ffe26a;
+    --pastel-yellow: #fef9db;
+    --teal: #75c9b7;
+    --mint: #c7ddcc;
+    --navy: #16123f;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: grey; 
+    border-radius: 10px;
+}
+
+* {
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background: linear-gradient(to right, var(--light-lime),var(--teal) );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    /* animation: fadeInAnimation ease 1s ; */
+}
+
+/**************** START STYLES HERE *******************/
+button {
+    background: none;
+
+    border: none;
+}
+button:hover {
+    cursor: pointer;
+}
+
+.container {
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 30px;
+}
+
+canvas {
+    background-color:var(--pastel-yellow);
+
+    border-radius: 30px;
+}
+
+.arrow-container {
+    width: 130px;
+    height: 60px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(200, 200, 200, 0.6);
+
+    padding: 3px;
+}
+
+.arrow{
+    height: 50px;
+}
+
+.line-br-v {
+    height: 40px;
+
+    border: 1px solid black  ;
+    align-self: center;
+
+    opacity: .4;
+}
