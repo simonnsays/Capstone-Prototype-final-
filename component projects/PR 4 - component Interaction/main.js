@@ -37,7 +37,7 @@ const shelf = [
 let isDragging = false
 let dragOffset = {x: 0, y: 0}
 // Selected Component
-let selectedComponent = null
+let componentSelected = null
 
 // Component Handlers
 chassis.sides.forEach(side => {
@@ -152,8 +152,8 @@ function animate() {
         // al non-rotatables
         if(!component.rotatable) {
             side = getSide(component, component.defaultSide)
-            // No rotate buttons for non-rotatables
             indicator.innerHTML = displayArea.component.type
+            // No rotate buttons for non-rotatables
             leftBtn.style.visibility = 'hidden'
             rightBtn.style.visibility = 'hidden'
         } else {
@@ -230,8 +230,9 @@ function insideBox(point, areaBox) {
 }
 function selectComponent(point) {
     // return the component found or remain null
-    let componentFound = shelf.find(spot => spot.component && insideBox(point, spot.component.box)).component
-    return componentFound ?? null
+    let componentFound = shelf.find(spot => spot.component && insideBox(point, spot.component.box))
+    if (componentFound) return componentFound.component
+    else return null
 }
 
 // rotate right
@@ -257,29 +258,37 @@ canvas.addEventListener('mousedown', (e) => {
     // declare mouse point and selected component
     canvasRect = canvas.getBoundingClientRect()
     mousePoint = {x: e.clientX - canvasRect.left, y: e.clientY - canvasRect.top}
-    selectedComponent = selectComponent(mousePoint)
-    console.log(selectedComponent)
-    if(!selectedComponent) return   
+    componentSelected = selectComponent(mousePoint)
+    
+    if(!componentSelected) return   
 
     // if there is a selected Component
-    dragOffset = {
-        x: mousePoint.x - selectedComponent.box.x,
-        y: mousePoint.y - selectedComponent.box.y
-    }
-
     isDragging = true
+    dragOffset = {
+        x: mousePoint.x - componentSelected.box.x,
+        y: mousePoint.y - componentSelected.box.y
+    }
+    // Create Origin Coordinate to return to in case
+    componentSelected.origin = {x: componentSelected.box.x, y: componentSelected.box.y}
+    
 })
 
 // MOUSE MOVE
 canvas.addEventListener('mousemove', (e) => {
-    if(isDragging && selectedComponent) {
+    if(isDragging && componentSelected) {
         // Update the component's position based on the mouse position and offset
-        selectedComponent.box.x = e.clientX - canvasRect.left - dragOffset.x
-        selectedComponent.box.y = e.clientY - canvasRect.top - dragOffset.y
+        componentSelected.box.x = e.clientX - canvasRect.left - dragOffset.x
+        componentSelected.box.y = e.clientY - canvasRect.top - dragOffset.y
     }
 })
 
 // MOUSE UP
 canvas.addEventListener('mouseup', () => {
-    selectedComponent = null
+    if (!componentSelected) return
+    
+    componentSelected.box.x = componentSelected.origin.x
+    componentSelected.box.y = componentSelected.origin.y
+
+    delete componentSelected.origin
+    componentSelected = null
 })
