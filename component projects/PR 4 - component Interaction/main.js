@@ -36,6 +36,7 @@ const shelf = [
 // USER 
 let isDragging = false
 let dragOffset = {x: 0, y: 0}
+let mousePoint = {x: 0, y: 0}
 // Selected Component
 let componentSelected = null
 
@@ -157,6 +158,8 @@ function animate() {
             leftBtn.style.visibility = 'hidden'
             rightBtn.style.visibility = 'hidden'
         } else {
+            leftBtn.style.visibility = 'visible'
+            rightBtn.style.visibility = 'visible'
             side = getSide(component, globalSides[curr])
             indicator.innerHTML = side.name + ' side'
         }
@@ -256,8 +259,7 @@ leftBtn.addEventListener('click', () => {
 // MOUSE DOWN
 canvas.addEventListener('mousedown', (e) => {
     // declare mouse point and selected component
-    canvasRect = canvas.getBoundingClientRect()
-    mousePoint = {x: e.clientX - canvasRect.left, y: e.clientY - canvasRect.top}
+    
     componentSelected = selectComponent(mousePoint)
     
     if(!componentSelected) return   
@@ -275,6 +277,9 @@ canvas.addEventListener('mousedown', (e) => {
 
 // MOUSE MOVE
 canvas.addEventListener('mousemove', (e) => {
+    const canvasRect = canvas.getBoundingClientRect()
+    mousePoint.x = e.clientX - canvasRect.left
+    mousePoint.y = e.clientY - canvasRect.top
     if(isDragging && componentSelected) {
         // Update the component's position based on the mouse position and offset
         componentSelected.box.x = e.clientX - canvasRect.left - dragOffset.x
@@ -285,7 +290,20 @@ canvas.addEventListener('mousemove', (e) => {
 // MOUSE UP
 canvas.addEventListener('mouseup', () => {
     if (!componentSelected) return
-    
+
+    if(selectComponent && insideBox(mousePoint, displayArea.area)) {
+        displayArea.component = componentSelected
+        const i = shelf.findIndex(spot => spot.component && spot.component.id == componentSelected.id)
+        if(i !== -1) {
+            shelf[i].component == null
+        }
+        shelf.forEach(spot => {
+            console.log(spot)
+        })
+        console.log(displayArea)
+
+    }
+
     componentSelected.box.x = componentSelected.origin.x
     componentSelected.box.y = componentSelected.origin.y
 

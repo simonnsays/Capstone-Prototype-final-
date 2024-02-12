@@ -1,5 +1,7 @@
 // CHASIS
 const chassis = {
+    id: 'ch001',
+    name: 'NZXT H5 Flow',
     type: 'chasis',
     dimensions: {
         depth: 446,
@@ -78,6 +80,8 @@ const chassis = {
 
 // MOTHERBOARD
 const motherboard = {
+    id: 'mo001',
+    name: 'MPG Z790 CARBON MAX WIFI',
     type:'motherboard',
     dimensions: {
         width: 305, // 305 - 40
@@ -104,6 +108,8 @@ const motherboard = {
 
 // PSU
 const psu = {
+    id: 'ps001',
+    name: 'EVGA SuperNOVA 1300 P+, 80+ PLATINUM 1300W',
     type: 'psu',
     dimensions: {
         width: 150,
