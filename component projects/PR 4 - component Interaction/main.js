@@ -1,6 +1,5 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
-c.imageSmoothingEnabled = true; //remove blur
 
 canvas.width = 1300
 canvas.height = 680
@@ -33,6 +32,12 @@ const shelf = [
     {area: {x: 670, y: 460, width: 300, height: 210}, component: null},
     {area: {x: 980, y: 460, width: 310, height: 210}, component: null},
 ]
+
+// USER 
+let isDragging = false
+let dragOffset = {x: 0, y: 0}
+// Selected Component
+let selectedComponent = null
 
 // Component Handlers
 chassis.sides.forEach(side => {
@@ -176,18 +181,6 @@ function animate() {
         })    
     }
 
-    // draw current side   
-    // let part = getSide(chassis, globalSides[curr])//chassis.sides[curr]   
-    
-    // // Draw pc case
-    // c.drawImage (part.image,
-    //     300 - (part.width / 2),
-    //     300 - (part.height /2), 
-    //     part.width, 
-    //     part.height)
-
-    // indicator.innerHTML = part.name + ' panel'
-
     // Draw Slots
     // part.slots.forEach(slot => {
     //     slot.supports.forEach(form => {
@@ -221,15 +214,28 @@ function animate() {
 }
 animate()
 function determineScale(componentHeight, baseHeight) {
+    // start with 1 as scale and lower if it still doesnt fit
     let scale = 1
     while (componentHeight * scale > baseHeight) {
         scale -= .1
     }
     return scale
 }
+function insideBox(point, areaBox) {
+    return point.x > areaBox.x &&
+        point.x < areaBox.x + areaBox.width &&
+        point.y > areaBox.y &&
+        point.y < areaBox.y + areaBox.height    
+    
+}
+function selectComponent(point) {
+    // return the component found or remain null
+    let componentFound = shelf.find(spot => spot.component && insideBox(point, spot.component.box)).component
+    return componentFound ?? null
+}
 
+// rotate right
 rightBtn.addEventListener('click', () => {
-
     if(curr == 3) {
         curr = 0
         return
@@ -237,10 +243,43 @@ rightBtn.addEventListener('click', () => {
     curr++
 })
 
+// rotate left
 leftBtn.addEventListener('click', () => {
     if(curr == 0) {
         curr = 3
         return
     }
     curr--
+})
+
+// MOUSE DOWN
+canvas.addEventListener('mousedown', (e) => {
+    // declare mouse point and selected component
+    canvasRect = canvas.getBoundingClientRect()
+    mousePoint = {x: e.clientX - canvasRect.left, y: e.clientY - canvasRect.top}
+    selectedComponent = selectComponent(mousePoint)
+    console.log(selectedComponent)
+    if(!selectedComponent) return   
+
+    // if there is a selected Component
+    dragOffset = {
+        x: mousePoint.x - selectedComponent.box.x,
+        y: mousePoint.y - selectedComponent.box.y
+    }
+
+    isDragging = true
+})
+
+// MOUSE MOVE
+canvas.addEventListener('mousemove', (e) => {
+    if(isDragging && selectedComponent) {
+        // Update the component's position based on the mouse position and offset
+        selectedComponent.box.x = e.clientX - canvasRect.left - dragOffset.x
+        selectedComponent.box.y = e.clientY - canvasRect.top - dragOffset.y
+    }
+})
+
+// MOUSE UP
+canvas.addEventListener('mouseup', () => {
+    selectedComponent = null
 })
