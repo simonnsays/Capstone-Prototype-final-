@@ -14,11 +14,12 @@ let curr = 0
 
 // Display Label Indicator
 const indicator = document.querySelector('#panelIndicator')
+const compLabel = document.querySelector('#compLabel')
 
 // Display Area
 const displayArea = {
     area: {x: 10, y: 10, width: 650, height: 660},
-    component: psu
+    component: null
 }
 
 // Shelf
@@ -108,26 +109,6 @@ shelf.forEach(spot => {
         createBoundingBox(spot)
     }
 })
-function createBoundingBox(display) {
-    let component = display.component
-    let part = getSide(component, component.defaultSide)
-    // checks if the component has the side the global sides has currently
-    if (part) {
-        let scale = determineScale(part.height, 190)
-        let toCenter = {
-            x: (display.area.x + (display.area.width / 2)),
-            y: (display.area.y + (display.area.height / 2))
-        }
-        component.box = {
-            x: toCenter.x - ((part.width * scale) / 2),
-            y: toCenter.y - ((part.height * scale) / 2),
-            width: part.width * scale,
-            height: part.height * scale
-
-        }
-        
-    }
-}
 
 // ANIMATE
 function animate() {
@@ -153,7 +134,7 @@ function animate() {
         // al non-rotatables
         if(!component.rotatable) {
             side = getSide(component, component.defaultSide)
-            indicator.innerHTML = displayArea.component.type
+            // indicator.innerHTML = displayArea.component.type
             // No rotate buttons for non-rotatables
             leftBtn.style.visibility = 'hidden'
             rightBtn.style.visibility = 'hidden'
@@ -163,26 +144,26 @@ function animate() {
             side = getSide(component, globalSides[curr])
             indicator.innerHTML = side.name + ' side'
         }
+        compLabel.innerHTML = displayArea.component.type
         c.drawImage(side.image, 
             (displayArea.area.width / 2) - (side.width / 2), // center of the area x
             (displayArea.area.height / 2) - (side.height / 2), // center  of the area y
             side.width,
             side.height
-        )
-
-        // Draw Components in Shelf Area
-        shelf.forEach(spot => {
-            if(spot.component) {
-                let image = getSide(spot.component, spot.component.defaultSide).image
-                c.drawImage(image,
-                    spot.component.box.x,
-                    spot.component.box.y,
-                    spot.component.box.width,
-                    spot.component.box.height,
-                )
-            }
-        })    
+        )  
     }
+    // Draw Components in Shelf Area
+    shelf.forEach(spot => {
+        if(spot.component) {
+            let image = getSide(spot.component, spot.component.defaultSide).image
+            c.drawImage(image,
+                spot.component.box.x,
+                spot.component.box.y,
+                spot.component.box.width,
+                spot.component.box.height,
+            )
+        }
+    })  
 
     // Draw Slots
     // part.slots.forEach(slot => {
@@ -216,27 +197,6 @@ function animate() {
     requestAnimationFrame(animate)
 }
 animate()
-function determineScale(componentHeight, baseHeight) {
-    // start with 1 as scale and lower if it still doesnt fit
-    let scale = 1
-    while (componentHeight * scale > baseHeight) {
-        scale -= .1
-    }
-    return scale
-}
-function insideBox(point, areaBox) {
-    return point.x > areaBox.x &&
-        point.x < areaBox.x + areaBox.width &&
-        point.y > areaBox.y &&
-        point.y < areaBox.y + areaBox.height    
-    
-}
-function selectComponent(point) {
-    // return the component found or remain null
-    let componentFound = shelf.find(spot => spot.component && insideBox(point, spot.component.box))
-    if (componentFound) return componentFound.component
-    else return null
-}
 
 // rotate right
 rightBtn.addEventListener('click', () => {
@@ -291,17 +251,22 @@ canvas.addEventListener('mousemove', (e) => {
 canvas.addEventListener('mouseup', () => {
     if (!componentSelected) return
 
-    if(selectComponent && insideBox(mousePoint, displayArea.area)) {
+    // If Component is in Display area
+    if(componentSelected && insideBox(mousePoint, displayArea.area)) {
+        // Swap the selected component and the component in the display area
+        const tmpComponent = displayArea.component
         displayArea.component = componentSelected
-        const i = shelf.findIndex(spot => spot.component && spot.component.id == componentSelected.id)
-        if(i !== -1) {
-            shelf[i].component == null
-        }
-        shelf.forEach(spot => {
-            console.log(spot)
-        })
-        console.log(displayArea)
+        console.log(tmpComponent)
 
+        //find the index of the selected component and replace with temp var
+        const i = shelf.findIndex(spot => spot.component && spot.component.id == componentSelected.id)  
+        shelf[i].component = tmpComponent //place the temp variable in the index 
+        // fix positioning of shelf spot components
+        shelf.forEach((spot, i) => {
+            
+            if(spot.component) createBoundingBox(spot);
+            
+        })
     }
 
     componentSelected.box.x = componentSelected.origin.x
@@ -309,4 +274,5 @@ canvas.addEventListener('mouseup', () => {
 
     delete componentSelected.origin
     componentSelected = null
+    console.log(shelf)
 })
