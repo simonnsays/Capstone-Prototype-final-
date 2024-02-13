@@ -19,7 +19,7 @@ const compLabel = document.querySelector('#compLabel')
 // Display Area
 const displayArea = {
     area: {x: 10, y: 10, width: 650, height: 660},
-    component: null
+    component: chassis
 }
 
 // Shelf
@@ -27,7 +27,7 @@ const shelf = [
     {area: {x: 670, y: 10, width: 300, height: 210}, component: motherboard},
     {area: {x: 980, y: 10, width: 310, height: 210}, component: psu},
 
-    {area: {x: 670, y: 230, width: 300, height: 220}, component: chassis},
+    {area: {x: 670, y: 230, width: 300, height: 220}, component: null},
     {area: {x: 980, y: 230, width: 310, height: 220}, component: null},
 
     {area: {x: 670, y: 460, width: 300, height: 210}, component: null},
@@ -102,6 +102,21 @@ psu.sides.forEach(side => {
     }
 })
 
+// Creation of bounding box for diplay area component
+function createDisplayAreaComponentBox(component, side) {
+    component.box = {
+        x: (displayArea.area.width / 2) - (side.width / 2), // center of the area x
+        y: (displayArea.area.height / 2) - (side.height / 2), // center of the area y
+        width: side.width,
+        height: side.height
+    }
+}
+if(displayArea.component) {
+    let component = displayArea.component
+    let side = getSide(component, component.defaultSide)
+
+    createDisplayAreaComponentBox(component, side)
+}
 // Creation of bounding box for shelf spots
 shelf.forEach(spot => {
     // createBoundingBox()
@@ -131,26 +146,44 @@ function animate() {
     if(displayArea.component) {
         let component = displayArea.component
         let side = null
-        // al non-rotatables
+        // separate non-rotatables
         if(!component.rotatable) {
             side = getSide(component, component.defaultSide)
-            // indicator.innerHTML = displayArea.component.type
             // No rotate buttons for non-rotatables
             leftBtn.style.visibility = 'hidden'
             rightBtn.style.visibility = 'hidden'
+            indicator.style.visibility = 'hidden'
         } else {
             leftBtn.style.visibility = 'visible'
             rightBtn.style.visibility = 'visible'
+            indicator.style.visibility = 'visible'
+            
             side = getSide(component, globalSides[curr])
-            indicator.innerHTML = side.name + ' side'
+            indicator.innerHTML = globalSides[curr] + ' side' // display current side name
         }
-        compLabel.innerHTML = displayArea.component.type
+        compLabel.innerHTML = displayArea.component.type // component label
+
+        // reinitialize component box to match the actual size(width and height)
+        createDisplayAreaComponentBox(component, side) 
+        // Draw the component
         c.drawImage(side.image, 
-            (displayArea.area.width / 2) - (side.width / 2), // center of the area x
-            (displayArea.area.height / 2) - (side.height / 2), // center  of the area y
-            side.width,
-            side.height
+            component.box.x, 
+            component.box.y,
+            component.box.width,
+            component.box.height
         )  
+        // Draw available slots (component.sides > slotBoxes > supports)
+        side.slotBoxes.forEach(slotBox => { 
+            slotBox.supports.forEach(slot => {
+                c.fillStyle = 'rgba(0,255,0,0.2)'
+                c.fillRect( 
+                    component.box.x + slot.offset.x,
+                    component.box.y + slot.offset.y,
+                    slot.offset.width,
+                    slot.offset.height    
+                )
+            })
+        })
     }
     // Draw Components in Shelf Area
     shelf.forEach(spot => {
@@ -165,50 +198,12 @@ function animate() {
         }
     })  
 
-    // Draw Slots
-    // part.slots.forEach(slot => {
-    //     slot.supports.forEach(form => {
-    //         // c.fillStyle = 'rgba(0,255,0,.2)'
-    //         // c.fillRect( (300 - (part.width / 2)) + form.offset.x, (300 - (part.height /2)) + form.offset.y, form.offset.width, form.offset.height)
-    //     })
-    //     // Draw components occupying the slot
-    //     if(slot.occupied) {
-    //         component = slot.component
-    //         // .support[0] means that it is accepting all formFactors as of now
-    //         offset = slot.supports[0].offset
-    //         // for psu
-    //         if(slot.type === 'psu') {
-    //             c.drawImage(component.image,
-    //                 (300 - (part.width / 2)) + ((offset.x + offset.width) - component.width ),
-    //                 300 - (part.height /2) + offset.y,
-    //                 component.width,
-    //                 offset.height)
-    //         } else {
-    //             c.drawImage(component.image,
-    //                 (300 - (part.width / 2)) + offset.x,
-    //                 300 - (part.height /2) + offset.y,
-    //                 offset.width,
-    //                 offset.height)
-    //         }
-    //     }     
-    // })
-
-
     requestAnimationFrame(animate)
 }
 animate()
 
 // rotate right
 rightBtn.addEventListener('click', () => {
-    if(curr == 3) {
-        curr = 0
-        return
-    }
-    curr++
-})
-
-// rotate left
-leftBtn.addEventListener('click', () => {
     if(curr == 0) {
         curr = 3
         return
@@ -216,10 +211,18 @@ leftBtn.addEventListener('click', () => {
     curr--
 })
 
+// rotate left
+leftBtn.addEventListener('click', () => {
+    if(curr == 3) {
+        curr = 0
+        return
+    }
+    curr++
+})
+
 // MOUSE DOWN
 canvas.addEventListener('mousedown', (e) => {
-    // declare mouse point and selected component
-    
+    // declare selected component
     componentSelected = selectComponent(mousePoint)
     
     if(!componentSelected) return   
@@ -256,23 +259,23 @@ canvas.addEventListener('mouseup', () => {
         // Swap the selected component and the component in the display area
         const tmpComponent = displayArea.component
         displayArea.component = componentSelected
-        console.log(tmpComponent)
 
         //find the index of the selected component and replace with temp var
         const i = shelf.findIndex(spot => spot.component && spot.component.id == componentSelected.id)  
         shelf[i].component = tmpComponent //place the temp variable in the index 
         // fix positioning of shelf spot components
         shelf.forEach((spot, i) => {
-            
-            if(spot.component) createBoundingBox(spot);
-            
+            if(spot.component) {
+                createBoundingBox(spot)
+            }
         })
     }
 
+    // return to shelf if no interaction
     componentSelected.box.x = componentSelected.origin.x
     componentSelected.box.y = componentSelected.origin.y
 
+    // reset temp attributes
     delete componentSelected.origin
     componentSelected = null
-    console.log(shelf)
 })
