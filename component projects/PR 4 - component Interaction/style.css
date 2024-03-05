@@ -8,6 +8,11 @@
     --teal: #75c9b7;
     --mint: #c7ddcc;
     --navy: #16123f;
+
+    --darkMode-blue1: #2F4F4F; 
+    --darkMode-blue2: #7DAFC2;
+    --darkMode-green1: #455b54;
+    --darkMode-green2: #527e71;
 }
 
 ::-webkit-scrollbar {
@@ -27,6 +32,7 @@
 }
 
 body {
+    /* background: linear-gradient(to right, var(--darkMode-blue1),var(--darkMode-blue2) ); */
     background: linear-gradient(to right, var(--light-lime),var(--teal) );
     display: flex;
     justify-content: center;
@@ -42,7 +48,8 @@ body {
 }
 
 canvas {
-    background-color: #fef9db;
+    /* background-color: var(--darkMode-green1); */
+    background-color: var(--pastel-yellow);
 
     border-radius: 30px
 }
@@ -51,7 +58,7 @@ canvas {
     width: 600px;
     height: 50px;   
     position: absolute;
-    bottom: 30;
+    bottom: 40;
     left: 30;
     display: flex;
     justify-content: space-evenly;
@@ -73,6 +80,29 @@ canvas {
     height: 100%;
 }
 
-#panelIndicator, #compLabel {
+#panelIndicator, #compLabel, #compName {
     text-align: center;
+    margin: 5px 0;
+}
+
+#left, #right {
+    visibility: hidden;
+}
+
+.button-wrapper {
+    position: absolute;
+    top: 20;
+    left: 20;
+}
+
+.button-wrapper > button {
+    height: 2.7rem;
+    width: 9rem;
+    border: 3px solid black;
+    border-radius: 20px;
+    margin: 5px
+}
+
+.button-wrapper > button:hover {
+    background-color: var(--mint);
 }

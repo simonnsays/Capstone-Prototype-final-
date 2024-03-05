@@ -5,27 +5,36 @@ canvas.width = 1300
 canvas.height = 680
 
 // BUTTONS
+// const mount = document.querySelector('#mount')
+// const unmount = document.querySelector('#unmount')
 const rightBtn = document.querySelector('#right')
 const leftBtn = document.querySelector('#left')
+
+// (TEMP) COMPONENT BUTTONS
+const componentButtons = document.querySelectorAll('[data-type="component"]')
+
+// console.log(mount.active)
 
 // Current Side
 const globalSides = ['left', 'front', 'right', 'rear']
 let curr = 0
+let currentSide = globalSides[curr]
 
 // Display Label Indicator
 const indicator = document.querySelector('#panelIndicator')
 const compLabel = document.querySelector('#compLabel')
+const compName = document.querySelector('#compName')
 
 // Display Area
 const displayArea = {
     area: {x: 10, y: 10, width: 650, height: 660},
-    component: chassis
+    component: null
 }
 
 // Shelf
 const shelf = [
-    {area: {x: 670, y: 10, width: 300, height: 210}, component: motherboard},
-    {area: {x: 980, y: 10, width: 310, height: 210}, component: psu},
+    {area: {x: 670, y: 10, width: 300, height: 210}, component: null},
+    {area: {x: 980, y: 10, width: 310, height: 210}, component: null},
 
     {area: {x: 670, y: 230, width: 300, height: 220}, component: null},
     {area: {x: 980, y: 230, width: 310, height: 220}, component: null},
@@ -35,103 +44,37 @@ const shelf = [
 ]
 
 // USER 
-let isDragging = false
-let dragOffset = {x: 0, y: 0}
-let mousePoint = {x: 0, y: 0}
-// Selected Component
-let componentSelected = null
-
-// Component Handlers
-chassis.sides.forEach(side => {
-    // create image
-    side.image = new Image()
-    side.image.src = side.imageSrc
-
-    // create dimension per side
-    switch(side.name) {
-        case 'left':
-        case 'right':
-            side.width = chassis.dimensions.depth
-            side.height = chassis.dimensions.height
-            break
-        case 'front':
-        case 'rear':
-            side.width = chassis.dimensions.width
-            side.height = chassis.dimensions.height
-            break
-    }
-})
-
-motherboard.sides.forEach(side => {
-    // create image
-    side.image = new Image()
-    side.image.src = side.imageSrc
-
-    // create dimension per side
-    switch(side.name) {
-        case 'left':
-        case 'right':
-            side.width = motherboard.dimensions.height
-            side.height = motherboard.dimensions.width
-            break
-        case 'front':
-        case 'rear':
-            side.width = motherboard.dimensions.height
-            side.height = motherboard.dimensions.depth 
-            break
-    }
-})
-
-psu.sides.forEach(side => {
-    // create image
-    side.image = new Image()
-    side.image.src = side.imageSrc
-
-    // create dimension per side
-    switch(side.name) {
-        case 'left':
-        case 'right':
-            side.width = psu.dimensions.depth
-            side.height = psu.dimensions.height
-            break
-        case 'front':
-        case 'rear':
-            side.width = psu.dimensions.width
-            side.height = psu.dimensions.height
-            break
-    }
-})
-
-// Creation of bounding box for diplay area component
-function createDisplayAreaComponentBox(component, side) {
-    component.box = {
-        x: (displayArea.area.width / 2) - (side.width / 2), // center of the area x
-        y: (displayArea.area.height / 2) - (side.height / 2), // center of the area y
-        width: side.width,
-        height: side.height
-    }
+const user = {
+    isDragging : false,
+    dragOffset : {x: 0, y: 0},
+    mousePoint : {x: 0, y: 0},
+    componentSelected : null, // Selected Component
+    availableSlots : []
 }
-if(displayArea.component) {
-    let component = displayArea.component
-    let side = getSide(component, component.defaultSide)
 
-    createDisplayAreaComponentBox(component, side)
+/*
+/
+/       CONSIDER AS METHOD FUNCTIONS
+/
+*/
+
+// Start Simulation
+start()
+
+// MAIN START FUNCTION
+function start() {
+    initialize()
+    animate()
 }
-// Creation of bounding box for shelf spots
-shelf.forEach(spot => {
-    // createBoundingBox()
-    if(spot.component) {
-        createBoundingBox(spot)
-    }
-})
 
-// ANIMATE
+// MAIN ANIMATE FUNCTION
 function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height) // clear
     c.imageSmoothingEnabled = true;
     
     // Fill Background
-    c.fillStyle = '#fef9db'
+    // c.fillStyle = '#455b54' // dark
+    c.fillStyle = '#fef9db' // light
     c.fillRect(0, 0, canvas.width, canvas.height)
 
     // fill display area
@@ -142,140 +85,188 @@ function animate() {
         fillRoundRect(spot.area.x, spot.area.y, spot.area.width, spot.area.height, 20)
     })
 
-    // Draw Component in display area
+    // draw Display area component
     if(displayArea.component) {
-        let component = displayArea.component
-        let side = null
-        // separate non-rotatables
-        if(!component.rotatable) {
-            side = getSide(component, component.defaultSide)
-            // No rotate buttons for non-rotatables
-            leftBtn.style.visibility = 'hidden'
-            rightBtn.style.visibility = 'hidden'
-            indicator.style.visibility = 'hidden'
-        } else {
-            leftBtn.style.visibility = 'visible'
-            rightBtn.style.visibility = 'visible'
-            indicator.style.visibility = 'visible'
-            
-            side = getSide(component, globalSides[curr])
-            indicator.innerHTML = globalSides[curr] + ' side' // display current side name
-        }
-        compLabel.innerHTML = displayArea.component.type // component label
+        // draw component
+        drawDisplayComponent(displayArea.component)
 
-        // reinitialize component box to match the actual size(width and height)
-        createDisplayAreaComponentBox(component, side) 
-        // Draw the component
-        c.drawImage(side.image, 
-            component.box.x, 
-            component.box.y,
-            component.box.width,
-            component.box.height
-        )  
-        // Draw available slots (component.sides > slotBoxes > supports)
-        side.slotBoxes.forEach(slotBox => { 
-            slotBox.supports.forEach(slot => {
-                c.fillStyle = 'rgba(0,255,0,0.2)'
-                c.fillRect( 
-                    component.box.x + slot.offset.x,
-                    component.box.y + slot.offset.y,
-                    slot.offset.width,
-                    slot.offset.height    
-                )
-            })
-        })
-    }
-    // Draw Components in Shelf Area
-    shelf.forEach(spot => {
-        if(spot.component) {
-            let image = getSide(spot.component, spot.component.defaultSide).image
-            c.drawImage(image,
-                spot.component.box.x,
-                spot.component.box.y,
-                spot.component.box.width,
-                spot.component.box.height,
-            )
-        }
-    })  
+        // draw attached components
+        
+        drawAttachedComponents(displayArea.component.slots, currentSide)
 
-    requestAnimationFrame(animate)
-}
-animate()
-
-// rotate right
-rightBtn.addEventListener('click', () => {
-    if(curr == 0) {
-        curr = 3
-        return
-    }
-    curr--
-})
-
-// rotate left
-leftBtn.addEventListener('click', () => {
-    if(curr == 3) {
-        curr = 0
-        return
-    }
-    curr++
-})
-
-// MOUSE DOWN
-canvas.addEventListener('mousedown', (e) => {
-    // declare selected component
-    componentSelected = selectComponent(mousePoint)
-    
-    if(!componentSelected) return   
-
-    // if there is a selected Component
-    isDragging = true
-    dragOffset = {
-        x: mousePoint.x - componentSelected.box.x,
-        y: mousePoint.y - componentSelected.box.y
-    }
-    // Create Origin Coordinate to return to in case
-    componentSelected.origin = {x: componentSelected.box.x, y: componentSelected.box.y}
-    
-})
-
-// MOUSE MOVE
-canvas.addEventListener('mousemove', (e) => {
-    const canvasRect = canvas.getBoundingClientRect()
-    mousePoint.x = e.clientX - canvasRect.left
-    mousePoint.y = e.clientY - canvasRect.top
-    if(isDragging && componentSelected) {
-        // Update the component's position based on the mouse position and offset
-        componentSelected.box.x = e.clientX - canvasRect.left - dragOffset.x
-        componentSelected.box.y = e.clientY - canvasRect.top - dragOffset.y
-    }
-})
-
-// MOUSE UP
-canvas.addEventListener('mouseup', () => {
-    if (!componentSelected) return
-
-    // If Component is in Display area
-    if(componentSelected && insideBox(mousePoint, displayArea.area)) {
-        // Swap the selected component and the component in the display area
-        const tmpComponent = displayArea.component
-        displayArea.component = componentSelected
-
-        //find the index of the selected component and replace with temp var
-        const i = shelf.findIndex(spot => spot.component && spot.component.id == componentSelected.id)  
-        shelf[i].component = tmpComponent //place the temp variable in the index 
-        // fix positioning of shelf spot components
-        shelf.forEach((spot, i) => {
-            if(spot.component) {
-                createBoundingBox(spot)
+        // draw available slots
+        user.availableSlots.forEach(slot => {
+            if(slot.box) {
+                drawSlot(slot.box)
             }
         })
     }
 
-    // return to shelf if no interaction
-    componentSelected.box.x = componentSelected.origin.x
-    componentSelected.box.y = componentSelected.origin.y
+    // draw shelf components
+    shelf.forEach(spot => {
+        if(spot.component) {
+            drawShelfComponent(spot.component)
+        }
+    })
 
-    // reset temp attributes
-    delete componentSelected.origin
-    componentSelected = null
+    requestAnimationFrame(animate)
+}
+
+/*
+/
+/           BUTTON CLICKS
+/
+*/
+
+// COMPONENT BUTTON CLICK FUNCTIONS
+componentButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        switch(button.id) {
+            case 'chassis':
+                placeComponent(chassis)
+                break
+            case 'mobo':
+                placeComponent(motherboard)
+                break
+            case 'psu':
+                placeComponent(psu)
+                break
+            case 'cpu':
+                placeComponent(cpu)
+        }
+    })
 })
+
+// DISPLAY ROTATE RIGHT
+rightBtn.addEventListener('click', () => {
+    curr = (curr + 1) % globalSides.length
+    currentSide = globalSides[curr]
+
+    // update box of display component
+    if(displayArea.component) {
+        updateBoxInDisplay(displayArea.component, displayArea, currentSide)
+
+        // update box of attached components(recursive)
+        displayArea.component.slots.forEach(slot => {
+            updateAttachedComponentBox(displayArea.component, slot, currentSide)
+        }) 
+    }
+})
+
+// DISPLAY ROTATE LEFT
+leftBtn.addEventListener('click', () => {
+    curr = (curr - 1 + globalSides.length) % globalSides.length;
+    currentSide = globalSides[curr]
+
+    // update box
+    if(displayArea.component) {
+        updateBoxInDisplay(displayArea.component, displayArea, currentSide)
+    }
+
+    // update box of attached components(recursive)
+    displayArea.component.slots.forEach(slot => {
+        updateAttachedComponentBox(displayArea.component, slot, currentSide)
+    })
+})
+
+
+/*
+/
+/   MOUSE INTERACTIONS
+/
+*/
+
+// MOUSE DOWN FUNCTION
+window.addEventListener('mousedown', (e) => {
+    if(e.button !== 0) return
+
+    // check if one of the shelf components is picked
+    user.componentSelected = selectComponent(user.mousePoint, shelf)
+    
+    
+    if(!user.componentSelected) return
+    console.log(user.componentSelected)
+
+    // if there is a selected component
+    user.isDragging = true
+    user.dragOffset = {
+        x: user.mousePoint.x - user.componentSelected.box.x,
+        y: user.mousePoint.y - user.componentSelected.box.y
+    }
+
+    // Create Origin For return cases
+    user.componentSelected.origin = {x: user.componentSelected.box.x, y: user.componentSelected.box.y}
+
+    // create slots that match the selected component
+    if(displayArea.component.slots.length > 0) {
+        createSlotsAvailable(displayArea.component, currentSide, user)
+    }
+    console.log(user.availableSlots)
+   
+})
+
+// MOUSE MOVE FUNCTION
+window.addEventListener('mousemove', (e) => {
+    // adjust user.mousePoint to be in canvas
+    const canvasRect = canvas.getBoundingClientRect()
+    const rawMouse = {x: e.clientX, y: e.clientY}
+
+    // calculate user.mousePoint to be inside canvas
+    user.mousePoint = {
+        x: rawMouse.x - canvasRect.left,
+        y: rawMouse.y - canvasRect.top
+    }
+
+    if(user.componentSelected && user.isDragging) {
+        user.componentSelected.box.x = user.mousePoint.x - user.dragOffset.x
+        user.componentSelected.box.y = user.mousePoint.y - user.dragOffset.y
+
+        // return component if out of bounds    
+        if(!isInsideBox(rawMouse, canvasRect)) {
+            returnToShelf(user.componentSelected)
+
+            resetTempProperties(user)
+        }
+    }
+})
+
+
+// MOUSE UP FUNCTION
+window.addEventListener('mouseup', () => {
+    if(!user.componentSelected) return
+    let isInteracting = false
+
+    user.availableSlots.forEach(slot => {
+        if(slot.box && isInsideBox(user.mousePoint, slot.box) && slot.box.accessible    ) {
+            isInteracting = true
+
+            // attach component
+            attachComponent(user.componentSelected, slot)
+            
+            // remove attached component from shelf
+            const i = shelf.findIndex(spot => spot.component && spot.component.id === user.componentSelected.id)
+            shelf[i].component = null
+        }
+    })
+
+    // to place selected component to display
+    if(!isInteracting && isInsideBox(user.mousePoint, displayArea.area)) {
+        isInteracting = true
+
+        // reset display orientation
+        curr = 0
+        currentSide = globalSides[curr] 
+
+        // swap components
+        swapComponents(displayArea, shelf, user.componentSelected)
+    }
+
+    // return to shelf if no interaction
+    if(!isInteracting) {
+        returnToShelf(user.componentSelected)
+    } 
+
+    // clear created properties
+    resetTempProperties(user)
+})
+

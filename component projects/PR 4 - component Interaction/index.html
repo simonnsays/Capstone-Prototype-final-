@@ -7,13 +7,23 @@
 </head>
 <body>
     <div class="game-container">
+        <div class="button-wrapper">
+            <!-- <button id="mount" data-active="true">mount</button>
+            <button id="unmount" data-active="false">unmount</button>
+            <button id="wires" class="">wires</button> -->
+            <button id="chassis" data-type="component"  >case</button>
+            <button id="mobo" data-type="component" >motherboard</button>
+            <button id="psu" data-type="component">psu</button>
+            <button id="cpu" data-type="component">cpu</button>
+        </div>
         <canvas></canvas>
         <div class="rotate-wrapper">
             <button class="button" id="left">
                 <img class="arrow" src="./assets/leftArr.svg" alt="left arrow">
             </button>
             <div class="wrapper">
-                <p id="compLabel" ></p>
+                <p id="compLabel"></p>
+                <p id="compName"></p>
                 <p id="panelIndicator"></p>
             </div>
             
@@ -25,8 +35,8 @@
     
 
     
-    <script src="utility.js"></script>
     <script src="components.js"></script>
+    <script src="utility.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
