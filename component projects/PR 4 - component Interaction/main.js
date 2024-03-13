@@ -133,6 +133,10 @@ componentButtons.forEach(button => {
                 break
             case 'cpu':
                 placeComponent(cpu)
+                break
+            case 'gpu':
+                placeComponent(gpu)
+                break
         }
     })
 })
@@ -183,9 +187,7 @@ window.addEventListener('mousedown', (e) => {
     // check if one of the shelf components is picked
     user.componentSelected = selectComponent(user.mousePoint, shelf)
     
-    
     if(!user.componentSelected) return
-    console.log(user.componentSelected)
 
     // if there is a selected component
     user.isDragging = true
@@ -201,8 +203,6 @@ window.addEventListener('mousedown', (e) => {
     if(displayArea.component.slots.length > 0) {
         createSlotsAvailable(displayArea.component, currentSide, user)
     }
-    console.log(user.availableSlots)
-   
 })
 
 // MOUSE MOVE FUNCTION
@@ -237,11 +237,14 @@ window.addEventListener('mouseup', () => {
     let isInteracting = false
 
     user.availableSlots.forEach(slot => {
-        if(slot.box && isInsideBox(user.mousePoint, slot.box) && slot.box.accessible    ) {
+        if(slot.box && isInsideBox(user.mousePoint, slot.box) && slot.box.accessible) {
             isInteracting = true
 
             // attach component
             attachComponent(user.componentSelected, slot)
+            displayArea.component.slots.forEach(slot => {
+                updateAttachedComponentBox(displayArea.component, slot, currentSide)
+            })
             
             // remove attached component from shelf
             const i = shelf.findIndex(spot => spot.component && spot.component.id === user.componentSelected.id)

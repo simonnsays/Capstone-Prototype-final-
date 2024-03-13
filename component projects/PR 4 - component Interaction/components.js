@@ -91,12 +91,26 @@ const motherboard = {
             sides: {
                 left: {
                     offsets: {
-                        dafault: {x: 50, y: 30, width: 45, height: 45},
+                        default: {x: 113, y: 73, width: 45, height: 45},
                     },
                     accessible: true // if able to attach to this side
                 }
             }
-        }
+        },
+        {
+            type: 'gpu', 
+            supports: ['pcie4'],
+            component: null,
+            sides: {
+                left: {
+                    offsets: {
+                        default: {x: 10, y: 173, width: 150, height: 50},
+                    },
+                    accessible: true // if able to attach to this side
+                }
+            }
+        },
+
     ]
 }
 
@@ -137,6 +151,26 @@ const cpu = {
     defaultSource: 'left',
     images: [
         {side: 'left', imageSrc: './assets/cpu/Intel Core i7-13700K.png'},  
+    ],
+    slots: []
+}
+
+const gpu = {
+    id: 'gp001',
+    name: 'NVIDIA GeForce RTX 4090',
+    type: 'gpu',
+    size: 'pcie4', // change to model instead of size
+    dimensions: {
+        depth: 61,
+        width: 274,
+        height: 137,
+    },
+    rotatable: false,
+    isAttached: false,
+    defaultSource: 'default',
+    images: [
+        {side: 'default', imageSrc: './assets/gpu/geforce-rtx-4090.png'},  
+        {side: 'left', imageSrc: './assets/gpu/geforce-rtx-4090-attached.png'}
     ],
     slots: []
 }

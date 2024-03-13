@@ -4,6 +4,7 @@ function initialize() {
     handleComponent(motherboard)
     handleComponent(psu)
     handleComponent(cpu)
+    handleComponent(gpu)
 }
 
 // PLACE COMPONENT ON BUTTON CLICK
@@ -93,17 +94,59 @@ function updateAttachedComponentBox(baseComponent, slot, currentSide) {
         return
     }
 
-    slot.component.box = {
-        x: baseComponent.box.x + slotOffset.x,
-        y: baseComponent.box.y + slotOffset.y,
-        width: slotOffset.width,
-        height: slotOffset.height
+
+    if(baseComponent.isAttached) {
+        const imageSide = getSide(baseComponent, currentSide)
+        diffX = imageSide.width - baseComponent.box.width
+        diffY = imageSide.height - baseComponent.box.height - 20
+
+        slot.component.box = {
+            x: baseComponent.box.x + slotOffset.x - (diffX / 2),
+            y: baseComponent.box.y + slotOffset.y - (diffY /2),
+            width: slotOffset.width,
+            height: slotOffset.height,
+            // accessible: slotSide.accessible
+        }  
+    } else {
+        slot.component.box = {
+            x: baseComponent.box.x + slotOffset.x,
+            y: baseComponent.box.y + slotOffset.y,
+            width: slotOffset.width,
+            height: slotOffset.height
+        }
     }
 
     // recursive callback
-    slot.component.slots.forEach(slot => {
-        updateAttachedComponentBox(slot.component, slot, currentSide)
+    slot.component.slots.forEach(childSlot => {
+        updateAttachedComponentBox(slot.component, childSlot, currentSide)
     })
+}
+
+// ATTACH COMPONENT
+function attachComponent(component, slot) {
+    // console.log(component)  // the component to be attached
+    // console.log(slot)       // the slot to where the component is going to be attached
+
+    slot.component = component  //placing the component to the slot
+    slot.component.isAttached = true
+
+
+    
+    // change the offset to match the new size of the component
+    if(component.slots.length > 0) {
+        component.slots.forEach(childSlot => {
+            // to get the offset change, get the image width and childSlot width
+            let slotSides = childSlot.sides
+            for (let side in slotSides) {
+                const currentImageSide = getSide(component, side)
+                const currentSlotSide = slotSides[side]
+                for(let offset in currentSlotSide.offsets) {
+                    console.log(offset)
+                }
+            }
+            
+        })
+    }
 }
 
 /*
@@ -117,12 +160,11 @@ function createSlotsAvailable (hostComponent, currentSide, user) {
 
     hostComponent.slots.forEach(slot => {
         if(slot.type == componentSelected.type && !slot.component) {
-            
+              
             createSlotBox(hostComponent, componentSelected, slot, currentSide)
-
+           
             user.availableSlots.push(slot)
         }
-        console.log(slot.box)
 
         // do the same for attached components
         if(slot.component && slot.component.slots.length > 0) {
@@ -133,17 +175,30 @@ function createSlotsAvailable (hostComponent, currentSide, user) {
 
 // CREATE SLOT BOX
 function createSlotBox(baseComponent, componentSelected, slot, currentSide) {
-    const side = getSlotSide(slot, currentSide)
-    const slotOffset = getSlotOffset(side, componentSelected)
+    const slotSide = getSlotSide(slot, currentSide)
+    const slotOffset = getSlotOffset(slotSide, componentSelected)
 
-    // create box only if offset is available
-    if(slotOffset) {
+    // alter offsets a bit if basecomponent is attached
+    if(slotOffset && baseComponent.isAttached) {
+        const imageSide = getSide(baseComponent, currentSide)
+        diffX = imageSide.width - baseComponent.box.width
+        diffY = imageSide.height - baseComponent.box.height - 20
+
+        slot.box = {
+            x: baseComponent.box.x + slotOffset.x - (diffX / 2),
+            y: baseComponent.box.y + slotOffset.y - (diffY /2),
+            width: slotOffset.width,
+            height: slotOffset.height,
+            accessible: slotSide.accessible
+        }  
+    } else if(slotOffset) {
+        // create box only if offset is available
         slot.box = {
             x: baseComponent.box.x + slotOffset.x,
             y: baseComponent.box.y + slotOffset.y,
             width: slotOffset.width,
             height: slotOffset.height,
-            accessible: side.accessible
+            accessible: slotSide.accessible
         }   
     }
 }
@@ -156,6 +211,7 @@ function getSlotSide(slot, currentSide) {
 // GET SLOT OFFSET
 function getSlotOffset(side, componentSelected) {
     if(!side) return null
+
 
     // get offset
     return Object.keys(side.offsets).length > 1 ? 
@@ -210,9 +266,11 @@ function drawAttachedComponents(slots, currentSide) {
     slots.forEach(slot => {
         if(slot.component) {
             const side = getSide(slot.component, currentSide)
-            if(side) canvasDraw(slot.component.box, side.image);
-
-            drawAttachedComponents(slot.component.slots)
+            if(side) {
+                canvasDraw(slot.component.box, side.image)
+            }
+            
+            drawAttachedComponents(slot.component.slots, currentSide)
         }
         
     })
@@ -265,6 +323,9 @@ function handleComponent(component) {
                 element.width = component.dimensions.width
                 element.height = component.dimensions.height
                 break
+            default:
+                element.width = component.dimensions.width
+                element.height = component.dimensions.height
         }
     })
 }
@@ -301,12 +362,6 @@ function addToShelf(newComponent) {
     
 }
 
-// ATTACH COMPONENT
-function attachComponent(component, slot) {
-    slot.component = component
-    slot.component.box = slot.box
-}
-
 /*
 /
 /       MISC
@@ -330,7 +385,7 @@ function resetTempProperties(user) {
 
     // slots 
     user.availableSlots.forEach(slot => {
-        delete slot.box
+        // delete slot.box
     })
     user.availableSlots = []
 
@@ -368,7 +423,7 @@ function swapComponents(displayArea, shelf, selectedComponent) {
 function determineScale(componentHeight, baseHeight) {
     // start with 1 as scale and lower if it still doesnt fit
     let scale = 1
-    while (componentHeight * scale > baseHeight && scale > 0) {
+    while (componentHeight * scale > baseHeight && scale > 0 ) {
         scale -= .1
     }
 
