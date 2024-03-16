@@ -27,16 +27,6 @@ function placeComponent(component) {
             createBox(spot.component, spot)
         }
     })
-
-    /*
-    /
-    /           ERROR WHEN THERE ARE ATTACHED COMPONENT AND YOU
-    /           STARTED PLACING NEW COOMPONENTS, ATTACHED COMPONENTS
-    /           WENT BACK TO SHELF
-    /
-    */
-
-
 }
 
 /*
@@ -94,7 +84,7 @@ function updateAttachedComponentBox(baseComponent, slot, currentSide) {
         return
     }
 
-
+    // align offsets to attached compoent box
     if(baseComponent.isAttached) {
         const imageSide = getSide(baseComponent, currentSide)
         diffX = imageSide.width - baseComponent.box.width
@@ -120,33 +110,6 @@ function updateAttachedComponentBox(baseComponent, slot, currentSide) {
     slot.component.slots.forEach(childSlot => {
         updateAttachedComponentBox(slot.component, childSlot, currentSide)
     })
-}
-
-// ATTACH COMPONENT
-function attachComponent(component, slot) {
-    // console.log(component)  // the component to be attached
-    // console.log(slot)       // the slot to where the component is going to be attached
-
-    slot.component = component  //placing the component to the slot
-    slot.component.isAttached = true
-
-
-    
-    // change the offset to match the new size of the component
-    if(component.slots.length > 0) {
-        component.slots.forEach(childSlot => {
-            // to get the offset change, get the image width and childSlot width
-            let slotSides = childSlot.sides
-            for (let side in slotSides) {
-                const currentImageSide = getSide(component, side)
-                const currentSlotSide = slotSides[side]
-                for(let offset in currentSlotSide.offsets) {
-                    console.log(offset)
-                }
-            }
-            
-        })
-    }
 }
 
 /*
@@ -367,6 +330,12 @@ function addToShelf(newComponent) {
 /       MISC
 /
 */ 
+
+// ATTACH COMPONENT
+function attachComponent(component, slot) {
+    slot.component = component  //placing the component to the slot
+    slot.component.isAttached = true
+}
 
 // GET DISPLAY SIDE (IF ROTATABLE OR NOT)
 function getDisplayComponentSide (component, currentSide) {
