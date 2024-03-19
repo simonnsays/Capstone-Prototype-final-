@@ -8,6 +8,7 @@ class ElementHandler {
             openBtn: document.querySelector('#openShop'),
             closeBtn: document.querySelector('#closeShop'),
             modal: document.querySelector('#shopModal'),
+            itemsContainer: document.querySelector('#shopItemsContainer')
 
         } || null
     }
@@ -17,6 +18,16 @@ class ElementHandler {
             openBtn: document.querySelector('#openInv'),
             closeBtn: document.querySelector('#closeInv'),
             modal: document.querySelector('#invModal'),
+            itemsContainer: document.querySelector('#invItemsContainer')
+
+        } || null
+    }
+
+    getConnectionsElements() {
+        return {
+            openBtn: document.querySelector('#openWires'),
+            closeBtn: document.querySelector('#closeWires'),
+            modal: document.querySelector('#wiresModal'),
 
         } || null
     }

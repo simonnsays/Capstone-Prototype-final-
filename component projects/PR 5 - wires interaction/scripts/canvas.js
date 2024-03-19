@@ -10,7 +10,11 @@ class Canvas {
         this.c = this.element.getContext('2d')
     }
 
-    animate(displayArea, shelf) {
+    animate(table) {
+        const displayArea = table.displayArea
+        const shelf = table.shelf
+
+        // clear
         this.clear()
         this.c.imageSmoothEnabed = true
 
