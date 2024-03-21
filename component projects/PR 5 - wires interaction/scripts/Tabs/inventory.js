@@ -1,9 +1,15 @@
 class Inventory {
-    constructor(elementHandler, utilityTool) {
+    constructor(elementHandler, utilityTool, displayArea, canvas) {
         // Utility
         this.utilityTool = utilityTool
         this.elements = elementHandler.getInventoryElements()
         if(!this.elements) throw new Error('Missing Inventory Elements')
+
+        // Display Area
+        this.displayArea = displayArea
+
+        // Canvas
+        this.canvas = canvas
 
         // Elements
         this.openBtn = this.elements.openBtn
@@ -52,8 +58,49 @@ class Inventory {
         })
     }
 
-    placeComponent(child) {
-        console.log(child)
+    addToShelf(newComponent, shelf) {
+        let added = false 
+        for(let i = 0; i < shelf.length; i++) {
+            const element = shelf[i]
+    
+            // If the component property is null, add the new component
+            if(element.component === null) {
+                element.component = newComponent
+                added = true
+                break;
+            }
+        }
+    
+        // If all component properties are occupied, shift components to the next object
+        if(!added) {
+            const lastElement = shelf[shelf.length - 1]
+            const removedComponent = lastElement.component
+    
+            for(let i = shelf.length - 1; i > 0; i--) {
+                const prevElement = shelf[i - 1]
+                shelf[i].component = prevElement.component
+            }
+    
+            // Add the new component to the first object
+            shelf[0].component = newComponent
+
+            // Return removed item to inventory
+            this.items.push(removedComponent)
+        }
+    }
+
+    addToDisplayArea(component) {
+        const table = this.displayArea.table
+        const shelf = this.displayArea.shelf
+    
+        // add to Table
+        if(!table.component) {
+            this.displayArea.table.component = component
+            return
+        }
+
+        // add to Shelf
+        this.addToShelf(component, shelf)
     }
 
     // Main Inventory Function
@@ -67,15 +114,14 @@ class Inventory {
 
         // Placing event
         let containerChildren = Array.from(this.itemsContainer.children) 
-        let removeIndex = null
 
         containerChildren.forEach((child, index) => {
             child.addEventListener('click', () => {
-                this.placeComponent(child.component)
-                
                 // Remove component from inventory
-                this.items.splice(index, 1)
+                const removedComponent = this.items.splice(index, 1)
 
+                this.addToDisplayArea(removedComponent)
+                
                 this.update()
             })
         })

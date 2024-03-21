@@ -1,6 +1,6 @@
 class UtilityTool {
     constructor() {
-        this.idCount = 8
+        this.idCount = 1
     }
     // Is point inside Box
     isInsideBox(point, box) {
@@ -59,10 +59,23 @@ class UtilityTool {
                 break
         }
         
-
         component.id = id
         this.idCount++
         console.log(count.length)
+    }
+
+    getSide(component, side) {
+        return component.images.find(element => element.side == side) || null
+    }
+
+    determineScale(componentHeight, baseHeight) {
+        // start with 1 as scale and lower if it still doesnt fit
+        let scale = 1
+        while (componentHeight * scale > baseHeight && scale > 0 ) {
+            scale -= .1
+        }
+    
+        return scale
     }
 }
 

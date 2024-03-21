@@ -1,5 +1,5 @@
 class Canvas {
-    constructor(elementHandler) {
+    constructor(elementHandler, utilityTool) {
         // Canvas Area
         this.element = elementHandler.getCanvas()
         if(!this.element) {
@@ -8,27 +8,8 @@ class Canvas {
         this.element.width = 1300
         this.element.height = 680
         this.c = this.element.getContext('2d')
-    }
 
-    animate(table) {
-        const displayArea = table.displayArea
-        const shelf = table.shelf
-
-        // clear
-        this.clear()
-        this.c.imageSmoothEnabed = true
-
-        // Fill Background
-        this.c.fillStyle = '#fef9db'
-        this.c.fillRect(0, 0, this.element.width, this.element.height)
-
-        // fill display area
-        this.fillRoundRect(displayArea.area.x, displayArea.area.y, displayArea.area.width, displayArea.area.height, 30)
-
-        // fill shelf areas
-        shelf.forEach(spot => {
-            this.fillRoundRect(spot.area.x, spot.area.y, spot.area.width, spot.area.height, 20)
-        })
+        this.utilityTool = utilityTool
     }
 
     clear() {
@@ -51,6 +32,62 @@ class Canvas {
         this.c.fillStyle = '#527e71'; // dark 
         this.c.fillStyle = '#c7ddcc'; // light 
         this.c.fill();
+    }
+
+    createBox(component, display) {
+        let componentSide = this.utilityTool.getSide(component, component.defaultSource)
+        let scale = this.utilityTool.determineScale(componentSide.height, display.area.height - 20)
+        let toCenter = {
+            x: display.area.x + (display.area.width / 2),
+            y: display.area.y + (display.area.height / 2) 
+        }
+        
+        component.box = {
+            x: toCenter.x - ((componentSide.width * scale) / 2),
+            y: toCenter.y - ((componentSide.height * scale) / 2),
+            width: componentSide.width * scale,
+            height: componentSide.height * scale 
+        }
+    }
+
+    animate(displayArea) {
+        const table = displayArea.table
+        const shelf = displayArea.shelf
+
+        // clear
+        this.clear()
+        this.c.imageSmoothEnabed = true
+
+        // Fill Background
+        this.c.fillStyle = '#fef9db'
+        this.c.fillRect(0, 0, this.element.width, this.element.height)
+
+        // fill display area
+        this.fillRoundRect(table.area.x, table.area.y, table.area.width, table.area.height, 30)
+
+        // fill shelf areas
+        shelf.forEach(spot => {
+            this.fillRoundRect(spot.area.x, spot.area.y, spot.area.width, spot.area.height, 20)
+        })
+
+        // draw Display area component
+        if(displayArea.component) {
+            // draw component
+            drawDisplayComponent(displayArea.component)
+
+            // draw attached components
+
+            // draw available slots
+        }
+
+        // draw shelf components
+        shelf.forEach(spot => {
+            if(spot.component) {
+                drawShelfComponent(spot.component)
+            }
+        })
+
+        requestAnimationFrame(animate)
     }
 }
 

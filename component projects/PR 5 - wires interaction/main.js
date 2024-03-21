@@ -13,9 +13,9 @@ class Main {
         this.utilityTool = new UtilityTool()
 
         // Table
-        this.table = {
+        this.displayArea = {
             // Display Area
-            displayArea :{area: {x: 10, y: 10, width: 650, height: 660}, component: null},
+            table: {area: {x: 10, y: 10, width: 650, height: 660}, component: null},
             shelf: [
                 {area: {x: 670, y: 10, width: 300, height: 210}, component: null},
                 {area: {x: 980, y: 10, width: 310, height: 210}, component: null},
@@ -32,7 +32,7 @@ class Main {
         this.user = new User()
 
         // Inventory
-        this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.table)
+        this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea, this.canvas)
 
         // Shop
         this.shop = new Shop(this.elementHandler, this.utilityTool, this.inventory)
@@ -40,15 +40,16 @@ class Main {
         // Wires Tab
         this.wiresTab = new WiresTab(this.elementHandler, this.utilityTool)
 
-         // Canvas
-         this.canvas = new Canvas(this.elementHandler, this.utilityTool)
+        // Canvas
+        this.canvas = new Canvas(this.elementHandler, this.utilityTool)
 
-        //  Drag and Drop Manager
+        // UI 
+
     }
 
     start() {
         // main code here
-        this.canvas.animate(this.table)
+        this.canvas.animate(this.displayArea)
         this.shop.init()
     }
 
