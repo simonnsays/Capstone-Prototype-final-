@@ -5,6 +5,7 @@ import Canvas from "./scripts/canvas.js"
 import Shop from "./scripts/Tabs/shop.js"
 import Inventory from "./scripts/Tabs/inventory.js"
 import WiresTab from "./scripts/Tabs/wiresTab.js"
+import DisplayArea from "./scripts/displayArea.js"
 
 class Main {
     constructor() {
@@ -12,21 +13,8 @@ class Main {
         this.elementHandler = new ElementHandler()
         this.utilityTool = new UtilityTool()
 
-        // Table
-        this.displayArea = {
-            // Display Area
-            table: {area: {x: 10, y: 10, width: 650, height: 660}, component: null},
-            shelf: [
-                {area: {x: 670, y: 10, width: 300, height: 210}, component: null},
-                {area: {x: 980, y: 10, width: 310, height: 210}, component: null},
-            
-                {area: {x: 670, y: 230, width: 300, height: 220}, component: null},
-                {area: {x: 980, y: 230, width: 310, height: 220}, component: null},
-            
-                {area: {x: 670, y: 460, width: 300, height: 210}, component: null},
-                {area: {x: 980, y: 460, width: 310, height: 210}, component: null},
-            ]
-        }
+        // Display Area
+        this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool)
 
         // User
         this.user = new User()
@@ -41,7 +29,7 @@ class Main {
         this.wiresTab = new WiresTab(this.elementHandler, this.utilityTool)
 
         // Canvas
-        this.canvas = new Canvas(this.elementHandler, this.utilityTool)
+        this.canvas = new Canvas(this.elementHandler, this.utilityTool, this.displayArea)
 
         // UI 
 
@@ -49,8 +37,8 @@ class Main {
 
     start() {
         // main code here
-        this.canvas.animate(this.displayArea)
         this.shop.init()
+        this.canvas.init()      
     }
 
 }

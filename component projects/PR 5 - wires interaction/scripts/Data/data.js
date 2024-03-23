@@ -65,4 +65,8 @@ const components = [
     })
 ]
 
+components.forEach(component => {
+    Component.handleComponent(component)
+})
+
 export default components

@@ -26,16 +26,19 @@ class Shop{
         window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
     }
 
+    // Open Shop Tab
     openTab(modal) {
         modal.showModal()
         modal.isOpen = true
     }
 
+    // Close Shop Tab
     closeTab(modal) {
         modal.close()
         modal.isOpen = false
     }
 
+    // Handle Mouse Point Out of Shop Tab Bounds
     handleOutofBounds(e, modal) {
         const rawMouse = {x: e.clientX, y: e.clientY}
         const rect = modal.getBoundingClientRect()
@@ -46,12 +49,14 @@ class Shop{
         }
     }
 
+    // Fill Shop Items from Data Imported from data.js
     fillShopItems(items, carrier) {
         items.forEach(item => {
             carrier.push(item)
         })
     }
 
+    // Create Interactive Elements to Show in Shop Tab
     createItemElements(items, container) {
         items.forEach(item => {
             const imageSource = item.images.find(image => image.side == item.defaultSource).imageSrc
@@ -64,6 +69,20 @@ class Shop{
         })
     }
 
+    // Buy Component
+    buyComponent(component) {
+        // create clone of the component
+        const componentClone = JSON.parse(JSON.stringify(component))
+
+        // render component images
+        this.utilityTool.createImages(componentClone.images)
+
+        // create unique ID 
+        this.utilityTool.createID(componentClone)
+        this.inventory.items.push(componentClone)
+    }
+
+    // Main Shop Initialization Method
     init() {
         // Fill Shop Items
         this.fillShopItems(components, this.items)
@@ -74,13 +93,10 @@ class Shop{
         // Purchase event
         Array.from(this.itemsContainer.children).forEach(child => {
             child.addEventListener('click', () => {
-                const component = {...child.component}
-
-                // Create unique ID 
-                this.utilityTool.createID(component)
-                this.inventory.items.push(component)
+                // buy component
+                this.buyComponent(child.component)
                 
-                // Update Inventory Container
+                // update inventory container
                 this.inventory.update()
             })
         })

@@ -31,6 +31,16 @@ class ElementHandler {
 
         } || null
     }
+
+    getDisplayAreaElements() {
+        return {
+            leftBtn: document.querySelector('#left'),
+            rightBtn: document.querySelector('#right'),
+            compLabel: document.querySelector('#compLabel'),
+            compName: document.querySelector('#compName'),
+            panelIndicator: document.querySelector('#panelIndicator')
+        } || null
+    }
 }
 
 export default ElementHandler

@@ -36,6 +36,7 @@ class Inventory {
         modal.isOpen = false
     }
 
+    // Handle User Click Out of Bounds
     handleOutofBounds(e, modal) {
         const rawMouse = {x: e.clientX, y: e.clientY}
         const rect = modal.getBoundingClientRect()
@@ -46,6 +47,7 @@ class Inventory {
         }
     }
 
+    // Create HTML Element for Each Item in Inventory
     createItemElements(items, container) {
         items.forEach(item => {
             const imageSource = item.images.find(image => image.side == item.defaultSource).imageSrc
@@ -58,12 +60,13 @@ class Inventory {
         })
     }
 
+    // Add Component to Shelf
     addToShelf(newComponent, shelf) {
         let added = false 
         for(let i = 0; i < shelf.length; i++) {
             const element = shelf[i]
     
-            // If the component property is null, add the new component
+            // if the component property is null, add the new component
             if(element.component === null) {
                 element.component = newComponent
                 added = true
@@ -71,7 +74,7 @@ class Inventory {
             }
         }
     
-        // If all component properties are occupied, shift components to the next object
+        // if all component properties are occupied, shift components to the next object
         if(!added) {
             const lastElement = shelf[shelf.length - 1]
             const removedComponent = lastElement.component
@@ -89,13 +92,15 @@ class Inventory {
         }
     }
 
-    addToDisplayArea(component) {
+    // Placing of Components to Display Area
+    placeComponent(component) {
         const table = this.displayArea.table
         const shelf = this.displayArea.shelf
     
         // add to Table
         if(!table.component) {
             this.displayArea.table.component = component
+            console.log('hit')
             return
         }
 
@@ -103,26 +108,34 @@ class Inventory {
         this.addToShelf(component, shelf)
     }
 
-    // Main Inventory Function
+    // Main Inventory Update Method
     update() {
-        // Clear Items
+        // clear Item Elements
         while (this.itemsContainer.firstChild) {
             this.itemsContainer.removeChild(this.itemsContainer.firstChild);
         }
 
+        // recreate Item Elements
         this.createItemElements(this.items, this.itemsContainer)
 
-        // Placing event
+        // placing event
         let containerChildren = Array.from(this.itemsContainer.children) 
 
         containerChildren.forEach((child, index) => {
             child.addEventListener('click', () => {
-                // Remove component from inventory
+                // remove component from inventory
                 const removedComponent = this.items.splice(index, 1)
 
-                this.addToDisplayArea(removedComponent)
+                // place removed component to display area
+                this.placeComponent(removedComponent[0])
+
+                // update display area information
+                this.displayArea.update()
                 
+                // update inventory information
                 this.update()
+
+                console.log(this.displayArea)
             })
         })
     }

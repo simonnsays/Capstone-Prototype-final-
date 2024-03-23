@@ -17,6 +17,31 @@ class Component {
         // Slots
         this.slots = slots
     }
+
+    static handleComponent(component) {
+        component.images.forEach(element => {
+            // // Create Image  
+            // element.image = new Image()
+            // element.image.src = element.imageSrc
+    
+            // Adjust width and height depending on side
+            switch(element.side) {
+                case 'left':
+                case 'right':
+                    element.width = component.dimensions.depth
+                    element.height = component.dimensions.height
+                    break
+                case 'front':
+                case 'rear':
+                    element.width = component.dimensions.width
+                    element.height = component.dimensions.height
+                    break
+                default:
+                    element.width = component.dimensions.width
+                    element.height = component.dimensions.height
+            }
+        })
+    }
 }
 
 export default Component

@@ -77,6 +77,18 @@ class UtilityTool {
     
         return scale
     }
+
+    getSide(component, side) {
+        // images associated with a side also has their width and height declared
+        return component.images.find(element => element.side == side) || null
+    }
+
+    createImages(imageArr) {
+        imageArr.forEach(imageSide => {
+            imageSide.image = new Image()
+            imageSide.image.src = imageSide.imageSrc
+        }) 
+    }
 }
 
 export default UtilityTool

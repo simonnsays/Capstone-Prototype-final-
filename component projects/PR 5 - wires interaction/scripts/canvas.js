@@ -1,5 +1,9 @@
 class Canvas {
-    constructor(elementHandler, utilityTool) {
+    constructor(elementHandler, utilityTool, displayArea) {
+        // Utility
+        this.elementHandler = elementHandler
+        this.utilityTool = utilityTool
+        
         // Canvas Area
         this.element = elementHandler.getCanvas()
         if(!this.element) {
@@ -9,7 +13,8 @@ class Canvas {
         this.element.height = 680
         this.c = this.element.getContext('2d')
 
-        this.utilityTool = utilityTool
+        // Display Area
+        this.displayArea = displayArea
     }
 
     clear() {
@@ -34,20 +39,23 @@ class Canvas {
         this.c.fill();
     }
 
-    createBox(component, display) {
-        let componentSide = this.utilityTool.getSide(component, component.defaultSource)
-        let scale = this.utilityTool.determineScale(componentSide.height, display.area.height - 20)
-        let toCenter = {
-            x: display.area.x + (display.area.width / 2),
-            y: display.area.y + (display.area.height / 2) 
-        }
-        
-        component.box = {
-            x: toCenter.x - ((componentSide.width * scale) / 2),
-            y: toCenter.y - ((componentSide.height * scale) / 2),
-            width: componentSide.width * scale,
-            height: componentSide.height * scale 
-        }
+    drawComponent(box, image) {
+        this.c.drawImage(
+            image,
+            box.x,
+            box.y,
+            box.width,
+            box.height
+        )
+    }
+
+    drawDisplayComponent(component, currentSide) {
+        // some components can't be rotated so we use default source for that case
+        let componentSide = component.rotatable 
+        ? this.utilityTool.getSide(component, currentSide) 
+        : this.utilityTool.getSide(component, component.defaultSource)
+
+        this.drawComponent(component.box, componentSide.image)
     }
 
     animate(displayArea) {
@@ -58,7 +66,7 @@ class Canvas {
         this.clear()
         this.c.imageSmoothEnabed = true
 
-        // Fill Background
+        // fill Background
         this.c.fillStyle = '#fef9db'
         this.c.fillRect(0, 0, this.element.width, this.element.height)
 
@@ -71,9 +79,9 @@ class Canvas {
         })
 
         // draw Display area component
-        if(displayArea.component) {
+        if(table.component) {
             // draw component
-            drawDisplayComponent(displayArea.component)
+            this.drawDisplayComponent(table.component, table.currentSide)
 
             // draw attached components
 
@@ -83,11 +91,18 @@ class Canvas {
         // draw shelf components
         shelf.forEach(spot => {
             if(spot.component) {
-                drawShelfComponent(spot.component)
+                // all shelf components will use default source
+                const component = spot.component
+                const componentSide = this.utilityTool.getSide(component, component.defaultSource) 
+                this.drawComponent(component.box, componentSide.image)
             }
         })
 
-        requestAnimationFrame(animate)
+        requestAnimationFrame(() => this.animate(this.displayArea))
+    }
+
+    init() {
+        this.animate(this.displayArea)
     }
 }
 
