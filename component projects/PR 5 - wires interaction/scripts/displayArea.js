@@ -35,6 +35,27 @@ class DisplayArea {
         this.displaySides = ['left', 'front', 'right', 'rear']
         this.curr = 0
         this.currentSide = this.displaySides[this.curr]
+
+        // Events
+        this.leftBtn.addEventListener('click', () => this.rotateLeft())
+        this.rightBtn.addEventListener('click', () => this.rotateRight())
+    }
+
+    // Rotate Left
+    rotateLeft() {
+        console.log('hit')
+        this.curr = (this.curr - 1 + this.displaySides.length) % this.displaySides.length;
+        this.currentSide = this.displaySides[this.curr]
+
+        this.update()
+    }
+    
+    // Rotate Right
+    rotateRight() {
+        this.curr = (this.curr + 1) % this.displaySides.length
+        this.currentSide = this.displaySides[this.curr]
+
+        this.update()
     }
 
     // Swap Components
@@ -52,15 +73,18 @@ class DisplayArea {
     }
 
     // Create Bounding Box
-    createBox(component, display) {
+    createBox(component, display, givenSide) {
         // get access to the components default side
-        let componentSide = this.utilityTool.getSide(component, component.defaultSource)
+        let componentSide = this.utilityTool.getSide(component, givenSide)
         let scale = this.utilityTool.determineScale(componentSide.height, display.area.height - 20)
+
+        // Offset to adjust the image drawing to center
         let toCenter = {
             x: display.area.x + (display.area.width / 2),
             y: display.area.y + (display.area.height / 2) 
         }
         
+        // creation of box with added
         component.box = {
             x: toCenter.x - ((componentSide.width * scale) / 2),
             y: toCenter.y - ((componentSide.height * scale) / 2),
@@ -71,7 +95,6 @@ class DisplayArea {
 
     // Update Stylesheet Depending if The Component is Rotatable or Not
     updateRotatableStyles(rotatable) {
-        console.log(rotatable)
         if(rotatable) {
             this.rightBtn.style.visibility = 'visible'
             this.leftBtn.style.visibility = 'visible'
@@ -94,7 +117,7 @@ class DisplayArea {
     update() {
         if(this.table.component) {
             const tableComponent = this.table.component
-            this.createBox(tableComponent, this.table)
+            this.createBox(tableComponent, this.table, this.currentSide)
 
             this.updateRotatableStyles(tableComponent.isRotatable)
             this.updateComponentLabels(tableComponent)
@@ -104,7 +127,7 @@ class DisplayArea {
             const shelfComponent = spot.component
 
             if(shelfComponent) {
-                this.createBox(shelfComponent, spot)
+                this.createBox(shelfComponent, spot, shelfComponent.defaultSource)
             }
         })
     }

@@ -102,6 +102,7 @@ class Canvas {
         this.user.resetTempProperties()
     }
 
+    // Rects With Border Radius(bent corners)
     fillRoundRect(left, top, width, height, radius) {
         this.c.beginPath();
         this.c.moveTo(left + radius, top);
@@ -120,6 +121,7 @@ class Canvas {
         this.c.fill();
     }
 
+    // Draw Component Image
     drawComponent(box, image) {
         this.c.drawImage(
             image,
@@ -132,7 +134,7 @@ class Canvas {
 
     drawDisplayComponent(component, currentSide) {
         // some components can't be rotated so we use default source for that case
-        let componentSide = component.rotatable 
+        let componentSide = component.isRotatable 
         ? this.utilityTool.getSide(component, currentSide) 
         : this.utilityTool.getSide(component, component.defaultSource)
 
@@ -163,7 +165,7 @@ class Canvas {
         // draw Display area component
         if(table.component) {
             // draw component
-            this.drawDisplayComponent(table.component, table.currentSide)
+            this.drawDisplayComponent(table.component, this.displayArea.currentSide)
 
             // draw attached components
 
@@ -180,6 +182,7 @@ class Canvas {
             }
         })
 
+        // Loop Canvas
         requestAnimationFrame(() => this.animate())
     }
 
