@@ -1,5 +1,5 @@
 class Canvas {
-    constructor(elementHandler, utilityTool, displayArea) {
+    constructor(elementHandler, utilityTool, displayArea, user) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
@@ -15,10 +15,91 @@ class Canvas {
 
         // Display Area
         this.displayArea = displayArea
+        this.table = displayArea.table
+        this.shelf = displayArea.shelf
+
+        // User
+        this.user = user
+
+        // Mouse Move Events
+        window.addEventListener('mousedown', (e) => this.handleMouseDown(e))
+        window.addEventListener('mousemove', (e) => this.handleMouseMove(e))
+        window.addEventListener('mouseup', () => this.handleMouseUp())
     }
 
-    clear() {
-        this.c.clearRect(0, 0, this.element.width, this.element.height)
+    // Mouse Down Event
+    handleMouseDown(e) {
+        // only accept left click
+        if(e.button !== 0) return
+
+        // try to select one of the components in shelf
+        this.user.componentSelected = this.user.selectComponent(this.shelf)
+
+        // do nothing if no selected component
+        if(!this.user.componentSelected) return
+
+        
+        // // set temp properties if a component is selected
+        // if(this.componentSelected) {
+        //     this.createTempProperties()
+            
+        // }
+
+        // if a component is selected
+        this.user.createTempProperties()
+
+    }
+
+    // Mouse Move Event
+    handleMouseMove(e) {
+        // adjust mouse point relative to the canvas
+        const canvasRect = this.element.getBoundingClientRect()
+        const rawMouse = {x: e.clientX, y: e.clientY}
+
+        this.user.mousePoint = {
+            x: rawMouse.x - canvasRect.left,
+            y: rawMouse.y - canvasRect.top
+        }
+
+        // dragging event
+        if(this.user.componentSelected && this.user.isDragging) {
+            this.user.dragComponent()
+
+            // return component if out of bounds
+            if(!this.utilityTool.isInsideBox(rawMouse, canvasRect)) {
+                this.user.returnComponentToShelf()
+
+                this.user.resetTempProperties()
+            }
+        }
+    }
+
+    // Mouse Up Event 
+    handleMouseUp() {
+        // return if no selected component
+        if(!this.user.componentSelected) return
+
+        let isInteracting = false
+
+        // swap components if component dragged is in table display area
+        if(!isInteracting && this.utilityTool.isInsideBox(this.user.mousePoint, this.table.area)) {
+            isInteracting = true
+
+            // reset user orientation
+            this.displayArea.curr = 0
+            this.displayArea.currentSide = this.displayArea.displaySides[this.displayArea.curr]
+
+            // swap components
+            this.displayArea.swapComponents(this.user.componentSelected)
+        }
+
+        // return to shelf if no interaction
+        if(!isInteracting) {
+            this.user.returnComponentToShelf()
+        }
+
+        // clear temporary properties
+        this.user.resetTempProperties()
     }
 
     fillRoundRect(left, top, width, height, radius) {
@@ -58,12 +139,13 @@ class Canvas {
         this.drawComponent(component.box, componentSide.image)
     }
 
-    animate(displayArea) {
-        const table = displayArea.table
-        const shelf = displayArea.shelf
+    // Main Animate Function
+    animate() {
+        const table = this.table
+        const shelf = this.shelf
 
         // clear
-        this.clear()
+        this.c.clearRect(0, 0, this.element.width, this.element.height)
         this.c.imageSmoothEnabed = true
 
         // fill Background
@@ -98,12 +180,9 @@ class Canvas {
             }
         })
 
-        requestAnimationFrame(() => this.animate(this.displayArea))
+        requestAnimationFrame(() => this.animate())
     }
 
-    init() {
-        this.animate(this.displayArea)
-    }
 }
 
 export default Canvas

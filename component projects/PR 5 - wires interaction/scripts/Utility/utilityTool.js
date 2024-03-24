@@ -2,7 +2,7 @@ class UtilityTool {
     constructor() {
         this.idCount = 1
     }
-    // Is point inside Box
+    // Check for The Relation of Point And Plane
     isInsideBox(point, box) {
         return point.x > box.x &&
             point.x < box.x + box.width &&
@@ -10,13 +10,14 @@ class UtilityTool {
             point.y < box.y + box.height
     }    
 
+    // Creation of HTML Elements for Items
     makeItemElement(item, imageSource){
-        // CREATE THE DIV
+        // create the div
         const element = document.createElement('div')
         element.classList = 'content'
         element.id = item.name
 
-        // CREATE IMAGE FOR THE DIV
+        // create image for the div
         const image = new Image()
         image.src = imageSource
         image.style.width = '100%'
@@ -24,7 +25,7 @@ class UtilityTool {
         image.alt = item.name
         element.appendChild(image)
 
-        // CREATE SLIDER DIV FOR TITLE
+        // create slider div for the label
         const slider = document.createElement('div')
         slider.classList = 'slider'
         slider.textContent = item.name + ' (' + item.type + ')'
@@ -32,21 +33,26 @@ class UtilityTool {
         return element  
     }
 
+    // Create of Unique ID
     createID(component) {
+        // prefixes to separate component types
         const types = {
             chassis: 'ch',
+            motherboard: 'mo',
             cpu: 'cp',
             gpu: 'gp'
         }
 
+        // check if valid component type 
         if (!types.hasOwnProperty(component.type)) {
-            throw new Error('Not Supported Component')
+            throw new Error('Not Supported Component, Failed to Create an ID')
         }
 
         const count = this.idCount.toString()
         const typePrefix = types[component.type]
         let id = null
 
+        // concatenate to create ID
         switch(count.length) {
             case 1:
                 id  = typePrefix + ('0' + '0' + count)
@@ -60,14 +66,12 @@ class UtilityTool {
         }
         
         component.id = id
+
+        // change id count number
         this.idCount++
-        console.log(count.length)
     }
 
-    getSide(component, side) {
-        return component.images.find(element => element.side == side) || null
-    }
-
+    // Determine Scaling Factor Based on Display Area Height
     determineScale(componentHeight, baseHeight) {
         // start with 1 as scale and lower if it still doesnt fit
         let scale = 1
@@ -78,11 +82,13 @@ class UtilityTool {
         return scale
     }
 
+    // Get Image Side
     getSide(component, side) {
         // images associated with a side also has their width and height declared
         return component.images.find(element => element.side == side) || null
     }
 
+    // Create Image Rendering
     createImages(imageArr) {
         imageArr.forEach(imageSide => {
             imageSide.image = new Image()

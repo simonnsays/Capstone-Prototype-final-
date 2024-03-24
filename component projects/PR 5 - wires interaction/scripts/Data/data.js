@@ -62,7 +62,53 @@ const components = [
                 }
             }
         ]
-    })
+    }),
+    new Component ({
+        name: 'MPG Z790 CARBON MAX WIFI',
+        type: 'motherboard',
+        size: 'ATX',
+        dimensions: {
+            depth: 244,
+            width: 244,
+            height: 305
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'left',
+        images: [
+            {side: 'left', imageSrc: './assets/motherboard/msi-mobo.png'}, 
+            {side: 'rear', imageSrc: './assets/motherboard/msi-IO.png'} 
+        ],
+        slots: [
+            {
+                type: 'cpu', 
+                supports: ['LGA 1700'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 113, y: 73, width: 45, height: 45},
+                        },
+                        accessible: true // if able to attach to this side
+                    }
+                }
+            },
+            {
+                type: 'gpu', 
+                supports: ['pcie4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 10, y: 173, width: 150, height: 50},
+                        },
+                        accessible: true // if able to attach to this side
+                    }
+                }
+            }
+        ]
+    }),
+    
 ]
 
 components.forEach(component => {

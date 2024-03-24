@@ -17,7 +17,7 @@ class Main {
         this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool)
 
         // User
-        this.user = new User()
+        this.user = new User(this.utilityTool)
 
         // Inventory
         this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea, this.canvas)
@@ -29,16 +29,13 @@ class Main {
         this.wiresTab = new WiresTab(this.elementHandler, this.utilityTool)
 
         // Canvas
-        this.canvas = new Canvas(this.elementHandler, this.utilityTool, this.displayArea)
-
-        // UI 
-
+        this.canvas = new Canvas(this.elementHandler, this.utilityTool, this.displayArea, this.user)
     }
 
     start() {
         // main code here
         this.shop.init()
-        this.canvas.init()      
+        this.canvas.animate()      
     }
 
 }

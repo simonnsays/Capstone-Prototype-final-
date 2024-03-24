@@ -100,7 +100,6 @@ class Inventory {
         // add to Table
         if(!table.component) {
             this.displayArea.table.component = component
-            console.log('hit')
             return
         }
 
@@ -134,8 +133,6 @@ class Inventory {
                 
                 // update inventory information
                 this.update()
-
-                console.log(this.displayArea)
             })
         })
     }

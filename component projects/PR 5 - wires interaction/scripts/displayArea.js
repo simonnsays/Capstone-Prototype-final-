@@ -37,6 +37,20 @@ class DisplayArea {
         this.currentSide = this.displaySides[this.curr]
     }
 
+    // Swap Components
+    swapComponents(componentSelected) {
+        const tempComponent = this.table.component
+        const index = this.shelf.findIndex(spot => spot.component && 
+            spot.component.id === componentSelected.id)
+
+        // swap
+        this.table.component = componentSelected
+        this.shelf[index].component = tempComponent
+
+        // update display area information
+        this.update()
+    }
+
     // Create Bounding Box
     createBox(component, display) {
         // get access to the components default side
@@ -55,20 +69,44 @@ class DisplayArea {
         }
     }
 
+    // Update Stylesheet Depending if The Component is Rotatable or Not
+    updateRotatableStyles(rotatable) {
+        console.log(rotatable)
+        if(rotatable) {
+            this.rightBtn.style.visibility = 'visible'
+            this.leftBtn.style.visibility = 'visible'
+            this.panelIndicator.style.visibility = 'visible'
+            this.panelIndicator.innerHTML = this.currentSide + ' side'
+        } else {
+            this.rightBtn.style.visibility = 'hidden'
+            this.leftBtn.style.visibility = 'hidden'
+            this.panelIndicator.style.visibility = 'hidden'
+        }
+    }
+
+    // Update Labels
+    updateComponentLabels(component) {
+        this.compLabel.innerHTML = component.type
+        this.compName.innerHTML = component.name
+    }
+
     // Main Dispay Area Update Method 
     update() {
         if(this.table.component) {
             const tableComponent = this.table.component
             this.createBox(tableComponent, this.table)
+
+            this.updateRotatableStyles(tableComponent.isRotatable)
+            this.updateComponentLabels(tableComponent)
         }
 
-    this.shelf.forEach(spot => {
-        const shelfComponent = spot.component
+        this.shelf.forEach(spot => {
+            const shelfComponent = spot.component
 
-        if(shelfComponent) {
-            this.createBox(shelfComponent, spot)
-        }
-    })
+            if(shelfComponent) {
+                this.createBox(shelfComponent, spot)
+            }
+        })
     }
 }
 
