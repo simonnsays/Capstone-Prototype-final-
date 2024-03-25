@@ -27,6 +27,7 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
+                            default: {x: 50, y: 61, width:204, height: 265},
                             ATX: {x: 50, y: 61, width:204, height: 265},
                             microATX: {x: 50, y: 63, width:204, height: 204},
                             miniATX: {x: 50, y: 63, width:150, height: 150}

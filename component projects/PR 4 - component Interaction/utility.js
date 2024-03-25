@@ -177,8 +177,9 @@ function getSlotOffset(side, componentSelected) {
 
 
     // get offset
-    return Object.keys(side.offsets).length > 1 ? 
-    side.offsets[componentSelected.size] : side.offsets['default'] || null
+    return Object.keys(side.offsets).length > 1 
+    ? side.offsets[componentSelected.size] 
+    : side.offsets['default'] || null
 }
 
 /*

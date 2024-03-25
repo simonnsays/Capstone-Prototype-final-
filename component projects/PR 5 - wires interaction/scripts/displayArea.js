@@ -43,7 +43,6 @@ class DisplayArea {
 
     // Rotate Left
     rotateLeft() {
-        console.log('hit')
         this.curr = (this.curr - 1 + this.displaySides.length) % this.displaySides.length;
         this.currentSide = this.displaySides[this.curr]
 
@@ -117,10 +116,20 @@ class DisplayArea {
     update() {
         if(this.table.component) {
             const tableComponent = this.table.component
+            // create bounding box for table component adjusted to the current side
             this.createBox(tableComponent, this.table, this.currentSide)
 
+            // update labels and rotate buttons visibility
             this.updateRotatableStyles(tableComponent.isRotatable)
             this.updateComponentLabels(tableComponent)
+
+            //update slot boxes
+            tableComponent.slots.forEach(slot => {
+                // match available slots based on currentSide
+                if(slot.sides[this.currentSide]) {
+                    console.log(slot.sides[this.currentSide].offsets['default'])
+                }
+            })
         }
 
         this.shelf.forEach(spot => {

@@ -26,6 +26,7 @@ class User {
         this.isDragging = false
 
         // ...slots
+        this.availableSlots = []
 
         // component selected
         delete this.componentSelected.origin

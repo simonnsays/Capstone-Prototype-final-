@@ -38,16 +38,19 @@ class Canvas {
         // do nothing if no selected component
         if(!this.user.componentSelected) return
 
-        
-        // // set temp properties if a component is selected
-        // if(this.componentSelected) {
-        //     this.createTempProperties()
-            
-        // }
-
         // if a component is selected
         this.user.createTempProperties()
 
+        // match slots 
+        this.displaySlots(this.table.component, this.user.componentSelected)
+    }
+
+    displaySlots(baseComponent,  componentSelected) {
+        // baseComponent.slots.forEach(slot => {
+            
+        // })
+        this.user.availableSlots = baseComponent.slots.filter(slot => slot.type === componentSelected.type)
+        console.log(this.user.availableSlots)
     }
 
     // Mouse Move Event
@@ -132,13 +135,38 @@ class Canvas {
         )
     }
 
-    drawDisplayComponent(component, currentSide) {
+    // Draw Componnent in Table Area
+    drawTableComponent(component, currentSide) {
         // some components can't be rotated so we use default source for that case
         let componentSide = component.isRotatable 
         ? this.utilityTool.getSide(component, currentSide) 
         : this.utilityTool.getSide(component, component.defaultSource)
 
         this.drawComponent(component.box, componentSide.image)
+    }
+
+    // Draw Available Slots
+    drawAvailableSlots(baseComponent) {
+        // do nothing if no available slots
+        if(this.user.availableSlots.length === 0) return
+
+        // highlight default slot box (not necessarily compatible yet)
+        this.user.availableSlots.forEach(slot => {
+            const side = slot.sides[this.displayArea.currentSide]
+            
+            // sometimes there are slot offsets only available on certain sides
+            if(side) {
+                const offset = side.offsets['default']
+
+                this.c.fillStyle = 'rgba(0, 255, 0, 0.4)'
+                this.c.fillRect(
+                    baseComponent.box.x + offset.x,
+                    baseComponent.box.y + offset.y,
+                    offset.width,
+                    offset.height
+                )
+            }
+        })
     }
 
     // Main Animate Function
@@ -165,11 +193,12 @@ class Canvas {
         // draw Display area component
         if(table.component) {
             // draw component
-            this.drawDisplayComponent(table.component, this.displayArea.currentSide)
+            this.drawTableComponent(table.component, this.displayArea.currentSide)
 
             // draw attached components
 
             // draw available slots
+            this.drawAvailableSlots(table.component)
         }
 
         // draw shelf components

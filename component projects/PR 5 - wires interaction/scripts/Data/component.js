@@ -19,11 +19,7 @@ class Component {
     }
 
     static handleComponent(component) {
-        component.images.forEach(element => {
-            // // Create Image  
-            // element.image = new Image()
-            // element.image.src = element.imageSrc
-    
+        component.images.forEach(element => { 
             // Adjust width and height depending on side
             switch(element.side) {
                 case 'left':
