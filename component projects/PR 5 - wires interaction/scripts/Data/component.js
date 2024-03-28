@@ -1,5 +1,5 @@
 class Component {
-    constructor({name, type, specs, dimensions, isRotatable, isAttached = false, defaultSource, images, slots}) {
+    constructor({name, type, specs, dimensions, isRotatable, isAttached = false, defaultSource, images, slots = []}) {
         // Description
         this.name = name
         this.type = type

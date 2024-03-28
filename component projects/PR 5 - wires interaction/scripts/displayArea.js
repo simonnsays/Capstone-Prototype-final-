@@ -57,6 +57,24 @@ class DisplayArea {
         this.update()
     }
 
+     // Attach Component
+     attachComponent(componentSelected, slot) {
+        slot.component = componentSelected
+        slot.component.isAttached = true
+        // slot.component.box = slot.box
+        slot.component.box.x = slot.box.x
+        slot.component.box.y = slot.box.y
+
+        // remove selected component from shelf
+        const i = this.shelf.findIndex(spot => spot.component && 
+            spot.component.id === componentSelected.id)
+        this.shelf[i].component = null
+
+        // update display area information
+        this.update()
+    }
+
+
     // Swap Components
     swapComponents(componentSelected) {
         const tempComponent = this.table.component
@@ -76,6 +94,7 @@ class DisplayArea {
         // get access to the components default side
         let componentSide = this.utilityTool.getSide(component, givenSide)
         let scale = this.utilityTool.determineScale(componentSide.height, display.area.height - 20)
+        display.scale = scale
 
         // Offset to adjust the image drawing to center
         let toCenter = {
@@ -112,6 +131,91 @@ class DisplayArea {
         this.compName.innerHTML = component.name
     }
 
+    // Update Slot Box
+    updateSlotBox(baseComponent, slot) {
+        /*
+        /
+        /
+        /       CHANGE YOU SLOT CREATION LOGIC SOMEBODY PLEASE HELP
+        /
+        /
+        */
+        const side = slot.sides[this.currentSide]
+
+        if(!side) {
+            console.log('no side')
+            console.log(slot)
+            slot.box = {
+                x: 0,
+                y: 0,
+                width: 0,
+                height: 0
+            }
+            return
+        }
+
+        // if(baseComponent.isAttached) {
+        //     console.log(this.currentSide, 'hit')
+        //     // get the original dimensions of the base component
+        //     const imageSide = this.utilityTool.getSide(baseComponent, this.currentSide)
+        //     const diffX = imageSide.width - baseComponent.box.width
+        //     const diffY = imageSide.height - baseComponent.box.height
+        //     const offset = side.offsets['default']
+
+        //     slot.box = {
+        //         x: baseComponent.box.x + (offset.x - ((offset.width * this.table.scale)) / 2),
+        //         y: baseComponent.box.y + (offset.y - ((offset.height * this.table.scale)) / 2),
+        //         width: offset.width * this.table.scale,
+        //         height: offset.height * this.table.scale,
+        //     }
+        // } else {
+            const base = baseComponent.box
+            const offset = side.offsets['default']
+
+            console.log(base)
+            slot.box = {
+                x: base.x + offset.x,
+                y: base.y + offset.y,
+                width: offset.width,
+                height: offset.height
+            }
+        // }
+
+        if(slot.component) {
+            slot.component.slots.forEach(childSlot => {
+                this.updateSlotBox(slot.component, childSlot)
+            })
+        }
+    }
+
+    updateAttachedComponentBox(baseComponent, slot) {
+        // only update when a side for slot is available
+        const side = slot.sides[this.currentSide]
+        if(!side) return
+
+        /*
+        *   Might Change and have a better connection logic  
+        */
+        const offset = side.offsets['default']
+
+            const base = baseComponent.box
+
+            slot.component.box = {
+                x: base.x + offset.x,
+                y: base.y + offset.y,
+                width: offset.width,
+                height: offset.height
+            }
+
+
+        // do the same for components attached to this attached component (if there are)
+        slot.component.slots.forEach(childSlot => {
+            if(childSlot.component) {
+                this.updateAttachedComponentBox(slot.component, childSlot)
+            }
+        })
+    }
+
     // Main Dispay Area Update Method 
     update() {
         if(this.table.component) {
@@ -123,15 +227,19 @@ class DisplayArea {
             this.updateRotatableStyles(tableComponent.isRotatable)
             this.updateComponentLabels(tableComponent)
 
-            //update slot boxes
+            //update table component slot information
             tableComponent.slots.forEach(slot => {
-                // match available slots based on currentSide
-                if(slot.sides[this.currentSide]) {
-                    console.log(slot.sides[this.currentSide].offsets['default'])
+                // update slot boxes
+                this.updateSlotBox(tableComponent, slot)  
+                
+                // update component boxes attached to slots
+                if(slot.component) {
+                    this.updateAttachedComponentBox(tableComponent, slot)
                 }
             })
         }
 
+        // create bounding boxes for components inside shelf
         this.shelf.forEach(spot => {
             const shelfComponent = spot.component
 

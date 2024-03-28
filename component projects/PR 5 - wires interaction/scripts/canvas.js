@@ -45,12 +45,19 @@ class Canvas {
         this.displaySlots(this.table.component, this.user.componentSelected)
     }
 
+    // Display Slots (get Available slots)
     displaySlots(baseComponent,  componentSelected) {
-        // baseComponent.slots.forEach(slot => {
-            
-        // })
-        this.user.availableSlots = baseComponent.slots.filter(slot => slot.type === componentSelected.type)
-        console.log(this.user.availableSlots)
+        // match slot type to selected component type
+        baseComponent.slots.forEach(slot => {
+            if(slot.type === componentSelected.type && slot.component === null) {
+                this.user.availableSlots.push(slot)
+            }
+
+            // get available slots from attached components
+            if(slot.component) {
+                this.displaySlots(slot.component, componentSelected)
+            }
+        })
     }
 
     // Mouse Move Event
@@ -82,7 +89,20 @@ class Canvas {
         // return if no selected component
         if(!this.user.componentSelected) return
 
+        // check for interaction
         let isInteracting = false
+
+        this.user.availableSlots.forEach(slot => {
+            if(!slot.box) throw new Error('Slot has no Box property')
+
+            if(this.utilityTool.isInsideBox(this.user.mousePoint, slot.box) 
+            && slot.sides[this.displayArea.currentSide].accessible) {
+                isInteracting = true
+
+                // attach component
+                this.displayArea.attachComponent(this.user.componentSelected, slot)
+            }
+        })
 
         // swap components if component dragged is in table display area
         if(!isInteracting && this.utilityTool.isInsideBox(this.user.mousePoint, this.table.area)) {
@@ -146,26 +166,43 @@ class Canvas {
     }
 
     // Draw Available Slots
-    drawAvailableSlots(baseComponent) {
+    drawAvailableSlots() {
         // do nothing if no available slots
         if(this.user.availableSlots.length === 0) return
 
         // highlight default slot box (not necessarily compatible yet)
         this.user.availableSlots.forEach(slot => {
-            const side = slot.sides[this.displayArea.currentSide]
-            
-            // sometimes there are slot offsets only available on certain sides
-            if(side) {
-                const offset = side.offsets['default']
-
+            // draw slot if a boudning box for slot is created
+            if(slot.box) {
                 this.c.fillStyle = 'rgba(0, 255, 0, 0.4)'
                 this.c.fillRect(
-                    baseComponent.box.x + offset.x,
-                    baseComponent.box.y + offset.y,
-                    offset.width,
-                    offset.height
+                    slot.box.x,
+                    slot.box.y,
+                    slot.box.width,
+                    slot.box.height
                 )
             }
+        })
+    }
+
+    // Recursively Draw Attached Components
+    drawAttachedComponents(slots, currentSide) {
+        // do nothing if component has no slots
+        if(slots.length < 1) return
+
+        slots.forEach(slot => {
+            if(slot.component) {
+                const side = this.utilityTool.getSide(slot.component, currentSide)
+
+                // draw slots according to the current side
+                if(side) {
+                    this.drawComponent(slot.component.box, side.image)
+                }
+                
+                // draw attached components for components attached to the slot components
+                this.drawAttachedComponents(slot.component.slots, currentSide)
+            }
+            
         })
     }
 
@@ -196,9 +233,10 @@ class Canvas {
             this.drawTableComponent(table.component, this.displayArea.currentSide)
 
             // draw attached components
+            this.drawAttachedComponents(table.component.slots, this.displayArea.currentSide)
 
             // draw available slots
-            this.drawAvailableSlots(table.component)
+            this.drawAvailableSlots()
         }
 
         // draw shelf components
@@ -214,7 +252,6 @@ class Canvas {
         // Loop Canvas
         requestAnimationFrame(() => this.animate())
     }
-
 }
 
 export default Canvas

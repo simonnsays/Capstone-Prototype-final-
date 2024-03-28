@@ -109,7 +109,23 @@ const components = [
             }
         ]
     }),
-    
+    new Component ({
+        name: 'Intel Core i7-13700K',
+        type: 'cpu',
+        size: 'LGA 1700',
+        dimensions: {
+            depth: 125,
+            width: 125,
+            height: 125,
+        },
+        rotatable: false,
+        isAttached: false,
+        defaultSource: 'left',
+        images: [
+            {side: 'left', imageSrc: './assets/cpu/Intel Core i7-13700K.png'},  
+        ],
+        slots: []
+    })
 ]
 
 components.forEach(component => {

@@ -225,19 +225,7 @@ function drawShelfComponent(component) {
 
 //  DRAW ATTACHED COMPONENTS
 function drawAttachedComponents(slots, currentSide) {
-    if(slots.length < 1) return
-
-    slots.forEach(slot => {
-        if(slot.component) {
-            const side = getSide(slot.component, currentSide)
-            if(side) {
-                canvasDraw(slot.component.box, side.image)
-            }
-            
-            drawAttachedComponents(slot.component.slots, currentSide)
-        }
-        
-    })
+     
 }
 
 // DRAW IMAGE IN CANVAS
