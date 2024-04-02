@@ -43,7 +43,7 @@ class DisplayArea {
 
     // Rotate Left
     rotateLeft() {
-        this.curr = (this.curr - 1 + this.displaySides.length) % this.displaySides.length;
+        this.curr = (this.curr + 1) % this.displaySides.length
         this.currentSide = this.displaySides[this.curr]
 
         this.update()
@@ -51,7 +51,7 @@ class DisplayArea {
     
     // Rotate Right
     rotateRight() {
-        this.curr = (this.curr + 1) % this.displaySides.length
+        this.curr = (this.curr - 1 + this.displaySides.length) % this.displaySides.length;
         this.currentSide = this.displaySides[this.curr]
 
         this.update()
@@ -61,10 +61,10 @@ class DisplayArea {
      attachComponent(componentSelected, slot) {
         slot.component = componentSelected
         slot.component.isAttached = true
-        // slot.component.box = slot.box
-        slot.component.box.x = slot.box.x
-        slot.component.box.y = slot.box.y
-
+        console.log('component: ', componentSelected.box)
+        console.log('slot: ', slot.box)
+        slot.component.box = slot.box
+        
         // remove selected component from shelf
         const i = this.shelf.findIndex(spot => spot.component && 
             spot.component.id === componentSelected.id)
@@ -132,7 +132,7 @@ class DisplayArea {
     }
 
     // Update Slot Box
-    updateSlotBox(baseComponent, slot) {
+    updateSlotBox(baseComponent, slot) {    
         /*
         /
         /
@@ -143,8 +143,7 @@ class DisplayArea {
         const side = slot.sides[this.currentSide]
 
         if(!side) {
-            console.log('no side')
-            console.log(slot)
+            console.log('no side', slot.type)
             slot.box = {
                 x: 0,
                 y: 0,
@@ -154,32 +153,39 @@ class DisplayArea {
             return
         }
 
-        // if(baseComponent.isAttached) {
-        //     console.log(this.currentSide, 'hit')
-        //     // get the original dimensions of the base component
-        //     const imageSide = this.utilityTool.getSide(baseComponent, this.currentSide)
-        //     const diffX = imageSide.width - baseComponent.box.width
-        //     const diffY = imageSide.height - baseComponent.box.height
-        //     const offset = side.offsets['default']
+        if(baseComponent.isAttached) {
 
-        //     slot.box = {
-        //         x: baseComponent.box.x + (offset.x - ((offset.width * this.table.scale)) / 2),
-        //         y: baseComponent.box.y + (offset.y - ((offset.height * this.table.scale)) / 2),
-        //         width: offset.width * this.table.scale,
-        //         height: offset.height * this.table.scale,
-        //     }
-        // } else {
+            // get the original dimensions of the base component
+            const imageSide = this.utilityTool.getSide(baseComponent, this.currentSide)
+
+            
+            // find the scale by getting the change happened in the component's width and height
+            const scale = {
+                width: baseComponent.box.width / imageSide.width,
+                height: baseComponent.box.height / imageSide.height,
+            }
+            console.log(scale)
+          
+            const offset = side.offsets['default']
+
+            slot.box = {
+                x: baseComponent.box.x + (offset.x * scale.width),
+                y: baseComponent.box.y + (offset.y * scale.height),
+                width: offset.width * scale.width,
+                height: offset.height * scale.width,
+            }
+        } else {
             const base = baseComponent.box
             const offset = side.offsets['default']
 
-            console.log(base)
             slot.box = {
                 x: base.x + offset.x,
                 y: base.y + offset.y,
                 width: offset.width,
                 height: offset.height
             }
-        // }
+        }
+     
 
         if(slot.component) {
             slot.component.slots.forEach(childSlot => {
@@ -229,13 +235,13 @@ class DisplayArea {
 
             //update table component slot information
             tableComponent.slots.forEach(slot => {
-                // update slot boxes
-                this.updateSlotBox(tableComponent, slot)  
-                
                 // update component boxes attached to slots
                 if(slot.component) {
                     this.updateAttachedComponentBox(tableComponent, slot)
                 }
+
+                // update slot boxes
+                this.updateSlotBox(tableComponent, slot)
             })
         }
 
