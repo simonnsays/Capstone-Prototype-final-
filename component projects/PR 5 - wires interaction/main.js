@@ -19,14 +19,14 @@ class Main {
         // User
         this.user = new User(this.utilityTool)
 
+        // Wires Tab
+        this.wiresTab = new WiresTab(this.elementHandler, this.utilityTool)
+        
         // Inventory
-        this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea, this.canvas)
+        this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea)
 
         // Shop
         this.shop = new Shop(this.elementHandler, this.utilityTool, this.inventory)
-
-        // Wires Tab
-        this.wiresTab = new WiresTab(this.elementHandler, this.utilityTool)
 
         // Canvas
         this.canvas = new Canvas(this.elementHandler, this.utilityTool, this.displayArea, this.user)

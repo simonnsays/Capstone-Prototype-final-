@@ -1,5 +1,5 @@
 class Inventory {
-    constructor(elementHandler, utilityTool, displayArea, canvas) {
+    constructor(elementHandler, utilityTool, displayArea) {
         // Utility
         this.utilityTool = utilityTool
         this.elements = elementHandler.getInventoryElements()
@@ -7,9 +7,6 @@ class Inventory {
 
         // Display Area
         this.displayArea = displayArea
-
-        // Canvas
-        this.canvas = canvas
 
         // Elements
         this.openBtn = this.elements.openBtn

@@ -133,7 +133,7 @@ dialog{
     width: 150px;
     height: 150px;
     /* margin:10px; */
-    border: solid 1px black;
+    /* border: solid 1px black; */
     border-radius: 10px;
     padding: 10px;
     position: relative;
@@ -157,7 +157,13 @@ dialog{
     position: absolute;
     top: 100%;
     background-color: #dce9e6;
-    white-space: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 5px;
+
+    font-size: small;
     text-align: center;
     transition: transform 0.3s ease-in-out
 }
@@ -168,8 +174,16 @@ dialog{
 .modal-body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 10px;
 }
 .modal-wrapper > div {
     margin-bottom: 15  ;
 }
 
+#wiresModal {
+    width: 900px;
+    height: 600px;
+}
+.wire-body {
+    display: flex;
+}
