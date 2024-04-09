@@ -20,7 +20,7 @@
         <!-- component labels -->
         <div class="rotate-wrapper">
             <button class="button" id="left">
-                <img class="arrow" src="./assets/leftArr.svg" alt="left arrow">
+                <img class="arrow" src="./assets/svg/leftArr.svg" alt="left arrow">
             </button>
             <div class="wrapper">
                 <p id="compLabel"></p>
@@ -29,7 +29,7 @@
             </div>
             
             <button class="button" id="right">
-                <img class="arrow" src="./assets/rightArr.svg" alt="right arrow">
+                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
             </button>
         </div>
     </div>
@@ -66,7 +66,7 @@
     </dialog>
 
     <!-- WIRES MODAL -->
-    <dialog id="wiresModal" class="modal">
+    <div id="wiresModal" class="modal">
         <div class="modal-wrapper">
             <!-- modal header -->
             <div class="modal-header">
@@ -77,15 +77,27 @@
             <!-- item container -->
             <div id="wiresItemsContainer" class="wire-body">
                 <!-- body header -->
-                <div id="body-header">
+                <div id="bodyHeader">
                     <div id="mainHead">PSU Ports</div>
                     <div id="subHead">Power</div>
                 </div>
-                <!-- body contents -->
-                <div class=""></div>
+                <!-- ports area container -->
+                <div id="portContainer">
+                </div>
             </div>
         </div>
-    </dialog>
+    </div>
+
+    <!-- Wires Cables Drawer -->
+    <div id="wiresDrawer">
+        <!-- drag up pulley -->
+        <div id="pulley">
+            <img src="./assets/svg/up-arrow-svgrepo-com (1).svg" alt="pulley up arrow">
+        </div>
+
+        <!-- cables / drawer contents -->
+        <div id="cableContainer"></div>
+    </div>
     
     <script type="module" src="main.js"></script>
 </body>

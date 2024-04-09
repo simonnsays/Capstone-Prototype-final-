@@ -61,8 +61,6 @@ class DisplayArea {
      attachComponent(componentSelected, slot) {
         slot.component = componentSelected
         slot.component.isAttached = true
-        console.log('component: ', componentSelected.box)
-        console.log('slot: ', slot.box)
         slot.component.box = slot.box
         
         // remove selected component from shelf
@@ -143,7 +141,6 @@ class DisplayArea {
         const side = slot.sides[this.currentSide]
 
         if(!side) {
-            console.log('no side', slot.type)
             slot.box = {
                 x: 0,
                 y: 0,
@@ -164,7 +161,6 @@ class DisplayArea {
                 width: baseComponent.box.width / imageSide.width,
                 height: baseComponent.box.height / imageSide.height,
             }
-            console.log(scale)
           
             const offset = side.offsets['default']
 
@@ -202,7 +198,29 @@ class DisplayArea {
         /*
         *   Might Change and have a better connection logic  
         */
-        const offset = side.offsets['default']
+
+        if(baseComponent.isAttached) {
+
+            // get the original dimensions of the base component
+            const imageSide = this.utilityTool.getSide(baseComponent, this.currentSide)
+
+            
+            // find the scale by getting the change happened in the component's width and height
+            const scale = {
+                width: baseComponent.box.width / imageSide.width,
+                height: baseComponent.box.height / imageSide.height,
+            }
+          
+            const offset = side.offsets['default']
+
+            slot.box = {
+                x: baseComponent.box.x + (offset.x * scale.width),
+                y: baseComponent.box.y + (offset.y * scale.height),
+                width: offset.width * scale.width,
+                height: offset.height * scale.width,
+            }
+        } else {
+            const offset = side.offsets['default']
 
             const base = baseComponent.box
 
@@ -212,7 +230,7 @@ class DisplayArea {
                 width: offset.width,
                 height: offset.height
             }
-
+        }
 
         // do the same for components attached to this attached component (if there are)
         slot.component.slots.forEach(childSlot => {

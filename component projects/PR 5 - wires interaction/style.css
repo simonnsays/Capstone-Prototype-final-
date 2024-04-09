@@ -51,6 +51,7 @@ canvas {
     /* background-color: var(--darkMode-green1); */
     background-color: var(--pastel-yellow);
 
+    /* border: 3px solid black; */
     border-radius: 30px
 }
 
@@ -68,7 +69,7 @@ canvas {
 
 .button {
     height: 70%;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 10px;
     padding: 5px;
 }
@@ -107,7 +108,7 @@ canvas {
     background-color: var(--mint);
 }
 
-dialog{
+.modal{
     border-radius: 20px;   
     animation: fadeInAnimation ease .4s;
     animation-iteration-count: 1 ;
@@ -181,9 +182,105 @@ dialog{
 }
 
 #wiresModal {
+    display: none;
+} 
+/* Wires  */
+#wiresModal {
     width: 900px;
     height: 600px;
-}
-.wire-body {
+    z-index: 3;
+    position: fixed;
+    top: calc(50%-600px/2);
+    left: calc(50%-900px/2);
+    background-color: white;
+
+}   
+#bodyHeader{
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #abd699; */
+}
+#mainHead {
+    font-size: 30px;
+}
+
+/* WIRES CABLE DRAWER */
+#wiresDrawer {
+    /* width: 1300px; */
+    width: 80vw;
+    height: 250px;
+    /* background-color: #7DAFC2;    */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+
+    position: fixed;
+    bottom: -195;
+
+    animation-duration: .5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards; 
+}
+
+#portContainer {
+    /* background-color: var(--pastel-yellow); */
+    width: 100%;
+    height: 80%;
+}
+
+.pull {
+    animation-name: pullUp;
+}
+.return {
+    animation-name: return;
+}
+#pulley {
+    width: 100px;
+    height: 70px;
+    background-color: var(--pastel-yellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    margin-bottom: 0px;
+    
+    border: 3px solid black;
+    border-bottom:0 ;
+    border-top-left-radius: 100px; 
+    border-top-right-radius: 100px; 
+
+    box-shadow: 0 0 10px black;
+    transition: all 1s ease-in-out;
+}
+#pulley:hover {
+    cursor: pointer;
+}
+
+#pulley > img {
+    width: 30px;
+}
+#cableContainer {
+    background-color: var(--pastel-yellow);
+    /* background-color: var(--blue); */
+    width: 100%;
+    height: 100%;
+
+    border: 3px solid black;
+    border-top-left-radius: 20px; /* Half of the height */
+    border-top-right-radius: 20px; /* Half of the height */
+
+    box-shadow: 0 0px 10px black;
+}
+
+/* Animations */
+@keyframes pullUp {
+    0% {bottom: -195;}
+    100% {bottom: 0;}
+}
+@keyframes return {
+    0% {bottom: 0;}
+    100% {bottom: -195;}
 }

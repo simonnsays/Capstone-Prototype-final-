@@ -13,6 +13,7 @@ class Inventory {
         this.closeBtn = this.elements.closeBtn
         this.modal = this.elements.modal
         this.itemsContainer = this.elements.itemsContainer
+        this.isActive = false
 
         // Items
         this.items = []
@@ -26,11 +27,17 @@ class Inventory {
     openTab(modal) {
         modal.showModal()
         modal.isOpen = true
+
+        // for canvas monitoring 
+        this.isActive = true
     }
 
     closeTab(modal) {
         modal.close()
         modal.isOpen = false
+
+        // for canvas monitoring 
+        this.isActive = false
     }
 
     // Handle User Click Out of Bounds

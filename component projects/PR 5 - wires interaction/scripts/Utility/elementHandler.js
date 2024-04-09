@@ -21,13 +21,16 @@ class ElementHandler {
             itemsContainer: document.querySelector('#invItemsContainer')
 
         } || null
-    }
+    }       
 
-    getConnectionsElements() {
+    getWiresElements() {
         return {
             openBtn: document.querySelector('#openWires'),
             closeBtn: document.querySelector('#closeWires'),
             modal: document.querySelector('#wiresModal'),
+            drawer: document.querySelector('#wiresDrawer'),
+            cableContainer: document.querySelector('#cableContainer'),
+            pullBtn: document.querySelector('#pulley')
 
         } || null
     }

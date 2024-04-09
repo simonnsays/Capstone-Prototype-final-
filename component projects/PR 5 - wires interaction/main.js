@@ -28,14 +28,30 @@ class Main {
         // Shop
         this.shop = new Shop(this.elementHandler, this.utilityTool, this.inventory)
 
+        
+
+        // Event
+        window.addEventListener('mousedown', () => this.handleMouseDown())
+
         // Canvas
         this.canvas = new Canvas(this.elementHandler, this.utilityTool, this.displayArea, this.user)
+    }
+
+    handleMouseDown() {
+        if(this.shop.isActive || 
+            this.inventory.isActive || 
+            this.wiresTab.isActive || 
+            this.wiresTab.drawer.isActive) {
+                this.canvas.isActive = false
+            } else {
+                this.canvas.isActive = true
+            }
     }
 
     start() {
         // main code here
         this.shop.init()
-        this.canvas.animate()      
+        this.canvas.animate()    
     }
 
 }

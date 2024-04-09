@@ -12,6 +12,7 @@ class Canvas {
         this.element.width = 1300
         this.element.height = 680
         this.c = this.element.getContext('2d')
+        this.isActive = true
 
         // Display Area
         this.displayArea = displayArea
@@ -30,7 +31,7 @@ class Canvas {
     // Mouse Down Event
     handleMouseDown(e) {
         // only accept left click
-        if(e.button !== 0) return
+        if(e.button !== 0 || !this.isActive) return
 
         // try to select one of the components in shelf
         this.user.componentSelected = this.user.selectComponent(this.shelf)
