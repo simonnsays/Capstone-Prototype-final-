@@ -23,7 +23,7 @@ class Main {
         this.wiresTab = new WiresTab(this.elementHandler, this.utilityTool)
         
         // Inventory
-        this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea)
+        this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea, this.wiresTab)
 
         // Shop
         this.shop = new Shop(this.elementHandler, this.utilityTool, this.inventory)

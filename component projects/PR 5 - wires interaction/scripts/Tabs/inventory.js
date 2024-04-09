@@ -1,5 +1,5 @@
 class Inventory {
-    constructor(elementHandler, utilityTool, displayArea) {
+    constructor(elementHandler, utilityTool, displayArea, wires) {
         // Utility
         this.utilityTool = utilityTool
         this.elements = elementHandler.getInventoryElements()

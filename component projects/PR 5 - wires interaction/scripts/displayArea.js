@@ -213,7 +213,7 @@ class DisplayArea {
           
             const offset = side.offsets['default']
 
-            slot.box = {
+            slot.component.box = {
                 x: baseComponent.box.x + (offset.x * scale.width),
                 y: baseComponent.box.y + (offset.y * scale.height),
                 width: offset.width * scale.width,
