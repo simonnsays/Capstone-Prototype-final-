@@ -1,5 +1,15 @@
 class Component {
-    constructor({name, type, specs, dimensions, isRotatable, isAttached = false, defaultSource, images, slots = []}) {
+    constructor({
+        name, 
+        type, 
+        specs, 
+        dimensions, 
+        isRotatable, 
+        isAttached = false, 
+        defaultSource, 
+        images, slots = [], 
+        ports = []}) {
+
         // Description
         this.name = name
         this.type = type
@@ -16,6 +26,9 @@ class Component {
 
         // Slots
         this.slots = slots
+
+        // Ports
+        this.ports = ports
     }
 
     static handleComponent(component) {

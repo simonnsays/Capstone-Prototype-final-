@@ -1,5 +1,5 @@
 class Inventory {
-    constructor(elementHandler, utilityTool, displayArea, wires) {
+    constructor(elementHandler, utilityTool, displayArea, wiresTab) {
         // Utility
         this.utilityTool = utilityTool
         this.elements = elementHandler.getInventoryElements()
@@ -17,6 +17,9 @@ class Inventory {
 
         // Items
         this.items = []
+
+        // Wires
+        this.wiresTab = wiresTab
 
         // Events
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
@@ -111,6 +114,12 @@ class Inventory {
         this.addToShelf(component, shelf)
     }
 
+    displayPort(component) {
+        component.ports.forEach(port => {
+            console.log(port)
+        })
+    }
+
     // Main Inventory Update Method
     update() {
         // clear Item Elements
@@ -132,8 +141,17 @@ class Inventory {
                 // place removed component to display area
                 this.placeComponent(removedComponent[0])
 
+                // display ports in wires Tab
+                this.displayPort(removedComponent[0])
+
+                // place component wires to drawer tab
+                // this.placeWires(removedComponent[0])
+
                 // update display area information
                 this.displayArea.update()
+
+                // update wires tab
+                this.wiresTab.update()
                 
                 // update inventory information
                 this.update()

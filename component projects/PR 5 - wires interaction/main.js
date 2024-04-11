@@ -20,7 +20,7 @@ class Main {
         this.user = new User(this.utilityTool)
 
         // Wires Tab
-        this.wiresTab = new WiresTab(this.elementHandler, this.utilityTool)
+        this.wiresTab = new WiresTab(this.elementHandler, this.utilityTool, this.displayArea)
         
         // Inventory
         this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea, this.wiresTab)
@@ -28,9 +28,7 @@ class Main {
         // Shop
         this.shop = new Shop(this.elementHandler, this.utilityTool, this.inventory)
 
-        
-
-        // Event
+        // Prevent Canvas Interaction when tabs are open
         window.addEventListener('mousedown', () => this.handleMouseDown())
 
         // Canvas

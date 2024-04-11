@@ -47,7 +47,7 @@ body {
     position: relative;
 }
 
-canvas {
+#simCanvas {
     /* background-color: var(--darkMode-green1); */
     background-color: var(--pastel-yellow);
 
@@ -110,7 +110,7 @@ canvas {
 
 .modal{
     border-radius: 20px;   
-    animation: fadeInAnimation ease .4s;
+    animation: fadeInAnimation ease .2  s;
     animation-iteration-count: 1 ;
 
     width: 580px;
@@ -184,7 +184,10 @@ canvas {
 #wiresModal {
     display: none;
 } 
-/* Wires  */
+
+/* 
+/       Wires  
+*/
 #wiresModal {
     width: 900px;
     height: 600px;
@@ -232,6 +235,24 @@ canvas {
 
     margin-top: 15px;
     border-radius: 20px;
+}
+#portContainer > img {
+    width: 400px;
+    height: auto;
+} 
+.length-1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    background-color: white;
+
+    padding: 5px;
+}
+.portCell {
+    background-color: var(--pastel-yellow);
+
+    border-radius: 20px;
+    padding: 10px;
 }
 
 .pull {
@@ -287,3 +308,7 @@ canvas {
     0% {bottom: 0;}
     100% {bottom: -195;}
 }
+@keyframes fadeInAnimation {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+  }

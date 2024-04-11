@@ -1,6 +1,6 @@
 class ElementHandler {
-    getCanvas() {
-        return document.querySelector('canvas') || null
+    getSimCanvas() {
+        return document.querySelector('#simCanvas') || null
     }
 
     getShopElements() {
@@ -28,6 +28,7 @@ class ElementHandler {
             openBtn: document.querySelector('#openWires'),
             closeBtn: document.querySelector('#closeWires'),
             modal: document.querySelector('#wiresModal'),
+            portsContainer: document.querySelector('#portsContainer'),
             drawer: document.querySelector('#wiresDrawer'),
             cableContainer: document.querySelector('#cableContainer'),
             pullBtn: document.querySelector('#pulley')

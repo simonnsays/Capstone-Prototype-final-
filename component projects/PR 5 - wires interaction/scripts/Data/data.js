@@ -62,7 +62,8 @@ const components = [
                     
                 }
             }
-        ]
+        ],
+        ports: []
     }),
     new Component ({
         name: 'MPG Z790 CARBON MAX WIFI',
@@ -107,7 +108,8 @@ const components = [
                     }
                 }
             }
-        ]
+        ],
+        ports: []
     }),
     new Component ({
         name: 'Intel Core i7-13700K',
@@ -118,13 +120,42 @@ const components = [
             width: 125,
             height: 125,
         },
-        rotatable: false,
+        isRotatable: false,
         isAttached: false,
         defaultSource: 'left',
         images: [
             {side: 'left', imageSrc: './assets/cpu/Intel Core i7-13700K.png'},  
         ],
-        slots: []
+        slots: [],
+        ports: []
+    }),
+    new Component ({
+        name: 'EVGA SuperNOVA 1300 P+, 80+ PLATINUM 1300W',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'left',
+        images: [
+            {side: 'left', imageSrc: './assets/psu/EVGA SuperNOVA 1300 P+ - left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/EVGA SuperNOVA 1300 P+ - front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/EVGA SuperNOVA 1300 P+ - right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/EVGA SuperNOVA 1300 P+ - rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: 'psu', 
+                images: {src: './assets/psu/EVGA SuperNOVA 1300 P+ - rear.png'},
+                offsets: []
+            }
+        ],
+        cables: []
     })
 ]
 

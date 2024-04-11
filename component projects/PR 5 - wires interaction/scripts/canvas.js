@@ -5,7 +5,7 @@ class Canvas {
         this.utilityTool = utilityTool
         
         // Canvas Area
-        this.element = elementHandler.getCanvas()
+        this.element = elementHandler.getSimCanvas()
         if(!this.element) {
             throw new Error('no canvas element found')
         }
@@ -243,6 +243,21 @@ class Canvas {
         // draw shelf components
         shelf.forEach(spot => {
             if(spot.component) {
+                // check if component as attached components
+                const occupiedSlots = spot.component.slots.filter(slot => slot.component)
+
+                //  highlight a bit for indication that the component is attached
+                if(occupiedSlots.length !== 0) {
+                    const scale = .7
+                    this.c.fillStyle = 'rgba(255,170,0, 0.3)'
+                    this.c.fillRect(
+                        spot.area.x + (spot.area.width - (spot.area.width * scale)) / 2,
+                        spot.area.y + ((spot.area.height - (spot.area.height * scale)) / 2) -20,
+                        spot.area.width * scale,
+                        spot.area.height * scale + 40,
+                    )
+                }
+
                 // all shelf components will use default source
                 const component = spot.component
                 const componentSide = this.utilityTool.getSide(component, component.defaultSource) 

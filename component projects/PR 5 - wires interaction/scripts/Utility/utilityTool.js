@@ -40,7 +40,8 @@ class UtilityTool {
             chassis: 'ch',
             motherboard: 'mo',
             cpu: 'cp',
-            gpu: 'gp'
+            gpu: 'gp',
+            psu: 'ps'
         }
 
         // check if valid component type 

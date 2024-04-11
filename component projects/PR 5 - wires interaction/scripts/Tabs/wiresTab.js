@@ -1,5 +1,5 @@
 class WiresTab {
-    constructor(elementHandler, utilityTool) {
+    constructor(elementHandler, utilityTool, displayArea) {
         // Utility
         this.utilityTool = utilityTool
         this.elements = elementHandler.getWiresElements()
@@ -9,7 +9,7 @@ class WiresTab {
         this.openBtn = this.elements.openBtn
         this.closeBtn = this.elements.closeBtn
         this.modal = this.elements.modal
-        this.cableContainer = this.elements.cableContainer
+        this.portsContainer = this.elements.portsContainer
         this.isActive = false
 
         // Drawer
@@ -17,11 +17,24 @@ class WiresTab {
             element: this.elements.drawer,
             isActive: false,
             pullBtn: this.elements.pullBtn,
-            
+            cableContainer: this.elements.cableContainer
         }
 
         // Wires
         this.wires = []
+
+        // Ports
+        this.ports = []
+
+        // Display Area
+        this.displayArea = displayArea
+
+        this.portAreas = {
+            single: {area: 0, },
+            grid: [
+                {area: 0, }
+            ]
+        }
 
         // Events
         this.drawer.pullBtn.addEventListener('click', () => this.toggleDrawer())
@@ -71,6 +84,25 @@ class WiresTab {
         
         // toggle drawer state
         this.drawer.isActive = !this.drawer.isActive
+    }
+
+    // Main Update Function
+    update() {
+        this.ports.forEach(port => {
+            const element = document.createElement('div')
+            const image  = document.createElement('img')
+            image.width = 900
+            image.height = 600
+
+
+            element.appendChild(image)
+            this.portsContainer.appendChild(element)
+        })
+
+        // check if the table has a component
+        if(this.displayArea.table.component) {
+            // display ports of the component and attached components to it in wires tab
+        }
     }
 }
 
