@@ -202,18 +202,42 @@ body {
     background-color: white;
 
 }   
-#bodyHeader{
+#bodyHeader {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    /* position: relative; */
+    /* background-color: #abd699; */
+}
+#portLeft, #portRight {
+    cursor: pointer;
+
+    transition: all .1s ease-in-out;
+}
+
+.port-label {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-color: #abd699; */
+
+    margin: 0 50px;
+}
+#portLeft:hover  {
+    transform: translateX(-7px);
+}
+#portRight:hover  {
+    transform: translateX(7px);
+}
+#portLeft:active, #portRight:active {
+    transform: translateX(0);
 }
 #mainHead {
     font-size: 30px;
 }
 
-#portContainer {
+#portContainer, #portsContainer {
     /* background-color: var(--mint); */
     background-color: var(--pastel-yellow) ;
     width: 880px;
@@ -221,17 +245,28 @@ body {
 
     margin-top: 15px;
     border-radius: 20px;
+
+    overflow: auto;
+    overflow-x: hidden  ;
 }
-#portContainer > img {
-    width: 400px;
-    height: auto;
-} 
+
 
 /* SIngle Port(use single image) */
 .length-1 {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+/* override */
+.length-1 > .portCell {
+    background-color: var(--mint);
+    width: 700px;
+    height: auto;
+
+    padding: 20px;
+}
+.length-1 > .portCell > img {
+    width: 100%;
 }
 
 /* Multiple Ports(use grid)) */
@@ -253,7 +288,6 @@ body {
     position: relative;
    
     border-radius: 20px;
-    /* padding: 10px; */
 
     overflow: hidden;
 }
@@ -374,7 +408,7 @@ body {
     position: relative; 
 
     border-radius: 20px;
-    padding: 10px;
+    padding:10px;
     
     transition: all 0.2s ease; 
     transform-origin: center center;
@@ -427,12 +461,9 @@ body {
 */
 .no-margin {
     margin-bottom: 0;
-}
-.visible {
-    visibility: visible;
-}
+}   
 .invisible {
-    visibility: hidden;
+    display: none;
 }
 
 /* Animations */

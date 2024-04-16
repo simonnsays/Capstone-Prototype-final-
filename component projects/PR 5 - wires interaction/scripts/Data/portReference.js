@@ -8,12 +8,13 @@ const portRef = {
                 width: 'auto',
                 height: '90%'
             },
-            // OFFSETS WILL BE USED FOR THE HIGHLIGHT DIV
+            
+            // will be used in highlights
             offset: {
                 top: 26,
-                    left: 145,
-                    width: 34,
-                    height: 180
+                left: 145,
+                width: 34,
+                height: 180
             }
             
         }

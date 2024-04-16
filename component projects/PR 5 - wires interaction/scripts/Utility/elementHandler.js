@@ -29,9 +29,6 @@ class ElementHandler {
             closeBtn: document.querySelector('#closeWires'),
             modal: document.querySelector('#wiresModal'),
             portsContainer: document.querySelector('#portsContainer'),
-            drawer: document.querySelector('#wiresDrawer'),
-            cableContainer: document.querySelector('#cableContainer'),
-            pullBtn: document.querySelector('#pulley')
 
         } || null
     }

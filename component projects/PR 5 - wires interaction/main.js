@@ -6,10 +6,6 @@ import Shop from "./scripts/Tabs/shop.js"
 import Inventory from "./scripts/Tabs/inventory.js"
 import WiresTab from "./scripts/Tabs/wiresTab.js"
 import DisplayArea from "./scripts/displayArea.js"
-import portRef from "./scripts/Data/portReference.js"
-/*
-/       CONTINUE WORKING HERE ! ! !
-*/
 
 class Main {
     constructor() {
@@ -40,6 +36,7 @@ class Main {
     }
 
     handleMouseDown() {
+        // prevent use of canvas when tabs are open
         if(this.shop.isActive || 
             this.inventory.isActive || 
             this.wiresTab.isActive || 

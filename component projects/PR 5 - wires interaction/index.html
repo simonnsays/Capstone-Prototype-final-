@@ -78,12 +78,25 @@
             <div id="wiresItemsContainer" class="wire-body">
                 <!-- body header -->
                 <div id="bodyHeader">
-                    <div id="mainHead">PORTS</div>
-                    <div id="subHead">Motherboard</div>
+                    <img src="./assets/svg/leftArr.svg" id="portLeft" width="50px" height="30px" >
+                    <div class="port-label">
+                        <div id="mainHead">PORTS</div>
+                        <div id="subHead">Motherboard</div>
+                    </div>
+                    <img src="./assets/svg/rightArr.svg" id="portRight" width="50px" height="30px">
+                    
                 </div>
-                <!-- ports area container -->
-                <div id="portContainer" data-length="single" class="length-2 visible">
-                    <!-- <img src="./assets/psu/EVGA SuperNOVA 1300 P+ - front.png"> -->
+
+                <!-- ports area container length: 1-->
+                <div id="portContainer" data-length="single" class="length-1 invisible">
+                    <div class="portCell">
+                        <img src="./assets/psu/EVGA SuperNOVA 1300 P+ - front.png">
+                    </div>
+                </div>    
+
+                <!-- ports area container length: 2-->
+                <div id="portsContainer" data-length="single" class="length-2 ">
+                   
 
                     <div class="portCell">
                         <img class="port" src="./assets/motherboard/ports/mobo-24pin-power.png">
@@ -92,7 +105,7 @@
                         <div class="port-slider">24-Pin Power</div>
                     </div>
 
-                        <div class="portCell">
+                        <!-- <div class="portCell">
                             
                         </div>
 
@@ -102,7 +115,7 @@
 
                         <div class="portCell"></div>
 
-                        <div class="portCell"></div>
+                        <div class="portCell"></div> -->
                 </div>
             </div>
         </div>

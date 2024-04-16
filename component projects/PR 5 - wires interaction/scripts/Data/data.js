@@ -110,7 +110,10 @@ const components = [
             }
         ],
         ports: [
-            {category: 'power', type: '24-pin'}
+            {
+                category: 'power', 
+                type: '24-pin'
+            }
         ],
         wires: [
             {
