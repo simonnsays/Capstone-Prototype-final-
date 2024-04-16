@@ -11,7 +11,7 @@
         <div class="button-wrapper">
             <button id="openShop">SHOP</button>
             <button id="openInv">INVENTORY</button>
-            <button id="openWires">WIRES</button>
+            <button id="openWires">PORTS</button>
         </div>
 
         <!-- canvas -->
@@ -69,8 +69,8 @@
     <div id="wiresModal" class="modal">
         <div class="modal-wrapper">
             <!-- modal header -->
-            <div class="modal-header">
-                WIRES
+            <div class="modal-header no-margin">
+                PORTS
                 <span id="closeWires" class="closeBtn">&times;</span>
             </div>
 
@@ -78,18 +78,31 @@
             <div id="wiresItemsContainer" class="wire-body">
                 <!-- body header -->
                 <div id="bodyHeader">
-                    <div id="mainHead">PSU Ports</div>
-                    <div id="subHead">Power</div>
+                    <div id="mainHead">PORTS</div>
+                    <div id="subHead">Motherboard</div>
                 </div>
                 <!-- ports area container -->
-                <div id="portContainer" class="length-1">
+                <div id="portContainer" data-length="single" class="length-2 visible">
                     <!-- <img src="./assets/psu/EVGA SuperNOVA 1300 P+ - front.png"> -->
-                    <div class="portCell"></div>
-                    <div class="portCell"></div>
-                    <div class="portCell"></div>
-                    <div class="portCell"></div>
-                    <div class="portCell"></div>
-                    <div class="portCell"></div>
+
+                    <div class="portCell">
+                        <img class="port" src="./assets/motherboard/ports/mobo-24pin-power.png">
+                        <div class="port-highlight"></div>
+                        <img class="port-attached" src="./assets/wires/24pin-attached(mobo).png">
+                        <div class="port-slider">24-Pin Power</div>
+                    </div>
+
+                        <div class="portCell">
+                            
+                        </div>
+
+                        <div class="portCell"></div>
+
+                        <div class="portCell"></div>
+
+                        <div class="portCell"></div>
+
+                        <div class="portCell"></div>
                 </div>
             </div>
         </div>
@@ -103,7 +116,20 @@
         </div>
 
         <!-- cables / drawer contents -->
-        <div id="cableContainer"></div>
+        <div id="cableContainer">
+            <div class="cableCell unused">
+                <img src="./assets/wires/24pin-mobo-power.png">
+                <div class="cable-slider"> 24-Pin Power Cable </div>
+            </div>
+            <div class="cableCell ip active">
+                <img src="./assets/wires/24pin-mobo-power.png">
+                <div class="cable-slider"> 24-Pin Power Cable </div>
+            </div>
+            <div class="cableCell used">
+                <img src="./assets/wires/24pin-mobo-power.png">
+                <div class="cable-slider"> 24-Pin Power Cable </div>
+            </div>
+        </div>
     </div>
     
     <script type="module" src="main.js"></script>

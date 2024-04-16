@@ -32,8 +32,9 @@ class Component {
     }
 
     static handleComponent(component) {
+        // Handle Image dimensions
         component.images.forEach(element => { 
-            // Adjust width and height depending on side
+            // adjust width and height depending on side
             switch(element.side) {
                 case 'left':
                 case 'right':

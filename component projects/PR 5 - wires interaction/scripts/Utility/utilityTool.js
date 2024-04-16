@@ -20,8 +20,8 @@ class UtilityTool {
         // create image for the div
         const image = new Image()
         image.src = imageSource
-        image.style.width = '100%'
-        image.style.height = '100%'
+        image.style.width = '150px'
+        image.style.height = 'auto'
         image.alt = item.name
         element.appendChild(image)
 

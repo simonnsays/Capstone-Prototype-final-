@@ -109,7 +109,15 @@ const components = [
                 }
             }
         ],
-        ports: []
+        ports: [
+            {category: 'power', type: '24-pin'}
+        ],
+        wires: [
+            {
+                type: '24-pin'
+
+            }
+        ]
     }),
     new Component ({
         name: 'Intel Core i7-13700K',
@@ -150,10 +158,12 @@ const components = [
         slots: [],
         ports: [
             {
-                type: 'psu', 
+                component: 'Power Supply',
+                type: 'power', 
                 images: {src: './assets/psu/EVGA SuperNOVA 1300 P+ - rear.png'},
                 offsets: []
-            }
+            },
+            
         ],
         cables: []
     })

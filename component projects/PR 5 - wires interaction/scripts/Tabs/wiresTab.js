@@ -1,3 +1,5 @@
+import Drawer from "./drawer.js"
+
 class WiresTab {
     constructor(elementHandler, utilityTool, displayArea) {
         // Utility
@@ -5,21 +7,18 @@ class WiresTab {
         this.elements = elementHandler.getWiresElements()
         if(!this.elements) throw new Error('Missing Connections Elements')
 
-        // Elements
+        // Open / Close tab buttons
         this.openBtn = this.elements.openBtn
         this.closeBtn = this.elements.closeBtn
+
+        // Wires / port tab
         this.modal = this.elements.modal
         this.portsContainer = this.elements.portsContainer
         this.isActive = false
 
         // Drawer
-        this.drawer = {
-            element: this.elements.drawer,
-            isActive: false,
-            pullBtn: this.elements.pullBtn,
-            cableContainer: this.elements.cableContainer
-        }
-
+        this.drawer = new Drawer(elementHandler)
+        
         // Wires
         this.wires = []
 
@@ -32,12 +31,17 @@ class WiresTab {
         this.portAreas = {
             single: {area: 0, },
             grid: [
+                {area: 0, },
+                {area: 0, },
+                {area: 0, },
+                {area: 0, },
+                {area: 0, },
                 {area: 0, }
             ]
         }
 
         // Events
-        this.drawer.pullBtn.addEventListener('click', () => this.toggleDrawer())
+        
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
         this.closeBtn.addEventListener('click', () => this.closeTab(this.modal))
         
@@ -61,47 +65,16 @@ class WiresTab {
         this.isActive = false
     }
 
-
-    // Toggle Drawer State
-    toggleDrawer() {
-        // get the arrow image to manipulate
-        const image = this.drawer.pullBtn.querySelector('img')
-        
-        if(this.drawer.isActive) {
-            // return drawer
-            this.drawer.element.classList.remove('pull')
-            this.drawer.element.classList.add('return')  
-
-            image.style.transform = 'rotate(0)'
-        } else {
-            // pull up drawer
-            this.drawer.element.classList.remove('return')
-            this.drawer.element.classList.add('pull')
-
-            image.style.transform = 'rotate(180deg)'
-
-        }
-        
-        // toggle drawer state
-        this.drawer.isActive = !this.drawer.isActive
+    createPortCells(tableComponent) {
+        tableComponent.ports.forEach(port)
     }
 
     // Main Update Function
     update() {
-        this.ports.forEach(port => {
-            const element = document.createElement('div')
-            const image  = document.createElement('img')
-            image.width = 900
-            image.height = 600
-
-
-            element.appendChild(image)
-            this.portsContainer.appendChild(element)
-        })
-
         // check if the table has a component
         if(this.displayArea.table.component) {
-            // display ports of the component and attached components to it in wires tab
+            const tableComponent = this.displayArea.table.component
+            this.createPortCells(tableComponent)
         }
     }
 }

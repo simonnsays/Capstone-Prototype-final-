@@ -36,6 +36,15 @@ class ElementHandler {
         } || null
     }
 
+    getDrawerElements() {
+        return {
+            modal: document.querySelector('#wiresDrawer'),
+            cableContainer: document.querySelector('#cableContainer'),
+            pullBtn: document.querySelector('#pulley')
+        
+        } || null
+    }
+
     getDisplayAreaElements() {
         return {
             leftBtn: document.querySelector('#left'),
