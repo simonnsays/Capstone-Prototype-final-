@@ -2,7 +2,7 @@ import Drawer from "./drawer.js"
 import portRef from "../Data/portReference.js"
 
 class WiresTab {
-    constructor(elementHandler, utilityTool, displayArea) {
+    constructor(elementHandler, utilityTool) {
         // Utility
         this.utilityTool = utilityTool
         this.elements = elementHandler.getWiresElements()
@@ -16,6 +16,7 @@ class WiresTab {
         this.modal = this.elements.modal
         this.portsContainer = this.elements.portsContainer
         this.isActive = false
+        this.portsGroupLabel = this.elements.portsGroupLabel
 
         // Drawer
         this.drawer = new Drawer(elementHandler)
@@ -25,21 +26,8 @@ class WiresTab {
 
         // Ports
         this.ports = []
-
-        // Display Area
-        this.displayArea = displayArea
-
-        this.portAreas = {
-            single: {area: 0, },
-            grid: [
-                {area: 0, },
-                {area: 0, },
-                {area: 0, },
-                {area: 0, },
-                {area: 0, },
-                {area: 0, }
-            ]
-        }
+        this.i = 0
+        this.currentGroup = this.ports[this.i]
 
         // Events
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
@@ -64,6 +52,7 @@ class WiresTab {
         this.isActive = false
     }
 
+    // Create Port Attributes
     createPortAttr(port, ref) {
         // create clone of the port
         const clone = {...port}
@@ -78,6 +67,7 @@ class WiresTab {
         return clone
     }
 
+    // Get Port Informations
     getPorts(component) {
         const currentComponent = component.type
         const ref = portRef[currentComponent] // reference for ports (see imports)
@@ -107,11 +97,15 @@ class WiresTab {
         })
     }
 
+    // Create Port Grid
     createPortGrid(tableComponent) {
         // get ports
         this.getPorts(tableComponent)
 
+        // create cells for each group
         this.ports.forEach(group => {
+            this.portsGroupLabel.innerHTML = group.component.toUpperCase()
+
             group.ports.forEach(port => {
                 // create cell div
                 const cellObj = document.createElement('div')
@@ -134,24 +128,25 @@ class WiresTab {
                 // append to container
                 this.portsContainer.appendChild(cellObj)
             })
-            
         })
     }
 
     // Main Update Function
-    update() {
+    update(table) {
         // delete port cells
         while(this.portsContainer.firstChild) {
             this.portsContainer.removeChild(this.portsContainer.firstChild)
         }
         this.ports = []
-
-        console.log(this.ports)
+        this.drawer.cables = []
 
         // check if the table has a component
-        if(this.displayArea.table.component) {
-            const tableComponent = this.displayArea.table.component
+        if(table.component) {
+            const tableComponent = table.component
             this.createPortGrid(tableComponent)
+
+            // update drawer
+            this.drawer.update(tableComponent)
         }
     }
 }

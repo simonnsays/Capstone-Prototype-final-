@@ -13,17 +13,17 @@ class Main {
         this.elementHandler = new ElementHandler()
         this.utilityTool = new UtilityTool()
 
-        // Display Area
-        this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool)
-
         // User
         this.user = new User(this.utilityTool)
 
         // Wires Tab
-        this.wiresTab = new WiresTab(this.elementHandler, this.utilityTool, this.displayArea)
+        this.wiresTab = new WiresTab(this.elementHandler, this.utilityTool)
+
+        // Display Area
+        this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool, this.wiresTab)
         
         // Inventory
-        this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea, this.wiresTab)
+        this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea)
 
         // Shop
         this.shop = new Shop(this.elementHandler, this.utilityTool, this.inventory)

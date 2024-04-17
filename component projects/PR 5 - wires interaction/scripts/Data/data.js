@@ -66,7 +66,7 @@ const components = [
         ports: []
     }),
     new Component ({
-        name: 'MPG Z790 CARBON MAX WIFI',
+        name: 'MSI MPG Z790 Carbon Max WiFi',
         type: 'motherboard',
         size: 'ATX',
         dimensions: {
@@ -141,7 +141,7 @@ const components = [
         ports: []
     }),
     new Component ({
-        name: 'EVGA SuperNOVA 1300 P+, 80+ PLATINUM 1300W',
+        name: 'EVGA Supernova 1300 P+, 80+ Platinum 1300W',
         type: 'psu',
         size: 'ATX',
         dimensions: {
@@ -159,15 +159,7 @@ const components = [
             {side: 'rear', imageSrc: './assets/psu/EVGA SuperNOVA 1300 P+ - rear.png'}
         ],
         slots: [],
-        ports: [
-            {
-                component: 'Power Supply',
-                type: 'power', 
-                images: {src: './assets/psu/EVGA SuperNOVA 1300 P+ - rear.png'},
-                offsets: []
-            },
-            
-        ],
+        ports: [],
         cables: []
     })
 ]

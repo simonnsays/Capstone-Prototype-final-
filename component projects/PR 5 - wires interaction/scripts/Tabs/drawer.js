@@ -11,6 +11,8 @@ class Drawer {
         this.cableContainer = this.elements.cableContainer
         this.isActive = false
 
+        this.cables = []
+
         // Events
         this.pullBtn.addEventListener('click', () => this.toggleDrawer())
     }
@@ -36,6 +38,21 @@ class Drawer {
         
         // toggle drawer state
         this.isActive = !this.isActive
+    }
+
+    createCableCells(tableComponent) {
+        // create 
+    }
+
+    // Main Update Function
+    update(tableComponent) {
+        // delete cable cells
+        while(this.cableContainer.firstChild) {
+            this.cableContainer.removeChild(this.cableContainer.firstChild)
+            this.cables = []
+        }
+
+        this.createCableCells(tableComponent)
     }
 }
 

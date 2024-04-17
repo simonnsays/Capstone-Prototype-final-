@@ -1,5 +1,5 @@
 class DisplayArea {
-    constructor(elementHandler, utilityTool) {
+    constructor(elementHandler, utilityTool, wiresTab) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
@@ -18,6 +18,9 @@ class DisplayArea {
             {area: {x: 670, y: 460, width: 300, height: 210}, component: null},
             {area: {x: 980, y: 460, width: 310, height: 210}, component: null}
         ]
+
+        // Wires Tab
+        this.wiresTab = wiresTab
 
         // Elements
         this.elements = this.elementHandler.getDisplayAreaElements()
@@ -125,7 +128,7 @@ class DisplayArea {
 
     // Update Labels
     updateComponentLabels(component) {
-        this.compLabel.innerHTML = component.type
+        this.compLabel.innerHTML = component.type.toUpperCase()
         this.compName.innerHTML = component.name
     }
 
@@ -181,7 +184,6 @@ class DisplayArea {
                 height: offset.height
             }
         }
-     
 
         if(slot.component) {
             slot.component.slots.forEach(childSlot => {
@@ -279,6 +281,9 @@ class DisplayArea {
                 this.createBox(shelfComponent, spot, shelfComponent.defaultSource)
             }
         })
+
+        // updater wires tab
+        this.wiresTab.update(this.table)
     }
 }
 

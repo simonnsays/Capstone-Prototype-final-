@@ -1,5 +1,5 @@
 class Inventory {
-    constructor(elementHandler, utilityTool, displayArea, wiresTab) {
+    constructor(elementHandler, utilityTool, displayArea) {
         // Utility
         this.utilityTool = utilityTool
         this.elements = elementHandler.getInventoryElements()
@@ -17,9 +17,6 @@ class Inventory {
 
         // Items
         this.items = []
-
-        // Wires
-        this.wiresTab = wiresTab
 
         // Events
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
@@ -149,9 +146,6 @@ class Inventory {
 
                 // update display area information
                 this.displayArea.update()
-
-                // update wires tab
-                this.wiresTab.update()
                 
                 // update inventory information
                 this.update()

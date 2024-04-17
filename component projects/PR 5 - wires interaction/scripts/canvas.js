@@ -46,21 +46,6 @@ class Canvas {
         this.displaySlots(this.table.component, this.user.componentSelected)
     }
 
-    // Display Slots (get Available slots)
-    displaySlots(baseComponent,  componentSelected) {
-        // match slot type to selected component type
-        baseComponent.slots.forEach(slot => {
-            if(slot.type === componentSelected.type && slot.component === null) {
-                this.user.availableSlots.push(slot)
-            }
-
-            // get available slots from attached components
-            if(slot.component) {
-                this.displaySlots(slot.component, componentSelected)
-            }
-        })
-    }
-
     // Mouse Move Event
     handleMouseMove(e) {
         // adjust mouse point relative to the canvas
@@ -126,8 +111,23 @@ class Canvas {
         this.user.resetTempProperties()
     }
 
+    // Display Slots (get Available slots)
+    displaySlots(baseComponent,  componentSelected) {
+        // match slot type to selected component type
+        baseComponent.slots.forEach(slot => {
+            if(slot.type === componentSelected.type && slot.component === null) {
+                this.user.availableSlots.push(slot)
+            }
+
+            // get available slots from attached components
+            if(slot.component) {
+                this.displaySlots(slot.component, componentSelected)
+            }
+        })
+    }
+
     // Rects With Border Radius(bent corners)
-    fillRoundRect(left, top, width, height, radius) {
+    fillRoundRect(left, top, width, height, radius, color) {
         this.c.beginPath();
         this.c.moveTo(left + radius, top);
         this.c.lineTo(left + width - radius, top);
@@ -140,8 +140,9 @@ class Canvas {
         this.c.arcTo(left, top, left + radius, top, radius);
 
         // any color you want
-        this.c.fillStyle = '#527e71'; // dark 
-        this.c.fillStyle = '#c7ddcc'; // light 
+        // this.c.fillStyle = '#527e71'; // dark 
+        // this.c.fillStyle = '#c7ddcc'; // light 
+        this.c.fillStyle = color;  
         this.c.fill();
     }
 
@@ -221,11 +222,11 @@ class Canvas {
         this.c.fillRect(0, 0, this.element.width, this.element.height)
 
         // fill display area
-        this.fillRoundRect(table.area.x, table.area.y, table.area.width, table.area.height, 30)
+        this.fillRoundRect(table.area.x, table.area.y, table.area.width, table.area.height, 30, '#c7ddcc')
 
         // fill shelf areas
         shelf.forEach(spot => {
-            this.fillRoundRect(spot.area.x, spot.area.y, spot.area.width, spot.area.height, 20)
+            this.fillRoundRect(spot.area.x, spot.area.y, spot.area.width, spot.area.height, 20, '#c7ddcc')
         })
 
         // draw Display area component
@@ -249,12 +250,21 @@ class Canvas {
                 //  highlight a bit for indication that the component is attached
                 if(occupiedSlots.length !== 0) {
                     const scale = .7
-                    this.c.fillStyle = 'rgba(255,170,0, 0.3)'
-                    this.c.fillRect(
-                        spot.area.x + (spot.area.width - (spot.area.width * scale)) / 2,
-                        spot.area.y + ((spot.area.height - (spot.area.height * scale)) / 2) -20,
-                        spot.area.width * scale,
-                        spot.area.height * scale + 40,
+                    const highlight = {
+                        left: spot.area.x + (spot.area.width - (spot.area.width * scale)) / 2,
+                        top: spot.area.y + ((spot.area.height - (spot.area.height * scale)) / 2) -20,
+                        width: spot.area.width * scale,
+                        height: spot.area.height * scale + 40,
+                        radius: 20,
+                        color: 'rgba(255,170,0, 0.3)'
+                    }
+                    this.fillRoundRect(
+                        highlight.left, 
+                        highlight.top, 
+                        highlight.width, 
+                        highlight.height, 
+                        highlight.radius, 
+                        highlight.color
                     )
                 }
 
