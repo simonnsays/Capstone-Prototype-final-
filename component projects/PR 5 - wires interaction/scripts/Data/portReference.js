@@ -11,7 +11,7 @@ const portRef = {
             
             // will be used in highlights
             offset: {
-                top: 26,
+                top: 26, // will also be used in attached cable offset
                 left: 145,
                 width: 34,
                 height: 180

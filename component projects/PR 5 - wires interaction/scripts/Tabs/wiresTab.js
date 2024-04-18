@@ -71,7 +71,8 @@ class WiresTab {
     getPorts(component) {
         const currentComponent = component.type
         const ref = portRef[currentComponent] // reference for ports (see imports)
-        // create a new port object
+
+        // create a new port object to group components
         const portObj = {}
 
         portObj.component = currentComponent

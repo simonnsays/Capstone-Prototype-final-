@@ -8,7 +8,9 @@ class Component {
         isAttached = false, 
         defaultSource, 
         images, slots = [], 
-        ports = []}) {
+        ports = [],
+        cables = []
+    }) {
 
         // Description
         this.name = name
@@ -29,6 +31,9 @@ class Component {
 
         // Ports
         this.ports = ports
+
+        // Cables
+        this.cables = cables
     }
 
     static handleComponent(component) {

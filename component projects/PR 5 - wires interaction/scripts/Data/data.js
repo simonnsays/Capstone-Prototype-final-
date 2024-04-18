@@ -111,16 +111,10 @@ const components = [
         ],
         ports: [
             {
-                category: 'power', 
                 type: '24-pin'
             }
         ],
-        wires: [
-            {
-                type: '24-pin'
-
-            }
-        ]
+        cables: []
     }),
     new Component ({
         name: 'Intel Core i7-13700K',
@@ -160,7 +154,12 @@ const components = [
         ],
         slots: [],
         ports: [],
-        cables: []
+        cables: [
+            {
+                type: '24-pin'
+
+            }
+        ]
     })
 ]
 

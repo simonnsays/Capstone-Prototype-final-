@@ -1,3 +1,5 @@
+import cableRef from "../Data/cableReference.js";
+
 class Drawer {
     constructor(elementHandler, utilityool) {
         // Utility
@@ -40,8 +42,66 @@ class Drawer {
         this.isActive = !this.isActive
     }
 
-    createCableCells(tableComponent) {
-        // create 
+    // Create Cable Attributes
+    createCableAttr(cable, ref) {
+        // create clone of the port
+        const clone = {...cable}
+
+        // find the reference for the specific port type
+        const currentRef = ref.find(refcable => refcable.type === cable.type)
+
+        // copy ref attributes to the copy of the cable
+        clone.images = currentRef.images
+        clone.scale = currentRef.scale
+
+        return clone
+    }
+
+    // Get Cable Information
+    getCables(component) {
+        const currentComponent = component.type
+        const ref = cableRef[currentComponent] // reference for cables (see imports)
+        
+        console.log(component)
+        // fill drawer
+        component.cables.forEach(cable => {
+            console.log(cable)
+            const cableCopy = this.createCableAttr(cable, ref)
+
+            this.cables.push(cableCopy)
+        })
+
+        // do the same for attached components (recursive)
+        component.slots.forEach(slot => {
+            if(slot.component) {
+                this.getCables(slot.component)
+            }
+        })
+    }
+
+    // Create Cable Cells
+    createCableCells() {
+        // iterate through this.cables
+        this.cables.forEach(cable => {
+            // create cells 
+            const cableCell = document.createElement('div')
+            cableCell.className = 'cableCell unused'
+
+            // create image
+            const cableImage = document.createElement('img')
+            cableImage.src = cable.images.find(image => image.state === 'default').imageSrc
+
+            // create slider
+            const cableSlider = document.createElement('div')
+            cableSlider.className = 'cable-slider'
+            cableSlider.innerHTML = cable.type + ' Cable'
+
+            // append elements
+            cableCell.appendChild(cableImage)
+            cableCell.appendChild(cableSlider)
+            this.cableContainer.appendChild(cableCell)
+        })
+        
     }
 
     // Main Update Function
@@ -52,7 +112,10 @@ class Drawer {
             this.cables = []
         }
 
-        this.createCableCells(tableComponent)
+        // get cable information
+        this.getCables(tableComponent)
+
+        this.createCableCells()
     }
 }
 
