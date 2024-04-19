@@ -301,18 +301,21 @@ body {
 /* will refer to data component port.offset */
 .port-highlight {
     background-color: rgba(0,255,70, .4);
-    width: 40px;
-    height: 180px;
+    /* width: 40px; */
+    /* height: 180px; */
     position: absolute;
-    top: 26;
-    left: 145;   
+    /* top: 26; */
+    /* left: 145;    */
+}
+.port-highlight:hover{
+    cursor: pointer;
 }
 .port-attached {
     position: absolute;
-    top: 26;
+    /* top: 26;
     left: 145; 
 
-    transform: scale(1, 1.47);
+    transform: scale(1, 1.47); */
     transform-origin: top left;
 }
 .port-slider {
@@ -324,6 +327,7 @@ body {
     align-items: center;
     position: absolute;
     bottom: -20%;
+    z-index: 10;
 
     transition: all .2s ease-in-out;
 }
@@ -410,7 +414,7 @@ body {
     border-radius: 20px;
     padding:10px;
     
-    transition: all 0.2s ease; 
+    transition: all 0.1s ease-in-out; 
     transform-origin: center center;
     overflow: hidden;
 }
@@ -453,6 +457,7 @@ body {
 }
 .active {
     border: 5px solid var(--maroon) ;
+    transform: scale(1.07);
 }
 
 

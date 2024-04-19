@@ -120,7 +120,7 @@ class WiresTab {
                 // create slider for port info
                 const celllSlider = document.createElement('div')
                 celllSlider.className = 'port-slider'
-                celllSlider.innerHTML = port.type
+                celllSlider.innerHTML = port.type + ' Port'
 
                 // append to cell div
                 cellObj.appendChild(cellImg)
@@ -128,12 +128,62 @@ class WiresTab {
 
                 // append to container
                 this.portsContainer.appendChild(cellObj)
+                port.div = cellObj
+            })
+        })
+    }
+
+    // Attach Cable
+    attachCable(port, cable) {
+        port.cableAttached = cable
+
+        /*
+        /       Maybe Abstract this
+        */ 
+        const baseDiv = port.div
+        const imgElement = document.createElement('img')
+        imgElement.src = cable.images.find(image => image.state === 'attached1').imageSrc
+        imgElement.className = 'port-attached'
+
+        // style to adjust offset
+        imgElement.style.top = port.offset.top
+        imgElement.style.left = port.offset.left
+        imgElement.style.transform = 'scale('+ cable.scale.width + ',' + cable.scale.height
+        imgElement.style.transformOrigin = 'top left'
+
+        baseDiv.appendChild(imgElement)
+    }
+
+    matchPorts(cable) {
+        this.ports.forEach(group => {
+            group.ports.forEach(port => {
+                // highlight port when matched
+                if(cable.type === port.type) {
+                    const baseDiv = port.div
+
+                    // highlight div
+                    const highlight = document.createElement('div')
+                    highlight.className = 'port-highlight'
+                    highlight.style.top = port.offset.top
+                    highlight.style.left = port.offset.left
+                    highlight.style.width = port.offset.width
+                    highlight.style.height = port.offset.height
+
+                    // append
+                    baseDiv.appendChild(highlight)
+
+                    // attach if highlight is selected
+                    highlight.addEventListener('click', () => {
+                        this.attachCable(port, cable)
+                    })
+
+                }
             })
         })
     }
 
     // Main Update Function
-    update(table) {
+    update(table, shelf) {
         // delete port cells
         while(this.portsContainer.firstChild) {
             this.portsContainer.removeChild(this.portsContainer.firstChild)
@@ -144,11 +194,24 @@ class WiresTab {
         // check if the table has a component
         if(table.component) {
             const tableComponent = table.component
+
+            // create the grid for port display
             this.createPortGrid(tableComponent)
 
             // update drawer
-            this.drawer.update(tableComponent)
+            this.drawer.update(table, shelf)
         }
+
+        // listen if one of the cable cells are clicked
+        this.drawer.cables.forEach(cable => {
+            cable.div.addEventListener('click', () => {
+                // select cable
+                this.drawer.selectCable(cable)
+
+                // highlight matching ports
+                this.matchPorts(cable)
+            })
+        })
     }
 }
 

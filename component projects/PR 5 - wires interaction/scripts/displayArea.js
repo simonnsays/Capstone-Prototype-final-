@@ -283,7 +283,7 @@ class DisplayArea {
         })
 
         // updater wires tab
-        this.wiresTab.update(this.table)
+        this.wiresTab.update(this.table, this.shelf)
     }
 }
 

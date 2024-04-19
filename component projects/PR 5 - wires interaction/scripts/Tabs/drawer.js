@@ -14,6 +14,7 @@ class Drawer {
         this.isActive = false
 
         this.cables = []
+        this.cableSelected = null
 
         // Events
         this.pullBtn.addEventListener('click', () => this.toggleDrawer())
@@ -30,6 +31,10 @@ class Drawer {
             this.modal.classList.add('return')  
 
             image.style.transform = 'rotate(0)'
+
+            // clear selected cable
+            this.cableSelected.div.classList.remove('active')
+            this.cableSelected = null
         } else {
             // pull up drawer
             this.modal.classList.remove('return')
@@ -40,6 +45,13 @@ class Drawer {
         
         // toggle drawer state
         this.isActive = !this.isActive
+    }
+
+    // Select Cable
+    selectCable(cable) {
+        console.log('this cell is active')
+        this.cableSelected = cable
+        cable.div.classList.add('active')
     }
 
     // Create Cable Attributes
@@ -59,13 +71,10 @@ class Drawer {
 
     // Get Cable Information
     getCables(component) {
-        const currentComponent = component.type
-        const ref = cableRef[currentComponent] // reference for cables (see imports)
-        
-        console.log(component)
+        const ref = cableRef[component.type] // reference for cables (see imports) 
+
         // fill drawer
         component.cables.forEach(cable => {
-            console.log(cable)
             const cableCopy = this.createCableAttr(cable, ref)
 
             this.cables.push(cableCopy)
@@ -78,6 +87,7 @@ class Drawer {
             }
         })
     }
+
 
     // Create Cable Cells
     createCableCells() {
@@ -100,21 +110,33 @@ class Drawer {
             cableCell.appendChild(cableImage)
             cableCell.appendChild(cableSlider)
             this.cableContainer.appendChild(cableCell)
+            cable.div = cableCell   
+            cable.div.rect = cable.div.getBoundingClientRect()
         })
         
     }
 
     // Main Update Function
-    update(tableComponent) {
+    update(table, shelf) {
         // delete cable cells
         while(this.cableContainer.firstChild) {
             this.cableContainer.removeChild(this.cableContainer.firstChild)
             this.cables = []
         }
 
-        // get cable information
-        this.getCables(tableComponent)
+        // get cable information from [ TABLE ]
+        if(table.component) {
+            this.getCables(table.component)
+        }
 
+        // get cable information from [ SHELF ]
+        shelf.forEach(spot => {
+            if(spot.component) {
+                this.getCables(spot.component) 
+            }
+        })
+
+        // create cells
         this.createCableCells()
     }
 }
