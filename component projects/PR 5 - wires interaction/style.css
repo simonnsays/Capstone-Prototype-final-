@@ -424,7 +424,7 @@ body {
 .used {
     background-color: var(--green);
 }
-.ip {
+.semi-used {
     background-color: var(--orange);
 }
 .cableCell:hover {

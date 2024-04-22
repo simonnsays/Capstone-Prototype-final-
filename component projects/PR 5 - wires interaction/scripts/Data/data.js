@@ -111,7 +111,9 @@ const components = [
         ],
         ports: [
             {
-                type: '24-pin'
+                type: '24-pin',
+                cableAttached: null
+                
             }
         ],
         cables: []

@@ -32,6 +32,7 @@ class WiresTab {
         // Events
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
         this.closeBtn.addEventListener('click', () => this.closeTab(this.modal)) 
+        // this.drawer.pullBtn.addEventListener('click', () => this.toggleDrawer())
     }
 
     openTab(modal) {
@@ -50,6 +51,12 @@ class WiresTab {
 
         // for canvas monitoring
         this.isActive = false
+
+        // clear selected cable
+        this.drawer.clearSelectedCable()
+
+        // remove port highlights
+        this.removeHighlights()
     }
 
     // Create Port Attributes
@@ -63,6 +70,9 @@ class WiresTab {
         // copy ref attributes to the copy of the port
         clone.image = currentRef.image
         clone.offset = currentRef.offset
+
+        // other attributes
+        clone.cableAttached = null
 
         return clone
     }
@@ -136,6 +146,7 @@ class WiresTab {
     // Attach Cable
     attachCable(port, cable) {
         port.cableAttached = cable
+        console.log(port.cableAttached)
 
         /*
         /       Maybe Abstract this
@@ -145,20 +156,35 @@ class WiresTab {
         imgElement.src = cable.images.find(image => image.state === 'attached1').imageSrc
         imgElement.className = 'port-attached'
 
-        // style to adjust offset
+        // style to adjust port offset
         imgElement.style.top = port.offset.top
         imgElement.style.left = port.offset.left
-        imgElement.style.transform = 'scale('+ cable.scale.width + ',' + cable.scale.height
+        imgElement.style.transform = 'scale('+ cable.scale.width + ',' + cable.scale.height + ')'
         imgElement.style.transformOrigin = 'top left'
 
         baseDiv.appendChild(imgElement)
+
+        // change cable display
+        cable.div.classList.remove('unused')
+        cable.div.classList.add('used')
+    }
+
+    removeHighlights() {
+        this.ports.forEach(group => {
+            group.ports.forEach(port => {
+                if(port.highlight) {
+                    port.div.removeChild(port.highlight)
+                    delete port.highlight
+                }
+            })
+        })
     }
 
     matchPorts(cable) {
         this.ports.forEach(group => {
             group.ports.forEach(port => {
-                // highlight port when matched
-                if(cable.type === port.type) {
+                // highlight port when matched and no attached cable yet
+                if(cable.type === port.type && !port.cableAttached) {
                     const baseDiv = port.div
 
                     // highlight div
@@ -171,12 +197,19 @@ class WiresTab {
 
                     // append
                     baseDiv.appendChild(highlight)
+                    port.highlight = highlight
 
-                    // attach if highlight is selected
+                    // if highlight is selected
                     highlight.addEventListener('click', () => {
+                        // attach cable
                         this.attachCable(port, cable)
-                    })
 
+                        // remove port highlight
+                        this.removeHighlights()
+
+                        // remove cable highlight
+                        this.drawer.clearSelectedCable()
+                    })
                 }
             })
         })
@@ -207,6 +240,9 @@ class WiresTab {
             cable.div.addEventListener('click', () => {
                 // select cable
                 this.drawer.selectCable(cable)
+
+                // reset highlights
+                this.removeHighlights()
 
                 // highlight matching ports
                 this.matchPorts(cable)

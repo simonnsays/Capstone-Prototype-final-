@@ -20,36 +20,53 @@ class Drawer {
         this.pullBtn.addEventListener('click', () => this.toggleDrawer())
     }
 
+    // Open Drawer
+    openDrawer(image) {
+        // pull up drawer
+        this.modal.classList.remove('return')
+        this.modal.classList.add('pull')
+
+        image.style.transform = 'rotate(180deg)'
+
+        // toggle state
+        this.isActive = !this.isActive
+    }
+
+    // Close Drawer
+    closeDrawer(image) {
+        // return drawer
+        this.modal.classList.remove('pull')
+        this.modal.classList.add('return')  
+
+        image.style.transform = 'rotate(0)'
+
+        // toggle state
+        this.isActive = !this.isActive
+    }
+
     // Toggle Drawer State
     toggleDrawer() {
         // get the arrow image to manipulate
         const image = this.pullBtn.querySelector('img')
-        
+
+        // toggle
         if(this.isActive) {
-            // return drawer
-            this.modal.classList.remove('pull')
-            this.modal.classList.add('return')  
+            this.closeDrawer(image)
+        } else {
+            this.openDrawer(image)
+        }
+    }
 
-            image.style.transform = 'rotate(0)'
-
-            // clear selected cable
+    // Clear Selected Cable
+    clearSelectedCable() {
+        if(this.cableSelected) {
             this.cableSelected.div.classList.remove('active')
             this.cableSelected = null
-        } else {
-            // pull up drawer
-            this.modal.classList.remove('return')
-            this.modal.classList.add('pull')
-
-            image.style.transform = 'rotate(180deg)'
         }
-        
-        // toggle drawer state
-        this.isActive = !this.isActive
     }
 
     // Select Cable
     selectCable(cable) {
-        console.log('this cell is active')
         this.cableSelected = cable
         cable.div.classList.add('active')
     }
