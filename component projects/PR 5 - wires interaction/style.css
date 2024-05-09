@@ -278,6 +278,9 @@ body {
 
     padding: 10px;
 }
+
+
+/* PORT CELL */
 .portCell {
     background-color: var(--mint);
     width: 285px;
@@ -292,32 +295,50 @@ body {
     overflow: hidden;
 }
 
-/* will refer to data component port.image */
+/* PORT IMAGE */
 .port {
     max-height: 90%;
-    width: auto;
+    /* max-width: 90%; */
+    width: 90%;
+    height: auto;
 }
 
 /* will refer to data component port.offset */
+/* PORT HIGHLIGHT */
 .port-highlight {
     background-color: rgba(0,255,70, .4);
-    /* width: 40px; */
-    /* height: 180px; */
     position: absolute;
-    /* top: 26; */
-    /* left: 145;    */
+
+    /* 
+    /   adjustables
+    */
+
+    width: 235px;
+    height: 58px;
+    
+    
+    top: 84;
+    left: 23;   
 }
 .port-highlight:hover{
     cursor: pointer;
 }
+
+/* CABLE ATTACHED TO THE PORT */
 .port-attached {
     position: absolute;
-    /* top: 26;
-    left: 145; 
-
-    transform: scale(1, 1.47); */
     transform-origin: top left;
+
+    /* 
+    /   adjustables
+    */
+    top: 84;
+    left: 23; 
+    transform: scale(.45, .45);
+    
 }
+
+/* PORT SLIDER FOR LABEL */
 .port-slider {
     background-color: var(--teal);
     width: 100%;

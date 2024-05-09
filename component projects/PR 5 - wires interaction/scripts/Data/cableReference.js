@@ -8,6 +8,10 @@ const cableRef = {
                     imageSrc: './assets/wires/24pin-attached(mobo).png' 
                 },
                 {
+                    state: 'attached2', 
+                    imageSrc: './assets/wires/(10+18)24pin-attached(psu).png' 
+                },
+                {
                     state: 'default', 
                     imageSrc: './assets/wires/24pin-mobo-power.png' 
                 },

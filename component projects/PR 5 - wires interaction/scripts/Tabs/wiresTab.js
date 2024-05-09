@@ -81,6 +81,7 @@ class WiresTab {
     getPorts(component) {
         const currentComponent = component.type
         const ref = portRef[currentComponent] // reference for ports (see imports)
+        console.log(ref)
 
         // create a new port object to group components
         const portObj = {}
@@ -109,10 +110,7 @@ class WiresTab {
     }
 
     // Create Port Grid
-    createPortGrid(tableComponent) {
-        // get ports
-        this.getPorts(tableComponent)
-
+    createPortGrid() {
         // create cells for each group
         this.ports.forEach(group => {
             this.portsGroupLabel.innerHTML = group.component.toUpperCase()
@@ -227,6 +225,9 @@ class WiresTab {
         // check if the table has a component
         if(table.component) {
             const tableComponent = table.component
+
+            // get ports
+            this.getPorts(tableComponent)
 
             // create the grid for port display
             this.createPortGrid(tableComponent)

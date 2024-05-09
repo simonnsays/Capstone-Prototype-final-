@@ -155,7 +155,13 @@ const components = [
             {side: 'rear', imageSrc: './assets/psu/EVGA SuperNOVA 1300 P+ - rear.png'}
         ],
         slots: [],
-        ports: [],
+        ports: [
+            {
+                type: '24-pin',
+                cableAttached: null
+                
+            }
+        ],
         cables: [
             {
                 type: '24-pin'
