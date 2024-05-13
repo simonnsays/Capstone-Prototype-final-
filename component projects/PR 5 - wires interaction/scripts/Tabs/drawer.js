@@ -29,7 +29,7 @@ class Drawer {
         image.style.transform = 'rotate(180deg)'
 
         // toggle state
-        this.isActive = !this.isActive
+        this.isActive = true
     }
 
     // Close Drawer
@@ -41,7 +41,7 @@ class Drawer {
         image.style.transform = 'rotate(0)'
 
         // toggle state
-        this.isActive = !this.isActive
+        this.isActive = false
     }
 
     // Toggle Drawer State
@@ -55,6 +55,16 @@ class Drawer {
         } else {
             this.openDrawer(image)
         }
+    }
+
+    // Remind User to Pull Drawer Down
+    remindUser() {
+        const image = document.querySelector('#pulleyImage')
+        // wiggle pulley button a couple times
+        setTimeout(() => {
+            this.pullBtn.classList.add('remind')
+        }, 200)
+        this.pullBtn.classList.remove('remind')
     }
 
     // Clear Selected Cable

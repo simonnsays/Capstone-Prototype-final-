@@ -2,6 +2,7 @@ const cableRef = {
     psu: [
         {
             type: '24-pin',
+            connectsTo: 'motherboard',
             images: [
                 {
                     state: 'attached1', 
@@ -16,7 +17,8 @@ const cableRef = {
                     imageSrc: './assets/wires/24pin-mobo-power.png' 
                 },
             ],
-            scale: {width: 1, height: 1.47} // will be used in matching cable to port
+            scale: {width: 1, height: 1.47}, // will be used in matching cable to port
+            
         }
     ]
 }

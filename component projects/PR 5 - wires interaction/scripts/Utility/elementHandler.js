@@ -29,7 +29,9 @@ class ElementHandler {
             closeBtn: document.querySelector('#closeWires'),
             modal: document.querySelector('#wiresModal'),
             portsContainer: document.querySelector('#portsContainer'),
-            portsGroupLabel: document.querySelector('#portSubhead')
+            portsGroupLabel: document.querySelector('#portSubhead'),
+            pageRightBtn: document.querySelector('#portRight'),
+            pageLeftBtn: document.querySelector('#portLeft')
 
         } || null
     }

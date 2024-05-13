@@ -298,8 +298,8 @@ body {
 /* PORT IMAGE */
 .port {
     max-height: 90%;
-    /* max-width: 90%; */
-    width: 90%;
+    max-width: 90%;
+    width: auto;
     height: auto;
 }
 
@@ -313,12 +313,12 @@ body {
     /   adjustables
     */
 
-    width: 235px;
+    /* width: 235px;
     height: 58px;
     
     
     top: 84;
-    left: 23;   
+    left: 23;    */
 }
 .port-highlight:hover{
     cursor: pointer;
@@ -396,12 +396,21 @@ body {
 
     box-shadow: 0 0 10px black;
     transition: all 1s ease-in-out;
+    animation-duration: .5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    
 }
 #pulley:hover {
     cursor: pointer;
 }
 #pulley > img {
     width: 30px;
+
+  
+}
+.remind {
+    animation-name: remind;
 }
 
 #cableContainer {
@@ -504,4 +513,13 @@ body {
 @keyframes fadeInAnimation {
     0% {opacity: 0;}
     100% {opacity: 1;}
-  }
+}
+@keyframes remind {
+    0% {transform: rotate(0deg);}
+    15% {transform: rotate(10deg);}
+    30% {transform: rotate(-10deg);}
+    55% {transform: rotate(10deg);}
+    70% {transform: rotate(-10deg);}
+    100% {transform: rotate(0deg);}
+    
+}
