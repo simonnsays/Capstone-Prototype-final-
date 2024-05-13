@@ -35,7 +35,7 @@ class WiresTab {
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
         this.closeBtn.addEventListener('click', () => this.closeTab(this.modal)) 
         window.addEventListener('click', (e) => this.handleWindowClick(e))
-        
+
         // port group page change event
         this.pageRightBtn.addEventListener('click', () => this.turnPortPageRight())
         this.pageLeftBtn.addEventListener('click', () => this.turnPortPageLeft())
@@ -132,30 +132,32 @@ class WiresTab {
 
     // Get Port Informations
     getPorts(component) {
-        const currentComponent = component.type
-        const ref = portRef[currentComponent] // reference for ports (see imports)
+        // only create groups for components with ports 
+        if(component.ports.length > 0) {
+            const currentComponent = component.type
+            const ref = portRef[currentComponent] // reference for ports (see imports)
 
-        // create a new port object to group components
-        const portGroup = {}
+            // create a new port object to group components
+            const portGroup = {}
 
-        portGroup.component = currentComponent    // name of the component of the group of ports
-        portGroup.ports = []                      // the group of ports
+            portGroup.component = currentComponent    // name of the component of the group of ports
+            portGroup.ports = []                      // the group of ports
 
-        // fill ports attribute
-        component.ports.forEach(port => {
-            // create port attributes
-            const portCopy =  this.createPortAttr(port, ref)
+            // fill ports attribute
+            component.ports.forEach(port => {
+                // create port attributes
+                const portCopy =  this.createPortAttr(port, ref)
 
-            // insert copy in portGroup
-            portGroup.ports.push(portCopy)
-        })
+                // insert copy in portGroup
+                portGroup.ports.push(portCopy)
+            })
 
-        // puh object to the portGroups list
-        this.portGroups.push(portGroup) 
-
+            // puh object to the portGroups list
+            this.portGroups.push(portGroup) 
+        }
+        
         // do the same for attached components (recursive)
         component.slots.forEach(slot => {
-            
             if(slot.component) {
                 if(slot.component.ports.length > 0) {
                     this.getPorts(slot.component)
@@ -163,11 +165,12 @@ class WiresTab {
                 
             }
         })
-        // console.log(this.portGroups)
     }
 
     // Create Port Grid
     createPortCells() {
+        if(!this.currentGroupPage) return
+        
         // set title to the group component
         this.portsGroupLabel.innerHTML = this.currentGroupPage.component.toUpperCase()
 
