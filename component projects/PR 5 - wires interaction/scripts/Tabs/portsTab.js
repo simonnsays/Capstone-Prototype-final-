@@ -1,7 +1,7 @@
 import Drawer from "./drawer.js"
 import portRef from "../Data/portReference.js"
 
-class WiresTab {
+class PortsTab {
     constructor(elementHandler, utilityTool) {
         // Utility
         this.utilityTool = utilityTool
@@ -323,4 +323,4 @@ class WiresTab {
     }
 }
 
-export default WiresTab
+export default PortsTab

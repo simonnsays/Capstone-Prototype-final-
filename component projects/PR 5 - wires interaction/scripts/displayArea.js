@@ -1,5 +1,5 @@
 class DisplayArea {
-    constructor(elementHandler, utilityTool, wiresTab) {
+    constructor(elementHandler, utilityTool, portsTab) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
@@ -20,7 +20,7 @@ class DisplayArea {
         ]
 
         // Wires Tab
-        this.wiresTab = wiresTab
+        this.portsTab = portsTab
 
         // Elements
         this.elements = this.elementHandler.getDisplayAreaElements()
@@ -283,7 +283,7 @@ class DisplayArea {
         })
 
         // update WIRES TAB
-        this.wiresTab.update(this.table, this.shelf)
+        this.portsTab.update(this.table, this.shelf)
     }
 }
 

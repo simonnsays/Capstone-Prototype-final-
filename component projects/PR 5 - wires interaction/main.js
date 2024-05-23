@@ -4,7 +4,7 @@ import User from "./scripts/user.js"
 import Canvas from "./scripts/canvas.js"
 import Shop from "./scripts/Tabs/shop.js"
 import Inventory from "./scripts/Tabs/inventory.js"
-import WiresTab from "./scripts/Tabs/wiresTab.js"
+import PortsTab from "./scripts/Tabs/portsTab.js"
 import DisplayArea from "./scripts/displayArea.js"
 
 class Main {
@@ -17,10 +17,10 @@ class Main {
         this.user = new User(this.utilityTool)
 
         // Wires Tab
-        this.wiresTab = new WiresTab(this.elementHandler, this.utilityTool)
+        this.portsTab = new PortsTab(this.elementHandler, this.utilityTool)
 
         // Display Area
-        this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool, this.wiresTab)
+        this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool, this.portsTab)
         
         // Inventory
         this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea)
@@ -39,8 +39,8 @@ class Main {
         // prevent use of canvas when tabs are open
         if(this.shop.isActive || 
             this.inventory.isActive || 
-            this.wiresTab.isActive || 
-            this.wiresTab.drawer.isActive) {
+            this.portsTab.isActive || 
+            this.portsTab.drawer.isActive) {
                 this.canvas.isActive = false
             } else {
                 this.canvas.isActive = true
