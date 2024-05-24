@@ -1,5 +1,4 @@
 import Drawer from "./drawer.js"
-import portRef from "../Data/portReference.js"
 
 class PortsTab {
     constructor(elementHandler, utilityTool) {
@@ -112,44 +111,42 @@ class PortsTab {
         this.updatePage()
     }
 
-    // Create Port Attributes
-    createPortAttr(port, ref) {
-        // create clone of the port
-        const clone = {...port}
+    // Update Port Page
+    updatePage() {
+        // clear cells
+        this.clearCells()
 
-        // find the reference for the specific port type
-        const currentRef = ref.find(refPort => refPort.type === port.type)
+        // clear selected cable
+        this.drawer.clearSelectedCable()
 
-        // copy ref attributes to the copy of the port
-        clone.image = currentRef.image
-        clone.offset = currentRef.offset
+        // create cells based on new information
+        this.createPortCells()
 
-        // additional attributes
-        clone.cableAttached = null
-
-        return clone
+        this.displayAttachedCables()
     }
+
+    
 
     // Get Port Informations
     getPorts(component) {
         // only create groups for components with ports 
         if(component.ports.length > 0) {
-            const currentComponent = component.type
-            const ref = portRef[currentComponent] // reference for ports (see imports)
+            const currentComponentType = component.type
+            // const ref = portRef[currentComponentType] // reference for ports (see imports)
 
             // create a new port object to group components
             const portGroup = {}
 
-            portGroup.component = currentComponent    // name of the component of the group of ports
+            portGroup.component = currentComponentType    // name of the component of the group of ports
             portGroup.ports = []                      // the group of ports
 
             // fill ports attribute
             component.ports.forEach(port => {
                 // create port attributes
-                const portCopy =  this.createPortAttr(port, ref)
+                // const portCopy =  this.createPortAttr(port, ref)
 
                 // insert copy in portGroup
-                portGroup.ports.push(portCopy)
+                portGroup.ports.push(port)
             })
 
             // puh object to the portGroups list
@@ -171,7 +168,7 @@ class PortsTab {
     createPortCells() {
         if(!this.currentGroupPage) return
         
-        // set title to the group component
+        // set title to the group component of the current group page
         this.portsGroupLabel.innerHTML = this.currentGroupPage.component.toUpperCase()
 
         // create cell for each port of the group
@@ -202,23 +199,8 @@ class PortsTab {
 
     // Attach Cable
     attachCable(port, cable) {
-        port.cableAttached = cable
-
-        /*
-        /       Maybe Abstract this
-        */ 
-        const baseDiv = port.div
-        const imgElement = document.createElement('img')
-        imgElement.src = cable.images.find(image => image.state === 'attached1').imageSrc
-        imgElement.className = 'port-attached'
-
-        // style to adjust port offset
-        imgElement.style.top = port.offset.top
-        imgElement.style.left = port.offset.left
-        imgElement.style.transform = 'scale('+ cable.scale.width + ',' + cable.scale.height + ')'
-        imgElement.style.transformOrigin = 'top left'
-
-        baseDiv.appendChild(imgElement)
+        // attach cable in logic
+        port.cableAttached = cable        
 
         // change cable display
         cable.div.classList.remove('unused')
@@ -256,30 +238,42 @@ class PortsTab {
 
                 // append
                 baseDiv.appendChild(highlight)
+
+                // create port highlight property
                 port.highlight = highlight
-
-                // if highlight is selected
-                highlight.addEventListener('click', () => {
-                    // attach cable
-                    this.attachCable(port, cable)
-
-                    // remove port highlight
-                    this.removeHighlights()
-
-                    // remove cable highlight
-                    this.drawer.clearSelectedCable()
-                })
             }
         })
     }
 
-    // Update Port Page
-    updatePage() {
-        // clear cells
-        this.clearCells()
+    // Display Attached Cables
+    displayAttachedCables() {
+        if(this.portGroups.length < 1 || !this.currentGroupPage) return
 
-        // create cells based on new information
-        this.createPortCells()
+        this.currentGroupPage.ports.forEach(port => {
+            if(!port.cableAttached) return
+
+            // get image asset based on the current group page component
+            const cableImage = port.cableAttached.images.find(image => image.attachedTo === this.currentGroupPage.component)
+
+            /*
+            /       Maybe Abstract this
+            */ 
+            const baseDiv = port.div
+            const imgElement = document.createElement('img')
+            imgElement.src = cableImage.imageSrc
+            imgElement.className = 'port-attached'
+
+            // style to adjust port offset
+            imgElement.style.top = port.offset.top
+            imgElement.style.left = port.offset.left
+            imgElement.style.transform = 'scale('+ cableImage.scale.width + ',' + cableImage.scale.height + ')'
+            imgElement.style.transformOrigin = 'top left'
+
+            baseDiv.appendChild(imgElement)
+        })
+
+        
+        
     }
 
     // Main Update Function
@@ -288,20 +282,27 @@ class PortsTab {
         this.clearCells()
         this.portGroups = []
         this.drawer.cables = []
-        this.i = 0
+        // this.i = this.i
 
         // check if the table has a component
         if(table.component) {
             const tableComponent = table.component
 
-            // get ports
+            /*  get ports method;
+            *   this method gets the type of port from data
+            *   and use that as reference to create other port attributes
+            *   taken from portReference.js
+            */
             this.getPorts(tableComponent)
 
-            // get the current ort group page
+            // get the current port group page
             this.currentGroupPage = this.portGroups[this.i]
 
-            // create the grid for port display
+            // create the cells for port display
             this.createPortCells(tableComponent)
+            
+            // display attached cables
+            this.displayAttachedCables()
 
             // update drawer
             this.drawer.update(table, shelf)
@@ -318,6 +319,27 @@ class PortsTab {
 
                 // highlight matching ports
                 this.highlightPorts(cable)
+
+                // cable attachment
+                this.currentGroupPage.ports.forEach(port => {
+                    // if highlight is selected
+
+                    if(!port.highlight) return
+
+                    port.highlight.addEventListener('click', () => {
+                        // attach cable
+                        this.attachCable(port, cable)
+
+                        // remove port highlight
+                        this.removeHighlights()
+
+                        // remove cable highlight
+                        this.drawer.clearSelectedCable()
+
+                        this.update(table, shelf)
+                    })
+                })
+                
             })
         })
     }

@@ -115,7 +115,6 @@ class Drawer {
         })
     }
 
-
     // Create Cable Cells
     createCableCells() {
         // iterate through this.cables
@@ -126,7 +125,7 @@ class Drawer {
 
             // create image
             const cableImage = document.createElement('img')
-            cableImage.src = cable.images.find(image => image.state === 'default').imageSrc
+            cableImage.src = cable.images.find(image => image.attachedTo === 'none').imageSrc
 
             // create slider
             const cableSlider = document.createElement('div')
@@ -137,7 +136,11 @@ class Drawer {
             cableCell.appendChild(cableImage)
             cableCell.appendChild(cableSlider)
             this.cableContainer.appendChild(cableCell)
-            cable.div = cableCell   
+
+            // create div property
+            cable.div = cableCell 
+            
+            // create bounding box of div for matching
             cable.div.rect = cable.div.getBoundingClientRect()
         })
         

@@ -24,18 +24,22 @@ class Shop{
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
         this.closeBtn.addEventListener('click', () => this.closeTab(this.modal))
         window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
+
+        this.isActive = false
     }
 
     // Open Shop Tab
     openTab(modal) {
         modal.showModal()
         modal.isOpen = true
+        this.isActive = true
     }
 
     // Close Shop Tab
     closeTab(modal) {
         modal.close()
         modal.isOpen = false
+        this.isActive = false
     }
 
     // Handle Mouse Point Out of Shop Tab Bounds

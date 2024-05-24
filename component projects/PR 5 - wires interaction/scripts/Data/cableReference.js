@@ -5,19 +5,21 @@ const cableRef = {
             connectsTo: 'motherboard',
             images: [
                 {
-                    state: 'attached1', 
-                    imageSrc: './assets/wires/24pin-attached(mobo).png' 
+                    attachedTo: 'motherboard', 
+                    imageSrc: './assets/wires/24pin-attached(mobo).png',
+                    scale: {width: 1, height: 1.47}, // will be used in matching cable to port
                 },
                 {
-                    state: 'attached2', 
-                    imageSrc: './assets/wires/(10+18)24pin-attached(psu).png' 
+                    attachedTo: 'psu', 
+                    imageSrc: './assets/wires/(10+18)24pin-attached(psu).png',
+                    scale: {width: .45, height: .45}, // will be used in matching cable to port 
                 },
                 {
-                    state: 'default', 
+                    attachedTo: 'none', 
                     imageSrc: './assets/wires/24pin-mobo-power.png' 
                 },
             ],
-            scale: {width: 1, height: 1.47}, // will be used in matching cable to port
+            
             
         }
     ]

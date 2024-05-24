@@ -1,3 +1,5 @@
+import portRef from "../Data/portReference.js"
+
 class Inventory {
     constructor(elementHandler, utilityTool, displayArea) {
         // Utility
@@ -96,10 +98,30 @@ class Inventory {
         }
     }
 
+    // Create Port Attributes
+    createPortAttr(port, ref) {
+        // find the reference for the specific port type
+        const currentRef = ref.find(refPort => refPort.type === port.type)
+
+        // copy reference attributes to the copy of the port
+        port.image = currentRef.image
+        port.offset = currentRef.offset
+
+        // additional attributes
+        port.cableAttached = null
+    }
+
     // Placing of Components to Display Area
     placeComponent(component) {
         const table = this.displayArea.table
         const shelf = this.displayArea.shelf
+        const componentType = component.type
+        const ref = portRef[componentType]
+
+        // create / fill port attributes
+        component.ports.forEach(port => {
+            this.createPortAttr(port, ref)
+        })
     
         // add to Table
         if(!table.component) {
@@ -109,12 +131,6 @@ class Inventory {
 
         // add to Shelf
         this.addToShelf(component, shelf)
-    }
-
-    displayPort(component) {
-        component.ports.forEach(port => {
-            // console.log(port)
-        })
     }
 
     // Main Inventory Update Method
@@ -137,12 +153,6 @@ class Inventory {
 
                 // place removed component to display area
                 this.placeComponent(removedComponent[0])
-
-                // display ports in wires Tab
-                this.displayPort(removedComponent[0])
-
-                // place component wires to drawer tab
-                // this.placeWires(removedComponent[0])
 
                 // update display area information
                 this.displayArea.update()

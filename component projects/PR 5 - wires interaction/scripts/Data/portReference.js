@@ -5,15 +5,13 @@ const portRef = {
             image: {
                 // port image will be used in the div with the class of 'port('.port')'
                 imageSrc: './assets/motherboard/ports/mobo-24pin-power.png',
-                width: 'auto',
-                height: '90%'
             },
             
             // will be used in highlights
             offset: {
                 top: 26, // will also be used in attached cable offset
                 left: 145,
-                width: 34,
+                width: 34, // used in highlight sizes
                 height: 180
             }
             
@@ -25,8 +23,6 @@ const portRef = {
             image: {
                 // port image will be used in the div with the class of 'port('.port')'
                 imageSrc: './assets/psu/ports/psu-port-10+18.png',
-                width: '90%',
-                height: 'auto'
             },
             
             // will be used in highlights
