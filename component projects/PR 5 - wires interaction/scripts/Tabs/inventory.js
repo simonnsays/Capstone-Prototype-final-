@@ -1,4 +1,5 @@
 import portRef from "../Data/portReference.js"
+import cableRef from "../Data/cableReference.js"
 
 class Inventory {
     constructor(elementHandler, utilityTool, displayArea) {
@@ -111,16 +112,35 @@ class Inventory {
         port.cableAttached = null
     }
 
+    // Create Cable Attributes
+    createCableAttr(cable, ref) {
+        // find the reference for the specific port type
+        const currentRef = ref.find(refcable => refcable.type === cable.type)
+
+        // copy ref attributes to the copy of the cable
+        cable.ends = currentRef.ends
+        cable.images = currentRef.images
+        // cable.scale = currentRef.scale
+
+    }
+
     // Placing of Components to Display Area
     placeComponent(component) {
         const table = this.displayArea.table
         const shelf = this.displayArea.shelf
         const componentType = component.type
-        const ref = portRef[componentType]
+        
+        const currentPortRef = portRef[componentType]
+        const currentCableRef = cableRef[componentType]
 
-        // create / fill port attributes
+        // create(fill) port attributes
         component.ports.forEach(port => {
-            this.createPortAttr(port, ref)
+            this.createPortAttr(port, currentPortRef)
+        })
+
+        // create(fill) cable attributes
+        component.cables.forEach(cable => {
+            this.createCableAttr(cable, currentCableRef)
         })
     
         // add to Table

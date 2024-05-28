@@ -98,13 +98,13 @@ class Drawer {
 
     // Get Cable Information
     getCables(component) {
-        const ref = cableRef[component.type] // reference for cables (see imports) 
+        // const ref = cableRef[component.type] // reference for cables (see imports) 
 
         // fill drawer
         component.cables.forEach(cable => {
-            const cableCopy = this.createCableAttr(cable, ref)
+            // const cableCopy = this.createCableAttr(cable, ref)
 
-            this.cables.push(cableCopy)
+            this.cables.push(cable)
         })
 
         // do the same for attached components (recursive)
@@ -115,6 +115,25 @@ class Drawer {
         })
     }
 
+    adjustCableStateStyle(cable, cell) {
+        let endsConnected = 0
+
+        for(let end in cable.ends) {
+            if(cable.ends[end].connected) endsConnected++
+        }
+
+        switch(endsConnected) {
+            case 1:
+                cell.classList.add('semi-used')
+                break
+            case 2:
+                cell.classList.add('used')
+                break
+            default:
+                cell.classList.add('unused')
+        }
+    }
+
     // Create Cable Cells
     createCableCells() {
         // iterate through this.cables
@@ -122,6 +141,9 @@ class Drawer {
             // create cells 
             const cableCell = document.createElement('div')
             cableCell.className = 'cableCell unused'
+
+            // adjust cable background to indicate what state it is in
+            this.adjustCableStateStyle(cable, cableCell)
 
             // create image
             const cableImage = document.createElement('img')

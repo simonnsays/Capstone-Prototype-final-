@@ -125,8 +125,6 @@ class PortsTab {
         this.displayAttachedCables()
     }
 
-    
-
     // Get Port Informations
     getPorts(component) {
         // only create groups for components with ports 
@@ -202,9 +200,8 @@ class PortsTab {
         // attach cable in logic
         port.cableAttached = cable        
 
-        // change cable display
-        cable.div.classList.remove('unused')
-        cable.div.classList.add('used')
+        // update cable connection state
+        cable.ends[this.currentGroupPage.component].connected = true
     }
 
     // Remove Matching Port Highlight
@@ -271,9 +268,6 @@ class PortsTab {
 
             baseDiv.appendChild(imgElement)
         })
-
-        
-        
     }
 
     // Main Update Function

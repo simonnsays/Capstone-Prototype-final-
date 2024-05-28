@@ -324,7 +324,10 @@ body {
     cursor: pointer;
 }
 
-/* CABLE ATTACHED TO THE PORT */
+/*  CABLE ATTACHED TO THE PORT 
+*   SCALE will be used by cableReference.js
+*   TOP, LEFT will be used by portReference.js
+*/
 .port-attached {
     position: absolute;
     transform-origin: top left;

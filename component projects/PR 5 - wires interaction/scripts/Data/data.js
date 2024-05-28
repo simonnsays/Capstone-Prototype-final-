@@ -1,7 +1,7 @@
 import Component from "./component.js"
 
 const components = [
-    new Component ({
+    new Component ({        // CASE
         name: 'NZXT H5 Flow',
         type: 'chassis',
         size: 'mid-tower',
@@ -63,9 +63,10 @@ const components = [
                 }
             }
         ],
-        ports: []
+        ports: [],
+        cables: []
     }),
-    new Component ({
+    new Component ({        // MOBO
         name: 'MSI MPG Z790 Carbon Max WiFi',
         type: 'motherboard',
         size: 'ATX',
@@ -118,7 +119,7 @@ const components = [
         ],
         cables: []
     }),
-    new Component ({
+    new Component ({        // CPU
         name: 'Intel Core i7-13700K',
         type: 'cpu',
         size: 'LGA 1700',
@@ -136,7 +137,7 @@ const components = [
         slots: [],
         ports: []
     }),
-    new Component ({
+    new Component ({        // PSU
         name: 'EVGA Supernova 1300 P+, 80+ Platinum 1300W',
         type: 'psu',
         size: 'ATX',

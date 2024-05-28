@@ -1,8 +1,18 @@
 const cableRef = {
     psu: [
         {
+            name: 'ATX power',
             type: '24-pin',
             connectsTo: 'motherboard',
+            ends: {
+                motherboard: {
+                    connected: false
+
+                },
+                psu: {
+                    connected: false
+                }
+            },
             images: [
                 {
                     attachedTo: 'motherboard', 
@@ -19,8 +29,6 @@ const cableRef = {
                     imageSrc: './assets/wires/24pin-mobo-power.png' 
                 },
             ],
-            
-            
         }
     ]
 }
