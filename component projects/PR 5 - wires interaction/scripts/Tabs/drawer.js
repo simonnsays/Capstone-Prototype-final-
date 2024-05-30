@@ -140,7 +140,7 @@ class Drawer {
         this.cables.forEach(cable => {
             // create cells 
             const cableCell = document.createElement('div')
-            cableCell.className = 'cableCell unused'
+            cableCell.className = 'cableCell'
 
             // adjust cable background to indicate what state it is in
             this.adjustCableStateStyle(cable, cableCell)
@@ -173,8 +173,8 @@ class Drawer {
         // delete cable cells
         while(this.cableContainer.firstChild) {
             this.cableContainer.removeChild(this.cableContainer.firstChild)
-            this.cables = []
         }
+        this.cables = []
 
         // get cable information from [ TABLE ]
         if(table.component) {

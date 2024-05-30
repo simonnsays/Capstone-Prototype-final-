@@ -101,8 +101,11 @@ class Inventory {
 
     // Create Port Attributes
     createPortAttr(port, ref) {
+         // create a copy of the reference to avoid ports pointing on the same attributes
+         const refClone = JSON.parse(JSON.stringify(ref))
+
         // find the reference for the specific port type
-        const currentRef = ref.find(refPort => refPort.type === port.type)
+        const currentRef = refClone.find(refPort => refPort.type === port.type)
 
         // copy reference attributes to the copy of the port
         port.image = currentRef.image
@@ -114,8 +117,11 @@ class Inventory {
 
     // Create Cable Attributes
     createCableAttr(cable, ref) {
+        // create a copy of the reference to avoid cables pointing on the same attributes
+        const refClone = JSON.parse(JSON.stringify(ref))
+
         // find the reference for the specific port type
-        const currentRef = ref.find(refcable => refcable.type === cable.type)
+        const currentRef = refClone.find(refcable => refcable.type === cable.type)
 
         // copy ref attributes to the copy of the cable
         cable.ends = currentRef.ends
@@ -173,6 +179,7 @@ class Inventory {
 
                 // place removed component to display area
                 this.placeComponent(removedComponent[0])
+                // console.log(removedComponent)
 
                 // update display area information
                 this.displayArea.update()

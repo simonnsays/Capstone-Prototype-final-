@@ -305,13 +305,17 @@ class PortsTab {
         // listen if one of the cable cells are clicked
         this.drawer.cables.forEach(cable => {
             cable.div.addEventListener('click', () => {
+                // console.log('hit')
+                
+                // clear previously selected cable
+                if(this.drawer.selectCable) {
+                    this.drawer.clearSelectedCable()
+                }
                 // select cable
                 this.drawer.selectCable(cable)
 
-                // reset highlights
+                // reset port highlights
                 this.removeHighlights()
-
-                // highlight matching ports
                 this.highlightPorts(cable)
 
                 // cable attachment
