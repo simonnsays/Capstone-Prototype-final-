@@ -112,9 +112,10 @@ const components = [
         ],
         ports: [
             {
-                type: '24-pin',
-                cableAttached: null
-                
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
             }
         ],
         cables: []
@@ -158,15 +159,25 @@ const components = [
         slots: [],
         ports: [
             {
-                type: '24-pin',
-                cableAttached: null
-                
-            }
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
         ],
         cables: [
             {
-                type: '24-pin'
-
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
             }
         ]
     })

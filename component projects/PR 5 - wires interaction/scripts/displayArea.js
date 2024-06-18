@@ -60,8 +60,8 @@ class DisplayArea {
         this.update()
     }
 
-     // Attach Component
-     attachComponent(componentSelected, slot) {
+    // Attach Component
+    attachComponent(componentSelected, slot) {
         slot.component = componentSelected
         slot.component.isAttached = true
         slot.component.box = slot.box
@@ -85,6 +85,8 @@ class DisplayArea {
         // swap
         this.table.component = componentSelected
         this.shelf[index].component = tempComponent
+
+        // removed any attached cables
 
         // update display area information
         this.update()

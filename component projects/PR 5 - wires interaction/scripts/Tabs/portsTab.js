@@ -163,7 +163,7 @@ class PortsTab {
     }
 
     // Create Port Grid
-    createPortCells() {
+    createPortCells() { 
         if(!this.currentGroupPage) return
         
         // set title to the group component of the current group page
@@ -208,9 +208,19 @@ class PortsTab {
     removeHighlights() {
         this.portGroups.forEach(group => {
             group.ports.forEach(port => {
+                // if port have a highligh div, remove it
                 if(port.highlight) {
                     port.div.removeChild(port.highlight)
                     delete port.highlight
+
+                // different handling for ports that share the same image
+                } else if(port.offset['first']) { 
+                    for(let offset in port.offset) {
+                        if(port.offset[offset].highlight) {
+                            port.div.removeChild(port.offset[offset].highlight)
+                            delete port.offset[offset].highlight    
+                        }
+                    }
                 }
             })
         })
@@ -220,26 +230,56 @@ class PortsTab {
     highlightPorts(cable) {
         const currentPage = this.currentGroupPage
 
+        // don't highlight if cable end is already connected
+        if(cable.ends[currentPage.component].connected) return
+
         currentPage.ports.forEach(port => {
+            
             // highlight port when matched and no attached cable yet
-            if(cable.type === port.type && !port.cableAttached) {
+            if(cable.type === port.type) {
                 const baseDiv = port.div
 
-                // highlight div
-                const highlight = document.createElement('div')
-                highlight.className = 'port-highlight'
-                highlight.style.top = port.offset.top
-                highlight.style.left = port.offset.left
-                highlight.style.width = port.offset.width
-                highlight.style.height = port.offset.height
+                if(port.cableAttached === null) {
+                    port.highlight = this.createHighlight(port.offset)
+                    //append
+                    baseDiv.appendChild(port.highlight)
+                } else if(port.offset['first']){
+                    for(let offsetNum in port.offset) {
+                        if(!port.offset[offsetNum].cableAttached && !cable.ends[currentPage.component].connected) {
+                            port.offset[offsetNum].highlight = this.createHighlight(port.offset[offsetNum])
+                            // append created highlight
+                            baseDiv.appendChild(port.offset[offsetNum].highlight)
+                        }
+                    }
+                }
+                   
 
-                // append
-                baseDiv.appendChild(highlight)
-
-                // create port highlight property
-                port.highlight = highlight
+                
+                    // if(!port.offset.first.cableAttached && !cable.ends[currentPage.component].connected) {
+                    //     port.offset.first.highlight = this.createHighlight(port.offset['first'])
+                    //     // append created highlight
+                    //     baseDiv.appendChild(port.offset.first.highlight)
+                    // }
+                    
+                    // if(!port.offset.second.cableAttached && !cable.ends[currentPage.component].connected) {
+                    //     port.offset.second.highlight =  this.createHighlight(port.offset['second'])
+                    //     // append
+                    //     baseDiv.appendChild(port.offset.second.highlight)
+                    // }
             }
         })
+    }
+
+    createHighlight(offset) {
+        // create the highlight div
+        const highlight = document.createElement('div')
+        highlight.className = 'port-highlight'
+        highlight.style.top = offset.top
+        highlight.style.left = offset.left
+        highlight.style.width = offset.width
+        highlight.style.height = offset.height
+
+        return highlight
     }
 
     // Display Attached Cables
@@ -247,27 +287,63 @@ class PortsTab {
         if(this.portGroups.length < 1 || !this.currentGroupPage) return
 
         this.currentGroupPage.ports.forEach(port => {
-            if(!port.cableAttached) return
-
-            // get image asset based on the current group page component
-            const cableImage = port.cableAttached.images.find(image => image.attachedTo === this.currentGroupPage.component)
-
-            /*
-            /       Maybe Abstract this
-            */ 
             const baseDiv = port.div
-            const imgElement = document.createElement('img')
-            imgElement.src = cableImage.imageSrc
-            imgElement.className = 'port-attached'
 
-            // style to adjust port offset
-            imgElement.style.top = port.offset.top
-            imgElement.style.left = port.offset.left
-            imgElement.style.transform = 'scale('+ cableImage.scale.width + ',' + cableImage.scale.height + ')'
-            imgElement.style.transformOrigin = 'top left'
+            if(port.offset['first']) {
+                for(let offset in port.offset) {
+                    if(port.offset[offset].cableAttached) {
+                        
+                        const cableImage = port.offset[offset].cableAttached.images.find(image => 
+                            image.attachedTo === this.currentGroupPage.component)
 
-            baseDiv.appendChild(imgElement)
+                        const attachedCableImageDiv = this.createAttachedCableImage(port.offset[offset], cableImage,offset)
+
+                        baseDiv.appendChild(attachedCableImageDiv)
+                    }
+                }
+            } else if(port.cableAttached) {
+                // get image asset based on the current group page component
+                const cableImage = port.cableAttached.images.find(image => image.attachedTo === this.currentGroupPage.component)
+
+                const attachedCableImageDiv = this.createAttachedCableImage(port.offset, cableImage)
+
+                baseDiv.appendChild(attachedCableImageDiv)
+            }
         })
+    }
+
+    // Creation of Attached Cable Div
+    createAttachedCableImage(offset, cableImage, num = '') {
+        const imgElement = document.createElement('img')
+        imgElement.src = cableImage.imageSrc
+        imgElement.className = 'port-attached'
+
+        // style to adjust port offset
+        if(num.length !== 0) {
+            // handling for ports that share the same image
+            imgElement.style.top = cableImage.offset[num].top
+            imgElement.style.left = cableImage.offset[num].left
+        } else {
+            imgElement.style.top = cableImage.offset.top
+            imgElement.style.left = cableImage.offset.left
+        }
+        
+        imgElement.style.transform = 'scale('+ cableImage.scale.width + ',' + cableImage.scale.height + ')'
+        imgElement.style.transformOrigin = 'top left'
+
+        return imgElement
+    }
+
+    // Highlight on click
+    highlightOnClick(port, cable) {
+        // attach cable
+        this.attachCable(port, cable)
+
+        // remove port highlight
+        this.removeHighlights()
+
+        // remove cable highlight
+        this.drawer.clearSelectedCable()
     }
 
     // Main Update Function
@@ -304,9 +380,7 @@ class PortsTab {
 
         // listen if one of the cable cells are clicked
         this.drawer.cables.forEach(cable => {
-            cable.div.addEventListener('click', () => {
-                // console.log('hit')
-                
+            cable.div.addEventListener('click', () => {                
                 // clear previously selected cable
                 if(this.drawer.selectCable) {
                     this.drawer.clearSelectedCable()
@@ -320,24 +394,26 @@ class PortsTab {
 
                 // cable attachment
                 this.currentGroupPage.ports.forEach(port => {
-                    // if highlight is selected
+                    // slightly different handling for ports that share the same image
+                    if(port.offset['first']) {
+                        for (let offset in port.offset) {
+                            if(port.offset[offset].highlight) {
+                                port.offset[offset].highlight.addEventListener('click', () => {
 
-                    if(!port.highlight) return
+                                    this.highlightOnClick(port.offset[offset], cable)
+    
+                                    this.update(table, shelf)
+                                })
+                            }
+                        }
+                    } else if(port.highlight){
+                        port.highlight.addEventListener('click', () => {
+                            this.highlightOnClick(port, cable)
 
-                    port.highlight.addEventListener('click', () => {
-                        // attach cable
-                        this.attachCable(port, cable)
-
-                        // remove port highlight
-                        this.removeHighlights()
-
-                        // remove cable highlight
-                        this.drawer.clearSelectedCable()
-
-                        this.update(table, shelf)
-                    })
+                            this.update(table, shelf)
+                        })
+                    } 
                 })
-                
             })
         })
     }
