@@ -87,6 +87,11 @@ class DisplayArea {
         this.shelf[index].component = tempComponent
 
         // removed any attached cables
+        /* 
+        *
+        *           CONTINURE WORKING HERE ! ! !
+        * 
+        */
 
         // update display area information
         this.update()
