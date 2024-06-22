@@ -14,7 +14,7 @@
                     width: 34, // used in highlight sizes
                     height: 180
                 },
-                cableAttached: null
+                // cableAttached: null
             },
             {
                 name: 'CPU EPS Connector',
@@ -29,7 +29,7 @@
                         width: 100, 
                         height: 58,
                         
-                        cableAttached: null
+                        // cableAttached: null
                     },
                     
                     second: {
@@ -38,7 +38,7 @@
                         width: 100, 
                         height: 58,
     
-                        cableAttached: null
+                        // cableAttached: null
                     }
                 }    
             }
@@ -56,7 +56,7 @@
                     width: 235,
                     height: 58
                 },
-                cableAttached: null
+                // cableAttached: null
             },
             {
                 type: '8-pin-power',
@@ -70,7 +70,7 @@
                     width: 147,
                     height: 116
                 },
-                cableAttached: null
+                // cableAttached: null
             }
         ]
     }

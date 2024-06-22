@@ -107,15 +107,6 @@ class Inventory {
         // find the reference for the specific port type
         const currentRef = refClone.find(refPort => refPort.type === port.type)
 
-        /*
-        *   Separate handling for cpu
-        */
-        if(port.type === '8-pin-power') {
-            port.image = currentRef.image
-            port.offset = currentRef.offset
-            return
-        }
-
         // copy reference attributes to the copy of the port
         port.image = currentRef.image
         port.offset = currentRef.offset

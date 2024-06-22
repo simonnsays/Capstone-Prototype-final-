@@ -8,7 +8,11 @@ class ElementHandler {
             openBtn: document.querySelector('#openShop'),
             closeBtn: document.querySelector('#closeShop'),
             modal: document.querySelector('#shopModal'),
-            itemsContainer: document.querySelector('#shopItemsContainer')
+            // itemsContainer: document.querySelector('#shopItemsContainer'),
+            itemsContainer: document.querySelector('.items-shop'),
+            shopSearchBar: document.querySelector('#shopSearch'),
+            shopCategories: document.querySelectorAll('[data-category="shop"]'),
+            quickBuy: document.querySelector('#quickBuy'),
 
         } || null
     }

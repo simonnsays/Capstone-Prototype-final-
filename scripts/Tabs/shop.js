@@ -1,4 +1,5 @@
 import components from "../Data/data.js"
+import SearchBar from "../Utility/searchBar.js"
 
 class Shop{
     constructor(elementHandler, utilityTool, inventory) {
@@ -12,10 +13,18 @@ class Shop{
         this.closeBtn = this.elements.closeBtn
         this.modal = this.elements.modal
         this.itemsContainer = this.elements.itemsContainer
-        this.drawer =''
+
+        // Search Bar
+        this.searchBar = new SearchBar(this.elements.shopSearchBar)
+        this.searchResults = []
+
+        // Component Categories
+        this.categories = this.elements.shopCategories
+        this.selectedCategory = ''
 
         // Items
         this.items =  []
+        this.filteredItems // when a search or active category happens
 
         // Inventory (class module)
         this.inventory = inventory
@@ -55,9 +64,14 @@ class Shop{
 
     // Fill Shop Items from Data Imported from data.js
     fillShopItems(items, carrier) {
+        // fill shop with items
         items.forEach(item => {
             carrier.push(item)
         })
+
+        // reference filters to this.items on initialize
+        this.filteredItems = this.items
+        this.searchResults = this.items
     }
 
     // Create Interactive Elements to Show in Shop Tab
@@ -86,14 +100,43 @@ class Shop{
         this.inventory.items.push(componentClone)
     }
 
-    // Main Shop Initialization Method
-    init() {
-        // Fill Shop Items
-        this.fillShopItems(components, this.items)
+    // Search Input Handling
+    handleSearchInput(e) {
+        const pattern = e.target.value
+        let searchResults = []
+        // use kmp search to match names of components to input search
+        searchResults = this.items.filter(item => 
+            this.searchBar.kmpSearch(item.name.toLowerCase(), pattern.toLowerCase()).length > 0)
+        // update shop display that is returned by the search result
+        if(searchResults.length > 0 || pattern.length > 0) {
+            this.searchResults = searchResults
+        } else {
+            // if search input has no value
+            this.searchResults = this.items
+        }
 
-        // Create Element For Each Item
-        this.createItemElements(this.items, this.itemsContainer)
-         
+        this.update()
+    } 
+
+    // Main Shop Update Method
+    update() {
+        while (this.itemsContainer.firstChild) {
+            this.itemsContainer.removeChild(this.itemsContainer.firstChild)
+        }
+
+        // apply category filter
+        if(this.selectedCategory.length !== 0) {
+            this.filteredItems = this.searchResults
+            .filter(item => 
+                item.type.toLowerCase() === this.selectedCategory.toLowerCase())
+        } else {
+            // apply search filter instead
+            this.filteredItems = this.searchResults
+        }
+
+        // create elements after filter application
+        this.createItemElements(this.filteredItems, this.itemsContainer)
+
         // Purchase event
         Array.from(this.itemsContainer.children).forEach(child => {
             child.addEventListener('click', () => {
@@ -104,6 +147,58 @@ class Shop{
                 this.inventory.update()
             })
         })
+    }
+
+    selectCategory(categoryID) {
+        // set a check if a category is selected
+        let categoryIsSelected = false
+
+        this.categories.forEach(category => {
+            // toggle the selected category
+            if(category.dataset.id === categoryID) {
+                switch(category.dataset.selected) {
+                    case 'false':
+                        category.dataset.selected = 'true'
+                        // imply that a category is selected
+                        categoryIsSelected = true
+                        break
+                    case 'true':
+                        category.dataset.selected = 'false'
+                        break    
+                }
+            } else {
+                // categories not selected are always set to false
+                category.dataset.selected = 'false'
+            }
+        })
+
+        // update this.selectedCategory of a category is selected
+        categoryIsSelected
+        ? this.selectedCategory = categoryID
+        : this.selectedCategory = ''
+    }
+
+    // Main Shop Initialization Method
+    init() {
+        // Fill Shop Items
+        this.fillShopItems(components, this.items)
+
+        // search bar event
+        this.searchBar.element.addEventListener('input', (e) => this.handleSearchInput(e))
+
+        // shop categories event
+        this.categories.forEach(category => {
+            category.addEventListener('click', () => {
+                // toggle this category
+                this.selectCategory(category.dataset.id)
+                
+                this.update()
+            })
+            
+        })
+
+        // use update method
+        this.update()
     }
 
 }

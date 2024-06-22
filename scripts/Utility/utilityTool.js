@@ -1,6 +1,12 @@
 class UtilityTool {
     constructor() {
+        // custom id for items
         this.idCount = 1
+
+        // color palette
+        const colorPalete = {
+            mint: getComputedStyle(document.documentElement).getPropertyValue('--mint')
+        }
     }
     // Check for The Relation of Point And Plane
     isInsideBox(point, box) {

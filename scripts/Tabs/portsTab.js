@@ -239,11 +239,7 @@ class PortsTab {
             if(cable.type === port.type) {
                 const baseDiv = port.div
 
-                if(port.cableAttached === null) {
-                    port.highlight = this.createHighlight(port.offset)
-                    //append
-                    baseDiv.appendChild(port.highlight)
-                } else if(port.offset['first']){
+                if(port.offset['first']){
                     for(let offsetNum in port.offset) {
                         if(!port.offset[offsetNum].cableAttached && !cable.ends[currentPage.component].connected) {
                             port.offset[offsetNum].highlight = this.createHighlight(port.offset[offsetNum])
@@ -251,21 +247,12 @@ class PortsTab {
                             baseDiv.appendChild(port.offset[offsetNum].highlight)
                         }
                     }
-                }
-                   
-
-                
-                    // if(!port.offset.first.cableAttached && !cable.ends[currentPage.component].connected) {
-                    //     port.offset.first.highlight = this.createHighlight(port.offset['first'])
-                    //     // append created highlight
-                    //     baseDiv.appendChild(port.offset.first.highlight)
-                    // }
-                    
-                    // if(!port.offset.second.cableAttached && !cable.ends[currentPage.component].connected) {
-                    //     port.offset.second.highlight =  this.createHighlight(port.offset['second'])
-                    //     // append
-                    //     baseDiv.appendChild(port.offset.second.highlight)
-                    // }
+                // } else if(port.cableAttached === null) {
+                } else {
+                    port.highlight = this.createHighlight(port.offset)
+                    //append
+                    baseDiv.appendChild(port.highlight)
+                } 
             }
         })
     }

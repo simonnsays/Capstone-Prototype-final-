@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
     <title>PR 5 - Wires Interaction</title>
 </head>
 <body>
@@ -36,18 +37,55 @@
 
     <!-- SHOP MODAL -->
     <dialog id="shopModal" class="modal">
-        <div class="modal-wrapper">
+        <!-- TOP -->
+        <div class="top">
+            <div class="headline">
+                <h2 class="title">SHOP</h2>
+                <input type="search" class="search-bar" id="shopSearch" placeholder="Search.." autocomplete="off">
+                <h2 id="money">$9999</h2>
+            </div>
+
+            <div class="category-scroll">
+                <button data-category="shop" data-selected="false" data-id="chassis" class="button2 category-btn">Case</button>
+                <button data-category="shop" data-selected="false" data-id="motherboard" class="button2 category-btn">Motherboard</button>
+                <button data-category="shop" data-selected="false" data-id="cpu" class="button2 category-btn">CPU</button>
+                <button data-category="shop" data-selected="false" data-id="psu" class="button2 category-btn">Power&nbsp;Supply</button>
+                <button data-category="shop" data-selected="false" data-id="ram" class="button2 category-btn">Memory</button>
+                <button data-category="shop" data-selected="false" data-id="rom" class="button2 category-btn">Storage</button>
+                <button data-category="shop" data-selected="false" data-id="cooling" class="button2 category-btn">Cooling</button>
+            </div>
+            <hr>
+        </div>
+        
+        <!-- MIDDLE -->
+        <div class="items-shop">
+            <!-- item divs are placed here -->
+        </div>
+        <!-- BOTTOM -->
+        <div class="bottom">
+            <hr>
+            <div class="bottom-container">
+                <label for="quickBuy" class="quick-buy">
+                    <input type="checkbox" id="quickBuy">Quick Buy
+                </label>
+                <button id="closeShop" class="button shop-btn">CLOSE</button>
+            </div>
+        </div>
+
+
+
+        <!-- <div class="modal-wrapper">
             <div class="modal-header">
                 SHOP
                 <span id="closeShop" class="closeBtn">&times;</span>
             </div>
 
-            <!-- item container -->
+            item container
             <div id="shopItemsContainer" class="modal-body">
                 
             </div>
         </div>
-        
+         -->
     </dialog>
 
     <!-- IVENTORY MODAL -->

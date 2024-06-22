@@ -49,7 +49,7 @@ class Main {
 
     start() {
         // main code here
-        this.shop.init()
+        this.shop.init() 
         this.canvas.animate()    
     }
 

@@ -2,3 +2,9 @@ TODO:
 
 - Process of transferring items from shop to inv
 - Image rendering of Shop Items
+
+[] - merge old proto shop to final proto
+    |_ [o] - add search bar functions
+    |_ [] - add component categories functions
+    |_ [] - add quick buy function
+[] - add search 

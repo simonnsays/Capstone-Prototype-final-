@@ -237,13 +237,10 @@ class PortsTab {
             
             // highlight port when matched and no attached cable yet
             if(cable.type === port.type) {
+                console.log(port.cableAttached)
                 const baseDiv = port.div
 
-                if(port.cableAttached === null) {
-                    port.highlight = this.createHighlight(port.offset)
-                    //append
-                    baseDiv.appendChild(port.highlight)
-                } else if(port.offset['first']){
+                if(port.offset['first']){
                     for(let offsetNum in port.offset) {
                         if(!port.offset[offsetNum].cableAttached && !cable.ends[currentPage.component].connected) {
                             port.offset[offsetNum].highlight = this.createHighlight(port.offset[offsetNum])
@@ -251,7 +248,11 @@ class PortsTab {
                             baseDiv.appendChild(port.offset[offsetNum].highlight)
                         }
                     }
-                }
+                } else if(port.cableAttached === null) {
+                    port.highlight = this.createHighlight(port.offset)
+                    //append
+                    baseDiv.appendChild(port.highlight)
+                } 
                    
 
                 
