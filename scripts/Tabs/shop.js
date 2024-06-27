@@ -2,7 +2,7 @@ import components from "../Data/data.js"
 import SearchBar from "../Utility/searchBar.js"
 
 class Shop{
-    constructor(elementHandler, utilityTool, inventory) {
+    constructor(elementHandler, utilityTool, inventory, itemInfo) {
         // Utility
         this.utilityTool = utilityTool
         this.elements = elementHandler.getShopElements()
@@ -13,6 +13,8 @@ class Shop{
         this.closeBtn = this.elements.closeBtn
         this.modal = this.elements.modal
         this.itemsContainer = this.elements.itemsContainer
+        this.quickBuy = this.elements.quickBuy
+        this.itemInfo = itemInfo
 
         // Search Bar
         this.searchBar = new SearchBar(this.elements.shopSearchBar)
@@ -98,6 +100,9 @@ class Shop{
         // create unique ID 
         this.utilityTool.createID(componentClone)
         this.inventory.items.push(componentClone)
+
+         // update inventory container
+         this.inventory.update()
     }
 
     // Search Input Handling
@@ -118,37 +123,7 @@ class Shop{
         this.update()
     } 
 
-    // Main Shop Update Method
-    update() {
-        while (this.itemsContainer.firstChild) {
-            this.itemsContainer.removeChild(this.itemsContainer.firstChild)
-        }
-
-        // apply category filter
-        if(this.selectedCategory.length !== 0) {
-            this.filteredItems = this.searchResults
-            .filter(item => 
-                item.type.toLowerCase() === this.selectedCategory.toLowerCase())
-        } else {
-            // apply search filter instead
-            this.filteredItems = this.searchResults
-        }
-
-        // create elements after filter application
-        this.createItemElements(this.filteredItems, this.itemsContainer)
-
-        // Purchase event
-        Array.from(this.itemsContainer.children).forEach(child => {
-            child.addEventListener('click', () => {
-                // buy component
-                this.buyComponent(child.component)
-                
-                // update inventory container
-                this.inventory.update()
-            })
-        })
-    }
-
+    // Selection of Category
     selectCategory(categoryID) {
         // set a check if a category is selected
         let categoryIsSelected = false
@@ -178,6 +153,68 @@ class Shop{
         : this.selectedCategory = ''
     }
 
+    // Main Shop Update Method
+    update() {
+        while (this.itemsContainer.firstChild) {
+            this.itemsContainer.removeChild(this.itemsContainer.firstChild)
+        }
+
+        // apply category filter
+        if(this.selectedCategory.length !== 0) {
+            this.filteredItems = this.searchResults
+            .filter(item => 
+                item.type.toLowerCase() === this.selectedCategory.toLowerCase())
+        } else {
+            // apply search filter instead
+            this.filteredItems = this.searchResults
+        }
+
+        // create elements after filter application
+        this.createItemElements(this.filteredItems, this.itemsContainer)
+
+        // Purchase event
+        Array.from(this.itemsContainer.children).forEach(child => {
+            child.addEventListener('click', () => {
+                if(this.quickBuy.checked) {
+                    // buy component
+                    this.buyComponent(child.component)
+                } else {
+                    // display component information first
+                    this.displayItemInfo(child.component)
+                }
+            })
+        })
+    }
+
+    displayItemInfo(component) {
+        const itemInfoModal = this.itemInfo.modal
+
+        // change image
+        while(this.itemInfo.imageContainer.firstChild) {
+            this.itemInfo.imageContainer.removeChild(this.itemInfo.imageContainer.firstChild)
+        }
+        const infoImage = new Image
+        infoImage.src = component.images.find(image => image.side === component.defaultSource).imageSrc
+        infoImage.style.maxHeight = '90%'
+        infoImage.style.maxWidth = '90%'
+        infoImage.onload = () => this.itemInfo.imageContainer.appendChild(infoImage)
+
+        // change info name 
+        this.itemInfo.infoName.innerHTML = component.name
+
+        // change specs list 
+        /*
+        *   ENTER CHANGE OF SPECS LOGIC HERE
+        */
+
+        // button events
+        this.itemInfo.btn1.addEventListener('click', () => {this.buyComponent(component); itemInfoModal.close()})
+        this.itemInfo.btn2.addEventListener('click', () => itemInfoModal.close())
+
+        // display info
+        itemInfoModal.showModal()
+    }
+
     // Main Shop Initialization Method
     init() {
         // Fill Shop Items
@@ -194,13 +231,11 @@ class Shop{
                 
                 this.update()
             })
-            
         })
 
         // use update method
         this.update()
     }
-
 }
 
 export default Shop

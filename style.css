@@ -99,7 +99,8 @@ body {
     left: 20;
 }
 
-.button-wrapper > button {
+/* .button-wrapper > button { */
+.button {
     height: 2.7rem;
     width: 9rem;
     border: 3px solid black;
@@ -502,6 +503,89 @@ body {
     transform: scale(1.07);
 }
 
+/*COMPONENT INFORMATION */
+#itemInfoModal {
+    height: 670px;
+    width: 450px;
+
+    padding: 15px;
+}
+.itemInfoContainer {
+    width: calc(100% - 30px);
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 21px;
+
+    padding: 0 15px;
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+#itemInfoImage {
+    background-color: var(--mint);
+    max-width: 180px;
+    max-height: 180px;
+    width: 180px;
+    height: 180px;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 5px;
+    border-radius: 10px;
+}
+#itemInfoNameContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    gap: 10px;
+} 
+#itemInfoNameContainer p {
+    width: 70%;
+    padding-left: 10px;
+    margin: 0;
+}
+.infoLineBreak {
+    height: 0;
+    width: 100%;
+    border:  3px solid black;
+    border-radius: 5px;
+    align-self: center;
+}
+#itemInfoSpecsContainer {
+    width: 100%;
+    max-height: 260px;
+
+    padding-left: 10px;
+
+    overflow: auto;
+}
+#itemInfoSpecsContainer h5{ 
+    margin: 0
+}
+.itemInfoBottomContainer {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: column ;
+
+}
+.itemInfoButtonsContainer {
+    padding-top: 15px;
+    align-self: center;
+    display: flex;
+
+    gap: 40px;
+}
+
+#button1:hover, #button2:hover {
+    background-color: var(--mint);
+}
 
 /* 
 /       UTILITY

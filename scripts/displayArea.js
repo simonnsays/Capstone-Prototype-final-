@@ -161,11 +161,9 @@ class DisplayArea {
         }
 
         if(baseComponent.isAttached) {
-
             // get the original dimensions of the base component
             const imageSide = this.utilityTool.getSide(baseComponent, this.currentSide)
 
-            
             // find the scale by getting the change happened in the component's width and height
             const scale = {
                 width: baseComponent.box.width / imageSide.width,

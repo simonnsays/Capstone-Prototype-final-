@@ -16,6 +16,9 @@ class Main {
         // User
         this.user = new User(this.utilityTool)
 
+        // Item Info Modal
+        this.itemInfo = this.elementHandler.getItemInfoElements()
+
         // Wires Tab
         this.portsTab = new PortsTab(this.elementHandler, this.utilityTool)
 
@@ -26,7 +29,7 @@ class Main {
         this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea)
 
         // Shop
-        this.shop = new Shop(this.elementHandler, this.utilityTool, this.inventory)
+        this.shop = new Shop(this.elementHandler, this.utilityTool, this.inventory, this.itemInfo)
 
         // Prevent Canvas Interaction when tabs are open
         window.addEventListener('mousedown', () => this.handleMouseDown())

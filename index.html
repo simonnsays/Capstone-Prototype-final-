@@ -6,14 +6,17 @@
     <link rel="stylesheet" href="style2.css">
     <link rel="icon" href="../favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
+    <style>
+       
+    </style>
 </head>
 <body>
     <!-- GAME CONTAINER -->
     <div class="game-container">
         <div class="button-wrapper">
-            <button id="openShop">SHOP</button>
-            <button id="openInv">INVENTORY</button>
-            <button id="openWires">PORTS</button>
+            <button class="button" id="openShop">SHOP</button>
+            <button class="button" id="openInv">INVENTORY</button>
+            <button class="button" id="openWires">PORTS</button>
         </div>
 
         <!-- canvas -->
@@ -35,6 +38,42 @@
             </button>
         </div>
     </div>
+
+    <!-- Component Information Modal -->
+    <dialog id="itemInfoModal">
+        <!-- info container -->
+        <div class="itemInfoContainer">
+            <!-- image container -->
+            <div id="itemInfoImage"></div>
+            
+            <!-- item info name -->
+            <div id="itemInfoNameContainer">
+                <div class="infoLineBreak"></div>
+                <p id="itemInfoName">EVGA Supernova 1300 P+, 80+ Platinum 1300W (psu)</p>
+                <div class="infoLineBreak"></div>
+            </div>
+            
+            <!-- item info [SPECS] container -->
+            <div id="itemInfoSpecsContainer">
+                <h5>SPECS</h5>
+                <ul id="itemInfoSpecs">
+                    <li>FormFactor</li>
+                    <li>CPU socket</li>
+                </ul>
+            </div>
+
+            <!-- Buy and cancel buttons-->
+            <div class="itemInfoBottomContainer">
+                <div class="infoLineBreak"></div>
+                <div class="itemInfoButtonsContainer">
+                    <button id="button1" class="button">Buy</button>
+                    <button id="button2" class="button">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </dialog>
+
 
     <!-- SHOP MODAL -->
     <dialog id="shopModal" class="modal">

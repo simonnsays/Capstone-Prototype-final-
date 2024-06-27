@@ -58,6 +58,17 @@ class ElementHandler {
             panelIndicator: document.querySelector('#panelIndicator')
         } || null
     }
+
+    getItemInfoElements() {
+        return {
+            modal: document.querySelector('#itemInfoModal'),
+            imageContainer: document.querySelector('#itemInfoImage'),
+            infoName: document.querySelector('#itemInfoName'),
+            specsContainer: document.querySelector('#itemInfoSpecs'),
+            btn1: document.querySelector('#button1'),
+            btn2: document.querySelector('#button2'),
+        }
+    }
 }
 
 export default ElementHandler
