@@ -94,12 +94,25 @@
                     imageSrc: './assets/gpu/ports/8+8pin_power.png',
                 },
                 
-                offset: {
-                    top: 107,
-                    left: 61,
-                    width: 175,
-                    height: 57
-                },
+                offset: {  // for ports that share the same image
+                    first: {
+                        top: 107,
+                        left: 61,
+                        width: 88,
+                        height: 57,
+                        
+                        cableAttached: null
+                    },
+                    
+                    second: {
+                        top: 107,
+                        left: 149, 
+                        width: 88,
+                        height: 57, 
+    
+                        cableAttached: null
+                    }
+                } ,
                 cableAttached: null
             },
         ]

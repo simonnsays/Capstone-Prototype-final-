@@ -312,11 +312,11 @@ body {
     /* 
     /   adjustables
     */
-    top: 83;
-    left: 79; 
+    top: 107;
+    left: 149; 
 
-    width: 121px;
-    height: 97px; 
+    width: 88;
+    height: 57; 
 }
 .port-highlight:hover{
     cursor: pointer;

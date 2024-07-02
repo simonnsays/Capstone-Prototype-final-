@@ -226,34 +226,48 @@ class PortsTab {
         })
     }
 
+    cableEndsMatchCurrentPage(cable, page) {
+        let x=0
+        for(let end in cable.ends) {
+            if (end === page.component) {
+                x++
+                console.log(x)
+                return true   
+            }
+        }
+        console.log(x)
+
+        return false
+    }
+
     // Show Matching Port Highlight
     highlightPorts(cable) {
         const currentPage = this.currentGroupPage
 
         // don't highlight if cable end is already connected
-        if(cable.ends[currentPage.component].connected ) return
+        if(!this.cableEndsMatchCurrentPage(cable, currentPage) || cable.ends[currentPage.component].connected) return
 
         currentPage.ports.forEach(port => {
-            
-            // highlight port when matched and no attached cable yet
-            if(cable.type === port.type) {
-                const baseDiv = port.div
+            // return cases
+            if(cable.type !== port.type) return
 
-                if(port.offset['first']){
-                    for(let offsetNum in port.offset) {
-                        if(!port.offset[offsetNum].cableAttached && !cable.ends[currentPage.component].connected) {
-                            port.offset[offsetNum].highlight = this.createHighlight(port.offset[offsetNum])
-                            // append created highlight
-                            baseDiv.appendChild(port.offset[offsetNum].highlight)
-                        }
+            const baseDiv = port.div
+
+            // highlight port when matched and no attached cable yet
+            if(port.offset['first']){
+                for(let offsetNum in port.offset) {
+                    if(!port.offset[offsetNum].cableAttached && !cable.ends[currentPage.component].connected) {
+                        port.offset[offsetNum].highlight = this.createHighlight(port.offset[offsetNum])
+                        // append created highlight
+                        baseDiv.appendChild(port.offset[offsetNum].highlight)
                     }
-                // } else if(port.cableAttached === null) {
-                } else {
-                    port.highlight = this.createHighlight(port.offset)
-                    //append
-                    baseDiv.appendChild(port.highlight)
-                } 
-            }
+                }
+            } else if(port.cableAttached === null) {
+            // } else {
+                port.highlight = this.createHighlight(port.offset)
+                //append
+                baseDiv.appendChild(port.highlight)
+            } 
         })
     }
 

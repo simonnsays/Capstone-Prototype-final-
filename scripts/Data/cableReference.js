@@ -15,13 +15,13 @@ const cableRef = {
             images: [
                 {
                     attachedTo: 'motherboard', 
-                    imageSrc: './assets/wires/ATX-power/ATX-attached(mobo).png',
+                    imageSrc: './assets/wires/ATX-power/ATX-power-attached(mobo).png',
                     scale: {width: 1, height: 1.47}, // will be used in matching cable to port
                     offset: {top: 26, left: 145}
                 },
                 {
                     attachedTo: 'psu', 
-                    imageSrc: './assets/wires/(10+18)ATX-power/ATX-attached(psu).png',
+                    imageSrc: './assets/wires/ATX-power/ATX-power-attached(psu).png',
                     scale: {width: .45, height: .45}, // will be used in matching cable to port 
                     offset: {top: 84, left: 23}
                 },

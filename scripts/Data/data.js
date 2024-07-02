@@ -170,6 +170,9 @@ const components = [
             {
                 type: '8-pin-pcie'
             },
+            {
+                type: '8-pin-pcie'
+            },
             
         ],
         cables: [
@@ -181,6 +184,9 @@ const components = [
             },
             {
                 type: '8-pin-power'
+            },
+            {
+                type: '8-pin-pcie'
             },
             {
                 type: '8-pin-pcie'
@@ -209,17 +215,7 @@ const components = [
                 type: '8-pin-pcie',
             }
         ],
-        // cables: [
-        //     {
-        //         type: '24-pin-power'
-        //     },
-        //     {
-        //         type: '8-pin-power'
-        //     },
-        //     {
-        //         type: '8-pin-power'
-        //     }
-        // ]
+        cables: []
     })
 ]
 
