@@ -1,6 +1,6 @@
     const portRef = {
         motherboard: [
-            {       // 24 pin Power
+            {   // 24 pin Power
                 type: '24-pin-power',
                 image: {
                     // port image will be used in the div with the class of 'port('.port')'
@@ -9,14 +9,14 @@
                 
                 // will be used in highlights
                 offset: {
-                    top: 26, // will also be used in attached cable offset
+                    top: 26,
                     left: 145,
                     width: 34, // used in highlight sizes
                     height: 180
                 },
                 cableAttached: null
             },
-            {
+            {   // 8pin - power
                 name: 'CPU EPS Connector',
                 type: '8-pin-power',
                 image: {
@@ -44,10 +44,10 @@
             }
         ],
         psu: [
-            {
+            {   // ATX - power
                 type: '24-pin-power',
                 image: {
-                    imageSrc: './assets/psu/ports/psu-port-10+18.png',
+                    imageSrc: './assets/psu/ports/ATX.png',
                 },
                 
                 offset: {
@@ -58,10 +58,10 @@
                 },
                 cableAttached: null
             },
-            {
+            {   // 8pin - power
                 type: '8-pin-power',
                 image: {
-                    imageSrc: './assets/psu/ports/psu_port-power.png',
+                    imageSrc: './assets/psu/ports/cpu.png',
                 },
                 
                 offset: {
@@ -71,7 +71,37 @@
                     height: 116
                 },
                 cableAttached: null
-            }
+            },
+            {   // 8pin - pcie
+                type: '8-pin-pcie',
+                image: {
+                    imageSrc: './assets/psu/ports/vga(pcie)-power.png',
+                },
+                
+                offset: {
+                    top: 83,
+                    left: 79,
+                    width: 121,
+                    height: 97
+                },
+                cableAttached: null
+            },
+        ],
+        gpu: [
+            {   // 8pin - pcie
+                type: '8-pin-pcie',
+                image: {
+                    imageSrc: './assets/gpu/ports/8+8pin_power.png',
+                },
+                
+                offset: {
+                    top: 107,
+                    left: 61,
+                    width: 175,
+                    height: 57
+                },
+                cableAttached: null
+            },
         ]
     }
 

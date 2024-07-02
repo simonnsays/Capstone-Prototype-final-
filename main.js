@@ -55,7 +55,6 @@ class Main {
         this.shop.init() 
         this.canvas.animate()    
     }
-
 }
 
 const game = new Main()

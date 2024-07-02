@@ -108,7 +108,7 @@ const components = [
                         accessible: true // if able to attach to this side
                     }
                 }
-            }
+            },
         ],
         ports: [
             {
@@ -167,6 +167,9 @@ const components = [
             {
                 type: '8-pin-power'
             },
+            {
+                type: '8-pin-pcie'
+            },
             
         ],
         cables: [
@@ -178,8 +181,45 @@ const components = [
             },
             {
                 type: '8-pin-power'
+            },
+            {
+                type: '8-pin-pcie'
             }
         ]
+    }),
+    new Component ({        // GPU
+        name: 'EVGA Supernova 1300 P+, 80+ Platinum 1300W',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            depth: 304,
+            width: 61,
+            height: 137,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'left',
+        images: [
+            {side: 'left', imageSrc: './assets/gpu/geforce-rtx-4090-attached.png'}, 
+            
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '8-pin-pcie',
+            }
+        ],
+        // cables: [
+        //     {
+        //         type: '24-pin-power'
+        //     },
+        //     {
+        //         type: '8-pin-power'
+        //     },
+        //     {
+        //         type: '8-pin-power'
+        //     }
+        // ]
     })
 ]
 

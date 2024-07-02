@@ -231,7 +231,7 @@ class PortsTab {
         const currentPage = this.currentGroupPage
 
         // don't highlight if cable end is already connected
-        if(cable.ends[currentPage.component].connected) return
+        if(cable.ends[currentPage.component].connected ) return
 
         currentPage.ports.forEach(port => {
             
@@ -323,7 +323,7 @@ class PortsTab {
 
     // Highlight on click
     highlightOnClick(port, cable) {
-        // attach cable
+        // attempt to attach cable
         this.attachCable(port, cable)
 
         // remove port highlight
@@ -381,8 +381,9 @@ class PortsTab {
 
                 // cable attachment
                 this.currentGroupPage.ports.forEach(port => {
-                    // slightly different handling for ports that share the same image
+                    // if port.offset have multiple objects in
                     if(port.offset['first']) {
+                        // iterate through the offsets
                         for (let offset in port.offset) {
                             if(port.offset[offset].highlight) {
                                 port.offset[offset].highlight.addEventListener('click', () => {

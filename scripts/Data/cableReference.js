@@ -15,19 +15,19 @@ const cableRef = {
             images: [
                 {
                     attachedTo: 'motherboard', 
-                    imageSrc: './assets/wires/24pin-attached(mobo).png',
+                    imageSrc: './assets/wires/ATX-power/ATX-attached(mobo).png',
                     scale: {width: 1, height: 1.47}, // will be used in matching cable to port
                     offset: {top: 26, left: 145}
                 },
                 {
                     attachedTo: 'psu', 
-                    imageSrc: './assets/wires/(10+18)24pin-attached(psu).png',
+                    imageSrc: './assets/wires/(10+18)ATX-power/ATX-attached(psu).png',
                     scale: {width: .45, height: .45}, // will be used in matching cable to port 
                     offset: {top: 84, left: 23}
                 },
                 {
                     attachedTo: 'none', 
-                    imageSrc: './assets/wires/24pin-power-default.png' 
+                    imageSrc: './assets/wires/ATX-power/ATX-power-default.png' 
                 },
             ],
         },
@@ -46,7 +46,7 @@ const cableRef = {
             images: [
                 {
                     attachedTo: 'motherboard', 
-                    imageSrc: './assets/wires/8pin-attached(mobo).png',
+                    imageSrc: './assets/wires/8pin-power/8pin-power-attached(gen).png',
                     scale: {width: .92, height: .9}, // will be used in matching cable to port
                     offset: {       // for cable components that share ports on the same image 
                         first: {top: -25, left: 12},
@@ -55,16 +55,50 @@ const cableRef = {
                 },
                 {
                     attachedTo: 'psu', 
-                    imageSrc: './assets/wires/8pin-attached(mobo).png',
+                    imageSrc: './assets/wires/8pin-power/8pin-power-attached(gen).png',
                     scale: {width: 1.27, height: 1.1}, // will be used in matching cable to port 
                     offset: {top: -13, left: 30}
                 },
                 {
                     attachedTo: 'none', 
-                    imageSrc: './assets/wires/8pin-power-default.png' 
+                    imageSrc: './assets/wires/8pin-power/8pin-power-default.png' 
                 },
             ],
-        }
+        },
+        {       // 8-pin-pcie
+            name: 'PCIe power',
+            type: '8-pin-pcie',
+            ends: {
+                gpu: {
+                    connected: false
+
+                },
+                psu: {
+                    connected: false
+                }
+            },
+            images: [
+                {
+                    attachedTo: 'gpu', 
+                    imageSrc: './assets/wires/8pin-pcie/8pin-pcie-attached(gen).png',
+                    scale: {width: 1.31, height: 1.1}, 
+                    offset: {       
+                        first: {top: 113, left: 36},
+                        second: {top: 113, left: 125}
+                    }
+                },
+                {
+                    attachedTo: 'psu', 
+                    imageSrc: './assets/wires/8pin-pcie/8pin-pcie-attached(gen).png',
+                    scale: {width: 1.8, height: 2.1},
+                    offset: {top: 86, left: 42}
+                },
+                {
+                    attachedTo: 'none', 
+                    imageSrc: './assets/wires/8pin-pcie/8pin-pcie-default.png' 
+                },
+            ],
+        },
     ]
 }
 

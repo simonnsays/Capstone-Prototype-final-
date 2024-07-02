@@ -99,8 +99,7 @@ body {
     left: 20;
 }
 
-/* .button-wrapper > button { */
-.button {
+.button-wrapper > button, #button1, #button2 {
     height: 2.7rem;
     width: 9rem;
     border: 3px solid black;
@@ -313,11 +312,11 @@ body {
     /* 
     /   adjustables
     */
-    /* top: 77;
-    left: 69; 
+    top: 83;
+    left: 79; 
 
-    width: 147px;
-    height: 116px;  */
+    width: 121px;
+    height: 97px; 
 }
 .port-highlight:hover{
     cursor: pointer;
@@ -334,21 +333,22 @@ body {
     /* 
     /   adjustables
     */
-    /* top: -13;
-    left: 30;  
-    transform: scale(1.27 , 1.1); */
-    /* opacity: .7; */ 
+    top: 113;
+    left: 36;  
+    transform: scale(1.31 , 1.1); 
+
+    opacity: 1; 
 }
-.port-attached1 {
+.port-attached2 {
     position: absolute;
     transform-origin: top left;
 
     /* 
     /   adjustables
     */
-    top: -25;
-    left: 112; 
-    transform: scale(.92 , .9);
+    top: 113;
+    left: 123; 
+    transform: scale(1.31 , 1.1);
     /* opacity: .7; */ 
 }
 
