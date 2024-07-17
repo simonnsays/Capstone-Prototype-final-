@@ -59,7 +59,32 @@ const components = [
                         },
                         accessible: true
                     }
-                    
+                }
+            },
+            {   // new sata
+                type: 'storage', 
+                supports: ['HDD', '2.5', 'U.2'],
+                component: null,
+                sides: {
+                    right: {
+                        offsets: {
+                            default: {x: 233, y: 215, width: 70, height: 90}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {   // new sata
+                type: 'storage', 
+                supports: ['HDD', '2.5', 'U.2'],
+                component: null,
+                sides: {
+                    right: {
+                        offsets: {
+                            default: {x:323, y: 215, width: 70, height: 90}
+                        },
+                        accessible: true
+                    }
                 }
             }
         ],
@@ -111,12 +136,9 @@ const components = [
             },
         ],
         ports: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
         ],
         cables: []
     }),
@@ -158,39 +180,19 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-pcie'
-            },
-            {
-                type: '8-pin-pcie'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-pcie'
-            },
-            {
-                type: '8-pin-pcie'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
     new Component ({        // GPU
@@ -202,7 +204,7 @@ const components = [
             width: 61,
             height: 137,
         },
-        isRotatable: true,
+        isRotatable: false,
         isAttached: false,
         defaultSource: 'left',
         images: [
@@ -211,11 +213,34 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '8-pin-pcie',
-            }
+            {type: '8-pin-pcie'}
         ],
         cables: []
+    }),
+    new Component ({        // SATA
+        name: 'EVGA Supernova 1300 P+, 80+ Platinum 1300W',
+        type: 'storage',
+        size: '2.5',
+        dimensions: {
+            depth: 100,
+            width: 100,
+            height: 100
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'left',
+        images: [
+            {side: 'left', imageSrc: './assets/storage/seagate-barracuda-default.png'}, 
+            {side: 'right', imageSrc: './assets/storage/seagate-barracuda-attached.png'},       
+        ],
+        slots: [],
+        ports: [
+            {type: 'sata'}
+        ],
+        cables: [
+            {type: 'sata-power'},
+            {type: 'sata-data'}
+        ]
     })
 ]
 

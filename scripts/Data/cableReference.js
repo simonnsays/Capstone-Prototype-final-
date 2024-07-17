@@ -99,6 +99,70 @@ const cableRef = {
                 },
             ],
         },
+    ],
+    storage: [
+        {       // sata - power
+            name: 'Sata power',
+            type: 'sata-power',
+            ends: {
+                storage: {
+                    connected: false
+
+                },
+                psu: {
+                    connected: false
+                }
+            },
+            images: [
+                {
+                    attachedTo: 'storage', 
+                    imageSrc: './assets/wires/sata-power/sata-power-attached(sata).png',
+                    scale: {width: 1.35, height: .8}, 
+                    offset: {top: 115, left: 55}
+                },
+                {
+                    attachedTo: 'psu', 
+                    imageSrc: './assets/wires/sata-power/sata-power-attached(psu).png',
+                    scale: {width: 1.66, height: 1.2}, 
+                    offset: {top: -40, left: 17}
+                },
+                {
+                    attachedTo: 'none', 
+                    imageSrc: './assets/wires/sata-power/sata-power-default.png' 
+                },
+            ],
+        },
+        {       // sata - data
+            name: 'Sata data',
+            type: 'sata-data',
+            ends: {
+                storage: {
+                    connected: false
+
+                },
+                motherboard: {
+                    connected: false
+                }
+            },
+            images: [
+                {
+                    attachedTo: 'storage', 
+                    imageSrc: './assets/wires/sata-data/sata-data-attached(gen).png',
+                    scale: {width: .9, height: .8}, 
+                    offset: {top: 113, left: 165}
+                },
+                {
+                    attachedTo: 'motherboard', 
+                    imageSrc: './assets/wires/sata-data/sata-data-attached(gen).png',
+                    scale: {width: 2, height: 1.8}, 
+                    offset: {top: 93, left: 67}
+                },
+                {
+                    attachedTo: 'none', 
+                    imageSrc: './assets/wires/sata-data/sata-data-default.png' 
+                },
+            ],
+        },
     ]
 }
 

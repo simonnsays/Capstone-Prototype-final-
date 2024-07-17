@@ -180,9 +180,6 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
     row-gap: 10px;
 }
-/* .modal-wrapper > div {
-    margin-bottom: 15  ;
-} */
 
 #wiresModal {
     display: none;
@@ -312,11 +309,11 @@ body {
     /* 
     /   adjustables
     */
-    top: 107;
-    left: 149; 
+    top: 114;
+    left: 167; 
 
-    width: 88;
-    height: 57; 
+    width: 69;
+    height: 23; 
 }
 .port-highlight:hover{
     cursor: pointer;
@@ -333,9 +330,11 @@ body {
     /* 
     /   adjustables
     */
-    top: 113;
-    left: 36;  
-    transform: scale(1.31 , 1.1); 
+    transform: scale(1.35 , .8);
+
+    top: 115;
+    left: 55;  
+     
 
     opacity: 1; 
 }
@@ -346,10 +345,12 @@ body {
     /* 
     /   adjustables
     */
-    top: 113;
-    left: 123; 
-    transform: scale(1.31 , 1.1);
-    /* opacity: .7; */ 
+    transform: scale(2 , 1.8); 
+
+    top: 93;
+    left: 67;  
+    
+    /* opacity: .7;  */
 }
 
 /* PORT SLIDER FOR LABEL */

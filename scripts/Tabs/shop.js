@@ -153,6 +153,49 @@ class Shop{
         : this.selectedCategory = ''
     }
 
+    displayItemInfo(component) {
+        const itemInfoModal = this.itemInfo.modal
+
+        // change image
+        while(this.itemInfo.imageContainer.firstChild) {
+            this.itemInfo.imageContainer.removeChild(this.itemInfo.imageContainer.firstChild)
+        }
+        const infoImage = new Image
+        infoImage.src = component.images.find(image => image.side === component.defaultSource).imageSrc
+        infoImage.style.maxHeight = '90%'
+        infoImage.style.maxWidth = '90%'
+        // infoImage.onload = () => 
+        this.itemInfo.imageContainer.appendChild(infoImage)
+
+        // change info name 
+        this.itemInfo.infoName.innerHTML = component.name
+
+        // change specs list 
+        /*
+        *   ENTER CHANGE OF SPECS LOGIC HERE
+        */
+
+        // button events
+        const buyEvent = () => {
+            this.buyComponent(component)
+            itemInfoModal.close()
+
+            // remove event listener after button events to avoid stacking of components being bought
+            this.itemInfo.btn1.removeEventListener('click', buyEvent)
+        }
+
+        this.itemInfo.btn1.addEventListener('click', buyEvent)
+        this.itemInfo.btn2.addEventListener('click', () => {
+            itemInfoModal.close()
+
+            // remove event listener after button events to avoid stacking of components being bought
+            this.itemInfo.btn1.removeEventListener('click', buyEvent)
+        })
+
+        // display info
+        itemInfoModal.showModal()
+    }
+
     // Main Shop Update Method
     update() {
         while (this.itemsContainer.firstChild) {
@@ -177,42 +220,15 @@ class Shop{
             child.addEventListener('click', () => {
                 if(this.quickBuy.checked) {
                     // buy component
+                    console.log('hit')
                     this.buyComponent(child.component)
                 } else {
+                    console.log('hit')
                     // display component information first
                     this.displayItemInfo(child.component)
                 }
             })
         })
-    }
-
-    displayItemInfo(component) {
-        const itemInfoModal = this.itemInfo.modal
-
-        // change image
-        while(this.itemInfo.imageContainer.firstChild) {
-            this.itemInfo.imageContainer.removeChild(this.itemInfo.imageContainer.firstChild)
-        }
-        const infoImage = new Image
-        infoImage.src = component.images.find(image => image.side === component.defaultSource).imageSrc
-        infoImage.style.maxHeight = '90%'
-        infoImage.style.maxWidth = '90%'
-        infoImage.onload = () => this.itemInfo.imageContainer.appendChild(infoImage)
-
-        // change info name 
-        this.itemInfo.infoName.innerHTML = component.name
-
-        // change specs list 
-        /*
-        *   ENTER CHANGE OF SPECS LOGIC HERE
-        */
-
-        // button events
-        this.itemInfo.btn1.addEventListener('click', () => {this.buyComponent(component); itemInfoModal.close()})
-        this.itemInfo.btn2.addEventListener('click', () => itemInfoModal.close())
-
-        // display info
-        itemInfoModal.showModal()
     }
 
     // Main Shop Initialization Method

@@ -28,23 +28,38 @@ TODO:
 !!!High Priority:
 [!] - Finish Ports Image assets 
     |_ [/] - Motherboard
-                |_ [/] - 24Pin_power
-                |_ [/] - CPU_8+8pin
-                |_ [] - 
+            |_ [/] - 24Pin_power
+            |_ [/] - CPU_8+8pin
+            |_ [] - 
     |_ [] - PSU 
-                |_ [/] - 24Pin_power
-                |_ [/] - CPU_8x8pin
-                |_ [] - Pcie 
-    |_ [] - GPU
-                |_ [] - 16pin
-    |_ [] - Storage
-                |_ [] - sata data port
-                |_ [] - sata power port
+            |_ [/] - 24Pin_power
+            |_ [/] - CPU_8x8pin
+            |_ [/] - Pcie 
+            |_ [] - 
+    |_ [/] - GPU
+            |_ [/] - 16pin
+    |_ [/] - Storage
+            |_ [/] - sata data port
+            |_ [/] - sata power port
+            |_ [/] - Cable   
     |_ [] - fans
-                |_ [] - 4pin_power
+            |_ [] - 4pin_power
     |_ [] - front panels
-                |_ [] - power
-                |_ [] - usb
-                |_ [] - reset
-                |_ [] - LED
-                |_ [] - speaker
+            |_ [] - power
+            |_ [] - usb
+            |_ [] - reset
+            |_ [] - LED
+            |_ [] - speaker
+
+
+When adding new component:
+
+[/] slot for base component
+[/] new component
+[/] images for component
+        |_ [/] default
+        |_ [/] sides / attached
+[/] new component ports (in portRef)
+        |_ [] port object
+        |_ [/] port images
+[/] new component Wires (in cableRef)

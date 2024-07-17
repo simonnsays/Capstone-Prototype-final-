@@ -47,7 +47,9 @@ class UtilityTool {
             motherboard: 'mo',
             cpu: 'cp',
             gpu: 'gp',
-            psu: 'ps'
+            psu: 'ps',
+            storage: 'st',
+            cooling: 'fn'
         }
 
         // check if valid component type 
