@@ -60,6 +60,20 @@
                 cableAttached: null,
                 takes: 'sata-data',
             },
+            {   // cooling
+                type: 'cooling',
+                image: {
+                    imageSrc: './assets/motherboard/ports/mobo_port-fan.png',
+                },
+                offset: {
+                    top: 85,
+                    left: 110,
+                    width: 69,
+                    height: 40
+                },
+                cableAttached: null,
+                takes: '3-pin-cooling',
+            },
         ],
         psu: [
             {   // ATX - power

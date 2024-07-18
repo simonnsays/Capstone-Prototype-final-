@@ -134,11 +134,25 @@ const components = [
                     }
                 }
             },
+            {       // NEW ADDITION
+                type: 'cooling', 
+                supports: ['amd', 'intel'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 90, y: 52, width: 90, height: 90},
+                        },
+                        accessible: true // if able to attach to this side
+                    }
+                }
+            },
         ],
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'cooling'},
         ],
         cables: []
     }),
@@ -240,6 +254,27 @@ const components = [
         cables: [
             {type: 'sata-power'},
             {type: 'sata-data'}
+        ]
+    }),
+    new Component ({        // CPU FAN ====== new addition
+        name: 'AMD Wraith Spire',
+        type: 'cooling',
+        size: 'default',
+        dimensions: {
+            depth: 140,
+            width: 140,
+            height: 140
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'left',
+        images: [
+            {side: 'left', imageSrc: './assets/cooling/amd wraith spire.png'},     
+        ],
+        slots: [],
+        ports: [],
+        cables: [
+            {type: '3-pin-cooling'}
         ]
     })
 ]

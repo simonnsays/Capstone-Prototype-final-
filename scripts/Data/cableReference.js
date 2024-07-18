@@ -163,6 +163,33 @@ const cableRef = {
                 },
             ],
         },
+    ],
+    cooling: [
+        {       // fan
+            name: '3-pin-cooling',
+            type: '3-pin-cooling',
+            ends: {
+                cooling: {
+                    connected: true
+
+                },
+                motherboard: {
+                    connected: false
+                }
+            },
+            images: [
+                {
+                    attachedTo: 'motherboard', 
+                    imageSrc: './assets/wires/3pin-cooling/3-pin-cooling-attached(gen).png',
+                    scale: {width: .33, height: .4}, 
+                    offset: {top: 85, left: -86}
+                },
+                {
+                    attachedTo: 'none', 
+                    imageSrc: './assets/wires/3pin-cooling/3-pin-cooling-default.png'
+                }
+            ],
+        }
     ]
 }
 

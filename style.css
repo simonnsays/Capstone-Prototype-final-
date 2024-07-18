@@ -309,11 +309,11 @@ body {
     /* 
     /   adjustables
     */
-    top: 114;
-    left: 167; 
+    top: 85;
+    left: 110; 
 
     width: 69;
-    height: 23; 
+    height: 40; 
 }
 .port-highlight:hover{
     cursor: pointer;
@@ -330,10 +330,10 @@ body {
     /* 
     /   adjustables
     */
-    transform: scale(1.35 , .8);
+    transform: scale(.33 , .4);
 
-    top: 115;
-    left: 55;  
+    top: 85;
+    left: -86;  
      
 
     opacity: 1; 
