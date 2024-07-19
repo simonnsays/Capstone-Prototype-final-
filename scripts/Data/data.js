@@ -2,7 +2,7 @@ import Component from "./component.js"
 
 const components = [
     // CASE
-    new Component ({        // NZXT H5 Flow
+    new Component ({        // NZXT H5 Flow [different storage orientation]
         name: 'NZXT H5 Flow',
         type: 'chassis',
         size: 'mid-tower',
@@ -256,7 +256,8 @@ const components = [
         //            },
                     right: {
                         offsets: {
-                            default: {x: 106, y: 390, width: 95, height: 27}
+                            default: {x: 106, y: 390, width: 95, height: 27},
+                            ssd: {x: 297, y: 216, width: 63, height: 80}
                         },
                         accessible: true
                     }
@@ -343,7 +344,8 @@ const components = [
         //            },
                     right: {
                         offsets: {
-                            default: {x: 130, y: 420, width: 95, height: 27}
+                            default: {x: 130, y: 420, width: 95, height: 27},
+                            ssd: {x: 225, y: 247, width: 80, height: 90},
                         },
                         accessible: true
                     }
@@ -356,7 +358,7 @@ const components = [
         ports: [],
         cables: []
     }),
-    new Component ({        // Phanteks Enthoo Pro M
+    new Component ({        // Phanteks Enthoo Pro M [different storage orientation]
         name: 'Phanteks Enthoo Pro M',
         type: 'chassis',
         size: 'mid-tower',
@@ -437,8 +439,8 @@ const components = [
         //            },
                     right: {
                         offsets: {
-                            default: {x: 300, y: 205, width: 50, height: 80},//x: 65, y: 400, width: 100, height: 27
-                            ssd: {x: 240, y: 223, width: 50, height: 68}
+                            default: {x: 65, y: 400, width: 100, height: 27},
+                            ssd: {x: 300, y: 205, width: 50, height: 80}
                         },
                         accessible: true
                     }
@@ -5356,7 +5358,7 @@ const components = [
     isAttached: false,
     defaultSource: 'PACK',
     images: [
-        {side: 'left', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res.png'},  
+        {side: 'right', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res.png'},  
         {side: 'PACK', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res - Copy.png'},  
     ],
     slots: [],
@@ -5380,7 +5382,7 @@ const components = [
     isAttached: false,
     defaultSource: 'PACK',
     images: [
-        {side: 'left', imageSrc: './assets/storage/ssd/samsung ssd.png'},  
+        {side: 'right', imageSrc: './assets/storage/ssd/samsung ssd.png'},  
         {side: 'PACK', imageSrc: './assets/storage/ssd/samsung ssd - Copy.png'},  
     ],
     slots: [],
@@ -5391,7 +5393,7 @@ const components = [
     }
     ]
  }),     
- new Component ({
+ new Component ({ //Sandisk Plus SSD
     name: 'Sandisk Plus SSD',
     type: 'storage',
     size: 'ssd',
@@ -5404,7 +5406,7 @@ const components = [
     isAttached: false,
     defaultSource: 'PACK',
     images: [
-        {side: 'left', imageSrc: './assets/storage/ssd/sandisk ssd plus.png'},  
+        {side: 'right', imageSrc: './assets/storage/ssd/sandisk ssd plus.png'},  
         {side: 'PACK', imageSrc: './assets/storage/ssd/sandisk ssd plus - Copy.png'},  
     ],
     slots: [],
@@ -5414,7 +5416,8 @@ const components = [
         type: 'satadata'
     }
     ]
- }),     new Component ({
+ }),     
+ new Component ({ //Sandisk Ultra SSD
     name: 'Sandisk Ultra SSD',
     type: 'storage',
     size: 'hdd',
@@ -5427,7 +5430,7 @@ const components = [
     isAttached: false,
     defaultSource: 'PACK',
     images: [
-        {side: 'left', imageSrc: './assets/storage/ssd/sandisk.png'},  
+        {side: 'right', imageSrc: './assets/storage/ssd/sandisk.png'},  
         {side: 'PACK', imageSrc: './assets/storage/ssd/sandisk - Copy.png'},  
     ],
     slots: [],
@@ -5531,24 +5534,25 @@ new Component ({ //AMD wraith Spire
  }),
  
  //  RAM DDR5
- //   new Component ({
- //      name: '',
- //      type: 'ddr5',
- //      dimensions: {
- //          depth: 125,
- //          width: 125,
- //          height: 125,
- //      },
- //      isRotatable: false,
- //      isAttached: false,
- //      defaultSource: 'pack',
- //      images: [
- //          {side: 'left', imageSrc: './assets/'},  
- //          {side: 'pack', imageSrc: './assets/'},  
- //      ],
- //      slots: [],
- //      ports: []
- //   }),
+   new Component ({
+      name: 'Dominator Tianium DDR5',
+      type: 'ram',
+      size: 'ddr5',
+      dimensions: {
+          depth: 125,
+          width: 125,
+          height: 125,
+      },
+      isRotatable: false,
+      isAttached: false,
+      defaultSource: 'pack',
+      images: [
+          {side: 'left', imageSrc: './assets/memory/Dominator Tianium DDR5 - attached.png'},  
+          {side: 'pack', imageSrc: './assets/memory/Dominator Tianium DDR5.png'},  
+      ],
+      slots: [],
+      ports: []
+   }),
  
  //GPU [gpu file is for general left side img assets] [gpu.1 is for pack side img assets]
  new Component ({        // Gigabyte Radeon RX 7900 XTX
@@ -5566,6 +5570,29 @@ new Component ({ //AMD wraith Spire
         {side: 'left', imageSrc: './assets/gpu/Gigabyte Radeon RX 7900 XTX.png'}, 
         {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
         {side: 'PACK', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'}
+    ],
+    slots: [],
+    ports: [
+        {
+            type: '8-pin-power'
+        }    
+    ]  
+}),
+new Component ({        // gigabyte nvidia geforce rtx 4060 windforce 8gb OC
+    name: 'Gigabyte NVIDIA GeForce rtx 4060 Windforce 8gb OC',
+    type: 'gpu',
+    size: '',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'PACK',
+    images: [
+        {side: 'left', imageSrc: './assets/gpu/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'}, 
+        {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
+        {side: 'PACK', imageSrc: './assets/gpu.1/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'}
     ],
     slots: [],
     ports: [
