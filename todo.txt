@@ -42,8 +42,8 @@ TODO:
             |_ [/] - sata data port
             |_ [/] - sata power port
             |_ [/] - Cable   
-    |_ [] - fans
-            |_ [] - 4pin_power
+    |_ [/] - fans
+            |_ [/] - 4pin_power
     |_ [] - front panels
             |_ [] - power
             |_ [] - usb

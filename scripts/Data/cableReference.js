@@ -190,6 +190,33 @@ const cableRef = {
                 }
             ],
         }
+    ],
+    chassis: [
+        {       // front panel
+            name: 'Front Panel',
+            type: 'frontPanel',
+            ends: {
+                chassis: {
+                    connected: true
+
+                },
+                motherboard: {
+                    connected: false
+                }
+            },
+            images: [
+                {
+                    attachedTo: 'motherboard', 
+                    imageSrc: './assets/wires/frontPanel/frontPanel-attached(gen).png',
+                    scale: {width: .58, height: .58}, 
+                    offset: {top: 97, left: 33}
+                },
+                {
+                    attachedTo: 'none', 
+                    imageSrc: './assets/wires/frontPanel/frontPanel-default.png'
+                }
+            ],
+        }
     ]
 }
 

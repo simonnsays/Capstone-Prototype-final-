@@ -89,7 +89,9 @@ const components = [
             }
         ],
         ports: [],
-        cables: []
+        cables: [
+            {type: 'frontPanel'}
+        ]
     }),
     new Component ({        // MOBO
         name: 'MSI MPG Z790 Carbon Max WiFi',
@@ -153,6 +155,7 @@ const components = [
             {type: '8-pin-power'},
             {type: 'sata-data'},
             {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),

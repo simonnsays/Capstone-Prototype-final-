@@ -117,10 +117,10 @@ body {
     animation-iteration-count: 1 ;
 
     width: 580px;
-    height: 550px;
+    height: 600px;
     /* overflow: auto; */
     border: 3px solid black;
-    padding: 20px;
+    padding: 0 20px;
 }
 
 .closeBtn {
@@ -197,6 +197,8 @@ body {
     left: calc(50%-900px/2);
     /* background-color: var(--pastel-yellow); */
     background-color: white;
+
+    padding: 20px;
 
 }   
 #bodyHeader {
@@ -309,11 +311,11 @@ body {
     /* 
     /   adjustables
     */
-    top: 85;
-    left: 110; 
+    top: 97;
+    left: 33; 
 
-    width: 69;
-    height: 40; 
+    width: 110;
+    height: 45; 
 }
 .port-highlight:hover{
     cursor: pointer;
@@ -330,13 +332,13 @@ body {
     /* 
     /   adjustables
     */
-    transform: scale(.33 , .4);
+    transform: scale(.58 , .58);
 
-    top: 85;
-    left: -86;  
+    top: 97;
+    left: 33;  
      
 
-    opacity: 1; 
+    /* opacity: .7;  */
 }
 .port-attached2 {
     position: absolute;

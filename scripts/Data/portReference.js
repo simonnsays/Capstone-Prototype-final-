@@ -74,6 +74,20 @@
                 cableAttached: null,
                 takes: '3-pin-cooling',
             },
+            {   // front panel
+                type: 'frontPanel',
+                image: {
+                    imageSrc: './assets/motherboard/ports/mobo_port-fpanel.png',
+                },
+                offset: {
+                    top: 97,
+                    left: 33,
+                    width: 110,
+                    height: 45
+                },
+                cableAttached: null,
+                takes: 'frontPanel',
+            },
         ],
         psu: [
             {   // ATX - power
