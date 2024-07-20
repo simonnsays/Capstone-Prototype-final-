@@ -4996,6 +4996,179 @@ const components = [
             }
         ]
     }),
+    new Component ({        // EVGA SuperNOVA 850 GT
+        name: 'EVGA SuperNOVA 850 GT',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 850 GT/EVGA SuperNOVA 850 GT pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 850 GT/EVGA SuperNOVA 850 GT left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 850 GT/EVGA SuperNOVA 850 GT front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 850 GT/EVGA SuperNOVA 850 GT right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 850 GT/EVGA SuperNOVA 850 GT rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // EVGA SuperNOVA 1000 P5
+        name: 'EVGA SuperNOVA 1000 P5',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1000 P5, 80 Plus Platinum 1000W/EVGA SuperNOVA 1000 P5 pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1000 P5, 80 Plus Platinum 1000W/EVGA SuperNOVA 1000 P5 left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1000 P5, 80 Plus Platinum 1000W/EVGA SuperNOVA 1000 P5 front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1000 P5, 80 Plus Platinum 1000W/EVGA SuperNOVA 1000 P5 right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1000 P5, 80 Plus Platinum 1000W/EVGA SuperNOVA 1000 P5 rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // EVGA SuperNOVA 1600 G+
+        name: 'EVGA SuperNOVA 1600 G+',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 G+, 80+ GOLD 1600W/EVGA SuperNOVA 1600 G+ pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 G+, 80+ GOLD 1600W/EVGA SuperNOVA 1600 G+ left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 G+, 80+ GOLD 1600W/EVGA SuperNOVA 1600 G+ front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 G+, 80+ GOLD 1600W/EVGA SuperNOVA 1600 G+ right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 G+, 80+ GOLD 1600W/EVGA SuperNOVA 1600 G+ rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // EVGA SuperNOVA 1600 P2
+        name: 'EVGA SuperNOVA 1600 P2',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 P2, 80+ PLATINUM 1600W/EVGA SuperNOVA 1600 P2 pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 P2, 80+ PLATINUM 1600W/EVGA SuperNOVA 1600 P2 left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 P2, 80+ PLATINUM 1600W/EVGA SuperNOVA 1600 P2 front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 P2, 80+ PLATINUM 1600W/EVGA SuperNOVA 1600 P2 right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 P2, 80+ PLATINUM 1600W/EVGA SuperNOVA 1600 P2 rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+
     new Component ({        // Silverstone DA750r-gm
         name: 'Silverstone DA750r-gm',
         type: 'psu',
@@ -5216,8 +5389,668 @@ const components = [
             }
         ]
     }),
-    // PSU [Non modular]
 
+    new Component ({        // Corsair AX1600i Digital
+        name: 'Corsair AX1600i Digital',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Corsair/Corsair ax1600i digital atx fully modular/Corsair ax1600i digital atx fully modular pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Corsair/Corsair ax1600i digital atx fully modular/Corsair ax1600i digital atx fully modular.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Corsair/Corsair ax1600i digital atx fully modular/Corsair ax1600i digital atx fully modular front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Corsair/Corsair ax1600i digital atx fully modular/Corsair ax1600i digital atx fully modular.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Corsair/Corsair ax1600i digital atx fully modular/Corsair ax1600i digital atx fully modular rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // Corsair RM1200e
+        name: 'Corsair RM1200e',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Corsair/corsair rme series rm1200e atx fully modular/corsair rme series rm1200e atx fully modular pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Corsair/corsair rme series rm1200e atx fully modular/corsair rme series rm1200e atx fully modular.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Corsair/corsair rme series rm1200e atx fully modular/corsair rme series rm1200e atx fully modular front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Corsair/corsair rme series rm1200e atx fully modular/corsair rme series rm1200e atx fully modular.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Corsair/corsair rme series rm1200e atx fully modular/corsair rme series rm1200e atx fully modular rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // Corsair RMX Shift RM850x
+        name: 'Corsair RMX Shift RM850x',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Corsair/Corsair rmx shift rm850x fully modular/Corsair rmx shift rm850x fully modular pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Corsair/Corsair rmx shift rm850x fully modular/Corsair rmx shift rm850x fully modular left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Corsair/Corsair rmx shift rm850x fully modular/Corsair rmx shift rm850x fully modular front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Corsair/Corsair rmx shift rm850x fully modular/Corsair rmx shift rm850x fully modular right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Corsair/Corsair rmx shift rm850x fully modular/Corsair rmx shift rm850x fully modular rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // Corsair AX1600i Digital
+        name: 'Corsair AX1600i Digital',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Corsair/corsair sf1000l 80+ gold sfx-l fully modular/corsair sf1000l 80+ gold sfx-l fully modular pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Corsair/corsair sf1000l 80+ gold sfx-l fully modular/corsair sf1000l 80+ gold sfx-l fully modular.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Corsair/corsair sf1000l 80+ gold sfx-l fully modular/corsair sf1000l 80+ gold sfx-l fully modular front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Corsair/corsair sf1000l 80+ gold sfx-l fully modular/corsair sf1000l 80+ gold sfx-l fully modular.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Corsair/corsair sf1000l 80+ gold sfx-l fully modular/corsair sf1000l 80+ gold sfx-l fully modular rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+
+    new Component ({        // Cooler Master MWE Gold 850w v2
+        name: 'Cooler Master MWE Gold 850w v2',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/cm mwe gold 850/pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Cooler master technology inc/cm mwe gold 850/left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Cooler master technology inc/cm mwe gold 850/front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Cooler master technology inc/cm mwe gold 850/right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Cooler master technology inc/cm mwe gold 850/rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // Cooler Master V 1600 Platinum v2
+        name: 'Cooler Master V 1600 Platinum v2',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/cm v p 1600/pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Cooler master technology inc/cm v p 1600/left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Cooler master technology inc/cm v p 1600/front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Cooler master technology inc/cm v p 1600/right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Cooler master technology inc/cm v p 1600/rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // Cooler Master X Silent Edge 850w Platinum
+        name: 'Cooler Master X Silent Edge 850w Platinum',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/cm x silent edge/pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Cooler master technology inc/cm x silent edge/left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Cooler master technology inc/cm x silent edge/front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Cooler master technology inc/cm x silent edge/right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Cooler master technology inc/cm x silent edge/rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // Cooler Master X Silent Edge 1100w Platinum
+        name: 'Cooler Master X Silent Edge 1100w Platinum',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/cm x silent edge p 1100/pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Cooler master technology inc/cm x silent edge p 1100/left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Cooler master technology inc/cm x silent edge p 1100/front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Cooler master technology inc/cm x silent edge p 1100/right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Cooler master technology inc/cm x silent edge p 1100/rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // Cooler Master X Silent 1300w MAX Platinum
+        name: 'Cooler Master X Silent 1300w MAX Platinum',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/cm x silent max 1300/pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Cooler master technology inc/cm x silent max 1300/left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Cooler master technology inc/cm x silent max 1300/front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Cooler master technology inc/cm x silent max 1300/right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Cooler master technology inc/cm x silent max 1300/rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    
+    new Component ({        // Thermaltake Toughpower GF 750W Gold
+        name: 'Thermaltake Toughpower GF 750W Gold',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gf 750W Gold/thermaltake toughpower gf 750w pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gf 750W Gold/thermaltake toughpower gf 750w left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gf 750W Gold/thermaltake toughpower gf 750w front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gf 750W Gold/thermaltake toughpower gf 750w right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gf 750W Gold/thermaltake toughpower gf 750w rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // Thermaltake Toughpower GF1 850W
+        name: 'Thermaltake Toughpower GF1 850W',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower GF1 850W/Thermaltake Toughpower GF1 850W pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower GF1 850W/Thermaltake Toughpower GF1 850W left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower GF1 850W/Thermaltake Toughpower GF1 850W front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower GF1 850W/Thermaltake Toughpower GF1 850W right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower GF1 850W/Thermaltake Toughpower GF1 850W rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // Thermaltake Toughpower GF 750W Gold
+        name: 'Thermaltake Toughpower GF 750W Gold',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Thermaltake/thermaltake toughpower gf3 1000w/toughpower gf3 pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Thermaltake/thermaltake toughpower gf3 1000w/toughpower gf3 left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Thermaltake/thermaltake toughpower gf3 1000w/toughpower gf3 front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Thermaltake/thermaltake toughpower gf3 1000w/toughpower gf3 right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Thermaltake/thermaltake toughpower gf3 1000w/toughpower gf3 rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '24-pin-power',
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+
+    // PSU [semi modular]
+    new Component ({        // Corsair CX750
+        name: 'Corsair CX750',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Corsair/Corsair CX750/Corsair CX750 pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Corsair/Corsair CX750/Corsair CX750.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Corsair/Corsair CX750/Corsair CX750 front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Corsair/Corsair CX750/Corsair CX750.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Corsair/Corsair CX750/Corsair CX750 rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '6-pin-power'
+            },
+            {
+                type: '6-pin-power'
+            },
+            {
+                type: '6-pin-power'
+            },
+            {
+                type: '6-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },            
+        ],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '6-pin-power'
+            },
+            {
+                type: '6-pin-power'
+            },
+            {
+                type: 'satapower'
+            },
+        ]
+    }),
+
+    // PSU[non-modular]
+    new Component ({        // Thermaltake Smart 500w
+        name: 'Thermaltake Smart 500w',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Thermaltake/thermaltake smart 500w/thermaltake smart 500w pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Thermaltake/thermaltake smart 500w/thermaltake smart 500w left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Thermaltake/thermaltake smart 500w/thermaltake smart 500w front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Thermaltake/thermaltake smart 500w/thermaltake smart 500w right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Thermaltake/thermaltake smart 500w/thermaltake smart 500w rear.png'}
+        ],
+        slots: [],
+        ports: [],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
+    new Component ({        // Thermaltake Toughpower gx2 600w
+        name: 'Thermaltake Toughpower GX2 600w',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gx2 600w/thermaltake toughpower pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gx2 600w/thermaltake toughpower left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gx2 600w/thermaltake toughpower front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gx2 600w/thermaltake toughpower right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gx2 600w/thermaltake toughpower rear.png'}
+        ],
+        slots: [],
+        ports: [],
+        cables: [
+            {
+                type: '24-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            },
+            {
+                type: '8-pin-power'
+            }
+        ]
+    }),
   //Storage hdd
     new Component ({ //Seagate Barracuda 8tb
         name: 'Seagate Barracuda 8tb',
@@ -5345,7 +6178,7 @@ const components = [
         ]
      }),
  //Storage ssd
- new Component ({ //Seagate Barracuda Q1 SSD
+     new Component ({ //Seagate Barracuda Q1 SSD
     name: 'Seagate Barracuda SSD',
     type: 'storage',
     size: 'ssd',
@@ -5368,8 +6201,8 @@ const components = [
         type: 'satadata'
     }
     ]
- }),     
- new Component ({ //Samsung EVO SSD
+     }),     
+     new Component ({ //Samsung EVO SSD
     name: 'Samsung EVO SSD',
     type: 'storage',
     size: 'ssd',
@@ -5392,8 +6225,8 @@ const components = [
         type: 'satadata'
     }
     ]
- }),     
- new Component ({ //Sandisk Plus SSD
+     }),     
+     new Component ({ //Sandisk Plus SSD
     name: 'Sandisk Plus SSD',
     type: 'storage',
     size: 'ssd',
@@ -5416,8 +6249,8 @@ const components = [
         type: 'satadata'
     }
     ]
- }),     
- new Component ({ //Sandisk Ultra SSD
+     }),     
+     new Component ({ //Sandisk Ultra SSD
     name: 'Sandisk Ultra SSD',
     type: 'storage',
     size: 'hdd',
@@ -5440,7 +6273,7 @@ const components = [
         type: 'satadata'
     }
     ]
- }),
+     }),
  // Cooling AMD
 new Component ({ //AMD wraith Prism
     name: 'AMD wraith Prism',
@@ -5516,7 +6349,7 @@ new Component ({ //AMD wraith Spire
     ports: []
 }),
     // RAM DDR4
-  new Component ({
+  new Component ({ //Kingston HyperX Beast RGB
       name: 'Kingston HyperX Beast RGB DDR4',
       type: 'ram',
       size: 'ddr4',
@@ -5532,9 +6365,57 @@ new Component ({ //AMD wraith Spire
           {side: 'PACK', imageSrc: './assets/memory/HyperX Beast RGB DDR4 pack.png'},  
       ],
  }),
- 
+ new Component ({ //Corsair Dominator Platinum
+    name: 'Corsair Dominator Platinum DDR4',
+    type: 'ram',
+    size: 'ddr4',
+    dimensions: {
+        width: 80,
+        height: 100,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'PACK',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/corsair dominator platinum pc4 attached.png'},  
+        {side: 'PACK', imageSrc: './assets/memory/corsair dominator platinum pc4.png'},  
+    ],
+}),
+new Component ({ //G.Skill Ripjaws V
+    name: 'G.Skill Ripjaws V DDR4',
+    type: 'ram',
+    size: 'ddr4',
+    dimensions: {
+        width: 80,
+        height: 100,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'PACK',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/gskill ripjaws v pc4 attached.png'},  
+        {side: 'PACK', imageSrc: './assets/memory/gskill ripjaws v pc4.png'},  
+    ],
+}),
+new Component ({ //Teamgroup Tforce Vulcan Z
+    name: 'Teamgroup Tforce Vulcan Z DDR4',
+    type: 'ram',
+    size: 'ddr4',
+    dimensions: {
+        width: 80,
+        height: 100,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'PACK',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4 attached.png'},  
+        {side: 'PACK', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4.png'},  
+    ],
+}),
+
  //  RAM DDR5
-   new Component ({
+   new Component ({ //Dominator Tianium
       name: 'Dominator Tianium DDR5',
       type: 'ram',
       size: 'ddr5',
@@ -5553,6 +6434,64 @@ new Component ({ //AMD wraith Spire
       slots: [],
       ports: []
    }),
+   new Component ({ //G.Skill Trident z5
+    name: 'G.Skill Trident z5 DDR5',
+    type: 'ram',
+    size: 'ddr5',
+    dimensions: {
+        depth: 125,
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/gskill trident z5 pc5 attached.png'},  
+        {side: 'pack', imageSrc: './assets/memory/gskill trident z5 pc5.png'},  
+    ],
+    slots: [],
+    ports: []
+ }),
+ new Component ({ //Kingston Fury Renegade
+    name: 'Kingston Fury Renegade DDR5',
+    type: 'ram',
+    size: 'ddr5',
+    dimensions: {
+        depth: 125,
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/kingston fury renegade pc5 attached.png'},  
+        {side: 'pack', imageSrc: './assets/memory/kingston fury renegade pc5.png'},  
+    ],
+    slots: [],
+    ports: []
+ }),
+ new Component ({ //Teamgroup Tforce DDR5
+    name: 'Teamgroup Tforce DDR5',
+    type: 'ram',
+    size: 'ddr5',
+    dimensions: {
+        depth: 125,
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/Teamgroup Tforce pc5 attached.png'},  
+        {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
+    ],
+    slots: [],
+    ports: []
+ }),
+ 
  
  //GPU [gpu file is for general left side img assets] [gpu.1 is for pack side img assets]
  new Component ({        // Gigabyte Radeon RX 7900 XTX
