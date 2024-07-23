@@ -111,8 +111,6 @@ class Inventory {
         port.image = currentRef.image
         port.offset = currentRef.offset
 
-        if(currentRef.takes) port.takes = currentRef.takes 
-
         // additional attributes
         port.cableAttached = null
     }
@@ -163,7 +161,6 @@ class Inventory {
 
     // Main Inventory Update Method
     update() {
-        console.log(this.items)
         // clear Item Elements
         while (this.itemsContainer.firstChild) {
             this.itemsContainer.removeChild(this.itemsContainer.firstChild);

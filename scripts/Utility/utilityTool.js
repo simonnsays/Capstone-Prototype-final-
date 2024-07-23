@@ -48,7 +48,8 @@ class UtilityTool {
             cpu: 'cp',
             gpu: 'gp',
             psu: 'ps',
-            storage: 'st',
+            ram: 'rm' ,
+            storage:'sg',
             cooling: 'fn'
         }
 

@@ -6311,6 +6311,96 @@ new Component ({ //AMD wraith Spire
     slots: [],
     ports: []
 }),  
+new Component ({ //Arctic Freezer 36
+    name: 'Arctic Freezer 36',
+    type: 'cooling',
+    size: 'amd',
+    dimensions: {
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'pack', imageSrc: './assets/cooling/arctic freezer 36 pack.png'},  
+        {side: 'left', imageSrc: './assets/cooling/arctic freezer 36.png'}
+    ],
+    slots: [],
+    ports: []
+}),  
+new Component ({ //be quiet pure rock
+    name: 'Be Quiet Pure Rock',
+    type: 'cooling',
+    size: 'amd',
+    dimensions: {
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'pack', imageSrc: './assets/cooling/be quiet pure rock.png'},  
+        {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
+    ],
+    slots: [],
+    ports: []
+}),  
+new Component ({ //be quiet dark rock 4
+    name: 'be quiet dark rock 4',
+    type: 'cooling',
+    size: 'amd',
+    dimensions: {
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'pack', imageSrc: './assets/cooling/be quiet dark rock 4.png'},  
+        {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
+    ],
+    slots: [],
+    ports: []
+}),  
+new Component ({ //cooler master 212 hyper
+    name: 'Cooler Master 212 Hyper',
+    type: 'cooling',
+    size: 'amd',
+    dimensions: {
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'pack', imageSrc: './assets/cooling/cooler master 212 hyper pack.png'},  
+        {side: 'left', imageSrc: './assets/cooling/cooler master 212 hyper.png'}
+    ],
+    slots: [],
+    ports: []
+}),  
+new Component ({ //DeepCool AK500 Digital
+    name: 'DeepCool AK500 Digital',
+    type: 'cooling',
+    size: 'amd',
+    dimensions: {
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'pack', imageSrc: './assets/cooling/deepcool ak500 digital pack.png'},  
+        {side: 'left', imageSrc: './assets/cooling/deepcool ak500 digital fan.png'}
+    ],
+    slots: [],
+    ports: []
+}),  
     // Cooling Intel
  new Component ({
      name: 'Intel Laminar RH1 cooling fan',
@@ -6354,7 +6444,7 @@ new Component ({ //AMD wraith Spire
       type: 'ram',
       size: 'ddr4',
       dimensions: {
-          width: 80,
+          width: 100,
           height: 100,
       },
       isRotatable: false,
@@ -6370,7 +6460,7 @@ new Component ({ //AMD wraith Spire
     type: 'ram',
     size: 'ddr4',
     dimensions: {
-        width: 80,
+        width: 100,
         height: 100,
     },
     isRotatable: false,
@@ -6386,7 +6476,7 @@ new Component ({ //G.Skill Ripjaws V
     type: 'ram',
     size: 'ddr4',
     dimensions: {
-        width: 80,
+        width: 100,
         height: 100,
     },
     isRotatable: false,
@@ -6402,7 +6492,7 @@ new Component ({ //Teamgroup Tforce Vulcan Z
     type: 'ram',
     size: 'ddr4',
     dimensions: {
-        width: 80,
+        width: 100,
         height: 100,
     },
     isRotatable: false,
@@ -6413,6 +6503,73 @@ new Component ({ //Teamgroup Tforce Vulcan Z
         {side: 'PACK', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4.png'},  
     ],
 }),
+new Component ({ //Teamgroup Tforce TUF
+    name: 'Teamgroup Tforce TUF DDR4',
+    type: 'ram',
+    size: 'ddr4',
+    dimensions: {
+        width: 100,
+        height: 100,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'PACK',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
+        {side: 'PACK', imageSrc: './assets/memory/tforce delta tuf pc4.png'},  
+    ],
+}),
+new Component ({ //Crucial Pro DDR4
+    name: 'Crucial Pro DDR4',
+    type: 'ram',
+    size: 'ddr4',
+    dimensions: {
+        width: 100,
+        height: 100,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'PACK',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/crucial pro ddr4 attached.png'},  
+        {side: 'PACK', imageSrc: './assets/memory/crucial pro ddr4.png'},  
+    ],
+}),
+new Component ({ //Corsiar Vengeance Pro DDR4
+    name: 'Corsiar Vengeance Pro DDR4',
+    type: 'ram',
+    size: 'ddr4',
+    dimensions: {
+        width: 100,
+        height: 100,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'PACK',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/corsair vengeance pro attached.png'},  
+        {side: 'PACK', imageSrc: './assets/memory/corsair vengeance pro ddr4.png'},  
+    ],
+}),
+new Component ({ //Teamgroup Tforce DDR5
+    name: 'Teamgroup Tforce DDR4',
+    type: 'ram',
+    size: 'ddr4',
+    dimensions: {
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/Teamgroup Tforce pc5 attached.png'},  
+        {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
+    ],
+    slots: [],
+    ports: []
+ }),
+ 
 
  //  RAM DDR5
    new Component ({ //Dominator Tianium
@@ -6420,7 +6577,6 @@ new Component ({ //Teamgroup Tforce Vulcan Z
       type: 'ram',
       size: 'ddr5',
       dimensions: {
-          depth: 125,
           width: 125,
           height: 125,
       },
@@ -6458,7 +6614,6 @@ new Component ({ //Teamgroup Tforce Vulcan Z
     type: 'ram',
     size: 'ddr5',
     dimensions: {
-        depth: 125,
         width: 125,
         height: 125,
     },
@@ -6477,7 +6632,6 @@ new Component ({ //Teamgroup Tforce Vulcan Z
     type: 'ram',
     size: 'ddr5',
     dimensions: {
-        depth: 125,
         width: 125,
         height: 125,
     },
@@ -6565,6 +6719,7 @@ new Component ({        // Intel ARC A750
 }),
 
 ]
+
 
 components.forEach(component => {
     Component.handleComponent(component)
