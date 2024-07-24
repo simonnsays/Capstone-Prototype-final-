@@ -200,7 +200,6 @@ class DisplayArea {
     updateAttachedComponentBox(baseComponent, slot) {
         // only update when a side for slot is available
         const side = slot.sides[this.currentSide]
-        console.log(side)
         if(!side) {
             slot.component.box = {
                 x: 0,

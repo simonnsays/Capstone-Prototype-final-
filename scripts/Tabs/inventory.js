@@ -163,7 +163,6 @@ class Inventory {
 
     // Main Inventory Update Method
     update() {
-        console.log(this.items)
         // clear Item Elements
         while (this.itemsContainer.firstChild) {
             this.itemsContainer.removeChild(this.itemsContainer.firstChild);
@@ -182,7 +181,6 @@ class Inventory {
 
                 // place removed component to display area
                 this.placeComponent(removedComponent[0])
-                // console.log(removedComponent)
 
                 // update display area information
                 this.displayArea.update()

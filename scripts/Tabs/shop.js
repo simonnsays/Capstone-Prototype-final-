@@ -204,6 +204,7 @@ class Shop{
 
         // apply category filter
         if(this.selectedCategory.length !== 0) {
+
             this.filteredItems = this.searchResults
             .filter(item => 
                 item.type.toLowerCase() === this.selectedCategory.toLowerCase())
@@ -220,10 +221,8 @@ class Shop{
             child.addEventListener('click', () => {
                 if(this.quickBuy.checked) {
                     // buy component
-                    console.log('hit')
                     this.buyComponent(child.component)
                 } else {
-                    console.log('hit')
                     // display component information first
                     this.displayItemInfo(child.component)
                 }
