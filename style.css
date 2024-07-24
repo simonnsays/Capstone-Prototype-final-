@@ -93,12 +93,15 @@ body {
     visibility: hidden;
 }
 
+/* MENU AND TAB BUTTONS */
 .button-wrapper {
     position: absolute;
     top: 20;
     left: 20;
-}
 
+    display: flex;
+    flex-direction: column;
+}
 .button-wrapper > button, #button1, #button2 {
     height: 2.7rem;
     width: 9rem;
@@ -106,11 +109,21 @@ body {
     border-radius: 20px;
     margin: 5px
 }
-
+.button-wrapper > [data-type="tab"] {
+    transition: transform .25s ease-in;
+}
 .button-wrapper > button:hover {
     background-color: var(--mint);
 }
+[data-type="menu"] {
+    z-index: 10;
+}
+[data-type="menu"] > * {
+    max-height: 100%;
+    transition: all .25s ease-in-out;
+}
 
+/* MODALS, CONTENTS, ITEM SLIDERS */
 .modal{
     border-radius: 20px;   
     animation: fadeInAnimation ease-in .1s;
@@ -598,6 +611,12 @@ body {
 }   
 .invisible {
     display: none;
+}
+.rotate180 {
+    transform: rotate(180deg);
+}
+.rotate0 {
+    transform: rotate(0deg);
 }
 
 /* Animations */

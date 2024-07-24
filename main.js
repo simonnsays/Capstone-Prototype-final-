@@ -53,6 +53,7 @@ class Main {
     start() {
         // main code here
         this.shop.init() 
+        this.displayArea.init()
         this.canvas.animate()    
     }
 }

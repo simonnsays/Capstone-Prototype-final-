@@ -4,6 +4,26 @@ class DisplayArea {
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
 
+         // Elements
+         this.elements = this.elementHandler.getDisplayAreaElements()
+         if(!this.elements) {
+             throw new Error ('Missing Display Area Elements')
+         }
+
+        // Wires Tab
+        this.portsTab = portsTab
+
+        // Tab Buttons
+        this.menuButton = this.elements.menuButton
+        this.tabButtons = this.elements.tabButtons
+ 
+         // Table Labels and Interactivity
+         this.leftBtn = this.elements.leftBtn
+         this.rightBtn = this.elements.rightBtn
+         this.compLabel = this.elements.compLabel
+         this.compName = this.elements.compName
+         this.panelIndicator = this.elements.panelIndicator
+
         // Table
         this.table = {area: {x: 10, y: 10, width: 650, height: 660}, component: null}
 
@@ -18,21 +38,6 @@ class DisplayArea {
             {area: {x: 670, y: 460, width: 300, height: 210}, component: null},
             {area: {x: 980, y: 460, width: 310, height: 210}, component: null}
         ]
-
-        // Wires Tab
-        this.portsTab = portsTab
-
-        // Elements
-        this.elements = this.elementHandler.getDisplayAreaElements()
-        if(!this.elements) {
-            throw new Error ('Missing Display Area Elements')
-        }
-
-        this.leftBtn = this.elements.leftBtn
-        this.rightBtn = this.elements.rightBtn
-        this.compLabel = this.elements.compLabel
-        this.compName = this.elements.compName
-        this.panelIndicator = this.elements.panelIndicator
 
         // Display Sides
         this.displaySides = ['left', 'front', 'right', 'rear']
@@ -289,6 +294,51 @@ class DisplayArea {
 
         // update WIRES TAB
         this.portsTab.update(this.table, this.shelf)
+    }
+
+    toggleMenu(menu, buttons, menuImg) {
+        // switch menu's active state
+        switch(menu.dataset.active) {
+            case 'true':
+                menu.dataset.active = 'false'
+                break
+            case 'false':
+                menu.dataset.active = 'true'
+                break
+        }
+
+        // adjust elements based of active state
+        if(menu.dataset.active === 'false') {
+            for(let i = 0; i < buttons.length; i++) {
+                buttons[i].style.transform = 'translateY('+ (-1 * (53 * i) - 53)+'px)'
+
+                // adjust z-index to go under menu button
+                buttons[i].style.zIndex = buttons.length - i
+            }
+
+            // swap menu image
+            menuImg.classList.add('rotate0')
+            menuImg.classList.remove('rotate180')
+            menuImg.src = './assets/svg/3line.svg'
+            return
+        }
+
+        menuImg.classList.add('rotate180')
+        menuImg.classList.remove('rotate0')
+        menuImg.src = './assets/svg/dropup.svg'
+        buttons.forEach(button => {
+            button.style['transform'] = ''
+        })
+    }
+
+    init() {
+        let menuImg = document.createElement('img')
+        menuImg.src = './assets/svg/3line.svg'
+        this.menuButton.appendChild(menuImg)
+
+        this.toggleMenu(this.menuButton, this.tabButtons, menuImg)
+
+        this.menuButton.addEventListener('click', () => this.toggleMenu(this.menuButton, this.tabButtons, menuImg))
     }
 }
 

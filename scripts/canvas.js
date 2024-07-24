@@ -204,7 +204,6 @@ class Canvas {
                 // draw attached components for components attached to the slot components
                 this.drawAttachedComponents(slot.component.slots, currentSide)
             }
-            
         })
     }
 

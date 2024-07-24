@@ -38,6 +38,7 @@ class PortsTab {
         // port group page change event
         this.pageRightBtn.addEventListener('click', () => this.turnPortPageRight())
         this.pageLeftBtn.addEventListener('click', () => this.turnPortPageLeft())
+        window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
     }
 
     // Open Tab
@@ -64,6 +65,16 @@ class PortsTab {
 
         // remove port highlights
         this.removeHighlights()
+    }
+
+    handleOutofBounds(e, modal) {
+        const rawMouse = {x: e.clientX, y: e.clientY}
+        const rect = modal.getBoundingClientRect()
+
+        if(!this.utilityTool.isInsideBox(rawMouse, rect) && modal.isOpen) {
+            
+            this.closeTab(modal)
+        }
     }
 
     // Clear Cells

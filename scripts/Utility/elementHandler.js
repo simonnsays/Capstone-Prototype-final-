@@ -55,7 +55,9 @@ class ElementHandler {
             rightBtn: document.querySelector('#right'),
             compLabel: document.querySelector('#compLabel'),
             compName: document.querySelector('#compName'),
-            panelIndicator: document.querySelector('#panelIndicator')
+            panelIndicator: document.querySelector('#panelIndicator'),
+            menuButton: document.querySelector('[data-type="menu"]'),
+            tabButtons: document.querySelectorAll('[data-type="tab"]')
         } || null
     }
 
