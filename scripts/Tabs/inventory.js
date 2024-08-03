@@ -111,6 +111,8 @@ class Inventory {
         port.image = currentRef.image
         port.offset = currentRef.offset
 
+        if(currentRef.takes) port.takes = currentRef.takes 
+
         // additional attributes
         port.cableAttached = null
     }
@@ -179,7 +181,6 @@ class Inventory {
 
                 // place removed component to display area
                 this.placeComponent(removedComponent[0])
-                // console.log(removedComponent)
 
                 // update display area information
                 this.displayArea.update()

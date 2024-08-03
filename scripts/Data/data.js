@@ -68,31 +68,37 @@ const components = [
                     
                 }
             },           
-            {
-                type: 'storage',
-                supports: [],
+            {   // new sata
+                type: 'storage', 
+                supports: ['HDD', '2.5', 'U.2'],
                 component: null,
                 sides: {
-        //            left: {
-        //                offsets: {
-        //                    default: {x: 42, y: 363, width: 140, height: 86}
-        //                },
-        //                accessible: true
-        //            },
                     right: {
                         offsets: {
-                            default: {x: 320, y: 215, width: 70, height: 86},
-                            ssd: {x: 240, y: 223, width: 50, height: 68}
+                            default: {x: 233, y: 215, width: 70, height: 90}
                         },
                         accessible: true
                     }
-                    
+                }
+            },
+            {   // new sata
+                type: 'storage', 
+                supports: ['HDD', '2.5', 'U.2'],
+                component: null,
+                sides: {
+                    right: {
+                        offsets: {
+                            default: {x:323, y: 215, width: 70, height: 90}
+                        },
+                        accessible: true
+                    }
                 }
             }
         ],
-        
         ports: [],
-        cables: []
+        cables: [
+            {type: 'frontPanel'}
+        ]
     }),
     new Component ({        // Corsair AF Render
         name: 'Corsair AF Render',
@@ -158,7 +164,7 @@ const components = [
             },           
             {
                 type: 'storage',
-                supports: [],
+                supports: ['HDD', '2.5', 'U.2'],
                 component: null,
                 sides: {
        //           left: {
@@ -176,6 +182,19 @@ const components = [
                     
                 }
             },
+            {   // new sata
+                type: 'storage', 
+                supports: ['HDD', '2.5', 'U.2'],
+                component: null,
+                sides: {
+                    right: {
+                        offsets: {
+                            default: {x: 131, y: 390, width: 100, height: 27}
+                        },
+                        accessible: true
+                    }
+                }
+            }
         ],
         
         ports: [],
@@ -245,7 +264,7 @@ const components = [
             },           
             {
                 type: 'storage',
-                supports: [],
+                supports: ['HDD', '2.5', 'U.2'],
                 component: null,
                 sides: {
         //            left: {
@@ -257,13 +276,52 @@ const components = [
                     right: {
                         offsets: {
                             default: {x: 106, y: 390, width: 95, height: 27},
-                            ssd: {x: 297, y: 216, width: 63, height: 80}
                         },
                         accessible: true
                     }
                     
                 }
             },
+            {   
+                type: 'storage', 
+                supports: ['HDD', '2.5', 'U.2'],
+                component: null,
+                sides: {
+                    right: {
+                        offsets: {
+                            default: {x: 106, y: 337, width: 95, height: 27}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {   
+                type: 'storage', 
+                supports: ['HDD', '2.5', 'U.2'],
+                component: null,
+                sides: {
+                    right: {
+                        offsets: {
+                            default: {x: 221, y: 216, width: 63, height: 80}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {   
+                type: 'storage', 
+                supports: ['HDD', '2.5', 'U.2'],
+                component: null,
+                sides: {
+                    right: {
+                        offsets: {
+                            default: {x: 297, y: 216, width: 63, height: 80}
+                        },
+                        accessible: true
+                    }
+                }
+            }
+            
         ],
         
         ports: [],
@@ -333,7 +391,7 @@ const components = [
             },           
             {
                 type: 'storage',
-                supports: [],
+                supports: ['HDD'],
                 component: null,
                 sides: {
         //            left: {
@@ -345,13 +403,38 @@ const components = [
                     right: {
                         offsets: {
                             default: {x: 130, y: 420, width: 95, height: 27},
-                            ssd: {x: 225, y: 247, width: 80, height: 90},
                         },
                         accessible: true
                     }
                     
                 }
             },
+            {   
+                type: 'storage', 
+                supports: [ '2.5', 'U.2'],
+                component: null,
+                sides: {
+                    right: {
+                        offsets: {
+                            default: {x: 225, y: 247, width: 80, height: 90}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {   
+                type: 'storage', 
+                supports: [ '2.5', 'U.2'],
+                component: null,
+                sides: {
+                    right: {
+                        offsets: {
+                            default: {x: 335, y: 247, width: 80, height: 90}
+                        },
+                        accessible: true
+                    }
+                }
+            }
 
         ],
         
@@ -428,7 +511,7 @@ const components = [
             },           
             {
                 type: 'storage',
-                supports: [],
+                supports: ['HDD', '2.5', 'U.2'],
                 component: null,
                 sides: {
         //            left: {
@@ -440,13 +523,51 @@ const components = [
                     right: {
                         offsets: {
                             default: {x: 65, y: 400, width: 100, height: 27},
-                            ssd: {x: 300, y: 205, width: 50, height: 80}
                         },
                         accessible: true
                     }
                     
                 }
             },
+            {   
+                type: 'storage', 
+                supports: ['HDD', '2.5', 'U.2'],
+                component: null,
+                sides: {
+                    right: {
+                        offsets: {
+                            default: {x: 65, y: 360, width: 100, height: 27}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {   
+                type: 'storage', 
+                supports: ['HDD', '2.5', 'U.2'],
+                component: null,
+                sides: {
+                    right: {
+                        offsets: {
+                            default: {x: 300, y: 205, width: 50, height: 80}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {   
+                type: 'storage', 
+                supports: ['HDD', '2.5', 'U.2'],
+                component: null,
+                sides: {
+                    right: {
+                        offsets: {
+                            default: {x: 374, y: 205, width: 50, height: 80}
+                        },
+                        accessible: true
+                    }
+                }
+            }
 
         ],
         
@@ -466,9 +587,9 @@ const components = [
         },
         isRotatable: false,
         isAttached: false,
-        defaultSource: 'PACK',
+        defaultSource: 'pack',
         images: [
-            {side: 'PACK', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-01.png'}, 
+            {side: 'pack', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-02.png'}, 
             {side: 'rear', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-05.png'} 
         ],
@@ -526,20 +647,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 204, y: 28, width: 8, height: 140}
+                            default: {x: 204, y: 25, width: 8, height: 137}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 194, y: 25, width: 8, height: 137}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 184, y: 25, width: 8, height: 137}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 174, y: 25, width: 8, height: 137}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -613,20 +772,59 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
+                            default: {x: 214, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
                             default: {x: 204, y: 28, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 194, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 184, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
             }
+
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -700,20 +898,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
+                            default: {x: 220, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
                             default: {x: 210, y: 32, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 200, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 190, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -787,20 +1023,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 209, y: 33, width: 8, height: 140}
+                            default: {x: 215, y: 33, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 205, y: 33, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 195, y: 33, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 185, y: 33, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -874,20 +1148,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
+                            default: {x: 216, y: 39, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
                             default: {x: 206, y: 39, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 196, y: 39, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 186, y: 39, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -961,20 +1273,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 204, y: 28, width: 8, height: 140}
+                            default: {x: 204, y: 25, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 194, y: 25, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 184, y: 25, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 174, y: 25, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -1053,15 +1403,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 194, y: 23, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 184, y: 23, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 174, y: 23, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -1140,15 +1528,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 194, y: 17, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 184, y: 17, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 174, y: 17, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -1222,20 +1648,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 204, y: 28, width: 8, height: 140}
+                            default: {x: 207, y: 28, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 197, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 187, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 177, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -1309,20 +1773,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 207, y: 28, width: 8, height: 140}
+                            default: {x: 207.2, y: 31, width: 8, height: 137.5}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 198.2, y: 31, width: 8, height: 137.5}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 188.7, y: 31, width: 8, height: 137.5}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 178.7, y: 31, width: 8, height: 137.5}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -1402,15 +1904,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 197, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 188.5, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 180, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -1484,20 +2024,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
+                            default: {x: 215, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
                             default: {x: 205, y: 32, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 195, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 185, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -1571,20 +2149,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 207, y: 32, width: 8, height: 140}
+                            default: {x: 210, y: 32, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 200, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 190, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 180, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -1658,20 +2274,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 207, y: 28, width: 8, height: 140}
+                            default: {x: 209, y: 28, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 199, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 189, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 179, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),    
@@ -1745,20 +2399,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 209, y: 32, width: 8, height: 140}
+                            default: {x: 213, y: 32, width: 6, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 203, y: 32, width: 6, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 195, y: 32, width: 6, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 186, y: 32, width: 6, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -1832,20 +2524,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 209, y: 28, width: 8, height: 140}
+                            default: {x: 211, y: 29, width: 7, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 201, y: 29, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 191, y: 29, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 181, y: 29, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -1924,15 +2654,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 197, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 187, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 177, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -2011,15 +2779,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 197, y: 31, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 187, y: 31, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 177, y: 31, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -2098,15 +2904,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 197, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 187, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 177, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -2185,15 +3029,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 197, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 187, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 177, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -2273,15 +3155,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }          
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 197, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 187, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 177, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },           
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -2355,20 +3275,59 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 201, y: 34, width: 8, height: 140}
+                            default: {x: 203, y: 38, width: 5, height: 130}
                         },
                         accessible: true
                     }
                 }
-            }  
+            },  
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 195, y: 38, width: 5, height: 130}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 186, y: 38, width: 5, height: 130}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 178, y: 38, width: 5, height: 130}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+
         ],
         ports: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -2443,24 +3402,62 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 211, y: 22, width: 8, height: 140}
+                            default: {x: 212, y: 22, width: 7, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }  
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 202, y: 22, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },  
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 192, y: 22, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },  
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 182, y: 22, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },    
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
-    new Component ({        // Z590 Aorus Xtreme
+    new Component ({        // ASRock Z590 PG Velocita
         name: 'ASRock Z590 PG Velocita',
         type: 'motherboard',
         size: 'ATX',
@@ -2530,20 +3527,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 211, y: 27, width: 8, height: 140}
+                            default: {x: 212, y: 27, width: 7, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }  
-        ],
-        ports: [
+            },  
             {
-                type: '24-pin-power'
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 202, y: 27, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 192, y: 27, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 182, y: 27, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -2617,20 +3652,59 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 211, y: 27, width: 8, height: 140}
+                            default: {x: 212, y: 27, width: 7, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }  
+            },  
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 202, y: 27, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },  
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 192, y: 27, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },  
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 182, y: 27, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },  
+
         ],
         ports: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -2709,15 +3783,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }  
+            },  
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 198, y: 29, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 188, y: 29, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 178, y: 29, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
         ],
         ports: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -2791,20 +3903,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 207, y: 29, width: 8, height: 140}
+                            default: {x: 208, y: 29, width: 7, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }  
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 198, y: 29, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 188, y: 29, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 178, y: 29, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -2878,20 +4028,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 207, y: 32, width: 8, height: 140}
+                            default: {x: 208, y: 32, width: 7, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }  
-        ],
-        ports: [
+            },  
             {
-                type: '24-pin-power'
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 198, y: 32, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 188, y: 32, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 178, y: 32, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -2973,12 +4161,11 @@ const components = [
             }  
         ],
         ports: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -3060,12 +4247,11 @@ const components = [
             }  
         ],
         ports: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -3144,15 +4330,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }  
+            },  
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 197, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 187, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 177, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
         ],
         ports: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -3226,20 +4450,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 205, y: 24, width: 8, height: 140}
+                            default: {x: 206, y: 24, width: 8, height: 130}
                         },
                         accessible: true
                     }
                 }
-            }  
+            },  
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 196, y: 24, width: 8, height: 130}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 186, y: 24, width: 8, height: 130}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 176, y: 24, width: 8, height: 130}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
         ],
         ports: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -3318,15 +4580,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }  
+            },  
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 197, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 187, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 177, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
         ],
         ports: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -3400,20 +4700,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 207, y: 24, width: 8, height: 140}
+                            default: {x: 208, y: 24, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }  
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 198, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },  
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 188, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },  
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 178, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },    
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -3488,20 +4826,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 207, y: 33, width: 8, height: 140}
+                            default: {x: 208, y: 33, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 198, y: 33, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 188, y: 33, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 178, y: 33, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),  
@@ -3580,15 +4956,55 @@ const components = [
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 197, y: 33, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 187, y: 33, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 177, y: 33, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+
+    
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),  
@@ -3662,20 +5078,59 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 207, y: 32, width: 8, height: 140}
+                            default: {x: 208, y: 31, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 198, y: 31, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 188, y: 31, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 178, y: 31, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),  
@@ -3749,20 +5204,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 205, y: 33, width: 8, height: 140}
+                            default: {x: 204, y: 33, width: 8, height: 135}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 194, y: 33, width: 8, height: 135}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 184, y: 33, width: 8, height: 135}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 174, y: 33, width: 8, height: 135}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),  
@@ -3836,20 +5329,59 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 211, y: 33, width: 8, height: 140}
+                            default: {x: 211, y: 33, width: 8, height: 138}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 201, y: 33, width: 8, height: 138}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 191, y: 33, width: 8, height: 138}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 181, y: 33, width: 8, height: 138}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),  
@@ -3928,15 +5460,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 196.5, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 186.5, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 176.5, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }), 
@@ -4010,20 +5580,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 211, y: 27, width: 8, height: 140}
+                            default: {x: 212, y: 27, width: 7, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 203, y: 27, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 193, y: 27, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 183, y: 27, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }), 
@@ -4097,20 +5705,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 209, y: 37, width: 8, height: 140}
+                            default: {x: 210, y: 37, width: 7, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 200, y: 37, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 190, y: 37, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 180, y: 37, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }), 
@@ -4189,15 +5835,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 199, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 191, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 183, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }), 
@@ -4276,15 +5960,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 199, y: 21, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 191, y: 21, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 183, y: 21, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }), 
@@ -4366,12 +6088,11 @@ const components = [
             }
         ],
         ports: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }), 
@@ -4453,12 +6174,11 @@ const components = [
             }
         ],
         ports: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }), 
@@ -4537,15 +6257,53 @@ const components = [
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 196, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 188, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 180, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -4619,20 +6377,58 @@ const components = [
                 sides: {
                     left: {
                         offsets: {
-                            default: {x: 205, y: 27, width: 8, height: 140}
+                            default: {x: 203, y: 27, width: 8, height: 140}
                         },
                         accessible: true
                     }
                 }
-            }
-        ],
-        ports: [
-            {
-                type: '24-pin-power'
             },
             {
-                type: '8-pin-power'
-            }
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 195, y: 27, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 187, y: 27, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 179, y: 27, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
         ],
         cables: []
     }),
@@ -4973,27 +6769,27 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '6-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: '8-pin'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '6-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+
         ]
     }),
     new Component ({        // EVGA SuperNOVA 850 GT
@@ -5016,27 +6812,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
     new Component ({        // EVGA SuperNOVA 1000 P5
@@ -5059,27 +6851,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
     new Component ({        // EVGA SuperNOVA 1600 G+
@@ -5102,27 +6890,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
     new Component ({        // EVGA SuperNOVA 1600 P2
@@ -5145,27 +6929,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
 
@@ -5190,27 +6970,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
     new Component ({        // Silverstone DA850r-gm
@@ -5234,27 +7010,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
     new Component ({        // Silverstone DA1000r-gm
@@ -5278,27 +7050,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
     new Component ({        // Silvestone EX850r-pm
@@ -5322,27 +7090,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
     new Component ({        // Silverstone EX1200r-pl
@@ -5366,27 +7130,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
 
@@ -5411,27 +7171,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
     new Component ({        // Corsair RM1200e
@@ -5455,27 +7211,24 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
     new Component ({        // Corsair RMX Shift RM850x
@@ -5499,27 +7252,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
     new Component ({        // Corsair AX1600i Digital
@@ -5543,27 +7292,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'}
         ]
     }),
 
@@ -5588,27 +7333,24 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
     new Component ({        // Cooler Master V 1600 Platinum v2
@@ -5632,27 +7374,26 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: '12vhpwr'}
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: '12vhpwr'}
         ]
     }),
     new Component ({        // Cooler Master X Silent Edge 850w Platinum
@@ -5676,27 +7417,28 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: '12vhpwr'},
+
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: '12vhpwr'},
+
         ]
     }),
     new Component ({        // Cooler Master X Silent Edge 1100w Platinum
@@ -5720,27 +7462,26 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: '12vhpwr'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: '12vhpwr'},
         ]
     }),
     new Component ({        // Cooler Master X Silent 1300w MAX Platinum
@@ -5764,27 +7505,26 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: '12vhpwr'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: '12vhpwr'},
         ]
     }),
     
@@ -5809,27 +7549,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'}
         ]
     }),
     new Component ({        // Thermaltake Toughpower GF1 850W
@@ -5853,27 +7589,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'}
         ]
     }),
     new Component ({        // Thermaltake Toughpower GF 750W Gold
@@ -5897,27 +7629,23 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '24-pin-power',
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'}
         ]
     }),
 
@@ -5943,44 +7671,21 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-                type: '6-pin-power'
-            },
-            {
-                type: '6-pin-power'
-            },
-            {
-                type: '6-pin-power'
-            },
-            {
-                type: '6-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },            
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
         ],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '6-pin-power'
-            },
-            {
-                type: '6-pin-power'
-            },
-            {
-                type: 'satapower'
-            },
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'}
         ]
     }),
 
@@ -6005,17 +7710,15 @@ const components = [
             {side: 'rear', imageSrc: './assets/psu/Thermaltake/thermaltake smart 500w/thermaltake smart 500w rear.png'}
         ],
         slots: [],
-        ports: [],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: '8-pin'}
         ]
     }),
     new Component ({        // Thermaltake Toughpower gx2 600w
@@ -6038,17 +7741,15 @@ const components = [
             {side: 'rear', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gx2 600w/thermaltake toughpower rear.png'}
         ],
         slots: [],
-        ports: [],
         cables: [
-            {
-                type: '24-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            },
-            {
-                type: '8-pin-power'
-            }
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: '8-pin'}
         ]
     }),
   //Storage hdd
@@ -6071,10 +7772,11 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-            type: 'satapower',
-            type: 'satadata'
-        }
+            {type: 'sata'}
+        ],
+        cables: [
+            {type: 'sata-power'},
+            {type: 'sata-data'}
         ]
      }),
      new Component ({ //Toshiba X300
@@ -6096,10 +7798,11 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-            type: 'satapower',
-            type: 'satadata'
-        }
+            {type: 'sata'}
+        ],
+        cables: [
+            {type: 'sata-power'},
+            {type: 'sata-data'}
         ]
      }),
      new Component ({ //Toshiba X300 PRO
@@ -6121,10 +7824,11 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-            type: 'satapower',
-            type: 'satadata'
-        }
+            {type: 'sata'}
+        ],
+        cables: [
+            {type: 'sata-power'},
+            {type: 'sata-data'}
         ]
      }),
      new Component ({ //Toshiba P300
@@ -6146,10 +7850,11 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-            type: 'satapower',
-            type: 'satadata'
-        }
+            {type: 'sata'}
+        ],
+        cables: [
+            {type: 'sata-power'},
+            {type: 'sata-data'}
         ]
      }),
      new Component ({ //Western Digital Gaming Black
@@ -6171,10 +7876,11 @@ const components = [
         ],
         slots: [],
         ports: [
-            {
-            type: 'satapower',
-            type: 'satadata'
-        }
+            {type: 'sata'}
+        ],
+        cables: [
+            {type: 'sata-power'},
+            {type: 'sata-data'}
         ]
      }),
  //Storage ssd
@@ -6196,10 +7902,11 @@ const components = [
     ],
     slots: [],
     ports: [
-        {
-        type: 'satapower',
-        type: 'satadata'
-    }
+        {type: 'sata'}
+    ],
+    cables: [
+        {type: 'sata-power'},
+        {type: 'sata-data'}
     ]
      }),     
      new Component ({ //Samsung EVO SSD
@@ -6220,10 +7927,11 @@ const components = [
     ],
     slots: [],
     ports: [
-        {
-        type: 'satapower',
-        type: 'satadata'
-    }
+        {type: 'sata'}
+    ],
+    cables: [
+        {type: 'sata-power'},
+        {type: 'sata-data'}
     ]
      }),     
      new Component ({ //Sandisk Plus SSD
@@ -6244,10 +7952,11 @@ const components = [
     ],
     slots: [],
     ports: [
-        {
-        type: 'satapower',
-        type: 'satadata'
-    }
+        {type: 'sata'}
+    ],
+    cables: [
+        {type: 'sata-power'},
+        {type: 'sata-data'}
     ]
      }),     
      new Component ({ //Sandisk Ultra SSD
@@ -6268,10 +7977,11 @@ const components = [
     ],
     slots: [],
     ports: [
-        {
-        type: 'satapower',
-        type: 'satadata'
-    }
+        {type: 'sata'}
+    ],
+    cables: [
+        {type: 'sata-power'},
+        {type: 'sata-data'}
     ]
      }),
  // Cooling AMD
@@ -6291,7 +8001,9 @@ new Component ({ //AMD wraith Prism
         {side: 'left', imageSrc: './assets/cooling/amd wraith prism fan.png'}
     ],
     slots: [],
-    ports: []
+    cables: [
+        {type: '3-pin-cooling'}
+    ]
 }), 
 new Component ({ //AMD wraith Spire
     name: 'AMD wraith Spire',
@@ -6309,7 +8021,9 @@ new Component ({ //AMD wraith Spire
         {side: 'left', imageSrc: './assets/cooling/amd wraith spire.png'}
     ],
     slots: [],
-    ports: []
+    cables: [
+        {type: '3-pin-cooling'}
+    ]
 }),  
 new Component ({ //Arctic Freezer 36
     name: 'Arctic Freezer 36',
@@ -6327,7 +8041,9 @@ new Component ({ //Arctic Freezer 36
         {side: 'left', imageSrc: './assets/cooling/arctic freezer 36.png'}
     ],
     slots: [],
-    ports: []
+    cables: [
+        {type: '3-pin-cooling'}
+    ]
 }),  
 new Component ({ //be quiet pure rock
     name: 'Be Quiet Pure Rock',
@@ -6345,8 +8061,10 @@ new Component ({ //be quiet pure rock
         {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
     ],
     slots: [],
-    ports: []
-}),  
+cables: [
+            {type: '3-pin-cooling'}
+        ]
+    }),  
 new Component ({ //be quiet dark rock 4
     name: 'be quiet dark rock 4',
     type: 'cooling',
@@ -6363,8 +8081,10 @@ new Component ({ //be quiet dark rock 4
         {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
     ],
     slots: [],
-    ports: []
-}),  
+cables: [
+            {type: '3-pin-cooling'}
+        ]
+    }),  
 new Component ({ //cooler master 212 hyper
     name: 'Cooler Master 212 Hyper',
     type: 'cooling',
@@ -6381,8 +8101,10 @@ new Component ({ //cooler master 212 hyper
         {side: 'left', imageSrc: './assets/cooling/cooler master 212 hyper.png'}
     ],
     slots: [],
-    ports: []
-}),  
+cables: [
+            {type: '3-pin-cooling'}
+        ]
+    }),  
 new Component ({ //DeepCool AK500 Digital
     name: 'DeepCool AK500 Digital',
     type: 'cooling',
@@ -6399,8 +8121,10 @@ new Component ({ //DeepCool AK500 Digital
         {side: 'left', imageSrc: './assets/cooling/deepcool ak500 digital fan.png'}
     ],
     slots: [],
-    ports: []
-}),  
+cables: [
+            {type: '3-pin-cooling'}
+        ]
+    }),  
     // Cooling Intel
  new Component ({
      name: 'Intel Laminar RH1 cooling fan',
@@ -6418,8 +8142,10 @@ new Component ({ //DeepCool AK500 Digital
          {side: 'left', imageSrc: './assets/cooling/intel laminar rh1.png'},  
      ],
      slots: [],
-     ports: []
- }),
+cables: [
+            {type: '3-pin-cooling'}
+        ]
+     }),
  new Component ({
     name: 'Intel Laminar RM1 cooling fan',
     type: 'cooling',
@@ -6436,8 +8162,10 @@ new Component ({ //DeepCool AK500 Digital
         {side: 'left', imageSrc: './assets/cooling/intel laminar rm1.png'},  
     ],
     slots: [],
-    ports: []
-}),
+cables: [
+            {type: '3-pin-cooling'}
+        ]
+    }),
     // RAM DDR4
   new Component ({ //Kingston HyperX Beast RGB
       name: 'Kingston HyperX Beast RGB DDR4',
@@ -6551,7 +8279,7 @@ new Component ({ //Corsiar Vengeance Pro DDR4
         {side: 'PACK', imageSrc: './assets/memory/corsair vengeance pro ddr4.png'},  
     ],
 }),
-new Component ({ //Teamgroup Tforce DDR5
+new Component ({ //Teamgroup Tforce DDR4
     name: 'Teamgroup Tforce DDR4',
     type: 'ram',
     size: 'ddr4',
@@ -6563,17 +8291,15 @@ new Component ({ //Teamgroup Tforce DDR5
     isAttached: false,
     defaultSource: 'pack',
     images: [
-        {side: 'left', imageSrc: './assets/memory/Teamgroup Tforce pc5 attached.png'},  
+        {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
     ],
-    slots: [],
-    ports: []
  }),
  
 
  //  RAM DDR5
-   new Component ({ //Dominator Tianium
-      name: 'Dominator Tianium DDR5',
+   new Component ({ //Dominator Titanium
+      name: 'Dominator Titanium DDR5',
       type: 'ram',
       size: 'ddr5',
       dimensions: {
@@ -6587,8 +8313,6 @@ new Component ({ //Teamgroup Tforce DDR5
           {side: 'left', imageSrc: './assets/memory/Dominator Tianium DDR5 - attached.png'},  
           {side: 'pack', imageSrc: './assets/memory/Dominator Tianium DDR5.png'},  
       ],
-      slots: [],
-      ports: []
    }),
    new Component ({ //G.Skill Trident z5
     name: 'G.Skill Trident z5 DDR5',
@@ -6606,8 +8330,6 @@ new Component ({ //Teamgroup Tforce DDR5
         {side: 'left', imageSrc: './assets/memory/gskill trident z5 pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/gskill trident z5 pc5.png'},  
     ],
-    slots: [],
-    ports: []
  }),
  new Component ({ //Kingston Fury Renegade
     name: 'Kingston Fury Renegade DDR5',
@@ -6621,13 +8343,11 @@ new Component ({ //Teamgroup Tforce DDR5
     isAttached: false,
     defaultSource: 'pack',
     images: [
-        {side: 'left', imageSrc: './assets/memory/kingston fury renegade pc5 attached.png'},  
+        {side: 'left', imageSrc: './assets/memory/kingston fury beast pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/kingston fury renegade pc5.png'},  
     ],
-    slots: [],
-    ports: []
  }),
- new Component ({ //Teamgroup Tforce DDR5
+ new Component ({ //Teamgroup Tforce 
     name: 'Teamgroup Tforce DDR5',
     type: 'ram',
     size: 'ddr5',
@@ -6639,84 +8359,517 @@ new Component ({ //Teamgroup Tforce DDR5
     isAttached: false,
     defaultSource: 'pack',
     images: [
-        {side: 'left', imageSrc: './assets/memory/Teamgroup Tforce pc5 attached.png'},  
+        {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
     ],
-    slots: [],
-    ports: []
+ }),
+ new Component ({ //Crucial Ballistix
+    name: 'Crucial Ballistix DDR5',
+    type: 'ram',
+    size: 'ddr5',
+    dimensions: {
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/crucial ballistix attached.png'},  
+        {side: 'pack', imageSrc: './assets/memory/crucial ballistix.png'},  
+    ],
+ }),
+ new Component ({ //Crucial Ballistix RGB 
+    name: 'Crucial Ballistix RGB DDR5',
+    type: 'ram',
+    size: 'ddr5',
+    dimensions: {
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/crucial ballistix rgb attached.png'},  
+        {side: 'pack', imageSrc: './assets/memory/crucial ballistix rgb.png'},  
+    ],
+ }),
+ new Component ({ //G.Skill Trident Z5 Silver 
+    name: 'G.Skill Trident Z5 Silver DDR5',
+    type: 'ram',
+    size: 'ddr5',
+    dimensions: {
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/gskill trident z5 silver attached.png'},  
+        {side: 'pack', imageSrc: './assets/memory/gskill trident z5 silver.png'},  
+    ],
+ }),
+ new Component ({ //Corsair Vengeance
+    name: 'Corsair Vengeance DDR5',
+    type: 'ram',
+    size: 'ddr5',
+    dimensions: {
+        width: 125,
+        height: 125,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/corsair vengeance attached.png'},  
+        {side: 'pack', imageSrc: './assets/memory/corsair vengeance.png'},  
+    ],
  }),
  
  
- //GPU [gpu file is for general left side img assets] [gpu.1 is for pack side img assets]
- new Component ({        // Gigabyte Radeon RX 7900 XTX
+ //GPU [gpu file is for general left side img assets] [gpu.1 is for pack side img assets] [single 8pins = {type: '8-pin'}] [dual 8pins = {type: '16-pin-pcie'}]
+ new Component ({        // Gigabyte Radeon RX 7900 XTX 16pin
     name: 'Gigabyte Radeon RX 7900 XTX',
     type: 'gpu',
-    size: '',
+    size: 'ATX',
     dimensions: {
         width: 200,
         height: 200,
     },
     isRotatable: false,
     isAttached: false,
-    defaultSource: 'PACK',
+    defaultSource: 'pack',
     images: [
         {side: 'left', imageSrc: './assets/gpu/Gigabyte Radeon RX 7900 XTX.png'}, 
         {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
-        {side: 'PACK', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'}
+        {side: 'pack', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'}
     ],
     slots: [],
     ports: [
-        {
-            type: '8-pin-power'
-        }    
+        {type: '16-pin-pcie'}
     ]  
 }),
 new Component ({        // gigabyte nvidia geforce rtx 4060 windforce 8gb OC
     name: 'Gigabyte NVIDIA GeForce rtx 4060 Windforce 8gb OC',
     type: 'gpu',
-    size: '',
+    size: 'ATX',
     dimensions: {
         width: 200,
         height: 200,
     },
     isRotatable: false,
     isAttached: false,
-    defaultSource: 'PACK',
+    defaultSource: 'pack',
     images: [
         {side: 'left', imageSrc: './assets/gpu/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'}, 
         {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
-        {side: 'PACK', imageSrc: './assets/gpu.1/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'}
+        {side: 'pack', imageSrc: './assets/gpu.1/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'}
     ],
     slots: [],
     ports: [
-        {
-            type: '8-pin-power'
-        }    
+        {type: '8-pin'}
     ]  
 }),
-new Component ({        // Intel ARC A750
+new Component ({        // Intel ARC A750 8+6pin
     name: 'Intel ARC A750',
     type: 'gpu',
-    size: '',
+    size: 'ATX',
     dimensions: {
         width: 200,
         height: 200,
     },
     isRotatable: false,
     isAttached: false,
-    defaultSource: 'PACK',
+    defaultSource: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/Intel.png'}, 
-        {side: 'PACK', imageSrc: './assets/gpu.1/intel arc.png'}
+        {side: 'pack', imageSrc: './assets/gpu.1/intel arc.png'}
     ],
     slots: [],
     ports: [
-        {
-            type: '8-pin-power'
-        }    
+        {type: '14-pin-pcie'}
     ]  
 }),
+new Component ({        // Gigabyte Nvidia GeForce RTX 3060
+    name: 'Gigabyte Nvidia GeForce RTX 3060',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 3060.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 3060.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '8-pin'}
+    ]  
+}),
+new Component ({        // Gigabyte Nvidia GeForce RTX 4070 WindForce OC
+    name: 'Gigabyte Nvidia GeForce RTX 4070 WindForce OC',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4070 windforce oc.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4070 windforce oc.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '8-pin'}
+    ]  
+}),
+new Component ({        // PNY Nvidia GeForce RTX 4090 12vhpwr
+    name: 'PNY Nvidia GeForce RTX 4090',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4090.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4090.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '12vhpwr'}
+    ]  
+}),
+new Component ({        // Gigabyte Nvidia GeForce RTX Eagle 3060
+    name: 'Gigabyte Nvidia GeForce RTX Eagle 3060',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx eagle 3060.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx eagle 3060.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '8-pin'}
+    ]  
+}),
+new Component ({        // Gigabyte Nvidia GeForce GTX 1650
+    name: 'Gigabyte Nvidia GeForce GTX 1650',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia geforce gtx 1650.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce gtx 1650.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '8-pin'}
+    ]  
+}),
+new Component ({        // Gigabyte Radeon RX7600
+    name: 'Gigabyte Radeon RX7600',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/radeon rx7600.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx7600.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '8-pin'}
+    ]  
+}),
+new Component ({        // Gigabyte Nvidia GeForce RTX 4090 Gaming OC
+    name: 'Gigabyte Nvidia GeForce RTX 4090 Gaming OC',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4090 gaming oc.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4090 gaming oc.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '8-pin'}
+    ]  
+}),
+new Component ({        // Aero Nvidia GeForce RTX 4060 OC
+    name: 'Aero Nvidia GeForce RTX 4060 OC',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/aero nvidia geforce rtx 4060 oc.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/aero nvidia geforce rtx 4060 oc.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '8-pin'}
+    ]  
+}),
+new Component ({        // Zotac Nvidia GeForce GTX 1660 Super
+    name: 'Zotac Nvidia GeForce GTX 1660 Super',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia geforce gtx 1660 super.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce gtx 1660 super.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '8-pin'}
+    ]  
+}),
+new Component ({        // MAXSUN Nvidia GeForce RTX 4060
+    name: 'MAXSUN Nvidia GeForce RTX 4060',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4060.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4060.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '8-pin'}
+    ]  
+}),
+new Component ({        // Asus Nvidia GeForce RTX 4070 Super 12vhpwr
+    name: 'Asus Nvidia GeForce RTX 4070 Super',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4070 super.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4070 super.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '12vhpwr'}
+    ]  
+}),
+new Component ({        // Asus Nvidia GeForce 3050
+    name: 'Asus Nvidia GeForce 3050',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia geforce 3050.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce 3050.png'}
+    ],
+    slots: [],
+    ports: []  
+}),
+new Component ({        // Asus Radeon RX6500 XT
+    name: 'Asus Radeon RX6500 XT',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/radeon rx6500 xt.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx6500 xt.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '6-pin-pcie'}
+    ]  
+}),
+new Component ({        // Nvidia GeForce RTX 2080 Super
+    name: 'Nvidia GeForce RTX 2080 Super',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 2080 super.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 2080 super.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '6-pin-pcie'}
+    ]  
+}),
+new Component ({        // Gigabyte Radeon RX6750 XT
+    name: 'Gigabyte Radeon RX6750 XT',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/radeon rx6750 xt.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx6750 xt.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '6-pin-pcie'}
+    ]  
+}),
+new Component ({        // AMD Radeon RX5300 OEM
+    name: 'AMD Radeon RX5300 OEM',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/radeon rx5300 OEM.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx5300 OEM.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '6-pin-pcie'}
+    ]  
+}),
+new Component ({        // Nvidia Tesla T40
+    name: 'Nvidia Tesla T40',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia Tesla T40.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia Tesla T40.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '6-pin-pcie'}
+    ]  
+}),
+new Component ({        // Nvidia Geforce 1080 Ti
+    name: 'Nvidia Geforce 1080 Ti',
+    type: 'gpu',
+    size: 'ATX',
+    dimensions: {
+        width: 200,
+        height: 200,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'pack',
+    images: [
+        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/nvidia geforce 1080 ti.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce 1080 ti.png'}
+    ],
+    slots: [],
+    ports: [
+        {type: '6-pin-pcie'}
+    ]  
+}),
+
 
 ]
 

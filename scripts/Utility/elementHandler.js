@@ -55,8 +55,21 @@ class ElementHandler {
             rightBtn: document.querySelector('#right'),
             compLabel: document.querySelector('#compLabel'),
             compName: document.querySelector('#compName'),
-            panelIndicator: document.querySelector('#panelIndicator')
+            panelIndicator: document.querySelector('#panelIndicator'),
+            menuButton: document.querySelector('[data-type="menu"]'),
+            tabButtons: document.querySelectorAll('[data-type="tab"]')
         } || null
+    }
+
+    getItemInfoElements() {
+        return {
+            modal: document.querySelector('#itemInfoModal'),
+            imageContainer: document.querySelector('#itemInfoImage'),
+            infoName: document.querySelector('#itemInfoName'),
+            specsContainer: document.querySelector('#itemInfoSpecs'),
+            btn1: document.querySelector('#button1'),
+            btn2: document.querySelector('#button2'),
+        }
     }
 }
 

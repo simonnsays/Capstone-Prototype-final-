@@ -3,14 +3,13 @@ class Component {
         name, 
         type, 
         specs, 
-        dimensions,
+        dimensions, 
         isRotatable, 
         isAttached = false, 
         defaultSource, 
         images, slots = [], 
         ports = [],
-        cables = [],
-        formFactor = '',
+        cables = []
     }) {
 
         // Description
@@ -35,9 +34,6 @@ class Component {
 
         // Cables
         this.cables = cables
-
-        // Form Factors
-        this.formFactor = formFactor
     }
 
     static handleComponent(component) {
