@@ -6817,6 +6817,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -6828,7 +6829,9 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'}
+            {type: '6-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
     new Component ({        // EVGA SuperNOVA 1000 P5
@@ -6856,6 +6859,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -6867,6 +6871,7 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin-pcie'}
         ]
     }),
@@ -6895,6 +6900,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -6906,7 +6912,9 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'}
+            {type: '6-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
     new Component ({        // EVGA SuperNOVA 1600 P2
@@ -6934,6 +6942,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -6945,7 +6954,9 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'}
+            {type: '6-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
 
@@ -6975,6 +6986,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -6986,7 +6998,9 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'}
+            {type: '6-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
     new Component ({        // Silverstone DA850r-gm
@@ -7015,6 +7029,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7026,7 +7041,9 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'}
+            {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
     new Component ({        // Silverstone DA1000r-gm
@@ -7055,6 +7072,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7066,7 +7084,9 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'}
+            {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
     new Component ({        // Silvestone EX850r-pm
@@ -7095,6 +7115,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7106,7 +7127,9 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'}
+            {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
     new Component ({        // Silverstone EX1200r-pl
@@ -7135,6 +7158,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7146,7 +7170,9 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'}
+            {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
 
@@ -7176,6 +7202,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7187,7 +7214,9 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'}
+            {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
     new Component ({        // Corsair RM1200e
@@ -7216,6 +7245,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7228,7 +7258,9 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'}
+            {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
     new Component ({        // Corsair RMX Shift RM850x
@@ -7257,6 +7289,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7268,7 +7301,9 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'}
+            {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
     new Component ({        // Corsair AX1600i Digital
@@ -7297,6 +7332,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7308,7 +7344,9 @@ const components = [
             {type: '8-pin-power' },
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'}
+            {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
+            {type: '8-pin'},
         ]
     }),
 
@@ -7338,6 +7376,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7350,6 +7389,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
         ]
     }),
@@ -7379,6 +7419,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7392,6 +7433,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: '12vhpwr'}
         ]
@@ -7422,6 +7464,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7436,6 +7479,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: '12vhpwr'},
 
@@ -7467,6 +7511,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7480,6 +7525,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: '12vhpwr'},
         ]
@@ -7510,6 +7556,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7523,6 +7570,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: '12vhpwr'},
         ]
@@ -7553,6 +7601,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7565,6 +7614,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'}
         ]
     }),
@@ -7593,6 +7643,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7605,6 +7656,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'}
         ]
     }),
@@ -7633,6 +7685,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7645,6 +7698,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'}
         ]
     }),
@@ -7675,6 +7729,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7685,6 +7740,7 @@ const components = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'}
         ]
     }),
@@ -7718,6 +7774,7 @@ const components = [
             {type: '8-pin-pcie'},
             {type: 'sata-power'},
             {type: 'sata-power'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'}
         ]
     }),
@@ -7749,6 +7806,7 @@ const components = [
             {type: '8-pin-pcie'},
             {type: 'sata-power'},
             {type: 'sata-power'},
+            {type: '6-pin-pcie'},
             {type: '8-pin'}
         ]
     }),
