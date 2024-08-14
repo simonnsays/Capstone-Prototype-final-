@@ -66,7 +66,7 @@ class PortsTab {
         // remove port highlights
         this.removeHighlights()
     }
-
+    
     handleOutofBounds(e, modal) {
         const rawMouse = {x: e.clientX, y: e.clientY}
         const rect = modal.getBoundingClientRect()
@@ -430,6 +430,7 @@ class PortsTab {
             })
         })
     }
+    
 }
 
 export default PortsTab

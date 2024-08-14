@@ -49,7 +49,8 @@ class UtilityTool {
             gpu: 'gp',
             psu: 'ps',
             storage: 'st',
-            cooling: 'fn'
+            cooling: 'fn',
+            ram: 'rm'
         }
 
         // check if valid component type 

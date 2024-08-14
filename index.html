@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style2.css">
-    <link rel="icon" href="../favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./assistant/assistant.css">
+    <link rel="icon" href="./favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
     <style>
-       
     </style>
 </head>
 <body>
@@ -95,6 +95,8 @@
                 <button data-category="shop" data-selected="false" data-id="ram" class="button2 category-btn">Memory</button>
                 <button data-category="shop" data-selected="false" data-id="storage" class="button2 category-btn">Storage</button>
                 <button data-category="shop" data-selected="false" data-id="cooling" class="button2 category-btn">Cooling</button>
+                <button data-category="shop" data-selected="false" data-id="gpu" class="button2 category-btn">GPU</button>
+
             </div>
             <hr>
         </div>
@@ -204,7 +206,113 @@
             </div> -->
         </div>
     </div>
-    
+       <!------------------------- ASSISTANT ----------------------------------->
+       <div class="assistant-container">
+        <!-- <a href="https://www.flaticon.com/free-icons/processor" title="processor icons">Processor icons created by 3ab2ou - Flaticon</a> -->
+        <!-- ASSISTANT IMAGE -->
+        <div class="assistant-image-container"> 
+            <div id="pulse" class="pulse"> </div>
+            
+            <img src="./assets/Assistant/processor.png" class="assistant-image img-rltv" >
+        </div>
+
+        <!-- INFO/TIPS -->
+        <div class="assistant-info-container hidden" style="cursor: pointer;"> 
+            <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
+            <p style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
+            <p style="font-weight: normal; cursor: pointer;">...</p> 
+            <!-- <p id="phrase2">LISTEN HERE YOU LITTLE BITCH</p>  -->
+        </div>
+    </div>
+
+    <!-- FULL PAGE INFO / TASKS -->
+    <dialog class="assistant-modal">
+        <div class="assistant-modal-container"> 
+            <!-- tasks -->
+            <div class="task-container">
+                <h1 class="header">TASKS</h1>
+                <div class="hr-line"></div>
+
+                <div class="task-cell">
+                <h1 class="tasktitle">Enter The Shop</h1>
+                <svg class="arrow">
+                    <use xlink:href="./assets/SVGs/rightarrow.svg#my-svg"></use>
+                </svg>
+                <div class="task-description">
+                <p>Look for your PC components and buy them.</p>
+                <p>Ensure to check prices and specifications before making a purchase.</p>
+                <p>The components that you will need are the following:</p>
+                <p>1.Case</p>
+                <p>2.motherboard</p>
+                <p>3.processor</p>
+                <p>4.Power Supply Unit</p>
+                <p>5.RAM</p>
+                <p>6.Storage Device - HDD or SSD</p>
+                <p>7.Cooling</p>
+                <p>8.GPU or Graphics card</p>
+                </div>
+            </div>
+
+                <div class="hr-line"></div>
+
+                <div class="task-cell">
+                <h1 class="tasktitle">Check your Inventory</h1>
+                <svg class="arrow">
+                    <use xlink:href="./assets/SVGs/rightarrow.svg#my-svg"></use>
+                </svg>
+                <div class="task-description">
+                <p>Place the components you've chosen to the components shelf</p>
+                <p>Place each component in regards to their order:</p>
+                <p>1.Case</p>
+                <p>2.motherboard</p>
+                <p>3.processor</p>
+                <p>4.Cooling</p>
+                <p>5.RAM</p>
+                <p>6.Storage Device - HDD or SSD</p>
+                <p>7.Power Supply Unit</p>
+                <p>8.GPU or Graphics card</p>
+                </div>
+            </div>
+
+                <div class="hr-line"></div>
+
+                <div class="task-cell">
+                <h1 class="tasktitle">Connecting Components With Wires</h1>
+                <svg class="arrow">
+                    <use xlink:href="./assets/SVGs/rightarrow.svg#my-svg"></use>
+                </svg>
+                <div class="task-description">
+                <p>Now we dive in to plugging each wire for each component either for power or data connection.</p>
+                <p>There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. 
+                Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicators, reset button, and 3.5mm audio jack ports. </p>                    
+                <p>To connect the wires simply open the wires inventory and drag the wires to their respective slots</p>
+                </div>
+            </div>
+
+                <div class="hr-line"></div>
+
+                <div class="task-cell">
+                <h1 class="tasktitle">Power On</h1>
+                <svg class="arrow">
+                    <use xlink:href="./assets/SVGs/rightarrow.svg#my-svg"></use>
+                </svg>
+                <div class="task-description">
+                <p>Power on your pc by pressing the power on button</p>
+                <p>To turn on your build all you need is to click the power on button</p>
+                </div>
+            </div>
+
+                <div class="hr-line"></div>
+        </div>
+    </dialog>
+
+    <!-- Assistant Error Message -->
+    <dialog class="err-message">
+        <h3>Error!</h3>
+    </dialog>
+
+    <!-- Assistant Reassure -->
+    <dialog class="asst-reassure"></dialog>
     <script type="module" src="main.js"></script>
 </body>
 </html>
