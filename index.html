@@ -1,318 +1,131 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style2.css">
-    <link rel="stylesheet" href="./assistant/assistant.css">
-    <link rel="icon" href="./favicon.png" type="image/x-icon">
-    <title>PC Assembly and Troubleshooting</title>
-    <style>
-    </style>
+    <link rel="stylesheet" href="Landing Page/landingpagestyle.css">
+    <link rel="stylesheet" href="Landing Page/mode.css">
+    <link rel="icon" href="../favicon.png" type="image/x-icon">
+    <title>Prototype v2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+<style>
+</style>
 <body>
-    <!-- GAME CONTAINER -->
-    <div class="game-container">
-        <div class="button-wrapper">
-            <button class="button" id="muneBtn" data-type="menu" data-active="true"></button>
-            <button class="button" id="openShop" data-type="tab">SHOP</button>
-            <button class="button" id="openInv" data-type="tab">INVENTORY</button>
-            <button class="button" id="openWires" data-type="tab">PORTS</button>
-            <button class="button" id="openPerif" data-type="tab">TURN ON</button>
-        </div>
-
-        <!-- canvas -->
-        <canvas id="simCanvas"></canvas>
-
-        <!-- component labels -->
-        <div class="rotate-wrapper">
-            <button class="button" id="left">
-                <img class="arrow" src="./assets/svg/leftArr.svg" alt="left arrow">
-            </button>
-            <div class="wrapper">
-                <p id="compLabel"></p>
-                <p id="compName"></p>
-                <p id="panelIndicator"></p>
-            </div>
-            
-            <button class="button" id="right">
-                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
-            </button>
-        </div>
+  <!-- Whole body of carousel with navigation buttons -->
+  <div class="carousel">
+    <div class="carousel__nav">
+        <span id="moveLeft" class="carousel__arrow">
+            <svg class="carousel__icon" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+                <!-- Left arrow SVG code -->
+            </svg>
+        </span>
+        <span id="moveRight" class="carousel__arrow">
+            <svg class="carousel__icon" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
+                <!-- Right arrow SVG code -->
+            </svg>
+        </span>
     </div>
 
-    <!-- Component Information Modal -->
-    <dialog id="itemInfoModal">
-        <!-- info container -->
-        <div class="itemInfoContainer">
-            <!-- image container -->
-            <div id="itemInfoImage"></div>
-            
-            <!-- item info name -->
-            <div id="itemInfoNameContainer">
-                <div class="infoLineBreak"></div>
-                <p id="itemInfoName">EVGA Supernova 1300 P+, 80+ Platinum 1300W (psu)</p>
-                <div class="infoLineBreak"></div>
+    <!-- Content for carousel items -->
+    <div class="carousel-item carousel-item--1">
+        <div class="carousel-item__image"></div>
+        <div class="carousel-item__info">
+          <div class="carousel-item__container">
+          <h2 class="carousel-item__subtitle">WELCOME TO PC SIMULATION!</h2>
+          <h1 class="carousel-item__title">What is Computer Simulation?</h1>
+          <p class="carousel-item__description">Computer simulation, a potent tool, replicates real-world scenarios virtually, enabling us to model intricate systems, foresee results, and glean insights from basic physics to complex biology. Our ardor lies in leveraging simulation's potential to craft immersive, educational experiences that redefine possibilities.</p>
+          <a class="carousel-item__btn">Simulate</a>
             </div>
-            
-            <!-- item info [SPECS] container -->
-            <div id="itemInfoSpecsContainer">
-                <h5>SPECS</h5>
-                <ul id="itemInfoSpecs">
-                    <li>FormFactor</li>
-                    <li>CPU socket</li>
-                </ul>
-            </div>
-
-            <!-- Buy and cancel buttons-->
-            <div class="itemInfoBottomContainer">
-                <div class="infoLineBreak"></div>
-                <div class="itemInfoButtonsContainer">
-                    <button id="button1" class="button">Buy</button>
-                    <button id="button2" class="button">Cancel</button>
-                </div>
-            </div>
-
         </div>
-    </dialog>
+      </div>
 
-
-    <!-- SHOP MODAL -->
-    <dialog id="shopModal" class="modal">
-        <!-- TOP -->
-        <div class="top">
-            <div class="headline">
-                <h2 class="title">SHOP</h2>
-                <input type="search" class="search-bar" id="shopSearch" placeholder="Search.." autocomplete="off">
-                <h2 id="money">$9999</h2>
+      <div class="carousel-item carousel-item--2">
+        <div class="carousel-item__image"></div>
+        <div class="carousel-item__info">
+          <div class="carousel-item__container">
+          <h2 class="carousel-item__subtitle">WELCOME TO PC SIMULATION!</h2>
+          <h1 class="carousel-item__title">Explore Limitless Possibilities:</h1>
+          <p class="carousel-item__description">Immerse in a varied collection of simulations crafted for inspiration, education, and enjoyment. Uncover fluid dynamics' intricacies, revisit history's moments, and journey to limitless technological futures. Our simulations suit all interests and knowledge levels, welcoming students, educators, researchers, and enthusiasts.</p>
+          <a class="carousel-item__btn">Simulate</a>
             </div>
-
-            <div class="category-scroll">
-                <button data-category="shop" data-selected="false" data-id="chassis" class="button2 category-btn">Case</button>
-                <button data-category="shop" data-selected="false" data-id="motherboard" class="button2 category-btn">Motherboard</button>
-                <button data-category="shop" data-selected="false" data-id="cpu" class="button2 category-btn">CPU</button>
-                <button data-category="shop" data-selected="false" data-id="psu" class="button2 category-btn">Power&nbsp;Supply</button>
-                <button data-category="shop" data-selected="false" data-id="ram" class="button2 category-btn">Memory</button>
-                <button data-category="shop" data-selected="false" data-id="storage" class="button2 category-btn">Storage</button>
-                <button data-category="shop" data-selected="false" data-id="cooling" class="button2 category-btn">Cooling</button>
-                <button data-category="shop" data-selected="false" data-id="gpu" class="button2 category-btn">GPU</button>
-
-            </div>
-            <hr>
         </div>
+      </div>
+
+      <div class="carousel-item carousel-item--3">
+        <div class="carousel-item__image"></div>
+        <div class="carousel-item__info">
+          <div class="carousel-item__container">
+          <h2 class="carousel-item__subtitle">WELCOME TO PC SIMULATION!</h2>
+          <h1 class="carousel-item__title">Empower Learning and Innovation:</h1>
+          <p class="carousel-item__description">PC Simulation: Where education and innovation converge. Our simulations transcend mere entertainment, serving as potent learning tools that cultivate critical thinking, problem-solving, and creativity. Unleash the potential of simulation-based learning, immersing yourself in interactive experiences that unravel intricate subjects.</p>
+          <a class="carousel-item__btn">Simulate</a>
+            </div>
+        </div>
+      </div>
         
-        <!-- MIDDLE -->
-        <div class="items-shop">
-            <!-- item divs are placed here -->
-        </div>
-        <!-- BOTTOM -->
-        <div class="bottom">
-            <hr>
-            <div class="bottom-container">
-                <label for="quickBuy" class="quick-buy">
-                    <input type="checkbox" id="quickBuy" checked>Quick Buy
-                </label>
-                <button id="closeShop" class="button shop-btn">CLOSE</button>
+      <div class="carousel-item carousel-item--4">
+        <div class="carousel-item__image"></div>
+        <div class="carousel-item__info">
+          <div class="carousel-item__container">
+          <h2 class="carousel-item__subtitle">WELCOME TO PC SIMULATION!</h2>
+          <h1 class="carousel-item__title">Unleash Your Potential:</h1>
+          <p class="carousel-item__description">Elevate your knowledge through an individual-focused journey in computer simulation. Explore diverse facets, refine your insights, and expand your expertise, all driven by your personal dedication. Your path in this realm is a solitary yet rewarding pursuit of continuous growth.</p>
+          <a class="carousel-item__btn">Simulate</a>
             </div>
         </div>
-    </dialog>
-
-    <!-- IVENTORY MODAL -->
-    <dialog id="invModal" class="modal">
-        <div class="modal-wrapper">
-            <div class="modal-header">
-                INVENTORY
-                <span id="closeInv" class="closeBtn">&times;</span>
-            </div>
-
-            <!-- item container -->
-            <div id="invItemsContainer" class="modal-body">
-                
-            </div>
+      </div>
+        
+      <div class="carousel-item carousel-item--5">
+        <div class="carousel-item__image"></div>
+        <div class="carousel-item__info">
+          <div class="carousel-item__container">
+          <h2 class="carousel-item__subtitle">WELCOME TO PC SIMULATION!</h2>
+          <h1 class="carousel-item__title">Ready to Begin Your Journey?</h1>
+          <p class="carousel-item__description">Embrace limitless possibilities with computer simulation. Whether learning, exploring, or immersing in the digital realm, PC Simulation awaits. Fasten your seatbelt and embark on an unparalleled adventure.</p>
+          <a class="carousel-item__btn">Simulate</a>
         </div>
-    </dialog>
-
-    <!-- WIRES MODAL -->
-    <div id="wiresModal" class="modal">
-        <div class="modal-wrapper">
-            <!-- modal header -->
-            <div class="modal-header no-margin">
-                PORTS
-                <span id="closeWires" class="closeBtn">&times;</span>
-            </div>
-
-            <!-- item container -->
-            <div id="wiresItemsContainer" class="wire-body">
-                <!-- body header -->
-                <div id="bodyHeader">
-                    <img src="./assets/svg/leftArr.svg" id="portLeft" width="50px" height="30px" >
-                    <div class="port-label">
-                        <div id="mainHead">PORTS</div>
-                        <div id="portSubHead"> &nbsp</div>
-                    </div>
-                    <img src="./assets/svg/rightArr.svg" id="portRight" width="50px" height="30px">
-                    
-                </div>  
-
-                <!-- ports area container -->
-                <div id="portsContainer" data-length="single" class="length-2 ">
-                   
-                    <!-- port cells here.. -->
-
-                                <!-- use cells reference ||| -->
-                                <!--                     vvv -->
-                    <!-- <div class="portCell"> -->
-                        <!-- actual port  -->
-                        <!-- <img class="port" src="./assets/motherboard/ports/mobo_port-fpanel.png"> -->
-                        
-                        <!-- port highlight -->
-                        <!-- <div class="port-highlight"></div> -->
-                        
-                        <!-- cable attached to port -->
-                        <!-- <img class="port-attached" src="./assets/wires/frontPanel/frontPanel-attached(gen).png"> -->
-                        <!-- <img class="port-attached2" src="./assets/wires/sata-data/sata-data-attached(sata).png"> -->
-                        
-                        <!-- slider div for label -->
-                        <!-- <div class="port-slider">24-Pin Power</div> -->
-                    <!-- </div>    -->
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- DRAWER / CABLES -->
-    <div id="wiresDrawer">
-        <!-- drag up pulley -->
-        <div id="pulley">
-            <img id="pulleyImage" src="./assets/svg/up-arrow-svgrepo-com (1).svg" alt="pulley up arrow">
+  <!-- overlay -->
+  <div class="overlay"></div>
+
+  <!-- MODE SELECT -->
+  <div class="mode-select-modal">
+    <!-- header -->
+    <h1 class="mode-header">MODE SELECT</h1>
+
+    <!-- MODES -->
+    <div class="modes-container"> 
+      <!-- Tutorial Mode -->
+      <a href="simulator/index.html">
+        <div class="mode">
+          <div class="mode-image">
+            <img src="Landing Page/assets/t-logo.png">
+          </div>
+          
+          <h1>Tutorial Mode</h1>
+          <img class="mode-icon" src="Landing Page/assets/stock/2.png">    
         </div>
+      </a>
 
-        <!-- cables / drawer contents -->
-        <div id="cableContainer">
-
-                            <!-- cells reference ||| -->
-                            <!--                 vvv -->
-            <!-- <div class="cableCell unused">
-                <img src="./assets/wires/sata-data/sata-data-default.png">
-                <div class="cable-slider"> 24-Pin Power Cable </div>
-            </div> -->
-            <!-- <div class="cableCell unused">
-                <img src="./assets/wires/ATX-power/ATX-power-default.png">
-                <div class="cable-slider"> 24-Pin Power Cable </div>
-            </div> -->
-            <!-- <div class="cableCell used">
-                <img src="./assets/wires/8pin-power/8pin-power-default.png">
-                <div class="cable-slider"> 24-Pin Power Cable </div>
-            </div> -->
+      <!-- Free Build Moed -->
+      <a href="simulator/index.html">
+        <div class="mode">
+          <div class="mode-image">
+            <img src="Landing Page/assets/f-logo.png">
+          </div>
+          <h1>Free Build Mode</h1>
+          <img class="mode-icon fr" src="Landing Page/assets/stock/1.png">
         </div>
+      </a>
     </div>
-       <!------------------------- ASSISTANT ----------------------------------->
-       <div class="assistant-container">
-        <!-- <a href="https://www.flaticon.com/free-icons/processor" title="processor icons">Processor icons created by 3ab2ou - Flaticon</a> -->
-        <!-- ASSISTANT IMAGE -->
-        <div class="assistant-image-container"> 
-            <div id="pulse" class="pulse"> </div>
-            
-            <img src="./assets/Assistant/processor.png" class="assistant-image img-rltv" >
-        </div>
+  </div>
 
-        <!-- INFO/TIPS -->
-        <div class="assistant-info-container hidden" style="cursor: pointer;"> 
-            <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
-            <p style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
-            <p style="font-weight: normal; cursor: pointer;">...</p> 
-            <!-- <p id="phrase2">LISTEN HERE YOU LITTLE BITCH</p>  -->
-        </div>
-    </div>
 
-    <!-- FULL PAGE INFO / TASKS -->
-    <dialog class="assistant-modal">
-        <div class="assistant-modal-container"> 
-            <!-- tasks -->
-            <div class="task-container">
-                <h1 class="header">TASKS</h1>
-                <div class="hr-line"></div>
-
-                <div class="task-cell">
-                <h1 class="tasktitle">Enter The Shop</h1>
-                <svg class="arrow">
-                    <use xlink:href="./assets/SVGs/rightarrow.svg#my-svg"></use>
-                </svg>
-                <div class="task-description">
-                <p>Look for your PC components and buy them.</p>
-                <p>Ensure to check prices and specifications before making a purchase.</p>
-                <p>The components that you will need are the following:</p>
-                <p>1.Case</p>
-                <p>2.motherboard</p>
-                <p>3.processor</p>
-                <p>4.Power Supply Unit</p>
-                <p>5.RAM</p>
-                <p>6.Storage Device - HDD or SSD</p>
-                <p>7.Cooling</p>
-                <p>8.GPU or Graphics card</p>
-                </div>
-            </div>
-
-                <div class="hr-line"></div>
-
-                <div class="task-cell">
-                <h1 class="tasktitle">Check your Inventory</h1>
-                <svg class="arrow">
-                    <use xlink:href="./assets/SVGs/rightarrow.svg#my-svg"></use>
-                </svg>
-                <div class="task-description">
-                <p>Place the components you've chosen to the components shelf</p>
-                <p>Place each component in regards to their order:</p>
-                <p>1.Case</p>
-                <p>2.motherboard</p>
-                <p>3.processor</p>
-                <p>4.Cooling</p>
-                <p>5.RAM</p>
-                <p>6.Storage Device - HDD or SSD</p>
-                <p>7.Power Supply Unit</p>
-                <p>8.GPU or Graphics card</p>
-                </div>
-            </div>
-
-                <div class="hr-line"></div>
-
-                <div class="task-cell">
-                <h1 class="tasktitle">Connecting Components With Wires</h1>
-                <svg class="arrow">
-                    <use xlink:href="./assets/SVGs/rightarrow.svg#my-svg"></use>
-                </svg>
-                <div class="task-description">
-                <p>Now we dive in to plugging each wire for each component either for power or data connection.</p>
-                <p>There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. 
-                Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicators, reset button, and 3.5mm audio jack ports. </p>                    
-                <p>To connect the wires simply open the wires inventory and drag the wires to their respective slots</p>
-                </div>
-            </div>
-
-                <div class="hr-line"></div>
-
-                <div class="task-cell">
-                <h1 class="tasktitle">Power On</h1>
-                <svg class="arrow">
-                    <use xlink:href="./assets/SVGs/rightarrow.svg#my-svg"></use>
-                </svg>
-                <div class="task-description">
-                <p>Power on your pc by pressing the power on button</p>
-                <p>To turn on your build all you need is to click the power on button</p>
-                </div>
-            </div>
-
-                <div class="hr-line"></div>
-        </div>
-    </dialog>
-
-    <!-- Assistant Error Message -->
-    <dialog class="err-message">
-        <h3>Error!</h3>
-    </dialog>
-
-    <!-- Assistant Reassure -->
-    <dialog class="asst-reassure"></dialog>
-    <script type="module" src="main.js"></script>
+  <script src="Landing Page/landscript.js"></script>
+  <script src="Landing Page/mode.js"></script>
 </body>
 </html>
