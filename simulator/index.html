@@ -316,55 +316,7 @@
     <script type="module" src="main.js"></script>
     <script src="./assistant/assistant.js"></script>
     <script>
-        //Assistant task function
-        document.addEventListener('DOMContentLoaded', function () {
-            const taskCells = document.querySelectorAll('.task-cell');
-
-            taskCells.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                    toggleTaskDescription(index);
-                    markTaskCompleted(index);
-                    updateTaskStatus(index);
-                });
-            });
-        });
-
-    //gray out effect for task completion
-        function markTaskCompleted(taskIndex) {
-            const taskCells = document.querySelectorAll('.task-cell');
-            taskCells.forEach((cell, index) => {
-                if (index <= taskIndex) {
-                    cell.classList.add('completed-task');
-                } else {
-                    cell.classList.remove('completed-task');
-                }
-            });
-        }
-    //task description script 
-    function toggleTaskDescription(taskIndex) {
-    const taskDescriptions = document.querySelectorAll('.task-description');
-    taskDescriptions.forEach((description, index) => {
-        if (index === taskIndex) {
-            description.style.display = description.style.display === 'none' ? 'block' : 'none';
-        } else {
-            description.style.display = 'none';
-        }
-    });
-
-    // Update the task status
-    const taskTitles = document.querySelectorAll('.tasktitle');
-    const taskStatus = document.querySelector('#task-status');
     
-    if (taskIndex >= 0 && taskIndex < taskTitles.length) {
-        const currentTaskTitle = taskTitles[taskIndex].textContent;
-        taskStatus.textContent = `Current Task: ${taskIndex + 1} - ${currentTaskTitle}`;
-    }  else {
-        taskStatus.textContent = 'No task selected';
-    }
-}
-    // Ensure no task is initially marked as completed
-    markTaskCompleted(-1); // Pass -1 to mark no task as completed initially
-    updateTaskStatus(-1);
     </script>
 </body>
 </html>

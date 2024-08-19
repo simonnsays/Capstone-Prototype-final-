@@ -71,6 +71,16 @@ class ElementHandler {
             btn2: document.querySelector('#button2'),
         }
     }
+    getAssistantElements() {
+        return {
+            container: document.querySelector('#assistantContainer') || null,
+            imageContainer: document.querySelector('#assistantImageContainer') || null,
+            pulse: document.querySelector('#assistantPulse') || null,
+            image: document.querySelector('#assistantImage') || null,
+            infoContainer: document.querySelector('#assistantInfoContainer') || null,
+            modal: document.querySelector('#assistantModal') || null
+        } || null
+    }
 }
 
 export default ElementHandler
