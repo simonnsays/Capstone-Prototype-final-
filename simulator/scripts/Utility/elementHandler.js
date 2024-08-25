@@ -74,7 +74,7 @@ class ElementHandler {
     getAssistantElements() {
         return {
             container: document.querySelector('#assistantContainer') || null,
-            imageContainer: document.querySelector('#assistantImageContainer') || null, // Fixed typo
+            imageContainer: document.querySelector('#assistantImageContainer') || null, 
             pulse: document.querySelector('#assistantPulse') || null,
             image: document.querySelector('#assistantImage') || null,
             infoContainer: document.querySelector('#assistantInfoContainer') || null,
