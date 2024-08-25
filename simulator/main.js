@@ -7,7 +7,6 @@ import Inventory from "./scripts/Tabs/inventory.js"
 import PortsTab from "./scripts/Tabs/portsTab.js"
 import DisplayArea from "./scripts/displayArea.js"
 import Assistant from "./assistant/assistant.js"
-import DomElements from "./scripts/domElements.js"
 
 class Main {
     constructor() {
@@ -33,10 +32,11 @@ class Main {
         // Shop
         this.shop = new Shop(this.elementHandler, this.utilityTool, this.inventory, this.itemInfo)
 
-        // Assistant
-        this.domElements = new DomElements()
-        this.assistant = new Assistant(this.domElements)
-
+        //Assistant
+        const elementHandler = new ElementHandler();
+        const assistant = new Assistant(elementHandler);
+        assistant.asstInit();
+        
         // Prevent Canvas Interaction when tabs are open
         window.addEventListener('mousedown', () => this.handleMouseDown())
 

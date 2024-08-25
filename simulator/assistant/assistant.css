@@ -1,5 +1,4 @@
 .assistant-container {
-    /* width: 40vw; */
     width: 4vw;
     height: 4vw;
     min-width: 80px;
@@ -9,19 +8,15 @@
     left: 50px;
     display: flex;
     gap: 50px;
-
     background-color: var(--pastel-yellow);
-    box-shadow: 0 0 10px black ;
-
+    box-shadow: 0 0 10px black;
     border-radius: 100px;
     padding: 10px;
-
-    transition: all 0.3s ease;
+    transition: width 0.3s ease; /* Specific transition */
     overflow: hidden;
 }
 .extended {
     width: 45vw;
-    /* height: 4vw; */
 }
 
 .assistant-image-container {
@@ -67,10 +62,8 @@
 }
 
 .assistant-info-container {
-    margin: 0;
-    /* overflow: hidden; */
-
     opacity: 0;
+    transition: opacity 0.3s ease-in-out; 
 }
 
 .assistant-info-container p{
@@ -104,7 +97,6 @@
 .assistant-modal-container {
     width: 100%;
     height: 100%;
-    
     display: flex;
     align-items: center;
     gap: 10px;

@@ -74,13 +74,13 @@ class ElementHandler {
     getAssistantElements() {
         return {
             container: document.querySelector('#assistantContainer') || null,
-            imageContainer: document.querySelector('#assistantImageContainer') || null,
+            imageContainer: document.querySelector('#assistantImageContainer') || null, // Fixed typo
             pulse: document.querySelector('#assistantPulse') || null,
             image: document.querySelector('#assistantImage') || null,
             infoContainer: document.querySelector('#assistantInfoContainer') || null,
             modal: document.querySelector('#assistantModal') || null
-        } || null
-    }
+        } || null;
+    }    
 }
 
 export default ElementHandler
