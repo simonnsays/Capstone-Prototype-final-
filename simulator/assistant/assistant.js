@@ -16,7 +16,7 @@ class Assistant {
     }
 
     isInArea(area, mouse) {
-        if (!area) return false;
+        if (!area) return false; // Guard clause for undefined area
         let point = { x: mouse.clientX, y: mouse.clientY };
         let rect = area.getBoundingClientRect();
 

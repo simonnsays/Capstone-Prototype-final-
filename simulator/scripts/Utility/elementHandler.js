@@ -73,13 +73,13 @@ class ElementHandler {
     }
     getAssistantElements() {
         return {
-            container: document.querySelector('#assistantContainer') || null,
-            imageContainer: document.querySelector('#assistantImageContainer') || null, 
-            pulse: document.querySelector('#assistantPulse') || null,
-            image: document.querySelector('#assistantImage') || null,
-            infoContainer: document.querySelector('#assistantInfoContainer') || null,
-            modal: document.querySelector('#assistantModal') || null
-        } || null;
+            container: document.querySelector('.assistantContainer') ,
+            imageContainer: document.querySelector('.assistantImageContainer') , 
+            pulse: document.querySelector('#assistantPulse') ,
+            image: document.querySelector('.assistantImage') ,
+            infoContainer: document.querySelector('.assistantInfoContainer') ,
+            modal: document.querySelector('.assistantModal') 
+        } 
     }    
 }
 

@@ -36,7 +36,7 @@ class Main {
         const elementHandler = new ElementHandler();
         const assistant = new Assistant(elementHandler);
         assistant.asstInit();
-        
+                
         // Prevent Canvas Interaction when tabs are open
         window.addEventListener('mousedown', () => this.handleMouseDown())
 

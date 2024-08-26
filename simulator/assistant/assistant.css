@@ -12,7 +12,7 @@
     box-shadow: 0 0 10px black;
     border-radius: 100px;
     padding: 10px;
-    transition: width 0.3s ease; /* Specific transition */
+    transition: width 0.3s ease;
     overflow: hidden;
 }
 .extended {
@@ -178,13 +178,6 @@
     border: 1px solid black;
 }
 
-.arrow {
-    width: 20;
-    height: 20;
-    position: absolute;
-    right: 20;
-    top: 40%;
-}
 
 @keyframes pulse {
     0% {
