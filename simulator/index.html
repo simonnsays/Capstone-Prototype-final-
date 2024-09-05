@@ -248,12 +248,12 @@
                 <h1 class="header">TASKS</h1>
                 <div class="hr-line"></div>
 
-                <div class="task-cell">
+                <div class="task-cell" data-task-action="openShop">
                 <h1 class="tasktitle">Enter The Shop</h1>
                 <svg class="arrow">
                     <use xlink:href="./assets/svg/rightArr.svg"></use>
                 </svg>
-                <div class="task-description"  data-task-action="openShop">
+                <div class="task-description">
                 <p>Look for your PC components and buy them.</p>
                 <p>Ensure to check prices and specifications before making a purchase.</p>
                 <p>The components that you will need are the following:</p>
@@ -270,12 +270,12 @@
 
                 <div class="hr-line"></div>
 
-                <div class="task-cell" >
+                <div class="task-cell" data-task-action="openInventory">
                 <h1 class="tasktitle">Check your Inventory</h1>
                 <svg class="arrow">
                     <use xlink:href="./assets/svg/rightArr.svg"></use>
                 </svg>
-                <div class="task-description" data-task-action="openInventory">
+                <div class="task-description">
                 <p>Place the components you've chosen to the components shelf</p>
                 <p>Place each component in regards to their order:</p>
                 <p>1.Case</p>
@@ -291,12 +291,12 @@
 
                 <div class="hr-line"></div>
 
-                <div class="task-cell" >
+                <div class="task-cell" data-task-action="connectWires">
                 <h1 class="tasktitle">Connecting Components With Wires</h1>
                 <svg class="arrow">
                     <use xlink:href="./assets/svg/rightArr.svg"></use>
                 </svg>
-                <div class="task-description" data-task-action="connectWires">
+                <div class="task-description">
                 <p>Now we dive in to plugging each wire for each component either for power or data connection.</p>
                 <p>There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. 
                 Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicators, reset button, and 3.5mm audio jack ports. </p>                    
@@ -306,12 +306,12 @@
 
                 <div class="hr-line"></div>
 
-                <div class="task-cell" >
+                <div class="task-cell" data-task-action="powerOnPC">
                 <h1 class="tasktitle">Power On</h1>
                 <svg class="arrow">
                     <use xlink:href="./assets/svg/rightArr.svg"></use>
                 </svg>
-                <div class="task-description" data-task-action="powerOnPC">
+                <div class="task-description">
                 <p>Power on your pc by pressing the power on button</p>
                 <p>To turn on your build all you need is to click the power on button</p>
                 </div>
@@ -391,7 +391,7 @@
     });
 });
 
-// task actions
+// Define the task actions
 function performTaskAction(action) {
     switch(action) {
         case 'openShop':
@@ -411,7 +411,7 @@ function performTaskAction(action) {
     }
 }
 
-
+// Example modal opening functions
 function openShopModal() {
     const shopModal = document.querySelector('#shopModal');
     if (shopModal) shopModal.showModal();
@@ -424,12 +424,12 @@ function openInventoryModal() {
 
 function openWiresModal() {
     const wiresModal = document.querySelector('#wiresModal');
-    if (wiresModal) wiresModal.style.display = 'block'; // .showModal() if it's a dialog
+    if (wiresModal) wiresModal.style.display = 'block'; // or .showModal() if it's a dialog
 }
 
 function powerOnPC() {
     alert("PC is powering on!");
-    // dagdag for pc power on
+    // Add any additional logic for powering on the PC
 }
 
     </script>
