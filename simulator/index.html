@@ -8,7 +8,11 @@
     <link rel="icon" href="./favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
     <style>
-         #task-status {
+          #completed-task {
+        background-color: #494848; /* Light gray for completed tasks */
+        }
+
+        #task-status {
         position: fixed;
         left: 10px;
         top: 10px;
@@ -16,10 +20,7 @@
         font-weight: bold;
         color: #333;
         }
-         
-        #completed-task {
-        background-color: #494848; /* Light gray for completed tasks */
-        }
+        
     </style>
 </head>
 <body>
@@ -219,8 +220,8 @@
     </div>
     <div id="task-status">Task to be done: Click me "The Assistant" </div>
 
-       <!------------------------- ASSISTANT ----------------------------------->
-       <div class="assistant-container">
+ <!------------------------- ASSISTANT ----------------------------------->
+    <div class="assistant-container" class="rect">
         <!-- <a href="https://www.flaticon.com/free-icons/processor" title="processor icons">Processor icons created by 3ab2ou - Flaticon</a> -->
         <!-- ASSISTANT IMAGE -->
         <div class="assistant-image-container"> 
@@ -230,13 +231,14 @@
         </div>
 
         <!-- INFO/TIPS -->
-        <div class="assistant-info-container" style="cursor: pointer;"> 
+        <div class="assistant-info-container hidden" style="cursor: pointer;"> 
             <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
             <p style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
             <p style="font-weight: normal; cursor: pointer;">...</p> 
             <!-- <p id="phrase2">LISTEN HERE YOU LITTLE BITCH</p>  -->
         </div>
     </div>
+
 
     <!-- FULL PAGE INFO / TASKS -->
     <dialog class="assistant-modal">
@@ -251,7 +253,7 @@
                 <svg class="arrow">
                     <use xlink:href="./assets/svg/rightArr.svg"></use>
                 </svg>
-                <div class="task-description">
+                <div class="task-description"  data-task-action="openShop">
                 <p>Look for your PC components and buy them.</p>
                 <p>Ensure to check prices and specifications before making a purchase.</p>
                 <p>The components that you will need are the following:</p>
@@ -268,12 +270,12 @@
 
                 <div class="hr-line"></div>
 
-                <div class="task-cell">
+                <div class="task-cell" >
                 <h1 class="tasktitle">Check your Inventory</h1>
                 <svg class="arrow">
                     <use xlink:href="./assets/svg/rightArr.svg"></use>
                 </svg>
-                <div class="task-description">
+                <div class="task-description" data-task-action="openInventory">
                 <p>Place the components you've chosen to the components shelf</p>
                 <p>Place each component in regards to their order:</p>
                 <p>1.Case</p>
@@ -289,12 +291,12 @@
 
                 <div class="hr-line"></div>
 
-                <div class="task-cell">
+                <div class="task-cell" >
                 <h1 class="tasktitle">Connecting Components With Wires</h1>
                 <svg class="arrow">
                     <use xlink:href="./assets/svg/rightArr.svg"></use>
                 </svg>
-                <div class="task-description">
+                <div class="task-description" data-task-action="connectWires">
                 <p>Now we dive in to plugging each wire for each component either for power or data connection.</p>
                 <p>There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. 
                 Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicators, reset button, and 3.5mm audio jack ports. </p>                    
@@ -304,12 +306,12 @@
 
                 <div class="hr-line"></div>
 
-                <div class="task-cell">
+                <div class="task-cell" >
                 <h1 class="tasktitle">Power On</h1>
                 <svg class="arrow">
                     <use xlink:href="./assets/svg/rightArr.svg"></use>
                 </svg>
-                <div class="task-description">
+                <div class="task-description" data-task-action="powerOnPC">
                 <p>Power on your pc by pressing the power on button</p>
                 <p>To turn on your build all you need is to click the power on button</p>
                 </div>
@@ -336,7 +338,6 @@
             button.addEventListener('click', () => {
                     toggleTaskDescription(index);
                     markTaskCompleted(index);
-                    updateTaskStatus(index);
                 });
             });
         });
@@ -376,7 +377,60 @@
 }
     // Ensure no task is initially marked as completed
     markTaskCompleted(-1); // Pass -1 to mark no task as completed initially
-    updateTaskStatus(-1);
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const taskCells = document.querySelectorAll('.task-cell');
+
+    taskCells.forEach((cell) => {
+        cell.addEventListener('click', () => {
+            const action = cell.getAttribute('data-task-action');
+            if (action) {
+                performTaskAction(action);  // Perform the task action
+            }
+        });
+    });
+});
+
+// Define the task actions
+function performTaskAction(action) {
+    switch(action) {
+        case 'openShop':
+            openShopModal();
+            break;
+        case 'openInventory':
+            openInventoryModal();
+            break;
+        case 'connectWires':
+            openWiresModal();
+            break;
+        case 'powerOnPC':
+            powerOnPC();
+            break;
+        default:
+            console.log("Unknown task action");
+    }
+}
+
+// Example modal opening functions
+function openShopModal() {
+    const shopModal = document.querySelector('#shopModal');
+    if (shopModal) shopModal.showModal();
+}
+
+function openInventoryModal() {
+    const invModal = document.querySelector('#invModal');
+    if (invModal) invModal.showModal();
+}
+
+function openWiresModal() {
+    const wiresModal = document.querySelector('#wiresModal');
+    if (wiresModal) wiresModal.style.display = 'block'; // or .showModal() if it's a dialog
+}
+
+function powerOnPC() {
+    alert("PC is powering on!");
+    // Add any additional logic for powering on the PC
+}
 
     </script>
 </body>

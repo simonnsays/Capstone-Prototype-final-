@@ -116,6 +116,7 @@
 
 .task-cell {
     width: 30%;
+    height: 10%;
     position: relative;
     display: flex;
     flex-direction: column;

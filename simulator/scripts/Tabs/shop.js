@@ -41,10 +41,17 @@ class Shop{
 
     // Open Shop Tab
     openTab(modal) {
-        modal.showModal()
-        modal.isOpen = true
-        this.isActive = true
+        modal.showModal();
+        modal.isOpen = true;
+        this.isActive = true;
+
+    // Automatically select the first category when the shop is opened
+    if (this.categories.length > 0) {
+        const firstCategory = this.categories[0].dataset.id;
+        this.selectCategory(firstCategory);
+        this.update();
     }
+}
 
     // Close Shop Tab
     closeTab(modal) {
