@@ -265,6 +265,8 @@
                 <p>6.Storage Device - HDD or SSD</p>
                 <p>7.Cooling</p>
                 <p>8.GPU or Graphics card</p>
+                <!--New Task Button-->
+                <button class="start-task-btn" data-task="openShop">Start Task</button>
                 </div>
             </div>
 
@@ -286,6 +288,7 @@
                 <p>6.Storage Device - HDD or SSD</p>
                 <p>7.Power Supply Unit</p>
                 <p>8.GPU or Graphics card</p>
+                <button class="start-task-btn" data-task="openInventory">Start Task</button>
                 </div>
             </div>
 
@@ -301,6 +304,7 @@
                 <p>There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. 
                 Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicators, reset button, and 3.5mm audio jack ports. </p>                    
                 <p>To connect the wires simply open the wires inventory and drag the wires to their respective slots</p>
+                <button class="start-task-btn" data-task="connectWires">Start Task</button>
                 </div>
             </div>
 
@@ -314,6 +318,7 @@
                 <div class="task-description">
                 <p>Power on your pc by pressing the power on button</p>
                 <p>To turn on your build all you need is to click the power on button</p>
+                <button class="start-task-btn" data-task="powerOnPC">Start Task</button>
                 </div>
             </div>
 
@@ -377,21 +382,42 @@
 }
     // Ensure no task is initially marked as completed
     markTaskCompleted(-1); // Pass -1 to mark no task as completed initially
-
+    
     document.addEventListener('DOMContentLoaded', function () {
     const taskCells = document.querySelectorAll('.task-cell');
 
-    taskCells.forEach((cell) => {
+    taskCells.forEach((cell, index) => {
         cell.addEventListener('click', () => {
-            const action = cell.getAttribute('data-task-action');
+            toggleTaskDescription(index);
+        });
+    });
+
+    // Event listener for "Start Task" button clicks
+    const startTaskButtons = document.querySelectorAll('.start-task-btn');
+    startTaskButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const action = button.getAttribute('data-task');
             if (action) {
                 performTaskAction(action);  // Perform the task action
             }
+            e.stopPropagation();  // Prevent toggling the description when button is clicked
         });
     });
 });
 
-// Define the task actions
+// Toggle the task description visibility
+function toggleTaskDescription(taskIndex) {
+    const taskDescriptions = document.querySelectorAll('.task-description');
+    taskDescriptions.forEach((description, index) => {
+        if (index === taskIndex) {
+            description.style.display = description.style.display === 'none' ? 'block' : 'none';
+        } else {
+            description.style.display = 'none';
+        }
+    });
+}
+
+// Perform the corresponding task action
 function performTaskAction(action) {
     switch(action) {
         case 'openShop':
@@ -429,7 +455,6 @@ function openWiresModal() {
 
 function powerOnPC() {
     alert("PC is powering on!");
-    // Add any additional logic for powering on the PC
 }
 
     </script>

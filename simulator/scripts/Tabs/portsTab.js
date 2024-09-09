@@ -10,6 +10,8 @@ class PortsTab {
         // Open / Close tab buttons
         this.openBtn = this.elements.openBtn
         this.closeBtn = this.elements.closeBtn
+        window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
+
 
         // Wires / port tab
         this.isActive = false
