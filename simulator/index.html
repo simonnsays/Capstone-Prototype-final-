@@ -8,8 +8,8 @@
     <link rel="icon" href="./favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
     <style>
-          #completed-task {
-        background-color: #494848; /* Light gray for completed tasks */
+        .completed-task {
+        background-color: #a7a4a4; /* Light gray for completed tasks */
         }
 
         #task-status {
@@ -336,88 +336,75 @@
     <script type="module" src="main.js"></script>
     <script>
         //Assistant task function
-        document.addEventListener('DOMContentLoaded', function () {
-            const taskCells = document.querySelectorAll('.task-cell');
-
-            taskCells.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                    toggleTaskDescription(index);
-                    markTaskCompleted(index);
-                });
-            });
-        });
-
-    //gray out effect for task completion
-        function markTaskCompleted(taskIndex) {
-            const taskCells = document.querySelectorAll('.task-cell');
-            taskCells.forEach((cell, index) => {
-                if (index <= taskIndex) {
-                    cell.classList.add('completed-task');
-                } else {
-                    cell.classList.remove('completed-task');
-                }
-            });
-        }
-    //task description script 
-    function toggleTaskDescription(taskIndex) {
-    const taskDescriptions = document.querySelectorAll('.task-description');
-    taskDescriptions.forEach((description, index) => {
-        if (index === taskIndex) {
-            description.style.display = description.style.display === 'none' ? 'block' : 'none';
-        } else {
-            description.style.display = 'none';
-        }
-    });
-
-    // Update the task status
-    const taskTitles = document.querySelectorAll('.tasktitle');
-    const taskStatus = document.querySelector('#task-status');
-    
-    if (taskIndex >= 0 && taskIndex < taskTitles.length) {
-        const currentTaskTitle = taskTitles[taskIndex].textContent;
-        taskStatus.textContent = `Current Task: ${taskIndex + 1} - ${currentTaskTitle}`;
-    }  else {
-        taskStatus.textContent = 'No task selected';
-    }
-}
-    // Ensure no task is initially marked as completed
-    markTaskCompleted(-1); // Pass -1 to mark no task as completed initially
-    
-    document.addEventListener('DOMContentLoaded', function () {
+// Assistant task function
+document.addEventListener('DOMContentLoaded', function () {
     const taskCells = document.querySelectorAll('.task-cell');
-
-    taskCells.forEach((cell, index) => {
-        cell.addEventListener('click', () => {
-            toggleTaskDescription(index);
+    
+    // Event listener for each task cell click
+    taskCells.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            toggleTaskDescription(index);   // Show description
+            markTaskCompleted(index);       // Mark task as completed
         });
     });
 
-    // Event listener for "Start Task" button clicks
+    // Event listener for "Start Task" button clicks inside descriptions
     const startTaskButtons = document.querySelectorAll('.start-task-btn');
     startTaskButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             const action = button.getAttribute('data-task');
             if (action) {
-                performTaskAction(action);  // Perform the task action
+                performTaskAction(action);  // Perform the task action (open shop, inventory, etc.)
             }
             e.stopPropagation();  // Prevent toggling the description when button is clicked
         });
     });
 });
 
-// Toggle the task description visibility
-function toggleTaskDescription(taskIndex) {
-    const taskDescriptions = document.querySelectorAll('.task-description');
-    taskDescriptions.forEach((description, index) => {
-        if (index === taskIndex) {
-            description.style.display = description.style.display === 'none' ? 'block' : 'none';
+// Mark tasks as completed and gray them out
+function markTaskCompleted(taskIndex) {
+    const taskCells = document.querySelectorAll('.task-cell');
+    taskCells.forEach((cell, index) => {
+        if (index <= taskIndex) {
+            cell.classList.add('completed-task');  // Add gray-out effect
         } else {
-            description.style.display = 'none';
+            cell.classList.remove('completed-task');
         }
     });
 }
 
-// Perform the corresponding task action
+// Toggle the visibility of task descriptions
+function toggleTaskDescription(taskIndex) {
+    const taskDescriptions = document.querySelectorAll('.task-description');
+
+    // Loop through all descriptions and hide the others
+    taskDescriptions.forEach((description, index) => {
+        if (index === taskIndex) {
+            description.style.display = 'block';  // Show the current task description
+        } else {
+            description.style.display = 'none';   // Hide other task descriptions
+        }
+    });
+
+    // Update the task status display
+    updateTaskStatus(taskIndex);
+}
+
+// Update the task status in the task-status element
+function updateTaskStatus(taskIndex) {
+    const taskTitles = document.querySelectorAll('.tasktitle');
+    const taskStatus = document.querySelector('#task-status');
+
+    // Update status based on the current task
+    if (taskIndex >= 0 && taskIndex < taskTitles.length) {
+        const currentTaskTitle = taskTitles[taskIndex].textContent;
+        taskStatus.textContent = `Current Task: ${taskIndex + 1} - ${currentTaskTitle}`;
+    } else {
+        taskStatus.textContent = 'No task selected';
+    }
+}
+
+// Perform the corresponding task action (open modal or do something)
 function performTaskAction(action) {
     switch(action) {
         case 'openShop':
@@ -450,13 +437,15 @@ function openInventoryModal() {
 
 function openWiresModal() {
     const wiresModal = document.querySelector('#wiresModal');
-    if (wiresModal) wiresModal.style.display = 'block'; // or .showModal() if it's a dialog
+    if (wiresModal) wiresModal.style.display = 'block';  // or use .showModal() if it's a dialog
 }
 
 function powerOnPC() {
     alert("PC is powering on!");
 }
 
+// Ensure no task is initially marked as completed
+markTaskCompleted(-1);  // Reset task completion at the start
     </script>
 </body>
 </html>
