@@ -22,9 +22,35 @@
 .assistant-image-container {
     width: 80px;
     height: auto;
-
     border-radius: 60px;
 }
+
+.start-task-btn{
+    border-radius: 100px; 
+    cursor: pointer;
+    font-weight: Bold;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    padding: 12.5px 30px;
+    margin: 20px;
+    margin-top: 40px;
+    margin-left: 250px;
+    border:0;
+  }
+  
+  .start-task-btn:hover{
+    background-color: #6fc5ff;
+    box-shadow: 0 0 20px #6fc5ff50;
+    transform: scale(1.1);
+  }
+  
+  .start-task-btn:active {
+      background-color: #3d94cf;
+      transition: all 0.25s;
+      -webkit-transition: all 0.25s;
+      box-shadow: none;
+      transform: scale(0.98);
+    }
 
 .pulse {
     width: 80px;
@@ -84,11 +110,10 @@
     height: 80vh;
     background-color: var(--pastel-yellow);
     overflow: auto;
-
     padding: 20px;
-    
     transition: all 1.5s ease-in-out;
 }
+
 .assistant-modal::backdrop {
     background-color: black;
     opacity: .3;
@@ -127,11 +152,6 @@
     padding: 5 10 10 10px;
     cursor: pointer;
 }
-.task-cell:hover {
-    /* background-color: bisque; */
-    /* background-color: var(--pastel-yellow); */
-    background-color: var(--mint);
-}
 
 .task-cell title {
     text-align: justify;
@@ -159,6 +179,7 @@
     border: black;
     background-color: #ffffff00;
     text-align: justify;
+    cursor: default;
 }
 
 .header {
