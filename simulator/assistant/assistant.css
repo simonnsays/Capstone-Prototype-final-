@@ -35,7 +35,6 @@
     margin: 20px;
     margin-top: 40px;
     margin-left: 250px;
-    border:0;
   }
   
   .start-task-btn:hover{
@@ -173,13 +172,15 @@
     display: none;
     position: fixed;
     top: 20%;
-    left: 45%;  
-    width: 600px; /* Adjust the width as needed */
+    left: 40%;  
+    width: 700px; /* Adjust the width as needed */
     padding: 10px;
     border: black;
     background-color: #ffffff00;
     text-align: justify;
     cursor: default;
+    max-height: 600px;  /* Set a reasonable max height for the description */
+    overflow-y: auto;   /* Enable vertical scrolling */
 }
 
 .header {

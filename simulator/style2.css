@@ -185,32 +185,7 @@ hr {
 /*******************************************************/
 
 /* BUTTONS */
-.start-task-btn{
-    border-radius: 100px; 
-    cursor: pointer;
-    font-weight: Bold;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-    padding: 12.5px 30px;
-    margin: 20px;
-    margin-top: 40px;
-    margin-left: 250px;
-    border:0;
-  }
-  
-  .start-task-btn:hover{
-    background-color: #6fc5ff;
-    box-shadow: 0 0 20px #6fc5ff50;
-    transform: scale(1.1);
-  }
-  
-  .start-task-btn:active {
-      background-color: #3d94cf;
-      transition: all 0.25s;
-      -webkit-transition: all 0.25s;
-      box-shadow: none;
-      transform: scale(0.98);
-    }
+
 .btn-container {
     position: absolute;
     align-self: center;
