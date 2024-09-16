@@ -1,0 +1,470 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="./assistant/assistant.css">
+    <link rel="icon" href="./favicon.png" type="image/x-icon">
+    <title>PC Assembly and Troubleshooting</title>
+    <style>
+        .completed-task {
+        background-color: #a7a4a4; /* Light gray for completed tasks */
+        }
+
+        #task-status {
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- GAME CONTAINER -->
+    <div class="game-container">
+        <div class="button-wrapper">
+            <button class="button" id="muneBtn" data-type="menu" data-active="true"></button>
+            <button class="button" id="openShop" data-type="tab">SHOP</button>
+            <button class="button" id="openInv" data-type="tab">INVENTORY</button>
+            <button class="button" id="openWires" data-type="tab">PORTS</button>
+            <button class="button" id="openPerif" data-type="tab">TURN ON</button>
+        </div>
+
+        <!-- canvas -->
+        <canvas id="simCanvas"></canvas>
+
+        <!-- component labels -->
+        <div class="rotate-wrapper">
+            <button class="button" id="left">
+                <img class="arrow" src="./assets/svg/leftArr.svg" alt="left arrow">
+            </button>
+            <div class="wrapper">
+                <p id="compLabel"></p>
+                <p id="compName"></p>
+                <p id="panelIndicator"></p>
+            </div>
+            
+            <button class="button" id="right">
+                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
+            </button>
+        </div>
+    </div>
+
+    <!-- Component Information Modal -->
+    <dialog id="itemInfoModal">
+        <!-- info container -->
+        <div class="itemInfoContainer">
+            <!-- image container -->
+            <div id="itemInfoImage"></div>
+            
+            <!-- item info name -->
+            <div id="itemInfoNameContainer">
+                <div class="infoLineBreak"></div>
+                <p id="itemInfoName">EVGA Supernova 1300 P+, 80+ Platinum 1300W (psu)</p>
+                <div class="infoLineBreak"></div>
+            </div>
+            
+            <!-- item info [SPECS] container -->
+            <div id="itemInfoSpecsContainer">
+                <h5>SPECS</h5>
+                <ul id="itemInfoSpecs">
+                    <li>FormFactor</li>
+                    <li>CPU socket</li>
+                </ul>
+            </div>
+
+            <!-- Buy and cancel buttons-->
+            <div class="itemInfoBottomContainer">
+                <div class="infoLineBreak"></div>
+                <div class="itemInfoButtonsContainer">
+                    <button id="button1" class="button">Buy</button>
+                    <button id="button2" class="button">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </dialog>
+
+
+    <!-- SHOP MODAL -->
+    <dialog id="shopModal" class="modal">
+        <!-- TOP -->
+        <div class="top">
+            <div class="headline">
+                <h2 class="title">SHOP</h2>
+                <input type="search" class="search-bar" id="shopSearch" placeholder="Search.." autocomplete="off">
+                <h2 id="money">$9999</h2>
+            </div>
+
+            <div class="category-scroll">
+                <button data-category="shop" data-selected="false" data-id="chassis" class="button2 category-btn">Case</button>
+                <button data-category="shop" data-selected="false" data-id="motherboard" class="button2 category-btn">Motherboard</button>
+                <button data-category="shop" data-selected="false" data-id="cpu" class="button2 category-btn">CPU</button>
+                <button data-category="shop" data-selected="false" data-id="psu" class="button2 category-btn">Power&nbsp;Supply</button>
+                <button data-category="shop" data-selected="false" data-id="ram" class="button2 category-btn">Memory</button>
+                <button data-category="shop" data-selected="false" data-id="storage" class="button2 category-btn">Storage</button>
+                <button data-category="shop" data-selected="false" data-id="cooling" class="button2 category-btn">Cooling</button>
+                <button data-category="shop" data-selected="false" data-id="gpu" class="button2 category-btn">GPU</button>
+            </div>
+            <hr>
+        </div>
+        
+        <!-- MIDDLE -->
+        <div class="items-shop">
+            <!-- item divs are placed here -->
+        </div>
+        <!-- BOTTOM -->
+        <div class="bottom">
+            <hr>
+            <div class="bottom-container">
+                <label for="quickBuy" class="quick-buy">
+                    <input type="checkbox" id="quickBuy" checked>Quick Buy
+                </label>
+                <button id="closeShop" class="button shop-btn">CLOSE</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- IVENTORY MODAL -->
+    <dialog id="invModal" class="modal">
+        <div class="modal-wrapper">
+            <div class="modal-header">
+                INVENTORY
+                <span id="closeInv" class="closeBtn">&times;</span>
+            </div>
+
+            <!-- item container -->
+            <div id="invItemsContainer" class="modal-body">
+                
+            </div>
+        </div>
+    </dialog>
+
+    <!-- WIRES MODAL -->
+    <div id="wiresModal" class="modal">
+        <div class="modal-wrapper">
+            <!-- modal header -->
+            <div class="modal-header no-margin">
+                PORTS
+                <span id="closeWires" class="closeBtn">&times;</span>
+            </div>
+
+            <!-- item container -->
+            <div id="wiresItemsContainer" class="wire-body">
+                <!-- body header -->
+                <div id="bodyHeader">
+                    <img src="./assets/svg/leftArr.svg" id="portLeft" width="50px" height="30px" >
+                    <div class="port-label">
+                        <div id="mainHead">PORTS</div>
+                        <div id="portSubHead"> &nbsp</div>
+                    </div>
+                    <img src="./assets/svg/rightArr.svg" id="portRight" width="50px" height="30px">
+                    
+                </div>  
+
+                <!-- ports area container -->
+                <div id="portsContainer" data-length="single" class="length-2 ">
+                   
+                    <!-- port cells here.. -->
+
+                                <!-- use cells reference ||| -->
+                                <!--                     vvv -->
+                    <!-- <div class="portCell"> -->
+                        <!-- actual port  -->
+                        <!-- <img class="port" src="./assets/motherboard/ports/mobo_port-fpanel.png"> -->
+                        
+                        <!-- port highlight -->
+                        <!-- <div class="port-highlight"></div> -->
+                        
+                        <!-- cable attached to port -->
+                        <!-- <img class="port-attached" src="./assets/wires/frontPanel/frontPanel-attached(gen).png"> -->
+                        <!-- <img class="port-attached2" src="./assets/wires/sata-data/sata-data-attached(sata).png"> -->
+                        
+                        <!-- slider div for label -->
+                        <!-- <div class="port-slider">24-Pin Power</div> -->
+                    <!-- </div>    -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DRAWER / CABLES -->
+    <div id="wiresDrawer">
+        <!-- drag up pulley -->
+        <div id="pulley">
+            <img id="pulleyImage" src="./assets/svg/up-arrow-svgrepo-com (1).svg" alt="pulley up arrow">
+        </div>
+
+        <!-- cables / drawer contents -->
+        <div id="cableContainer">
+
+                            <!-- cells reference ||| -->
+                            <!--                 vvv -->
+            <!-- <div class="cableCell unused">
+                <img src="./assets/wires/sata-data/sata-data-default.png">
+                <div class="cable-slider"> 24-Pin Power Cable </div>
+            </div> -->
+            <!-- <div class="cableCell unused">
+                <img src="./assets/wires/ATX-power/ATX-power-default.png">
+                <div class="cable-slider"> 24-Pin Power Cable </div>
+            </div> -->
+            <!-- <div class="cableCell used">
+                <img src="./assets/wires/8pin-power/8pin-power-default.png">
+                <div class="cable-slider"> 24-Pin Power Cable </div>
+            </div> -->
+        </div>
+    </div>
+    <div id="task-status">Task to be done: Click me "The Assistant" </div>
+
+ <!------------------------- ASSISTANT ----------------------------------->
+    <div class="assistant-container" class="rect">
+        <!-- <a href="https://www.flaticon.com/free-icons/processor" title="processor icons">Processor icons created by 3ab2ou - Flaticon</a> -->
+        <!-- ASSISTANT IMAGE -->
+        <div class="assistant-image-container"> 
+            <div id="pulse" class="pulse"> </div>
+            
+            <img src="./assets/Assistant/processor.png" class="assistant-image img-rltv" >
+        </div>
+
+        <!-- INFO/TIPS -->
+        <div class="assistant-info-container hidden" style="cursor: pointer;"> 
+            <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
+            <p style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
+            <p style="font-weight: normal; cursor: pointer;">...</p> 
+            <!-- <p id="phrase2">LISTEN HERE YOU LITTLE BITCH</p>  -->
+        </div>
+    </div>
+
+
+    <!-- FULL PAGE INFO / TASKS -->
+    <dialog class="assistant-modal">
+        <div class="assistant-modal-container"> 
+            <!-- tasks -->
+            <div class="task-container">
+                <h1 class="header">TASKS</h1>
+                <div class="hr-line"></div>
+
+                <div class="task-cell" data-task-action="openShop">
+                <h1 class="tasktitle">Enter The Shop</h1>
+                <svg class="arrow">
+                    <use xlink:href="./assets/svg/rightArr.svg"></use>
+                </svg>
+                <div class="task-description">
+                <p>Look for your PC components and buy them.</p>
+                <p style="padding-bottom: 10px;">Ensure to check prices and specifications before making a purchase.</p>
+                <p>The components that you will need are the following:</p>
+                <p>1.Case</p>
+                <p>2.motherboard</p>
+                <p>3.processor</p>
+                <p>4.Power Supply Unit</p>
+                <p>5.RAM</p>
+                <p>6.Storage Device - HDD or SSD</p>
+                <p>7.Cooling</p>
+                <p>8.GPU or Graphics card</p>
+                <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
+                <p><img src="assets/Assistant/shop1.png" alt="shop1" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/shop2.png" alt="shop2" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/shop3.png" alt="shop3" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <!--New Task Button-->
+                <button class="start-task-btn" data-task="openShop">Start Task</button>
+                </div>
+            </div>
+
+                <div class="hr-line"></div>
+
+                <div class="task-cell" data-task-action="openInventory">
+                <h1 class="tasktitle">Check your Inventory</h1>
+                <svg class="arrow">
+                    <use xlink:href="./assets/svg/rightArr.svg"></use>
+                </svg>
+                <div class="task-description">
+                <p style="padding-bottom: 10px;">Place the components you've chosen to the components shelf by clicking the components in your inventory</p>
+                <p>Place each component in regards to their order:</p>
+                <p>1.Case</p>
+                <p>2.motherboard</p>
+                <p>3.processor</p>
+                <p>4.Cooling</p>
+                <p>5.RAM</p>
+                <p>6.Storage Device - HDD or SSD</p>
+                <p>7.Power Supply Unit</p>
+                <p>8.GPU or Graphics card</p>
+                <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
+                <p><img src="assets/Assistant/inv1.png" alt="inv1" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/inv2.png" alt="inv2" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/inv3.png" alt="inv3" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <button class="start-task-btn" data-task="openInventory">Start Task</button>
+                </div>
+            </div>
+
+                <div class="hr-line"></div>
+
+                <div class="task-cell" data-task-action="connectWires">
+                <h1 class="tasktitle">Connecting Components With Wires</h1>
+                <svg class="arrow">
+                    <use xlink:href="./assets/svg/rightArr.svg"></use>
+                </svg>
+                <div class="task-description">
+                <p>Now we dive in to plugging each wire for each component either for power or data connection.</p>
+                <p>There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. 
+                Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicators, reset button, and 3.5mm audio jack ports. </p>                    
+                <p>To connect the wires simply open the wires inventory and drag the wires to their respective slots</p>
+                <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
+                <p><img src="assets/Assistant/wires1.png" alt="inv1" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires2.png" alt="inv2" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires3.png" alt="inv3" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires4.png" alt="inv1" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires4.1.png" alt="inv2" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p style="padding: 5px;">Also please note that the wire will be colored green when they are connected on both components however it will be colored red if it is only connected on one end.</p>
+                <p><img src="assets/Assistant/wires4.2.png" alt="inv3" style="height: 200px; width: 500px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires5.png" alt="inv1" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires6.png" alt="inv2" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <button class="start-task-btn" data-task="connectWires">Start Task</button>
+                </div>
+            </div>
+
+                <div class="hr-line"></div>
+
+                <div class="task-cell" data-task-action="powerOnPC">
+                <h1 class="tasktitle">Power On</h1>
+                <svg class="arrow">
+                    <use xlink:href="./assets/svg/rightArr.svg"></use>
+                </svg>
+                <div class="task-description">
+                <p>Power on your pc by pressing the power on button</p>
+                <p>To turn on your build all you need is to click the power on button</p>
+                <button class="start-task-btn" data-task="powerOnPC">Start Task</button>
+                </div>
+            </div>
+
+                <div class="hr-line"></div>
+        </div>
+    </dialog>
+
+    <!-- Assistant Error Message -->
+    <dialog class="err-message">
+        <h3>Error!</h3>
+    </dialog>
+
+    <!-- Assistant Reassure -->
+    <dialog class="asst-reassure"></dialog>
+    <script type="module" src="main.js"></script>
+    <script>
+    // Assistant task function
+    document.addEventListener('DOMContentLoaded', function () {
+    const taskCells = document.querySelectorAll('.task-cell');
+    
+    // Event listener for each task cell click
+    taskCells.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            toggleTaskDescription(index);   // Show description
+            markTaskCompleted(index);       // Mark task as completed
+        });
+    });
+
+    // Event listener for "Start Task" button clicks inside descriptions
+    const startTaskButtons = document.querySelectorAll('.start-task-btn');
+    startTaskButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const action = button.getAttribute('data-task');
+            if (action) {
+                performTaskAction(action);  // Perform the task action (open shop, inventory, etc.)
+            }
+            e.stopPropagation();  // Prevent toggling the description when button is clicked
+        });
+    });
+});
+
+// Mark tasks as completed and gray them out
+function markTaskCompleted(taskIndex) {
+    const taskCells = document.querySelectorAll('.task-cell');
+    taskCells.forEach((cell, index) => {
+        if (index <= taskIndex) {
+            cell.classList.add('completed-task');  // Add gray-out effect
+        } else {
+            cell.classList.remove('completed-task');
+        }
+    });
+}
+
+// Toggle the visibility of task descriptions
+function toggleTaskDescription(taskIndex) {
+    const taskDescriptions = document.querySelectorAll('.task-description');
+
+    // Loop through all descriptions and hide the others
+    taskDescriptions.forEach((description, index) => {
+        if (index === taskIndex) {
+            description.style.display = 'block';  // Show the current task description
+        } else {
+            description.style.display = 'none';   // Hide other task descriptions
+        }
+    });
+
+    // Update the task status display
+    updateTaskStatus(taskIndex);
+}
+
+// Update the task status in the task-status element
+function updateTaskStatus(taskIndex) {
+    const taskTitles = document.querySelectorAll('.tasktitle');
+    const taskStatus = document.querySelector('#task-status');
+
+    // Update status based on the current task
+    if (taskIndex >= 0 && taskIndex < taskTitles.length) {
+        const currentTaskTitle = taskTitles[taskIndex].textContent;
+        taskStatus.textContent = `Current Task: ${taskIndex + 1} - ${currentTaskTitle}`;
+    } else {
+        taskStatus.textContent = 'No task selected';
+    }
+}
+
+// Perform the corresponding task action (open modal or do something)
+function performTaskAction(action) {
+    switch(action) {
+        case 'openShop':
+            openShopModal();
+            break;
+        case 'openInventory':
+            openInventoryModal();
+            break;
+        case 'connectWires':
+            openWiresModal();
+            break;
+        case 'powerOnPC':
+            powerOnPC();
+            break;
+        default:
+            console.log("Unknown task action");
+    }
+}
+
+// Example modal opening functions
+function openShopModal() {
+    const shopModal = document.querySelector('#shopModal');
+    if (shopModal) shopModal.showModal();
+}
+
+function openInventoryModal() {
+    const invModal = document.querySelector('#invModal');
+    if (invModal) invModal.showModal();
+}
+
+function openWiresModal() {
+    const wiresModal = document.querySelector('#wiresModal');
+    if (wiresModal) wiresModal.style.display = 'block';  // or use .showModal() if it's a dialog
+}
+
+function powerOnPC() {
+    alert("PC is powering on!");
+}
+
+// Ensure no task is initially marked as completed
+markTaskCompleted(-1);  // Reset task completion at the start
+
+
+    </script>
+</body>
+</html>
