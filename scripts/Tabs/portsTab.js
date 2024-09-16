@@ -20,7 +20,7 @@ class PortsTab {
         this.pageLeftBtn = this.elements.pageLeftBtn
 
         // Drawer
-        this.drawer = new Drawer(elementHandler)
+        this.drawer = new Drawer(elementHandler, utilityTool)
         
         // Wires
         this.wires = []
@@ -70,8 +70,10 @@ class PortsTab {
     handleOutofBounds(e, modal) {
         const rawMouse = {x: e.clientX, y: e.clientY}
         const rect = modal.getBoundingClientRect()
-
-        if(!this.utilityTool.isInsideBox(rawMouse, rect) && modal.isOpen) {
+        if(this.drawer.isBeingOpened(rawMouse) || this.drawer.isBeingUsed(rawMouse)) {
+            return
+        }
+        if(!this.utilityTool.isInsideBox(rawMouse, rect) && modal.isOpen)  {
             
             this.closeTab(modal)
         }

@@ -69,8 +69,21 @@ class ElementHandler {
             specsContainer: document.querySelector('#itemInfoSpecs'),
             btn1: document.querySelector('#button1'),
             btn2: document.querySelector('#button2'),
-        }
+        } || null
     }
+
+    getBootUpTabElements() {
+        return {
+            modal: document.querySelector('#bootUpTab'),
+            openBtn: document.querySelector('#openBootTab'),
+            closeBtn: document.querySelector('#closeBootTab'),
+            powerBtn: document.querySelector('#powerButton'),
+            pcPlaceHolder: document.querySelector('#unitPlaceHolder'),
+            reportArea: document.querySelector('#bootTabReport')
+        } || null
+    }
+
+    getPcSetElements
 }
 
 export default ElementHandler

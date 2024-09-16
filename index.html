@@ -18,7 +18,7 @@
             <button class="button" id="openShop" data-type="tab">SHOP</button>
             <button class="button" id="openInv" data-type="tab">INVENTORY</button>
             <button class="button" id="openWires" data-type="tab">PORTS</button>
-            <button class="button" id="openPerif" data-type="tab">TURN ON</button>
+            <button class="button" id="openBootTab" data-type="tab">BOOT</button>
         </div>
 
         <!-- canvas -->
@@ -76,7 +76,6 @@
         </div>
     </dialog>
 
-
     <!-- SHOP MODAL -->
     <dialog id="shopModal" class="modal">
         <!-- TOP -->
@@ -130,7 +129,7 @@
         </div>
     </dialog>
 
-    <!-- WIRES MODAL -->
+    <!-- WIRES(PORTS) MODAL -->
     <div id="wiresModal" class="modal">
         <div class="modal-wrapper">
             <!-- modal header -->
@@ -202,6 +201,46 @@
                 <img src="./assets/wires/8pin-power/8pin-power-default.png">
                 <div class="cable-slider"> 24-Pin Power Cable </div>
             </div> -->
+        </div>
+    </div>
+
+    <!-- BOOT UP MODAL -->
+    <div id="bootUpTab" class="modal">
+        <div class="modal-wrapper">
+            <!-- header -->
+            <div class="modal-header no-margin">
+                BOOT UP
+                <span id="closeBootTab" class="closeBtn">&times;</span>
+            </div>
+
+            <!-- body -->
+            <div class="bootTabBodyWrapper">
+                <!-- report -->
+                <div id="bootTabReport">
+                    <!-- <div class="reportCell">
+                        <div class="reportCellTag"> Temperature:</div>
+                        <div class="reportCellDef">71 degrees</div>
+                    </div>
+                    <div class="reportCell">
+                        <div class="reportCellTag"> Wattage:</div>
+                        <div class="reportCellDef">600W / 800W</div>
+                    </div> -->
+                </div>
+
+                <div class="vertLine"></div>
+
+                <!-- display -->
+                <div id="bootDisplay">
+                    <img id="desk" src="./assets/desk.png" >
+                    <img id="monitor" src="./assets/monitor.png" >
+                    <div id="unitPlaceHolder">
+                        <!-- image element here -->
+                    </div>
+                    <div id="powerButton">
+                        <img src="./assets/svg/power-button.svg" alt="">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     

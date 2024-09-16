@@ -1,14 +1,16 @@
 class DisplayArea {
-    constructor(elementHandler, utilityTool, portsTab) {
+    constructor(elementHandler, utilityTool, portsTab, bootUpTab) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
 
-         // Elements
-         this.elements = this.elementHandler.getDisplayAreaElements()
-         if(!this.elements) {
-             throw new Error ('Missing Display Area Elements')
-         }
+        // Elements
+        this.elements = this.elementHandler.getDisplayAreaElements()
+        if(!this.elements) {
+            throw new Error ('Missing Display Area Elements')
+        }
+
+        this.bootUpTab = bootUpTab
 
         // Wires Tab
         this.portsTab = portsTab
@@ -260,42 +262,6 @@ class DisplayArea {
         })
     }
 
-    // Main Dispay Area Update Method 
-    update() {
-        if(this.table.component) {
-            const tableComponent = this.table.component
-            // create bounding box for table component adjusted to the current side
-            this.createBox(tableComponent, this.table, this.currentSide)
-
-            // update labels and rotate buttons visibility
-            this.updateRotatableStyles(tableComponent.isRotatable)
-            this.updateComponentLabels(tableComponent)
-
-            //update table component slot information
-            tableComponent.slots.forEach(slot => {
-                // update component boxes attached to slots
-                if(slot.component) {
-                    this.updateAttachedComponentBox(tableComponent, slot)
-                }
-
-                // update slot boxes
-                this.updateSlotBox(tableComponent, slot)
-            })
-        }
-
-        // create bounding boxes for components inside shelf
-        this.shelf.forEach(spot => {
-            const shelfComponent = spot.component
-
-            if(shelfComponent) {
-                this.createBox(shelfComponent, spot, shelfComponent.defaultSource)
-            }
-        })
-
-        // update WIRES TAB
-        this.portsTab.update(this.table, this.shelf)
-    }
-
     toggleMenu(menu, buttons, menuImg) {
         // switch menu's active state
         switch(menu.dataset.active) {
@@ -331,12 +297,54 @@ class DisplayArea {
         })
     }
 
+    // Main Dispay Area Update Method 
+    update() {
+        if(this.table.component) {
+            const tableComponent = this.table.component
+
+            // create bounding box for table component adjusted to the current side
+            this.createBox(tableComponent, this.table, this.currentSide)
+
+            // update labels and rotate buttons visibility
+            this.updateRotatableStyles(tableComponent.isRotatable)
+            this.updateComponentLabels(tableComponent)
+
+            //update table component slot information
+            tableComponent.slots.forEach(slot => {
+                // update component boxes attached to slots
+                if(slot.component) {
+                    this.updateAttachedComponentBox(tableComponent, slot)
+                }
+
+                // update slot boxes
+                this.updateSlotBox(tableComponent, slot)
+            })
+        }
+
+        // create bounding boxes for components inside shelf
+        this.shelf.forEach(spot => {
+            const shelfComponent = spot.component
+
+            if(shelfComponent) {
+                this.createBox(shelfComponent, spot, shelfComponent.defaultSource)
+            }
+        })
+
+        // update WIRES TAB
+        this.portsTab.update(this.table, this.shelf)
+
+        // update BOOT TAB
+        this.bootUpTab.update(this.table.component)
+    }
+
     init() {
         let menuImg = document.createElement('img')
         menuImg.src = './assets/svg/3line.svg'
         this.menuButton.appendChild(menuImg)
 
         this.toggleMenu(this.menuButton, this.tabButtons, menuImg)
+        
+        this.bootUpTab.update()
 
         this.menuButton.addEventListener('click', () => this.toggleMenu(this.menuButton, this.tabButtons, menuImg))
     }
