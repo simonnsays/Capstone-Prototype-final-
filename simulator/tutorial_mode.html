@@ -8,8 +8,28 @@
     <link rel="icon" href="./favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
     <style>
+        .checkmark {
+        width: 30px;
+        height: 30px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        }
+
+        .completed-task .checkmark {
+            display: block; /* Make the checkmark visible when completed */
+            opacity: 1;
+        }
+
+        /* Additional style for completed tasks */
         .completed-task {
-        background-color: #a7a4a4; /* Light gray for completed tasks */
+            background-color: #e0ffe0;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+
+        .completed-task .tasktitle {
+            text-decoration: line-through;
+            color: #888;
         }
 
         #task-status {
@@ -245,14 +265,16 @@
         <div class="assistant-modal-container"> 
             <!-- tasks -->
             <div class="task-container">
-                <h1 class="header">TASKS</h1>
+                <h1 class="header" style="margin-left: 50%;">TASKS</h1>
                 <div class="hr-line"></div>
 
                 <div class="task-cell" data-task-action="openShop">
-                <h1 class="tasktitle">Enter The Shop</h1>
-                <svg class="arrow">
-                    <use xlink:href="./assets/svg/rightArr.svg"></use>
-                </svg>
+                    <div class="task-icon">
+                        <img src="assets/Assistant/shop.png" alt="shop icon">
+                    </div>
+                <h1 class="tasktitle">Enter The Shop</h1>  
+                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
+                <img class="checkmark" src="assets/svg/check.svg" alt="Completed" style="display: none;"> <!-- Hidden by default -->
                 <div class="task-description">
                 <p>Look for your PC components and buy them.</p>
                 <p style="padding-bottom: 10px;">Ensure to check prices and specifications before making a purchase.</p>
@@ -266,9 +288,9 @@
                 <p>7.Cooling</p>
                 <p>8.GPU or Graphics card</p>
                 <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
-                <p><img src="assets/Assistant/shop1.png" alt="shop1" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/shop2.png" alt="shop2" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/shop3.png" alt="shop3" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/shop1.png" class="timg" alt="shop1" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/shop2.png" class="timg" alt="shop2" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/shop3.png" class="timg" alt="shop3" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <!--New Task Button-->
                 <button class="start-task-btn" data-task="openShop">Start Task</button>
                 </div>
@@ -277,10 +299,12 @@
                 <div class="hr-line"></div>
 
                 <div class="task-cell" data-task-action="openInventory">
+                    <div class="task-icon">
+                        <img src="assets/Assistant/inventory.png" alt="shop icon">
+                    </div>
                 <h1 class="tasktitle">Check your Inventory</h1>
-                <svg class="arrow">
-                    <use xlink:href="./assets/svg/rightArr.svg"></use>
-                </svg>
+                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
+                <img class="checkmark" src="assets/svg/check.svg" alt="Completed" style="display: none;"> <!-- Hidden by default -->
                 <div class="task-description">
                 <p style="padding-bottom: 10px;">Place the components you've chosen to the components shelf by clicking the components in your inventory</p>
                 <p>Place each component in regards to their order:</p>
@@ -293,9 +317,9 @@
                 <p>7.Power Supply Unit</p>
                 <p>8.GPU or Graphics card</p>
                 <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
-                <p><img src="assets/Assistant/inv1.png" alt="inv1" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/inv2.png" alt="inv2" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/inv3.png" alt="inv3" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/inv1.png" class="timg" alt="inv1" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/inv2.png" class="timg" alt="inv2" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/inv3.png" class="timg" alt="inv3" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <button class="start-task-btn" data-task="openInventory">Start Task</button>
                 </div>
             </div>
@@ -303,25 +327,27 @@
                 <div class="hr-line"></div>
 
                 <div class="task-cell" data-task-action="connectWires">
+                    <div class="task-icon">
+                        <img src="assets/Assistant/wires.png" alt="shop icon">
+                    </div>
                 <h1 class="tasktitle">Connecting Components With Wires</h1>
-                <svg class="arrow">
-                    <use xlink:href="./assets/svg/rightArr.svg"></use>
-                </svg>
+                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
+                <img class="checkmark" src="assets/svg/check.svg" alt="Completed" style="display: none;"> <!-- Hidden by default -->
                 <div class="task-description">
                 <p>Now we dive in to plugging each wire for each component either for power or data connection.</p>
                 <p>There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. 
                 Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicators, reset button, and 3.5mm audio jack ports. </p>                    
                 <p>To connect the wires simply open the wires inventory and drag the wires to their respective slots</p>
                 <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
-                <p><img src="assets/Assistant/wires1.png" alt="inv1" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/wires2.png" alt="inv2" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/wires3.png" alt="inv3" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/wires4.png" alt="inv1" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/wires4.1.png" alt="inv2" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires1.png" class="timg" alt="wre1" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires2.png" class="timg" alt="wre2" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires3.png" class="timg" alt="wre3" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires4.png" class="timg" alt="wre4" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires4.1.png" class="timg" alt="wre5" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <p style="padding: 5px;">Also please note that the wire will be colored green when they are connected on both components however it will be colored red if it is only connected on one end.</p>
-                <p><img src="assets/Assistant/wires4.2.png" alt="inv3" style="height: 200px; width: 500px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/wires5.png" alt="inv1" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/wires6.png" alt="inv2" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires4.2.png"  alt="wre6" style="height: 200px; width: 550px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires5.png" class="timg" alt="wre67" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires6.png" class="timg" alt="wre8" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <button class="start-task-btn" data-task="connectWires">Start Task</button>
                 </div>
             </div>
@@ -329,10 +355,12 @@
                 <div class="hr-line"></div>
 
                 <div class="task-cell" data-task-action="powerOnPC">
+                    <div class="task-icon">
+                        <img src="assets/Assistant/power-button.png" alt="shop icon">
+                    </div>
                 <h1 class="tasktitle">Power On</h1>
-                <svg class="arrow">
-                    <use xlink:href="./assets/svg/rightArr.svg"></use>
-                </svg>
+                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
+                <img class="checkmark" src="assets/svg/check.svg" alt="Completed" style="display: none;"> <!-- Hidden by default -->
                 <div class="task-description">
                 <p>Power on your pc by pressing the power on button</p>
                 <p>To turn on your build all you need is to click the power on button</p>
@@ -383,9 +411,17 @@ function markTaskCompleted(taskIndex) {
     const taskCells = document.querySelectorAll('.task-cell');
     taskCells.forEach((cell, index) => {
         if (index <= taskIndex) {
-            cell.classList.add('completed-task');  // Add gray-out effect
+            cell.classList.add('completed-task');  // Add gray-out effect and completed style
+            const checkmark = cell.querySelector('.checkmark');
+            if (checkmark) {
+                checkmark.style.display = 'block';  // Show the checkmark icon
+            }
         } else {
             cell.classList.remove('completed-task');
+            const checkmark = cell.querySelector('.checkmark');
+            if (checkmark) {
+                checkmark.style.display = 'none';  // Hide the checkmark icon for incomplete tasks
+            }
         }
     });
 }
