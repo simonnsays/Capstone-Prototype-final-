@@ -80,7 +80,8 @@ class ElementHandler {
             infoContainer: document.querySelector('.assistant-info-container') ,
             modal: document.querySelector('.assistant-modal') 
         } 
-    }    
+    } 
+       
 }
 
 export default ElementHandler

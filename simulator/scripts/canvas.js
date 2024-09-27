@@ -27,6 +27,59 @@ class Canvas {
         window.addEventListener('mousemove', (e) => this.handleMouseMove(e))
         window.addEventListener('mouseup', () => this.handleMouseUp())
     }
+    
+    checkCompatibility(component, slot) {
+
+        if (!component) {
+            console.error("Error: Component is undefined or null");
+            return false;
+        }
+    
+        if (!slot) {
+            console.error("Error: Slot is undefined or null");
+            return false;
+        }
+    
+        // Log the component and its properties 
+        console.log('Component Object:', component);
+        console.log('Slot Object:', slot);
+        
+        //checking of component type and size
+        const componentType = component.type;
+        if (!componentType) {
+            console.error("Error: Component type is undefined or null");
+            return false;
+        }
+    
+        const slotType = slot.type;
+        if (componentType !== slotType) {
+            console.log(`Error: Slot type (${slotType}) does not match component type (${componentType})`);
+            alert(`This slot is not for a ${componentType} component. Please choose the correct slot.`);
+            return false; 
+        }
+
+        const componentSize = component.size;
+        console.log('Component Size:', componentSize); 
+        const slotSupports = slot.supports;
+    
+        // Check if the component size is missing
+        if (!componentSize) {
+            console.log('Error: Component size is undefined or null');
+            alert('Component size is missing. Please choose a valid component.');
+            return false; 
+        }
+    
+        // Check if the slot supports the component size
+        if (!slotSupports.includes(componentSize)) {
+            console.log(`Error: Slot does not support component size ${componentSize}`);
+            alert(`This slot doesn't support a ${componentSize} component. Please choose a compatible component.`);
+            return false; 
+        }
+    
+        return true; 
+    }
+    
+    
 
     // Mouse Down Event
     handleMouseDown(e) {
@@ -70,46 +123,49 @@ class Canvas {
         }
     }
 
-    // Mouse Up Event 
-    handleMouseUp() {
-        // return if no selected component
-        if(!this.user.componentSelected) return
+// Mouse Up Event - Modified to include compatibility check and no swapping of component if it is not compatible
+handleMouseUp() {
+    // return if no selected component
+    if (!this.user.componentSelected) return;
 
-        // check for interaction
-        let isInteracting = false
+    // check for interaction
+    let isInteracting = false;
 
-        this.user.availableSlots.forEach(slot => {
-            if(!slot.box) throw new Error('Slot has no Box property')
+    this.user.availableSlots.forEach(slot => {
+        if (!slot.box) throw new Error('Slot has no Box property');
 
-            if(this.utilityTool.isInsideBox(this.user.mousePoint, slot.box) 
+        // Check if mouse is inside the slot and it's accessible
+        if (this.utilityTool.isInsideBox(this.user.mousePoint, slot.box)
             && slot.sides[this.displayArea.currentSide].accessible) {
-                isInteracting = true
 
-                // attach component
-                this.displayArea.attachComponent(this.user.componentSelected, slot)
+            // Check compatibility before proceeding
+            if (this.checkCompatibility(this.user.componentSelected, slot)) {
+                isInteracting = true;
+                this.displayArea.attachComponent(this.user.componentSelected, slot);
+            } else {
+                isInteracting = true;  // Mark as interacting to avoid swapping components
+                this.user.returnComponentToShelf();
             }
-        })
-
-        // swap components if component dragged is in table display area
-        if(!isInteracting && this.utilityTool.isInsideBox(this.user.mousePoint, this.table.area)) {
-            isInteracting = true
-
-            // reset user orientation
-            this.displayArea.curr = 0
-            this.displayArea.currentSide = this.displayArea.displaySides[this.displayArea.curr]
-
-            // swap components
-            this.displayArea.swapComponents(this.user.componentSelected)
         }
+    });
 
-        // return to shelf if no interaction
-        if(!isInteracting) {
-            this.user.returnComponentToShelf()
-        }
+    // Swap components if dragged component is in table display area
+    if (!isInteracting && this.utilityTool.isInsideBox(this.user.mousePoint, this.table.area)) {
+        isInteracting = true;
 
-        // clear temporary properties
-        this.user.resetTempProperties()
+        this.displayArea.curr = 0;
+        this.displayArea.currentSide = this.displayArea.displaySides[this.displayArea.curr];
+
+        this.displayArea.swapComponents(this.user.componentSelected);
     }
+
+    if (!isInteracting) {
+        this.user.returnComponentToShelf();
+    }
+
+    // Clear temporary properties
+    this.user.resetTempProperties();
+}
 
     // Display Slots (get Available slots)
     displaySlots(baseComponent,  componentSelected) {
@@ -277,6 +333,7 @@ class Canvas {
         // Loop Canvas
         requestAnimationFrame(() => this.animate())
     }
+    
 }
 
 export default Canvas
