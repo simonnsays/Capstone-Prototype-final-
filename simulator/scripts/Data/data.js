@@ -41,8 +41,9 @@ const components = [
                         },
                         accessible: false 
                     },
-                    right:{offsets: {
-                        default: {x: 38, y: 35, width: 44, height: 165}
+                    right:{
+                        offsets: {
+                        default: {x: 221, y: 62, width: 180, height: 129}
                     },
                     accessible: false
                     } // for cases with back view of motherboards
@@ -139,7 +140,12 @@ const components = [
                         },
                         accessible: false 
                     },
-                    //right:{ } for cases with back view of motherboards
+                    right:{
+                        offsets: {
+                        default: {x: 230, y: 62, width: 200, height: 129}
+                    },
+                    accessible: false
+                    }
                 }
             },
             {
@@ -239,7 +245,12 @@ const components = [
                         },
                         accessible: false 
                     },
-                    //right:{ } for cases with back view of motherboards
+                    right:{
+                        offsets: {
+                        default: {x: 235, y: 53, width: 160, height: 138}
+                    },
+                    accessible: false
+                    }
                 }
             },
             {
@@ -366,7 +377,12 @@ const components = [
                         },
                         accessible: false 
                     },
-                    //right:{ } for cases with back view of motherboards
+                    right:{
+                        offsets: {
+                        default: {x: 245, y: 73, width: 180, height: 147}
+                    },
+                    accessible: false
+                    }
                 },
             },
             {
@@ -480,7 +496,12 @@ const components = [
                         },
                         accessible: false 
                     },
-                    //right:{ } for cases with back view of motherboards
+                    right:{
+                        offsets: {
+                        default: {x: 245, y: 50, width: 180, height: 147}
+                    },
+                    accessible: false
+                    }
                 },
             },
             {
@@ -591,6 +612,7 @@ const components = [
         images: [
             {side: 'pack', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-02.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-05.png'} 
         ],
         slots: [
@@ -697,6 +719,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -717,6 +742,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/AM4/X570 PG Velocita(L1).png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASRock/AM4/X570 PG Velocita(L2).png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/ASRock/AM4/X570 PG Velocita(L5).png'} 
         ],
         slots: [
@@ -823,6 +849,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -842,7 +871,8 @@ const components = [
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/AM4/X570 Taichi(M1).png'}, 
-            {side: 'left', imageSrc: './assets/motherboard/ASRock/AM4/X570 Taichi(M2).png'}, 
+            {side: 'left', imageSrc: './assets/motherboard/ASRock/AM4/X570 Taichi(M2).png'},             
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/ASRock/AM4/X570 Taichi(M5).png'} 
         ],
         slots: [
@@ -948,6 +978,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -968,6 +1001,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/AM4/ROG STRIX B550-F GAMING WIFI.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/AM4/ROG STRIX B550-F GAMING WIFI II.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/ASUS ROG/AM4/ROG STRIX B550-F GAMING II REAR.png'} 
         ],
         slots: [
@@ -1073,6 +1107,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -1093,6 +1130,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/AM4/ROG STRIX B550-XE GAMING WIFI Pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/AM4/ROG STRIX B550-XE GAMING WIFI.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/ASUS ROG/AM4/ROG STRIX B550-XE GAMING WIFI REAR.png'} 
         ],
         slots: [
@@ -1198,6 +1236,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -1218,6 +1259,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/AM4/B550GTA PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/AM4/B550GTA.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Biostar/AM4/B550GTA REAR.png'} 
         ],
         slots: [
@@ -1323,6 +1365,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -1343,6 +1388,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/AM4/X570GTA PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/AM4/X570GTA.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Biostar/AM4/X570GTA REAR.png'} 
         ],
         slots: [
@@ -1448,6 +1494,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -1467,7 +1516,8 @@ const components = [
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/EVGA/AM4/EVGA X570 FTW PACK.png'}, 
-            {side: 'left', imageSrc: './assets/motherboard/EVGA/AM4/EVGA X570 FTW.png'}, 
+            {side: 'left', imageSrc: './assets/motherboard/EVGA/AM4/EVGA X570 FTW.png'},
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'}, 
             {side: 'rear', imageSrc: './assets/motherboard/EVGA/AM4/EVGA X570 FTW REAR.png'} 
         ],
         slots: [
@@ -1573,6 +1623,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -1593,6 +1646,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/AM4/B550 GAMING X V2/B550 GAMING X V2-04.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/AM4/B550 GAMING X V2/B550 GAMING X V2-02.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Gigabyte/AM4/B550 GAMING X V2/B550 GAMING X V2-03.png'} 
         ],
         slots: [
@@ -1698,6 +1752,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -1717,7 +1774,8 @@ const components = [
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/AM4/B550 VISION D/B550 VISION D PACK.png'}, 
-            {side: 'left', imageSrc: './assets/motherboard/Gigabyte/AM4/B550 VISION D/B550 VISION D.png'}, 
+            {side: 'left', imageSrc: './assets/motherboard/Gigabyte/AM4/B550 VISION D/B550 VISION D.png'},
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'}, 
             {side: 'rear', imageSrc: './assets/motherboard/Gigabyte/AM4/B550 VISION D/B550 VISION D REAR.png'} 
         ],
         slots: [
@@ -1823,6 +1881,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -1844,6 +1905,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Aorus/AM5/B650E AORUS ELITE X AX ICE-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/AM5/B650E AORUS ELITE X AX ICE-02.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside1.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Aorus/AM5/B650E AORUS ELITE X AX ICE-06.png'} 
         ],
         slots: [
@@ -1894,7 +1956,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -1907,7 +1969,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -1920,7 +1982,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -1933,7 +1995,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -1948,6 +2010,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -1968,7 +2033,8 @@ const components = [
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/AM5/B650 LiveMixer(M1).png'}, 
-            {side: 'left', imageSrc: './assets/motherboard/ASRock/AM5/b650 Livemixer.png'}, 
+            {side: 'left', imageSrc: './assets/motherboard/ASRock/AM5/b650 Livemixer.png'},
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'}, 
             {side: 'rear', imageSrc: './assets/motherboard/ASRock/AM5/b650 Livemixer rear.png'} 
         ],
         slots: [
@@ -2019,7 +2085,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2032,7 +2098,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2045,7 +2111,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2058,7 +2124,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2073,6 +2139,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -2094,6 +2163,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/AM5/X670E PG Lightning(L1).png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASRock/AM5/X670E PG Lightning(L3).png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/ASRock/AM5/X670E PG Lightning(L6).png'} 
         ],
         slots: [
@@ -2144,7 +2214,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2157,7 +2227,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2170,7 +2240,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2183,7 +2253,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2198,6 +2268,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -2219,6 +2292,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/AM5/ROG STRIX B650E-E GAMING WIFI pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/AM5/ROG STRIX B650E-E GAMING WIFI.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/ASUS ROG/AM5/ROG STRIX B650E-E GAMING WIFI 1.png'} 
         ],
         slots: [
@@ -2269,7 +2343,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2282,7 +2356,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2295,7 +2369,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2308,7 +2382,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2323,6 +2397,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -2344,6 +2421,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/AM5/X670E VALKYRIE pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/AM5/X670E VALKYRIE.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Biostar/AM5/X670E VALKYRIE 1.png'} 
         ],
         slots: [
@@ -2394,7 +2472,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2407,7 +2485,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2420,7 +2498,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2433,7 +2511,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2448,6 +2526,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -2469,6 +2550,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/AM5/X870E VALKYRIE pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/AM5/X870E VALKYRIE.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Biostar/AM5/X870E VALKYRIE REAR.png'} 
         ],
         slots: [
@@ -2519,7 +2601,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2532,7 +2614,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2545,7 +2627,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2558,7 +2640,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2573,6 +2655,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -2594,6 +2679,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/AM5/B650 GAMING X/B650 GAMING X-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/AM5/B650 GAMING X/B650 GAMING X-02.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Gigabyte/AM5/B650 GAMING X/B650 GAMING X-05.png'} 
         ],
         slots: [
@@ -2644,7 +2730,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2657,7 +2743,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2670,7 +2756,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2683,7 +2769,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2698,6 +2784,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -2719,6 +2808,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/AM5/B650 UD AX/B650 UD AX-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/AM5/B650 UD AX/B650 UD AX-02.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Gigabyte/AM5/B650 UD AX/B650 UD AX-04.png'} 
         ],
         slots: [
@@ -2769,7 +2859,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2782,7 +2872,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2795,7 +2885,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2808,7 +2898,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2823,6 +2913,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -2844,6 +2937,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/MSI/AM5/MPG B650 CARBON WIFI PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/MSI/AM5/MPG B650 CARBON WIFI.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/MSI/AM5/MPG B650 CARBON WIFI REAR.png'} 
         ],
         slots: [
@@ -2894,7 +2988,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2907,7 +3001,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2920,7 +3014,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2933,7 +3027,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -2948,6 +3042,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -2969,6 +3066,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/MSI/AM5/MPG X670E CARBON WIFI PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/MSI/AM5/MPG X670E CARBON WIFI.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/MSI/AM5/MPG X670E CARBON WIFI REAR.png'} 
         ],
         slots: [
@@ -3019,7 +3117,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -3032,7 +3130,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -3045,7 +3143,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -3058,7 +3156,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -3073,6 +3171,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -3095,6 +3196,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Aorus/LGA 1200/Z590 AORUS MASTER (rev. 1.0)/1.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/LGA 1200/Z590 AORUS MASTER (rev. 1.0)/2.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Aorus/LGA 1200//Z590 AORUS MASTER (rev. 1.0)/5.png'} 
         ],
         slots: [
@@ -3200,6 +3302,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -3219,7 +3324,8 @@ const components = [
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Aorus/LGA 1200/Z590 AORUS XTREME (rev. 1.0)/1.png'}, 
-            {side: 'left', imageSrc: './assets/motherboard/Aorus/LGA 1200/Z590 AORUS XTREME (rev. 1.0)/2.png'}, 
+            {side: 'left', imageSrc: './assets/motherboard/Aorus/LGA 1200/Z590 AORUS XTREME (rev. 1.0)/2.png'},
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'}, 
             {side: 'rear', imageSrc: './assets/motherboard/Aorus/LGA 1200//Z590 AORUS XTREME (rev. 1.0)/5.png'} 
         ],
         slots: [
@@ -3326,6 +3432,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -3346,7 +3455,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/LGA 1200/W480 Creator(M1).png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASRock/LGA 1200/W480 Creator(M2).png'}, 
-          //{side: 'right', imageSrc: './assets/motherboard/ASRock/LGA 1200/W480 Creator backside.png'}, additional for cases with backside monitor exposure
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/ASRock/LGA 1200//W480 Creator REAR.png'} 
         ],
         slots: [
@@ -3452,6 +3561,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -3471,7 +3583,8 @@ const components = [
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/LGA 1200/Z590 PG Velocita(L3).png'}, 
-            {side: 'left', imageSrc: './assets/motherboard/ASRock/LGA 1200/Z590 PG Velocita(L5).png'}, 
+            {side: 'left', imageSrc: './assets/motherboard/ASRock/LGA 1200/Z590 PG Velocita(L5).png'},
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'}, 
             {side: 'rear', imageSrc: './assets/motherboard/ASRock/LGA 1200//Z590 PG Velocita REAR.png'} 
         ],
         slots: [
@@ -3577,6 +3690,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -3597,6 +3713,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/LGA1200/ROG STRIX B560-E GAMING WIFI PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/LGA1200/ROG STRIX B560-E GAMING WIFI.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/ASUS ROG/LGA1200/ROG STRIX B560-E GAMING WIFI REAR.png'} 
         ],
         slots: [
@@ -3703,6 +3820,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -3723,6 +3843,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/LGA1200/ROG STRIX Z490-A GAMING PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/LGA1200/ROG STRIX Z490-A GAMING.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/ASUS ROG/LGA1200/ROG STRIX Z490-A GAMING REAR.png'} 
         ],
         slots: [
@@ -3828,6 +3949,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -3848,6 +3972,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/LGA 1200/Z590 VALKYRIE PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/LGA 1200/Z590 VALKYRIE.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Biostar/LGA 1200/Z590 VALKYRIE REAR.png'} 
         ],
         slots: [
@@ -3953,6 +4078,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -3973,6 +4101,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/LGA 1200/Z590GTA PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/LGA 1200/Z590GTA.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Biostar/LGA 1200/Z590GTA REAR.png'} 
         ],
         slots: [
@@ -4083,178 +4212,7 @@ const components = [
         ],
         cables: []
     }),
-    new Component ({        // EVGA Z490 DARK [RAM orientation is on horizontal]
-        name: 'EVGA Z490 DARK',
-        type: 'motherboard',
-        size: 'ATX',
-        dimensions: {
-            depth: 244,
-            width: 244,
-            height: 305
-        },
-        isRotatable: false,
-        isAttached: false,
-        defaultSource: 'PACK',
-        images: [
-            {side: 'PACK', imageSrc: './assets/motherboard/EVGA/LGA 1200/EVGA Z490 DARK PACK.png'}, 
-            {side: 'left', imageSrc: './assets/motherboard/EVGA/LGA 1200/EVGA Z490 DARK.png'}, 
-            {side: 'rear', imageSrc: './assets/motherboard/EVGA/LGA 1200/EVGA Z490 DARK REAR.png'} 
-        ],
-        slots: [
-            {
-                type: 'cpu', 
-                supports: ['LGA 1200'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 109, y: 73, width: 45, height: 45},
-                        },
-                        accessible: true // if able to attach to this side
-                    }
-                }
-            },
-            {
-                type: 'gpu', 
-                supports: ['pcie4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 1, y: 170, width: 200, height: 40},
-                        },
-                        accessible: true // if able to attach to this side
-                    },
-                    rear: {
-                        offsets: {
-                            default: {x: 10, y: 350, width: 560, height: 164},
-                        },
-                        accessible: false
-                    }
-                }
-            },
-         {
-               type: 'cooling',
-               supports: ['AMD'],
-               component: null,
-               sides: {    
-                   left: {
-                       offsets: {
-                           default: {x: 84, y: 48, width: 95, height: 105}
-                       },
-                       accessible: true
-                   }
-               }
-           },
-            {
-                type: 'ram',
-                supports: ['ddr4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 73, y: 28, width: 110, height: 8}
-                        },
-                        accessible: true
-                    }
-                }
-            }  
-        ],
-        ports: [
-            {type: '24-pin-power'},
-            {type: '8-pin-power'},
-            {type: 'sata-data'},
-            {type: 'cooling'},
-            {type: 'frontPanel'},
-        ],
-        cables: []
-    }),
-    new Component ({        // EVGA Z590 DARK [RAM orientation is on horizontal]
-        name: 'EVGA Z490 DARK',
-        type: 'motherboard',
-        size: 'ATX',
-        dimensions: {
-            depth: 244,
-            width: 244,
-            height: 305
-        },
-        isRotatable: false,
-        isAttached: false,
-        defaultSource: 'PACK',
-        images: [
-            {side: 'PACK', imageSrc: './assets/motherboard/EVGA/LGA 1200/EVGA Z590 DARK PACK.png'}, 
-            {side: 'left', imageSrc: './assets/motherboard/EVGA/LGA 1200/EVGA Z590 DARK.png'}, 
-            {side: 'rear', imageSrc: './assets/motherboard/EVGA/LGA 1200/EVGA Z590 DARK REAR.png'} 
-        ],
-        slots: [
-            {
-                type: 'cpu', 
-                supports: ['LGA 1200'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 109, y: 67, width: 45, height: 45},
-                        },
-                        accessible: true // if able to attach to this side
-                    }
-                }
-            },
-            {
-                type: 'gpu', 
-                supports: ['pcie4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 1, y: 170, width: 200, height: 40},
-                        },
-                        accessible: true // if able to attach to this side
-                    },
-                    rear: {
-                        offsets: {
-                            default: {x: 10, y: 350, width: 560, height: 164},
-                        },
-                        accessible: false
-                    }
-                }
-            },
-         {
-               type: 'cooling',
-               supports: ['AMD'],
-               component: null,
-               sides: {    
-                   left: {
-                       offsets: {
-                           default: {x: 84, y: 40, width: 95, height: 105}
-                       },
-                       accessible: true
-                   }
-               }
-           },
-            {
-                type: 'ram',
-                supports: ['ddr4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 207, y: 32, width: 8, height: 140}
-                        },
-                        accessible: true
-                    }
-                }
-            }  
-        ],
-        ports: [
-            {type: '24-pin-power'},
-            {type: '8-pin-power'},
-            {type: 'sata-data'},
-            {type: 'cooling'},
-            {type: 'frontPanel'},
-        ],
-        cables: []
-    }),
+
     new Component ({        // Gigabyte Z590 GAMING X
         name: 'Gigabyte Z590 GAMING X',
         type: 'motherboard',
@@ -4270,6 +4228,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/LGA 1200/Z590 GAMING X/Z590 GAMING X PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/LGA 1200/Z590 GAMING X/Z590 GAMING X.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Gigabyte/LGA 1200/Z590 GAMING X/Z590 GAMING X REAR.png'} 
         ],
         slots: [
@@ -4375,6 +4334,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -4395,6 +4357,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/LGA 1200/Z590 VISION D/6.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/LGA 1200/Z590 VISION D/2.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Gigabyte/LGA 1200/Z590 VISION D/5.png'} 
         ],
         slots: [
@@ -4500,6 +4463,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -4520,6 +4486,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/MSI/LGA 1200/MAG Z590 TORPEDO PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/MSI/LGA 1200/MAG Z590 TORPEDO.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/MSI/LGA 1200/MAG Z590 TORPEDO REAR.png'} 
         ],
         slots: [
@@ -4625,6 +4592,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -4645,6 +4615,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/MSI/LGA 1200/Z590 PRO WIFI (CEC) PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/MSI/LGA 1200/Z590 PRO WIFI (CEC).png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/MSI/LGA 1200/Z590 PRO WIFI (CEC) REAR.png'} 
         ],
         slots: [
@@ -4750,6 +4721,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -4771,6 +4745,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/MSI/LGA 1700/MPG Z790 CARBON MAX WIFI II PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/MSI/LGA 1700/MPG Z790 CARBON MAX WIFI II.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/MSI/LGA 1700/MPG Z790 CARBON MAX WIFI II REAR.png'} 
         ],
         slots: [
@@ -4821,7 +4796,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -4834,7 +4809,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -4847,7 +4822,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -4860,7 +4835,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -4875,6 +4850,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -4896,6 +4874,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/MSI/LGA 1700/MPG Z790 EDGE WIFI PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/MSI/LGA 1700/MPG Z790 EDGE WIFI.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/MSI/LGA 1700/MPG Z790 EDGE WIFI REAR.png'} 
         ],
         slots: [
@@ -4946,7 +4925,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -4959,7 +4938,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -4972,7 +4951,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -4985,7 +4964,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5002,6 +4981,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -5023,6 +5005,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Aorus/LGA 1700/B760 AORUS MASTER DDR4-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/LGA 1700/B760 AORUS MASTER DDR4-02.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Aorus/LGA 1700/B760 AORUS MASTER DDR4-06.png'} 
         ],
         slots: [
@@ -5073,7 +5056,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5086,7 +5069,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5099,7 +5082,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5112,7 +5095,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5128,6 +5111,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -5149,6 +5135,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Aorus/LGA 1700/Z790 AORUS PRO X-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/LGA 1700/Z790 AORUS PRO X-02.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside1.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Aorus/LGA 1700/Z790 AORUS PRO X-03.png'} 
         ],
         slots: [
@@ -5199,7 +5186,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5212,7 +5199,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5225,7 +5212,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5238,7 +5225,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5253,6 +5240,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -5273,7 +5263,8 @@ const components = [
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/LGA 1700/Z790 LiveMixer(M1).png'}, 
-            {side: 'left', imageSrc: './assets/motherboard/ASRock/LGA 1700/z790 Livemixer.png'}, 
+            {side: 'left', imageSrc: './assets/motherboard/ASRock/LGA 1700/z790 Livemixer.png'},
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'}, 
             {side: 'rear', imageSrc: './assets/motherboard/ASRock/LGA 1700/z790 Livemixer Rear.png'} 
         ],
         slots: [
@@ -5324,7 +5315,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5337,7 +5328,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5350,7 +5341,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5363,7 +5354,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5379,6 +5370,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -5400,6 +5394,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/LGA 1700/Z790 PG Riptide(L1).png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASRock/LGA 1700/Z790 PG Riptide(L3).png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/ASRock/LGA 1700/Z790 PG Riptide(L6).png'} 
         ],
         slots: [
@@ -5450,7 +5445,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5463,7 +5458,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5476,7 +5471,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5489,7 +5484,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5504,6 +5499,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -5525,6 +5523,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/LGA1700/ROG STRIX Z790-A GAMING WIFI II pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/LGA1700/ROG STRIX Z790-A GAMING WIFI II.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/ASUS ROG/LGA1700/ROG STRIX Z790-A GAMING WIFI II 1.png'} 
         ],
         slots: [
@@ -5543,7 +5542,7 @@ const components = [
             },
             {
                 type: 'gpu', 
-                supports: ['pcie4'],
+                supports: ['pcie5'],
                 component: null,
                 sides: {
                     left: {
@@ -5575,7 +5574,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5588,7 +5587,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5601,7 +5600,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5614,7 +5613,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5629,6 +5628,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -5650,6 +5652,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/LGA1700/ROG MAXIMUS Z790 DARK HERO PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/LGA1700/ROG MAXIMUS Z790 DARK HERO.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/ASUS ROG/LGA1700/ROG MAXIMUS Z790 DARK HERO REAR.png'} 
         ],
         slots: [
@@ -5700,7 +5703,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5713,7 +5716,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5726,7 +5729,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5739,7 +5742,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5754,6 +5757,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -5775,6 +5781,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/LGA 1700/Z690A VALKYRIE pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/LGA 1700/Z690A VALKYRIE.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Biostar/LGA 1700/Z690A VALKYRIE 1.png'} 
         ],
         slots: [
@@ -5825,7 +5832,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5838,7 +5845,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5851,7 +5858,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5864,7 +5871,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5879,6 +5886,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -5900,6 +5910,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/LGA 1700/Z790 VALKYRIE pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/LGA 1700/Z790 VALKYRIE.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Biostar/LGA 1700/Z790 VALKYRIE 1.png'} 
         ],
         slots: [
@@ -5950,7 +5961,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5963,7 +5974,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5976,7 +5987,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -5989,7 +6000,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -6005,183 +6016,14 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
-            {type: 'cooling'},
-            {type: 'frontPanel'},
-        ],
-        cables: []
-    }), 
-    new Component ({        // EVGA Z790 CLASSIFIED [RAM orientation is on horizontal]
-        name: 'EVGA Z790 CLASSIFIED',
-        type: 'motherboard',
-        size: 'ATX',
-        dimensions: {
-            depth: 244,
-            width: 244,
-            height: 305
-        },
-        isRotatable: false,
-        isAttached: false,
-        defaultSource: 'PACK',
-        images: [
-            {side: 'PACK', imageSrc: './assets/motherboard/EVGA/LGA 1700/EVGA Z790 CLASSIFIED pack.png'}, 
-            {side: 'left', imageSrc: './assets/motherboard/EVGA/LGA 1700/EVGA Z790 CLASSIFIED.png'}, 
-            {side: 'rear', imageSrc: './assets/motherboard/EVGA/LGA 1700/EVGA Z790 CLASSIFIED REAR.png'} 
-        ],
-        slots: [
-            {
-                type: 'cpu', 
-                supports: ['LGA 1700'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 108, y: 81, width: 45, height: 45},
-                        },
-                        accessible: true // if able to attach to this side
-                    }
-                }
-            },
-            {
-                type: 'gpu', 
-                supports: ['pcie4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 1, y: 190, width: 200, height: 40},
-                        },
-                        accessible: true // if able to attach to this side
-                    },
-                    rear: {
-                        offsets: {
-                            default: {x: 10, y: 350, width: 560, height: 164},
-                        },
-                        accessible: false
-                    }
-                }
-            },
-         {
-               type: 'cooling',
-               supports: ['AMD'],
-               component: null,
-               sides: {    
-                   left: {
-                       offsets: {
-                           default: {x: 84, y: 50, width: 95, height: 105}
-                       },
-                       accessible: true
-                   }
-               }
-           },
-            {
-                type: 'ram',
-                supports: ['ddr4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 207, y: 24, width: 8, height: 140}
-                        },
-                        accessible: true
-                    }
-                }
-            }
-        ],
-        ports: [
-            {type: '24-pin-power'},
-            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
         cables: []
-    }), 
-    new Component ({        // EVGA Z790 DARK KiNGPiN [RAM orientation is on horizontal]
-        name: 'EVGA Z790 DARK KiNGPiN',
-        type: 'motherboard',
-        size: 'ATX',
-        dimensions: {
-            depth: 244,
-            width: 244,
-            height: 305
-        },
-        isRotatable: false,
-        isAttached: false,
-        defaultSource: 'PACK',
-        images: [
-            {side: 'PACK', imageSrc: './assets/motherboard/EVGA/LGA 1700/EVGA Z790 DARK KiNGPiN pack.png'}, 
-            {side: 'left', imageSrc: './assets/motherboard/EVGA/LGA 1700/EVGA Z790 DARK KiNGPiN.png'}, 
-            {side: 'rear', imageSrc: './assets/motherboard/EVGA/LGA 1700/EVGA Z790 DARK KiNGPiN REAR.png'} 
-        ],
-        slots: [
-            {
-                type: 'cpu', 
-                supports: ['LGA 1700'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 108, y: 72, width: 45, height: 45},
-                        },
-                        accessible: true // if able to attach to this side
-                    }
-                }
-            },
-            {
-                type: 'gpu', 
-                supports: ['pcie4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 1, y: 170, width: 200, height: 40},
-                        },
-                        accessible: true // if able to attach to this side
-                    },
-                    rear: {
-                        offsets: {
-                            default: {x: 10, y: 350, width: 560, height: 164},
-                        },
-                        accessible: false
-                    }
-                }
-            },
-         {
-               type: 'cooling',
-               supports: ['AMD'],
-               component: null,
-               sides: {    
-                   left: {
-                       offsets: {
-                           default: {x: 84, y: 43, width: 95, height: 105}
-                       },
-                       accessible: true
-                   }
-               }
-           },
-            {
-                type: 'ram',
-                supports: ['ddr4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 207, y: 24, width: 8, height: 140}
-                        },
-                        accessible: true
-                    }
-                }
-            }
-        ],
-        ports: [
-            {type: '24-pin-power'},
-            {type: '8-pin-power'},
-            {type: 'sata-data'},
-            {type: 'cooling'},
-            {type: 'frontPanel'},
-        ],
-        cables: []
-    }), 
+    }),  
     new Component ({        // Gigabyte B760 DS3H AX V2
         name: 'Gigabyte B760 DS3H AX V2',
         type: 'motherboard',
@@ -6197,6 +6039,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/LGA 1700/B760 DS3H AX V2/B760 DS3H AX V2-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/LGA 1700/B760 DS3H AX V2/B760 DS3H AX V2-02.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Gigabyte/LGA 1700/B760 DS3H AX V2/B760 DS3H AX V2-04.png'} 
         ],
         slots: [
@@ -6302,6 +6145,9 @@ const components = [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
         ],
@@ -6322,6 +6168,7 @@ const components = [
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/LGA 1700/Z790 GAMING PLUS AX/Z790 GAMING PLUS AX-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/LGA 1700/Z790 GAMING PLUS AX/Z790 GAMING PLUS AX-02.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
             {side: 'rear', imageSrc: './assets/motherboard/Gigabyte/LGA 1700/Z790 GAMING PLUS AX/Z790 GAMING PLUS AX-04.png'} 
         ],
         slots: [
@@ -6372,7 +6219,7 @@ const components = [
            },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -6385,7 +6232,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -6398,7 +6245,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -6411,7 +6258,7 @@ const components = [
             },
             {
                 type: 'ram',
-                supports: ['ddr4'],
+                supports: ['ddr5'],
                 component: null,
                 sides: {
                     left: {
@@ -6426,6 +6273,9 @@ const components = [
         ports: [
             {type: '24-pin-power'},
             {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
             {type: 'sata-data'},
             {type: 'cooling'},
             {type: 'frontPanel'},
@@ -8104,7 +7954,7 @@ new Component ({ //Arctic Freezer 36
     ]
 }),  
 new Component ({ //be quiet pure rock
-    name: 'Be Quiet Pure Rock',
+    name: 'Be Quiet Pure Rock 2',
     type: 'cooling',
     size: 'amd',
     dimensions: {
@@ -8354,7 +8204,6 @@ new Component ({ //Teamgroup Tforce DDR4
     ],
  }),
  
-
  //  RAM DDR5
    new Component ({ //Dominator Titanium
       name: 'Dominator Titanium DDR5',
