@@ -16,11 +16,10 @@
         }
 
         .completed-task .checkmark {
-            display: block; /* Make the checkmark visible when completed */
+            display: block;
             opacity: 1;
         }
 
-        /* Additional style for completed tasks */
         .completed-task {
             background-color: #e0ffe0;
             color: #333;
@@ -158,7 +157,7 @@
             <div class="tooltiptext">remove</div>
         </div>
         
-         <!-- Custom confirmation dialog (initially hidden) -->
+         <!-- Custom confirmation dialog -->
          <div id="confirmationDialog" class="dialog">
             <div class="dialog-content">
                 <p>Are you sure you want to remove this component?</p>
@@ -184,9 +183,6 @@
         </div>
 
         </div>
-
-      
- 
 
     <!-- Component Information Modal -->
     <dialog id="itemInfoModal">
@@ -592,7 +588,7 @@ function performTaskAction(action) {
     }
 }
 
-// Example modal opening functions
+// Modal opening functions
 function openShopModal() {
     const shopModal = document.querySelector('#shopModal');
     if (shopModal) shopModal.showModal();
