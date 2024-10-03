@@ -14,7 +14,7 @@ class UtilityTool {
             point.x < box.x + box.width &&
             point.y > box.y &&
             point.y < box.y + box.height
-    }    
+    }     
 
     // Creation of HTML Elements for Items
     makeItemElement(item, imageSource){
@@ -62,7 +62,7 @@ class UtilityTool {
         const typePrefix = types[component.type]
         let id = null
 
-        // concatenate to create ID
+        // create ID
         switch(count.length) {
             case 1:
                 id  = typePrefix + ('0' + '0' + count)
@@ -77,13 +77,11 @@ class UtilityTool {
         
         component.id = id
 
-        // change id count number
         this.idCount++
     }
 
     // Determine Scaling Factor Based on Display Area Height
     determineScale(componentHeight, baseHeight) {
-        // start with 1 as scale and lower if it still doesnt fit
         let scale = 1
         while (componentHeight * scale > baseHeight && scale > 0 ) {
             scale -= .1
@@ -94,7 +92,6 @@ class UtilityTool {
 
     // Get Image Side
     getSide(component, side) {
-        // images associated with a side also has their width and height declared
         return component.images.find(element => element.side == side) || null
     }
 

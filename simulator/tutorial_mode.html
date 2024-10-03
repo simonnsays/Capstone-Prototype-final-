@@ -41,7 +41,102 @@
         color: #333;
         }
 
+        #drawtrashBox {
+        position: absolute;
+        top: 20px;
+        left: 570px;
+        width: 80px;
+        height: 80px;
+        background-color: #fef9db;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 0px solid transparent;
+        transition: all 0.2 linear;
+        user-select: none;
+        }
+
+        #drawtrashBox img {
+        width: 80%;
+        height: 80%;
+        opacity: 70%;
+        }
+
+        #drawtrashBox:hover {
+        background-color: #888;
+        }
+
+        #drawtrashBox:hover {
+        box-shadow: 3.4px 2.5px 4.9px rgba(0, 0, 0, 0.025),
+                    8.6px 6.3px 12.4px rgba(0, 0, 0, 0.035),
+                    17.5px 12.8px 25.3px rgba(0, 0, 0, 0.045),
+                    36.1px 26.3px 52.2px rgba(0, 0, 0, 0.055),
+                    99px 72px 143px rgba(0, 0, 0, 0.08);
+        }
+
+        .tooltiptext {
+         visibility: hidden;
+         width: 4em;
+         background-color: rgba(0, 0, 0, 0.253);
+         color: #fff;
+         text-align: center;
+         border-radius: 6px;
+         padding: 5px 0;
+         position: absolute;
+         z-index: 1;
+         top: 25%;
+         left: 110%;
+        }
+
+        .tooltiptext::after {
+         content: "";
+         position: absolute;
+         top: 50%;
+         right: 100%;
+         margin-top: -5px;
+         border-width: 5px;
+         border-style: solid;
+         border-color: transparent rgba(0, 0, 0, 0.386) transparent transparent;
+        }
+
+        .trash-icon:hover .tooltiptext {
+         visibility: visible;
+        }
+
+        .dialog {
+            display: none; 
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: white;
+            border: 1px solid #888;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
         
+        .dialog-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .dialog-content button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            background-color: #f04f4f;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dialog-content button:hover {
+            background-color: #d43e3e;
+        }
     </style>
 </head>
 <body>
@@ -58,9 +153,21 @@
         <!-- canvas -->
         <canvas id="simCanvas"></canvas>
 
+        <div id="drawtrashBox" class="trash-icon">
+            <img src="./assets/trash-bin.png" alt="Trash Icon">
+            <div class="tooltiptext">remove</div>
+        </div>
+        
+         <!-- Custom confirmation dialog (initially hidden) -->
+         <div id="confirmationDialog" class="dialog">
+            <div class="dialog-content">
+                <p>Are you sure you want to remove this component?</p>
+                <button id="confirmBtn">Yes</button>
+                <button id="cancelBtn">No</button>
+            </div>
         </div>
 
-        <!-- component labels -->
+            <!-- component labels -->
         <div class="rotate-wrapper">
             <button class="button" id="left">
                 <img class="arrow" style="height: 90%;" src="./assets/svg/leftArr.svg" alt="left arrow">
@@ -75,7 +182,11 @@
                 <img class="arrow" style="height: 90%;" src="./assets/svg/rightArr.svg" alt="right arrow">
             </button>
         </div>
-    </div>
+
+        </div>
+
+      
+ 
 
     <!-- Component Information Modal -->
     <dialog id="itemInfoModal">
@@ -242,6 +353,7 @@
         </div>
     </div>
     <div id="task-status">Task to be done: Click me "The Assistant" </div>
+    
 
  <!------------------------- ASSISTANT ----------------------------------->
     <div class="assistant-container" class="rect">
@@ -339,7 +451,7 @@
                 <div class="task-description">
                 <p>Now we dive in to plugging each wire for each component either for power or data connection.</p>
                 <p>There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. 
-                Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicators, reset button, and 3.5mm audio jack ports. </p>                    
+                Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicator, reset button, and 3.5mm audio jack ports. </p>                    
                 <p>To connect the wires simply open the wires inventory and drag the wires to their respective slots</p>
                 <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
                 <p><img src="assets/Assistant/wires1.png" class="timg" alt="wre1" style="height: 300px; width: 400px;padding: 10px;"></p>
@@ -348,7 +460,7 @@
                 <p><img src="assets/Assistant/wires4.png" class="timg" alt="wre4" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <p><img src="assets/Assistant/wires4.1.png" class="timg" alt="wre5" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <p style="padding: 5px;">Also please note that the wire will be colored green when they are connected on both components however it will be colored red if it is only connected on one end.</p>
-                <p><img src="assets/Assistant/wires4.2.png"  alt="wre6" style="height: 200px; width: 550px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/wires4.2.png"  alt="wre6" style="height: 200px; width: 580px;padding: 10px; left: 30px;"></p>
                 <p><img src="assets/Assistant/wires5.png" class="timg" alt="wre67" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <p><img src="assets/Assistant/wires6.png" class="timg" alt="wre8" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <button class="start-task-btn" data-task="connectWires">Start Task</button>
@@ -502,16 +614,6 @@ function powerOnPC() {
 
 // Ensure no task is initially marked as completed
 markTaskCompleted(-1);  // Reset task completion at the start
-
-function getRandomRamSpeed() {
-    const speeds = [2400, 2666, 2933, 3200];
-    return speeds[Math.floor(Math.random() * speeds.length)];
-}
-
-function getRandomRamStorage() {
-    const storages = [4, 8, 16];
-    return storages[Math.floor(Math.random() * storages.length)];
-}
     </script>
 </body>
 </html>

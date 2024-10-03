@@ -71,6 +71,7 @@ class ElementHandler {
             btn2: document.querySelector('#button2'),
         }
     }
+    
     getAssistantElements() {
         return {
             container: document.querySelector('.assistant-container') ,

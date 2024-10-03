@@ -8,7 +8,102 @@
     <link rel="icon" href="./favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
     <style>   
+        #drawtrashBox {
+        position: absolute;
+        top: 20px;
+        left: 570px;
+        width: 80px;
+        height: 80px;
+        background-color: #fef9db;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 0px solid transparent;
+        transition: all 0.2 linear;
+        user-select: none;
+        }
 
+        #drawtrashBox img {
+        width: 80%;
+        height: 80%;
+        opacity: 70%;
+        }
+
+        #drawtrashBox:hover {
+        background-color: #888; /* Highlight color */
+        }
+
+        #drawtrashBox:hover {
+        box-shadow: 3.4px 2.5px 4.9px rgba(0, 0, 0, 0.025),
+                    8.6px 6.3px 12.4px rgba(0, 0, 0, 0.035),
+                    17.5px 12.8px 25.3px rgba(0, 0, 0, 0.045),
+                    36.1px 26.3px 52.2px rgba(0, 0, 0, 0.055),
+                    99px 72px 143px rgba(0, 0, 0, 0.08);
+        }
+       
+        .dialog {
+            display: none; 
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: white;
+            border: 1px solid #888;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .dialog-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .dialog-content button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            background-color: #f04f4f;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dialog-content button:hover {
+            background-color: #d43e3e;
+        }
+        
+        .tooltiptext {
+         visibility: hidden;
+         width: 4em;
+         background-color: rgba(0, 0, 0, 0.253);
+         color: #fff;
+         text-align: center;
+         border-radius: 6px;
+         padding: 5px 0;
+         position: absolute;
+         z-index: 1;
+         top: 25%;
+         left: 110%;
+        }
+
+        .tooltiptext::after {
+         content: "";
+         position: absolute;
+         top: 50%;
+         right: 100%;
+         margin-top: -5px;
+         border-width: 5px;
+         border-style: solid;
+         border-color: transparent rgba(0, 0, 0, 0.386) transparent transparent;
+        }
+
+        .trash-icon:hover .tooltiptext {
+         visibility: visible;
+        }
     </style>
 </head>
 <body>
@@ -21,10 +116,21 @@
             <button class="button" id="openWires" data-type="tab">PORTS</button>
             <button class="button" id="openPerif" data-type="tab">TURN ON</button>
         </div>
-
+        
         <!-- canvas -->
         <canvas id="simCanvas"></canvas>
-     
+        <div id="drawtrashBox" class="trash-icon">
+            <img src="./assets/trash-bin.png" alt="Trash Icon">
+            <div class="tooltiptext">remove</div>
+        </div>
+        <!-- Custom confirmation dialog (initially hidden) -->
+        <div id="confirmationDialog" class="dialog">
+            <div class="dialog-content">
+                <p>Are you sure you want to remove this component?</p>
+                <button id="confirmBtn">Yes</button>
+                <button id="cancelBtn">No</button>
+            </div>
+        </div>
         <!-- component labels -->
         <div class="rotate-wrapper">
             <button class="button" id="left">
@@ -209,6 +315,33 @@
 
     <script type="module" src="main.js"></script>
     <script>
+       let componentToRemove = null;
+
+    // Function to show confirmation dialog
+    function confirmRemoval(event) {
+        event.preventDefault();
+        // Show confirmation dialog
+        const dialog = document.getElementById('confirmationDialog');
+        dialog.style.display = 'block';
+    
+        // Store reference to the component we want to remove
+        componentToRemove = document.getElementById('drawtrashBox');
+    }
+    
+    // Function to remove the component after confirmation
+    function removeComponent() {
+        if (componentToRemove) {
+            componentToRemove.remove();  // Remove the element from DOM
+        }
+        // Hide the confirmation dialog
+        document.getElementById('confirmationDialog').style.display = 'none';
+    }
+    
+    // Function to cancel the removal
+    function cancelRemoval() {
+        // Hide the confirmation dialog without removing the component
+        document.getElementById('confirmationDialog').style.display = 'none';
+    }
     </script>
 </body>
 </html>
