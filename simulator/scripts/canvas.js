@@ -34,7 +34,7 @@ class Canvas {
         // Mouse Events
         window.addEventListener('mousedown', (e) => this.handleMouseDown(e));
         window.addEventListener('mousemove', (e) => this.handleMouseMove(e));
-        window.addEventListener('mouseup', (e) => this.handleMouseUp(e));
+        window.addEventListener('mouseup', () => this.handleMouseUp());
 
         // Dialog Events
         this.confirmBtn.addEventListener('click', () => this.confirmRemoval());
@@ -140,7 +140,7 @@ class Canvas {
     }
 
     // Mouse Up Event - Handle dropping on trash
-    handleMouseUp(e) {
+    handleMouseUp() {
         if (!this.user.componentSelected) return;
 
         const adjustedMousePoint = {

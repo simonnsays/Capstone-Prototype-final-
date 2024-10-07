@@ -114,7 +114,7 @@
             <button class="button" id="openShop" data-type="tab">SHOP</button>
             <button class="button" id="openInv" data-type="tab">INVENTORY</button>
             <button class="button" id="openWires" data-type="tab">PORTS</button>
-            <button class="button" id="openPerif" data-type="tab">TURN ON</button>
+            <button class="button" id="openBootTab" data-type="tab">BOOT</button>
         </div>
         
         <!-- canvas -->
@@ -134,7 +134,7 @@
         <!-- component labels -->
         <div class="rotate-wrapper">
             <button class="button" id="left">
-                <img class="arrow" src="./assets/svg/leftArr.svg" alt="left arrow">
+                <img class="arrow" src="./assets/svg/leftArr.svg" alt="left arrow" style="height: 90%;">
             </button>
             <div class="wrapper">
                 <p id="compLabel"></p>
@@ -143,7 +143,7 @@
             </div>
             
             <button class="button" id="right">
-                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
+                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow"  style="height: 90%;">
             </button>
         </div>
     </div>
@@ -158,16 +158,16 @@
             <!-- item info name -->
             <div id="itemInfoNameContainer">
                 <div class="infoLineBreak"></div>
-                <p id="itemInfoName">EVGA Supernova 1300 P+, 80+ Platinum 1300W (psu)</p>
+                <p id="itemInfoName"></p>
                 <div class="infoLineBreak"></div>
             </div>
             
             <!-- item info [SPECS] container -->
             <div id="itemInfoSpecsContainer">
-                <h5>SPECS</h5>
+                <h5>SPECIFICATIONS</h5>
                 <ul id="itemInfoSpecs">
-                    <li>FormFactor</li>
-                    <li>CPU socket</li>
+                    <li id="type"></li>
+                    <li id="size"></li>
                 </ul>
             </div>
 
@@ -313,6 +313,46 @@
         </div>
     </div>
 
+    <!-- BOOT UP MODAL -->
+    <div id="bootUpTab" class="modal">
+        <div class="modal-wrapper">
+            <!-- header -->
+            <div class="modal-header no-margin">
+                BOOT UP
+                <span id="closeBootTab" class="closeBtn">&times;</span>
+            </div>
+
+            <!-- body -->
+            <div class="bootTabBodyWrapper">
+                <!-- report -->
+                <div id="bootTabReport">
+                    <!-- <div class="reportCell">
+                        <div class="reportCellTag"> Temperature:</div>
+                        <div class="reportCellDef">71 degrees</div>
+                    </div>
+                    <div class="reportCell">
+                        <div class="reportCellTag"> Wattage:</div>
+                        <div class="reportCellDef">600W / 800W</div>
+                    </div> -->
+                </div>
+
+                <div class="vertLine"></div>
+
+                <!-- display -->
+                <div id="bootDisplay">
+                    <img id="desk" src="./assets/desk.png" >
+                    <img id="monitor" src="./assets/monitor.png" >
+                    <div id="unitPlaceHolder">
+                        <!-- image element here -->
+                    </div>
+                    <div id="powerButton">
+                        <img src="./assets/svg/power-button.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script type="module" src="main.js"></script>
     <script>
        let componentToRemove = null;
@@ -342,6 +382,8 @@
         // Hide the confirmation dialog without removing the component
         document.getElementById('confirmationDialog').style.display = 'none';
     }
-    </script>
+
+   
+</script>
 </body>
 </html>

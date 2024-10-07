@@ -95,7 +95,7 @@ class Shop{
             container.appendChild(element)
         })
     }
-
+    
     // Buy Component
     buyComponent(component) {
         // create clone of the component
@@ -178,10 +178,8 @@ class Shop{
         this.itemInfo.infoName.innerHTML = component.name
 
         // change specs list 
-        /*
-        *   ENTER CHANGE OF SPECS LOGIC HERE
-        */
-
+        document.getElementById('type').textContent = `Type: ${component.type}`;
+        document.getElementById('size').textContent = `Size: ${component.size}`;
         // button events
         const buyEvent = () => {
             this.buyComponent(component)

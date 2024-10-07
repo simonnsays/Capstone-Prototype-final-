@@ -1,8 +1,9 @@
 import cableRef from "../Data/cableReference.js";
 
 class Drawer {
-    constructor(elementHandler, utilityool) {
+    constructor(elementHandler, utilityTool) {
         // Utility
+        this.utilityTool = utilityTool
         this.elementHandler = elementHandler
         this.elements = this.elementHandler.getDrawerElements()
         if(!this.elements) throw new Error('Missing Drawer Elements');
@@ -55,6 +56,20 @@ class Drawer {
         } else {
             this.openDrawer(image)
         }
+    }
+    
+    isBeingOpened(mouse) {
+        if(this.utilityTool.isInsideBox(mouse, this.pullBtn.getBoundingClientRect())) {
+            return true
+        } 
+        return false
+    }
+
+    isBeingUsed(mouse) {
+        if(this.utilityTool.isInsideBox(mouse, this.cableContainer.getBoundingClientRect())) {
+            return true
+        } 
+        return false
     }
 
     // Remind User to Pull Drawer Down

@@ -603,6 +603,141 @@ body {
     background-color: var(--mint);
 }
 
+
+/****************************************** BOOT UP TAB ****************************/ 
+#bootUpTab {
+    display: none;
+    width: 1000px;
+    height: 600px;
+    z-index: 15;
+    position: fixed;
+    background-color: white;
+
+    padding: 20px;
+}
+
+.bootTabBodyWrapper {
+    width: 100%;
+    height: 95%;
+    /* background-color: #334155; */
+    display: flex;
+    gap: 15px;
+    align-items: center;
+
+    padding-top: 10px;
+}
+
+/* Boot Report */
+#bootTabReport {
+    width: 240px;
+    height: calc(100% - 20px);
+    /* background-color: rgba(0,0,0, .5); */
+    /* background-color: var(--light-lime); */
+    background-color: rgba(171, 214, 153, .4);
+    position: relative;
+
+    /* margin-bottom: 10px; */
+    border-radius: 10px;
+    padding: 10px;
+
+    overflow: auto;
+}
+.reportCell {
+    /* background-color: var(--light-lime); */
+    background-color: rgba(171, 214, 153, .8);
+    font-weight:normal;
+    width: calc(100% - 10px);
+    height: auto;
+    position: relative;
+
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 5px;
+
+    overflow: auto;
+    animation: reportCellSlide .4s ease-in;
+}
+.reportCellDef {
+    font-weight: normal;
+    margin-left: 15px;
+}
+
+.vertLine {
+    height: 90%;
+    width: 0px;
+
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+/* Boot Display */
+#bootDisplay {
+    width: 700px;
+    height: 100%;
+    /* background-color: rgba(120, 105, 150, 1); */
+    background-color: var(--light-lime);
+    position: relative;
+    overflow: hidden;
+
+    /* border: solid 5px black; */
+    border-radius: 20px ;
+}
+#desk {
+    /* background-color: green; */
+    position: absolute;
+    bottom: -186;
+    left: 30;
+}
+#monitor{
+    width: calc(399px - 50px);
+    height: calc(328px - 50px);
+    position: absolute;
+    top: 120px;
+    left: 60px;
+}
+#unitPlaceHolder {
+     width: 200px;
+     height: 340px;
+     position: absolute;
+     top: 58;
+     left: 440;
+}
+#unitPlaceHolder > img {
+    width: 100%;
+    height: 100%;
+}
+#powerButton {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 10;
+    top: 10;
+    cursor: pointer;
+    /* background-color: black; */
+    background-color: var(--darkMode-green1);
+
+    border: 5px solid var(--darkMode-green1);
+    /* border: 3px solid black; */
+    border-radius: 50px;
+}
+#powerButton:active > img{
+    /* opacity: 40%; */
+    width: 100%;
+    height: 100%;
+}
+#powerButton > img {
+    width: 116%;
+    height: 116%;
+    /* position: relative;
+    bottom: 7%;
+    right: 7%; */
+
+    transition: all ease-in-out .1s;
+}
+
 /* 
 /       UTILITY
 */

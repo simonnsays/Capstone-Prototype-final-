@@ -82,6 +82,7 @@ class UtilityTool {
 
     // Determine Scaling Factor Based on Display Area Height
     determineScale(componentHeight, baseHeight) {
+        // start with 1 as scale and lower if it still doesnt fit
         let scale = 1
         while (componentHeight * scale > baseHeight && scale > 0 ) {
             scale -= .1

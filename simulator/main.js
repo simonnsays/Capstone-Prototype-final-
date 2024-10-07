@@ -6,7 +6,9 @@ import Shop from "./scripts/Tabs/shop.js"
 import Inventory from "./scripts/Tabs/inventory.js"
 import PortsTab from "./scripts/Tabs/portsTab.js"
 import DisplayArea from "./scripts/displayArea.js"
+import BootUpTab from "./scripts/Tabs/bootUpTab.js"
 import Assistant from "./assistant/assistant.js"
+import PCUnit from "./scripts/Data/pcUnit.js"
 
 class Main {
     constructor() {
@@ -23,8 +25,14 @@ class Main {
         // Wires Tab
         this.portsTab = new PortsTab(this.elementHandler, this.utilityTool)
 
+        // PC Unit
+        this.pcUnit = new PCUnit()
+
+        // Boot Up Tab
+        this.bootUpTab = new BootUpTab(this.elementHandler, this.utilityTool, this.pcUnit)
+
         // Display Area
-        this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool, this.portsTab)
+        this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool, this.portsTab, this.bootUpTab)
         
         // Inventory
         this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea)
@@ -49,7 +57,8 @@ class Main {
         if(this.shop.isActive || 
             this.inventory.isActive || 
             this.portsTab.isActive || 
-            this.portsTab.drawer.isActive) {
+            this.portsTab.drawer.isActive ||
+            this.bootUpTab.isActive) {
                 this.canvas.isActive = false
             } else {
                 this.canvas.isActive = true

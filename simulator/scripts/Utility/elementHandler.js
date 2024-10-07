@@ -82,7 +82,19 @@ class ElementHandler {
             modal: document.querySelector('.assistant-modal') 
         } 
     } 
-       
+    
+    getBootUpTabElements() {
+        return {
+            modal: document.querySelector('#bootUpTab'),
+            openBtn: document.querySelector('#openBootTab'),
+            closeBtn: document.querySelector('#closeBootTab'),
+            powerBtn: document.querySelector('#powerButton'),
+            pcPlaceHolder: document.querySelector('#unitPlaceHolder'),
+            reportArea: document.querySelector('#bootTabReport')
+        } || null
+    }
+
+    getPcSetElements  
 }
 
 export default ElementHandler

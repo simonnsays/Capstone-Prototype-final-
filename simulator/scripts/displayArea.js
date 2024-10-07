@@ -1,5 +1,5 @@
 class DisplayArea {
-    constructor(elementHandler, utilityTool, portsTab) {
+    constructor(elementHandler, utilityTool, portsTab, bootUpTab) {
         // Utility
         this.elementHandler = elementHandler;
         this.utilityTool = utilityTool;
@@ -9,6 +9,9 @@ class DisplayArea {
         if (!this.elements) {
             throw new Error('Missing Display Area Elements');
         }
+
+        // Bootup Tab
+        this.bootUpTab = bootUpTab;
 
         // Wires Tab
         this.portsTab = portsTab;
@@ -174,13 +177,13 @@ class DisplayArea {
         }
 
         if (baseComponent.isAttached) {
+            // get the original dimensions of the base component
             const imageSide = this.utilityTool.getSide(baseComponent, this.currentSide);
-
+            // get the original dimensions of the base component
             const scale = {
                 width: baseComponent.box.width / imageSide.width,
                 height: baseComponent.box.height / imageSide.height
             };
-
             const offset = side.offsets['default'];
 
             slot.box = {
@@ -210,6 +213,7 @@ class DisplayArea {
 
     // Update Attached Component Box
     updateAttachedComponentBox(baseComponent, slot) {
+        // only update when a side for slot is available
         const side = slot.sides[this.currentSide];
         if (!side) {
             slot.component.box = { x: 0, y: 0, width: 0, height: 0 };
@@ -217,11 +221,16 @@ class DisplayArea {
         }
 
         if (baseComponent.isAttached) {
+
+             // get the original dimensions of the base component
             const imageSide = this.utilityTool.getSide(baseComponent, this.currentSide);
+
+              // find the scale by getting the change happened in the component's width and height
             const scale = {
                 width: baseComponent.box.width / imageSide.width,
                 height: baseComponent.box.height / imageSide.height
             };
+
             const offset = side.offsets['default'];
 
             slot.component.box = {
@@ -242,40 +251,14 @@ class DisplayArea {
             };
         }
 
+        // do the same for components attached to this attached component (if there are)
         slot.component.slots.forEach((childSlot) => {
             if (childSlot.component) {
                 this.updateAttachedComponentBox(slot.component, childSlot);
             }
         });
     }
-
-    // Main Display Area Update Method
-    update() {
-        if (this.table.component) {
-            const tableComponent = this.table.component;
-            this.createBox(tableComponent, this.table, this.currentSide);
-            this.updateRotatableStyles(tableComponent.isRotatable);
-            this.updateComponentLabels(tableComponent);
-
-            tableComponent.slots.forEach((slot) => {
-                if (slot.component) {
-                    this.updateAttachedComponentBox(tableComponent, slot);
-                }
-                this.updateSlotBox(tableComponent, slot);
-            });
-        }
-
-        this.shelf.forEach((spot) => {
-            const shelfComponent = spot.component;
-
-            if (shelfComponent) {
-                this.createBox(shelfComponent, spot, shelfComponent.defaultSource);
-            }
-        });
-
-        this.portsTab.update(this.table, this.shelf);
-    }
-
+    
     toggleMenu(menu, buttons, menuImg) {
         switch (menu.dataset.active) {
             case 'true':
@@ -306,12 +289,57 @@ class DisplayArea {
         });
     }
 
+       // Main Dispay Area Update Method 
+       update() {
+        if(this.table.component) {
+            const tableComponent = this.table.component
+
+            // create bounding box for table component adjusted to the current side
+            this.createBox(tableComponent, this.table, this.currentSide)
+
+            // update labels and rotate buttons visibility
+            this.updateRotatableStyles(tableComponent.isRotatable)
+            this.updateComponentLabels(tableComponent)
+
+            //update table component slot information
+            tableComponent.slots.forEach(slot => {
+                // update component boxes attached to slots
+                if(slot.component) {
+                    this.updateAttachedComponentBox(tableComponent, slot)
+                }
+
+                // update slot boxes
+                this.updateSlotBox(tableComponent, slot)
+            })
+        }
+
+        // create bounding boxes for components inside shelf
+        this.shelf.forEach(spot => {
+            const shelfComponent = spot.component
+
+            if(shelfComponent) {
+                this.createBox(shelfComponent, spot, shelfComponent.defaultSource)
+            }
+        })
+
+        // update WIRES TAB
+        this.portsTab.update(this.table, this.shelf)
+
+        // update BOOT TAB
+        this.bootUpTab.update(this.table.component)
+    }
+
+    
     init() {
         let menuImg = document.createElement('img');
         menuImg.src = './assets/svg/3line.svg';
         this.menuButton.appendChild(menuImg);
+        
 
         this.toggleMenu(this.menuButton, this.tabButtons, menuImg);
+
+        this.bootUpTab.update()
+        
         this.menuButton.addEventListener('click', () =>
             this.toggleMenu(this.menuButton, this.tabButtons, menuImg)
         );
