@@ -6,7 +6,7 @@ o = currently working out
 
 TODO:
 - Process of transferring items from shop to inv
-- Image rendering of Shop Items
+- Image rendering of Shop Items 
 
 [|] - merge old proto [SHOP] to final proto shop
     |_ [/] - add search bar functions

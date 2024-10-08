@@ -374,8 +374,11 @@
         </div>
     </div>
 
-     <!------------------------- ASSISTANT ----------------------------------->
-     <div class="assistant-container" class="rect">
+    <!------------------------- ASSISTANT ----------------------------------->
+    <div id="task-status">Task to be done: Click me "The Assistant" </div>
+
+
+    <div class="assistant-container" class="rect">
         <!-- <a href="https://www.flaticon.com/free-icons/processor" title="processor icons">Processor icons created by 3ab2ou - Flaticon</a> -->
         <!-- ASSISTANT IMAGE -->
         <div class="assistant-image-container"> 
@@ -575,7 +578,7 @@
             });
 
             // Update the task status display
-            // updateTaskStatus(taskIndex);
+            updateTaskStatus(taskIndex);
         }
 
         // Update the task status in the task-status element
