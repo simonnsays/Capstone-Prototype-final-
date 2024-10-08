@@ -41,17 +41,10 @@ class Shop{
 
     // Open Shop Tab
     openTab(modal) {
-        modal.showModal();
-        modal.isOpen = true;
-        this.isActive = true;
-
-    // Automatically select the first category when the shop is opened
-    if (this.categories.length > 0) {
-        const firstCategory = this.categories[0].dataset.id;
-        this.selectCategory(firstCategory);
-        this.update();
+        modal.showModal()
+        modal.isOpen = true
+        this.isActive = true
     }
-}
 
     // Close Shop Tab
     closeTab(modal) {
@@ -95,7 +88,7 @@ class Shop{
             container.appendChild(element)
         })
     }
-    
+
     // Buy Component
     buyComponent(component) {
         // create clone of the component
@@ -178,8 +171,10 @@ class Shop{
         this.itemInfo.infoName.innerHTML = component.name
 
         // change specs list 
-        document.getElementById('type').textContent = `Type: ${component.type}`;
-        document.getElementById('size').textContent = `Size: ${component.size}`;
+        /*
+        *   ENTER CHANGE OF SPECS LOGIC HERE
+        */
+
         // button events
         const buyEvent = () => {
             this.buyComponent(component)

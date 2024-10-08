@@ -69,20 +69,9 @@ class ElementHandler {
             specsContainer: document.querySelector('#itemInfoSpecs'),
             btn1: document.querySelector('#button1'),
             btn2: document.querySelector('#button2'),
-        }
+        } || null
     }
-    
-    getAssistantElements() {
-        return {
-            container: document.querySelector('.assistant-container') ,
-            imageContainer: document.querySelector('.assistant-image-container') , 
-            pulse: document.querySelector('#pulse') ,
-            image: document.querySelector('.assistant-image') ,
-            infoContainer: document.querySelector('.assistant-info-container') ,
-            modal: document.querySelector('.assistant-modal') 
-        } 
-    } 
-    
+
     getBootUpTabElements() {
         return {
             modal: document.querySelector('#bootUpTab'),
@@ -94,7 +83,7 @@ class ElementHandler {
         } || null
     }
 
-    getPcSetElements  
+    getPcSetElements
 }
 
 export default ElementHandler

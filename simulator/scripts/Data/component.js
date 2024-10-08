@@ -1,8 +1,7 @@
 class Component {
     constructor({
         name, 
-        type,
-        size, 
+        type, 
         specs, 
         dimensions, 
         isRotatable, 
@@ -15,7 +14,6 @@ class Component {
 
         // Description
         this.name = name
-        this.size = size
         this.type = type
         this.specs = specs
         this.dimensions = dimensions
