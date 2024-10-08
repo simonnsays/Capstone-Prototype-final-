@@ -1,0 +1,250 @@
+/* Assistant container */
+.assistant-container {
+    width: 4vw;
+    height: 4vw;
+    min-width: 80px;
+    min-height: 80px;
+    position: fixed;
+    bottom: 30px;
+    left: 50px;
+    display: flex;
+    gap: 50px;
+    background-color: var(--pastel-yellow);
+    box-shadow: 0 0 10px black;
+    border-radius: 100px;
+    padding: 10px;
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+.extended {
+    width: 45vw;
+}
+
+.assistant-image-container {
+    width: 80px;
+    height: auto;
+    border-radius: 60px;
+}
+
+.pulse {
+    width: 80px;
+    height: 80px;
+    /* background-color: var(--mint); */
+    background-color: #2f5c72;
+    position: relative;
+    border-radius: 50px ;
+    animation: pulse 1.5s infinite;
+}
+
+.pulse::before {
+    content: "";
+    width: 75px; 
+    height: 75px;
+    background-color: var(--pastel-yellow) ;
+    border-radius: 50%; 
+    position: absolute;
+    top: 2.5px; 
+    left: 2.5px;
+}
+
+.assistant-image {
+    width: 80px; 
+    height: 100%; 
+    object-fit: contain;
+    
+}
+
+.img-rltv {
+    position: relative;
+    /* margin-bottom: 80px; */
+    bottom: 80px;
+}
+
+.assistant-info-container {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; 
+}
+
+.assistant-info-container p{
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.assistant-info-container:not(.hidden) {
+    opacity: 1;
+    animation: fadeIn .3s forwards;
+}
+
+.assistant-modal {
+    width: 80vw;
+    height: 80vh;
+    background-color: var(--pastel-yellow);
+    overflow: auto;
+    padding: 20px;
+    transition: all 1.5s ease-in-out;
+}
+
+.assistant-modal::backdrop {
+    background-color: black;
+    opacity: .3;
+}
+
+.assistant-modal-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Task modal */
+.assistant-modal {
+    width: 80vw;
+    height: 80vh;
+    background-color: rgba(248, 249, 250, 0.8); /* Lighter background for modern feel */
+    overflow: auto;
+    padding: 20px;
+    transition: all 0.5s ease-in-out;
+    backdrop-filter: blur(10px); /* Adds a blurred background effect */
+}
+
+.assistant-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Task container */
+.task-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* Task cells */
+.task-cell {
+    width: 95%;
+    padding: 20px;
+    background: linear-gradient(to right, var(--light-lime),var(--teal) );
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.task-cell:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px #75c9b7;
+}
+
+/* Task title */
+.tasktitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+/* Task icon */
+.task-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.arrow{
+    width: 30px;
+    height: 30px;
+}
+
+/* Task description */
+.task-description {
+    display: none;
+    background-color: #527e718b;
+    border-radius: 15px;
+    padding: 15px;
+    color: white;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    position: relative;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 650px;
+}
+
+.task-description ul {
+    padding-left: 20px;
+}
+
+.task-description img {
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+/* Start task button */
+.start-task-btn {
+    padding: 10px 30px;
+    margin-left: 40%;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #FF385C;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.start-task-btn:hover {
+    background-color: #E10E42;
+    box-shadow: 0 0 20px rgba(255, 56, 92, 0.5);
+}
+
+.timg{
+    margin-left: 20%;
+}
+
+/* Scrollable task description */
+.task-description {
+    max-height: 300px;  /* Adjust as needed */
+    overflow-y: auto;   /* Enable scrolling */
+    padding-right: 10px;
+}
+
+.task-description::-webkit-scrollbar {
+    width: 8px;
+}
+
+.task-description::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 150, 255, 0.4);
+    border-radius: 5px;
+}
+
+.task-description::-webkit-scrollbar-track {
+    background-color: #2c2f3f;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(.2); /* Initial size */
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.4); /* Back to the initial size */
+        opacity: .5;
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    1000% { opacity: 1; }
+}
