@@ -646,7 +646,8 @@ function openWiresModal() {
 }
 
 function powerOnPC() {
-    alert("PC is powering on!");
+    const bootUpTab = document.querySelector('#bootUpTab');
+    if (bootUpTab) bootUpTab.style.display = 'block';  
 }
 
 // Ensure no task is initially marked as completed

@@ -136,6 +136,36 @@
                 cableAttached: null,
                 takes: '8-pin-pcie',
             },
+            {   // 8pin
+                type: '8-pin',
+                image: {
+                    imageSrc: './assets/psu/ports/vga(pcie)-power.png',
+                },
+                
+                offset: {
+                    top: 83,
+                    left: 79,
+                    width: 121,
+                    height: 97
+                },
+                cableAttached: null,
+                takes: '8-pin'
+            },
+            {   // 6pin - pcie
+                type: '6-pin-pcie',
+                image: {
+                    imageSrc: './assets/psu/ports/perif.png',
+                },
+                
+                offset: {
+                    top: 110,
+                    left: 79,
+                    width: 121,
+                    height: 90
+                },
+                cableAttached: null,
+                takes: '6-pin-pcie',
+            },
             {   // sata - power
                 type: 'sata-power',
                 image: {
@@ -150,10 +180,25 @@
                 cableAttached: null,
                 takes: 'sata-power',
             },
+            {   //12vhpwr
+                type: '12vhpwr',
+                image: {
+                    imageSrc: './assets/psu/ports/12vhpwr.png',
+                },
+                offset: {
+                    top: 83,
+                    left: 76,
+                    width: 140,
+                    height: 91
+                },
+                cableAttached: null,
+                takes: '12vhpwr',
+            },
+           
         ],
         gpu: [
-            {   // 8pin - pcie
-                type: '8-pin-pcie',
+            {   // 8+8 pin - pcie for data.js add to port 16-pin-pcie
+                type: '16-pin-pcie',
                 image: {
                     imageSrc: './assets/gpu/ports/8+8pin_power.png',
                 },
@@ -178,9 +223,93 @@
                         takes: '8-pin-pcie',
                         cableAttached: null
                     }
+                } , 
+                cableAttached: null
+            },
+            {   // 8+6 pin - pcie for data.js add to port 14-pin-pcie
+                type: '14-pin-pcie',
+                image: {
+                    imageSrc: './assets/gpu/ports/8+6pin_power.png',
+                },
+                
+                offset: { 
+                    first: {
+                        top: 107,
+                        left: 61,
+                        width: 88,
+                        height: 57,
+                        
+                        takes: '',
+                        cableAttached: null
+                    },
+                    
+                    second: {
+                        top: 107,
+                        left: 149, 
+                        width: 88,
+                        height: 57, 
+    
+                        takes: '',
+                        cableAttached: null
+                    }
+                } , 
+                cableAttached: null
+            },
+            {   // 12vhpwr for data.js add to port 14-pin-pcie
+                type: '12vhpwr',
+                image: {
+                    imageSrc: './assets/gpu/ports/12vhpwr.png',
+                },
+                
+                offset: { 
+                        top: 87,
+                        left: 94,
+                        width: 120,
+                        height: 60,
+                        
+                        takes: '12vhpwr',
+                        cableAttached: null
                 } ,
                 cableAttached: null
             },
+            {   // 8pin - pcie
+                type: '8-pin',
+                image: {
+                    imageSrc: './assets/gpu/ports/8pin_power.png',
+                },
+                
+                offset: { 
+                    first:{
+                        top: 70,
+                        left: 80,
+                        width: 130,
+                        height: 80,
+                        
+                        takes: '8-pin',
+                        cableAttached: null,
+                    }
+                } , 
+                cableAttached: null
+            },
+            {   // 6pin - pcie
+                type: '6-pin-pcie',
+                image: {
+                    imageSrc: './assets/gpu/ports/6pin_power.png',
+                },
+                
+                offset: { 
+                    first: {
+                        top: 60,
+                        left: 50,
+                        width: 170,
+                        height: 110,
+                        takes: '6-pin-pcie',
+                        cableAttached: null
+                    }
+                } , 
+                cableAttached: null
+            },
+            
         ],
         storage: [
             {   // sata (data + power)

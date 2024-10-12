@@ -14,7 +14,7 @@ class UtilityTool {
             point.x < box.x + box.width &&
             point.y > box.y &&
             point.y < box.y + box.height
-    }    
+    }     
 
     // Creation of HTML Elements for Items
     makeItemElement(item, imageSource){
@@ -49,7 +49,8 @@ class UtilityTool {
             gpu: 'gp',
             psu: 'ps',
             storage: 'st',
-            cooling: 'fn'
+            cooling: 'fn',
+            ram: 'rm'
         }
 
         // check if valid component type 
@@ -61,7 +62,7 @@ class UtilityTool {
         const typePrefix = types[component.type]
         let id = null
 
-        // concatenate to create ID
+        // create ID
         switch(count.length) {
             case 1:
                 id  = typePrefix + ('0' + '0' + count)
@@ -76,7 +77,6 @@ class UtilityTool {
         
         component.id = id
 
-        // change id count number
         this.idCount++
     }
 
@@ -93,7 +93,6 @@ class UtilityTool {
 
     // Get Image Side
     getSide(component, side) {
-        // images associated with a side also has their width and height declared
         return component.images.find(element => element.side == side) || null
     }
 

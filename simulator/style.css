@@ -62,7 +62,7 @@ body {
     width: 600px;
     height: 50px;   
     position: absolute;
-    bottom: 40;
+    bottom: 30;
     left: 30;
     display: flex;
     justify-content: space-evenly;
@@ -204,7 +204,7 @@ body {
 #wiresModal {
     width: 900px;
     height: 600px;
-    z-index: 15;
+    z-index: 3;
     position: fixed;
     top: calc(50%-600px/2);
     left: calc(50%-900px/2);
@@ -368,7 +368,7 @@ body {
     /* opacity: .7;  */
 }
 
-/********************* PORT SLIDER FOR LABEL ************************************/
+/* PORT SLIDER FOR LABEL */
 .port-slider {
     background-color: var(--teal);
     width: 100%;
@@ -386,8 +386,9 @@ body {
     bottom: 0;
 }
 
-/********************** WIRES CABLE DRAWER ************************************/
+/* WIRES CABLE DRAWER */
 #wiresDrawer {
+    /* width: 1300px; */
     width: 80vw;
     height: 280px;
     display: flex;
@@ -518,7 +519,7 @@ body {
     transform: scale(1.07);
 }
 
-/********************************COMPONENT INFORMATION ********************************/
+/*COMPONENT INFORMATION */
 #itemInfoModal {
     height: 670px;
     width: 450px;
@@ -601,6 +602,7 @@ body {
 #button1:hover, #button2:hover {
     background-color: var(--mint);
 }
+
 
 /****************************************** BOOT UP TAB ****************************/ 
 #bootUpTab {
@@ -773,17 +775,4 @@ body {
     70% {transform: rotate(-10deg);}
     100% {transform: rotate(0deg);}
     
-}
-@keyframes reportCellSlide {
-    0% {
-        top: calc(20%);
-        opacity: .0;
-    }
-    50% {
-        opacity: .0;
-    }
-    100% {
-        top: 0;
-        opacity: 1;
-    }
 }

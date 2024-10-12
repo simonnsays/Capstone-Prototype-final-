@@ -10,6 +10,8 @@ class PortsTab {
         // Open / Close tab buttons
         this.openBtn = this.elements.openBtn
         this.closeBtn = this.elements.closeBtn
+        window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
+
 
         // Wires / port tab
         this.isActive = false
@@ -66,7 +68,7 @@ class PortsTab {
         // remove port highlights
         this.removeHighlights()
     }
-
+    
     handleOutofBounds(e, modal) {
         const rawMouse = {x: e.clientX, y: e.clientY}
         const rect = modal.getBoundingClientRect()
@@ -432,6 +434,7 @@ class PortsTab {
             })
         })
     }
+    
 }
 
 export default PortsTab

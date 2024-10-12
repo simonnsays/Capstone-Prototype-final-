@@ -354,36 +354,7 @@
     </div>
     
     <script type="module" src="main.js"></script>
-    <script>
-       let componentToRemove = null;
-
-    // Function to show confirmation dialog
-    function confirmRemoval(event) {
-        event.preventDefault();
-        // Show confirmation dialog
-        const dialog = document.getElementById('confirmationDialog');
-        dialog.style.display = 'block';
-    
-        // Store reference to the component we want to remove
-        componentToRemove = document.getElementById('drawtrashBox');
-    }
-    
-    // Function to remove the component after confirmation
-    function removeComponent() {
-        if (componentToRemove) {
-            componentToRemove.remove();  // Remove the element from DOM
-        }
-        // Hide the confirmation dialog
-        document.getElementById('confirmationDialog').style.display = 'none';
-    }
-    
-    // Function to cancel the removal
-    function cancelRemoval() {
-        // Hide the confirmation dialog without removing the component
-        document.getElementById('confirmationDialog').style.display = 'none';
-    }
-
-   
+    <script>   
 </script>
 </body>
 </html>

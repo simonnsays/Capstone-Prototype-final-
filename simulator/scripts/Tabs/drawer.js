@@ -57,7 +57,7 @@ class Drawer {
             this.openDrawer(image)
         }
     }
-
+    
     isBeingOpened(mouse) {
         if(this.utilityTool.isInsideBox(mouse, this.pullBtn.getBoundingClientRect())) {
             return true
