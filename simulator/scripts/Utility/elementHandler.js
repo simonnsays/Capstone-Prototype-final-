@@ -79,7 +79,7 @@ class ElementHandler {
             pulse: document.querySelector('#pulse') ,
             image: document.querySelector('.assistant-image') ,
             infoContainer: document.querySelector('.assistant-info-container') ,
-            modal: document.querySelector('.assistant-modal') 
+            modal: document.querySelector('.assistant-modal') ,
         } 
     } 
     

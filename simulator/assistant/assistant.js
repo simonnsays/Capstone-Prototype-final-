@@ -7,8 +7,7 @@ class Assistant {
         this.pulse = elements.pulse;
         this.image = elements.image;
         this.infoContainer = elements.infoContainer;
-        this.modal = elements.modal;
-
+        this.modal = elements.modal;        
 
         // TUTORIAL STEP BY STEPS
         this.tasks = [{ title: '', description: '' }];

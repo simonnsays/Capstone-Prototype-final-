@@ -20,7 +20,7 @@ class BootUpTab {
 
         // Events
         this.openBtn.addEventListener('click', () => this.openTab())
-        window.addEventListener('mousedown', (e) => this.handleOfBounds(e, this.modal))
+//      window.addEventListener('mousedown', (e) => this.handleOfBounds(e, this.modal))
         this.closeBtn.addEventListener('click', () => this.closeTab())
     }
 
@@ -34,14 +34,14 @@ class BootUpTab {
         this.isActive = false
     }
 
-    handleOfBounds(e, modal) {
-        const rawPoint = {x: e.clientX, y: e.clientY}
-        const rect = modal.getBoundingClientRect()
-        
-        if(!this.utilityTool.isInsideBox(rawPoint, rect)) {
-            this.closeTab()
-        }
-    }
+//    handleOfBounds(e, modal) {
+//        const rawPoint = {x: e.clientX, y: e.clientY}
+//        const rect = modal.getBoundingClientRect()
+//        
+//        if(!this.utilityTool.isInsideBox(rawPoint, rect)) {
+//            this.closeTab()
+//        }
+//    }
 
     togglePowerButtonState(state) {
         switch(state) {
