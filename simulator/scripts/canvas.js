@@ -19,6 +19,11 @@ class Canvas {
         this.table = displayArea.table;
         this.shelf = displayArea.shelf;
 
+        // Custom Alert Elements
+        this.alertBox = document.getElementById('customAlert');
+        this.alertMessage = document.getElementById('alertMessage');
+        this.alertOkButton = document.querySelector('#alertOKButton');
+
         // User
         this.user = user;
 
@@ -39,16 +44,23 @@ class Canvas {
         // Dialog Events
         this.confirmBtn.addEventListener('click', () => this.confirmRemoval());
         this.cancelBtn.addEventListener('click', () => this.cancelRemoval());
+        this.alertOkButton.addEventListener('click', () => this.closeAlert());
+    }
+
+      // Custom Alert Handling
+    showAlert(message) {
+        this.alertMessage.textContent = message;
+        this.alertBox.classList.remove('hidden');
+    }
+
+    closeAlert() {
+        this.alertBox.classList.add('hidden');
     }
 
     // Check if the component and slot are compatible
     checkCompatibility(component, slot) {
-        if (!component) {
-            console.error("Error: Component is undefined or null");
-            return false;
-        }
-        if (!slot) {
-            console.error("Error: Slot is undefined or null");
+        if (!component || !slot) {
+            console.error("Error: Invalid component or slot");
             return false;
         }
 
@@ -65,12 +77,13 @@ class Canvas {
             console.log('CPU cooler detected, allowing compatibility for mount compatibility can be used anywhere.');
             return true; 
         }
+
         if (!componentType) {
             console.error("Error: Component type is undefined or null");
             return false;
         }
         if (componentType !== slotType) {
-            alert(`This slot is not for a ${componentType} component. Please choose the correct slot.`);
+            this.showAlert(`This slot is not for a ${componentType} component. Please choose the correct slot.`);
             return false;
         }
 
@@ -78,33 +91,36 @@ class Canvas {
         const slotSupports = slot.supports;
 
         if (!componentSize) {
-            alert('Component size is missing. Please choose a valid component.');
+            this.showAlert('Component size is missing. Please choose a valid component.');
             return false;
         }
 
         if (!slotSupports.includes(componentSize)) {
-            alert(`This slot doesn't support a ${componentSize} component. Please choose a compatible component.`);
+            this.showAlert(`This slot doesn't support a ${componentSize} component. Please choose a compatible component.`);
             return false;
         }
 
         return true;
     }
 
-    // Function to show the confirmation dialog
+    // Confirmation Dialog Handling
     showConfirmationDialog(component) {
-        this.componentToRemove = component;  
-        this.confirmationDialog.style.display = 'block';  
+        this.componentToRemove = component;
+        this.confirmationDialog.style.display = 'block';
     }
 
-    // Function to confirm the removal of the component
     confirmRemoval() {
-        if (this.componentToRemove) {
-            this.removeComponentFromCanvas(this.componentToRemove);
-        }
-        this.confirmationDialog.style.display = 'none';  
-        this.componentToRemove = null;  
+        if (this.componentToRemove) this.removeComponentFromCanvas(this.componentToRemove);
+        this.confirmationDialog.style.display = 'none';
+        this.componentToRemove = null;
     }
 
+    cancelRemoval() {
+        this.user.returnComponentToShelf();
+        this.user.resetTempProperties();
+        this.confirmationDialog.style.display = 'none';
+        this.componentToRemove = null;
+    }
     // Function to cancel the removal process
     cancelRemoval() {
         this.user.returnComponentToShelf(); 
@@ -118,11 +134,9 @@ class Canvas {
         if (e.button !== 0 || !this.isActive) return;
 
         this.user.componentSelected = this.user.selectComponent(this.shelf);
-
         if (!this.user.componentSelected) return;
 
         this.user.createTempProperties();
-
         this.displaySlots(this.table.component, this.user.componentSelected);
     }
 
@@ -143,7 +157,6 @@ class Canvas {
             // return component if out of bounds
             if(!this.utilityTool.isInsideBox(rawMouse, canvasRect)) {
                 this.user.returnComponentToShelf()
-
                 this.user.resetTempProperties()
             }
         }

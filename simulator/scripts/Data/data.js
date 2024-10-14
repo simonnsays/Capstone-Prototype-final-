@@ -275,7 +275,7 @@ const components = [
             },           
             {
                 type: 'storage',
-                supports: ['HDD', '2.5', 'U.2', 'ssd'],
+                supports: ['hdd', '2.5', 'U.2', 'ssd'],
                 component: null,
                 sides: {
         //            left: {
@@ -295,7 +295,7 @@ const components = [
             },
             {   
                 type: 'storage', 
-                supports: ['HDD', '2.5', 'U.2', 'ssd'],
+                supports: ['hdd', '2.5', 'U.2', 'ssd'],
                 component: null,
                 sides: {
                     right: {
@@ -308,7 +308,7 @@ const components = [
             },
             {   
                 type: 'storage', 
-                supports: ['HDD', '2.5', 'U.2', 'ssd'],
+                supports: ['hdd', '2.5', 'U.2', 'ssd'],
                 component: null,
                 sides: {
                     right: {
@@ -321,7 +321,7 @@ const components = [
             },
             {   
                 type: 'storage', 
-                supports: ['HDD', '2.5', 'U.2', 'ssd'],
+                supports: ['hdd', '2.5', 'U.2', 'ssd'],
                 component: null,
                 sides: {
                     right: {

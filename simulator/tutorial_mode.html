@@ -145,7 +145,7 @@
     </dialog>
 
     <!-- WIRES MODAL -->
-    <div id="wiresModal" class="modal">
+    <div id="wiresModal" class="modal" style="z-index: 1;">
         <div class="modal-wrapper">
             <!-- modal header -->
             <div class="modal-header no-margin">
@@ -220,7 +220,7 @@
     </div>
         <!-- BOOT UP MODAL -->
         
-        <div id="bootUpTab" class="modal">
+        <div id="bootUpTab" class="modal" >
             <div class="modal-wrapper">
                 <!-- header -->
                 <div class="modal-header no-margin">
@@ -397,6 +397,12 @@
     <dialog class="err-message">
         <h3>Error!</h3>
     </dialog>
+
+    <!-- Custom Alert Box -->
+    <div id="customAlert" class="alert hidden">
+        <span id="alertMessage"></span>
+        <button id="alertOKButton">OK</button>
+    </div>
 
     <!-- Assistant Reassure -->
     <dialog class="asst-reassure"></dialog>
