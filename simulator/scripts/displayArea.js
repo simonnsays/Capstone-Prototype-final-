@@ -3,7 +3,7 @@ class DisplayArea {
         // Utility
         this.elementHandler = elementHandler;
         this.utilityTool = utilityTool;
-
+        this.bootUpTab = bootUpTab;
         // Elements
         this.elements = this.elementHandler.getDisplayAreaElements();
         if (!this.elements) {
@@ -69,6 +69,8 @@ class DisplayArea {
         slot.component = componentSelected;
         slot.component.isAttached = true;
         slot.component.box = slot.box;
+        // Add component to PCUnit attached components
+        this.bootUpTab.pcUnit.addAttachedComponent(componentSelected);
 
         // Remove selected component from shelf
         const i = this.shelf.findIndex(

@@ -94,6 +94,16 @@ class ElementHandler {
         } || null
     }
 
+    gettsimulation() {
+        return {
+            modal: document.querySelector('#troubleshootingModal'),
+            closeBtn: document.querySelector('#close-troubleshooting'),
+            errorList: document.querySelector('#error-list'),
+            fixAllBtn: document.querySelector('#fix-all-btn'),
+        } || null
+    }
+
+
     getPcSetElements  
 }
 

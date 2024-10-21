@@ -9,6 +9,7 @@ import DisplayArea from "./scripts/displayArea.js"
 import BootUpTab from "./scripts/Tabs/bootUpTab.js"
 import Assistant from "./assistant/assistant.js"
 import PCUnit from "./scripts/Data/pcUnit.js"
+import tsimulation from "./scripts/Tabs/tsimulation.js"
 
 class Main {
     constructor() {
@@ -17,7 +18,7 @@ class Main {
         this.utilityTool = new UtilityTool()
 
         // User
-        this.user = new User(this.utilityTool)
+        this.user = new User(this.utilityTool, this.pcUnit)
 
         // Item Info Modal
         this.itemInfo = this.elementHandler.getItemInfoElements()
@@ -32,13 +33,16 @@ class Main {
         this.bootUpTab = new BootUpTab(this.elementHandler, this.utilityTool, this.pcUnit)
 
         // Display Area
-        this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool, this.portsTab, this.bootUpTab)
+        this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool, this.portsTab, this.bootUpTab, this.tsimulation)
         
         // Inventory
         this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea)
 
         // Shop
         this.shop = new Shop(this.elementHandler, this.utilityTool, this.inventory, this.itemInfo)
+
+        // Troubleshooting
+        this.tsimulation = new tsimulation(this.troubleshootingModal, this.errorList, this.fixAllbtn, this.elementHandler, this.utilityTool);
 
         //Assistant
         const elementHandler = new ElementHandler();
@@ -58,7 +62,8 @@ class Main {
             this.inventory.isActive || 
             this.portsTab.isActive || 
             this.portsTab.drawer.isActive ||
-            this.bootUpTab.isActive) {
+            this.bootUpTab.isActive ||
+            this.tsimulation.isActive) {
                 this.canvas.isActive = false
             } else {
                 this.canvas.isActive = true

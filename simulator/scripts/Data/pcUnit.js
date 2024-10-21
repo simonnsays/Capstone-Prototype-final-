@@ -1,5 +1,10 @@
 class PCUnit {
-    constructor() { 
+    constructor(utilityTool, displayArea, Canvas ) { 
+        this.displayArea = displayArea;
+        this.Canvas = Canvas;
+        this.utilityTool = utilityTool;  
+        this.attachedComponents = new Set();  // Track attached components
+        this.requiredComponents = ['motherboard', 'cpu', 'storage', 'psu', 'ram'];  // Required components
         this.availableUnit = null
         // this.reportArea = null
 
@@ -16,14 +21,24 @@ class PCUnit {
         this.reportCount = 0
     }
 
+    // Add component to the set when attached
+    addAttachedComponent(component) {
+        this.attachedComponents.add(component.type);
+    }
+
+    // Method to check for missing essential components
+    getMissingComponents() {
+        return this.requiredComponents.filter(comp => !this.attachedComponents.has(comp));
+    }
+    
     powerOn() {
-        const initialDelay = 1200
-        const decreaseFactor = .75
+        const initialDelay = 1200;
+        const decreaseFactor = 0.75;
 
         this.reports.forEach((report, i) => {
-            const delay = initialDelay * Math.pow(decreaseFactor, i)
-            setTimeout(() => this.createReportCell(report), delay)
-        }) 
+            const delay = initialDelay * Math.pow(decreaseFactor, i);
+            setTimeout(() => this.createReportCell(report), delay);
+        });
     }
 
     createReportCell(report) {
@@ -53,6 +68,7 @@ class PCUnit {
         if(component && component.type === 'chassis') return component
         return null    
     }
+
 }
 
 export default PCUnit

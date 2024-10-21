@@ -198,4 +198,5 @@ class Assistant {
     // Ensure no task is initially marked as completed
     markTaskCompleted(-1);  // Reset task completion at the start
 
+    
 export default Assistant;

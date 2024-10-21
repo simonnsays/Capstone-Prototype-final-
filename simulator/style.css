@@ -771,6 +771,20 @@ body {
     font-weight: bold;
 }
 
+#troubleshootingModal {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #444;
+    background-color: white;
+    text-align: center;
+}
+
+#error-list li {
+    text-align: left;
+    margin: 5px 0;
+    color: red;
+}
+
 /* 
 /       UTILITY
 */

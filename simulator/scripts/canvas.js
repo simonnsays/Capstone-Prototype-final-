@@ -1,9 +1,11 @@
 class Canvas {
-    constructor(elementHandler, utilityTool, displayArea, user) {
+    constructor(elementHandler, utilityTool, displayArea, user, pcUnit, bootUpTab) {
         // Utility
         this.elementHandler = elementHandler;
         this.utilityTool = utilityTool;
-
+        this.pcUnit = pcUnit;
+        this.bootUpTab = bootUpTab;
+        
         // Canvas Area
         this.element = elementHandler.getSimCanvas();
         if (!this.element) {
@@ -121,6 +123,7 @@ class Canvas {
         this.confirmationDialog.style.display = 'none';
         this.componentToRemove = null;
     }
+    
     // Function to cancel the removal process
     cancelRemoval() {
         this.user.returnComponentToShelf(); 
@@ -182,7 +185,7 @@ class Canvas {
         let isInteracting = false;
         this.user.availableSlots.forEach(slot => {
             if (!slot.box) throw new Error('Slot has no Box property');
-
+            
             if (this.utilityTool.isInsideBox(this.user.mousePoint, slot.box)
                 && slot.sides[this.displayArea.currentSide].accessible) {
 
@@ -263,7 +266,12 @@ class Canvas {
 
     // Trash box
     drawtrashBox() {
-        this.c.fillRect(this.trashBox.x, this.trashBox.y, this.trashBox.width, this.trashBox.height);
+        this.c.fillRect(
+            this.trashBox.x, 
+            this.trashBox.y, 
+            this.trashBox.width, 
+            this.trashBox.height
+        );
     }
 
     // Draw Component in Table Area
