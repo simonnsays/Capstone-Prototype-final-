@@ -1,7 +1,7 @@
 import Component from "./component.js"
 
 const components = [
-    // CASE
+    // Practice Set
     new Component ({        // NZXT H5 Flow [different storage orientation]
         name: 'NZXT H5 Flow',
         type: 'chassis',
@@ -101,6 +101,283 @@ const components = [
             {type: 'frontPanel'}
         ]
     }),
+    new Component ({        // B550 Aorus Elite v2 
+        name: 'B550 Aorus Elite v2',
+        type: 'motherboard',
+        size: 'ATX',
+        dimensions: {
+            depth: 244,
+            width: 244,
+            height: 305
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'pack', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-01.png'}, 
+            {side: 'left', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-02.png'}, 
+            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
+            {side: 'rear', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-05.png'} 
+        ],
+        slots: [
+            {
+                type: 'cpu', 
+                supports: ['AM4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 107, y: 75, width: 45, height: 45},
+                        },
+                        accessible: true // if able to attach to this side
+                    }
+                }
+            },
+            {
+                type: 'gpu', 
+                supports: ['pcie3'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 1, y: 170, width: 200, height: 40},
+                            
+                        },
+                        accessible: true // if able to attach to this side
+                    },
+                   rear: {
+                       offsets: {
+                           default: {x: 10, y: 350, width: 560, height: 164},
+                       },
+                       accessible: false
+                   }
+                }
+            },
+         {
+               type: 'cooling',
+               supports: ['AMD'],
+               component: null,
+               sides: {    
+                   left: {
+                       offsets: {
+                           default: {x: 80, y: 46, width: 95, height: 105}
+                       },
+                       accessible: true
+                   }
+               }
+           },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 204, y: 25, width: 8, height: 137}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 194, y: 25, width: 8, height: 137}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 184, y: 25, width: 8, height: 137}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'ram',
+                supports: ['ddr4'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 174, y: 25, width: 8, height: 137}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+        ],
+        ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'sata-data'},
+            {type: 'cooling'},
+            {type: 'frontPanel'},
+        ],
+        cables: []
+    }),
+    new Component ({        // Ryzen 9 5900X
+        name: 'AMD Ryzen 9 5900X',
+        type: 'cpu',
+        size: 'AM4',
+        dimensions: {
+            depth: 125,
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
+            {side: 'PACK', imageSrc: './assets/cpu/amd/am4/Ryzen 9 5900X.png'},  
+        ],
+        slots: [],
+        ports: []
+    }),
+    new Component ({        // EVGA SuperNOVA 1600 G+
+        name: 'EVGA SuperNOVA 1600 G+',
+        type: 'psu',
+        size: 'ATX',
+        dimensions: {
+            depth: 200,
+            width: 150,
+            height: 86,
+        },
+        isRotatable: true,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 G+, 80+ GOLD 1600W/EVGA SuperNOVA 1600 G+ pack.png'}, 
+            {side: 'left', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 G+, 80+ GOLD 1600W/EVGA SuperNOVA 1600 G+ left.png'}, 
+            {side: 'front', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 G+, 80+ GOLD 1600W/EVGA SuperNOVA 1600 G+ front.png'}, 
+            {side: 'right', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 G+, 80+ GOLD 1600W/EVGA SuperNOVA 1600 G+ right.png'}, 
+            {side: 'rear', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 G+, 80+ GOLD 1600W/EVGA SuperNOVA 1600 G+ rear.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '24-pin-power',},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
+            {type: '8-pin'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+        ],
+        cables: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power' },
+            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '8-pin'},
+        ]
+    }),
+    new Component ({        //Corsair Vengeance Pro DDR4
+        name: 'Corsair Vengeance Pro DDR4',
+        type: 'ram',
+        size: 'ddr4',
+        dimensions: {
+            width: 100,
+            height: 100,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/corsair vengeance pro attached.png'},  
+            {side: 'PACK', imageSrc: './assets/memory/corsair vengeance pro ddr4.png'},  
+        ],
+    }),
+    new Component ({        //Seagate Barracuda Q1 SSD
+        name: 'Seagate Barracuda SSD',
+        type: 'storage',
+        size: 'ssd',
+        dimensions: {
+            depth: 125,
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'right', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res.png'},  
+            {side: 'PACK', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res - Copy.png'},  
+        ],
+        slots: [],
+        ports: [
+            {type: 'sata'}
+        ],
+        cables: [
+            {type: 'sata-power'},
+            {type: 'sata-data'}
+        ]
+    }),
+    new Component ({        //be quiet pure rock
+        name: 'Be Quiet Pure Rock 2',
+        type: 'cooling',
+        size: 'amd',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'pack', imageSrc: './assets/cooling/be quiet pure rock.png'},  
+            {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
+        ],
+        slots: [],
+    cables: [
+                {type: '3-pin-cooling'}
+            ]
+    }), 
+    new Component ({        // Gigabyte Nvidia GeForce RTX 3060
+        name: 'Gigabyte Nvidia GeForce RTX 3060',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 3060.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 3060.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '8-pin'}
+        ]  
+    }),
+
+    // CASE
+   
     new Component ({        // Corsair AF Render
         name: 'Corsair AF Render',
         type: 'chassis',
@@ -597,136 +874,7 @@ const components = [
     }),
 
     // MOTHERBOARD AM4
-    new Component ({        // B550 Aorus Elite v2 
-        name: 'B550 Aorus Elite v2',
-        type: 'motherboard',
-        size: 'ATX',
-        dimensions: {
-            depth: 244,
-            width: 244,
-            height: 305
-        },
-        isRotatable: false,
-        isAttached: false,
-        defaultSource: 'pack',
-        images: [
-            {side: 'pack', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-01.png'}, 
-            {side: 'left', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-02.png'}, 
-            {side: 'right', imageSrc: './assets/motherboard/backside.png'},
-            {side: 'rear', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-05.png'} 
-        ],
-        slots: [
-            {
-                type: 'cpu', 
-                supports: ['AM4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 107, y: 75, width: 45, height: 45},
-                        },
-                        accessible: true // if able to attach to this side
-                    }
-                }
-            },
-            {
-                type: 'gpu', 
-                supports: ['pcie3'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 1, y: 170, width: 200, height: 40},
-                            
-                        },
-                        accessible: true // if able to attach to this side
-                    },
-                   rear: {
-                       offsets: {
-                           default: {x: 10, y: 350, width: 560, height: 164},
-                       },
-                       accessible: false
-                   }
-                }
-            },
-         {
-               type: 'cooling',
-               supports: ['AMD'],
-               component: null,
-               sides: {    
-                   left: {
-                       offsets: {
-                           default: {x: 80, y: 46, width: 95, height: 105}
-                       },
-                       accessible: true
-                   }
-               }
-           },
-            {
-                type: 'ram',
-                supports: ['ddr4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 204, y: 25, width: 8, height: 137}
-                        },
-                        accessible: true
-                    }
-                }
-            },
-            {
-                type: 'ram',
-                supports: ['ddr4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 194, y: 25, width: 8, height: 137}
-                        },
-                        accessible: true
-                    }
-                }
-            },
-            {
-                type: 'ram',
-                supports: ['ddr4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 184, y: 25, width: 8, height: 137}
-                        },
-                        accessible: true
-                    }
-                }
-            },
-            {
-                type: 'ram',
-                supports: ['ddr4'],
-                component: null,
-                sides: {
-                    left: {
-                        offsets: {
-                            default: {x: 174, y: 25, width: 8, height: 137}
-                        },
-                        accessible: true
-                    }
-                }
-            },
-        ],
-        ports: [
-            {type: '24-pin-power'},
-            {type: '8-pin-power'},
-            {type: 'sata-data'},
-            {type: 'sata-data'},
-            {type: 'sata-data'},
-            {type: 'sata-data'},
-            {type: 'cooling'},
-            {type: 'frontPanel'},
-        ],
-        cables: []
-    }),
+    
     new Component ({        // X570 PG Velocita
         name: 'ASRock X570 PG Velocita',
         type: 'motherboard',
@@ -6464,25 +6612,6 @@ const components = [
         slots: [],
         ports: []
     }),
-    new Component ({        // Ryzen 9 5900X
-        name: 'AMD Ryzen 9 5900X',
-        type: 'cpu',
-        size: 'AM4',
-        dimensions: {
-            depth: 125,
-            width: 125,
-            height: 125,
-        },
-        isRotatable: false,
-        isAttached: false,
-        defaultSource: 'PACK',
-        images: [
-            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
-            {side: 'PACK', imageSrc: './assets/cpu/amd/am4/Ryzen 9 5900X.png'},  
-        ],
-        slots: [],
-        ports: []
-    }),
     new Component ({        // Ryzen 7 7800X3D
         name: 'AMD Ryzen 7 7800X3D',
         type: 'cpu',
@@ -7686,189 +7815,9 @@ const components = [
             {type: 'sata-power'},
             {type: 'sata-data'}
         ]
-     }),
-     new Component ({ //Toshiba X300
-        name: 'Toshiba X300',
-        type: 'storage',
-        size: 'hdd',
-        dimensions: {
-            depth: 125,
-            width: 125,
-            height: 125,
-        },
-        isRotatable: false,
-        isAttached: false,
-        defaultSource: 'PACK',
-        images: [
-            {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
-            {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
-            {side: 'PACK', imageSrc: './assets/storage/hdd/Toshiba p300.png'},  
-        ],
-        slots: [],
-        ports: [
-            {type: 'sata'}
-        ],
-        cables: [
-            {type: 'sata-power'},
-            {type: 'sata-data'}
-        ]
-     }),
-     new Component ({ //Toshiba X300 PRO
-        name: 'Toshiba X300 PRO',
-        type: 'storage',
-        size: 'hdd',
-        dimensions: {
-            depth: 125,
-            width: 125,
-            height: 125,
-        },
-        isRotatable: false,
-        isAttached: false,
-        defaultSource: 'PACK',
-        images: [
-            {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
-            {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
-            {side: 'PACK', imageSrc: './assets/storage/hdd/toshiba x300 pro.png'},  
-        ],
-        slots: [],
-        ports: [
-            {type: 'sata'}
-        ],
-        cables: [
-            {type: 'sata-power'},
-            {type: 'sata-data'}
-        ]
-     }),
-     new Component ({ //Toshiba P300
-        name: 'Toshiba P300',
-        type: 'storage',
-        size: 'hdd',
-        dimensions: {
-            depth: 125,
-            width: 125,
-            height: 125,
-        },
-        isRotatable: false,
-        isAttached: false,
-        defaultSource: 'PACK',
-        images: [
-            {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
-            {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
-            {side: 'PACK', imageSrc: './assets/storage/hdd/toshiba x300.png'},  
-        ],
-        slots: [],
-        ports: [
-            {type: 'sata'}
-        ],
-        cables: [
-            {type: 'sata-power'},
-            {type: 'sata-data'}
-        ]
-     }),
-     new Component ({ //Western Digital Gaming Black
-        name: 'Western Digital Gaming Black',
-        type: 'storage',
-        size: 'hdd',
-        dimensions: {
-            depth: 125,
-            width: 125,
-            height: 125,
-        },
-        isRotatable: false,
-        isAttached: false,
-        defaultSource: 'PACK',
-        images: [
-            {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
-            {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
-            {side: 'PACK', imageSrc: './assets/storage/hdd/wdc black.png'},  
-        ],
-        slots: [],
-        ports: [
-            {type: 'sata'}
-        ],
-        cables: [
-            {type: 'sata-power'},
-            {type: 'sata-data'}
-        ]
-     }),
- //Storage ssd
-     new Component ({ //Seagate Barracuda Q1 SSD
-    name: 'Seagate Barracuda SSD',
-    type: 'storage',
-    size: 'ssd',
-    dimensions: {
-        depth: 125,
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'PACK',
-    images: [
-        {side: 'right', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res.png'},  
-        {side: 'PACK', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res - Copy.png'},  
-    ],
-    slots: [],
-    ports: [
-        {type: 'sata'}
-    ],
-    cables: [
-        {type: 'sata-power'},
-        {type: 'sata-data'}
-    ]
-     }),     
-     new Component ({ //Samsung EVO SSD
-    name: 'Samsung EVO SSD',
-    type: 'storage',
-    size: 'ssd',
-    dimensions: {
-        depth: 125,
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'PACK',
-    images: [
-        {side: 'right', imageSrc: './assets/storage/ssd/samsung ssd.png'},  
-        {side: 'PACK', imageSrc: './assets/storage/ssd/samsung ssd - Copy.png'},  
-    ],
-    slots: [],
-    ports: [
-        {type: 'sata'}
-    ],
-    cables: [
-        {type: 'sata-power'},
-        {type: 'sata-data'}
-    ]
-     }),     
-     new Component ({ //Sandisk Plus SSD
-    name: 'Sandisk Plus SSD',
-    type: 'storage',
-    size: 'ssd',
-    dimensions: {
-        depth: 125,
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'PACK',
-    images: [
-        {side: 'right', imageSrc: './assets/storage/ssd/sandisk ssd plus.png'},  
-        {side: 'PACK', imageSrc: './assets/storage/ssd/sandisk ssd plus - Copy.png'},  
-    ],
-    slots: [],
-    ports: [
-        {type: 'sata'}
-    ],
-    cables: [
-        {type: 'sata-power'},
-        {type: 'sata-data'}
-    ]
-     }),     
-     new Component ({ //Sandisk Ultra SSD
-    name: 'Sandisk Ultra SSD',
+    }),
+    new Component ({ //Toshiba X300
+    name: 'Toshiba X300',
     type: 'storage',
     size: 'hdd',
     dimensions: {
@@ -7880,8 +7829,9 @@ const components = [
     isAttached: false,
     defaultSource: 'PACK',
     images: [
-        {side: 'right', imageSrc: './assets/storage/ssd/sandisk.png'},  
-        {side: 'PACK', imageSrc: './assets/storage/ssd/sandisk - Copy.png'},  
+        {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
+        {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
+        {side: 'PACK', imageSrc: './assets/storage/hdd/Toshiba p300.png'},  
     ],
     slots: [],
     ports: [
@@ -7891,340 +7841,11 @@ const components = [
         {type: 'sata-power'},
         {type: 'sata-data'}
     ]
-     }),
- // Cooling AMD
-new Component ({ //AMD wraith Prism
-    name: 'AMD wraith Prism',
-    type: 'cooling',
-    size: 'amd',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'pack', imageSrc: './assets/cooling/amd wraith prism pack.png'},  
-        {side: 'left', imageSrc: './assets/cooling/amd wraith prism fan.png'}
-    ],
-    slots: [],
-    cables: [
-        {type: '3-pin-cooling'}
-    ]
-}), 
-new Component ({ //AMD wraith Spire
-    name: 'AMD wraith Spire',
-    type: 'cooling',
-    size: 'amd',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'pack', imageSrc: './assets/cooling/amd wraith spire pack.png'},  
-        {side: 'left', imageSrc: './assets/cooling/amd wraith spire.png'}
-    ],
-    slots: [],
-    cables: [
-        {type: '3-pin-cooling'}
-    ]
-}),  
-new Component ({ //Arctic Freezer 36
-    name: 'Arctic Freezer 36',
-    type: 'cooling',
-    size: 'amd',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'pack', imageSrc: './assets/cooling/arctic freezer 36 pack.png'},  
-        {side: 'left', imageSrc: './assets/cooling/arctic freezer 36.png'}
-    ],
-    slots: [],
-    cables: [
-        {type: '3-pin-cooling'}
-    ]
-}),  
-new Component ({ //be quiet pure rock
-    name: 'Be Quiet Pure Rock 2',
-    type: 'cooling',
-    size: 'amd',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'pack', imageSrc: './assets/cooling/be quiet pure rock.png'},  
-        {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
-    ],
-    slots: [],
-cables: [
-            {type: '3-pin-cooling'}
-        ]
-    }),  
-new Component ({ //be quiet dark rock 4
-    name: 'be quiet dark rock 4',
-    type: 'cooling',
-    size: 'amd',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'pack', imageSrc: './assets/cooling/be quiet dark rock 4.png'},  
-        {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
-    ],
-    slots: [],
-cables: [
-            {type: '3-pin-cooling'}
-        ]
-    }),  
-new Component ({ //cooler master 212 hyper
-    name: 'Cooler Master 212 Hyper',
-    type: 'cooling',
-    size: 'amd',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'pack', imageSrc: './assets/cooling/cooler master 212 hyper pack.png'},  
-        {side: 'left', imageSrc: './assets/cooling/cooler master 212 hyper.png'}
-    ],
-    slots: [],
-cables: [
-            {type: '3-pin-cooling'}
-        ]
-    }),  
-new Component ({ //DeepCool AK500 Digital
-    name: 'DeepCool AK500 Digital',
-    type: 'cooling',
-    size: 'amd',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'pack', imageSrc: './assets/cooling/deepcool ak500 digital pack.png'},  
-        {side: 'left', imageSrc: './assets/cooling/deepcool ak500 digital fan.png'}
-    ],
-    slots: [],
-cables: [
-            {type: '3-pin-cooling'}
-        ]
-    }),  
-    // Cooling Intel
- new Component ({
-     name: 'Intel Laminar RH1 cooling fan',
-     type: 'cooling',
-     size: 'intel',
-     dimensions: {
-         width: 125,
-         height: 125,
-     },
-     isRotatable: false,
-     isAttached: false,
-     defaultSource: 'pack',
-     images: [
-         {side: 'pack', imageSrc: './assets/cooling/intel laminar pack.png'},  
-         {side: 'left', imageSrc: './assets/cooling/intel laminar rh1.png'},  
-     ],
-     slots: [],
-cables: [
-            {type: '3-pin-cooling'}
-        ]
-     }),
- new Component ({
-    name: 'Intel Laminar RM1 cooling fan',
-    type: 'cooling',
-    size: 'intel',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'pack', imageSrc: './assets/cooling/intel laminar pack.png'},  
-        {side: 'left', imageSrc: './assets/cooling/intel laminar rm1.png'},  
-    ],
-    slots: [],
-cables: [
-            {type: '3-pin-cooling'}
-        ]
     }),
-    // RAM DDR4
-  new Component ({ //Kingston HyperX Beast RGB
-      name: 'Kingston HyperX Beast RGB DDR4',
-      type: 'ram',
-      size: 'ddr4',
-      dimensions: {
-          width: 100,
-          height: 100,
-      },
-      isRotatable: false,
-      isAttached: false,
-      defaultSource: 'PACK',
-      images: [
-          {side: 'left', imageSrc: './assets/memory/HyperX Beast RGB DDR4 attached.png'},  
-          {side: 'PACK', imageSrc: './assets/memory/HyperX Beast RGB DDR4 pack.png'},  
-      ],
- }),
- new Component ({ //Corsair Dominator Platinum
-    name: 'Corsair Dominator Platinum DDR4',
-    type: 'ram',
-    size: 'ddr4',
-    dimensions: {
-        width: 100,
-        height: 100,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'PACK',
-    images: [
-        {side: 'left', imageSrc: './assets/memory/corsair dominator platinum pc4 attached.png'},  
-        {side: 'PACK', imageSrc: './assets/memory/corsair dominator platinum pc4.png'},  
-    ],
-}),
-new Component ({ //G.Skill Ripjaws V
-    name: 'G.Skill Ripjaws V DDR4',
-    type: 'ram',
-    size: 'ddr4',
-    dimensions: {
-        width: 100,
-        height: 100,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'PACK',
-    images: [
-        {side: 'left', imageSrc: './assets/memory/gskill ripjaws v pc4 attached.png'},  
-        {side: 'PACK', imageSrc: './assets/memory/gskill ripjaws v pc4.png'},  
-    ],
-}),
-new Component ({ //Teamgroup Tforce Vulcan Z
-    name: 'Teamgroup Tforce Vulcan Z DDR4',
-    type: 'ram',
-    size: 'ddr4',
-    dimensions: {
-        width: 100,
-        height: 100,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'PACK',
-    images: [
-        {side: 'left', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4 attached.png'},  
-        {side: 'PACK', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4.png'},  
-    ],
-}),
-new Component ({ //Teamgroup Tforce TUF
-    name: 'Teamgroup Tforce TUF DDR4',
-    type: 'ram',
-    size: 'ddr4',
-    dimensions: {
-        width: 100,
-        height: 100,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'PACK',
-    images: [
-        {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
-        {side: 'PACK', imageSrc: './assets/memory/tforce delta tuf pc4.png'},  
-    ],
-}),
-new Component ({ //Crucial Pro DDR4
-    name: 'Crucial Pro DDR4',
-    type: 'ram',
-    size: 'ddr4',
-    dimensions: {
-        width: 100,
-        height: 100,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'PACK',
-    images: [
-        {side: 'left', imageSrc: './assets/memory/crucial pro ddr4 attached.png'},  
-        {side: 'PACK', imageSrc: './assets/memory/crucial pro ddr4.png'},  
-    ],
-}),
-new Component ({ //Corsiar Vengeance Pro DDR4
-    name: 'Corsiar Vengeance Pro DDR4',
-    type: 'ram',
-    size: 'ddr4',
-    dimensions: {
-        width: 100,
-        height: 100,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'PACK',
-    images: [
-        {side: 'left', imageSrc: './assets/memory/corsair vengeance pro attached.png'},  
-        {side: 'PACK', imageSrc: './assets/memory/corsair vengeance pro ddr4.png'},  
-    ],
-}),
-new Component ({ //Teamgroup Tforce DDR4
-    name: 'Teamgroup Tforce DDR4',
-    type: 'ram',
-    size: 'ddr4',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
-        {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
-    ],
- }),
- 
- //  RAM DDR5
-   new Component ({ //Dominator Titanium
-      name: 'Dominator Titanium DDR5',
-      type: 'ram',
-      size: 'ddr5',
-      dimensions: {
-          width: 125,
-          height: 125,
-      },
-      isRotatable: false,
-      isAttached: false,
-      defaultSource: 'pack',
-      images: [
-          {side: 'left', imageSrc: './assets/memory/Dominator Tianium DDR5 - attached.png'},  
-          {side: 'pack', imageSrc: './assets/memory/Dominator Tianium DDR5.png'},  
-      ],
-   }),
-   new Component ({ //G.Skill Trident z5
-    name: 'G.Skill Trident z5 DDR5',
-    type: 'ram',
-    size: 'ddr5',
+    new Component ({ //Toshiba X300 PRO
+    name: 'Toshiba X300 PRO',
+    type: 'storage',
+    size: 'hdd',
     dimensions: {
         depth: 125,
         width: 125,
@@ -8232,550 +7853,999 @@ new Component ({ //Teamgroup Tforce DDR4
     },
     isRotatable: false,
     isAttached: false,
-    defaultSource: 'pack',
+    defaultSource: 'PACK',
     images: [
-        {side: 'left', imageSrc: './assets/memory/gskill trident z5 pc5 attached.png'},  
-        {side: 'pack', imageSrc: './assets/memory/gskill trident z5 pc5.png'},  
+        {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
+        {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
+        {side: 'PACK', imageSrc: './assets/storage/hdd/toshiba x300 pro.png'},  
     ],
- }),
- new Component ({ //Kingston Fury Renegade
-    name: 'Kingston Fury Renegade DDR5',
-    type: 'ram',
-    size: 'ddr5',
+    slots: [],
+    ports: [
+        {type: 'sata'}
+    ],
+    cables: [
+        {type: 'sata-power'},
+        {type: 'sata-data'}
+    ]
+    }),
+    new Component ({ //Toshiba P300
+    name: 'Toshiba P300',
+    type: 'storage',
+    size: 'hdd',
     dimensions: {
+        depth: 125,
         width: 125,
         height: 125,
     },
     isRotatable: false,
     isAttached: false,
-    defaultSource: 'pack',
+    defaultSource: 'PACK',
     images: [
-        {side: 'left', imageSrc: './assets/memory/kingston fury beast pc5 attached.png'},  
-        {side: 'pack', imageSrc: './assets/memory/kingston fury renegade pc5.png'},  
+        {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
+        {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
+        {side: 'PACK', imageSrc: './assets/storage/hdd/toshiba x300.png'},  
     ],
- }),
- new Component ({ //Teamgroup Tforce 
-    name: 'Teamgroup Tforce DDR5',
-    type: 'ram',
-    size: 'ddr5',
+    slots: [],
+    ports: [
+        {type: 'sata'}
+    ],
+    cables: [
+        {type: 'sata-power'},
+        {type: 'sata-data'}
+    ]
+    }),
+    new Component ({ //Western Digital Gaming Black
+    name: 'Western Digital Gaming Black',
+    type: 'storage',
+    size: 'hdd',
     dimensions: {
+        depth: 125,
         width: 125,
         height: 125,
     },
     isRotatable: false,
     isAttached: false,
-    defaultSource: 'pack',
+    defaultSource: 'PACK',
     images: [
-        {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
-        {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
-    ],
- }),
- new Component ({ //Crucial Ballistix
-    name: 'Crucial Ballistix DDR5',
-    type: 'ram',
-    size: 'ddr5',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'left', imageSrc: './assets/memory/crucial ballistix attached.png'},  
-        {side: 'pack', imageSrc: './assets/memory/crucial ballistix.png'},  
-    ],
- }),
- new Component ({ //Crucial Ballistix RGB 
-    name: 'Crucial Ballistix RGB DDR5',
-    type: 'ram',
-    size: 'ddr5',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'left', imageSrc: './assets/memory/crucial ballistix rgb attached.png'},  
-        {side: 'pack', imageSrc: './assets/memory/crucial ballistix rgb.png'},  
-    ],
- }),
- new Component ({ //G.Skill Trident Z5 Silver 
-    name: 'G.Skill Trident Z5 Silver DDR5',
-    type: 'ram',
-    size: 'ddr5',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'left', imageSrc: './assets/memory/gskill trident z5 silver attached.png'},  
-        {side: 'pack', imageSrc: './assets/memory/gskill trident z5 silver.png'},  
-    ],
- }),
- new Component ({ //Corsair Vengeance
-    name: 'Corsair Vengeance DDR5',
-    type: 'ram',
-    size: 'ddr5',
-    dimensions: {
-        width: 125,
-        height: 125,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'left', imageSrc: './assets/memory/corsair vengeance attached.png'},  
-        {side: 'pack', imageSrc: './assets/memory/corsair vengeance.png'},  
-    ],
- }),
- 
- 
- //GPU [gpu file is for general left side img assets] [gpu.1 is for pack side img assets] [single 8pins = {type: '8-pin'}] [dual 8pins = {type: '16-pin-pcie'}]
- new Component ({        // Gigabyte Radeon RX 7900 XTX 16pin
-    name: 'Gigabyte Radeon RX 7900 XTX',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'left', imageSrc: './assets/gpu/Gigabyte Radeon RX 7900 XTX.png'}, 
-        {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'}
+        {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
+        {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
+        {side: 'PACK', imageSrc: './assets/storage/hdd/wdc black.png'},  
     ],
     slots: [],
     ports: [
-        {type: '16-pin-pcie'}
-    ]  
-}),
-new Component ({        // gigabyte nvidia geforce rtx 4060 windforce 8gb OC
-    name: 'Gigabyte NVIDIA GeForce rtx 4060 Windforce 8gb OC',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'left', imageSrc: './assets/gpu/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'}, 
-        {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'}
+        {type: 'sata'}
     ],
-    slots: [],
-    ports: [
-        {type: '8-pin'}
-    ]  
-}),
-new Component ({        // Intel ARC A750 8+6pin
-    name: 'Intel ARC A750',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/Intel.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/intel arc.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '14-pin-pcie'}
-    ]  
-}),
-new Component ({        // Gigabyte Nvidia GeForce RTX 3060
-    name: 'Gigabyte Nvidia GeForce RTX 3060',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 3060.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 3060.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '8-pin'}
-    ]  
-}),
-new Component ({        // Gigabyte Nvidia GeForce RTX 4070 WindForce OC
-    name: 'Gigabyte Nvidia GeForce RTX 4070 WindForce OC',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4070 windforce oc.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4070 windforce oc.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '8-pin'}
-    ]  
-}),
-new Component ({        // PNY Nvidia GeForce RTX 4090 12vhpwr
-    name: 'PNY Nvidia GeForce RTX 4090',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4090.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4090.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '12vhpwr'}
-    ]  
-}),
-new Component ({        // Gigabyte Nvidia GeForce RTX Eagle 3060
-    name: 'Gigabyte Nvidia GeForce RTX Eagle 3060',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx eagle 3060.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx eagle 3060.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '8-pin'}
-    ]  
-}),
-new Component ({        // Gigabyte Nvidia GeForce GTX 1650
-    name: 'Gigabyte Nvidia GeForce GTX 1650',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia geforce gtx 1650.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce gtx 1650.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '8-pin'}
-    ]  
-}),
-new Component ({        // Gigabyte Radeon RX7600
-    name: 'Gigabyte Radeon RX7600',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/radeon rx7600.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx7600.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '8-pin'}
-    ]  
-}),
-new Component ({        // Gigabyte Nvidia GeForce RTX 4090 Gaming OC
-    name: 'Gigabyte Nvidia GeForce RTX 4090 Gaming OC',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4090 gaming oc.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4090 gaming oc.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '8-pin'}
-    ]  
-}),
-new Component ({        // Aero Nvidia GeForce RTX 4060 OC
-    name: 'Aero Nvidia GeForce RTX 4060 OC',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/aero nvidia geforce rtx 4060 oc.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/aero nvidia geforce rtx 4060 oc.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '8-pin'}
-    ]  
-}),
-new Component ({        // Zotac Nvidia GeForce GTX 1660 Super
-    name: 'Zotac Nvidia GeForce GTX 1660 Super',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia geforce gtx 1660 super.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce gtx 1660 super.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '8-pin'}
-    ]  
-}),
-new Component ({        // MAXSUN Nvidia GeForce RTX 4060
-    name: 'MAXSUN Nvidia GeForce RTX 4060',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4060.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4060.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '8-pin'}
-    ]  
-}),
-new Component ({        // Asus Nvidia GeForce RTX 4070 Super 12vhpwr
-    name: 'Asus Nvidia GeForce RTX 4070 Super',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4070 super.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4070 super.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '12vhpwr'}
-    ]  
-}),
-new Component ({        // Asus Nvidia GeForce 3050
-    name: 'Asus Nvidia GeForce 3050',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia geforce 3050.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce 3050.png'}
-    ],
-    slots: [],
-    ports: []  
-}),
-new Component ({        // Asus Radeon RX6500 XT
-    name: 'Asus Radeon RX6500 XT',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/radeon rx6500 xt.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx6500 xt.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '6-pin-pcie'}
-    ]  
-}),
-new Component ({        // Nvidia GeForce RTX 2080 Super
-    name: 'Nvidia GeForce RTX 2080 Super',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 2080 super.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 2080 super.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '6-pin-pcie'}
-    ]  
-}),
-new Component ({        // Gigabyte Radeon RX6750 XT
-    name: 'Gigabyte Radeon RX6750 XT',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/radeon rx6750 xt.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx6750 xt.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '6-pin-pcie'}
-    ]  
-}),
-new Component ({        // AMD Radeon RX5300 OEM
-    name: 'AMD Radeon RX5300 OEM',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/radeon rx5300 OEM.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx5300 OEM.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '6-pin-pcie'}
-    ]  
-}),
-new Component ({        // Nvidia Tesla T40
-    name: 'Nvidia Tesla T40',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia Tesla T40.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia Tesla T40.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '6-pin-pcie'}
-    ]  
-}),
-new Component ({        // Nvidia Geforce 1080 Ti
-    name: 'Nvidia Geforce 1080 Ti',
-    type: 'gpu',
-    size: 'ATX',
-    dimensions: {
-        width: 200,
-        height: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/nvidia geforce 1080 ti.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce 1080 ti.png'}
-    ],
-    slots: [],
-    ports: [
-        {type: '6-pin-pcie'}
-    ]  
-}),
+    cables: [
+        {type: 'sata-power'},
+        {type: 'sata-data'}
+    ]
+    }),
+ //Storage ssd
+         
+    new Component ({ //Samsung EVO SSD
+name: 'Samsung EVO SSD',
+type: 'storage',
+size: 'ssd',
+dimensions: {
+    depth: 125,
+    width: 125,
+    height: 125,
+},
+isRotatable: false,
+isAttached: false,
+defaultSource: 'PACK',
+images: [
+    {side: 'right', imageSrc: './assets/storage/ssd/samsung ssd.png'},  
+    {side: 'PACK', imageSrc: './assets/storage/ssd/samsung ssd - Copy.png'},  
+],
+slots: [],
+ports: [
+    {type: 'sata'}
+],
+cables: [
+    {type: 'sata-power'},
+    {type: 'sata-data'}
+]
+    }),     
+    new Component ({ //Sandisk Plus SSD
+name: 'Sandisk Plus SSD',
+type: 'storage',
+size: 'ssd',
+dimensions: {
+    depth: 125,
+    width: 125,
+    height: 125,
+},
+isRotatable: false,
+isAttached: false,
+defaultSource: 'PACK',
+images: [
+    {side: 'right', imageSrc: './assets/storage/ssd/sandisk ssd plus.png'},  
+    {side: 'PACK', imageSrc: './assets/storage/ssd/sandisk ssd plus - Copy.png'},  
+],
+slots: [],
+ports: [
+    {type: 'sata'}
+],
+cables: [
+    {type: 'sata-power'},
+    {type: 'sata-data'}
+]
+    }),     
+    new Component ({ //Sandisk Ultra SSD
+name: 'Sandisk Ultra SSD',
+type: 'storage',
+size: 'hdd',
+dimensions: {
+    depth: 125,
+    width: 125,
+    height: 125,
+},
+isRotatable: false,
+isAttached: false,
+defaultSource: 'PACK',
+images: [
+    {side: 'right', imageSrc: './assets/storage/ssd/sandisk.png'},  
+    {side: 'PACK', imageSrc: './assets/storage/ssd/sandisk - Copy.png'},  
+],
+slots: [],
+ports: [
+    {type: 'sata'}
+],
+cables: [
+    {type: 'sata-power'},
+    {type: 'sata-data'}
+]
+    }),
+ // Cooling AMD
+    new Component ({ //AMD wraith Prism
+        name: 'AMD wraith Prism',
+        type: 'cooling',
+        size: 'amd',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'pack', imageSrc: './assets/cooling/amd wraith prism pack.png'},  
+            {side: 'left', imageSrc: './assets/cooling/amd wraith prism fan.png'}
+        ],
+        slots: [],
+        cables: [
+            {type: '3-pin-cooling'}
+        ]
+    }), 
+    new Component ({ //AMD wraith Spire
+        name: 'AMD wraith Spire',
+        type: 'cooling',
+        size: 'amd',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'pack', imageSrc: './assets/cooling/amd wraith spire pack.png'},  
+            {side: 'left', imageSrc: './assets/cooling/amd wraith spire.png'}
+        ],
+        slots: [],
+        cables: [
+            {type: '3-pin-cooling'}
+        ]
+    }),  
+    new Component ({ //Arctic Freezer 36
+        name: 'Arctic Freezer 36',
+        type: 'cooling',
+        size: 'amd',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'pack', imageSrc: './assets/cooling/arctic freezer 36 pack.png'},  
+            {side: 'left', imageSrc: './assets/cooling/arctic freezer 36.png'}
+        ],
+        slots: [],
+        cables: [
+            {type: '3-pin-cooling'}
+        ]
+    }),  
+    new Component ({ //be quiet pure rock
+        name: 'Be Quiet Pure Rock 2',
+        type: 'cooling',
+        size: 'amd',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'pack', imageSrc: './assets/cooling/be quiet pure rock.png'},  
+            {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
+        ],
+        slots: [],
+    cables: [
+                {type: '3-pin-cooling'}
+            ]
+    }),  
+    new Component ({ //be quiet dark rock 4
+        name: 'be quiet dark rock 4',
+        type: 'cooling',
+        size: 'amd',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'pack', imageSrc: './assets/cooling/be quiet dark rock 4.png'},  
+            {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
+        ],
+        slots: [],
+    cables: [
+                {type: '3-pin-cooling'}
+            ]
+    }),  
+    new Component ({ //cooler master 212 hyper
+        name: 'Cooler Master 212 Hyper',
+        type: 'cooling',
+        size: 'amd',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'pack', imageSrc: './assets/cooling/cooler master 212 hyper pack.png'},  
+            {side: 'left', imageSrc: './assets/cooling/cooler master 212 hyper.png'}
+        ],
+        slots: [],
+    cables: [
+                {type: '3-pin-cooling'}
+            ]
+    }),  
+    new Component ({ //DeepCool AK500 Digital
+        name: 'DeepCool AK500 Digital',
+        type: 'cooling',
+        size: 'amd',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'pack', imageSrc: './assets/cooling/deepcool ak500 digital pack.png'},  
+            {side: 'left', imageSrc: './assets/cooling/deepcool ak500 digital fan.png'}
+        ],
+        slots: [],
+    cables: [
+                {type: '3-pin-cooling'}
+            ]
+    }),  
+    // Cooling Intel
+    new Component ({
+        name: 'Intel Laminar RH1 cooling fan',
+        type: 'cooling',
+        size: 'intel',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'pack', imageSrc: './assets/cooling/intel laminar pack.png'},  
+            {side: 'left', imageSrc: './assets/cooling/intel laminar rh1.png'},  
+        ],
+        slots: [],
+    cables: [
+                {type: '3-pin-cooling'}
+            ]
+    }),
+    new Component ({
+        name: 'Intel Laminar RM1 cooling fan',
+        type: 'cooling',
+        size: 'intel',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'pack', imageSrc: './assets/cooling/intel laminar pack.png'},  
+            {side: 'left', imageSrc: './assets/cooling/intel laminar rm1.png'},  
+        ],
+        slots: [],
+    cables: [
+                {type: '3-pin-cooling'}
+            ]
+    }),
+    // RAM DDR4
+    new Component ({ //Kingston HyperX Beast RGB
+        name: 'Kingston HyperX Beast RGB DDR4',
+        type: 'ram',
+        size: 'ddr4',
+        dimensions: {
+            width: 100,
+            height: 100,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/HyperX Beast RGB DDR4 attached.png'},  
+            {side: 'PACK', imageSrc: './assets/memory/HyperX Beast RGB DDR4 pack.png'},  
+        ],
+    }),
+    new Component ({ //Corsair Dominator Platinum
+        name: 'Corsair Dominator Platinum DDR4',
+        type: 'ram',
+        size: 'ddr4',
+        dimensions: {
+            width: 100,
+            height: 100,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/corsair dominator platinum pc4 attached.png'},  
+            {side: 'PACK', imageSrc: './assets/memory/corsair dominator platinum pc4.png'},  
+        ],
+    }),
+    new Component ({ //G.Skill Ripjaws V
+        name: 'G.Skill Ripjaws V DDR4',
+        type: 'ram',
+        size: 'ddr4',
+        dimensions: {
+            width: 100,
+            height: 100,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/gskill ripjaws v pc4 attached.png'},  
+            {side: 'PACK', imageSrc: './assets/memory/gskill ripjaws v pc4.png'},  
+        ],
+    }),
+    new Component ({ //Teamgroup Tforce Vulcan Z
+        name: 'Teamgroup Tforce Vulcan Z DDR4',
+        type: 'ram',
+        size: 'ddr4',
+        dimensions: {
+            width: 100,
+            height: 100,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4 attached.png'},  
+            {side: 'PACK', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4.png'},  
+        ],
+    }),
+    new Component ({ //Teamgroup Tforce TUF
+        name: 'Teamgroup Tforce TUF DDR4',
+        type: 'ram',
+        size: 'ddr4',
+        dimensions: {
+            width: 100,
+            height: 100,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
+            {side: 'PACK', imageSrc: './assets/memory/tforce delta tuf pc4.png'},  
+        ],
+    }),
+    new Component ({ //Crucial Pro DDR4
+        name: 'Crucial Pro DDR4',
+        type: 'ram',
+        size: 'ddr4',
+        dimensions: {
+            width: 100,
+            height: 100,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/crucial pro ddr4 attached.png'},  
+            {side: 'PACK', imageSrc: './assets/memory/crucial pro ddr4.png'},  
+        ],
+    }),
+
+    new Component ({ //Teamgroup Tforce DDR4
+        name: 'Teamgroup Tforce DDR4',
+        type: 'ram',
+        size: 'ddr4',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
+            {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
+        ],
+    }),
+    
+    //  RAM DDR5
+    new Component ({ //Dominator Titanium
+        name: 'Dominator Titanium DDR5',
+        type: 'ram',
+        size: 'ddr5',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/Dominator Tianium DDR5 - attached.png'},  
+            {side: 'pack', imageSrc: './assets/memory/Dominator Tianium DDR5.png'},  
+        ],
+    }),
+    new Component ({ //G.Skill Trident z5
+        name: 'G.Skill Trident z5 DDR5',
+        type: 'ram',
+        size: 'ddr5',
+        dimensions: {
+            depth: 125,
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/gskill trident z5 pc5 attached.png'},  
+            {side: 'pack', imageSrc: './assets/memory/gskill trident z5 pc5.png'},  
+        ],
+    }),
+    new Component ({ //Kingston Fury Renegade
+        name: 'Kingston Fury Renegade DDR5',
+        type: 'ram',
+        size: 'ddr5',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/kingston fury beast pc5 attached.png'},  
+            {side: 'pack', imageSrc: './assets/memory/kingston fury renegade pc5.png'},  
+        ],
+    }),
+    new Component ({ //Teamgroup Tforce 
+        name: 'Teamgroup Tforce DDR5',
+        type: 'ram',
+        size: 'ddr5',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
+            {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
+        ],
+    }),
+    new Component ({ //Crucial Ballistix
+        name: 'Crucial Ballistix DDR5',
+        type: 'ram',
+        size: 'ddr5',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/crucial ballistix attached.png'},  
+            {side: 'pack', imageSrc: './assets/memory/crucial ballistix.png'},  
+        ],
+    }),
+    new Component ({ //Crucial Ballistix RGB 
+        name: 'Crucial Ballistix RGB DDR5',
+        type: 'ram',
+        size: 'ddr5',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/crucial ballistix rgb attached.png'},  
+            {side: 'pack', imageSrc: './assets/memory/crucial ballistix rgb.png'},  
+        ],
+    }),
+    new Component ({ //G.Skill Trident Z5 Silver 
+        name: 'G.Skill Trident Z5 Silver DDR5',
+        type: 'ram',
+        size: 'ddr5',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/gskill trident z5 silver attached.png'},  
+            {side: 'pack', imageSrc: './assets/memory/gskill trident z5 silver.png'},  
+        ],
+    }),
+    new Component ({ //Corsair Vengeance
+        name: 'Corsair Vengeance DDR5',
+        type: 'ram',
+        size: 'ddr5',
+        dimensions: {
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'left', imageSrc: './assets/memory/corsair vengeance attached.png'},  
+            {side: 'pack', imageSrc: './assets/memory/corsair vengeance.png'},  
+        ],
+    }),
+    
+    
+    //GPU [gpu file is for general left side img assets] [gpu.1 is for pack side img assets] [single 8pins = {type: '8-pin'}] [dual 8pins = {type: '16-pin-pcie'}]
+    new Component ({        // Gigabyte Radeon RX 7900 XTX 16pin
+        name: 'Gigabyte Radeon RX 7900 XTX',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'left', imageSrc: './assets/gpu/Gigabyte Radeon RX 7900 XTX.png'}, 
+            {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '16-pin-pcie'}
+        ]  
+    }),
+    new Component ({        // gigabyte nvidia geforce rtx 4060 windforce 8gb OC
+        name: 'Gigabyte NVIDIA GeForce rtx 4060 Windforce 8gb OC',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'left', imageSrc: './assets/gpu/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'}, 
+            {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '8-pin'}
+        ]  
+    }),
+    new Component ({        // Intel ARC A750 8+6pin
+        name: 'Intel ARC A750',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/Intel.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/intel arc.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '14-pin-pcie'}
+        ]  
+    }),
+    
+    new Component ({        // Gigabyte Nvidia GeForce RTX 4070 WindForce OC
+        name: 'Gigabyte Nvidia GeForce RTX 4070 WindForce OC',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4070 windforce oc.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4070 windforce oc.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '8-pin'}
+        ]  
+    }),
+    new Component ({        // PNY Nvidia GeForce RTX 4090 12vhpwr
+        name: 'PNY Nvidia GeForce RTX 4090',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4090.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4090.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '12vhpwr'}
+        ]  
+    }),
+    new Component ({        // Gigabyte Nvidia GeForce RTX Eagle 3060
+        name: 'Gigabyte Nvidia GeForce RTX Eagle 3060',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx eagle 3060.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx eagle 3060.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '8-pin'}
+        ]  
+    }),
+    new Component ({        // Gigabyte Nvidia GeForce GTX 1650
+        name: 'Gigabyte Nvidia GeForce GTX 1650',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia geforce gtx 1650.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce gtx 1650.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '8-pin'}
+        ]  
+    }),
+    new Component ({        // Gigabyte Radeon RX7600
+        name: 'Gigabyte Radeon RX7600',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/radeon rx7600.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/radeon rx7600.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '8-pin'}
+        ]  
+    }),
+    new Component ({        // Gigabyte Nvidia GeForce RTX 4090 Gaming OC
+        name: 'Gigabyte Nvidia GeForce RTX 4090 Gaming OC',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4090 gaming oc.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4090 gaming oc.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '8-pin'}
+        ]  
+    }),
+    new Component ({        // Aero Nvidia GeForce RTX 4060 OC
+        name: 'Aero Nvidia GeForce RTX 4060 OC',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/aero nvidia geforce rtx 4060 oc.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/aero nvidia geforce rtx 4060 oc.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '8-pin'}
+        ]  
+    }),
+    new Component ({        // Zotac Nvidia GeForce GTX 1660 Super
+        name: 'Zotac Nvidia GeForce GTX 1660 Super',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia geforce gtx 1660 super.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce gtx 1660 super.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '8-pin'}
+        ]  
+    }),
+    new Component ({        // MAXSUN Nvidia GeForce RTX 4060
+        name: 'MAXSUN Nvidia GeForce RTX 4060',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4060.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4060.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '8-pin'}
+        ]  
+    }),
+    new Component ({        // Asus Nvidia GeForce RTX 4070 Super 12vhpwr
+        name: 'Asus Nvidia GeForce RTX 4070 Super',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4070 super.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4070 super.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '12vhpwr'}
+        ]  
+    }),
+    new Component ({        // Asus Nvidia GeForce 3050
+        name: 'Asus Nvidia GeForce 3050',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia geforce 3050.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce 3050.png'}
+        ],
+        slots: [],
+        ports: []  
+    }),
+    new Component ({        // Asus Radeon RX6500 XT
+        name: 'Asus Radeon RX6500 XT',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/radeon rx6500 xt.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/radeon rx6500 xt.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '6-pin-pcie'}
+        ]  
+    }),
+    new Component ({        // Nvidia GeForce RTX 2080 Super
+        name: 'Nvidia GeForce RTX 2080 Super',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 2080 super.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 2080 super.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '6-pin-pcie'}
+        ]  
+    }),
+    new Component ({        // Gigabyte Radeon RX6750 XT
+        name: 'Gigabyte Radeon RX6750 XT',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/radeon rx6750 xt.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/radeon rx6750 xt.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '6-pin-pcie'}
+        ]  
+    }),
+    new Component ({        // AMD Radeon RX5300 OEM
+        name: 'AMD Radeon RX5300 OEM',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/radeon rx5300 OEM.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/radeon rx5300 OEM.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '6-pin-pcie'}
+        ]  
+    }),
+    new Component ({        // Nvidia Tesla T40
+        name: 'Nvidia Tesla T40',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia Tesla T40.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia Tesla T40.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '6-pin-pcie'}
+        ]  
+    }),
+    new Component ({        // Nvidia Geforce 1080 Ti
+        name: 'Nvidia Geforce 1080 Ti',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
+            {side: 'left', imageSrc: './assets/gpu/nvidia geforce 1080 ti.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce 1080 ti.png'}
+        ],
+        slots: [],
+        ports: [
+            {type: '6-pin-pcie'}
+        ]  
+    }),
 
 //thermal paste
 // new Component ({ 

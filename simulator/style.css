@@ -676,7 +676,6 @@ body {
     background-color: var(--light-lime);
     position: relative;
     overflow: hidden;
-
     /* border: solid 5px black; */
     border-radius: 20px ;
 }
@@ -692,6 +691,16 @@ body {
     position: absolute;
     top: 120px;
     left: 60px;
+}
+/* #screen { */
+.screen-on {
+    width: 323;
+    height: 176.5;
+    background-color: rgba(255, 255, 255,.25);
+    color: yellow;
+    position: absolute;
+    top: 133;
+    left: 73;
 }
 #unitPlaceHolder {
      width: 200px;

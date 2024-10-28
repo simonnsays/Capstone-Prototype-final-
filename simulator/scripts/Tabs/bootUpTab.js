@@ -1,5 +1,7 @@
+import PCUnit from "../Data/pcUnit.js"
+
 class BootUpTab {
-    constructor(elementHandler, utilityTool, pcUnit) {
+    constructor(elementHandler, utilityTool) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
@@ -15,8 +17,7 @@ class BootUpTab {
         this.powerBtn.disabled = true
         
         // PC Unit
-        this.pcUnit = pcUnit
-        pcUnit.reportArea = this.elements.reportArea
+        this.pcUnit = new PCUnit(this.elements)
 
         // Events
         this.openBtn.addEventListener('click', () => this.openTab())
@@ -78,8 +79,27 @@ class BootUpTab {
         this.pcPlaceHolder.appendChild(newUnitImage)
     }
 
-    powerBtnClick = () => {
-        if(!this.powerBtn.disabled) this.pcUnit.powerOn()
+    togglePower(unit) {
+        const state = this.pcUnit.checkPCState(unit)
+        // turn on
+        if(this.pcUnit.power === 'off') {
+            // check for pc parts
+           
+            
+            this.pcUnit.power = 'on'
+            this.pcUnit.powerOn()
+            return
+        }
+
+        // turn off
+        this.pcUnit.power = 'off' 
+        this.pcUnit.powerOff()
+    }
+
+    powerBtnClick = (unit) => {
+        if(!this.powerBtn.disabled) {
+            this.togglePower(unit)
+        }
     }
 
     update(component) {
@@ -99,10 +119,8 @@ class BootUpTab {
         this.createUnitElement(this.pcUnit.availableUnit)
 
         // only turn on if power button is enabled
-        // this.powerBtn.removeEventListener('mouseup', this.powerBtnClick ) 
-        // this.powerBtn.addEventListener('mouseup', this.powerBtnClick)
         if (!this.powerBtn.hasListener) {
-            this.powerBtn.addEventListener('mouseup', this.powerBtnClick);
+            this.powerBtn.addEventListener('mouseup', () => this.powerBtnClick(this.pcUnit.availableUnit));
             this.powerBtn.hasListener = true;
         }  
     }

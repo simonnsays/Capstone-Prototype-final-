@@ -7,7 +7,8 @@ class Component {
         isRotatable, 
         isAttached = false, 
         defaultSource, 
-        images, slots = [], 
+        images, 
+        slots = [], 
         ports = [],
         cables = []
     }) {

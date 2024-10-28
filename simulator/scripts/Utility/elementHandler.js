@@ -90,7 +90,8 @@ class ElementHandler {
             closeBtn: document.querySelector('#closeBootTab'),
             powerBtn: document.querySelector('#powerButton'),
             pcPlaceHolder: document.querySelector('#unitPlaceHolder'),
-            reportArea: document.querySelector('#bootTabReport')
+            reportArea: document.querySelector('#bootTabReport'),
+            screen: document.querySelector('#screen')
         } || null
     }
 

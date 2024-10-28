@@ -27,15 +27,11 @@ class Main {
             this.elementHandler, 
             this.utilityTool
         )
-
-        // PC Unit
-        this.pcUnit = new PCUnit()
-
+        
         // Boot Up Tab
         this.bootUpTab = new BootUpTab(
             this.elementHandler, 
             this.utilityTool, 
-            this.pcUnit
         )
 
         // Display Area
