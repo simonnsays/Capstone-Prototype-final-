@@ -129,7 +129,6 @@ class Inventory {
         cable.ends = currentRef.ends
         cable.images = currentRef.images
         // cable.scale = currentRef.scale
-
     }
 
     // Placing of Components to Display Area
