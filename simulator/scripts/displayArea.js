@@ -41,6 +41,10 @@ class DisplayArea {
             {area: {x: 980, y: 460, width: 310, height: 210}, component: null}
         ]
 
+        // Mode
+        this.mountModeButton = this.elements.mountToggle
+        this.isInMountMode = true
+
         // Display Sides
         this.displaySides = ['left', 'front', 'right', 'rear']
         this.curr = 0
@@ -262,6 +266,27 @@ class DisplayArea {
         })
     }
 
+    hideButtons(buttons) {
+        for(let i = 0; i < buttons.length; i++) {
+            // show buttons
+            if(buttons[i].id === 'mountUnmount') {
+                buttons[i].style.transform = ''
+            } else {
+                buttons[i].style.transform = 'translateY('+ (-1 * (53 * i) - 53)+'px)'
+            }
+
+            // adjust z-index to go under menu button
+            buttons[i].style.zIndex = buttons.length - i
+        }
+    }
+
+    showButtons(buttons) {
+        buttons.forEach(button => {
+            if(button.id === 'mountUnmount') button.style['transform'] = 'translateX(155px)'
+            else button.style['transform'] = ''
+        })
+    }
+
     toggleMenu(menu, buttons, menuImg) {
         // switch menu's active state
         switch(menu.dataset.active) {
@@ -275,12 +300,8 @@ class DisplayArea {
 
         // adjust elements based of active state
         if(menu.dataset.active === 'false') {
-            for(let i = 0; i < buttons.length; i++) {
-                buttons[i].style.transform = 'translateY('+ (-1 * (53 * i) - 53)+'px)'
-
-                // adjust z-index to go under menu button
-                buttons[i].style.zIndex = buttons.length - i
-            }
+            
+            this.hideButtons(buttons)
 
             // swap menu image
             menuImg.classList.add('rotate0')
@@ -292,9 +313,20 @@ class DisplayArea {
         menuImg.classList.add('rotate180')
         menuImg.classList.remove('rotate0')
         menuImg.src = './assets/svg/dropup.svg'
-        buttons.forEach(button => {
-            button.style['transform'] = ''
-        })
+        this.showButtons(buttons)
+    }
+
+    toggleMountMode() {
+        this.isInMountMode = !this.isInMountMode
+        console.log(this.isInMountMode)
+
+        if(this.isInMountMode) {
+            this.mountModeButton.style.backgroundColor = 'var(--green)'
+            this.mountModeButton.innerHTML = 'Mount Mode'
+        } else {
+            this.mountModeButton.style.backgroundColor = 'var(--orange)'
+            this.mountModeButton.innerHTML = 'Unount Mode'
+        }
     }
 
     // Main Dispay Area Update Method 
@@ -342,11 +374,12 @@ class DisplayArea {
         menuImg.src = './assets/svg/3line.svg'
         this.menuButton.appendChild(menuImg)
 
-        this.toggleMenu(this.menuButton, this.tabButtons, menuImg)
+        this.hideButtons(this.tabButtons)
         
         this.bootUpTab.update()
 
         this.menuButton.addEventListener('click', () => this.toggleMenu(this.menuButton, this.tabButtons, menuImg))
+        this.mountModeButton.addEventListener('click', () => this.toggleMountMode())
     }
 }
 

@@ -57,7 +57,9 @@ class ElementHandler {
             compName: document.querySelector('#compName'),
             panelIndicator: document.querySelector('#panelIndicator'),
             menuButton: document.querySelector('[data-type="menu"]'),
-            tabButtons: document.querySelectorAll('[data-type="tab"]')
+            tabButtons: document.querySelectorAll('[data-type="button"]'),
+            mountToggle: document.querySelector('#mountUnmount')
+            
         } || null
     }
 

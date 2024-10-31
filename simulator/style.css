@@ -73,7 +73,7 @@ body {
 .button {
     height: 70%;
     /* border: 2px solid black; */
-    border-radius: 10px;
+    border-radius: 100px;
     padding: 5px;
 }
 .button:hover {
@@ -101,6 +101,7 @@ body {
 
     display: flex;
     flex-direction: column;
+    /* position: relative; */
 }
 .button-wrapper > button, #button1, #button2 {
     height: 2.7rem;
@@ -109,11 +110,13 @@ body {
     border-radius: 20px;
     margin: 5px
 }
-.button-wrapper > [data-type="tab"] {
-    transition: transform .25s ease-in;
+.button-wrapper > [data-type="button"] {
+    transition: all .25s ease-in;
+    cursor: pointer;
 }
 .button-wrapper > button:hover {
     background-color: var(--mint);
+    /* background-color: rgba(0, 0, 0, .25); */
 }
 [data-type="menu"] {
     z-index: 10;
@@ -121,6 +124,18 @@ body {
 [data-type="menu"] > * {
     max-height: 100%;
     transition: all .25s ease-in-out;
+}
+
+#mountUnmount {
+    position: absolute;
+    /* left: 10rem; */
+
+    /* transform: translateX(155px); */
+    background-color: var(--green);
+
+}
+#mountUnmount:hover {
+    background-color: none; 
 }
 
 /* MODALS, CONTENTS, ITEM SLIDERS */
