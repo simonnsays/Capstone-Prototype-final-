@@ -1,5 +1,5 @@
 class DisplayArea {
-    constructor(elementHandler, utilityTool, portsTab, bootUpTab) {
+    constructor(elementHandler, utilityTool, portsTab, bootUpTab, user) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
@@ -10,6 +10,7 @@ class DisplayArea {
             throw new Error ('Missing Display Area Elements')
         }
 
+        this.user = user
         this.bootUpTab = bootUpTab
 
         // Wires Tab
@@ -318,7 +319,6 @@ class DisplayArea {
 
     toggleMountMode() {
         this.isInMountMode = !this.isInMountMode
-        console.log(this.isInMountMode)
 
         if(this.isInMountMode) {
             this.mountModeButton.style.backgroundColor = 'var(--green)'
@@ -329,8 +329,19 @@ class DisplayArea {
         }
     }
 
+    updateDetachableComponents(baseComponent) {
+        this.user.detachableComponents.push(baseComponent)
+        console.log(this.user.detachableComponents)
+        baseComponent.slots.forEach(slot => {
+            if(slot.component) {
+                this.updateDetachableComponents(slot.component)
+            }
+        })
+    }
+
     // Main Dispay Area Update Method 
     update() {
+        this.user.detachableComponents = []
         if(this.table.component) {
             const tableComponent = this.table.component
 
@@ -346,6 +357,9 @@ class DisplayArea {
                 // update component boxes attached to slots
                 if(slot.component) {
                     this.updateAttachedComponentBox(tableComponent, slot)
+
+                    // update detachableComponents
+                    this.updateDetachableComponents(slot.component)
                 }
 
                 // update slot boxes

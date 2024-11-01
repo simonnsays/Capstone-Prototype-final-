@@ -19,6 +19,8 @@ class Canvas {
         this.table = displayArea.table
         this.shelf = displayArea.shelf
 
+        // this.highlights = []
+
         // User
         this.user = user
 
@@ -46,6 +48,15 @@ class Canvas {
         this.displaySlots(this.table.component, this.user.componentSelected)
     }
 
+    highlight(box) {
+        this.c.fillStyle = 'rgba(0, 255, 0, 0.4)'
+        this.c.fillRect(
+            box.x,
+            box.y,
+            box.width,
+            box.height
+        )
+    }
     // Mouse Move Event
     handleMouseMove(e) {
         // adjust mouse point relative to the canvas
@@ -55,6 +66,32 @@ class Canvas {
         this.user.mousePoint = {
             x: rawMouse.x - canvasRect.left,
             y: rawMouse.y - canvasRect.top
+        }
+
+        // Unmount Mode
+        if(!this.displayArea.isInMountMode && this.user.detachableComponents.length !== 0) {
+            // check if user is hovered to a detachable component
+            this.user.detachableComponents.forEach(component => {
+                if(this.utilityTool.isInsideBox(this.user.mousePoint, component.box)) {
+                    this.user.componentToDetach = component
+                } 
+            }) 
+
+            // check if user isnt hovered to a detachable component anymore
+            let componentCheck = false
+            this.user.detachableComponents.forEach(component => {
+                if(this.utilityTool.isInsideBox(this.user.mousePoint, component.box)) {
+                    componentCheck = true
+                } 
+            })
+
+            if(!componentCheck)  {
+                this.user.componentToDetach = null
+            }
+
+            ////////////// !!!!!!! CONTINUE WORKING HERE !!!!!!!!!!!!! ////////////////
+
+            return
         }
 
         // dragging event
@@ -176,13 +213,7 @@ class Canvas {
         this.user.availableSlots.forEach(slot => {
             // draw slot if a boudning box for slot is created
             if(slot.box) {
-                this.c.fillStyle = 'rgba(0, 255, 0, 0.4)'
-                this.c.fillRect(
-                    slot.box.x,
-                    slot.box.y,
-                    slot.box.width,
-                    slot.box.height
-                )
+                this.highlight(slot.box)                
             }
         })
     }
@@ -274,6 +305,9 @@ class Canvas {
             }
         })
 
+        if(this.user.componentToDetach) {
+            this.highlight(this.user.componentToDetach.box) 
+        }
         // Loop Canvas
         requestAnimationFrame(() => this.animate())
     }

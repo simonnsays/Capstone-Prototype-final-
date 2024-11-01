@@ -39,7 +39,8 @@ class Main {
             this.elementHandler, 
             this.utilityTool, 
             this.portsTab, 
-            this.bootUpTab
+            this.bootUpTab,
+            this.user
         )
         
         // Inventory

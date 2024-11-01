@@ -8,6 +8,10 @@ class User {
         this.mousePoint = {x: 0, y: 0}
         this.componentSelected = null
         this.availableSlots = []
+
+        this.canDisplayDetachables = false
+        this.detachableComponents = []
+        this.componentToDetach = null
     }
 
     returnComponentToShelf() {
