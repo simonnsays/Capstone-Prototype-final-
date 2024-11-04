@@ -1,11 +1,12 @@
 import Drawer from "./drawer.js"
 
 class PortsTab {
-    constructor(elementHandler, utilityTool) {
+    constructor(elementHandler, utilityTool, pcUnit) {
         // Utility
         this.utilityTool = utilityTool
         this.elements = elementHandler.getWiresElements()
         if(!this.elements) throw new Error('Missing Connections Elements')
+        this.pcUnit = pcUnit
 
         // Open / Close tab buttons
         this.openBtn = this.elements.openBtn
@@ -31,6 +32,9 @@ class PortsTab {
         this.portGroups = []
         this.i = 0
         this.currentGroupPage = this.portGroups[this.i]
+
+        // This object will keep track of the attachment status for cables
+        this.attachedCablesStatus = [];
 
         // Events
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
@@ -162,7 +166,7 @@ class PortsTab {
                 portGroup.ports.push(port)
             })
 
-            // puh object to the portGroups list
+            // push object to the portGroups list
             this.portGroups.push(portGroup) 
         }
         
@@ -217,6 +221,31 @@ class PortsTab {
 
         // update cable connection state
         cable.ends[this.currentGroupPage.component].connected = true
+
+         // Update attachedCablesStatus with port and cable type
+         this.attachedCablesStatus[port.type] = cable.type;
+    }       
+
+    // Method to get the current attached cables status
+    getAttachedCablesStatus() {
+        return this.attachedCablesStatus;
+    }
+
+     // Helper method to find a port by type
+     findPortByType(portType) {
+        for (const group in this.portGroups) {
+            const ports = this.portGroups[group];
+            for (const port of ports) {
+                if (port.type === portType) {
+                    return port;
+                }
+            }
+        }
+        return null;
+    }
+     // Method to get the current status of attached cables
+     getAttachedCablesStatus() {
+        return this.attachedCablesStatus;
     }
 
     // Remove Matching Port Highlight

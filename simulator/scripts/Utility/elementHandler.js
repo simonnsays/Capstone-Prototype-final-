@@ -36,7 +36,7 @@ class ElementHandler {
             portsGroupLabel: document.querySelector('#portSubhead'),
             pageRightBtn: document.querySelector('#portRight'),
             pageLeftBtn: document.querySelector('#portLeft')
-
+            
         } || null
     }
 

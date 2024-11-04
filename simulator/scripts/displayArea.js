@@ -4,14 +4,13 @@ class DisplayArea {
         this.elementHandler = elementHandler;
         this.utilityTool = utilityTool;
         this.bootUpTab = bootUpTab;
+        
+        
         // Elements
         this.elements = this.elementHandler.getDisplayAreaElements();
         if (!this.elements) {
             throw new Error('Missing Display Area Elements');
         }
-
-        // Bootup Tab
-        this.bootUpTab = bootUpTab;
 
         // Wires Tab
         this.portsTab = portsTab;
@@ -69,9 +68,10 @@ class DisplayArea {
         slot.component = componentSelected;
         slot.component.isAttached = true;
         slot.component.box = slot.box;
+
         // Add component to PCUnit attached components
         this.bootUpTab.pcUnit.addAttachedComponent(componentSelected);
-
+        
         // Remove selected component from shelf
         const i = this.shelf.findIndex(
             (spot) => spot.component && spot.component.id === componentSelected.id
@@ -329,6 +329,19 @@ class DisplayArea {
 
         // update BOOT TAB
         this.bootUpTab.update(this.table.component)
+
+         // Call update on portsTab only if initialized and defined
+    if (this.portsTab) {
+        this.portsTab.update(this.table, this.shelf);
+    } else {
+        console.error("PortsTab is not initialized");
+    }
+
+    if (this.bootUpTab) {
+        this.bootUpTab.update(this.table.component);
+    } else {
+        console.error("BootUpTab is not initialized");
+    }
     }
 
     

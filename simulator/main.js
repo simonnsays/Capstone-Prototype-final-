@@ -24,13 +24,13 @@ class Main {
         this.itemInfo = this.elementHandler.getItemInfoElements()
 
         // Wires Tab
-        this.portsTab = new PortsTab(this.elementHandler, this.utilityTool)
+        this.portsTab = new PortsTab(this.elementHandler, this.utilityTool, this.pcUnit)
 
         // PC Unit
-        this.pcUnit = new PCUnit()
+        this.pcUnit = new PCUnit(this.utilityTool, this.displayArea, this.canvas, this.portsTab, this.drawer)
 
         // Boot Up Tab
-        this.bootUpTab = new BootUpTab(this.elementHandler, this.utilityTool, this.pcUnit)
+        this.bootUpTab = new BootUpTab(this.elementHandler, this.utilityTool, this.pcUnit, this.portsTab)
 
         // Display Area
         this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool, this.portsTab, this.bootUpTab, this.tsimulation)

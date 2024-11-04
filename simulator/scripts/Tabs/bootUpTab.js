@@ -1,9 +1,10 @@
 class BootUpTab {
-    constructor(elementHandler, utilityTool, pcUnit) {
+    constructor(elementHandler, utilityTool, pcUnit, portsTab) {
         // Utility
         this.elementHandler = elementHandler;
         this.utilityTool = utilityTool;
         this.elements = this.elementHandler.getBootUpTabElements();
+        this.portsTab = portsTab;
 
         // Elements
         this.isActive = false;
@@ -63,7 +64,7 @@ class BootUpTab {
         newUnitImage.src = componentSrc;
         this.pcPlaceHolder.appendChild(newUnitImage);
     }
-    
+
     powerBtnClick = () => {
         if (!this.powerBtn.disabled) this.simulateBootProcess();
     };
@@ -72,31 +73,43 @@ class BootUpTab {
     simulateBootProcess() {
         this.pcUnit.clearReportsArea(); // Clear previous boot reports
 
-        const missingComponents = this.pcUnit.getMissingComponents(); // Check for missing components
+        // Get missing components and cables from pcUnit
+        const { missingComponents, missingCables } = this.pcUnit.getMissingComponents();
 
-        if (missingComponents.length > 0) {
-            this.showMissingComponentsError(missingComponents);
-        } else {
-            const randomErrorChance = Math.random() < 0.7; // 70% chance of boot failure 
-
-            if (randomErrorChance) {
-                this.showBootError();
-            } else {
-                this.showSuccessfulBoot();
+            // If missing components or cables, show errors and stop the process
+        if (missingComponents.length || missingCables.length) {
+            if (missingComponents.length) {
+                this.showMissingError(missingComponents, 'component');
             }
+            if (missingCables.length) {
+                this.showMissingError(missingCables, 'cable');
+            }
+            return; // Stop further boot process if errors are found
+        }
+    
+        // 70% chance of boot failure
+        const randomErrorChance = Math.random() < 0.7;
+    
+        if (randomErrorChance) {
+            this.showBootError(); // Show boot error
+        } else {
+            this.showSuccessfulBoot(); // Successful boot
         }
     }
 
-    // If component is missing message will be shown
-    showMissingComponentsError(missingComponents) {
-        missingComponents.forEach(component => {
-            const errorMessage = { tag: "Error", def: `${component.toUpperCase()} is not attached.` };
+    // Show missing components or cables error
+    showMissingError(missingItems, type) {
+        missingItems.forEach(item => {
+            const errorMessage = { 
+                tag: "Error", 
+                def: `${item.toUpperCase()} ${type} is not attached.` 
+            };
             this.pcUnit.createReportCell(errorMessage);
         });
 
         const troubleshootingDiv = document.createElement('div');
         troubleshootingDiv.classList = 'troubleshootingSteps';
-        troubleshootingDiv.innerHTML = "Please attach the missing components and try booting again.";
+        troubleshootingDiv.innerHTML = `Please attach the missing ${type}(s) and try booting again.`;
         this.reportArea.appendChild(troubleshootingDiv);
     }
 

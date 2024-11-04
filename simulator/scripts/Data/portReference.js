@@ -46,7 +46,6 @@
                 }    
             },
             {   // sata - data
-                name: 'CPU EPS Connector',
                 type: 'sata-data',
                 image: {
                     imageSrc: './assets/motherboard/ports/mobo_port-sata.png',
