@@ -9,7 +9,6 @@ class User {
         this.componentSelected = null
         this.availableSlots = []
 
-        this.canDisplayDetachables = false
         this.detachableComponents = []
         this.componentToDetach = null
     }
@@ -36,6 +35,10 @@ class User {
         delete this.componentSelected.origin
         this.componentSelected = null
 
+        // detachables
+        this.detachableComponents = []
+        this.componentToDetach = null
+
     }
 
     // Create Temporary Properties
@@ -61,6 +64,20 @@ class User {
         ? componentFound.component
         : null
 
+    }
+
+    takeDetachableComponents(baseComponent) {
+        baseComponent.slots.forEach(slot => {
+            if(slot.component) {
+                this.detachableComponents.push({
+                    // reference both the base and attached component
+                    base: baseComponent,
+                    attached: slot.component 
+                })
+
+                this.takeDetachableComponents(slot.component)
+            }
+        })
     }
 
 }

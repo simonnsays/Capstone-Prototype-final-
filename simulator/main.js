@@ -67,7 +67,8 @@ class Main {
             this.elementHandler, 
             this.utilityTool, 
             this.displayArea, 
-            this.user
+            this.user,
+            this.inventory
         )
     }
 

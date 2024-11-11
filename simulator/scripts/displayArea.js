@@ -87,7 +87,6 @@ class DisplayArea {
         this.update()
     }
 
-
     // Swap Components
     swapComponents(componentSelected) {
         const tempComponent = this.table.component
@@ -107,6 +106,22 @@ class DisplayArea {
 
         // update display area information
         this.update()
+    }
+
+    // Fill Shelf
+    fillShelf(newComponent, shelf) {
+        for(let i = 0; i < shelf.length; i++) {
+            const spot = shelf[i]
+    
+            // if the component property is null, add the new component
+            if(spot.component === null) {
+                spot.component = newComponent
+                this.createBox(newComponent, spot, newComponent.defaultSource)
+                return true
+            }
+        }
+
+        return false
     }
 
     // Create Bounding Box
@@ -331,7 +346,7 @@ class DisplayArea {
 
     updateDetachableComponents(baseComponent) {
         this.user.detachableComponents.push(baseComponent)
-        console.log(this.user.detachableComponents)
+
         baseComponent.slots.forEach(slot => {
             if(slot.component) {
                 this.updateDetachableComponents(slot.component)

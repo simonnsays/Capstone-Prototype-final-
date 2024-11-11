@@ -69,17 +69,7 @@ class Inventory {
 
     // Add Component to Shelf
     addToShelf(newComponent, shelf) {
-        let added = false 
-        for(let i = 0; i < shelf.length; i++) {
-            const element = shelf[i]
-    
-            // if the component property is null, add the new component
-            if(element.component === null) {
-                element.component = newComponent
-                added = true
-                break;
-            }
-        }
+        let added = this.displayArea.fillShelf(newComponent, shelf)
     
         // if all component properties are occupied, shift components to the next object
         if(!added) {
@@ -95,8 +85,37 @@ class Inventory {
             shelf[0].component = newComponent
 
             // Return removed item to inventory
-            this.items.push(removedComponent)
+            this.returnToInv(removedComponent)
+            // this.items.push(removedComponent)
         }
+    }
+
+    // returning components to Inventory 
+    returnToInv(component) {
+        const tempDetachedComponents = []
+
+        const gatherAttachedComponents = (component) => {
+            component.slots.forEach(slot => {
+                if(slot.component) {
+                    tempDetachedComponents.push(slot.component)
+    
+                    gatherAttachedComponents(slot.component)
+
+                    slot.component = null
+                }
+            })
+        }
+
+        gatherAttachedComponents(component)
+
+        // remove attached component first
+        if(tempDetachedComponents.length > 0) {
+            tempDetachedComponents.forEach(tempItem => {
+                this.items.push(tempItem)
+            })
+        }  
+
+        this.items.push(component)
     }
 
     // Create Port Attributes

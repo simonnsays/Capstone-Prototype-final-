@@ -1,5 +1,5 @@
 class Canvas {
-    constructor(elementHandler, utilityTool, displayArea, user) {
+    constructor(elementHandler, utilityTool, displayArea, user, inventory) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
@@ -19,10 +19,11 @@ class Canvas {
         this.table = displayArea.table
         this.shelf = displayArea.shelf
 
-        // this.highlights = []
-
         // User
         this.user = user
+
+        // Inventory
+        this.inventory = inventory
 
         // Mouse Move Events
         window.addEventListener('mousedown', (e) => this.handleMouseDown(e))
@@ -34,6 +35,24 @@ class Canvas {
     handleMouseDown(e) {
         // only accept left click
         if(e.button !== 0 || !this.isActive) return
+
+        // Unmount mode    
+        if(!this.displayArea.isInMountMode) {
+            if(!this.user.componentToDetach) return
+
+            // check if okay to return to shelf or return to inventory 
+            let componentIsAdded = this.displayArea.fillShelf(this.user.componentToDetach.attached, this.displayArea.shelf)
+
+            if(!componentIsAdded) {
+                this.inventory.returnToInv(this.user.componentToDetach.attached)
+                this.inventory.update()
+            }
+
+            this.user.componentToDetach.base.slots.find(slot => 
+                slot.component === this.user.componentToDetach.attached).component = null
+            
+            return
+        }
 
         // try to select one of the components in shelf
         this.user.componentSelected = this.user.selectComponent(this.shelf)
@@ -69,28 +88,24 @@ class Canvas {
         }
 
         // Unmount Mode
-        if(!this.displayArea.isInMountMode && this.user.detachableComponents.length !== 0) {
-            // check if user is hovered to a detachable component
-            this.user.detachableComponents.forEach(component => {
-                if(this.utilityTool.isInsideBox(this.user.mousePoint, component.box)) {
-                    this.user.componentToDetach = component
-                } 
-            }) 
-
-            // check if user isnt hovered to a detachable component anymore
+        if(!this.displayArea.isInMountMode && this.user.detachableComponents.length !== 0 && this.displayArea.table.component) {
+            /*  check if mousepoint is hovering on 
+                one of the components that can be detached
+            */
             let componentCheck = false
-            this.user.detachableComponents.forEach(component => {
-                if(this.utilityTool.isInsideBox(this.user.mousePoint, component.box)) {
+            this.user.detachableComponents = []
+            this.user.takeDetachableComponents(this.displayArea.table.component)
+
+            this.user.detachableComponents.forEach(pair => {
+                if(this.utilityTool.isInsideBox(this.user.mousePoint, pair.attached.box)) {
+                    this.user.componentToDetach = pair
                     componentCheck = true
-                } 
+                }             
             })
 
-            if(!componentCheck)  {
+            if(!componentCheck) {
                 this.user.componentToDetach = null
             }
-
-            ////////////// !!!!!!! CONTINUE WORKING HERE !!!!!!!!!!!!! ////////////////
-
             return
         }
 
@@ -306,8 +321,8 @@ class Canvas {
         })
 
         if(this.user.componentToDetach) {
-            this.highlight(this.user.componentToDetach.box) 
-        }
+            this.highlight(this.user.componentToDetach.attached.box) 
+        }   
         // Loop Canvas
         requestAnimationFrame(() => this.animate())
     }
