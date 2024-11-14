@@ -71,7 +71,7 @@ const components = [
             },           
             {   // new sata
                 type: 'storage', 
-                supports: ['HDD', '2.5', 'U.2', 'ssd'],
+                supports: ['2.5', 'U.2', 'ssd'],
                 component: null,
                 sides: {
                     right: {
@@ -84,7 +84,7 @@ const components = [
             },
             {   // new sata
                 type: 'storage', 
-                supports: ['HDD', '2.5', 'U.2', 'ssd'],
+                supports: ['2.5', 'U.2', 'ssd'],
                 component: null,
                 sides: {
                     right: {
@@ -170,7 +170,7 @@ const components = [
             },           
             {
                 type: 'storage',
-                supports: ['HDD', '2.5', 'U.2', 'ssd'],
+                supports: ['hdd', '2.5', 'U.2'],
                 component: null,
                 sides: {
        //           left: {
@@ -190,7 +190,7 @@ const components = [
             },
             {   // new sata
                 type: 'storage', 
-                supports: ['HDD', '2.5', 'U.2', 'ssd'],
+                supports: ['hdd', '2.5', 'U.2'],
                 component: null,
                 sides: {
                     right: {
@@ -275,7 +275,7 @@ const components = [
             },           
             {
                 type: 'storage',
-                supports: ['hdd', '2.5', 'U.2', 'ssd'],
+                supports: ['hdd','2.5', 'U.2', 'ssd'],
                 component: null,
                 sides: {
         //            left: {
@@ -295,7 +295,7 @@ const components = [
             },
             {   
                 type: 'storage', 
-                supports: ['hdd', '2.5', 'U.2', 'ssd'],
+                supports: ['hdd','2.5', 'U.2', 'ssd'],
                 component: null,
                 sides: {
                     right: {
@@ -308,7 +308,7 @@ const components = [
             },
             {   
                 type: 'storage', 
-                supports: ['hdd', '2.5', 'U.2', 'ssd'],
+                supports: ['2.5', 'U.2', 'ssd'],
                 component: null,
                 sides: {
                     right: {
@@ -321,7 +321,7 @@ const components = [
             },
             {   
                 type: 'storage', 
-                supports: ['hdd', '2.5', 'U.2', 'ssd'],
+                supports: ['2.5', 'U.2', 'ssd'],
                 component: null,
                 sides: {
                     right: {
@@ -407,7 +407,7 @@ const components = [
             },           
             {
                 type: 'storage',
-                supports: ['HDD'],
+                supports: ['hdd'],
                 component: null,
                 sides: {
         //            left: {
@@ -532,7 +532,7 @@ const components = [
             },           
             {
                 type: 'storage',
-                supports: ['HDD', '2.5', 'U.2', 'ssd'],
+                supports: ['hdd', '2.5', 'U.2'],
                 component: null,
                 sides: {
         //            left: {
@@ -552,7 +552,7 @@ const components = [
             },
             {   
                 type: 'storage', 
-                supports: ['HDD', '2.5', 'U.2', 'ssd'],
+                supports: ['hdd', '2.5', 'U.2'],
                 component: null,
                 sides: {
                     right: {
@@ -565,7 +565,7 @@ const components = [
             },
             {   
                 type: 'storage', 
-                supports: ['HDD', '2.5', 'U.2', 'ssd'],
+                supports: ['2.5', 'U.2', 'ssd'],
                 component: null,
                 sides: {
                     right: {
@@ -578,7 +578,7 @@ const components = [
             },
             {   
                 type: 'storage', 
-                supports: ['HDD', '2.5', 'U.2', 'ssd'],
+                supports: ['2.5', 'U.2', 'ssd'],
                 component: null,
                 sides: {
                     right: {
@@ -6604,8 +6604,8 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            width: 200,
-            height: 200,
+            width: 150,
+            height: 150,
             depth: 200,
         },
         isRotatable: true,
@@ -6648,8 +6648,8 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            width: 200,
-            height: 200,
+            width: 150,
+            height: 150,
             depth: 200,
         },
         isRotatable: true,
@@ -6691,9 +6691,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -6733,9 +6733,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -6776,9 +6776,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -6820,9 +6820,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -6863,9 +6863,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -6906,9 +6906,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -6949,9 +6949,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -6992,9 +6992,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7036,9 +7036,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7079,9 +7079,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7123,9 +7123,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7166,9 +7166,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7210,9 +7210,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7253,9 +7253,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7298,9 +7298,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7345,9 +7345,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            height: 200,
+            width: 150,
             depth: 200,
-            width: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7390,9 +7390,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            width: 200,
-            height: 200,
+            width: 150,
             depth: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7436,9 +7436,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            width: 200,
-            height: 200,
+            width: 150,
             depth: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7478,9 +7478,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            width: 200,
-            height: 200,
+            width: 150,
             depth: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7520,9 +7520,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            width: 200,
-            height: 200,
+            width: 150,
             depth: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7564,9 +7564,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            width: 200,
-            height: 200,
+            width: 150,
             depth: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7606,9 +7606,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            width: 200,
-            height: 200,
+            width: 150,
             depth: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7636,9 +7636,9 @@ const components = [
         type: 'psu',
         size: 'ATX',
         dimensions: {
-            width: 200,
-            height: 200,
+            width: 150,
             depth: 200,
+            height: 150,
         },
         isRotatable: true,
         isAttached: false,
@@ -7871,7 +7871,7 @@ const components = [
      new Component ({ //Sandisk Ultra SSD
     name: 'Sandisk Ultra SSD',
     type: 'storage',
-    size: 'hdd',
+    size: 'ssd',
     dimensions: {
         depth: 125,
         width: 125,
@@ -8089,9 +8089,9 @@ cables: [
       type: 'ram',
       size: 'ddr4',
       dimensions: {
-        width: 200,
-        height: 200,
-        depth: 200,
+        width: 133,
+        height: 133,
+        depth: 100,
       },
       isRotatable: false,
       isAttached: false,
@@ -8106,8 +8106,8 @@ cables: [
     type: 'ram',
     size: 'ddr4',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8123,8 +8123,8 @@ new Component ({ //G.Skill Ripjaws V
     type: 'ram',
     size: 'ddr4',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8140,8 +8140,8 @@ new Component ({ //Teamgroup Tforce Vulcan Z
     type: 'ram',
     size: 'ddr4',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8157,8 +8157,8 @@ new Component ({ //Teamgroup Tforce TUF
     type: 'ram',
     size: 'ddr4',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8174,8 +8174,8 @@ new Component ({ //Crucial Pro DDR4
     type: 'ram',
     size: 'ddr4',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8191,8 +8191,8 @@ new Component ({ //Corsiar Vengeance Pro DDR4
     type: 'ram',
     size: 'ddr4',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8208,8 +8208,8 @@ new Component ({ //Teamgroup Tforce DDR4
     type: 'ram',
     size: 'ddr4',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8227,8 +8227,8 @@ new Component ({ //Teamgroup Tforce DDR4
       type: 'ram',
       size: 'ddr5',
       dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
       },
       isRotatable: false,
@@ -8244,8 +8244,8 @@ new Component ({ //Teamgroup Tforce DDR4
     type: 'ram',
     size: 'ddr5',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8261,8 +8261,8 @@ new Component ({ //Teamgroup Tforce DDR4
     type: 'ram',
     size: 'ddr5',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8278,8 +8278,8 @@ new Component ({ //Teamgroup Tforce DDR4
     type: 'ram',
     size: 'ddr5',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8295,8 +8295,8 @@ new Component ({ //Teamgroup Tforce DDR4
     type: 'ram',
     size: 'ddr5',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8312,8 +8312,8 @@ new Component ({ //Teamgroup Tforce DDR4
     type: 'ram',
     size: 'ddr5',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8329,8 +8329,8 @@ new Component ({ //Teamgroup Tforce DDR4
     type: 'ram',
     size: 'ddr5',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,
@@ -8346,8 +8346,8 @@ new Component ({ //Teamgroup Tforce DDR4
     type: 'ram',
     size: 'ddr5',
     dimensions: {
-        width: 200,
-        height: 200,
+        width: 133,
+        height: 133,
         depth: 200,
     },
     isRotatable: false,

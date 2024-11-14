@@ -1,12 +1,13 @@
 import Drawer from "./drawer.js"
 
 class PortsTab {
-    constructor(elementHandler, utilityTool, pcUnit) {
+    constructor(elementHandler, utilityTool, pcUnit, drawer) {
         // Utility
         this.utilityTool = utilityTool
         this.elements = elementHandler.getWiresElements()
         if(!this.elements) throw new Error('Missing Connections Elements')
         this.pcUnit = pcUnit
+        this.drawer = drawer
 
         // Open / Close tab buttons
         this.openBtn = this.elements.openBtn
@@ -30,11 +31,12 @@ class PortsTab {
 
         // Ports
         this.portGroups = []
+        this.portConnectionStatus = []
         this.i = 0
         this.currentGroupPage = this.portGroups[this.i]
 
         // This object will keep track of the attachment status for cables
-        this.attachedCablesStatus = [];
+        this.attachedCablesStatus = []
 
         // Events
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
@@ -216,16 +218,38 @@ class PortsTab {
 
     // Attach Cable
     attachCable(port, cable) {
-        // attach cable in logic
-        port.cableAttached = cable        
+        const component = this.currentGroupPage.component;
 
-        // update cable connection state
-        cable.ends[this.currentGroupPage.component].connected = true
+        // Verify if the cable has an end for this component type
+        if (cable.ends[component] === undefined) {
+            console.error(`Cable end not valid for component: ${component}`);
+            return;
+        }
+    
+        // Attach the cable end to the specified component port
+        port.cableAttached = cable;
+        cable.ends[component].connected = true;
 
-         // Update attachedCablesStatus with port and cable type
-         this.attachedCablesStatus[port.type] = cable.type;
+        if (!this.attachedCablesStatus[cable.type]) {
+            this.attachedCablesStatus[cable.type] = { motherboard: false, psu: false, fullyConnected: false };
+        }
+
+        // Update the cable status for this component end
+        this.attachedCablesStatus[cable.type][component] = true;
+    
+        // Check if both ends are now connected
+        const bothEndsConnected = (cable.ends.motherboard && cable.ends.motherboard.connected) && 
+        (cable.ends.psu && cable.ends.psu.connected);
+    
+        // Only set fully connected if both ends are attached
+        if (bothEndsConnected) {
+            this.attachedCablesStatus[cable.type].fullyConnected = true;
+            console.log(`Cable ${cable.type} is fully connected.`);
+        } else {
+            this.attachedCablesStatus[cable.type].fullyConnected = false;
+        }
     }       
-
+    
     // Method to get the current attached cables status
     getAttachedCablesStatus() {
         return this.attachedCablesStatus;
@@ -242,10 +266,6 @@ class PortsTab {
             }
         }
         return null;
-    }
-     // Method to get the current status of attached cables
-     getAttachedCablesStatus() {
-        return this.attachedCablesStatus;
     }
 
     // Remove Matching Port Highlight

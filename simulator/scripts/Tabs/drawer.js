@@ -1,12 +1,13 @@
 import cableRef from "../Data/cableReference.js";
 
 class Drawer {
-    constructor(elementHandler, utilityTool) {
+    constructor(elementHandler, utilityTool, pcUnit) {
         // Utility
         this.utilityTool = utilityTool
         this.elementHandler = elementHandler
         this.elements = this.elementHandler.getDrawerElements()
         if(!this.elements) throw new Error('Missing Drawer Elements');
+        this.pcUnit = pcUnit
        
         // Elements
         this.modal = this.elements.modal

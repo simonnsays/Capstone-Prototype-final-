@@ -1,7 +1,6 @@
 const cableRef = {
     psu: [
         {       // 24-pin-power
-            name: 'ATX power',
             type: '24-pin-power',
             ends: {
                 motherboard: {
@@ -11,7 +10,7 @@ const cableRef = {
                 psu: {
                     connected: false
                 }
-            },
+            }, 
             images: [
                 {
                     attachedTo: 'motherboard', 

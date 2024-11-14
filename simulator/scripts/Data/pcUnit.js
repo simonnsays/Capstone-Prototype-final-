@@ -1,18 +1,20 @@
 class PCUnit {
-    constructor(utilityTool, displayArea, Canvas, portsTab, drawer) { 
+    constructor(utilityTool, displayArea, Canvas, portsTab, drawer, assistant) { 
         this.displayArea = displayArea;
         this.Canvas = Canvas;
         this.utilityTool = utilityTool;
         this.portsTab = portsTab;
         this.drawer = drawer;
+        this.assistant = assistant;
 
         // Track attached components and cables
         this.attachedComponents = new Set();
         this.attachedCables = new Set();
+        this.cableConnectionStatus = {}; // Stores each cable’s connection status
     
         // Required components and cables
         this.requiredComponents = ['motherboard', 'cpu', 'storage', 'psu', 'ram'];
-        this.requiredCables = ['24-pin-power', '8-pin-power', 'sata-power'];
+        this.requiredCables = ['24-pin-power', '8-pin-power'];
         this.availableUnit = null;
 
         // Boot reports
@@ -23,22 +25,24 @@ class PCUnit {
         this.reportCount = 0;
     }
 
-    // Collect all attached cables
+    // Collect all attached cables from PortsTab
     getAttachedCables() {
-     if (!this.portsTab || typeof this.portsTab.getAttachedCablesStatus !== 'function') {
+        if (!this.portsTab || typeof this.portsTab.getAttachedCablesStatus !== 'function') {
             console.error('PortsTab or getAttachedCablesStatus method not found');
             return;
         }
-
+    
         // Refresh attached cables from PortsTab's updated status
         const attachedCablesStatus = this.portsTab.getAttachedCablesStatus();
         this.attachedCables.clear();
         
         for (const cableType in attachedCablesStatus) {
-            if (attachedCablesStatus[cableType]) {
+            if (attachedCablesStatus[cableType].fullyConnected) {
                 this.attachedCables.add(cableType);  // Only add fully connected cables
             }
         }
+    
+        console.log("Attached cables:", Array.from(this.attachedCables));
     }
 
     // Add component when attached

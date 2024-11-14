@@ -254,6 +254,7 @@ transition: opacity 0.3s ease;
     text-decoration: line-through;
     color: #888;
 }
+
 #task-status {
 position: fixed;
 left: 10px;
@@ -262,6 +263,7 @@ font-size: 18px;
 font-weight: bold;
 color: #333;
 }
+
 @keyframes pulse {
     0% {
         transform: scale(.2); /* Initial size */

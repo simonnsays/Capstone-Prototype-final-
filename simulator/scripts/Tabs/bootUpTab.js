@@ -1,11 +1,11 @@
 class BootUpTab {
-    constructor(elementHandler, utilityTool, pcUnit, portsTab) {
+    constructor(elementHandler, utilityTool, pcUnit, portsTab, drawer) {
         // Utility
         this.elementHandler = elementHandler;
         this.utilityTool = utilityTool;
         this.elements = this.elementHandler.getBootUpTabElements();
         this.portsTab = portsTab;
-
+        this.drawer = drawer;
         // Elements
         this.isActive = false;
         this.modal = this.elements.modal;
@@ -71,12 +71,13 @@ class BootUpTab {
 
     // Simulate the boot process
     simulateBootProcess() {
-        this.pcUnit.clearReportsArea(); // Clear previous boot reports
+        // Clear reports area
+        this.pcUnit.clearReportsArea();
 
-        // Get missing components and cables from pcUnit
-        const { missingComponents, missingCables } = this.pcUnit.getMissingComponents();
+         // Check for missing ports,cables,components and for semiused cables
+         const { missingComponents, missingCables } = this.pcUnit.getMissingComponents();
 
-            // If missing components or cables, show errors and stop the process
+        // Check for missing components and cables
         if (missingComponents.length || missingCables.length) {
             if (missingComponents.length) {
                 this.showMissingError(missingComponents, 'component');
@@ -84,17 +85,12 @@ class BootUpTab {
             if (missingCables.length) {
                 this.showMissingError(missingCables, 'cable');
             }
-            return; // Stop further boot process if errors are found
+            return;
         }
-    
-        // 70% chance of boot failure
-        const randomErrorChance = Math.random() < 0.7;
-    
-        if (randomErrorChance) {
-            this.showBootError(); // Show boot error
-        } else {
-            this.showSuccessfulBoot(); // Successful boot
-        }
+
+        // Proceed with boot
+        const bootSuccess = Math.random() >= 0.7;
+        bootSuccess ? this.showSuccessfulBoot() : this.showBootError();
     }
 
     // Show missing components or cables error
@@ -102,7 +98,7 @@ class BootUpTab {
         missingItems.forEach(item => {
             const errorMessage = { 
                 tag: "Error", 
-                def: `${item.toUpperCase()} ${type} is not attached.` 
+                def: ` ${item} is missing or not connected.` 
             };
             this.pcUnit.createReportCell(errorMessage);
         });
@@ -143,6 +139,7 @@ class BootUpTab {
     // Boot Successful 
     showSuccessfulBoot() {
         this.pcUnit.powerOn();
+
     }
 
     update(component) {

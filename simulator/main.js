@@ -10,7 +10,7 @@ import BootUpTab from "./scripts/Tabs/bootUpTab.js"
 import Assistant from "./assistant/assistant.js"
 import PCUnit from "./scripts/Data/pcUnit.js"
 import tsimulation from "./scripts/Tabs/tsimulation.js"
-
+import Drawer from "./scripts/Tabs/drawer.js"
 class Main {
     constructor() {
         // Utility Modules
@@ -30,7 +30,7 @@ class Main {
         this.pcUnit = new PCUnit(this.utilityTool, this.displayArea, this.canvas, this.portsTab, this.drawer)
 
         // Boot Up Tab
-        this.bootUpTab = new BootUpTab(this.elementHandler, this.utilityTool, this.pcUnit, this.portsTab)
+        this.bootUpTab = new BootUpTab(this.elementHandler, this.utilityTool, this.pcUnit, this.portsTab, this.drawer)
 
         // Display Area
         this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool, this.portsTab, this.bootUpTab, this.tsimulation)
