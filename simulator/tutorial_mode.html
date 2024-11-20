@@ -218,8 +218,8 @@
             </div> -->
         </div>
     </div>
+
         <!-- BOOT UP MODAL -->
-        
         <div id="bootUpTab" class="modal" >
             <div class="modal-wrapper">
                 <!-- header -->
@@ -243,7 +243,7 @@
                     </div>
     
                     <div class="vertLine"></div>
-     
+                    <div class = "errorDialog"></div>
                     <!-- display -->
                     <div id="bootDisplay">
                         <img id="desk" src="./assets/desk.png" >
@@ -258,6 +258,16 @@
                 </div>
             </div>
         </div>
+
+        <!-- Boot Error Dialog -->
+        <dialog id="bootErrorDialog" class="modal">
+            <div class="dialog-content">
+                <h3>Boot Error</h3>
+                <p id="errorMessage">An unknown error occurred during boot-up.</p> <!-- Error message placeholder -->
+                <button id="troubleshootBtn">Troubleshoot</button> <!-- Button to initiate troubleshooting -->
+                <button id="closeErrorDialogBtn">Close</button> <!-- Button to close the dialog -->
+            </div>
+        </dialog>
 
     <div id="task-status">Task to be done: Click me "The Assistant" </div>
     
@@ -404,16 +414,6 @@
         <button id="alertOKButton">OK</button>
     </div>
 
-    <!-- Troubleshooting Modal -->
-    <dialog id="troubleshootingModal">
-        <h2>PC Troubleshooting Guide</h2>
-        <p id="error-description">Issues detected during boot:</p>
-        <ul id="error-list">
-            <!-- Errors will be dynamically populated here -->
-        </ul>
-        <button id="fix-all-btn">Try to Fix All Issues</button>
-        <button id="close-troubleshooting">Close</button>
-    </dialog>
     
     <!-- Assistant Reassure -->
     <dialog class="asst-reassure"></dialog>

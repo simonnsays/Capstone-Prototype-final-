@@ -6,6 +6,7 @@ class BootUpTab {
         this.elements = this.elementHandler.getBootUpTabElements();
         this.portsTab = portsTab;
         this.drawer = drawer;
+        
         // Elements
         this.isActive = false;
         this.modal = this.elements.modal;
@@ -15,7 +16,7 @@ class BootUpTab {
         this.powerBtn = this.elements.powerBtn;
         this.powerBtn.disabled = true;
         this.reportArea = this.elements.reportArea;
-
+        
         // PC Unit
         this.pcUnit = pcUnit;
         this.pcUnit.reportArea = this.elements.reportArea;
@@ -92,7 +93,7 @@ class BootUpTab {
         const bootSuccess = Math.random() >= 0.7;
         bootSuccess ? this.showSuccessfulBoot() : this.showBootError();
     }
-
+    
     // Show missing components or cables error
     showMissingError(missingItems, type) {
         missingItems.forEach(item => {
@@ -111,35 +112,27 @@ class BootUpTab {
 
     // Boot error messages
     showBootError() {
-        const errorMessages = [
-            "Error: Missing Boot Device",
-            "Error: CMOS Battery Failure",
-            "Error: GPU not detected",
-            "Error: No RAM detected",
-            "Error: Overheating detected",
-            "Error: Power supply issue detected"
-        ];
+        // Categorized boot errors
+    const errorCategories = {
+        BIOS: [],
+        Storage: [],
+        Overheat: [],
+        Power: [],
+        Memory: []
+    };
 
-        const randomError = errorMessages[Math.floor(Math.random() * errorMessages.length)];
-        this.pcUnit.createReportCell({ tag: 'Error', def: randomError });
-
-        const troubleshootingSteps = `
-            - Check all power cables and connections.<br>
-            - Make sure the boot device (HDD/SSD) is properly connected.<br>
-            - Reseat the RAM and GPU.<br>
-            - Replace the CMOS battery if necessary.<br>
-            - Ensure the power supply unit is functioning correctly.
-        `;
-        const troubleshootingDiv = document.createElement('div');
-        troubleshootingDiv.classList = 'troubleshootingSteps';
-        troubleshootingDiv.innerHTML = troubleshootingSteps;
-        this.reportArea.appendChild(troubleshootingDiv);
+    // Randomly select a category and an error message within it
+    const categoryKeys = Object.keys(errorCategories);
+    const selectedCategory = categoryKeys[Math.floor(Math.random() * categoryKeys.length)];
+    const selectedError = errorCategories[selectedCategory][Math.floor(Math.random() * errorCategories[selectedCategory].length)];
+    
+    // Show boot error dialog
+    this.pcUnit.showBootErrorDialog(selectedError);
     }
 
     // Boot Successful 
     showSuccessfulBoot() {
         this.pcUnit.powerOn();
-
     }
 
     update(component) {

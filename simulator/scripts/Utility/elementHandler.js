@@ -90,16 +90,10 @@ class ElementHandler {
             closeBtn: document.querySelector('#closeBootTab'),
             powerBtn: document.querySelector('#powerButton'),
             pcPlaceHolder: document.querySelector('#unitPlaceHolder'),
-            reportArea: document.querySelector('#bootTabReport')
-        } || null
-    }
-
-    gettsimulation() {
-        return {
-            modal: document.querySelector('#troubleshootingModal'),
-            closeBtn: document.querySelector('#close-troubleshooting'),
-            errorList: document.querySelector('#error-list'),
-            fixAllBtn: document.querySelector('#fix-all-btn'),
+            reportArea: document.querySelector('#bootTabReport'),
+            closeErrorDialogBtn: document.querySelector('#closeErrorDialogBtn'),
+            troubleshootBtn: document.querySelector('#troubleshootBtn'),
+            errorMessage: document.querySelector('#errorMessage')
         } || null
     }
 

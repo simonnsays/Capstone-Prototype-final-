@@ -35,7 +35,7 @@ class PortsTab {
         this.i = 0
         this.currentGroupPage = this.portGroups[this.i]
 
-        // This object will keep track of the attachment status for cables
+        // This will keep track of the attachment status for cables
         this.attachedCablesStatus = []
 
         // Events
@@ -226,10 +226,12 @@ class PortsTab {
             return;
         }
     
-        // Attach the cable end to the specified component port
+        // attach cable in logic
         port.cableAttached = cable;
+        // update cable connection state
         cable.ends[component].connected = true;
 
+        // Get cable status for motherboard psu as false(starting value) for both ends
         if (!this.attachedCablesStatus[cable.type]) {
             this.attachedCablesStatus[cable.type] = { motherboard: false, psu: false, fullyConnected: false };
         }

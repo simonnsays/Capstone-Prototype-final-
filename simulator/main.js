@@ -9,8 +9,6 @@ import DisplayArea from "./scripts/displayArea.js"
 import BootUpTab from "./scripts/Tabs/bootUpTab.js"
 import Assistant from "./assistant/assistant.js"
 import PCUnit from "./scripts/Data/pcUnit.js"
-import tsimulation from "./scripts/Tabs/tsimulation.js"
-import Drawer from "./scripts/Tabs/drawer.js"
 class Main {
     constructor() {
         // Utility Modules
@@ -41,9 +39,6 @@ class Main {
         // Shop
         this.shop = new Shop(this.elementHandler, this.utilityTool, this.inventory, this.itemInfo)
 
-        // Troubleshooting
-        this.tsimulation = new tsimulation(this.troubleshootingModal, this.errorList, this.fixAllbtn, this.elementHandler, this.utilityTool);
-
         //Assistant
         const elementHandler = new ElementHandler();
         const assistant = new Assistant(elementHandler);
@@ -62,8 +57,7 @@ class Main {
             this.inventory.isActive || 
             this.portsTab.isActive || 
             this.portsTab.drawer.isActive ||
-            this.bootUpTab.isActive ||
-            this.tsimulation.isActive) {
+            this.bootUpTab.isActive) {
                 this.canvas.isActive = false
             } else {
                 this.canvas.isActive = true
