@@ -51,6 +51,9 @@ TODO:
             |_ [] - LED
             |_ [] - speaker
 
+**** Boot up feature
+[/] - required components check
+[o o o] - attached components wires check
 
 When adding new component:
 

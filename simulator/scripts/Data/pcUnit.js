@@ -15,12 +15,15 @@ class PCUnit {
         this.componentsStatus = {
             motherboard: null,
             cpu: null,
-            memory: [],
+            ram: [],
             gpu: null,
             psu: null,
             storage: [],
-            cooling: null
+            cpuCooling: null,
+            caseCooling: []
         }
+
+        this.bootUpRequirements = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling', 'gpu']
 
         this.unitStatus = {
             PSU_TO_MOTHERBOARD: {
@@ -54,37 +57,38 @@ class PCUnit {
         // check defects and compatibility here
         this.fillComponentStatus(unit)
 
-        // console.log(this.componentsStatus.motherboard)
-        // 
-        // 
-        //  CONTINUE LOGIC HERE
-        // 
-        // 
-            
+        let allowBoot = false
+        // check for minimum boot up requirement
+        const requiredComponentsArePresent = this.bootUpRequirements.every((req) => this.componentsStatus[req])
 
-        // return 
+        if(requiredComponentsArePresent) {
+            // proceed to check if everything is wired
+        }
+        
     }
 
     fillComponentStatus(unit) {
         switch(unit.type) {
             case 'ram':
-                this.componentsStatus.memory.push(unit);
-                break;
+                this.componentsStatus.ram.push(unit);
+                break
             case 'storage':
-                this.componentsStatus.storage.push(unit);
-                break;
+                this.componentsStatus.storage.push(unit)
+                break
+            case 'cooling':
+                if(unit.specs.category === 'cpu') this.componentsStatus.cpuCooling = unit
+                if(unit.specs.category === 'chassis') this.componentsStatus.caseCooling = unit
+                break
             default:
-                this.componentsStatus[unit.type] = unit;
+                this.componentsStatus[unit.type] = unit
         }
     
         // Recursively check slots for attached components
         unit.slots.forEach(slot => {
             if (slot.component) {
-                this.fillComponentStatus(slot.component);
+                this.fillComponentStatus(slot.component)
             }
-        });
-    
-        console.log(this.componentsStatus);
+        })    
     }
 
     powerOff() {

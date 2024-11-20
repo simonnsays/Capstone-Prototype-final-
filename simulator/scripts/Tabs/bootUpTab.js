@@ -83,8 +83,11 @@ class BootUpTab {
         const state = this.pcUnit.checkPCState(unit)
         // turn on
         if(this.pcUnit.power === 'off') {
+            /*
+            *   Main Power on Sequence
+            */
+
             // check for pc parts
-           
             
             this.pcUnit.power = 'on'
             this.pcUnit.powerOn()

@@ -50,6 +50,7 @@ class UtilityTool {
             psu: 'ps',
             storage: 'st',
             cooling: 'fn',
+            cpuCooling: 'cpufn',
             ram: 'rm'
         }
 

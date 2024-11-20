@@ -337,6 +337,9 @@ const components = [
     new Component ({        //be quiet pure rock
         name: 'Be Quiet Pure Rock 2',
         type: 'cooling',
+        specs: {
+            category: 'cpu'
+        }, 
         size: 'amd',
         dimensions: {
             width: 125,

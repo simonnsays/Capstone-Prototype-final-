@@ -36,8 +36,8 @@ class User {
         this.componentSelected = null
 
         // detachables
-        this.detachableComponents = []
-        this.componentToDetach = null
+        // this.detachableComponents = []
+        // this.componentToDetach = null
 
     }
 
