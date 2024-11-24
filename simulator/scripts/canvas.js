@@ -1,11 +1,12 @@
 class Canvas {
-    constructor(elementHandler, utilityTool, displayArea, user, pcUnit, bootUpTab) {
+    constructor(elementHandler, utilityTool, displayArea, user, pcUnit, bootUpTab, inventory) {
         // Utility
         this.elementHandler = elementHandler;
         this.utilityTool = utilityTool;
         this.pcUnit = pcUnit;
         this.bootUpTab = bootUpTab;
-        
+        this.inventory = inventory;
+
         // Canvas Area
         this.element = elementHandler.getSimCanvas();
         if (!this.element) {
@@ -58,7 +59,15 @@ class Canvas {
     closeAlert() {
         this.alertBox.classList.add('hidden');
     }
-
+    highlight(box) {
+        this.c.fillStyle = 'rgba(0, 255, 0, 0.4)'
+        this.c.fillRect(
+            box.x,
+            box.y,
+            box.width,
+            box.height
+        )
+    }
     // Check if the component and slot are compatible
     checkCompatibility(component, slot) {
         if (!component || !slot) {
@@ -134,17 +143,42 @@ class Canvas {
 
     // Mouse Down Event
     handleMouseDown(e) {
+        // only accept left click
         if (e.button !== 0 || !this.isActive) return;
 
+        // Unmount mode    
+        if(!this.displayArea.isInMountMode) {
+            if(!this.user.componentToDetach) return
+
+            // check if okay to return to shelf or return to inventory 
+            let componentIsAdded = this.displayArea.fillShelf(this.user.componentToDetach.attached, this.displayArea.shelf)
+
+            if(!componentIsAdded) {
+                this.inventory.returnToInv(this.user.componentToDetach.attached)
+                this.inventory.update()
+            }
+
+            this.user.componentToDetach.base.slots.find(slot => 
+                slot.component === this.user.componentToDetach.attached).component = null
+            
+            return
+        }
+        // try to select one of the components in shelf
         this.user.componentSelected = this.user.selectComponent(this.shelf);
+
+        // do nothing if no selected components
         if (!this.user.componentSelected) return;
 
+        // if a componnet is selected
         this.user.createTempProperties();
+        
+        // match slots
         this.displaySlots(this.table.component, this.user.componentSelected);
     }
 
     // Mouse Move Event
     handleMouseMove(e) {
+        // adjust mouse point relative to the canvas
         const canvasRect = this.element.getBoundingClientRect();
         const rawMouse = { x: e.clientX, y: e.clientY };
 
@@ -152,6 +186,28 @@ class Canvas {
             x: rawMouse.x - canvasRect.left,
             y: rawMouse.y - canvasRect.top
         };
+
+         // Unmount Mode
+         if(!this.displayArea.isInMountMode && this.user.detachableComponents.length !== 0 && this.displayArea.table.component) {
+            /*  check if mousepoint is hovering on 
+                one of the components that can be detached
+            */
+            let componentCheck = false
+            this.user.detachableComponents = []
+            this.user.takeDetachableComponents(this.displayArea.table.component)
+        
+            this.user.detachableComponents.forEach(pair => {
+                if(this.utilityTool.isInsideBox(this.user.mousePoint, pair.attached.box)) {
+                    this.user.componentToDetach = pair
+                    componentCheck = true
+                }             
+            })
+        
+            if(!componentCheck) {
+                this.user.componentToDetach = null
+            }
+            return
+        }
 
         // dragging event
         if(this.user.componentSelected && this.user.isDragging) {
@@ -167,6 +223,7 @@ class Canvas {
 
     // Mouse Up Event - Handle dropping on trash
     handleMouseUp() {
+        // return if no selected component
         if (!this.user.componentSelected) return;
 
         const adjustedMousePoint = {
@@ -181,8 +238,9 @@ class Canvas {
             this.user.resetTempProperties();
             return;
         }
-
+        // check for interaction
         let isInteracting = false;
+
         this.user.availableSlots.forEach(slot => {
             if (!slot.box) throw new Error('Slot has no Box property');
             
@@ -227,10 +285,12 @@ class Canvas {
 
     // Display Slots
     displaySlots(baseComponent, componentSelected) {
+        // match slot type to selected component type
         baseComponent.slots.forEach((slot) => {
             if (slot.type === componentSelected.type && !slot.component) {
                 this.user.availableSlots.push(slot);
             }
+            // get available slots from attached components
             if (slot.component) {
                 this.displaySlots(slot.component, componentSelected);
             }
@@ -249,6 +309,7 @@ class Canvas {
         this.c.arcTo(left, top + height, left, top + height - radius, radius);
         this.c.lineTo(left, top + radius);
         this.c.arcTo(left, top, left + radius, top, radius);
+
         this.c.fillStyle = color;
         this.c.fill();
     }
@@ -284,25 +345,29 @@ class Canvas {
 
     // Draw Available Slots
     drawAvailableSlots() {
+        // do nothing if no available slots
         if (this.user.availableSlots.length === 0) return;
-
+        // highlight default slot box (not necessarily compatible yet)
         this.user.availableSlots.forEach(slot => {
+            // draw slot if a boudning box for slot is created
             if (slot.box) {
-                this.c.fillStyle = 'rgba(0, 255, 0, 0.4)';
-                this.c.fillRect(slot.box.x, slot.box.y, slot.box.width, slot.box.height);
+               this.highlight(slot.box)
             }
         });
     }
 
     // Recursively Draw Attached Components
     drawAttachedComponents(slots, currentSide) {
+        // do nothing if component has no slots
         if (slots.length < 1) return;
         slots.forEach(slot => {
             if (slot.component) {
                 const side = this.utilityTool.getSide(slot.component, currentSide);
+                // draw slots according to the current side
                 if (side) {
                     this.drawComponent(slot.component.box, side.image);
                 }
+                // draw attached components for components attached to the slot components
                 this.drawAttachedComponents(slot.component.slots, currentSide);
             }
         });
@@ -312,30 +377,36 @@ class Canvas {
     animate() {
         const table = this.table;
         const shelf = this.shelf;
-
+        // clear
         this.c.clearRect(0, 0, this.element.width, this.element.height);
         this.c.imageSmoothEnabed = true;
-        
+        // fill Background
         this.c.fillStyle = '#fef9db';
         this.c.fillRect(0, 0, this.element.width, this.element.height);
-
+        // fill display area
         this.fillRoundRect(table.area.x, table.area.y, table.area.width, table.area.height, 30, '#c7ddcc');
+        // fill shelf areas
         shelf.forEach(spot => {
             this.fillRoundRect(spot.area.x, spot.area.y, spot.area.width, spot.area.height, 20, '#c7ddcc');
         });
 
         // Trashbox
         this.drawtrashBox();
-
+         // draw Display area component
         if (table.component) {
+            // draw component
             this.drawTableComponent(table.component, this.displayArea.currentSide);
+            // draw attached components
             this.drawAttachedComponents(table.component.slots, this.displayArea.currentSide);
+            // draw available slots
             this.drawAvailableSlots();
         }
-
+        // draw shelf components
         shelf.forEach(spot => {
             if (spot.component) {
+                // check if component as attached components
                 const occupiedSlots = spot.component.slots.filter(slot => slot.component);
+                //  highlight a bit for indication that the component is attached
                 if (occupiedSlots.length !== 0) {
                     const scale = 0.7;
                     const highlight = {
@@ -348,12 +419,17 @@ class Canvas {
                     };
                     this.fillRoundRect(highlight.left, highlight.top, highlight.width, highlight.height, highlight.radius, highlight.color);
                 }
+                // all shelf components will use default source
                 const component = spot.component;
                 const componentSide = this.utilityTool.getSide(component, component.defaultSource);
                 this.drawComponent(component.box, componentSide.image);
             }
         });
 
+        if(this.user.componentToDetach) {
+            this.highlight(this.user.componentToDetach.attached.box) 
+        }   
+        // Loop Canvas
         requestAnimationFrame(() => this.animate());
     }
 }

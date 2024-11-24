@@ -16,28 +16,55 @@ class Main {
         this.utilityTool = new UtilityTool()
 
         // User
-        this.user = new User(this.utilityTool, this.pcUnit)
+        this.user = new User(
+            this.utilityTool, 
+            this.pcUnit)
 
         // Item Info Modal
         this.itemInfo = this.elementHandler.getItemInfoElements()
 
         // Wires Tab
-        this.portsTab = new PortsTab(this.elementHandler, this.utilityTool, this.pcUnit)
+        this.portsTab = new PortsTab(
+            this.elementHandler, 
+            this.utilityTool, 
+            this.pcUnit)
 
         // PC Unit
-        this.pcUnit = new PCUnit(this.utilityTool, this.displayArea, this.canvas, this.portsTab, this.drawer)
+        this.pcUnit = new PCUnit(
+            this.utilityTool, 
+            this.displayArea, 
+            this.canvas, 
+            this.portsTab, 
+            this.drawer)
 
         // Boot Up Tab
-        this.bootUpTab = new BootUpTab(this.elementHandler, this.utilityTool, this.pcUnit, this.portsTab, this.drawer)
+        this.bootUpTab = new BootUpTab(
+            this.elementHandler, 
+            this.utilityTool, 
+            this.pcUnit, 
+            this.portsTab, 
+            this.drawer)
 
         // Display Area
-        this.displayArea = new DisplayArea(this.elementHandler, this.utilityTool, this.portsTab, this.bootUpTab, this.tsimulation)
+        this.displayArea = new DisplayArea(
+            this.elementHandler, 
+            this.utilityTool, 
+            this.portsTab, 
+            this.bootUpTab, 
+            this.user)
         
         // Inventory
-        this.inventory = new Inventory(this.elementHandler, this.utilityTool, this.displayArea)
+        this.inventory = new Inventory(
+            this.elementHandler, 
+            this.utilityTool, 
+            this.displayArea)
 
         // Shop
-        this.shop = new Shop(this.elementHandler, this.utilityTool, this.inventory, this.itemInfo)
+        this.shop = new Shop(
+            this.elementHandler, 
+            this.utilityTool, 
+            this.inventory, 
+            this.itemInfo)
 
         //Assistant
         const elementHandler = new ElementHandler();
@@ -48,7 +75,12 @@ class Main {
         window.addEventListener('mousedown', () => this.handleMouseDown())
 
         // Canvas
-        this.canvas = new Canvas(this.elementHandler, this.utilityTool, this.displayArea, this.user)
+        this.canvas = new Canvas(
+            this.elementHandler, 
+            this.utilityTool, 
+            this.displayArea, 
+            this.user, 
+            this.inventory)
     }
 
     handleMouseDown() {

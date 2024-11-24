@@ -50,15 +50,45 @@ class PCUnit {
     // Display a boot error in the dialog
     showBootErrorDialog() {
         const errorCategories = {
-            BIOS: ["BIOS checksum error.", "Unsupported CPU detected in BIOS."],
-            Storage: ["No bootable device found.", "Storage device error: Unable to access data."],
-            Overheat: ["Overheating detected, system halted."],
-            Power: ["CPU fan not detected.", "Power supply voltage instability."],
-            Memory: ["Memory not detected."]
+            BIOS: [
+                "BIOS checksum error.",
+                "Unsupported CPU detected in BIOS.",
+                "Invalid BIOS configuration detected."
+            ],
+            Storage: [
+                "No bootable device found.",
+                "Storage device error: Unable to access data.",
+                "Drive not detected."
+            ],
+            Overheat: [
+                "Overheating detected, system halted.",
+                "Fan speed too low.",
+                "Thermal paste not applied properly."
+            ],
+            Power: [
+                "CPU fan not detected.",
+                "Power supply voltage instability.",
+                "PSU insufficient wattage."
+            ],
+            Memory: [
+                "Memory not detected.",
+                "RAM compatibility issue.",
+                "Memory modules seated incorrectly."
+            ],
+            "Diagnostic LEDs": [
+                "Motherboard LED error detected.",
+                "Debug LED indicates CPU fault.",
+                "Debug LED indicates RAM issue."
+            ],
+            GPU: [
+                "Graphics card not detected.",
+                "Insufficient power to GPU.",
+                "GPU overheating."
+            ]
         };
 
         let selectedCategory = "Unknown";
-        let errorMessage = this.getRandomBootError();
+        let errorMessage = this.getRandomBootError(); // generate random error message
 
         for (const [category, errors] of Object.entries(errorCategories)) {
             if (errors.includes(errorMessage)) {
@@ -96,6 +126,12 @@ class PCUnit {
                 break;
             case "Memory":
                 this.visualizeMemoryFix(troubleshootingDiv);
+                break;
+            case "Diagnostic LEDs":
+                this.visualizeLEDIndicators(troubleshootingDiv);
+                break;
+            case "GPU":
+                this.visualizeGPUFix(troubleshootingDiv); 
                 break;
             default:
                 troubleshootingDiv.innerHTML = `<p>Unknown troubleshooting category. Please check manually.</p>`;
@@ -253,6 +289,35 @@ class PCUnit {
             }
         }, 400);
     }
+    // Visualization: GPU Troubleshooting
+    visualizeGPUFix(container) {
+        container.innerHTML = `
+            <h3>GPU Troubleshooting</h3>
+            <p>Simulating GPU diagnostics...</p>
+            <div style="position: relative; text-align: center;">
+                <img src="./assets/troubleshooting/gpu.png" alt="GPU Troubleshooting Diagram" style="width: 70%; border: 1px solid #ddd;">
+                <div style="position: absolute; top: 20%; left: 45%; color: red; font-weight: bold;">GPU Slot</div>
+            </div>
+            <progress id="gpuProgress" value="0" max="100"></progress>
+            <p id="gpuStatus"></p>
+        `;
+
+        const progressBar = container.querySelector('#gpuProgress');
+        const statusText = container.querySelector('#gpuStatus');
+        let progress = 0;
+
+        const interval = setInterval(() => {
+            progress += 25;
+            progressBar.value = progress;
+
+            if (progress === 50) statusText.textContent = "Checking power cables and connections...";
+            if (progress === 100) {
+                clearInterval(interval);
+                statusText.textContent = "GPU diagnostics completed. No issues detected.";
+            }
+        }, 400);
+    }
+
     // Add more visualization of troubleshooting
 
     // Close the boot error dialog

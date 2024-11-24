@@ -109,8 +109,9 @@ body {
     border-radius: 20px;
     margin: 5px
 }
-.button-wrapper > [data-type="tab"] {
-    transition: transform .25s ease-in;
+.button-wrapper > [data-type="button"] {
+    transition: all .25s ease-in;
+    cursor: pointer;
 }
 .button-wrapper > button:hover {
     background-color: var(--mint);
@@ -122,7 +123,17 @@ body {
     max-height: 100%;
     transition: all .25s ease-in-out;
 }
+#mountUnmount {
+    position: absolute;
+    /* left: 10rem; */
 
+    /* transform: translateX(155px); */
+    background-color: var(--green);
+
+}
+#mountUnmount:hover {
+    background-color: none; 
+}
 /* MODALS, CONTENTS, ITEM SLIDERS */
 .modal{
     border-radius: 20px;   

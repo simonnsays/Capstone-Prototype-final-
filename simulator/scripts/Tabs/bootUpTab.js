@@ -118,7 +118,10 @@ class BootUpTab {
         Storage: [],
         Overheat: [],
         Power: [],
-        Memory: []
+        Memory: [],
+        "Diagnostic LEDs": [],
+        GPU: [],
+
     };
 
     // Randomly select a category and an error message within it

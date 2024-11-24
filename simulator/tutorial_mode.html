@@ -13,10 +13,11 @@
     <div class="game-container">
         <div class="button-wrapper">
             <button class="button" id="muneBtn" data-type="menu" data-active="true"></button>
-            <button class="button" id="openShop" data-type="tab">SHOP</button>
-            <button class="button" id="openInv" data-type="tab">INVENTORY</button>
-            <button class="button" id="openWires" data-type="tab">PORTS</button>
-            <button class="button" id="openBootTab" data-type="tab">BOOT</button>
+            <button id="openShop" data-type="button">SHOP</button>
+            <button id="openInv" data-type="button">INVENTORY</button>
+            <button id="openWires" data-type="button">PORTS</button>
+            <button id="openBootTab" data-type="button">BOOT</button>
+            <button  id="mountUnmount" data-type="button">Mount Mode</button>
         </div>
 
         <!-- canvas -->
@@ -268,7 +269,6 @@
                 <button id="closeErrorDialogBtn">Close</button> <!-- Button to close the dialog -->
             </div>
         </dialog>
-
     <div id="task-status">Task to be done: Click me "The Assistant" </div>
     
 
@@ -368,7 +368,7 @@
                 <p>Now we dive in to plugging each wire for each component either for power or data connection.</p>
                 <p>There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. 
                 Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicator, reset button, and 3.5mm audio jack ports. </p>                    
-                <p>To connect the wires simply open the wires inventory and drag the wires to their respective slots</p>
+                <p>To connect the wires simply open the wires drawer and click the wires to their respective highlighted slots</p>
                 <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
                 <p><img src="assets/Assistant/wires1.png" class="timg" alt="wre1" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <p><img src="assets/Assistant/wires2.png" class="timg" alt="wre2" style="height: 300px; width: 400px;padding: 10px;"></p>

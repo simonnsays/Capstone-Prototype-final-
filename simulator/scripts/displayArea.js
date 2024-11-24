@@ -1,10 +1,10 @@
 class DisplayArea {
-    constructor(elementHandler, utilityTool, portsTab, bootUpTab) {
+    constructor(elementHandler, utilityTool, portsTab, bootUpTab, user) {
         // Utility
         this.elementHandler = elementHandler;
         this.utilityTool = utilityTool;
         this.bootUpTab = bootUpTab;
-        
+        this.user = user;
         
         // Elements
         this.elements = this.elementHandler.getDisplayAreaElements();
@@ -39,6 +39,10 @@ class DisplayArea {
             { area: { x: 980, y: 460, width: 310, height: 210 }, component: null }
         ];
 
+        // Mode
+        this.mountModeButton = this.elements.mountToggle
+        this.isInMountMode = true
+  
         // Display Sides
         this.displaySides = ['left', 'front', 'right', 'rear'];
         this.curr = 0;
@@ -48,6 +52,7 @@ class DisplayArea {
         this.leftBtn.addEventListener('click', () => this.rotateLeft());
         this.rightBtn.addEventListener('click', () => this.rotateRight());
     }
+    
 
     // Rotate Left
     rotateLeft() {
@@ -92,13 +97,27 @@ class DisplayArea {
         );
 
         // Swap
-        this.table.component = componentSelected;
-        if (index !== -1) {
-            this.shelf[index].component = tempComponent;
-        }
+        this.table.component = componentSelected
+        this.shelf[index].component = tempComponent
 
         // Update display area information
         this.update();
+    }
+
+    // Fill Shelf
+    fillShelf(newComponent, shelf) {
+        for(let i = 0; i < shelf.length; i++) {
+            const spot = shelf[i]
+    
+            // if the component property is null, add the new component
+            if(spot.component === null) {
+                spot.component = newComponent
+                this.createBox(newComponent, spot, newComponent.defaultSource)
+                return true
+            }
+        }
+
+        return false
     }
 
     // Remove Component
@@ -218,10 +237,15 @@ class DisplayArea {
         // only update when a side for slot is available
         const side = slot.sides[this.currentSide];
         if (!side) {
-            slot.component.box = { x: 0, y: 0, width: 0, height: 0 };
+            slot.component.box = {
+                 x: 0,
+                 y: 0, 
+                 width: 0, 
+                 height: 0 
+            };
             return;
         }
-
+        
         if (baseComponent.isAttached) {
 
              // get the original dimensions of the base component
@@ -260,8 +284,29 @@ class DisplayArea {
             }
         });
     }
-    
+
+    hideButtons(buttons) {
+        for(let i = 0; i < buttons.length; i++) {
+            // show buttons
+            if(buttons[i].id === 'mountUnmount') {
+                buttons[i].style.transform = ''
+            } else {
+                buttons[i].style.transform = 'translateY('+ (-1 * (53 * i) - 53)+'px)'
+            }
+            // adjust z-index to go under menu button
+            buttons[i].style.zIndex = buttons.length - i
+        }
+    }
+
+    showButtons(buttons) {
+        buttons.forEach(button => {
+            if(button.id === 'mountUnmount') button.style['transform'] = 'translateX(155px)'
+            else button.style['transform'] = ''
+        })
+    }
+
     toggleMenu(menu, buttons, menuImg) {
+        // switch menu's active state
         switch (menu.dataset.active) {
             case 'true':
                 menu.dataset.active = 'false';
@@ -270,29 +315,48 @@ class DisplayArea {
                 menu.dataset.active = 'true';
                 break;
         }
+        // adjust elements based of active state
+        if(menu.dataset.active === 'false') {
+            
+            this.hideButtons(buttons)
 
-        if (menu.dataset.active === 'false') {
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].style.transform = 'translateY(' + (-1 * (53 * i) - 53) + 'px)';
-                buttons[i].style.zIndex = buttons.length - i;
-            }
-
-            menuImg.classList.add('rotate0');
-            menuImg.classList.remove('rotate180');
-            menuImg.src = './assets/svg/3line.svg';
-            return;
+            // swap menu image
+            menuImg.classList.add('rotate0')
+            menuImg.classList.remove('rotate180')
+            menuImg.src = './assets/svg/3line.svg'
+            return
         }
 
-        menuImg.classList.add('rotate180');
-        menuImg.classList.remove('rotate0');
-        menuImg.src = './assets/svg/dropup.svg';
-        buttons.forEach((button) => {
-            button.style['transform'] = '';
-        });
+        menuImg.classList.add('rotate180')
+        menuImg.classList.remove('rotate0')
+        menuImg.src = './assets/svg/dropup.svg'
+        this.showButtons(buttons)
     }
 
+    toggleMountMode() {
+        this.isInMountMode = !this.isInMountMode
+        console.log(this.isInMountMode)
+
+        if(this.isInMountMode) {
+            this.mountModeButton.style.backgroundColor = 'var(--green)'
+            this.mountModeButton.innerHTML = 'Mount Mode'
+        } else {
+            this.mountModeButton.style.backgroundColor = 'var(--orange)'
+            this.mountModeButton.innerHTML = 'Unount Mode'
+        }
+    }
+
+    updateDetachableComponents(baseComponent) {
+        this.user.detachableComponents.push(baseComponent)
+        baseComponent.slots.forEach(slot => {
+            if(slot.component) {
+                this.updateDetachableComponents(slot.component)
+            }
+        })
+    }
        // Main Dispay Area Update Method 
        update() {
+        this.user.detachableComponents = []
         if(this.table.component) {
             const tableComponent = this.table.component
 
@@ -308,6 +372,8 @@ class DisplayArea {
                 // update component boxes attached to slots
                 if(slot.component) {
                     this.updateAttachedComponentBox(tableComponent, slot)
+                // update detachable components
+                this.updateDetachableComponents(slot.component)
                 }
 
                 // update slot boxes
@@ -329,19 +395,6 @@ class DisplayArea {
 
         // update BOOT TAB
         this.bootUpTab.update(this.table.component)
-
-         // Call update on portsTab only if initialized and defined
-    if (this.portsTab) {
-        this.portsTab.update(this.table, this.shelf);
-    } else {
-        console.error("PortsTab is not initialized");
-    }
-
-    if (this.bootUpTab) {
-        this.bootUpTab.update(this.table.component);
-    } else {
-        console.error("BootUpTab is not initialized");
-    }
     }
 
     
@@ -351,13 +404,11 @@ class DisplayArea {
         this.menuButton.appendChild(menuImg);
         
 
-        this.toggleMenu(this.menuButton, this.tabButtons, menuImg);
-
+        this.hideButtons(this.tabButtons)
         this.bootUpTab.update()
         
-        this.menuButton.addEventListener('click', () =>
-            this.toggleMenu(this.menuButton, this.tabButtons, menuImg)
-        );
+        this.menuButton.addEventListener('click', () => this.toggleMenu(this.menuButton, this.tabButtons, menuImg))
+        this.mountModeButton.addEventListener('click', () => this.toggleMountMode())
     }
 }
 
