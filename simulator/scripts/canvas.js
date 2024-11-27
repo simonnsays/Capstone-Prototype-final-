@@ -59,6 +59,7 @@ class Canvas {
     closeAlert() {
         this.alertBox.classList.add('hidden');
     }
+
     highlight(box) {
         this.c.fillStyle = 'rgba(0, 255, 0, 0.4)'
         this.c.fillRect(
@@ -68,6 +69,7 @@ class Canvas {
             box.height
         )
     }
+
     // Check if the component and slot are compatible
     checkCompatibility(component, slot) {
         if (!component || !slot) {
@@ -88,11 +90,13 @@ class Canvas {
             console.log('CPU cooler detected, allowing compatibility for mount compatibility can be used anywhere.');
             return true; 
         }
-
+        // Check if component type is included in data.js
         if (!componentType) {
             console.error("Error: Component type is undefined or null");
             return false;
         }
+
+        // Validate component type 
         if (componentType !== slotType) {
             this.showAlert(`This slot is not for a ${componentType} component. Please choose the correct slot.`);
             return false;
@@ -101,15 +105,61 @@ class Canvas {
         const componentSize = component.size;
         const slotSupports = slot.supports;
 
+      // RAM Compatibility Logic
+      if (componentType === 'ram' && slotType === 'ram') {
+        console.log('RAM detected, checking compatibility.');
+        
+        // Get all RAM slots
+        const motherboardSlots = this.displayArea.table.component?.slots.filter(s => s.type === 'ram');
+        
+        if (motherboardSlots.length === 0) {
+            console.log('No RAM slots found on motherboard');
+            return false;
+        }
+
+        // Check if slot has a component attached
+        const attachedComponent = motherboardSlots.find(s => s.component);
+
+        if (!attachedComponent) {
+            return true; // Allow adding new RAM if none is attached
+        }
+
+        // Compare new RAM with attached RAM
+        const newRam = {
+            name: component.name,
+            bytes: component.bytes,
+            speed: component.speed
+        };
+
+        const attachedRam = {
+            name: attachedComponent.component.name,
+            bytes: attachedComponent.component.bytes,
+            speed: attachedComponent.component.speed
+        };
+
+        // Check for size mismatch
+        if (newRam.bytes !== attachedRam.bytes || newRam.speed !== attachedRam.speed) {
+            console.log(`Mismatch found! Attached RAM: ${attachedRam.bytes} ${attachedRam.speed}, New RAM: ${newRam.bytes} ${newRam.speed}`);
+            this.showAlert(`RAM specs mismatch detected. Please choose matching RAM.`);
+            return false;
+        } else {
+            console.log('RAM specs match');
+            return true;
+        }
+    }
+       
+        // Check component size if it is included in data.js
         if (!componentSize) {
             this.showAlert('Component size is missing. Please choose a valid component.');
             return false;
         }
 
+        // Validate component slot
         if (!slotSupports.includes(componentSize)) {
             this.showAlert(`This slot doesn't support a ${componentSize} component. Please choose a compatible component.`);
             return false;
         }
+        
 
         return true;
     }
@@ -246,7 +296,7 @@ class Canvas {
             
             if (this.utilityTool.isInsideBox(this.user.mousePoint, slot.box)
                 && slot.sides[this.displayArea.currentSide].accessible) {
-
+                // Check compatibility function checks compatiblity of each component dropped to their respective slots
                 if (this.checkCompatibility(this.user.componentSelected, slot)) {
                     isInteracting = true;
                     this.displayArea.attachComponent(this.user.componentSelected, slot);

@@ -3,7 +3,9 @@ class Component {
         name, 
         type,
         size, 
-        specs, 
+        specs,
+        speed,
+        bytes, 
         dimensions, 
         isRotatable, 
         isAttached = false, 
@@ -18,6 +20,8 @@ class Component {
         this.size = size
         this.type = type
         this.specs = specs
+        this.bytes = bytes
+        this.speed = speed
         this.dimensions = dimensions
         
         // Image

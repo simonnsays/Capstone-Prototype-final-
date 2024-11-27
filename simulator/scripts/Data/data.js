@@ -8046,7 +8046,7 @@ cables: [
         ]
     }),  
     // Cooling Intel
- new Component ({
+ new Component ({ //Intel Laminar RH1 cooling fan
      name: 'Intel Laminar RH1 cooling fan',
      type: 'cooling',
      size: 'intel',
@@ -8067,7 +8067,7 @@ cables: [
             {type: '3-pin-cooling'}
         ]
      }),
- new Component ({
+ new Component ({ //Intel Laminar RM1 cooling fan
     name: 'Intel Laminar RM1 cooling fan',
     type: 'cooling',
     size: 'intel',
@@ -8089,22 +8089,81 @@ cables: [
     }),
     // RAM DDR4
   new Component ({ //Kingston HyperX Beast RGB
-      name: 'Kingston HyperX Beast RGB DDR4',
-      type: 'ram',
-      size: 'ddr4',
-      dimensions: {
-        width: 133,
-        height: 133,
-        depth: 100,
-      },
-      isRotatable: false,
-      isAttached: false,
-      defaultSource: 'PACK',
-      images: [
-          {side: 'left', imageSrc: './assets/memory/HyperX Beast RGB DDR4 attached.png'},  
-          {side: 'PACK', imageSrc: './assets/memory/HyperX Beast RGB DDR4 pack.png'},  
-      ],
+    name: 'Kingston HyperX Beast RGB DDR4 8gb 2666mhz',
+    type: 'ram',
+    size: 'ddr4',
+    speed: '2666mhz',
+    bytes: '8gb',
+    dimensions: {
+      width: 133,
+      height: 133,
+      depth: 100,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'PACK',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/HyperX Beast RGB DDR4 attached.png'},  
+        {side: 'PACK', imageSrc: './assets/memory/HyperX Beast RGB DDR4 pack.png'},  
+    ],
  }),
+ new Component ({ //Kingston HyperX Beast RGB
+    name: 'Kingston HyperX Beast RGB DDR4 16gb 2666mhz',
+    type: 'ram',
+    size: 'ddr4', 
+    speed: '2666mhz',
+    bytes: '16gb',
+    dimensions: {
+      width: 133,
+      height: 133,
+      depth: 100,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'PACK',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/HyperX Beast RGB DDR4 attached.png'},  
+        {side: 'PACK', imageSrc: './assets/memory/HyperX Beast RGB DDR4 pack.png'},  
+    ],
+}),
+new Component ({ //Kingston HyperX Beast RGB
+    name: 'Kingston HyperX Beast RGB DDR4 8gb 3200mhz',
+    type: 'ram',
+    size: 'ddr4',
+    speed: '3200mhz',
+    bytes: '8gb',
+    dimensions: {
+      width: 133,
+      height: 133,
+      depth: 100,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'PACK',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/HyperX Beast RGB DDR4 attached.png'},  
+        {side: 'PACK', imageSrc: './assets/memory/HyperX Beast RGB DDR4 pack.png'},  
+    ],
+}),
+new Component ({ //Kingston HyperX Beast RGB
+    name: 'Kingston HyperX Beast RGB DDR4 16gb 3200mhz',
+    type: 'ram',
+    size: 'ddr4',
+    speed: '3200mhz',
+    bytes: '16gb',
+    dimensions: {
+      width: 133,
+      height: 133,
+      depth: 100,
+    },
+    isRotatable: false,
+    isAttached: false,
+    defaultSource: 'PACK',
+    images: [
+        {side: 'left', imageSrc: './assets/memory/HyperX Beast RGB DDR4 attached.png'},  
+        {side: 'PACK', imageSrc: './assets/memory/HyperX Beast RGB DDR4 pack.png'},  
+    ],
+}),
  new Component ({ //Corsair Dominator Platinum
     name: 'Corsair Dominator Platinum DDR4',
     type: 'ram',
