@@ -337,10 +337,15 @@ class Canvas {
 
     // Draw Component in Table Area
     drawTableComponent(component, currentSide) {
-        let componentSide = component.isRotatable
-            ? this.utilityTool.getSide(component, currentSide)
-            : this.utilityTool.getSide(component, component.defaultSource);
-        this.drawComponent(component.box, componentSide.image);
+       let componentSide = null
+       if (component.type === 'motherboard'){
+        componentSide = this.utilityTool.getSide(component, 'left')
+       } else if (component.isRotatable){
+        componentSide = this.utilityTool.getSide(component, currentSide)
+       } else {
+        componentSide = this.utilityTool.getSide(component, component.defaultSource)
+       }
+       this.drawComponent(component.box, componentSide.image)
     }
 
     // Draw Available Slots

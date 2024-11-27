@@ -7806,6 +7806,7 @@ const components = [
     isAttached: false,
     defaultSource: 'PACK',
     images: [
+        {side: 'left', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res.png'},  
         {side: 'right', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res.png'},  
         {side: 'PACK', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res - Copy.png'},  
     ],
@@ -7831,6 +7832,7 @@ const components = [
     isAttached: false,
     defaultSource: 'PACK',
     images: [
+        {side: 'left', imageSrc: './assets/storage/ssd/samsung ssd.png'},  
         {side: 'right', imageSrc: './assets/storage/ssd/samsung ssd.png'},  
         {side: 'PACK', imageSrc: './assets/storage/ssd/samsung ssd - Copy.png'},  
     ],
@@ -7856,6 +7858,7 @@ const components = [
     isAttached: false,
     defaultSource: 'PACK',
     images: [
+        {side: 'left', imageSrc: './assets/storage/ssd/sandisk ssd plus.png'},  
         {side: 'right', imageSrc: './assets/storage/ssd/sandisk ssd plus.png'},  
         {side: 'PACK', imageSrc: './assets/storage/ssd/sandisk ssd plus - Copy.png'},  
     ],
@@ -7881,6 +7884,7 @@ const components = [
     isAttached: false,
     defaultSource: 'PACK',
     images: [
+        {side: 'left', imageSrc: './assets/storage/ssd/sandisk.png'},  
         {side: 'right', imageSrc: './assets/storage/ssd/sandisk.png'},  
         {side: 'PACK', imageSrc: './assets/storage/ssd/sandisk - Copy.png'},  
     ],
