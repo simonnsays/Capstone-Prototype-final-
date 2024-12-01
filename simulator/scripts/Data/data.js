@@ -259,6 +259,9 @@ const components = [
             width: 150,
             height: 86,
         },
+        specs: {
+            wattage: 1600
+        },
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
@@ -277,7 +280,7 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
+            // {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -285,12 +288,12 @@ const components = [
         ],
         cables: [
             {type: '24-pin-power'},
-            {type: '8-pin-power' },
+            {type: '8-pin-power'},
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
             {type: '8-pin-pcie'},
-            {type: '8-pin'},
+            // {type: '8-pin'},
         ]
     }),
     new Component ({        //Corsair Vengeance Pro DDR4
@@ -300,6 +303,7 @@ const components = [
         dimensions: {
             width: 100,
             height: 100,
+            depth: 100
         },
         isRotatable: false,
         isAttached: false,
@@ -353,14 +357,18 @@ const components = [
             {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
         ],
         slots: [],
-    cables: [
-                {type: '3-pin-cooling'}
-            ]
+        cables: [
+                    {type: '3-pin-cooling'}
+                ]
     }), 
     new Component ({        // Gigabyte Nvidia GeForce RTX 3060
         name: 'Gigabyte Nvidia GeForce RTX 3060',
         type: 'gpu',
         size: 'ATX',
+        specs: {
+            portCount: 1,
+            portType: '8-pin'
+        },
         dimensions: {
             width: 200,
             height: 200,
@@ -376,6 +384,30 @@ const components = [
         slots: [],
         ports: [
             {type: '8-pin'}
+        ]  
+    }),
+    new Component ({        // Gigabyte Radeon RX 7900 XTX 16pin
+        name: 'Gigabyte Radeon RX 7900 XTX',
+        type: 'gpu',
+        size: 'ATX',
+        dimensions: {
+            width: 200,
+            height: 200,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        images: [
+            {side: 'left', imageSrc: './assets/gpu/Gigabyte Radeon RX 7900 XTX.png'}, 
+            {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
+            {side: 'pack', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'}
+        ],
+        slots: [],
+        ports: [
+            {
+                type: '16-pin-pcie',
+                style: 'split'
+            }
         ]  
     }),
 
@@ -7028,7 +7060,7 @@ const components = [
             {type: '8-pin'},
         ]
     }),
-    new Component ({        // Silverstone DA1000r-gm
+    new Component ({        // Silverstone DA1000r-gm   
         name: 'Silverstone DA1000r-gm',
         type: 'psu',
         size: 'ATX',
@@ -8430,27 +8462,27 @@ cables: [
     
     
     //GPU [gpu file is for general left side img assets] [gpu.1 is for pack side img assets] [single 8pins = {type: '8-pin'}] [dual 8pins = {type: '16-pin-pcie'}]
-    new Component ({        // Gigabyte Radeon RX 7900 XTX 16pin
-        name: 'Gigabyte Radeon RX 7900 XTX',
-        type: 'gpu',
-        size: 'ATX',
-        dimensions: {
-            width: 200,
-            height: 200,
-        },
-        isRotatable: false,
-        isAttached: false,
-        defaultSource: 'pack',
-        images: [
-            {side: 'left', imageSrc: './assets/gpu/Gigabyte Radeon RX 7900 XTX.png'}, 
-            {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
-            {side: 'pack', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'}
-        ],
-        slots: [],
-        ports: [
-            {type: '16-pin-pcie'}
-        ]  
-    }),
+    // new Component ({        // Gigabyte Radeon RX 7900 XTX 16pin
+    //     name: 'Gigabyte Radeon RX 7900 XTX',
+    //     type: 'gpu',
+    //     size: 'ATX',
+    //     dimensions: {
+    //         width: 200,
+    //         height: 200,
+    //     },
+    //     isRotatable: false,
+    //     isAttached: false,
+    //     defaultSource: 'pack',
+    //     images: [
+    //         {side: 'left', imageSrc: './assets/gpu/Gigabyte Radeon RX 7900 XTX.png'}, 
+    //         {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
+    //         {side: 'pack', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'}
+    //     ],
+    //     slots: [],
+    //     ports: [
+    //         {type: '16-pin-pcie'}
+    //     ]  
+    // }),
     new Component ({        // gigabyte nvidia geforce rtx 4060 windforce 8gb OC
         name: 'Gigabyte NVIDIA GeForce rtx 4060 Windforce 8gb OC',
         type: 'gpu',

@@ -11,7 +11,25 @@ class PCUnit {
         // CHECKLIST:
         // - if components are complete (status)
         // - if components are compatible (compatibility)
-        // - if components are working fine (defect)
+         // - if components are working fine (defect)
+        
+        this.XXXcomponentsStatus = {
+            motherboard: {
+                component: null,
+                powered: false
+            },
+            cpu: {
+                component: null,
+                powered: false
+            },
+            ram: [],
+            gpu: null,
+            psu: null,
+            storage: [],
+            cpuCooling: null,
+            caseCooling: []
+        }
+
         this.componentsStatus = {
             motherboard: null,
             cpu: null,
@@ -53,19 +71,85 @@ class PCUnit {
         this.reportCount = 0
     }
 
+    checkPowerConnection() {
+        const supply = this.componentsStatus.psu
+        // check if all components are supplied with power
+        Object.keys(this.componentsStatus).forEach(key => {
+            switch(key) {
+                case 'motherboard': {
+                    const cable = supply.cables.find(cable => cable.type === '24-pin-power')
+                    if(cable && Object.keys(cable.ends).every(endKey => cable.ends[endKey].connected)) {
+                        console.log('motherboard is connected')
+                        this.XXXcomponentsStatus.motherboard.powered = true
+                    }
+                    break
+                }
+                        
+                case 'cpu': {
+                    const cables = supply.cables.filter(cable => cable.type === '8-pin-power') 
+                    if(cables.length !== 0) {
+                        let allCablesConnected = cables.every(cable => Object.keys(cable.ends).every(endKey => cable.ends[endKey].connected) )
+                        
+
+                        console.log(allCablesConnected)
+                        if(allCablesConnected) {
+                            console.log('cpu is connected')
+                            this.XXXcomponentsStatus.cpu.powered = true
+                        }
+                    }
+                    break
+                }
+
+                case 'gpu': {
+                    const portType = this.componentsStatus.gpu.specs.portType
+                    switch(portType) {
+                        case '8-pin':
+                            const cable = this.componentsStatus.gpu.cables
+                            break
+                    }
+                }
+            }
+        })
+    }
+
     checkPCState(unit) {
         // check defects and compatibility here
         this.fillComponentStatus(unit)
-
+        console.log(this.componentsStatus)
         let allowBoot = false
+        
         // check for minimum boot up requirement
         const requiredComponentsArePresent = this.bootUpRequirements.every((req) => this.componentsStatus[req])
-
+        this.checkPowerConnection()
+        /*  CHECK FOR POWER SUPPLY CONNECTIONS
+        *   take the power supply and check every compoent if power is being supplied
+        *
+        * 
+        */
+        let allCablesAreAttached = true
         if(requiredComponentsArePresent) {
+            
+            this.checkPowerConnection()
+
+
             // proceed to check if everything is wired
+            Object.keys(this.componentsStatus).forEach(componentReq => {
+                const component = this.componentsStatus[componentReq] 
+                // ram and storage handling
+                if(Array.isArray(component)) {
+                    component.forEach(item => {
+                        allCablesAreAttached = this.checkAllAttachedCables(component, allCablesAreAttached)           
+                    })
+                // other component handling
+                } else {
+                    allCablesAreAttached = this.checkAllAttachedCables(component, allCablesAreAttached)
+                }
+            })
+
+            if(!allCablesAreAttached) throw new Error ('not all cables are attached')
         }
-        
     }
+
 
     fillComponentStatus(unit) {
         switch(unit.type) {

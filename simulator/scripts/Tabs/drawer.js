@@ -162,7 +162,8 @@ class Drawer {
 
             // create image
             const cableImage = document.createElement('img')
-            cableImage.src = cable.images.find(image => image.attachedTo === 'none').imageSrc
+            // cableImage.src = cable.images.find(image => image.attachedTo === 'none').imageSrc
+            cableImage.src = cable.images.drawer.imageSrc
 
             // create slider
             const cableSlider = document.createElement('div')

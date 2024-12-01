@@ -212,9 +212,15 @@ class Canvas {
     // Draw Componnent in Table Area
     drawTableComponent(component, currentSide) {
         // some components can't be rotated so we use default source for that case
-        let componentSide = component.isRotatable 
-        ? this.utilityTool.getSide(component, currentSide) 
-        : this.utilityTool.getSide(component, component.defaultSource)
+        let componentSide = null
+
+        if(component.type === 'motherboard') {
+            componentSide = this.utilityTool.getSide(component, 'left')
+        } else if(component.isRotatable) {
+            componentSide = this.utilityTool.getSide(component, currentSide)
+        } else {
+            componentSide = this.utilityTool.getSide(component, component.defaultSource)
+        }
 
         this.drawComponent(component.box, componentSide.image)
     }

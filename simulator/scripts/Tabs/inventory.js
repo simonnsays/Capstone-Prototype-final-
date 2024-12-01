@@ -129,6 +129,7 @@ class Inventory {
         // copy reference attributes to the copy of the port
         port.image = currentRef.image
         port.offset = currentRef.offset
+        port.style = currentRef.style
 
         if(currentRef.takes) port.takes = currentRef.takes 
 
@@ -138,6 +139,8 @@ class Inventory {
 
     // Create Cable Attributes
     createCableAttr(cable, ref) {
+        // create new class object
+
         // create a copy of the reference to avoid cables pointing on the same attributes
         const refClone = JSON.parse(JSON.stringify(ref))
 
