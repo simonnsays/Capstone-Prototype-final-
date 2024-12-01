@@ -99,14 +99,13 @@ class Inventory {
                     tempDetachedComponents.push(slot.component)
     
                     gatherAttachedComponents(slot.component)
-
                     slot.component = null
+                    
                 }
             })
         }
 
     gatherAttachedComponents(component)
-
         // remove attached component first
         if(tempDetachedComponents.length > 0) {
             tempDetachedComponents.forEach(tempItem => {

@@ -91,17 +91,23 @@ class DisplayArea {
 
     // Swap Components
     swapComponents(componentSelected) {
-        const tempComponent = this.table.component;
-        const index = this.shelf.findIndex(
-            (spot) => spot.component && spot.component.id === componentSelected.id
-        );
+        const tempComponent = this.table.component
+        const index = this.shelf.findIndex(spot => spot.component && 
+            spot.component.id === componentSelected.id)
 
-        // Swap
+        // swap
         this.table.component = componentSelected
         this.shelf[index].component = tempComponent
 
-        // Update display area information
-        this.update();
+        // removed any attached cables
+        /* 
+        *
+        *           CONTINURE WORKING HERE ! ! !
+        * 
+        */
+
+        // update display area information
+        this.update()
     }
 
     // Fill Shelf
@@ -116,7 +122,6 @@ class DisplayArea {
                 return true
             }
         }
-
         return false
     }
 
@@ -200,7 +205,7 @@ class DisplayArea {
         if (baseComponent.isAttached) {
             // get the original dimensions of the base component
             const imageSide = this.utilityTool.getSide(baseComponent, this.currentSide);
-            // get the original dimensions of the base component
+            // find the scale by getting the change happened in the component's width and height
             const scale = {
                 width: baseComponent.box.width / imageSide.width,
                 height: baseComponent.box.height / imageSide.height
@@ -371,7 +376,8 @@ class DisplayArea {
             tableComponent.slots.forEach(slot => {
                 // update component boxes attached to slots
                 if(slot.component) {
-                    this.updateAttachedComponentBox(tableComponent, slot)
+                this.updateAttachedComponentBox(tableComponent, slot)
+
                 // update detachable components
                 this.updateDetachableComponents(slot.component)
                 }

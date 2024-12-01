@@ -1,53 +1,196 @@
 class Canvas {
-    constructor(elementHandler, utilityTool, displayArea, user, pcUnit, bootUpTab, inventory) {
+    constructor(elementHandler, utilityTool, displayArea, user, inventory, pcUnit, bootUpTab) {
         // Utility
-        this.elementHandler = elementHandler;
-        this.utilityTool = utilityTool;
-        this.pcUnit = pcUnit;
-        this.bootUpTab = bootUpTab;
-        this.inventory = inventory;
+        this.elementHandler = elementHandler
+        this.utilityTool = utilityTool
+        this.inventory = inventory
+        this.pcUnit = pcUnit
+        this.bootUpTab = bootUpTab
 
         // Canvas Area
         this.element = elementHandler.getSimCanvas();
         if (!this.element) {
             throw new Error('no canvas element found');
         }
-        this.element.width = 1300;
-        this.element.height = 680;
-        this.c = this.element.getContext('2d');
-        this.isActive = true;
+        this.element.width = 1300
+        this.element.height = 680
+        this.c = this.element.getContext('2d')
+        this.isActive = true
 
         // Display Area
-        this.displayArea = displayArea;
-        this.table = displayArea.table;
-        this.shelf = displayArea.shelf;
+        this.displayArea = displayArea
+        this.table = displayArea.table
+        this.shelf = displayArea.shelf
 
         // Custom Alert Elements
-        this.alertBox = document.getElementById('customAlert');
-        this.alertMessage = document.getElementById('alertMessage');
-        this.alertOkButton = document.querySelector('#alertOKButton');
+        this.alertBox = document.getElementById('customAlert')
+        this.alertMessage = document.getElementById('alertMessage')
+        this.alertOkButton = document.querySelector('#alertOKButton')
 
         // User
         this.user = user;
 
         // Trash Icon 
-        this.trashBox = { x: 570, y: 20, width: 80, height: 80 };
+        this.trashBox = { x: 570, y: 20, width: 80, height: 80 }
 
         // Dialog elements
-        this.confirmationDialog = document.getElementById('confirmationDialog');
-        this.confirmBtn = document.getElementById('confirmBtn');
-        this.cancelBtn = document.getElementById('cancelBtn');
-        this.componentToRemove = null;  // Placeholder for the component to remove
+        this.confirmationDialog = document.getElementById('confirmationDialog')
+        this.confirmBtn = document.getElementById('confirmBtn')
+        this.cancelBtn = document.getElementById('cancelBtn')
+        this.componentToRemove = null // Placeholder for the component to remove
 
         // Mouse Events
-        window.addEventListener('mousedown', (e) => this.handleMouseDown(e));
-        window.addEventListener('mousemove', (e) => this.handleMouseMove(e));
-        window.addEventListener('mouseup', () => this.handleMouseUp());
+        window.addEventListener('mousedown', (e) => this.handleMouseDown(e))
+        window.addEventListener('mousemove', (e) => this.handleMouseMove(e))
+        window.addEventListener('mouseup', () => this.handleMouseUp())
 
         // Dialog Events
-        this.confirmBtn.addEventListener('click', () => this.confirmRemoval());
-        this.cancelBtn.addEventListener('click', () => this.cancelRemoval());
-        this.alertOkButton.addEventListener('click', () => this.closeAlert());
+        this.confirmBtn.addEventListener('click', () => this.confirmRemoval())
+        this.cancelBtn.addEventListener('click', () => this.cancelRemoval())
+        this.alertOkButton.addEventListener('click', () => this.closeAlert())
+    }
+
+    // Mouse Down Event
+    handleMouseDown(e) {
+        // only accept left click
+        if(e.button !== 0 || !this.isActive) return
+
+       // Unmount mode    
+       if(!this.displayArea.isInMountMode) {
+        if(!this.user.componentToDetach) return
+
+        // check if okay to return to shelf or return to inventory 
+        let componentIsAdded = this.displayArea.fillShelf(this.user.componentToDetach.attached, this.displayArea.shelf)
+
+        if(!componentIsAdded) {
+            this.inventory.returnToInv(this.user.componentToDetach.attached)
+            this.inventory.update()
+        }
+
+        this.user.componentToDetach.base.slots.find(slot => 
+            slot.component === this.user.componentToDetach.attached).component = null
+        
+        return
+    }
+
+        // try to select one of the components in shelf
+        this.user.componentSelected = this.user.selectComponent(this.shelf)
+
+        // do nothing if no selected component
+        if(!this.user.componentSelected) return
+
+        // if a component is selected
+        this.user.createTempProperties()
+
+        // match slots 
+        this.displaySlots(this.table.component, this.user.componentSelected)
+    }
+
+
+    // Mouse Move Event
+    handleMouseMove(e) {
+        // adjust mouse point relative to the canvas
+        const canvasRect = this.element.getBoundingClientRect();
+        const rawMouse = { x: e.clientX, y: e.clientY };
+
+        this.user.mousePoint = {
+            x: rawMouse.x - canvasRect.left,
+            y: rawMouse.y - canvasRect.top
+        };
+
+          // Unmount Mode
+          if(!this.displayArea.isInMountMode && this.user.detachableComponents.length !== 0 && this.displayArea.table.component) {
+            /*  check if mousepoint is hovering on 
+                one of the components that can be detached
+            */
+            let componentCheck = false
+            this.user.detachableComponents = []
+            this.user.takeDetachableComponents(this.displayArea.table.component)
+
+            this.user.detachableComponents.forEach(pair => {              
+                if(this.utilityTool.isInsideBox(this.user.mousePoint, pair.attached.box)) {
+                    this.user.componentToDetach = pair                    
+                    componentCheck = true
+                }             
+            })
+        
+            if(!componentCheck) {
+                this.user.componentToDetach = null
+            }
+            return
+        }
+
+        // dragging event
+        if(this.user.componentSelected && this.user.isDragging) {
+            this.user.dragComponent()
+
+            // return component if out of bounds
+            if(!this.utilityTool.isInsideBox(rawMouse, canvasRect)) {
+                this.user.returnComponentToShelf()
+                this.user.resetTempProperties()
+            }
+        }
+    }
+
+    // Mouse Up Event - Handle dropping on trash
+    handleMouseUp() {
+        // return if no selected component
+        if (!this.user.componentSelected) return;
+
+        const adjustedMousePoint = {
+            x: this.user.mousePoint.x,
+            y: this.user.mousePoint.y
+        };
+
+        // Check if component is dropped on the trash icon
+        if (this.utilityTool.isInsideBox(adjustedMousePoint, this.trashBox)) {
+            this.showConfirmationDialog(this.user.componentSelected); // Show confirmation dialog
+            this.user.returnComponentToShelf();
+            this.user.resetTempProperties();
+            return;
+        }
+
+        // check for interaction
+        let isInteracting = false;
+
+        this.user.availableSlots.forEach(slot => {
+            if (!slot.box) throw new Error('Slot has no Box property');
+            
+            if (this.utilityTool.isInsideBox(this.user.mousePoint, slot.box)
+                && slot.sides[this.displayArea.currentSide].accessible) {
+
+                // Check compatibility function checks compatiblity of each component dropped to their respective slots
+                if (this.checkCompatibility(this.user.componentSelected, slot)) {
+                    isInteracting = true;
+
+                    // Attach component
+                    this.displayArea.attachComponent(this.user.componentSelected, slot);
+                } else {
+                    isInteracting = true;
+                    this.user.returnComponentToShelf();
+                }
+            }
+        });
+
+         // swap components if component dragged is in table display area
+        if(!isInteracting && this.utilityTool.isInsideBox(this.user.mousePoint, this.table.area)) {
+            isInteracting = true
+
+            // reset user orientation
+            this.displayArea.curr = 0
+            this.displayArea.currentSide = this.displayArea.displaySides[this.displayArea.curr]
+
+            // swap components
+            this.displayArea.swapComponents(this.user.componentSelected)
+        }
+
+        // return to shelf if no interaction
+        if(!isInteracting) {
+            this.user.returnComponentToShelf()
+        }
+
+        // clear temporary properties
+        this.user.resetTempProperties()
     }
 
       // Custom Alert Handling
@@ -105,48 +248,48 @@ class Canvas {
         const componentSize = component.size;
         const slotSupports = slot.supports;
 
-      // RAM Compatibility Logic
-      if (componentType === 'ram' && slotType === 'ram') {
-        console.log('RAM detected, checking compatibility.');
-        
-        // Get all RAM slots
-        const motherboardSlots = this.displayArea.table.component?.slots.filter(s => s.type === 'ram');
-        
-        if (motherboardSlots.length === 0) {
-            console.log('No RAM slots found on motherboard');
-            return false;
-        }
-
-        // Check if slot has a component attached
-        const attachedComponent = motherboardSlots.find(s => s.component);
-
-        if (!attachedComponent) {
-            return true; // Allow adding new RAM if none is attached
-        }
-
-        // Compare new RAM with attached RAM
-        const newRam = {
-            name: component.name,
-            bytes: component.bytes,
-            speed: component.speed
-        };
-
-        const attachedRam = {
-            name: attachedComponent.component.name,
-            bytes: attachedComponent.component.bytes,
-            speed: attachedComponent.component.speed
-        };
-
-        // Check for size mismatch
-        if (newRam.bytes !== attachedRam.bytes || newRam.speed !== attachedRam.speed) {
-            console.log(`Mismatch found! Attached RAM: ${attachedRam.bytes} ${attachedRam.speed}, New RAM: ${newRam.bytes} ${newRam.speed}`);
-            this.showAlert(`RAM specs mismatch detected. Please choose matching RAM.`);
-            return false;
-        } else {
-            console.log('RAM specs match');
-            return true;
-        }
-    }
+//      // RAM Compatibility Logic
+//      if (componentType === 'ram' && slotType === 'ram') {
+//        console.log('RAM detected, checking compatibility.');
+//        
+//        // Get all RAM slots
+//        const motherboardSlots = this.displayArea.table.component?.slots.filter(s => s.type === 'ram');
+//        
+//        if (motherboardSlots.length === 0) {
+//            console.log('No RAM slots found on motherboard');
+//            return false;
+//        }
+//
+//        // Check if slot has a component attached
+//        const attachedComponent = motherboardSlots.find(s => s.component);
+//
+//        if (!attachedComponent) {
+//            return true; // Allow adding new RAM if none is attached
+//        }
+//
+//        // Compare new RAM with attached RAM
+//        const newRam = {
+//            name: component.name,
+//            bytes: component.bytes,
+//            speed: component.speed
+//        };
+//
+//        const attachedRam = {
+//            name: attachedComponent.component.name,
+//            bytes: attachedComponent.component.bytes,
+//            speed: attachedComponent.component.speed
+//        };
+//
+//        // Check for size mismatch
+//        if (newRam.bytes !== attachedRam.bytes || newRam.speed !== attachedRam.speed) {
+//            console.log(`Mismatch found! Attached RAM: ${attachedRam.bytes} ${attachedRam.speed}, New RAM: ${newRam.bytes} ${newRam.speed}`);
+//            this.showAlert(`RAM specs mismatch detected. Please choose matching RAM.`);
+//            return false;
+//        } else {
+//            console.log('RAM specs match');
+//            return true;
+//        }
+//    }
        
         // Check component size if it is included in data.js
         if (!componentSize) {
@@ -189,136 +332,6 @@ class Canvas {
         this.user.resetTempProperties();
         this.confirmationDialog.style.display = 'none'; 
         this.componentToRemove = null; 
-    }
-
-    // Mouse Down Event
-    handleMouseDown(e) {
-        // only accept left click
-        if (e.button !== 0 || !this.isActive) return;
-
-        // Unmount mode    
-        if(!this.displayArea.isInMountMode) {
-            if(!this.user.componentToDetach) return
-
-            // check if okay to return to shelf or return to inventory 
-            let componentIsAdded = this.displayArea.fillShelf(this.user.componentToDetach.attached, this.displayArea.shelf)
-
-            if(!componentIsAdded) {
-                this.inventory.returnToInv(this.user.componentToDetach.attached)
-                this.inventory.update()
-            }
-
-            this.user.componentToDetach.base.slots.find(slot => 
-                slot.component === this.user.componentToDetach.attached).component = null
-            
-            return
-        }
-        // try to select one of the components in shelf
-        this.user.componentSelected = this.user.selectComponent(this.shelf);
-
-        // do nothing if no selected components
-        if (!this.user.componentSelected) return;
-
-        // if a componnet is selected
-        this.user.createTempProperties();
-        
-        // match slots
-        this.displaySlots(this.table.component, this.user.componentSelected);
-    }
-
-    // Mouse Move Event
-    handleMouseMove(e) {
-        // adjust mouse point relative to the canvas
-        const canvasRect = this.element.getBoundingClientRect();
-        const rawMouse = { x: e.clientX, y: e.clientY };
-
-        this.user.mousePoint = {
-            x: rawMouse.x - canvasRect.left,
-            y: rawMouse.y - canvasRect.top
-        };
-
-         // Unmount Mode
-         if(!this.displayArea.isInMountMode && this.user.detachableComponents.length !== 0 && this.displayArea.table.component) {
-            /*  check if mousepoint is hovering on 
-                one of the components that can be detached
-            */
-            let componentCheck = false
-            this.user.detachableComponents = []
-            this.user.takeDetachableComponents(this.displayArea.table.component)
-        
-            this.user.detachableComponents.forEach(pair => {
-                if(this.utilityTool.isInsideBox(this.user.mousePoint, pair.attached.box)) {
-                    this.user.componentToDetach = pair
-                    componentCheck = true
-                }             
-            })
-        
-            if(!componentCheck) {
-                this.user.componentToDetach = null
-            }
-            return
-        }
-
-        // dragging event
-        if(this.user.componentSelected && this.user.isDragging) {
-            this.user.dragComponent()
-
-            // return component if out of bounds
-            if(!this.utilityTool.isInsideBox(rawMouse, canvasRect)) {
-                this.user.returnComponentToShelf()
-                this.user.resetTempProperties()
-            }
-        }
-    }
-
-    // Mouse Up Event - Handle dropping on trash
-    handleMouseUp() {
-        // return if no selected component
-        if (!this.user.componentSelected) return;
-
-        const adjustedMousePoint = {
-            x: this.user.mousePoint.x,
-            y: this.user.mousePoint.y
-        };
-
-        // Check if component is dropped on the trash icon
-        if (this.utilityTool.isInsideBox(adjustedMousePoint, this.trashBox)) {
-            this.showConfirmationDialog(this.user.componentSelected); // Show confirmation dialog
-            this.user.returnComponentToShelf();
-            this.user.resetTempProperties();
-            return;
-        }
-        // check for interaction
-        let isInteracting = false;
-
-        this.user.availableSlots.forEach(slot => {
-            if (!slot.box) throw new Error('Slot has no Box property');
-            
-            if (this.utilityTool.isInsideBox(this.user.mousePoint, slot.box)
-                && slot.sides[this.displayArea.currentSide].accessible) {
-                // Check compatibility function checks compatiblity of each component dropped to their respective slots
-                if (this.checkCompatibility(this.user.componentSelected, slot)) {
-                    isInteracting = true;
-                    this.displayArea.attachComponent(this.user.componentSelected, slot);
-                } else {
-                    isInteracting = true;
-                    this.user.returnComponentToShelf();
-                }
-            }
-        });
-
-        if (!isInteracting && this.utilityTool.isInsideBox(this.user.mousePoint, this.table.area)) {
-            isInteracting = true;
-            this.displayArea.curr = 0;
-            this.displayArea.currentSide = this.displayArea.displaySides[this.displayArea.curr];
-            this.displayArea.swapComponents(this.user.componentSelected);
-        }
-
-        if (!isInteracting) {
-            this.user.returnComponentToShelf();
-        }
-
-        this.user.resetTempProperties();
     }
 
     // Function to remove the component from the canvas
@@ -432,14 +445,18 @@ class Canvas {
     animate() {
         const table = this.table;
         const shelf = this.shelf;
+        
         // clear
         this.c.clearRect(0, 0, this.element.width, this.element.height);
         this.c.imageSmoothEnabed = true;
+        
         // fill Background
         this.c.fillStyle = '#fef9db';
         this.c.fillRect(0, 0, this.element.width, this.element.height);
+
         // fill display area
         this.fillRoundRect(table.area.x, table.area.y, table.area.width, table.area.height, 30, '#c7ddcc');
+        
         // fill shelf areas
         shelf.forEach(spot => {
             this.fillRoundRect(spot.area.x, spot.area.y, spot.area.width, spot.area.height, 20, '#c7ddcc');
@@ -447,15 +464,19 @@ class Canvas {
 
         // Trashbox
         this.drawtrashBox();
+
          // draw Display area component
         if (table.component) {
             // draw component
             this.drawTableComponent(table.component, this.displayArea.currentSide);
+
             // draw attached components
             this.drawAttachedComponents(table.component.slots, this.displayArea.currentSide);
+
             // draw available slots
             this.drawAvailableSlots();
         }
+
         // draw shelf components
         shelf.forEach(spot => {
             if (spot.component) {
@@ -472,7 +493,13 @@ class Canvas {
                         radius: 20,
                         color: 'rgba(255,170,0, 0.3)'
                     };
-                    this.fillRoundRect(highlight.left, highlight.top, highlight.width, highlight.height, highlight.radius, highlight.color);
+                    this.fillRoundRect(
+                        highlight.left, 
+                        highlight.top, 
+                        highlight.width, 
+                        highlight.height, 
+                        highlight.radius, 
+                        highlight.color);
                 }
                 // all shelf components will use default source
                 const component = spot.component;
