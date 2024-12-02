@@ -1,5 +1,5 @@
 class DisplayArea {
-    constructor(elementHandler, utilityTool, portsTab, bootUpTab, user) {
+    constructor(elementHandler, utilityTool, portsTab, bootUpTab, user, wattageCalculator) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
@@ -12,6 +12,9 @@ class DisplayArea {
 
         this.user = user
         this.bootUpTab = bootUpTab
+        
+        // Wattage Calculator
+        this.wattageCalculator = wattageCalculator
 
         // Wires Tab
         this.portsTab = portsTab

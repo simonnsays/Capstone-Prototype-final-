@@ -1,5 +1,5 @@
 class Canvas {
-    constructor(elementHandler, utilityTool, displayArea, user, inventory) {
+    constructor(elementHandler, utilityTool, displayArea, user, inventory, wattageCalculator) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
@@ -18,6 +18,9 @@ class Canvas {
         this.displayArea = displayArea
         this.table = displayArea.table
         this.shelf = displayArea.shelf
+
+        // Wattage Calculator
+        this.wattageCalculator = wattageCalculator
 
         // User
         this.user = user
@@ -50,7 +53,10 @@ class Canvas {
 
             this.user.componentToDetach.base.slots.find(slot => 
                 slot.component === this.user.componentToDetach.attached).component = null
-            
+
+            // Update wattage calculation
+            this.wattageCalculator.calculateWattage()
+
             return
         }
 
@@ -140,6 +146,7 @@ class Canvas {
                 // attach component
                 this.displayArea.attachComponent(this.user.componentSelected, slot)
             }
+   
         })
 
         // swap components if component dragged is in table display area
@@ -157,8 +164,10 @@ class Canvas {
         // return to shelf if no interaction
         if(!isInteracting) {
             this.user.returnComponentToShelf()
-        }
-
+        } else{
+            // Update wattage calculation
+           this.wattageCalculator.calculateWattage()
+       }
         // clear temporary properties
         this.user.resetTempProperties()
     }

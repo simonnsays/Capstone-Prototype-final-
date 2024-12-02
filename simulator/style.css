@@ -760,6 +760,13 @@ body {
     transition: all ease-in-out .1s;
 }
 
+.wattC{
+    position: absolute;
+    left: 20%;
+    top: 5%;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
 /* 
 /       UTILITY
 */

@@ -8,6 +8,7 @@ class Component {
         isAttached = false, 
         defaultSource, 
         images, 
+        watts,
         slots = [], 
         ports = [],
         cables = []
@@ -35,6 +36,9 @@ class Component {
 
         // Cables
         this.cables = cables
+
+        // Wattage
+        this.watts = watts
     }
 
     static handleComponent(component) {

@@ -71,7 +71,7 @@ const components = [
             },           
             {   // new sata
                 type: 'storage', 
-                supports: ['HDD', '2.5', 'U.2'],
+                supports: ['hdd', '2.5', 'U.2'],
                 component: null,
                 sides: {
                     right: {
@@ -84,7 +84,7 @@ const components = [
             },
             {   // new sata
                 type: 'storage', 
-                supports: ['HDD', '2.5', 'U.2'],
+                supports: ['hdd', '2.5', 'U.2'],
                 component: null,
                 sides: {
                     right: {
@@ -105,6 +105,7 @@ const components = [
         name: 'B550 Aorus Elite v2',
         type: 'motherboard',
         size: 'ATX',
+        watts: '70',
         dimensions: {
             depth: 244,
             width: 244,
@@ -235,6 +236,7 @@ const components = [
         name: 'AMD Ryzen 9 5900X',
         type: 'cpu',
         size: 'AM4',
+        watts: '255',
         dimensions: {
             depth: 125,
             width: 125,
@@ -254,6 +256,7 @@ const components = [
         name: 'EVGA SuperNOVA 1600 G+',
         type: 'psu',
         size: 'ATX',
+        watts: '1600',
         dimensions: {
             depth: 200,
             width: 150,
@@ -297,6 +300,7 @@ const components = [
         name: 'Corsair Vengeance Pro DDR4',
         type: 'ram',
         size: 'ddr4',
+        watts: '5',
         dimensions: {
             width: 100,
             height: 100,
@@ -309,10 +313,38 @@ const components = [
             {side: 'PACK', imageSrc: './assets/memory/corsair vengeance pro ddr4.png'},  
         ],
     }),
+    new Component ({ //Seagate Barracuda 8tb
+        name: 'Seagate Barracuda 8tb',
+        type: 'storage',
+        size: 'hdd',
+        watts: '8',
+        dimensions: {
+            depth: 125,
+            width: 125,
+            height: 125,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'PACK',
+        images: [
+            {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
+            {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
+            {side: 'PACK', imageSrc: './assets/storage/hdd/Seagate Barracuda 8tb.png'},  
+        ],
+        slots: [],
+        ports: [
+            {type: 'sata'}
+        ],
+        cables: [
+            {type: 'sata-power'},
+            {type: 'sata-data'}
+        ]
+    }),
     new Component ({        //Seagate Barracuda Q1 SSD
         name: 'Seagate Barracuda SSD',
         type: 'storage',
         size: 'ssd',
+        watts: '4',
         dimensions: {
             depth: 125,
             width: 125,
@@ -338,6 +370,7 @@ const components = [
         name: 'Be Quiet Pure Rock 2',
         type: 'cooling',
         size: 'amd',
+        watts: '100',
         dimensions: {
             width: 125,
             height: 125,
@@ -358,6 +391,7 @@ const components = [
         name: 'Gigabyte Nvidia GeForce RTX 3060',
         type: 'gpu',
         size: 'ATX',
+        watts: '170',
         dimensions: {
             width: 200,
             height: 200,
@@ -377,7 +411,6 @@ const components = [
     }),
 
     // CASE
-   
     new Component ({        // Corsair AF Render
         name: 'Corsair AF Render',
         type: 'chassis',
