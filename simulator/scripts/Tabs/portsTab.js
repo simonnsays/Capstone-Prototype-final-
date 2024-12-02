@@ -137,7 +137,7 @@ class PortsTab {
         this.createPortCells()
 
         this.removeHighlights()
-        this.highlightPorts(this.drawer.cableSelected)
+        // this.highlightPorts(this.drawer.cableSelected)
 
         this.drawer.cables.forEach(cable => {
             this.portOnClick()
@@ -227,27 +227,21 @@ class PortsTab {
     removeHighlights() {
         this.portGroups.forEach(group => {
             group.ports.forEach(port => {
-                // if port have a highligh div, remove it
-                if(port.highlight) {
-                    port.div.removeChild(port.highlight)
-                    delete port.highlight
+                Object.keys(port.offset).forEach(key => {
+                    const currentOffset = port.offset[key]
 
-                // different handling for ports that share the same image
-                } else if(port.offset['first']) { 
-                    for(let offset in port.offset) {
-                        if(port.offset[offset].highlight) {
-                            port.div.removeChild(port.offset[offset].highlight)
-                            delete port.offset[offset].highlight    
-                        }
+                    if(currentOffset.highlight) {
+                        port.div.removeChild(currentOffset.highlight)
+                        delete currentOffset.highlight
                     }
-                }
+                })
             })
         })
     }
 
     cableEndsMatchCurrentPage(cable, page) {
         // return true if at least one of the cable ends matches the page component name
-        Object.keys(cable.end).forEach(endKey => {
+        Object.keys(cable.ends).forEach(endKey => {
             if (page && endKey === page.component) return true
         }) 
     
@@ -256,44 +250,25 @@ class PortsTab {
 
     // Show Matching Port Highlight
     highlightPorts(cable) {
-        
         const currentPage = this.currentGroupPage
 
         // don't highlight if cable end is already connected
-        if(!this.cableEndsMatchCurrentPage(cable, currentPage) || cable.ends[currentPage.component].connected) return
+        if(this.cableEndsMatchCurrentPage(cable, currentPage) || cable.ends[currentPage.component]?.connected) return
 
         currentPage.ports.forEach(port => {
             const baseDiv = port.div
 
-            
             // match the cable type to the port.takes
-                Object.keys(port.offset).forEach(key => {
-                    const currentOffset = port.offset[key]
+            Object.keys(port.offset).forEach(key => {
+                const currentOffset = port.offset[key]
 
-                    if (!currentOffset.cableAttached && cable.type === currentOffset.takes) {
-                        currentOffset.highlight = this.createHighlight(currentOffset)
-                    }
-                })
-
-            // highlight port when matched and no attached cable yet
-            if(port.offset['first']){
-                for(let offsetNum in port.offset) {
-                    const currentOffset = port.offset[offsetNum] 
-
-                    if(!currentOffset.cableAttached && 
-                        !cable.ends[currentPage.component].connected &&
-                        currentOffset.takes === cable.type) {
-                        currentOffset.highlight = this.createHighlight(currentOffset)
-                        // append created highlight
-                        baseDiv.appendChild(currentOffset.highlight)
-                    }
+                // highlight port when matched and no attached cable yet
+                if (!currentOffset.cableAttached && cable.type === currentOffset.takes) {
+                    // console.log(currentOffset)
+                    currentOffset.highlight = this.createHighlight(currentOffset)
+                    baseDiv.appendChild(currentOffset.highlight)
                 }
-            } else if(port.cableAttached === null && port.takes === cable.type) {
-            // } else {
-                port.highlight = this.createHighlight(port.offset)
-                //append
-                baseDiv.appendChild(port.highlight)
-            } 
+            })
         })
     }
 
@@ -464,7 +439,15 @@ class PortsTab {
                 // cable attachment
                 // this.portOnClick(cable)
                 this.currentGroupPage.ports.forEach(port => {
-
+                    Object.keys(port.offset).forEach(key => {
+                        const currentOffset = port.offset[key] 
+                        if(currentOffset.highlight) {
+                            // console.log(port)
+                            // console.log(currentOffset)
+                            // ! ! ! !  CONTINUE  HERE
+                        }
+                        
+                    })
                 })
             })
         })
@@ -482,26 +465,25 @@ class PortsTab {
             })
 
             // if port.offset have multiple objects in
-            if(port.offset['first']) {
-                // iterate through the offsets
-                for (let offset in port.offset) {
-                    if(port.offset[offset].highlight) {
-                        port.offset[offset].highlight.addEventListener('click', () => {
-                            this.highlightOnClick(port.offset[offset], cable)
+            // if(port.offset['first']) {
+            //     // iterate through the offsets
+            //     for (let offset in port.offset) {
+            //         if(port.offset[offset].highlight) {
+            //             port.offset[offset].highlight.addEventListener('click', () => {
+            //                 this.highlightOnClick(port.offset[offset], cable)
 
-                            this.update(table, shelf)
-                        })
-                    }
-                }
-            } else if(port.highlight){
-                port.highlight.addEventListener('click', () => {
-                    this.highlightOnClick(port, cable)
+            //                 this.update(table, shelf)
+            //             })
+            //         }
+            //     }
+            // } else if(port.highlight){
+            //     port.highlight.addEventListener('click', () => {
+            //         this.highlightOnClick(port, cable)
 
-                    this.update(table, shelf)
-                })
-            } 
+            //         this.update(table, shelf)
+            //     })
+            // } 
         })
     }
 }
-
 export default PortsTab
