@@ -4,8 +4,9 @@ class Component {
         type,
         size, 
         specs,
-        speed,
-        bytes, 
+        //speed,
+        //bytes, 
+        watts,
         dimensions, 
         isRotatable, 
         isAttached = false, 
@@ -20,8 +21,8 @@ class Component {
         this.size = size
         this.type = type
         this.specs = specs
-        this.bytes = bytes
-        this.speed = speed
+        //this.bytes = bytes
+        //this.speed = speed
         this.dimensions = dimensions
         
         // Image
@@ -40,6 +41,9 @@ class Component {
 
         // Cables
         this.cables = cables
+
+        // Wattage
+        this.watts = watts
     }
 
     static handleComponent(component) {

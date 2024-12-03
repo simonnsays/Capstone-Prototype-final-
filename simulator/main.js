@@ -9,6 +9,7 @@ import DisplayArea from "./scripts/displayArea.js"
 import BootUpTab from "./scripts/Tabs/bootUpTab.js"
 import Assistant from "./assistant/assistant.js"
 import PCUnit from "./scripts/Data/pcUnit.js"
+import wattageCalculator from "./scripts/Data/wattageCalculator.js"
 class Main {
     constructor() {
         // Utility Modules
@@ -74,13 +75,19 @@ class Main {
         // Prevent Canvas Interaction when tabs are open
         window.addEventListener('mousedown', () => this.handleMouseDown())
 
+        // Wattage Calculator
+        this.wattageCalculator = new wattageCalculator(
+            this.displayArea, 
+            this.canvas)
+
         // Canvas
         this.canvas = new Canvas(
             this.elementHandler, 
             this.utilityTool, 
             this.displayArea, 
             this.user, 
-            this.inventory)
+            this.inventory,
+            this.wattageCalculator)
     }
 
     handleMouseDown() {

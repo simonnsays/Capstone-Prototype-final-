@@ -1,11 +1,11 @@
 class DisplayArea {
-    constructor(elementHandler, utilityTool, portsTab, bootUpTab, user) {
+    constructor(elementHandler, utilityTool, portsTab, bootUpTab, user, wattageCalculator) {
         // Utility
         this.elementHandler = elementHandler;
         this.utilityTool = utilityTool;
         this.bootUpTab = bootUpTab;
         this.user = user;
-        
+        this.wattageCalculator = wattageCalculator;
         // Elements
         this.elements = this.elementHandler.getDisplayAreaElements();
         if (!this.elements) {

@@ -601,6 +601,7 @@ const components = [
         name: 'B550 Aorus Elite v2',
         type: 'motherboard',
         size: 'ATX',
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -730,7 +731,8 @@ const components = [
     new Component ({        // X570 PG Velocita
         name: 'ASRock X570 PG Velocita',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -860,7 +862,8 @@ const components = [
     new Component ({        // X570 Taichi
         name: 'ASRock X570 Taichi',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -989,7 +992,8 @@ const components = [
     new Component ({        // ROG Strix B550-F Gaming
         name: 'ROG Strix B550-F Gaming',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -1118,7 +1122,8 @@ const components = [
     new Component ({        // ROG Strix B550-XE Gaming
         name: 'ROG Strix B550-XE Gaming',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -1247,7 +1252,8 @@ const components = [
     new Component ({        // Biostar B550GTA
         name: 'Biostar Racing B550GTA',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -1376,7 +1382,8 @@ const components = [
     new Component ({        // Biostar X570GTA
         name: 'Biostar Racing X570GTA',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -1505,7 +1512,8 @@ const components = [
     new Component ({        // EVGA X570 FTW
         name: 'EVGA X570 FTW',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -1634,7 +1642,8 @@ const components = [
     new Component ({        // Gigabyte B550 GAMING X V2
         name: 'Gigabyte B550 GAMING X V2',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -1763,7 +1772,8 @@ const components = [
     new Component ({        // Gigabyte B550 VISION D
         name: 'Gigabyte B550 VISION D',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -1893,7 +1903,8 @@ const components = [
     new Component ({        // B650E Aorus Elite X AX Ice
         name: 'B650E Aorus Elite X AX Ice',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -2022,7 +2033,8 @@ const components = [
     new Component ({        // B650M Livemixer
         name: 'ASRock B650 Livemixer',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -2151,7 +2163,8 @@ const components = [
     new Component ({        // X670E PG Lightning
         name: 'ASRock X670E PG Lightning',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -2280,7 +2293,8 @@ const components = [
     new Component ({        // ROG Strix B650E-E Gaming Wifi
         name: 'ROG Strix B650E-E Gaming',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -2409,7 +2423,8 @@ const components = [
     new Component ({        // Biostar X670E VALKYRIE
         name: 'Biostar X670E VALKYRIE',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -2538,7 +2553,8 @@ const components = [
     new Component ({        // Biostar X870E VALKYRIE
         name: 'Biostar X870E VALKYRIE',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -2667,7 +2683,8 @@ const components = [
     new Component ({        // Gigabyte B650 GAMING X
         name: 'Gigabyte B650 GAMING X',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -2796,7 +2813,8 @@ const components = [
     new Component ({        // Gigabyte B650 UD AX
         name: 'Gigabyte B650 UD AX',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -2925,7 +2943,8 @@ const components = [
     new Component ({        // MSI MPG B650 CARBON WIFI
         name: 'MSI MPG B650 CARBON WIFI',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -3054,7 +3073,8 @@ const components = [
     new Component ({        // MSI MPG X670E CARBON WIFI
         name: 'MSI MPG X670E CARBON WIFI',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -3184,7 +3204,8 @@ const components = [
     new Component ({        // Z590 Aorus Master
         name: 'Z590 Aorus Master',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -3313,7 +3334,8 @@ const components = [
     new Component ({        // Z590 Aorus Xtreme
         name: 'Z590 Aorus Xtreme',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -3443,7 +3465,8 @@ const components = [
     new Component ({        // W480 Creator
         name: 'ASRock W480 Creator',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -3572,7 +3595,8 @@ const components = [
     new Component ({        // ASRock Z590 PG Velocita
         name: 'ASRock Z590 PG Velocita',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -3701,7 +3725,8 @@ const components = [
     new Component ({        // ROG Strix B560-E Gaming
         name: 'ROG Strix B560-E Gaming',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -3831,7 +3856,8 @@ const components = [
     new Component ({        // ROG Strix Z490-A GAMING
         name: 'ROG STRIX Z490-A GAMING',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -3960,7 +3986,8 @@ const components = [
     new Component ({        // Biostar Z590 VALKYRIE
         name: 'Biostar Z590 VALKYRIE',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -4089,7 +4116,8 @@ const components = [
     new Component ({        // Biostar Z590GTA
         name: 'Biostar Z590GTA',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -4216,7 +4244,8 @@ const components = [
     new Component ({        // Gigabyte Z590 GAMING X
         name: 'Gigabyte Z590 GAMING X',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -4345,7 +4374,8 @@ const components = [
     new Component ({        // Gigabyte Z590 VISION D
         name: 'Gigabyte Z590 VISION D',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -4474,7 +4504,8 @@ const components = [
     new Component ({        // MSI MAG Z590 TORPEDO
         name: 'MSI MAG Z590 TORPEDO',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -4603,7 +4634,8 @@ const components = [
     new Component ({        // MSI Z590 PRO WIFI (CEC)
         name: 'MSI Z590 PRO WIFI (CEC)',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -4733,7 +4765,8 @@ const components = [
     new Component ({        // MSI MPG Z790 Carbon Max WiFi
         name: 'MSI MPG Z790 Carbon Max WiFi',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 300,
@@ -4862,7 +4895,8 @@ const components = [
     new Component ({        // MSI MPG Z790 EDGE WIFI
         name: 'MSI MPG Z790 EDGE WIFI',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -4993,7 +5027,8 @@ const components = [
     new Component ({        // B760 Aorus Master DDR4
         name: 'B760 Aorus Master DDR4',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -5123,7 +5158,8 @@ const components = [
     new Component ({        // Z790 Aorus Pro X
         name: 'Z790 Aorus Pro X',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -5252,7 +5288,8 @@ const components = [
     new Component ({        // Z790 Livemixer
         name: 'ASRock Z790 Livemixer',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -5382,7 +5419,8 @@ const components = [
     new Component ({        // Z790 PG Riptide
         name: 'ASRock Z790 PG Riptide',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -5511,7 +5549,8 @@ const components = [
     new Component ({        // ROG STRIX Z790-A GAMING WIFI II
         name: 'ROG STRIX Z790-A GAMING WIFI II',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -5640,7 +5679,8 @@ const components = [
     new Component ({        // ROG MAXIMUS Z790 DARK HERO
         name: 'ROG MAXIMUS Z790 DARK HERO',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -5769,7 +5809,8 @@ const components = [
     new Component ({        // Biostar Z690A VALKYRIE
         name: 'Biostar Z690A VALKYRIE',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -5898,7 +5939,8 @@ const components = [
     new Component ({        // Biostar Z790 VALKYRIE
         name: 'Biostar Z790 VALKYRIE',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -6027,7 +6069,8 @@ const components = [
     new Component ({        // Gigabyte B760 DS3H AX V2
         name: 'Gigabyte B760 DS3H AX V2',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -6156,7 +6199,8 @@ const components = [
     new Component ({        // Gigabyte Z790 GAMING PLUS AX
         name: 'Gigabyte Z790 GAMING PLUS AX',
         type: 'motherboard',
-        size: 'ATX',
+        size: 'ATX',        
+        watts: '100',
         dimensions: {
             depth: 244,
             width: 244,
@@ -6288,6 +6332,7 @@ const components = [
         name: 'Intel Core i9-14900K',
         type: 'cpu',
         size: 'LGA 1700',
+        watts: '275',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6308,6 +6353,7 @@ const components = [
         name: 'Intel Core i9-11900K',
         type: 'cpu',
         size: 'LGA 1200',
+        watts: '275',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6325,9 +6371,10 @@ const components = [
         ports: []
     }),    
     new Component ({        // Intel Core i7 14700K
-        name: 'Intel Core i7 14700K',
+        name: 'Intel Core i7-14700K',
         type: 'cpu',
         size: 'LGA 1700',
+        watts: '275',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6348,6 +6395,7 @@ const components = [
         name: 'Intel Core i7-11700K',
         type: 'cpu',
         size: 'LGA 1200',
+        watts: '275',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6368,6 +6416,7 @@ const components = [
         name: 'Intel Core i5-14400',
         type: 'cpu',
         size: 'LGA 1700',
+        watts: '215',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6387,7 +6436,8 @@ const components = [
     new Component ({        // Intel Core i5 11600K
         name: 'Intel Core i5-11600K',
         type: 'cpu',
-        size: 'LGA 1200',
+        size: 'LGA 1200',      
+        watts: '275',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6408,6 +6458,7 @@ const components = [
         name: 'Intel Core i3-14100',
         type: 'cpu',
         size: 'LGA 1700',
+        watts: '208',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6428,6 +6479,7 @@ const components = [
         name: 'Intel Core i3-11305F',
         type: 'cpu',
         size: 'LGA 1200',
+        watts: '208',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6449,6 +6501,7 @@ const components = [
         name: 'AMD Ryzen 9 7900X3D',
         type: 'cpu',
         size: 'AM5',
+        watts: '270',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6468,6 +6521,7 @@ const components = [
         name: 'AMD Ryzen 9 5900X',
         type: 'cpu',
         size: 'AM4',
+        watts: '255',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6487,6 +6541,7 @@ const components = [
         name: 'AMD Ryzen 7 7800X3D',
         type: 'cpu',
         size: 'AM5',
+        watts: '270',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6506,6 +6561,7 @@ const components = [
         name: 'AMD Ryzen 7 5700G',
         type: 'cpu',
         size: 'AM4',
+        watts: '215',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6525,6 +6581,7 @@ const components = [
         name: 'AMD Ryzen 5 7600X',
         type: 'cpu',
         size: 'AM5',
+        watts: '255',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6544,6 +6601,7 @@ const components = [
         name: 'AMD Ryzen 5 5600GT',
         type: 'cpu',
         size: 'AM4',
+        watts: '215',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6563,6 +6621,7 @@ const components = [
         name: 'AMD Ryzen 3 8300G',
         type: 'cpu',
         size: 'AM5',
+        watts: '250',
         dimensions: {
             depth: 125,
             width: 125,
@@ -6582,6 +6641,7 @@ const components = [
         name: 'AMD Ryzen 3 5300G',
         type: 'cpu',
         size: 'AM4',
+        watts: '215',
         dimensions: {
             depth: 125,
             width: 125,
@@ -7662,10 +7722,11 @@ const components = [
         ]
     }),
   //Storage hdd
-    new Component ({ //Seagate Barracuda 8tb
-        name: 'Seagate Barracuda 8tb',
+    new Component ({ //Seagate Barracuda
+        name: 'Seagate Barracuda',
         type: 'storage',
         size: 'hdd',
+        watts: '10',
         dimensions: {
             depth: 125,
             width: 125,
@@ -7692,6 +7753,7 @@ const components = [
         name: 'Toshiba X300',
         type: 'storage',
         size: 'hdd',
+        watts: '10',
         dimensions: {
             depth: 125,
             width: 125,
@@ -7718,6 +7780,7 @@ const components = [
         name: 'Toshiba X300 PRO',
         type: 'storage',
         size: 'hdd',
+        watts: '10',
         dimensions: {
             depth: 125,
             width: 125,
@@ -7744,6 +7807,7 @@ const components = [
         name: 'Toshiba P300',
         type: 'storage',
         size: 'hdd',
+        watts: '10',
         dimensions: {
             depth: 125,
             width: 125,
@@ -7770,6 +7834,7 @@ const components = [
         name: 'Western Digital Gaming Black',
         type: 'storage',
         size: 'hdd',
+        watts: '10',
         dimensions: {
             depth: 125,
             width: 125,
@@ -7797,6 +7862,7 @@ const components = [
     name: 'Seagate Barracuda SSD',
     type: 'storage',
     size: 'ssd',
+    watts: '4',
     dimensions: {
         depth: 125,
         width: 125,
@@ -7823,6 +7889,7 @@ const components = [
     name: 'Samsung EVO SSD',
     type: 'storage',
     size: 'ssd',
+    watts: '4',
     dimensions: {
         depth: 125,
         width: 125,
@@ -7849,6 +7916,7 @@ const components = [
     name: 'Sandisk Plus SSD',
     type: 'storage',
     size: 'ssd',
+    watts: '4',
     dimensions: {
         depth: 125,
         width: 125,
@@ -7875,6 +7943,7 @@ const components = [
     name: 'Sandisk Ultra SSD',
     type: 'storage',
     size: 'ssd',
+    watts: '4',
     dimensions: {
         depth: 125,
         width: 125,
@@ -7902,6 +7971,7 @@ new Component ({ //AMD wraith Prism
     name: 'AMD wraith Prism',
     type: 'cooling',
     size: 'amd',
+    watts: '150',
     dimensions: {
         width: 200,
         height: 200,
@@ -7923,6 +7993,7 @@ new Component ({ //AMD wraith Spire
     name: 'AMD wraith Spire',
     type: 'cooling',
     size: 'amd',
+    watts: '150',
     dimensions: {
         width: 200,
         height: 200,
@@ -7944,6 +8015,7 @@ new Component ({ //Arctic Freezer 36
     name: 'Arctic Freezer 36',
     type: 'cooling',
     size: 'amd',
+    watts: '150',
     dimensions: {
         width: 200,
         height: 200,
@@ -7965,6 +8037,7 @@ new Component ({ //be quiet pure rock
     name: 'Be Quiet Pure Rock 2',
     type: 'cooling',
     size: 'amd',
+    watts: '150',
     dimensions: {
         width: 200,
         height: 200,
@@ -7986,6 +8059,7 @@ new Component ({ //be quiet dark rock 4
     name: 'be quiet dark rock 4',
     type: 'cooling',
     size: 'amd',
+    watts: '150',
     dimensions: {
         width: 200,
         height: 200,
@@ -8007,6 +8081,7 @@ new Component ({ //cooler master 212 hyper
     name: 'Cooler Master 212 Hyper',
     type: 'cooling',
     size: 'amd',
+    watts: '150',
     dimensions: {
         width: 200,
         height: 200,
@@ -8028,6 +8103,7 @@ new Component ({ //DeepCool AK500 Digital
     name: 'DeepCool AK500 Digital',
     type: 'cooling',
     size: 'amd',
+    watts: '150',
     dimensions: {
         width: 200,
         height: 200,
@@ -8050,6 +8126,7 @@ cables: [
      name: 'Intel Laminar RH1 cooling fan',
      type: 'cooling',
      size: 'intel',
+    watts: '150',
      dimensions: {
         width: 200,
         height: 200,
@@ -8071,6 +8148,7 @@ cables: [
     name: 'Intel Laminar RM1 cooling fan',
     type: 'cooling',
     size: 'intel',
+    watts: '150',
     dimensions: {
         width: 200,
         height: 200,
@@ -8111,6 +8189,7 @@ new Component ({ //Kingston HyperX Beast RGB
     name: 'Kingston HyperX Beast RGB DDR4',
     type: 'ram',
     size: 'ddr4',
+    watts: '3',
     dimensions: {
       width: 133,
       height: 133,
@@ -8128,6 +8207,7 @@ new Component ({ //Kingston HyperX Beast RGB
     name: 'Corsair Dominator Platinum DDR4',
     type: 'ram',
     size: 'ddr4',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8145,6 +8225,7 @@ new Component ({ //G.Skill Ripjaws V
     name: 'G.Skill Ripjaws V DDR4',
     type: 'ram',
     size: 'ddr4',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8162,6 +8243,7 @@ new Component ({ //Teamgroup Tforce Vulcan Z
     name: 'Teamgroup Tforce Vulcan Z DDR4',
     type: 'ram',
     size: 'ddr4',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8179,6 +8261,7 @@ new Component ({ //Teamgroup Tforce TUF
     name: 'Teamgroup Tforce TUF DDR4',
     type: 'ram',
     size: 'ddr4',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8196,6 +8279,7 @@ new Component ({ //Crucial Pro DDR4
     name: 'Crucial Pro DDR4',
     type: 'ram',
     size: 'ddr4',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8213,6 +8297,7 @@ new Component ({ //Corsiar Vengeance Pro DDR4
     name: 'Corsiar Vengeance Pro DDR4',
     type: 'ram',
     size: 'ddr4',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8230,6 +8315,7 @@ new Component ({ //Teamgroup Tforce DDR4
     name: 'Teamgroup Tforce DDR4',
     type: 'ram',
     size: 'ddr4',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8249,6 +8335,7 @@ new Component ({ //Teamgroup Tforce DDR4
       name: 'Dominator Titanium DDR5',
       type: 'ram',
       size: 'ddr5',
+    watts: '3',
       dimensions: {
         width: 133,
         height: 133,
@@ -8266,6 +8353,7 @@ new Component ({ //Teamgroup Tforce DDR4
     name: 'G.Skill Trident z5 DDR5',
     type: 'ram',
     size: 'ddr5',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8283,6 +8371,7 @@ new Component ({ //Teamgroup Tforce DDR4
     name: 'Kingston Fury Renegade DDR5',
     type: 'ram',
     size: 'ddr5',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8300,6 +8389,7 @@ new Component ({ //Teamgroup Tforce DDR4
     name: 'Teamgroup Tforce DDR5',
     type: 'ram',
     size: 'ddr5',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8317,6 +8407,7 @@ new Component ({ //Teamgroup Tforce DDR4
     name: 'Crucial Ballistix DDR5',
     type: 'ram',
     size: 'ddr5',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8334,6 +8425,7 @@ new Component ({ //Teamgroup Tforce DDR4
     name: 'Crucial Ballistix RGB DDR5',
     type: 'ram',
     size: 'ddr5',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8351,6 +8443,7 @@ new Component ({ //Teamgroup Tforce DDR4
     name: 'G.Skill Trident Z5 Silver DDR5',
     type: 'ram',
     size: 'ddr5',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8368,6 +8461,7 @@ new Component ({ //Teamgroup Tforce DDR4
     name: 'Corsair Vengeance DDR5',
     type: 'ram',
     size: 'ddr5',
+    watts: '3',
     dimensions: {
         width: 133,
         height: 133,
@@ -8388,6 +8482,7 @@ new Component ({ //Teamgroup Tforce DDR4
     name: 'Gigabyte Radeon RX 7900 XTX',
     type: 'gpu',
     size: 'ATX',
+    watts: '355',
     dimensions: {
         width: 200,
         height: 200,
@@ -8410,6 +8505,7 @@ new Component ({        // gigabyte nvidia geforce rtx 4060 windforce 8gb OC
     name: 'Gigabyte NVIDIA GeForce rtx 4060 Windforce 8gb OC',
     type: 'gpu',
     size: 'ATX',
+    watts: '110',
     dimensions: {
         width: 200,
         height: 200,
@@ -8432,6 +8528,7 @@ new Component ({        // Intel ARC A750 8+6pin
     name: 'Intel ARC A750',
     type: 'gpu',
     size: 'ATX',
+    watts: '225',
     dimensions: {
         width: 200,
         height: 200,
@@ -8454,6 +8551,7 @@ new Component ({        // Gigabyte Nvidia GeForce RTX 3060
     name: 'Gigabyte Nvidia GeForce RTX 3060',
     type: 'gpu',
     size: 'ATX',
+    watts: '170',
     dimensions: {
         width: 200,
         height: 200,
@@ -8476,6 +8574,7 @@ new Component ({        // Gigabyte Nvidia GeForce RTX 4070 WindForce OC
     name: 'Gigabyte Nvidia GeForce RTX 4070 WindForce OC',
     type: 'gpu',
     size: 'ATX',
+    watts: '200',
     dimensions: {
         width: 200,
         height: 200,
@@ -8498,6 +8597,7 @@ new Component ({        // PNY Nvidia GeForce RTX 4090 12vhpwr
     name: 'PNY Nvidia GeForce RTX 4090',
     type: 'gpu',
     size: 'ATX',
+    watts: '450',
     dimensions: {
         width: 200,
         height: 200,
@@ -8520,6 +8620,7 @@ new Component ({        // Gigabyte Nvidia GeForce RTX Eagle 3060
     name: 'Gigabyte Nvidia GeForce RTX Eagle 3060',
     type: 'gpu',
     size: 'ATX',
+    watts: '170',
     dimensions: {
         width: 200,
         height: 200,
@@ -8542,6 +8643,7 @@ new Component ({        // Gigabyte Nvidia GeForce GTX 1650
     name: 'Gigabyte Nvidia GeForce GTX 1650',
     type: 'gpu',
     size: 'ATX',
+    watts: '75',
     dimensions: {
         width: 200,
         height: 200,
@@ -8564,6 +8666,7 @@ new Component ({        // Gigabyte Radeon RX7600
     name: 'Gigabyte Radeon RX7600',
     type: 'gpu',
     size: 'ATX',
+    watts: '165',
     dimensions: {
         width: 200,
         height: 200,
@@ -8586,6 +8689,7 @@ new Component ({        // Gigabyte Nvidia GeForce RTX 4090 Gaming OC
     name: 'Gigabyte Nvidia GeForce RTX 4090 Gaming OC',
     type: 'gpu',
     size: 'ATX',
+    watts: '450',
     dimensions: {
         width: 200,
         height: 200,
@@ -8608,6 +8712,7 @@ new Component ({        // Aero Nvidia GeForce RTX 4060 OC
     name: 'Aero Nvidia GeForce RTX 4060 OC',
     type: 'gpu',
     size: 'ATX',
+    watts: '125',
     dimensions: {
         width: 200,
         height: 200,
@@ -8630,6 +8735,7 @@ new Component ({        // Zotac Nvidia GeForce GTX 1660 Super
     name: 'Zotac Nvidia GeForce GTX 1660 Super',
     type: 'gpu',
     size: 'ATX',
+    watts: '125',
     dimensions: {
         width: 200,
         height: 200,
@@ -8652,6 +8758,7 @@ new Component ({        // MAXSUN Nvidia GeForce RTX 4060
     name: 'MAXSUN Nvidia GeForce RTX 4060',
     type: 'gpu',
     size: 'ATX',
+    watts: '115',
     dimensions: {
         width: 200,
         height: 200,
@@ -8674,6 +8781,7 @@ new Component ({        // Asus Nvidia GeForce RTX 4070 Super 12vhpwr
     name: 'Asus Nvidia GeForce RTX 4070 Super',
     type: 'gpu',
     size: 'ATX',
+    watts: '220',
     dimensions: {
         width: 200,
         height: 200,
@@ -8696,6 +8804,7 @@ new Component ({        // Asus Nvidia GeForce 3050
     name: 'Asus Nvidia GeForce 3050',
     type: 'gpu',
     size: 'ATX',
+    watts: '130',
     dimensions: {
         width: 200,
         height: 200,
@@ -8716,6 +8825,7 @@ new Component ({        // Asus Radeon RX6500 XT
     name: 'Asus Radeon RX6500 XT',
     type: 'gpu',
     size: 'ATX',
+    watts: '120',
     dimensions: {
         width: 200,
         height: 200,
@@ -8738,6 +8848,7 @@ new Component ({        // Nvidia GeForce RTX 2080 Super
     name: 'Nvidia GeForce RTX 2080 Super',
     type: 'gpu',
     size: 'ATX',
+    watts: '250',
     dimensions: {
         width: 200,
         height: 200, 
@@ -8760,6 +8871,7 @@ new Component ({        // Gigabyte Radeon RX6750 XT
     name: 'Gigabyte Radeon RX6750 XT',
     type: 'gpu',
     size: 'ATX',
+    watts: '250',
     dimensions: {
         width: 200,
         height: 200, 
@@ -8782,6 +8894,7 @@ new Component ({        // AMD Radeon RX5300 OEM
     name: 'AMD Radeon RX5300 OEM',
     type: 'gpu',
     size: 'ATX',
+    watts: '100',
     dimensions: {
         width: 200,
         height: 200, 
@@ -8804,6 +8917,7 @@ new Component ({        // Nvidia Tesla T40
     name: 'Nvidia Tesla T40',
     type: 'gpu',
     size: 'ATX',
+    watts: '245',
     dimensions: {
         width: 200,
         height: 200, 
@@ -8826,6 +8940,7 @@ new Component ({        // Nvidia Geforce 1080 Ti
     name: 'Nvidia Geforce 1080 Ti',
     type: 'gpu',
     size: 'ATX',
+    watts: '250',
     dimensions: {
         width: 200,
         height: 200, 

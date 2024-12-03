@@ -1,9 +1,10 @@
 class Canvas {
-    constructor(elementHandler, utilityTool, displayArea, user, inventory, pcUnit, bootUpTab) {
+    constructor(elementHandler, utilityTool, displayArea, user, inventory, wattageCalculator, pcUnit, bootUpTab) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
         this.inventory = inventory
+        this.wattageCalculator = wattageCalculator
         this.pcUnit = pcUnit
         this.bootUpTab = bootUpTab
 
@@ -69,7 +70,8 @@ class Canvas {
 
         this.user.componentToDetach.base.slots.find(slot => 
             slot.component === this.user.componentToDetach.attached).component = null
-        
+        // Update wattage calculation
+        this.wattageCalculator.calculateWattage()
         return
     }
 
@@ -187,7 +189,10 @@ class Canvas {
         // return to shelf if no interaction
         if(!isInteracting) {
             this.user.returnComponentToShelf()
-        }
+        } else{
+            // Update wattage calculation
+           this.wattageCalculator.calculateWattage()
+       }
 
         // clear temporary properties
         this.user.resetTempProperties()
