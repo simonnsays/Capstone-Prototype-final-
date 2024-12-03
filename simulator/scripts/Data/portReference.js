@@ -31,6 +31,7 @@ const portRef = {
             offset: {  // for ports that share the same image
                 first: {
                     top: 87, 
+                    // top: 87, 
                     left: 43,
                     width: 100, 
                     height: 58,

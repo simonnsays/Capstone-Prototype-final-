@@ -132,9 +132,6 @@ class Inventory {
         port.style = currentRef.style
 
         if(currentRef.takes) port.takes = currentRef.takes 
-
-        // additional attributes
-        port.cableAttached = null
     }
 
     // Create Cable Attributes
