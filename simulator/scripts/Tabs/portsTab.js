@@ -30,15 +30,20 @@ class PortsTab {
         this.i = 0
         this.currentGroupPage = this.portGroups[this.i]
 
+        this.displayArea = {
+            table: null,
+            shelf: null
+        }
+
         // Events
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
         this.closeBtn.addEventListener('click', () => this.closeTab(this.modal)) 
         window.addEventListener('click', (e) => this.handleWindowClick(e))
 
         // port group page change event
+        window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
         this.pageRightBtn.addEventListener('click', () => this.turnPortPageRight())
         this.pageLeftBtn.addEventListener('click', () => this.turnPortPageLeft())
-        window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
     }
 
     // Open Tab
@@ -129,22 +134,13 @@ class PortsTab {
         // clear cells
         this.clearCells()
 
-        // clear selected cable
-        // this.drawer.clearSelectedCable()
-        
-
         // create cells based on new information
         this.createPortCells()
-
-        this.removeHighlights()
-        // this.highlightPorts(this.drawer.cableSelected)
-
-        this.drawer.cables.forEach(cable => {
-            this.portOnClick()
-        })
-        
-
         this.displayAttachedCables()
+        if(this.drawer.cableSelected) {
+            this.highlightPorts(this.drawer.cableSelected)
+        }
+        this.cableAttachmentListener(this.drawer.cableSelected)      
     }
 
     // Get Port Informations
@@ -229,6 +225,8 @@ class PortsTab {
                     const currentOffset = port.offset[key]
 
                     if(currentOffset.highlight) {
+                        console.log(currentOffset)
+                        console.log()
                         port.div.removeChild(currentOffset.highlight)
                         delete currentOffset.highlight
                     }
@@ -290,7 +288,8 @@ class PortsTab {
                 const currentOffset = port.offset[key]
    
                 if(currentOffset.cableAttached) {
-                    const cableImageRef = currentOffset.cableAttached.images[port.style].find(image => image.attachedTo === this.currentGroupPage.component)
+                    const cableImageRef = currentOffset.cableAttached.images[port.style].find(image => 
+                        image.attachedTo === this.currentGroupPage.component)
                     const attachedCableImageDiv = this.createAttachedCableImage(cableImageRef, key)
 
                     baseDiv.appendChild(attachedCableImageDiv)
@@ -320,14 +319,46 @@ class PortsTab {
         return imgElement
     }
 
+    cableAttachmentListener(cable) {
+        this.currentGroupPage.ports.forEach(port => {
+            Object.keys(port.offset).forEach(key => {
+                const currentOffset = port.offset[key] 
+                // highlight onclick
+                if(currentOffset.highlight) {
+                   console.log(currentOffset)
+                    const clickHandler = () => {
+                        console.log('hit')
+                        // attempt to attach cable
+                        this.attachCable(currentOffset, cable)
+
+                        // remove port highlight
+                        this.removeHighlights()
+
+                        // remove cable highlight
+                        this.drawer.clearSelectedCable()
+
+                        // update ports and cables
+                        this.update(this.displayArea.table, this.displayArea.shelf)
+                    }
+                       
+                    currentOffset.highlight.removeEventListener('click', clickHandler)
+                    currentOffset.highlight.addEventListener('click', clickHandler)
+                }    
+            })
+        })
+    }
+
     // Main Update Function
     update(table, shelf) {
         // delete port cells
         this.clearCells()
         this.portGroups = []
         this.drawer.cables = []
-        // this.i = this.i
 
+        this.displayArea.table = table
+        this.displayArea.shelf = shelf
+
+        console.log('hit')
         // check if the table has a component
         if(table.component) {
             const tableComponent = table.component
@@ -356,42 +387,25 @@ class PortsTab {
         this.drawer.cables.forEach(cable => {
             cable.div.addEventListener('click', () => {                
                 // clear previously selected cable
-                if(this.drawer.selectCable) {
+                if(this.drawer.cableSelected) {
                     this.drawer.clearSelectedCable()
                 }
                 // select cable
                 this.drawer.selectCable(cable)
 
                 // reset port highlights
+                
                 this.removeHighlights()
                 this.highlightPorts(cable)
 
                 if(!this.currentGroupPage) return
 
                 // cable attachment
-                this.currentGroupPage.ports.forEach(port => {
-                    Object.keys(port.offset).forEach(key => {
-                        const currentOffset = port.offset[key] 
-                        // highlight onclick
-                        if(currentOffset.highlight) {
-                            currentOffset.highlight.addEventListener('click', () => {
-                                // attempt to attach cable
-                                this.attachCable(currentOffset, cable)
-
-                                // remove port highlight
-                                this.removeHighlights()
-
-                                // remove cable highlight
-                                this.drawer.clearSelectedCable()
-
-                                // update ports and cables
-                                this.update(table, shelf)
-                            })
-                        }    
-                    })
-                })
+                this.cableAttachmentListener(cable)
+                
             })
         })
     }
+    
 }
 export default PortsTab
