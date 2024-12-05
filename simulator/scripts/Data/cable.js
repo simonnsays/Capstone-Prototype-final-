@@ -1,9 +1,14 @@
 class Cable {
-    constructor({name, type, ends, images}) {
+    constructor({id, name, type, ends, images}) {
+        this.id = id
         this.name = name
         this.type = type
-        this.ends = ends
+        this.ends = ends                                
         this.images = images
+
+        Object.keys(this.ends).forEach(key => {
+            this.ends[key].portAttached = null
+        })
     }
 }
 

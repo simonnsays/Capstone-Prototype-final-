@@ -160,6 +160,7 @@ class Drawer {
             // adjust cable background to indicate what state it is in
             this.adjustCableStateStyle(cable, cableCell)
 
+            // console.log(cable)
             // create image
             const cableImage = document.createElement('img')
             // cableImage.src = cable.images.find(image => image.attachedTo === 'none').imageSrc

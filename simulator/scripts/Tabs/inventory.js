@@ -1,5 +1,6 @@
 import portRef from "../Data/portReference.js"
 import cableRef from "../Data/cableReference.js"
+import Cable from "../Data/cable.js"
 
 class Inventory {
     constructor(elementHandler, utilityTool, displayArea) {
@@ -119,7 +120,7 @@ class Inventory {
     }
 
     // Create Port Attributes
-    createPortAttr(port, ref) {
+    createPortAttr(port, ref) { 
         // create a copy of the reference to avoid ports pointing on the same attributes
         const refClone = JSON.parse(JSON.stringify(ref))
 
@@ -142,11 +143,20 @@ class Inventory {
         const refClone = JSON.parse(JSON.stringify(ref))
 
         // find the reference for the specific port type
-        const currentRef = refClone.find(refcable => refcable.type === cable.type)
+        const currentRef = refClone.find(refcable => refcable.type === cable.type) 
 
+        const newCable = new Cable({
+            id: this.utilityTool.createID('cable'),
+            name: currentRef.name,
+            type: currentRef.type,
+            ends: currentRef.ends,
+            images: currentRef.images
+        })
+
+        return newCable  
         // copy ref attributes to the copy of the cable
-        cable.ends = currentRef.ends
-        cable.images = currentRef.images
+        // cable.ends = currentRef.ends
+        // cable.images = currentRef.images
         // cable.scale = currentRef.scale
 
     }
@@ -166,9 +176,8 @@ class Inventory {
         })
 
         // create(fill) cable attributes
-        component.cables.forEach(cable => {
-            this.createCableAttr(cable, currentCableRef)
-        })
+        component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))
+        console.log(component.cables)
     
         // add to Table
         if(!table.component) {

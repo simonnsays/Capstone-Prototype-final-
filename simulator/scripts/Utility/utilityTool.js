@@ -40,7 +40,7 @@ class UtilityTool {
     }
 
     // Create of Unique ID
-    createID(component) {
+    createID(componentType) {
         // prefixes to separate component types
         const types = {
             chassis: 'ch',
@@ -51,16 +51,17 @@ class UtilityTool {
             storage: 'st',
             cooling: 'fn',
             cpuCooling: 'cpufn',
-            ram: 'rm'
+            ram: 'rm',
+            cable: 'cb'
         }
 
         // check if valid component type 
-        if (!types.hasOwnProperty(component.type)) {
+        if (!types.hasOwnProperty(componentType)) {
             throw new Error('Not Supported Component, Failed to Create an ID')
         }
 
         const count = this.idCount.toString()
-        const typePrefix = types[component.type]
+        const typePrefix = types[componentType]
         let id = null
 
         // concatenate to create ID
@@ -76,10 +77,10 @@ class UtilityTool {
                 break
         }
         
-        component.id = id
-
         // change id count number
         this.idCount++
+
+        return id
     }
 
     // Determine Scaling Factor Based on Display Area Height

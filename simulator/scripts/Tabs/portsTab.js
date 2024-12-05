@@ -215,6 +215,7 @@ class PortsTab {
         port.cableAttached = cable      
         // update cable connection state
         cable.ends[this.currentGroupPage.component].connected = true
+        console.log(port)
     }
 
     // Remove Matching Port Highlight
@@ -225,8 +226,6 @@ class PortsTab {
                     const currentOffset = port.offset[key]
 
                     if(currentOffset.highlight) {
-                        console.log(currentOffset)
-                        console.log()
                         port.div.removeChild(currentOffset.highlight)
                         delete currentOffset.highlight
                     }
@@ -325,9 +324,7 @@ class PortsTab {
                 const currentOffset = port.offset[key] 
                 // highlight onclick
                 if(currentOffset.highlight) {
-                   console.log(currentOffset)
                     const clickHandler = () => {
-                        console.log('hit')
                         // attempt to attach cable
                         this.attachCable(currentOffset, cable)
 
@@ -358,7 +355,6 @@ class PortsTab {
         this.displayArea.table = table
         this.displayArea.shelf = shelf
 
-        console.log('hit')
         // check if the table has a component
         if(table.component) {
             const tableComponent = table.component
