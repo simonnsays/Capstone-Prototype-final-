@@ -249,53 +249,28 @@ class Canvas {
             this.showAlert(`This slot is not for a ${componentType} component. Please choose the correct slot.`);
             return false;
         }
+       
+        // PSU Compatibility Logic
+        if (componentType === 'psu') {
+        console.log('PSU detected, checking wattage compatibility.');
+
+        // Calculate the total wattage required by all components
+        const totalWatts = this.wattageCalculator.calculateWattage();
+        const psuWatts = parseInt(component.watts, 10) || 0;
+
+        if (totalWatts > psuWatts) {
+            this.showAlert(
+                `Incompatible PSU detected! Total wattage of ${totalWatts}W exceeds PSU capacity of ${psuWatts}W.`
+            );
+            return false;
+        }
+        console.log(`PSU is compatible. Total Wattage: ${totalWatts}W, PSU Capacity: ${psuWatts}W.`);
+        return true;
+        }
 
         const componentSize = component.size;
         const slotSupports = slot.supports;
 
-//      // RAM Compatibility Logic
-//      if (componentType === 'ram' && slotType === 'ram') {
-//        console.log('RAM detected, checking compatibility.');
-//        
-//        // Get all RAM slots
-//        const motherboardSlots = this.displayArea.table.component?.slots.filter(s => s.type === 'ram');
-//        
-//        if (motherboardSlots.length === 0) {
-//            console.log('No RAM slots found on motherboard');
-//            return false;
-//        }
-//
-//        // Check if slot has a component attached
-//        const attachedComponent = motherboardSlots.find(s => s.component);
-//
-//        if (!attachedComponent) {
-//            return true; // Allow adding new RAM if none is attached
-//        }
-//
-//        // Compare new RAM with attached RAM
-//        const newRam = {
-//            name: component.name,
-//            bytes: component.bytes,
-//            speed: component.speed
-//        };
-//
-//        const attachedRam = {
-//            name: attachedComponent.component.name,
-//            bytes: attachedComponent.component.bytes,
-//            speed: attachedComponent.component.speed
-//        };
-//
-//        // Check for size mismatch
-//        if (newRam.bytes !== attachedRam.bytes || newRam.speed !== attachedRam.speed) {
-//            console.log(`Mismatch found! Attached RAM: ${attachedRam.bytes} ${attachedRam.speed}, New RAM: ${newRam.bytes} ${newRam.speed}`);
-//            this.showAlert(`RAM specs mismatch detected. Please choose matching RAM.`);
-//            return false;
-//        } else {
-//            console.log('RAM specs match');
-//            return true;
-//        }
-//    }
-       
         // Check component size if it is included in data.js
         if (!componentSize) {
             this.showAlert('Component size is missing. Please choose a valid component.');

@@ -6663,6 +6663,7 @@ const components = [
         name: 'EVGA Supernova 1300 P+',
         type: 'psu',
         size: 'ATX',
+        watts: '1300',
         dimensions: {
             width: 150,
             height: 150,
@@ -6707,6 +6708,7 @@ const components = [
         name: 'EVGA SuperNOVA 850 GT',
         type: 'psu',
         size: 'ATX',
+        watts: '850',
         dimensions: {
             width: 150,
             height: 150,
@@ -6750,6 +6752,7 @@ const components = [
         name: 'EVGA SuperNOVA 1000 P5',
         type: 'psu',
         size: 'ATX',
+        watts: '1000',
         dimensions: {
             width: 150,
             depth: 200,
@@ -6792,6 +6795,7 @@ const components = [
         name: 'EVGA SuperNOVA 1600 G+',
         type: 'psu',
         size: 'ATX',
+        watts: '1600',
         dimensions: {
             width: 150,
             depth: 200,
@@ -6835,6 +6839,7 @@ const components = [
         name: 'EVGA SuperNOVA 1600 P2',
         type: 'psu',
         size: 'ATX',
+        watts: '1600',
         dimensions: {
             width: 150,
             depth: 200,
@@ -6879,6 +6884,7 @@ const components = [
         name: 'Silverstone DA750r-gm',
         type: 'psu',
         size: 'ATX',
+        watts: '750',
         dimensions: {
             width: 150,
             depth: 200,
@@ -6922,6 +6928,7 @@ const components = [
         name: 'Silverstone DA850r-gm',
         type: 'psu',
         size: 'ATX',
+        watts: '850',
         dimensions: {
             width: 150,
             depth: 200,
@@ -6965,6 +6972,7 @@ const components = [
         name: 'Silverstone DA1000r-gm',
         type: 'psu',
         size: 'ATX',
+        watts: '1000',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7008,6 +7016,7 @@ const components = [
         name: 'Silverstone EX850r-pm',
         type: 'psu',
         size: 'ATX',
+        watts: '850',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7051,6 +7060,7 @@ const components = [
         name: 'Silverstone EX1200r-pl',
         type: 'psu',
         size: 'ATX',
+        watts: '1200',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7095,6 +7105,7 @@ const components = [
         name: 'Corsair AX1600i Digital',
         type: 'psu',
         size: 'ATX',
+        watts: '1600',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7138,6 +7149,7 @@ const components = [
         name: 'Corsair RM1200e',
         type: 'psu',
         size: 'ATX',
+        watts: '1200',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7182,6 +7194,7 @@ const components = [
         name: 'Corsair RMX Shift RM850x',
         type: 'psu',
         size: 'ATX',
+        watts: '850',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7225,6 +7238,7 @@ const components = [
         name: 'Corsair AX1600i Digital',
         type: 'psu',
         size: 'ATX',
+        watts: '1600',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7269,6 +7283,7 @@ const components = [
         name: 'Cooler Master MWE Gold 850w v2',
         type: 'psu',
         size: 'ATX',
+        watts: '850',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7312,6 +7327,7 @@ const components = [
         name: 'Cooler Master V 1600 Platinum v2',
         type: 'psu',
         size: 'ATX',
+        watts: '1600',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7357,6 +7373,7 @@ const components = [
         name: 'Cooler Master X Silent Edge 850w Platinum',
         type: 'psu',
         size: 'ATX',
+        watts: '850',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7404,6 +7421,7 @@ const components = [
         name: 'Cooler Master X Silent Edge 1100w Platinum',
         type: 'psu',
         size: 'ATX',
+        watts: '1100',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7449,6 +7467,7 @@ const components = [
         name: 'Cooler Master X Silent 1300w MAX Platinum',
         type: 'psu',
         size: 'ATX',
+        watts: '1300',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7495,6 +7514,7 @@ const components = [
         name: 'Thermaltake Toughpower GF 750W Gold',
         type: 'psu',
         size: 'ATX',
+        watts: '750',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7537,6 +7557,7 @@ const components = [
         name: 'Thermaltake Toughpower GF1 850W',
         type: 'psu',
         size: 'ATX',
+        watts: '850',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7576,9 +7597,10 @@ const components = [
         ]
     }),
     new Component ({        // Thermaltake Toughpower GF 750W Gold
-        name: 'Thermaltake Toughpower GF 750W Gold',
+        name: 'Thermaltake Toughpower GF3 1000W Gold',
         type: 'psu',
         size: 'ATX',
+        watts: '1000',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7623,6 +7645,7 @@ const components = [
         name: 'Corsair CX750',
         type: 'psu',
         size: 'ATX',
+        watts: '750',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7665,6 +7688,7 @@ const components = [
         name: 'Thermaltake Smart 500w',
         type: 'psu',
         size: 'ATX',
+        watts: '500',
         dimensions: {
             width: 150,
             depth: 200,
@@ -7695,6 +7719,7 @@ const components = [
         name: 'Thermaltake Toughpower GX2 600w',
         type: 'psu',
         size: 'ATX',
+        watts: '600',
         dimensions: {
             width: 150,
             depth: 200,
