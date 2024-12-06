@@ -287,12 +287,14 @@ const cableRef = {
                         scale: {width: 1.35, height: .8}, 
                         offset: {top: 115, left: 55}
                     },
+                ],
+                single: [
                     {
                         attachedTo: 'psu', 
                         imageSrc: './assets/wires/sata-power/sata-power-attached(psu).png',
                         scale: {width: 1.66, height: 1.2}, 
                         offset: {top: -40, left: 17}
-                    },
+                    }, 
                 ],
                 drawer: {
                     attachedTo: 'none', 
@@ -320,6 +322,8 @@ const cableRef = {
                         scale: {width: .9, height: .8}, 
                         offset: {top: 113, left: 165}
                     },
+                ],
+                single: [
                     {
                         attachedTo: 'motherboard', 
                         imageSrc: './assets/wires/sata-data/sata-data-attached(gen).png',

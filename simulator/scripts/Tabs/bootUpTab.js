@@ -106,6 +106,7 @@ class BootUpTab {
     }
 
     update(component) {
+        // throw new Error('error test')
         // Set New PC Unit(Only accepting chassis)
         this.pcUnit.availableUnit = this.pcUnit.checkIfAvailableUnit(component) || null
         this.clearCurrentUnitElement()

@@ -212,7 +212,7 @@ const portRef = {
     gpu: [
         {   // 8+8 pin - pcie for data.js add to port 16-pin-pcie
             type: '16-pin-pcie',
-            syle: 'split',
+            style: 'split',
             image: {
                 imageSrc: './assets/gpu/ports/8+8pin_power.png',
             },

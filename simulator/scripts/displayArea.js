@@ -405,7 +405,7 @@ class DisplayArea {
 
         this.hideButtons(this.tabButtons)
         
-        this.bootUpTab.update()
+        // this.bootUpTab.update()
 
         this.menuButton.addEventListener('click', () => this.toggleMenu(this.menuButton, this.tabButtons, menuImg))
         this.mountModeButton.addEventListener('click', () => this.toggleMountMode())

@@ -75,17 +75,20 @@ class PCUnit {
         const supply = this.componentsStatus.psu
         // check if all components are supplied with power
         Object.keys(this.componentsStatus).forEach(key => {
+            // different components will have different ways of checks
             switch(key) {
                 case 'motherboard': {
-                    const cable = supply.cables.find(cable => cable.type === '24-pin-power')
-                    if(cable && Object.keys(cable.ends).every(endKey => cable.ends[endKey].connected)) {
-                        console.log('motherboard is connected')
-                        this.XXXcomponentsStatus.motherboard.powered = true
-                    }
+                    console.log(supply)
+                    // const cable = supply.cables.find(cable => cable.type === '24-pin-power')
+                    // if(cable && Object.keys(cable.ends).every(endKey => cable.ends[endKey].connected)) {
+                    //     console.log('motherboard is connected')
+                    //     this.XXXcomponentsStatus.motherboard.powered = true
+                    // }
                     break
                 }
                         
                 case 'cpu': {
+                    break
                     const cables = supply.cables.filter(cable => cable.type === '8-pin-power') 
                     if(cables.length !== 0) {
                         let allCablesConnected = cables.every(cable => Object.keys(cable.ends).every(endKey => cable.ends[endKey].connected) )
@@ -101,6 +104,7 @@ class PCUnit {
                 }
 
                 case 'gpu': {
+                    break
                     const portType = this.componentsStatus.gpu.specs.portType
                     switch(portType) {
                         case '8-pin':
@@ -115,7 +119,7 @@ class PCUnit {
     checkPCState(unit) {
         // check defects and compatibility here
         this.fillComponentStatus(unit)
-        console.log(this.componentsStatus)
+        // console.log(this.componentsStatus)
         let allowBoot = false
         
         // check for minimum boot up requirement

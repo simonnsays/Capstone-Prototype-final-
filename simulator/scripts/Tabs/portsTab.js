@@ -215,7 +215,6 @@ class PortsTab {
         port.cableAttached = cable      
         // update cable connection state
         cable.ends[this.currentGroupPage.component].connected = true
-        console.log(port)
     }
 
     // Remove Matching Port Highlight
@@ -287,8 +286,7 @@ class PortsTab {
                 const currentOffset = port.offset[key]
    
                 if(currentOffset.cableAttached) {
-                    const cableImageRef = currentOffset.cableAttached.images[port.style].find(image => 
-                        image.attachedTo === this.currentGroupPage.component)
+                    const cableImageRef = currentOffset.cableAttached.images[port.style].find(image => image.attachedTo === this.currentGroupPage.component)
                     const attachedCableImageDiv = this.createAttachedCableImage(cableImageRef, key)
 
                     baseDiv.appendChild(attachedCableImageDiv)

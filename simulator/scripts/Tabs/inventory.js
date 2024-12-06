@@ -177,8 +177,7 @@ class Inventory {
 
         // create(fill) cable attributes
         component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))
-        console.log(component.cables)
-    
+            
         // add to Table
         if(!table.component) {
             this.displayArea.table.component = component
