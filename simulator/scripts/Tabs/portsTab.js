@@ -135,7 +135,7 @@ class PortsTab {
         this.clearCells()
 
         // create cells based on new information
-        this.createPortCells()
+        this.updateTabUI()
         this.displayAttachedCables()
         if(this.drawer.cableSelected) {
             this.highlightPorts(this.drawer.cableSelected)
@@ -150,16 +150,10 @@ class PortsTab {
             const currentComponentType = component.type
 
             // create a new port object to group components
-            const portGroup = {}
-
-            portGroup.component = currentComponentType  // name of the component of the group of ports
-            portGroup.ports = []                        // the group of ports
-
-            // fill ports attribute
-            component.ports.forEach(port => {
-                // insert copy in portGroup
-                portGroup.ports.push(port)
-            })
+            const portGroup = {
+                component: currentComponentType,    // name of the component of the group of ports
+                ports: [...component.ports]         // the group of ports
+            }
 
             // puh object to the portGroups list
             this.portGroups.push(portGroup) 
@@ -177,7 +171,7 @@ class PortsTab {
     }
 
     // Create Port Grid
-    createPortCells() { 
+    updateTabUI() { 
         if(!this.currentGroupPage) return
         
         // set title to the group component of the current group page
@@ -368,7 +362,7 @@ class PortsTab {
             this.currentGroupPage = this.portGroups[this.i]
 
             // create the cells for port display
-            this.createPortCells(tableComponent)
+            this.updateTabUI(tableComponent)
             
             // display attached cables
             this.displayAttachedCables()

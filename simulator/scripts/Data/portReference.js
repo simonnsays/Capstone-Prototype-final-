@@ -223,7 +223,6 @@ const portRef = {
                     left: 61,
                     width: 88,
                     height: 57,
-                    
                     takes: '8-pin-pcie',
                     cableAttached: null
                 },
