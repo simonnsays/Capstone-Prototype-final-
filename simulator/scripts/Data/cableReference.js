@@ -364,7 +364,6 @@ const cableRef = {
             ends: {
                 chassis: {
                     connected: true
-
                 },
                 motherboard: {
                     connected: false

@@ -13,8 +13,7 @@ class PortsTab {
         this.openBtn = this.elements.openBtn
         this.closeBtn = this.elements.closeBtn
         window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
-
-
+        
         // Wires / port tab
         this.isActive = false
         this.modal = this.elements.modal
@@ -29,14 +28,14 @@ class PortsTab {
         // Wires
         this.wires = []
 
+        // This will keep track of the attachment status for cables
+        this.attachedCablesStatus = []
+
         // Ports
         this.portGroups = []
         this.portConnectionStatus = []
         this.i = 0
         this.currentGroupPage = this.portGroups[this.i]
-
-        // This will keep track of the attachment status for cables
-        this.attachedCablesStatus = []
 
         // Events
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
@@ -226,22 +225,24 @@ class PortsTab {
             return;
         }
     
-        // attach cable in logic
+        // Attach cable in logic
         port.cableAttached = cable;
-        // update cable connection state
+    
+        // Update cable connection state
         cable.ends[component].connected = true;
-
+    
         // Get cable status for motherboard psu as false(starting value) for both ends
         if (!this.attachedCablesStatus[cable.type]) {
             this.attachedCablesStatus[cable.type] = { motherboard: false, psu: false, fullyConnected: false };
         }
-
+    
         // Update the cable status for this component end
         this.attachedCablesStatus[cable.type][component] = true;
     
         // Check if both ends are now connected
-        const bothEndsConnected = (cable.ends.motherboard && cable.ends.motherboard.connected) && 
-        (cable.ends.psu && cable.ends.psu.connected);
+        const bothEndsConnected = 
+            (cable.ends.motherboard && cable.ends.motherboard.connected) &&
+            (cable.ends.psu && cable.ends.psu.connected);
     
         // Only set fully connected if both ends are attached
         if (bothEndsConnected) {
@@ -250,6 +251,7 @@ class PortsTab {
         } else {
             this.attachedCablesStatus[cable.type].fullyConnected = false;
         }
+
     }       
     
     // Method to get the current attached cables status
