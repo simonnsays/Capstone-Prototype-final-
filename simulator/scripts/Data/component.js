@@ -4,12 +4,11 @@ class Component {
         type,
         size, 
         specs,
-        //speed,
-        //bytes, 
         watts,
         dimensions, 
         isRotatable, 
-        isAttached = false, 
+        isAttached = false,
+        isModular = false, // if psu is non modular set value to false | if psu is modular set value to true
         defaultSource, 
         images, slots = [], 
         ports = [],
@@ -21,8 +20,6 @@ class Component {
         this.size = size
         this.type = type
         this.specs = specs
-        //this.bytes = bytes
-        //this.speed = speed
         this.dimensions = dimensions
         
         // Image
@@ -32,6 +29,7 @@ class Component {
         // States
         this.isRotatable = isRotatable
         this.isAttached = isAttached
+        this.isModular = isModular 
 
         // Slots
         this.slots = slots

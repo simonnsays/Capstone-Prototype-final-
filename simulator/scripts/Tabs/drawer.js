@@ -21,7 +21,7 @@ class Drawer {
         // Events
         this.pullBtn.addEventListener('click', () => this.toggleDrawer())
     }
-
+    
     // Open Drawer
     openDrawer(image) {
         // pull up drawer
@@ -97,6 +97,19 @@ class Drawer {
         cable.div.classList.add('active')
     }
 
+     // Attach PSU Cables Automatically if Non-Modular
+     initializePSUCables(component) {
+        // Handle non-modular PSU 
+        if (!component.isModular) {
+            console.log("PSU is non-modular. Attaching all cables by default.");
+            component.cables.forEach((cable) => {
+                // Connect psu cable end as true
+                cable.ends.psu.connected = true;
+                console.log(`Cable ${cable.type} connected to PSU.`); 
+            });
+        }
+    }
+
     // Create Cable Attributes
     createCableAttr(cable, ref) {
         // create clone of the port
@@ -114,6 +127,11 @@ class Drawer {
 
     // Get Cable Information
     getCables(component) {
+                
+        if (component.type === "psu") {
+            this.initializePSUCables(component); // Ensure initializePSUCables will pass
+        }
+        
         // const ref = cableRef[component.type] // reference for cables (see imports) 
 
         // fill drawer
@@ -181,7 +199,6 @@ class Drawer {
             // create bounding box of div for matching
             cable.div.rect = cable.div.getBoundingClientRect()
         })
-        
     }
 
     // Main Update Function

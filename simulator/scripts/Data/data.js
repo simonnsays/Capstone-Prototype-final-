@@ -6671,6 +6671,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA/EVGA SuperNOVA 1300 P+ - pack.png'}, 
@@ -6716,6 +6717,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 850 GT/EVGA SuperNOVA 850 GT pack.png'}, 
@@ -6760,6 +6762,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1000 P5, 80 Plus Platinum 1000W/EVGA SuperNOVA 1000 P5 pack.png'}, 
@@ -6803,6 +6806,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 G+, 80+ GOLD 1600W/EVGA SuperNOVA 1600 G+ pack.png'}, 
@@ -6847,6 +6851,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA 1600 P2, 80+ PLATINUM 1600W/EVGA SuperNOVA 1600 P2 pack.png'}, 
@@ -6892,6 +6897,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Silverstone technology co. Ltd/DA750r-gm/da750r-gm-10.png'}, 
@@ -6936,6 +6942,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Silverstone technology co. Ltd/DA850r-gm/da850r-gm-10.png'}, 
@@ -6980,6 +6987,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Silverstone technology co. Ltd/DA1000r-gm/da1000r-gm-23.png'}, 
@@ -7024,6 +7032,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Silverstone technology co. Ltd/EX850r-pm/ex850r-pm-21.png'}, 
@@ -7068,6 +7077,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Silverstone technology co. Ltd/EX1200r-pl/ex1200r-pm-21.png'}, 
@@ -7113,6 +7123,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Corsair/Corsair ax1600i digital atx fully modular/Corsair ax1600i digital atx fully modular pack.png'}, 
@@ -7157,6 +7168,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Corsair/corsair rme series rm1200e atx fully modular/corsair rme series rm1200e atx fully modular pack.png'}, 
@@ -7202,6 +7214,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Corsair/Corsair rmx shift rm850x fully modular/Corsair rmx shift rm850x fully modular pack.png'}, 
@@ -7246,6 +7259,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Corsair/corsair sf1000l 80+ gold sfx-l fully modular/corsair sf1000l 80+ gold sfx-l fully modular pack.png'}, 
@@ -7291,6 +7305,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/cm mwe gold 850/pack.png'}, 
@@ -7335,6 +7350,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/cm v p 1600/pack.png'}, 
@@ -7381,6 +7397,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/cm x silent edge/pack.png'}, 
@@ -7429,6 +7446,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/cm x silent edge p 1100/pack.png'}, 
@@ -7475,6 +7493,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/cm x silent max 1300/pack.png'}, 
@@ -7522,6 +7541,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gf 750W Gold/thermaltake toughpower gf 750w pack.png'}, 
@@ -7565,6 +7585,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower GF1 850W/Thermaltake Toughpower GF1 850W pack.png'}, 
@@ -7608,6 +7629,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Thermaltake/thermaltake toughpower gf3 1000w/toughpower gf3 pack.png'}, 
@@ -7653,6 +7675,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
+        isModular: false, // Non-modular PSU
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Corsair/Corsair CX750/Corsair CX750 pack.png'}, 
@@ -7689,6 +7712,7 @@ const components = [
         type: 'psu',
         size: 'ATX',
         watts: '500',
+        isModular: false, // Non-modular PSU
         dimensions: {
             width: 150,
             depth: 200,
@@ -7705,6 +7729,7 @@ const components = [
             {side: 'rear', imageSrc: './assets/psu/Thermaltake/thermaltake smart 500w/thermaltake smart 500w rear.png'}
         ],
         slots: [],
+        ports: [],
         cables: [
             {type: '24-pin-power'},
             {type: '8-pin-power' },
@@ -7720,6 +7745,7 @@ const components = [
         type: 'psu',
         size: 'ATX',
         watts: '600',
+        isModular: false, // Non-modular PSU
         dimensions: {
             width: 150,
             depth: 200,
@@ -7736,6 +7762,7 @@ const components = [
             {side: 'rear', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gx2 600w/thermaltake toughpower rear.png'}
         ],
         slots: [],
+        ports: [],
         cables: [
             {type: '24-pin-power'},
             {type: '8-pin-power' },
