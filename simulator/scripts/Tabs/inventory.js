@@ -137,14 +137,13 @@ class Inventory {
 
     // Create Cable Attributes
     createCableAttr(cable, ref) {
-        // create new class object
-
         // create a copy of the reference to avoid cables pointing on the same attributes
         const refClone = JSON.parse(JSON.stringify(ref))
 
         // find the reference for the specific port type
         const currentRef = refClone.find(refcable => refcable.type === cable.type) 
 
+        // create new class object
         const newCable = new Cable({
             id: this.utilityTool.createID('cable'),
             name: currentRef.name,
@@ -154,11 +153,6 @@ class Inventory {
         })
 
         return newCable  
-        // copy ref attributes to the copy of the cable
-        // cable.ends = currentRef.ends
-        // cable.images = currentRef.images
-        // cable.scale = currentRef.scale
-
     }
 
     // Placing of Components to Display Area
@@ -176,7 +170,15 @@ class Inventory {
         })
 
         // create(fill) cable attributes
-        component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))
+        component.cables = component.cables.map(cable=> {
+            // create cable attributes
+            const cableClone = this.createCableAttr(cable, currentCableRef) 
+            // adjust psu modularity
+            if(component.type === 'psu') {
+                cableClone.adjustCableModularity(component, cableClone)
+            }
+            return cableClone
+        })
             
         // add to Table
         if(!table.component) {

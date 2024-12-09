@@ -260,7 +260,8 @@ const components = [
             height: 86,
         },
         specs: {
-            wattage: 1600
+            wattage: 1600,
+            cableModularity: 'semi-modular'
         },
         isRotatable: true,
         isAttached: false,
