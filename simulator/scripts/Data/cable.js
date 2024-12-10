@@ -11,24 +11,25 @@ class Cable {
         })
     }
 
-    adjustCableModularity(component, cableClone) {
+    adjustCableModularity(component) {
         switch(component.specs.cableModularity) {
             case 'non-modular':
-                cableClone.ends[component.type].connected = true
+                this.ends[component.type].connected = true
                 break
             case 'semi-modular':
-                if(cableClone.name === 'ATX power' || cableClone.name === 'CPU Connector') {
-                    cableClone.ends[component.type].connected = true
+                if(this.name === 'ATX power' || this.name === 'CPU Connector') {
+                    this.ends[component.type].connected = true
                 }
                 break
             case 'modular':
-                cableClone.ends[component.type].connected = false
+                this.ends[component.type].connected = false
                 break
             default:
                 console.error('no modularity attribut found')
         }
-        console.log(component)
     }
+
+    
 }
 
 export default Cable
