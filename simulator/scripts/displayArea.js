@@ -75,7 +75,7 @@ class DisplayArea {
         slot.component.box = slot.box;
 
         // Add component to PCUnit attached components
-        this.bootUpTab.pcUnit.addAttachedComponent(componentSelected);
+       // this.bootUpTab.pcUnit.addAttachedComponent(componentSelected);
         
         // Remove selected component from shelf
         const i = this.shelf.findIndex(

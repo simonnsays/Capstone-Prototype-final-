@@ -142,14 +142,14 @@ class Inventory {
         const currentRef = refClone.find(refcable => refcable.type === cable.type) 
 
         // create new class object
-        return new Cable = new Cable({
+        const newCable = new Cable({
             id: this.utilityTool.createID('cable'),
             name: currentRef.name,
             type: currentRef.type,
             ends: currentRef.ends,
             images: currentRef.images
         })
-
+        return newCable
     }
 
     // Placing of Components to Display Area
@@ -170,16 +170,11 @@ class Inventory {
         component.cables = component.cables.map(cable=> {
             const cableClone = this.createCableAttr(cable, currentCableRef) 
             // adjust psu modularity
-            
+            if(component.type === 'psu') {
+                cableClone.adjustCableModularity(component, cableClone)
+            }
             return cableClone
         })
-        if(component.type === 'psu') {
-            component.cables.forEach(cable => cable.adjustCableModularity(component))
-            
-            console.log(component)
-            component.adjustPortAndCableModularity(component)
-        }
-            
         // add to Table
         if(!table.component) {
             this.displayArea.table.component = component
