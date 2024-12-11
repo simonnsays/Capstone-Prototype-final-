@@ -97,16 +97,38 @@ class Drawer {
         cable.div.classList.add('active')
     }
 
-     // Attach PSU Cables Automatically if Non-Modular
-     initializePSUCables(component) {
-        // Handle non-modular PSU 
+    // Attach PSU Cables Automatically if Non-Modular
+    initializePSUCables(component) {
+        // Handle non-modular PSU
         if (!component.isModular) {
-            console.log("PSU is non-modular. Attaching all cables by default.");
+            console.log("PSU is non-modular. Attaching all PSU cables by default.");
+
+            // Connect all PSU cables
             component.cables.forEach((cable) => {
-                // Connect psu cable end as true
                 cable.ends.psu.connected = true;
-                console.log(`Cable ${cable.type} connected to PSU.`); 
+                console.log(`Cable ${cable.type} connected to PSU.`);
             });
+        }
+    }
+    
+    initializeStoragePowerCables(storageComponent, psu) {
+        // Check if PSU is non-modular
+        if (!psu.isModular) {
+            console.log("PSU is non-modular. Attaching storage power cables without ports.");
+    
+            // Iterate over storage component's cables
+            storageComponent.cables.forEach((cable) => {
+                // Handle only sata-power cables
+                if (cable.type === "sata-power" && cable.ends) {
+                    cable.ends.psu.connected = true; // Mark the PSU end as connected
+                    cable.ends.storage.connected = true; // Mark the Storage end as connected
+                    console.log(`Storage power cable ${cable.type} connected directly to PSU and storage.`);
+                } else {
+                    console.warn(`Cable ${cable.type} is not a power cable or lacks ends.`);
+                }
+            });
+        } else {
+            console.log("PSU is modular. Storage power cables require port connections.");
         }
     }
 
@@ -181,8 +203,8 @@ class Drawer {
 
             // create image
             const cableImage = document.createElement('img')
-            cableImage.src = cable.images.find(image => image.attachedTo === 'none').imageSrc
-
+            cableImage.src = cable.images.drawer.imageSrc
+            
             // create slider
             const cableSlider = document.createElement('div')
             cableSlider.className = 'cable-slider'

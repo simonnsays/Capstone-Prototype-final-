@@ -50,7 +50,7 @@ class Canvas {
         this.cancelBtn.addEventListener('click', () => this.cancelRemoval())
         this.alertOkButton.addEventListener('click', () => this.closeAlert())
     }
-
+    
     // Mouse Down Event
     handleMouseDown(e) {
         // only accept left click
@@ -380,7 +380,9 @@ class Canvas {
 
     // Draw Component in Table Area
     drawTableComponent(component, currentSide) {
+       // some components can't be rotated so we use default source for that case
        let componentSide = null
+
        if (component.type === 'motherboard'){
         componentSide = this.utilityTool.getSide(component, 'left')
        } else if (component.isRotatable){
@@ -388,6 +390,7 @@ class Canvas {
        } else {
         componentSide = this.utilityTool.getSide(component, component.defaultSource)
        }
+
        this.drawComponent(component.box, componentSide.image)
     }
 

@@ -1,21 +1,84 @@
 class PCUnit {
-    constructor(utilityTool, displayArea, Canvas, portsTab, drawer, assistant) { 
+    constructor(bootUpElements, utilityTool, displayArea, Canvas, portsTab, drawer, assistant) {
+        this.bootUpElements = bootUpElements;
+        this.utilityTool = utilityTool;
         this.displayArea = displayArea;
         this.Canvas = Canvas;
-        this.utilityTool = utilityTool;
         this.portsTab = portsTab;
         this.drawer = drawer;
         this.assistant = assistant;
 
-        // Track attached components and cables
-        this.attachedComponents = new Set();
-        this.attachedCables = new Set();
-        this.cableConnectionStatus = {}; // Stores each cable’s connection status
-    
-        // Required components and cables
-        this.requiredComponents = ['motherboard', 'cpu', 'storage', 'psu', 'ram'];
-        this.requiredCables = ['24-pin-power', '8-pin-power'];
+        this.power = 'off';
         this.availableUnit = null;
+        this.reportArea = bootUpElements.reportArea || null;
+        this.screen = bootUpElements.screen || null;
+
+        // Track attached components and cables
+//        this.attachedComponents = new Set();
+//        this.attachedCables = new Set();
+//        this.cableConnectionStatus = {}; // Stores each cable’s connection status
+
+        // Required components and cables
+//      this.requiredComponents = ['motherboard', 'cpu', 'storage', 'psu', 'ram'];
+//      this.requiredCables = ['24-pin-power', '8-pin-power'];
+
+        // Components checklist
+        this.XXXcomponentsStatus = {
+            motherboard: {
+                component: null,
+                powered: false,
+            },
+            cpu: {
+                component: null,
+                powered: false,
+            },
+            ram: [],
+            gpu: null,
+            psu: null,
+            storage: [],
+            cpuCooling: null,
+            caseCooling: [],
+        };
+
+        this.componentsStatus = {
+            motherboard: null,
+            cpu: null,
+            ram: [],
+            gpu: null,
+            psu: null,
+            storage: [],
+            cpuCooling: null,
+            caseCooling: [],
+        };
+
+        this.bootUpRequirements = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling', 'gpu'];
+
+        this.unitStatus = {
+            PSU_TO_MOTHERBOARD: {
+                compatibility: null,
+                error: null,
+            },
+            PSU_TO_CPU: {
+                compatibility: null,
+                error: null,
+            },
+            // more status
+        };
+
+        this.state = ['off', 'on'];
+        this.currentState = this.state[0];
+
+        this.reports = [
+            {
+                tag: 'Temperature',
+                def: '71 degrees',
+            },
+            {
+                tag: 'Wattage',
+                def: '600W / 1200W',
+            },
+        ];
+        this.reportCount = 0;
 
         // Boot error dialog elements
         this.bootErrorDialog = document.getElementById('bootErrorDialog');
@@ -23,20 +86,12 @@ class PCUnit {
         this.troubleshootBtn = document.getElementById('troubleshootBtn');
         this.closeErrorDialogBtn = document.getElementById('closeErrorDialogBtn');
 
-        // Boot reports
-        this.reports = [
-            { tag: 'Temperature', def: '71 degrees' },
-            { tag: 'Wattage', def: '600W / 1200W' }
-        ];
-        this.reportCount = 0;
-
         // Event Listeners
-        this.troubleshootBtn.addEventListener('click', () => this.startTroubleshooting());
-        this.closeErrorDialogBtn.addEventListener('click', () => this.closeErrorDialog());
+        this.troubleshootBtn?.addEventListener('click', () => this.startTroubleshooting());
+        this.closeErrorDialogBtn?.addEventListener('click', () => this.closeErrorDialog());
     }
-
-    // Generate a random boot error message
-    getRandomBootError() {
+      // Generate a random boot error message
+      getRandomBootError() {
         const errors = [
             "No bootable device found.",
             "BIOS checksum error.",
@@ -261,6 +316,7 @@ class PCUnit {
             }
         }, 500);
     }
+
     // Visualization: Memory Troubleshooting
     visualizeMemoryFix(container) {
         container.innerHTML = `
@@ -289,6 +345,7 @@ class PCUnit {
             }
         }, 400);
     }
+
     // Visualization: GPU Troubleshooting
     visualizeGPUFix(container) {
         container.innerHTML = `
@@ -316,9 +373,7 @@ class PCUnit {
                 statusText.textContent = "GPU diagnostics completed. No issues detected.";
             }
         }, 400);
-    }
-
-    // Add more visualization of troubleshooting
+    }// Add more visualization of troubleshooting
 
     // Close the boot error dialog
     closeErrorDialog() {
@@ -333,49 +388,128 @@ class PCUnit {
         this.reportArea.appendChild(cell);
     }
 
-    // Collect all attached cables from PortsTab
-    getAttachedCables() {
-        if (!this.portsTab || typeof this.portsTab.getAttachedCablesStatus !== 'function') {
-            console.error('PortsTab or getAttachedCablesStatus method not found');
-            return;
-        }
-    
-        // Refresh attached cables from PortsTab's updated status
-        const attachedCablesStatus = this.portsTab.getAttachedCablesStatus();
-        this.attachedCables.clear();
-        
-        for (const cableType in attachedCablesStatus) {
-            if (attachedCablesStatus[cableType].fullyConnected) {
-                this.attachedCables.add(cableType);  // Only add fully connected cables
+    checkPowerConnection() {
+        const supply = this.componentsStatus.psu
+        // check if all components are supplied with power
+        Object.keys(this.componentsStatus).forEach(key => {
+            // different components will have different ways of checks
+            switch(key) {
+                case 'motherboard': {
+                    console.log(supply)
+                    // const cable = supply.cables.find(cable => cable.type === '24-pin-power')
+                    // if(cable && Object.keys(cable.ends).every(endKey => cable.ends[endKey].connected)) {
+                    //     console.log('motherboard is connected')
+                    //     this.XXXcomponentsStatus.motherboard.powered = true
+                    // }
+                    break
+                }
+                        
+                case 'cpu': {
+                    break
+                    const cables = supply.cables.filter(cable => cable.type === '8-pin-power') 
+                    if(cables.length !== 0) {
+                        let allCablesConnected = cables.every(cable => Object.keys(cable.ends).every(endKey => cable.ends[endKey].connected) )
+                        
+
+                        console.log(allCablesConnected)
+                        if(allCablesConnected) {
+                            console.log('cpu is connected')
+                            this.XXXcomponentsStatus.cpu.powered = true
+                        }
+                    }
+                    break
+                }
+
+                case 'gpu': {
+                    break
+                    const portType = this.componentsStatus.gpu.specs.portType
+                    switch(portType) {
+                        case '8-pin':
+                            const cable = this.componentsStatus.gpu.cables
+                            break
+                    }
+                }
             }
+        })
+    }
+
+    checkPCState(unit) {
+        // check defects and compatibility here
+        this.fillComponentStatus(unit)
+        // console.log(this.componentsStatus)
+        let allowBoot = false
+        
+        // check for minimum boot up requirement
+        const requiredComponentsArePresent = this.bootUpRequirements.every((req) => this.componentsStatus[req])
+        this.checkPowerConnection()
+        /*  CHECK FOR POWER SUPPLY CONNECTIONS
+        *   take the power supply and check every compoent if power is being supplied
+        *
+        * 
+        */
+        let allCablesAreAttached = true
+        if(requiredComponentsArePresent) {
+            
+            this.checkPowerConnection()
+
+
+            // proceed to check if everything is wired
+            Object.keys(this.componentsStatus).forEach(componentReq => {
+                const component = this.componentsStatus[componentReq] 
+                // ram and storage handling
+                if(Array.isArray(component)) {
+                    component.forEach(item => {
+                        allCablesAreAttached = this.checkAllAttachedCables(component, allCablesAreAttached)           
+                    })
+                // other component handling
+                } else {
+                    allCablesAreAttached = this.checkAllAttachedCables(component, allCablesAreAttached)
+                }
+            })
+
+            if(!allCablesAreAttached) throw new Error ('not all cables are attached')
+        }
+    }
+    
+    fillComponentStatus(unit) {
+        switch(unit.type) {
+            case 'ram':
+                this.componentsStatus.ram.push(unit);
+                break
+            case 'storage':
+                this.componentsStatus.storage.push(unit)
+                break
+            case 'cooling':
+                if(unit.specs.category === 'cpu') this.componentsStatus.cpuCooling = unit
+                if(unit.specs.category === 'chassis') this.componentsStatus.caseCooling = unit
+                break
+            default:
+                this.componentsStatus[unit.type] = unit
         }
     
-        console.log("Attached cables:", Array.from(this.attachedCables));
+        // Recursively check slots for attached components
+        unit.slots.forEach(slot => {
+            if (slot.component) {
+                this.fillComponentStatus(slot.component)
+            }
+        })    
     }
 
-    // Add component when attached
-    addAttachedComponent(component) {
-        this.attachedComponents.add(component.type);
+    powerOff() {
+        this.power = 'off';
+        this.screen?.classList.remove('screen-on');
+        this.clearReportsArea();
     }
 
-    // Get missing components and cables
-    getMissingComponents() {
-        // Refresh attached cables status from Drawer
-        this.getAttachedCables();
-
-        const missingComponents = this.requiredComponents.filter(
-            comp => !this.attachedComponents.has(comp)
-        );
-
-        const missingCables = this.requiredCables.filter(
-            cable => !this.attachedCables.has(cable)
-        );
-
-        return { missingComponents, missingCables };
-    }
-
-    // Power on the system with delay-based reporting
     powerOn() {
+        this.power = 'on';
+
+        this.screen?.classList.add('screen-on');
+
+        setTimeout(() => this.report(), 500);
+    }
+
+    report() {
         const initialDelay = 1200;
         const decreaseFactor = 0.75;
 
@@ -385,7 +519,6 @@ class PCUnit {
         });
     }
 
-    // Create report cell
     createReportCell(report) {
         const cell = document.createElement('div');
         cell.classList = 'reportCell';
@@ -400,20 +533,47 @@ class PCUnit {
         def.innerHTML = report.def;
         cell.appendChild(def);
 
-        this.reportArea.appendChild(cell);
+        this.reportArea?.appendChild(cell);
     }
 
-    // Clear report area
     clearReportsArea() {
-        while (this.reportArea.firstChild) {
+        while (this.reportArea?.firstChild) {
             this.reportArea.removeChild(this.reportArea.firstChild);
         }
     }
 
-    // Check if a valid chassis is available
     checkIfAvailableUnit(component) {
         return component && component.type === 'chassis' ? component : null;
     }
+
+//    // Collect all attached cables from PortsTab
+//    getAttachedCables() {
+//        // Refresh attached cables from PortsTab's updated status
+//        const attachedCablesStatus = this.portsTab.getAttachedCablesStatus();
+//        this.attachedCables.clear();
+//        
+//        for (const cableType in attachedCablesStatus) {
+//            if (attachedCablesStatus[cableType].fullyConnected) {
+//                this.attachedCables.add(cableType);  // Only add fully connected cables
+//            }
+//        }
+//    
+//        console.log("Attached cables:", Array.from(this.attachedCables));
+//    }
+//
+//
+//    addAttachedComponent(component) {
+//        this.attachedComponents.add(component.type);
+//    }
+//
+//    getMissingComponents() {
+//        this.getAttachedCables();
+//
+//        const missingComponents = this.requiredComponents.filter((comp) => !this.attachedComponents.has(comp));
+//        const missingCables = this.requiredCables.filter((cable) => !this.attachedCables.has(cable));
+//
+//        return { missingComponents, missingCables };
+//    }
 }
 
 export default PCUnit;

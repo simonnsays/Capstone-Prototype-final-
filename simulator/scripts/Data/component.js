@@ -10,7 +10,8 @@ class Component {
         isAttached = false,
         isModular = false, // if psu is non modular set value to false | if psu is modular set value to true
         defaultSource, 
-        images, slots = [], 
+        images, 
+        slots = [], 
         ports = [],
         cables = []
     }) {

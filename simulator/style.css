@@ -354,11 +354,11 @@ body {
     /* 
     /   adjustables
     */
-    transform: scale(.58 , .58);
+    /*transform: scale(.58 , .58);
 
     top: 97;
     left: 33;  
-     
+    */
 
     /* opacity: .7;  */
 }

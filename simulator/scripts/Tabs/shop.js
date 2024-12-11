@@ -105,7 +105,7 @@ class Shop{
         this.utilityTool.createImages(componentClone.images)
 
         // create unique ID 
-        this.utilityTool.createID(componentClone)
+        componentClone.id = this.utilityTool.createID(componentClone.type)        
         this.inventory.items.push(componentClone)
 
          // update inventory container

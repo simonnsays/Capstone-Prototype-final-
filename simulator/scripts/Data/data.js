@@ -1899,6 +1899,7 @@ const components = [
         ],
         cables: []
     }),
+
     // MOTHERBOARD AM5
     new Component ({        // B650E Aorus Elite X AX Ice
         name: 'B650E Aorus Elite X AX Ice',
@@ -3200,6 +3201,7 @@ const components = [
         ],
         cables: []
     }),
+    
     // MOTHERBOARD LGA1200
     new Component ({        // Z590 Aorus Master
         name: 'Z590 Aorus Master',
@@ -4761,6 +4763,7 @@ const components = [
         ],
         cables: []
     }),
+
     // MOTHERBOARD LGA 1700
     new Component ({        // MSI MPG Z790 Carbon Max WiFi
         name: 'MSI MPG Z790 Carbon Max WiFi',
@@ -6496,6 +6499,7 @@ const components = [
         slots: [],
         ports: []
     }),
+
     // CPU AMD [use general photos for attached component and use pack for differentiation of cpus amd am4.png(am4 cpus) and amd am5.png(am5 cpus)]
     new Component ({        // Ryzen 9 7900X3D
         name: 'AMD Ryzen 9 7900X3D',
@@ -6663,6 +6667,10 @@ const components = [
         name: 'EVGA Supernova 1300 P+',
         type: 'psu',
         size: 'ATX',
+        specs:{
+            wattage: '130',
+            cableModularity: 'modular'
+        },
         watts: '1300',
         dimensions: {
             width: 150,
@@ -6692,7 +6700,6 @@ const components = [
             {type: 'sata-power'},
             {type: 'sata-power'},
             {type: 'sata-power'},
-            {type: '8-pin'},
         ],
         cables: [
             {type: '24-pin-power'},
@@ -6701,14 +6708,16 @@ const components = [
             {type: '6-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
-            {type: '8-pin'},
-
         ]
     }),
     new Component ({        // Silverstone EX1200r-pl
         name: 'Silverstone EX1200r-pl',
         type: 'psu',
         size: 'ATX',
+        specs:{
+            wattage: '120',
+            cableModularity: 'modular'
+        },
         watts: '1200',
         dimensions: {
             width: 150,
@@ -6734,7 +6743,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -6747,13 +6755,16 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
         ]
     }),
     new Component ({        // Corsair AX1600i Digital
         name: 'Corsair AX1600i Digital',
         type: 'psu',
         size: 'ATX',
+        specs:{
+            wattage: '1600',
+            cableModularity: 'modular'
+        },
         watts: '1600',
         dimensions: {
             width: 150,
@@ -6779,7 +6790,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -6792,13 +6802,16 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
         ]
     }),
     new Component ({        // Cooler Master X Silent 1300w MAX Platinum
         name: 'Cooler Master X Silent 1300w MAX Platinum',
         type: 'psu',
         size: 'ATX',
+        specs:{
+            wattage: '1300',
+            cableModularity: 'modular'
+        },
         watts: '1300',
         dimensions: {
             width: 150,
@@ -6824,7 +6837,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -6838,7 +6850,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
             {type: '12vhpwr'},
         ]
     }),
@@ -6846,6 +6857,10 @@ const components = [
         name: 'Cooler Master V 1600 Platinum v2',
         type: 'psu',
         size: 'ATX',
+        specs:{
+            wattage: '1600',
+            cableModularity: 'modular'
+        },
         watts: '1600',
         dimensions: {
             width: 150,
@@ -6871,7 +6886,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -6885,7 +6899,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
             {type: '12vhpwr'}
         ]
     }),
@@ -6893,6 +6906,10 @@ const components = [
         name: 'Thermaltake Toughpower GF3 1000W Gold',
         type: 'psu',
         size: 'ATX',
+        specs:{
+            wattage: '750',
+            cableModularity: 'semi-modular'
+        },
         watts: '1000',
         dimensions: {
             width: 150,
@@ -6917,7 +6934,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -6930,15 +6946,18 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'}
         ]
     }),
 
     // PSU [semi modular]
-    new Component ({        // Corsair CX750
-        name: 'Corsair CX750',
+    new Component ({        // Corsair CX750M   
+        name: 'Corsair CX750M',
         type: 'psu',
         size: 'ATX',
+        specs:{
+            wattage: '750',
+            cableModularity: 'semi-modular'
+        },
         watts: '750',
         dimensions: {
             width: 150,
@@ -6947,7 +6966,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
-        isModular: false, // Non-modular PSU
+        isModular: true, 
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Corsair/Corsair CX750/Corsair CX750 pack.png'}, 
@@ -6958,12 +6977,10 @@ const components = [
         ],
         slots: [],
         ports: [
-            {type: '8-pin-power'},
-            {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
+            {type: '6-pin-pcie'},
             {type: 'sata-power'},
             {type: 'sata-power'},
         ],
@@ -6974,13 +6991,17 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'}
         ]
-    }),    
+    }),
+        
     new Component ({        // EVGA 850 Bq, 80+ Bronze 850W, Semi Modular
         name: 'EVGA 850 Bq, 80+ Bronze 850W, Semi Modular',
         type: 'psu',
         size: 'ATX',
+        specs:{
+            wattage: '1000',
+            cableModularity: 'semi-modular'
+        },
         watts: '1000',
         dimensions: {
             width: 150,
@@ -6989,7 +7010,7 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
-        isModular: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA 850 Bq, 80+ Bronze 850W, Semi Modular/EVGA 850 Bq, 80+ Bronze 850W, Semi Modular pack.png'}, 
@@ -7000,14 +7021,11 @@ const components = [
         ],
         slots: [],
         ports: [
-            {type: '24-pin-power',},
-            {type: '8-pin-power'},
-            {type: '8-pin-power'},
+            {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
-            {type: 'sata-power'},
+            {type: '6-pin-pcie'},
             {type: 'sata-power'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7021,10 +7039,15 @@ const components = [
             {type: '8-pin-pcie'}
         ]
     }),
+    
     new Component ({        // Silverstone et750-hg
         name: 'Silverstone semi-modular 750w et750-hg',
         type: 'psu',
-        size: 'ATX',
+        size: 'ATX', 
+        specs:{
+            wattage: '750',
+            cableModularity: 'semi-modular'
+        },
         watts: '750',
         dimensions: {
             width: 150,
@@ -7033,26 +7056,21 @@ const components = [
         },
         isRotatable: true,
         isAttached: false,
-        isModular: false,
+        isModular: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Silverstone technology co. Ltd/et750-hg/et750-hg-package-2.png'}, 
-            {side: 'left', imageSrc: './assets/psu/Silverstone technology co. Ltd/et750-hg/et750-hg-side-left.png'}, 
+            {side: 'left', imageSrc: './assets/psu/Silverstone technology co. Ltd/et750-hg/et750-hg-side-left.jpg'}, 
             {side: 'front', imageSrc: './assets/psu/Silverstone technology co. Ltd/et750-hg/et750-hg-front.jpg'}, 
-            {side: 'right', imageSrc: './assets/psu/Silverstone technology co. Ltd/et750-hg/et750-hg-side-right.png'}, 
+            {side: 'right', imageSrc: './assets/psu/Silverstone technology co. Ltd/et750-hg/et750-hg-side-right.jpg'}, 
             {side: 'rear', imageSrc: './assets/psu/Silverstone technology co. Ltd/et750-hg/et750-hg-back.jpg'}
         ],
         slots: [],
         ports: [
-            {type: '24-pin-power',},
-            {type: '8-pin-power'},
-            {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
+            {type: '6-pin-pcie'},
             {type: 'sata-power'},
             {type: 'sata-power'},
         ],
@@ -7063,13 +7081,17 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
         ]
     }),
+    
     new Component ({        // thermaltake smart BM3 Bronze 650W
         name: 'Thermaltake smart BM3 Bronze 650W',
         type: 'psu',
-        size: 'ATX',
+        size: 'ATX', 
+        specs:{
+            wattage: '650',
+            cableModularity: 'semi-modular'
+        },
         watts: '650',
         isModular: false, // Non-modular PSU
         dimensions: {
@@ -7078,17 +7100,25 @@ const components = [
             height: 150,
         },
         isRotatable: true,
-        isAttached: false,
+        isAttached: true,
         defaultSource: 'PACK',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Thermaltake/thermaltake smart BM3 Bronze 650W/pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/Thermaltake/thermaltake smart BM3 Bronze 650W/side.jpg'}, 
             {side: 'front', imageSrc: './assets/psu/Thermaltake/thermaltake smart BM3 Bronze 650W/front.png'}, 
             {side: 'right', imageSrc: './assets/psu/Thermaltake/thermaltake smart BM3 Bronze 650W/side.jpg'}, 
-            {side: 'rear', imageSrc: './assets/psu/Thermaltake/thermaltake smart BM3 Bronze 650W/rear.png'}
+            {side: 'rear', imageSrc: './assets/psu/Thermaltake/thermaltake smart BM3 Bronze 650W/rear.jpg'}
         ],
         slots: [],
-        ports: [],
+        ports: [            
+            {type: '8-pin-pcie'},
+            {type: '8-pin-pcie'},
+            {type: '6-pin-pcie'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
+        ],
         cables: [
             {type: '24-pin-power'},
             {type: '8-pin-power' },
@@ -7096,13 +7126,17 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'}
         ]
     }),
+    
     new Component ({        // Silverstone da1000-gh
         name: 'Silverstone DA1000-gh',
         type: 'psu',
-        size: 'ATX',
+        size: 'ATX', 
+        specs:{
+            wattage: '1000',
+            cableModularity: 'semi-modular'
+        },
         watts: '1000',
         dimensions: {
             width: 150,
@@ -7122,13 +7156,9 @@ const components = [
         ],
         slots: [],
         ports: [
-            {type: '24-pin-power',},
-            {type: '8-pin-power'},
-            {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
             {type: 'sata-power'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7141,7 +7171,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
         ]
     }),
 
@@ -7149,7 +7178,11 @@ const components = [
     new Component ({        // Thermaltake Smart 500w
         name: 'Thermaltake Smart 500w',
         type: 'psu',
-        size: 'ATX',
+        size: 'ATX', 
+        specs:{
+            wattage: '500',
+            cableModularity: 'non-modular'
+        },
         watts: '500',
         isModular: false, // Non-modular PSU
         dimensions: {
@@ -7176,13 +7209,17 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'}
         ]
     }),
+
     new Component ({        // Thermaltake Toughpower gx2 600w
         name: 'Thermaltake Toughpower GX2 600w',
         type: 'psu',
-        size: 'ATX',
+        size: 'ATX', 
+        specs:{
+            wattage: '600',
+            cableModularity: 'non-modular'
+        },
         watts: '600',
         isModular: false, // Non-modular PSU
         dimensions: {
@@ -7209,13 +7246,17 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'}
         ]
     }),
+
     new Component ({        // Cooler Master MWE Gold 850w v2 non modular
         name: 'Cooler master MWE Bronze 650 V3 230V',
         type: 'psu',
-        size: 'ATX',
+        size: 'ATX', 
+        specs:{
+            wattage: '850',
+            cableModularity: 'non-modular'
+        },
         watts: '850',
         dimensions: {
             width: 150,
@@ -7234,19 +7275,7 @@ const components = [
             {side: 'rear', imageSrc: './assets/psu/Cooler master technology inc/mwe bronze 650 v3 230v/rear.png'}
         ],
         slots: [],
-        ports: [
-            {type: '24-pin-power',},
-            {type: '8-pin-power'},
-            {type: '8-pin-power'},
-            {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'},
-            {type: '6-pin-pcie'},
-            {type: '8-pin'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-        ],
+        ports: [],
         cables: [
             {type: '24-pin-power'},
             {type: '8-pin-power' },
@@ -7254,13 +7283,17 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
         ]
     }),
+
     new Component ({        // EVGA 500 GE, 80 Plus Gold 500W non modular
         name: 'EVGA 500 GE, 80 Plus Gold 500W',
         type: 'psu',
-        size: 'ATX',
+        size: 'ATX', 
+        specs:{
+            wattage: '500',
+            cableModularity: 'non-modular'
+        },
         watts: '500',
         dimensions: {
             width: 150,
@@ -7279,19 +7312,7 @@ const components = [
             {side: 'rear', imageSrc: './assets/psu/EVGA/EVGA 500 GE, 80 Plus Gold 500W/EVGA 500 GE, 80 Plus Gold 500W rear.png'}
         ],
         slots: [],
-        ports: [
-            {type: '24-pin-power',},
-            {type: '8-pin-power'},
-            {type: '8-pin-power'},
-            {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'},
-            {type: '6-pin-pcie'},
-            {type: '8-pin'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-        ],
+        ports: [],
         cables: [
             {type: '24-pin-power'},
             {type: '8-pin-power' },
@@ -7299,13 +7320,17 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
             {type: '8-pin-pcie'},
-            {type: '8-pin'},
         ]
     }),
+
     new Component ({        // Corsair CX750 80 bronze non modular
-        name: 'Corsair CX750 80 Plus Bronze Non Modular Low-Noise ATX 750 Watt Power Supply',
+        name: 'Corsair CX750 80 Plus',
         type: 'psu',
-        size: 'ATX',
+        size: 'ATX', 
+        specs:{
+            wattage: '750',
+            cableModularity: 'non-modular'
+        },
         watts: '750',
         dimensions: {
             width: 150,
@@ -7324,20 +7349,7 @@ const components = [
             {side: 'rear', imageSrc: './assets/psu/Corsair/CORSAIR CX750 80 Plus Bronze Non Modular Low-Noise ATX 750 Watt Power Supply/Corsair CX750 rear.png'}
         ],
         slots: [],
-        ports: [
-            {type: '24-pin-power',},
-            {type: '8-pin-power'},
-            {type: '8-pin-power'},
-            {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'},
-            {type: '6-pin-pcie'},
-            {type: '8-pin'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-
-        ],
+        ports: [],
         cables: [
             {type: '24-pin-power'},
             {type: '8-pin-power' },
@@ -7345,13 +7357,17 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: '8-pin'},
         ]
     }),
+
     new Component ({        // Silverstone ST60F-ES230
-        name: 'Silverstone non-modular 600w ST60F-ES230',
+        name: 'Silverstone 600w ST60F-ES230',
         type: 'psu',
-        size: 'ATX',
+        size: 'ATX', 
+        specs:{
+            wattage: '600',
+            cableModularity: 'non-modular'
+        },
         watts: '600',
         dimensions: {
             width: 150,
@@ -7370,19 +7386,7 @@ const components = [
             {side: 'rear', imageSrc: './assets/psu/Silverstone technology co. Ltd/st60f-es230/st60f-es230-back.jpg'}
         ],
         slots: [],
-        ports: [
-            {type: '24-pin-power',},
-            {type: '8-pin-power'},
-            {type: '8-pin-power'},
-            {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'},
-            {type: '6-pin-pcie'},
-            {type: '8-pin'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-        ],
+        ports: [],
         cables: [
             {type: '24-pin-power'},
             {type: '8-pin-power' },
@@ -7390,7 +7394,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
             {type: '8-pin-pcie'},
-            {type: '8-pin'},
         ]
     }),
 
@@ -7639,8 +7642,8 @@ const components = [
         {type: 'sata-data'}
     ]
      }),
- // Cooling AMD
-new Component ({ //AMD wraith Prism
+    // Cooling AMD
+    new Component ({ //AMD wraith Prism
     name: 'AMD wraith Prism',
     type: 'cooling',
     size: 'amd',
@@ -7661,8 +7664,8 @@ new Component ({ //AMD wraith Prism
     cables: [
         {type: '3-pin-cooling'}
     ]
-}), 
-new Component ({ //AMD wraith Spire
+    }), 
+    new Component ({ //AMD wraith Spire
     name: 'AMD wraith Spire',
     type: 'cooling',
     size: 'amd',
@@ -7683,8 +7686,8 @@ new Component ({ //AMD wraith Spire
     cables: [
         {type: '3-pin-cooling'}
     ]
-}),  
-new Component ({ //Arctic Freezer 36
+    }),  
+    new Component ({ //Arctic Freezer 36
     name: 'Arctic Freezer 36',
     type: 'cooling',
     size: 'amd',
@@ -7705,8 +7708,8 @@ new Component ({ //Arctic Freezer 36
     cables: [
         {type: '3-pin-cooling'}
     ]
-}),  
-new Component ({ //be quiet pure rock
+    }),  
+    new Component ({ //be quiet pure rock
     name: 'Be Quiet Pure Rock 2',
     type: 'cooling',
     size: 'amd',
@@ -7724,11 +7727,11 @@ new Component ({ //be quiet pure rock
         {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
     ],
     slots: [],
-cables: [
+    cables: [
             {type: '3-pin-cooling'}
         ]
     }),  
-new Component ({ //be quiet dark rock 4
+    new Component ({ //be quiet dark rock 4
     name: 'be quiet dark rock 4',
     type: 'cooling',
     size: 'amd',
@@ -7746,11 +7749,11 @@ new Component ({ //be quiet dark rock 4
         {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
     ],
     slots: [],
-cables: [
+    cables: [
             {type: '3-pin-cooling'}
         ]
     }),  
-new Component ({ //cooler master 212 hyper
+    new Component ({ //cooler master 212 hyper
     name: 'Cooler Master 212 Hyper',
     type: 'cooling',
     size: 'amd',
@@ -7768,11 +7771,11 @@ new Component ({ //cooler master 212 hyper
         {side: 'left', imageSrc: './assets/cooling/cooler master 212 hyper.png'}
     ],
     slots: [],
-cables: [
+    cables: [
             {type: '3-pin-cooling'}
         ]
     }),  
-new Component ({ //DeepCool AK500 Digital
+    new Component ({ //DeepCool AK500 Digital
     name: 'DeepCool AK500 Digital',
     type: 'cooling',
     size: 'amd',
@@ -7790,12 +7793,12 @@ new Component ({ //DeepCool AK500 Digital
         {side: 'left', imageSrc: './assets/cooling/deepcool ak500 digital fan.png'}
     ],
     slots: [],
-cables: [
+    cables: [
             {type: '3-pin-cooling'}
         ]
     }),  
-    // Cooling Intel
- new Component ({ //Intel Laminar RH1 cooling fan
+        // Cooling Intel
+     new Component ({ //Intel Laminar RH1 cooling fan
      name: 'Intel Laminar RH1 cooling fan',
      type: 'cooling',
      size: 'intel',
@@ -7816,8 +7819,8 @@ cables: [
 cables: [
             {type: '3-pin-cooling'}
         ]
-     }),
- new Component ({ //Intel Laminar RM1 cooling fan
+    }),
+     new Component ({ //Intel Laminar RM1 cooling fan
     name: 'Intel Laminar RM1 cooling fan',
     type: 'cooling',
     size: 'intel',
@@ -7834,31 +7837,12 @@ cables: [
         {side: 'left', imageSrc: './assets/cooling/intel laminar rm1.png'},  
     ],
     slots: [],
-cables: [
+    cables: [
             {type: '3-pin-cooling'}
         ]
     }),
-    // RAM DDR4
-// new Component ({ //Kingston HyperX Beast RGB
-//   name: 'Kingston HyperX Beast RGB DDR4 8gb 2666mhz',
-//   type: 'ram',
-//   size: 'ddr4',
-//   speed: '2666mhz',
-//   bytes: '8gb',
-//   dimensions: {
-//      width: 133,
-//      height: 133,
-//      depth: 100,
-//   },
-//   isRotatable: false,
-//   isAttached: false,
-//   defaultSource: 'PACK',
-//   images: [
-//      {side: 'left', imageSrc: './assets/memory/HyperX Beast RGB DDR4 attached.png'},  
-//      {side: 'PACK', imageSrc: './assets/memory/HyperX Beast RGB DDR4 pack.png'},  
-//   ],
-//}),
-new Component ({ //Kingston HyperX Beast RGB
+        // RAM DDR4
+    new Component ({ //Kingston HyperX Beast RGB
     name: 'Kingston HyperX Beast RGB DDR4',
     type: 'ram',
     size: 'ddr4',
@@ -7875,8 +7859,8 @@ new Component ({ //Kingston HyperX Beast RGB
         {side: 'left', imageSrc: './assets/memory/HyperX Beast RGB DDR4 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/HyperX Beast RGB DDR4 pack.png'},  
     ],
- }),
- new Component ({ //Corsair Dominator Platinum
+    }),
+     new Component ({ //Corsair Dominator Platinum
     name: 'Corsair Dominator Platinum DDR4',
     type: 'ram',
     size: 'ddr4',
@@ -7893,8 +7877,8 @@ new Component ({ //Kingston HyperX Beast RGB
         {side: 'left', imageSrc: './assets/memory/corsair dominator platinum pc4 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/corsair dominator platinum pc4.png'},  
     ],
-}),
-new Component ({ //G.Skill Ripjaws V
+    }),
+    new Component ({ //G.Skill Ripjaws V
     name: 'G.Skill Ripjaws V DDR4',
     type: 'ram',
     size: 'ddr4',
@@ -7911,8 +7895,8 @@ new Component ({ //G.Skill Ripjaws V
         {side: 'left', imageSrc: './assets/memory/gskill ripjaws v pc4 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/gskill ripjaws v pc4.png'},  
     ],
-}),
-new Component ({ //Teamgroup Tforce Vulcan Z
+    }),
+    new Component ({ //Teamgroup Tforce Vulcan Z
     name: 'Teamgroup Tforce Vulcan Z DDR4',
     type: 'ram',
     size: 'ddr4',
@@ -7929,8 +7913,8 @@ new Component ({ //Teamgroup Tforce Vulcan Z
         {side: 'left', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4.png'},  
     ],
-}),
-new Component ({ //Teamgroup Tforce TUF
+    }),
+    new Component ({ //Teamgroup Tforce TUF
     name: 'Teamgroup Tforce TUF DDR4',
     type: 'ram',
     size: 'ddr4',
@@ -7947,8 +7931,8 @@ new Component ({ //Teamgroup Tforce TUF
         {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/tforce delta tuf pc4.png'},  
     ],
-}),
-new Component ({ //Crucial Pro DDR4
+    }),
+    new Component ({ //Crucial Pro DDR4
     name: 'Crucial Pro DDR4',
     type: 'ram',
     size: 'ddr4',
@@ -7965,8 +7949,8 @@ new Component ({ //Crucial Pro DDR4
         {side: 'left', imageSrc: './assets/memory/crucial pro ddr4 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/crucial pro ddr4.png'},  
     ],
-}),
-new Component ({ //Corsiar Vengeance Pro DDR4
+    }),
+    new Component ({ //Corsiar Vengeance Pro DDR4
     name: 'Corsiar Vengeance Pro DDR4',
     type: 'ram',
     size: 'ddr4',
@@ -7983,8 +7967,8 @@ new Component ({ //Corsiar Vengeance Pro DDR4
         {side: 'left', imageSrc: './assets/memory/corsair vengeance pro attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/corsair vengeance pro ddr4.png'},  
     ],
-}),
-new Component ({ //Teamgroup Tforce DDR4
+    }),
+    new Component ({ //Teamgroup Tforce DDR4
     name: 'Teamgroup Tforce DDR4',
     type: 'ram',
     size: 'ddr4',
@@ -8001,10 +7985,10 @@ new Component ({ //Teamgroup Tforce DDR4
         {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
     ],
- }),
+    }),
  
- //  RAM DDR5
-   new Component ({ //Dominator Titanium
+    //  RAM DDR5
+    new Component ({ //Dominator Titanium
       name: 'Dominator Titanium DDR5',
       type: 'ram',
       size: 'ddr5',
@@ -8021,8 +8005,8 @@ new Component ({ //Teamgroup Tforce DDR4
           {side: 'left', imageSrc: './assets/memory/Dominator Tianium DDR5 - attached.png'},  
           {side: 'pack', imageSrc: './assets/memory/Dominator Tianium DDR5.png'},  
       ],
-   }),
-   new Component ({ //G.Skill Trident z5
+    }),
+    new Component ({ //G.Skill Trident z5
     name: 'G.Skill Trident z5 DDR5',
     type: 'ram',
     size: 'ddr5',
@@ -8039,8 +8023,8 @@ new Component ({ //Teamgroup Tforce DDR4
         {side: 'left', imageSrc: './assets/memory/gskill trident z5 pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/gskill trident z5 pc5.png'},  
     ],
- }),
- new Component ({ //Kingston Fury Renegade
+    }),
+    new Component ({ //Kingston Fury Renegade
     name: 'Kingston Fury Renegade DDR5',
     type: 'ram',
     size: 'ddr5',
@@ -8057,8 +8041,8 @@ new Component ({ //Teamgroup Tforce DDR4
         {side: 'left', imageSrc: './assets/memory/kingston fury beast pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/kingston fury renegade pc5.png'},  
     ],
- }),
- new Component ({ //Teamgroup Tforce 
+    }),
+    new Component ({ //Teamgroup Tforce 
     name: 'Teamgroup Tforce DDR5',
     type: 'ram',
     size: 'ddr5',
@@ -8075,8 +8059,8 @@ new Component ({ //Teamgroup Tforce DDR4
         {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
     ],
- }),
- new Component ({ //Crucial Ballistix
+    }),
+    new Component ({ //Crucial Ballistix
     name: 'Crucial Ballistix DDR5',
     type: 'ram',
     size: 'ddr5',
@@ -8093,8 +8077,8 @@ new Component ({ //Teamgroup Tforce DDR4
         {side: 'left', imageSrc: './assets/memory/crucial ballistix attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/crucial ballistix.png'},  
     ],
- }),
- new Component ({ //Crucial Ballistix RGB 
+    }),
+    new Component ({ //Crucial Ballistix RGB 
     name: 'Crucial Ballistix RGB DDR5',
     type: 'ram',
     size: 'ddr5',
@@ -8111,8 +8095,8 @@ new Component ({ //Teamgroup Tforce DDR4
         {side: 'left', imageSrc: './assets/memory/crucial ballistix rgb attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/crucial ballistix rgb.png'},  
     ],
- }),
- new Component ({ //G.Skill Trident Z5 Silver 
+    }),
+    new Component ({ //G.Skill Trident Z5 Silver 
     name: 'G.Skill Trident Z5 Silver DDR5',
     type: 'ram',
     size: 'ddr5',
@@ -8129,8 +8113,8 @@ new Component ({ //Teamgroup Tforce DDR4
         {side: 'left', imageSrc: './assets/memory/gskill trident z5 silver attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/gskill trident z5 silver.png'},  
     ],
- }),
- new Component ({ //Corsair Vengeance
+    }),
+    new Component ({ //Corsair Vengeance
     name: 'Corsair Vengeance DDR5',
     type: 'ram',
     size: 'ddr5',
@@ -8147,15 +8131,17 @@ new Component ({ //Teamgroup Tforce DDR4
         {side: 'left', imageSrc: './assets/memory/corsair vengeance attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/corsair vengeance.png'},  
     ],
- }),
+    }),
  
- 
- //GPU [gpu file is for general left side img assets] [gpu.1 is for pack side img assets] [single 8pins = {type: '8-pin'}] [dual 8pins = {type: '16-pin-pcie'}]
- new Component ({        // Gigabyte Radeon RX 7900 XTX 16pin
+     //GPU [gpu file is for general left side img assets] [gpu.1 is for pack side img assets]
+    new Component ({        // Gigabyte Radeon RX 7900 XTX 16pin
     name: 'Gigabyte Radeon RX 7900 XTX',
     type: 'gpu',
     size: 'ATX',
-    watts: '355',
+    specs: {
+        portCount: 2,
+        portType: '16-pin-pcie'
+    },
     dimensions: {
         width: 200,
         height: 200,
@@ -8165,19 +8151,29 @@ new Component ({ //Teamgroup Tforce DDR4
     isAttached: false,
     defaultSource: 'pack',
     images: [
-        {side: 'left', imageSrc: './assets/gpu/Gigabyte Radeon RX 7900 XTX.png'}, 
+        {side: 'left', imageSrc: './assets/gpu/Gigabyte Radeon RX 7900 XTX.png'},
+        {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
+        {side: 'pack', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'},  
         {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
         {side: 'pack', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'}
     ],
     slots: [],
     ports: [
-        {type: '16-pin-pcie'}
+        {
+            type: '16-pin-pcie',
+            style: 'split'
+        }
     ]  
-}),
-new Component ({        // gigabyte nvidia geforce rtx 4060 windforce 8gb OC
+    }),
+
+    new Component ({        // gigabyte nvidia geforce rtx 4060 windforce 8gb OC
     name: 'Gigabyte NVIDIA GeForce rtx 4060 Windforce 8gb OC',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '8-pin-pcie'
+    },
     watts: '110',
     dimensions: {
         width: 200,
@@ -8194,13 +8190,21 @@ new Component ({        // gigabyte nvidia geforce rtx 4060 windforce 8gb OC
     ],
     slots: [],
     ports: [
-        {type: '8-pin'}
+        {
+            type: '8-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Intel ARC A750 8+6pin
+    }),
+
+    new Component ({        // Intel ARC A750 8+6pin
     name: 'Intel ARC A750',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 2,
+        portType: '14-pin-pcie'
+    },
     watts: '225',
     dimensions: {
         width: 200,
@@ -8217,13 +8221,21 @@ new Component ({        // Intel ARC A750 8+6pin
     ],
     slots: [],
     ports: [
-        {type: '14-pin-pcie'}
+        {
+            type: '14-pin-pcie',
+            style: 'split'
+        }
     ]  
-}),
-new Component ({        // Gigabyte Nvidia GeForce RTX 3060
+    }),
+
+    new Component ({        // Gigabyte Nvidia GeForce RTX 3060
     name: 'Gigabyte Nvidia GeForce RTX 3060',
     type: 'gpu',
-    size: 'ATX',
+    size: 'ATX', 
+    specs: {
+        portCount: 1,
+        portType: '8-pin-pcie'
+    },
     watts: '170',
     dimensions: {
         width: 200,
@@ -8240,13 +8252,21 @@ new Component ({        // Gigabyte Nvidia GeForce RTX 3060
     ],
     slots: [],
     ports: [
-        {type: '8-pin'}
+        {
+            type: '8-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Gigabyte Nvidia GeForce RTX 4070 WindForce OC
+    }),
+
+    new Component ({        // Gigabyte Nvidia GeForce RTX 4070 WindForce OC
     name: 'Gigabyte Nvidia GeForce RTX 4070 WindForce OC',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '8-pin-pcie'
+    },
     watts: '200',
     dimensions: {
         width: 200,
@@ -8263,13 +8283,21 @@ new Component ({        // Gigabyte Nvidia GeForce RTX 4070 WindForce OC
     ],
     slots: [],
     ports: [
-        {type: '8-pin'}
+        {
+            type: '8-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // PNY Nvidia GeForce RTX 4090 12vhpwr
+    }),
+
+    new Component ({        // PNY Nvidia GeForce RTX 4090 12vhpwr
     name: 'PNY Nvidia GeForce RTX 4090',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '12vhpwr'
+    },
     watts: '450',
     dimensions: {
         width: 200,
@@ -8286,13 +8314,21 @@ new Component ({        // PNY Nvidia GeForce RTX 4090 12vhpwr
     ],
     slots: [],
     ports: [
-        {type: '12vhpwr'}
+        {
+            type: '12vhpwr',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Gigabyte Nvidia GeForce RTX Eagle 3060
+    }),
+
+    new Component ({        // Gigabyte Nvidia GeForce RTX Eagle 3060
     name: 'Gigabyte Nvidia GeForce RTX Eagle 3060',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '8-pin-pcie'
+    },
     watts: '170',
     dimensions: {
         width: 200,
@@ -8309,13 +8345,21 @@ new Component ({        // Gigabyte Nvidia GeForce RTX Eagle 3060
     ],
     slots: [],
     ports: [
-        {type: '8-pin'}
+        {
+            type: '8-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Gigabyte Nvidia GeForce GTX 1650
+    }),
+
+    new Component ({        // Gigabyte Nvidia GeForce GTX 1650
     name: 'Gigabyte Nvidia GeForce GTX 1650',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '8-pin-pcie'
+    },
     watts: '75',
     dimensions: {
         width: 200,
@@ -8332,13 +8376,21 @@ new Component ({        // Gigabyte Nvidia GeForce GTX 1650
     ],
     slots: [],
     ports: [
-        {type: '8-pin'}
+        {
+            type: '8-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Gigabyte Radeon RX7600
+    }),
+
+    new Component ({        // Gigabyte Radeon RX7600
     name: 'Gigabyte Radeon RX7600',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '8-pin-pcie'
+    },
     watts: '165',
     dimensions: {
         width: 200,
@@ -8355,13 +8407,21 @@ new Component ({        // Gigabyte Radeon RX7600
     ],
     slots: [],
     ports: [
-        {type: '8-pin'}
+        {
+            type: '8-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Gigabyte Nvidia GeForce RTX 4090 Gaming OC
+    }),
+
+    new Component ({        // Gigabyte Nvidia GeForce RTX 4090 Gaming OC
     name: 'Gigabyte Nvidia GeForce RTX 4090 Gaming OC',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '8-pin-pcie'
+    },
     watts: '450',
     dimensions: {
         width: 200,
@@ -8378,13 +8438,21 @@ new Component ({        // Gigabyte Nvidia GeForce RTX 4090 Gaming OC
     ],
     slots: [],
     ports: [
-        {type: '8-pin'}
+        {
+            type: '8-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Aero Nvidia GeForce RTX 4060 OC
+    }),
+
+    new Component ({        // Aero Nvidia GeForce RTX 4060 OC
     name: 'Aero Nvidia GeForce RTX 4060 OC',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '8-pin-pcie'
+    },
     watts: '125',
     dimensions: {
         width: 200,
@@ -8401,13 +8469,21 @@ new Component ({        // Aero Nvidia GeForce RTX 4060 OC
     ],
     slots: [],
     ports: [
-        {type: '8-pin'}
+        {
+            type: '8-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Zotac Nvidia GeForce GTX 1660 Super
+    }),
+
+    new Component ({        // Zotac Nvidia GeForce GTX 1660 Super
     name: 'Zotac Nvidia GeForce GTX 1660 Super',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '8-pin-pcie'
+    },
     watts: '125',
     dimensions: {
         width: 200,
@@ -8424,13 +8500,21 @@ new Component ({        // Zotac Nvidia GeForce GTX 1660 Super
     ],
     slots: [],
     ports: [
-        {type: '8-pin'}
+        {
+            type: '8-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // MAXSUN Nvidia GeForce RTX 4060
+    }),
+
+    new Component ({        // MAXSUN Nvidia GeForce RTX 4060
     name: 'MAXSUN Nvidia GeForce RTX 4060',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '8-pin-pcie'
+    },
     watts: '115',
     dimensions: {
         width: 200,
@@ -8447,13 +8531,21 @@ new Component ({        // MAXSUN Nvidia GeForce RTX 4060
     ],
     slots: [],
     ports: [
-        {type: '8-pin'}
+        {
+            type: '8-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Asus Nvidia GeForce RTX 4070 Super 12vhpwr
+    }),
+
+    new Component ({        // Asus Nvidia GeForce RTX 4070 Super 12vhpwr
     name: 'Asus Nvidia GeForce RTX 4070 Super',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '12vhpwr'
+    },
     watts: '220',
     dimensions: {
         width: 200,
@@ -8470,10 +8562,14 @@ new Component ({        // Asus Nvidia GeForce RTX 4070 Super 12vhpwr
     ],
     slots: [],
     ports: [
-        {type: '12vhpwr'}
+        {
+            type: '12vhpwr',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Asus Nvidia GeForce 3050
+    }),
+
+    new Component ({        // Asus Nvidia GeForce 3050
     name: 'Asus Nvidia GeForce 3050',
     type: 'gpu',
     size: 'ATX',
@@ -8493,11 +8589,16 @@ new Component ({        // Asus Nvidia GeForce 3050
     ],
     slots: [],
     ports: []  
-}),
-new Component ({        // Asus Radeon RX6500 XT
+    }),
+
+    new Component ({        // Asus Radeon RX6500 XT
     name: 'Asus Radeon RX6500 XT',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '6-pin-pcie'
+    },
     watts: '120',
     dimensions: {
         width: 200,
@@ -8514,13 +8615,21 @@ new Component ({        // Asus Radeon RX6500 XT
     ],
     slots: [],
     ports: [
-        {type: '6-pin-pcie'}
+        {
+            type: '6-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Nvidia GeForce RTX 2080 Super
+    }),
+
+    new Component ({        // Nvidia GeForce RTX 2080 Super
     name: 'Nvidia GeForce RTX 2080 Super',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '6-pin-pcie'
+    },
     watts: '250',
     dimensions: {
         width: 200,
@@ -8537,13 +8646,21 @@ new Component ({        // Nvidia GeForce RTX 2080 Super
     ],
     slots: [],
     ports: [
-        {type: '6-pin-pcie'}
+        {
+            type: '6-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Gigabyte Radeon RX6750 XT
+    }),
+
+    new Component ({        // Gigabyte Radeon RX6750 XT
     name: 'Gigabyte Radeon RX6750 XT',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '6-pin-pcie'
+    },
     watts: '250',
     dimensions: {
         width: 200,
@@ -8560,13 +8677,21 @@ new Component ({        // Gigabyte Radeon RX6750 XT
     ],
     slots: [],
     ports: [
-        {type: '6-pin-pcie'}
+        {            
+            type: '6-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // AMD Radeon RX5300 OEM
+    }),
+
+    new Component ({        // AMD Radeon RX5300 OEM
     name: 'AMD Radeon RX5300 OEM',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '6-pin-pcie'
+    },
     watts: '100',
     dimensions: {
         width: 200,
@@ -8583,13 +8708,21 @@ new Component ({        // AMD Radeon RX5300 OEM
     ],
     slots: [],
     ports: [
-        {type: '6-pin-pcie'}
+        {            
+            type: '6-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Nvidia Tesla T40
+    }),
+
+    new Component ({        // Nvidia Tesla T40
     name: 'Nvidia Tesla T40',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '6-pin-pcie'
+    },
     watts: '245',
     dimensions: {
         width: 200,
@@ -8606,13 +8739,21 @@ new Component ({        // Nvidia Tesla T40
     ],
     slots: [],
     ports: [
-        {type: '6-pin-pcie'}
+        {            
+            type: '6-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
-new Component ({        // Nvidia Geforce 1080 Ti
+    }),
+
+    new Component ({        // Nvidia Geforce 1080 Ti
     name: 'Nvidia Geforce 1080 Ti',
     type: 'gpu',
     size: 'ATX',
+    specs: {
+        portCount: 1,
+        portType: '6-pin-pcie'
+    },
     watts: '250',
     dimensions: {
         width: 200,
@@ -8629,9 +8770,12 @@ new Component ({        // Nvidia Geforce 1080 Ti
     ],
     slots: [],
     ports: [
-        {type: '6-pin-pcie'}
+        {            
+            type: '6-pin-pcie',
+            style: 'single'
+        }
     ]  
-}),
+    }),
 
 //thermal paste
 // new Component ({ 

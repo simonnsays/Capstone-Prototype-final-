@@ -1,5 +1,6 @@
 import portRef from "../Data/portReference.js"
 import cableRef from "../Data/cableReference.js"
+import Cable from "../Data/cable.js"
 
 class Inventory {
     constructor(elementHandler, utilityTool, displayArea) {
@@ -127,25 +128,28 @@ class Inventory {
         // copy reference attributes to the copy of the port
         port.image = currentRef.image
         port.offset = currentRef.offset
+        port.style = currentRef.style
 
         if(currentRef.takes) port.takes = currentRef.takes 
-
-        // additional attributes
-        port.cableAttached = null
     }
 
-    // Create Cable Attributes
-    createCableAttr(cable, ref) {
+   // Create Cable Attributes
+   createCableAttr(cable, ref) {
         // create a copy of the reference to avoid cables pointing on the same attributes
         const refClone = JSON.parse(JSON.stringify(ref))
 
         // find the reference for the specific port type
-        const currentRef = refClone.find(refcable => refcable.type === cable.type)
+        const currentRef = refClone.find(refcable => refcable.type === cable.type) 
 
-        // copy ref attributes to the copy of the cable
-        cable.ends = currentRef.ends
-        cable.images = currentRef.images
-        // cable.scale = currentRef.scale
+        // create new class object
+        return new Cable = new Cable({
+            id: this.utilityTool.createID('cable'),
+            name: currentRef.name,
+            type: currentRef.type,
+            ends: currentRef.ends,
+            images: currentRef.images
+        })
+
     }
 
     // Placing of Components to Display Area
@@ -163,10 +167,19 @@ class Inventory {
         })
 
         // create(fill) cable attributes
-        component.cables.forEach(cable => {
-            this.createCableAttr(cable, currentCableRef)
+        component.cables = component.cables.map(cable=> {
+            const cableClone = this.createCableAttr(cable, currentCableRef) 
+            // adjust psu modularity
+            
+            return cableClone
         })
-    
+        if(component.type === 'psu') {
+            component.cables.forEach(cable => cable.adjustCableModularity(component))
+            
+            console.log(component)
+            component.adjustPortAndCableModularity(component)
+        }
+            
         // add to Table
         if(!table.component) {
             this.displayArea.table.component = component
@@ -176,7 +189,7 @@ class Inventory {
         // add to Shelf
         this.addToShelf(component, shelf)
     }
-
+    
     // Main Inventory Update Method
     update() {
         // clear Item Elements
