@@ -1,5 +1,6 @@
 class Component {
     constructor({
+        id,
         name, 
         type, 
         specs, 
@@ -14,6 +15,7 @@ class Component {
     }) {
 
         // Description
+        this.id = id
         this.name = name
         this.type = type
         this.specs = specs
@@ -37,7 +39,7 @@ class Component {
         this.cables = cables
     }
 
-    static handleComponent(component) {
+    handleComponent(component) {
         // Handle Image dimensions
         component.images.forEach(element => { 
             // adjust width and height depending on side
@@ -61,7 +63,7 @@ class Component {
 
     adjustPortAndCableModularity(component) {
         component.ports.forEach(port => {
-            console.log(port)
+            console.log (port)    
         })
     }
 }

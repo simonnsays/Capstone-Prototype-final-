@@ -177,7 +177,6 @@ class Inventory {
         if(component.type === 'psu') {
             component.cables.forEach(cable => cable.adjustCableModularity(component))
             
-            console.log(component)
             component.adjustPortAndCableModularity(component)
         }
             

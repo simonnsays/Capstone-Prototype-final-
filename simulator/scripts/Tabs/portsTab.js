@@ -310,6 +310,7 @@ class PortsTab {
         return imgElement
     }
 
+    // ReInitializingh of the Onclick Event
     cableAttachmentListener(cable) {
         this.currentGroupPage.ports.forEach(port => {
             Object.keys(port.offset).forEach(key => {
