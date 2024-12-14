@@ -73,6 +73,20 @@ class Drawer {
         return false
     }
 
+    isBeingOpened(mouse) {
+        if(this.utilityTool.isInsideBox(mouse, this.pullBtn.getBoundingClientRect())) {
+            return true
+        } 
+        return false
+    }
+
+    isBeingUsed(mouse) {
+        if(this.utilityTool.isInsideBox(mouse, this.cableContainer.getBoundingClientRect())) {
+            return true
+        } 
+        return false
+    }
+
     // Remind User to Pull Drawer Down
     remindUser() {
         const image = document.querySelector('#pulleyImage')
@@ -201,10 +215,12 @@ class Drawer {
             // adjust cable background to indicate what state it is in
             this.adjustCableStateStyle(cable, cableCell)
 
+            // console.log(cable)
             // create image
             const cableImage = document.createElement('img')
+            // cableImage.src = cable.images.find(image => image.attachedTo === 'none').imageSrc
             cableImage.src = cable.images.drawer.imageSrc
-            
+
             // create slider
             const cableSlider = document.createElement('div')
             cableSlider.className = 'cable-slider'

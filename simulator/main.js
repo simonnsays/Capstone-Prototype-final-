@@ -17,9 +17,7 @@ class Main {
         this.utilityTool = new UtilityTool()
 
         // User
-        this.user = new User(
-            this.utilityTool, 
-            this.pcUnit)
+        this.user = new User(this.utilityTool)
 
         // Item Info Modal
         this.itemInfo = this.elementHandler.getItemInfoElements()
@@ -51,14 +49,16 @@ class Main {
             this.elementHandler, 
             this.utilityTool, 
             this.portsTab, 
-            this.bootUpTab, 
-            this.user)
+            this.bootUpTab,
+            this.user
+        )
         
         // Inventory
         this.inventory = new Inventory(
             this.elementHandler, 
             this.utilityTool, 
-            this.displayArea)
+            this.displayArea
+            )
 
         // Shop
         this.shop = new Shop(
@@ -68,17 +68,16 @@ class Main {
             this.itemInfo)
 
         //Assistant
-        const elementHandler = new ElementHandler();
-        const assistant = new Assistant(elementHandler);
-        assistant.asstInit();
-                
+        this.assistant = new Assistant(this.elementHandler)
+
         // Prevent Canvas Interaction when tabs are open
         window.addEventListener('mousedown', () => this.handleMouseDown())
 
         // Wattage Calculator
-        this.wattageCalculator = new wattageCalculator(
-            this.displayArea, 
-            this.canvas)
+        this.wattageCalculator = new wattageCalculator(this.displayArea, this.canvas)
+        console.log(this.wattageCalculator)
+        // Prevent Canvas Interaction when tabs are open
+        window.addEventListener('mousedown', () => this.handleMouseDown())
 
         // Canvas
         this.canvas = new Canvas(
@@ -87,7 +86,8 @@ class Main {
             this.displayArea, 
             this.user, 
             this.inventory,
-            this.wattageCalculator)
+            this.wattageCalculator
+        )
     }
 
     handleMouseDown() {
@@ -104,10 +104,12 @@ class Main {
     }
 
     start() {
+        console.log('test')
         // main code here
         this.shop.init() 
         this.displayArea.init()
-        this.canvas.animate()    
+        this.canvas.animate()   
+        this.assistant.asstInit() 
     }
 }
 

@@ -1,3 +1,4 @@
+import Component from "../Data/component.js"
 import components from "../Data/data.js"
 import SearchBar from "../Utility/searchBar.js"
 
@@ -99,10 +100,25 @@ class Shop{
     // Buy Component
     buyComponent(component) {
         // create clone of the component
-        const componentClone = JSON.parse(JSON.stringify(component))
+        // const componentClone = JSON.parse(JSON.stringify(component))
+        const componentClone = new Component({
+            id: this.utilityTool.createID(component.type),
+            name: component.name,
+            type: component.type,
+            specs: component.specs,
+            dimensions: component.dimensions,
+            isRotatable: component.isRotatable,
+            isAttached: component.isAttached,
+            defaultSource: component.defaultSource,
+            images: component.images,
+            slots: component.slots,
+            ports: component.ports,
+            cables: component.cables,
+        })
 
         // render component images
         this.utilityTool.createImages(componentClone.images)
+        componentClone.handleComponent(componentClone)
 
         // create unique ID 
         componentClone.id = this.utilityTool.createID(componentClone.type)        

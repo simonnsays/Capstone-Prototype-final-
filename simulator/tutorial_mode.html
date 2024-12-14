@@ -2,11 +2,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <link rel="stylesheet" href="./assistant/assistant.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style2.css">
-    <link rel="stylesheet" href="./assistant/assistant.css">
-    <link rel="icon" href="./favicon.png" type="image/x-icon">
+    <link rel="icon" href="../favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
+    <style>
+       .checkmark {
+        width: 30px;
+        height: 30px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        }
+
+        .completed-task .checkmark {
+            display: block; /* Make the checkmark visible when completed */
+            opacity: 1;
+        }
+
+        /* Additional style for completed tasks */
+        .completed-task {
+            background-color: #e0ffe0;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+
+        .completed-task .tasktitle {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        #task-status {
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        }
+
+        #drawtrashBox {
+        position: absolute;
+        top: 20px;
+        left: 570px;
+        width: 80px;
+        height: 80px;
+        background-color: #fef9db;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 0px solid transparent;
+        transition: all 0.2 linear;
+        user-select: none;
+        }
+
+        #drawtrashBox img {
+        width: 80%;
+        height: 80%;
+        opacity: 70%;
+        }
+
+        #drawtrashBox:hover {
+        background-color: #888;
+        }
+
+        #drawtrashBox:hover {
+        box-shadow: 3.4px 2.5px 4.9px rgba(0, 0, 0, 0.025),
+                    8.6px 6.3px 12.4px rgba(0, 0, 0, 0.035),
+                    17.5px 12.8px 25.3px rgba(0, 0, 0, 0.045),
+                    36.1px 26.3px 52.2px rgba(0, 0, 0, 0.055),
+                    99px 72px 143px rgba(0, 0, 0, 0.08);
+        }
+
+        .tooltiptext {
+         visibility: hidden;
+         width: 4em;
+         background-color: rgba(0, 0, 0, 0.253);
+         color: #fff;
+         text-align: center;
+         border-radius: 6px;
+         padding: 5px 0;
+         position: absolute;
+         z-index: 1;
+         top: 25%;
+         left: 110%;
+        }
+
+        .tooltiptext::after {
+         content: "";
+         position: absolute;
+         top: 50%;
+         right: 100%;
+         margin-top: -5px;
+         border-width: 5px;
+         border-style: solid;
+         border-color: transparent rgba(0, 0, 0, 0.386) transparent transparent;
+        }
+
+        .trash-icon:hover .tooltiptext {
+         visibility: visible;
+        }
+
+        .dialog {
+            display: none; 
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: white;
+            border: 1px solid #888;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .dialog-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .dialog-content button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            background-color: #f04f4f;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dialog-content button:hover {
+            background-color: #d43e3e;
+        }
+    </style>
 </head>
 <body>
     <!-- GAME CONTAINER -->
@@ -18,6 +149,7 @@
             <button id="openInv" data-type="button">INVENTORY</button>
             <button id="openWires" data-type="button">PORTS</button>
             <button id="openBootTab" data-type="button">BOOT</button>
+
             <button  id="mountUnmount" data-type="button">Mount Mode</button>
         </div>
 
@@ -90,7 +222,6 @@
 
         </div>
     </dialog>
-
 
     <!-- SHOP MODAL -->
     <dialog id="shopModal" class="modal">
@@ -279,6 +410,7 @@
         <!-- ASSISTANT IMAGE -->
         <div class="assistant-image-container"> 
             <div id="pulse" class="pulse"> </div>
+            
             <img src="./assets/Assistant/processor.png" class="assistant-image img-rltv" >
         </div>
 
@@ -290,7 +422,6 @@
             <!-- <p id="phrase2">LISTEN HERE YOU LITTLE BITCH</p>  -->
         </div>
     </div>
-
 
     <!-- FULL PAGE INFO / TASKS -->
     <dialog class="assistant-modal">
@@ -370,6 +501,7 @@
                 <p>There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. 
                 Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicator, reset button, and 3.5mm audio jack ports. </p>                    
                 <p>To connect the wires simply open the wires drawer and click the wires to their respective highlighted slots</p>
+                <p>To connect the wires simply open the wires inventory and drag the wires to their respective slots</p>
                 <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
                 <p><img src="assets/Assistant/wires1.png" class="timg" alt="wre1" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <p><img src="assets/Assistant/wires2.png" class="timg" alt="wre2" style="height: 300px; width: 400px;padding: 10px;"></p>
@@ -415,9 +547,130 @@
         <button id="alertOKButton">OK</button>
     </div>
 
-    
     <!-- Assistant Reassure -->
     <dialog class="asst-reassure"></dialog>
+
+    <!-------------------------- S C R I P T S ------------------------------->
     <script type="module" src="main.js"></script>
+    <!-- <script>
+        // Assistant task function
+        document.addEventListener('DOMContentLoaded', function () {
+        const taskCells = document.querySelectorAll('.task-cell');
+        
+        // Event listener for each task cell click
+        taskCells.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                toggleTaskDescription(index);   // Show description
+                markTaskCompleted(index);       // Mark task as completed
+            });
+        });
+
+        // Event listener for "Start Task" button clicks inside descriptions
+        const startTaskButtons = document.querySelectorAll('.start-task-btn');
+            startTaskButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const action = button.getAttribute('data-task');
+                    if (action) {
+                        performTaskAction(action);  // Perform the task action (open shop, inventory, etc.)
+                    }
+                    e.stopPropagation();  // Prevent toggling the description when button is clicked
+                });
+            });
+        });
+
+        // Mark tasks as completed and gray them out
+        function markTaskCompleted(taskIndex) {
+            const taskCells = document.querySelectorAll('.task-cell');
+            taskCells.forEach((cell, index) => {
+                if (index <= taskIndex) {
+                    cell.classList.add('completed-task');  // Add gray-out effect and completed style
+                    const checkmark = cell.querySelector('.checkmark');
+                    if (checkmark) {
+                        checkmark.style.display = 'block';  // Show the checkmark icon
+                    }
+                } else {
+                    cell.classList.remove('completed-task');
+                    const checkmark = cell.querySelector('.checkmark');
+                    if (checkmark) {
+                        checkmark.style.display = 'none';  // Hide the checkmark icon for incomplete tasks
+                    }
+                }
+            });
+        }
+
+        // Toggle the visibility of task descriptions
+        function toggleTaskDescription(taskIndex) {
+            const taskDescriptions = document.querySelectorAll('.task-description');
+
+            // Loop through all descriptions and hide the others
+            taskDescriptions.forEach((description, index) => {
+                if (index === taskIndex) {
+                    description.style.display = 'block';  // Show the current task description
+                } else {
+                    description.style.display = 'none';   // Hide other task descriptions
+                }
+            });
+
+            // Update the task status display
+            updateTaskStatus(taskIndex);
+        }
+
+        // Update the task status in the task-status element
+        function updateTaskStatus(taskIndex) {
+            const taskTitles = document.querySelectorAll('.tasktitle');
+            const taskStatus = document.querySelector('#task-status');
+
+            // Update status based on the current task
+            if (taskIndex >= 0 && taskIndex < taskTitles.length) {
+                const currentTaskTitle = taskTitles[taskIndex].textContent;
+                taskStatus.textContent = `Current Task: ${taskIndex + 1} - ${currentTaskTitle}`;
+            } else {
+                taskStatus.textContent = 'No task selected';
+            }
+        }
+
+        // Perform the corresponding task action (open modal or do something)
+        function performTaskAction(action) {
+            switch(action) {
+                case 'openShop':
+                    openShopModal();
+                    break;
+                case 'openInventory':
+                    openInventoryModal();
+                    break;
+                case 'connectWires':
+                    openWiresModal();
+                    break;
+                case 'powerOnPC':
+                    powerOnPC();
+                    break;
+                default:
+                    console.log("Unknown task action");
+            }
+        }
+
+        // Modal opening functions
+        function openShopModal() {
+            const shopModal = document.querySelector('#shopModal');
+            if (shopModal) shopModal.showModal();
+        }
+
+        function openInventoryModal() {
+            const invModal = document.querySelector('#invModal');
+            if (invModal) invModal.showModal();
+        }
+
+        function openWiresModal() {
+            const wiresModal = document.querySelector('#wiresModal');
+            if (wiresModal) wiresModal.style.display = 'block';  // or use .showModal() if it's a dialog
+        }
+
+        function powerOnPC() {
+            alert("PC is powering on!");
+        }
+
+        // Ensure no task is initially marked as completed
+        markTaskCompleted(-1);  // Reset task completion at the start
+    </script> -->
 </body>
 </html>

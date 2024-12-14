@@ -76,8 +76,7 @@ class UtilityTool {
                 id  = typePrefix + count
                 break
         }
-        
-         // change id count number
+        // change id count number
         this.idCount++
 
         return id

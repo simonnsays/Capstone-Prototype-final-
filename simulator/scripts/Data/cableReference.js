@@ -137,7 +137,7 @@ const cableRef = {
                 }
             },
             images: {
-                split: [
+                single: [
                     {
                         attachedTo: 'gpu', 
                         imageSrc: './assets/wires/8pin-pcie/8pin-pcie-attached(gen).png',

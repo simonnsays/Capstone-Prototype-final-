@@ -1,17 +1,17 @@
 class PCUnit {
     constructor(bootUpElements, utilityTool, displayArea, Canvas, portsTab, drawer, assistant) {
-        this.bootUpElements = bootUpElements;
-        this.utilityTool = utilityTool;
-        this.displayArea = displayArea;
-        this.Canvas = Canvas;
-        this.portsTab = portsTab;
-        this.drawer = drawer;
-        this.assistant = assistant;
+        this.bootUpElements = bootUpElements
+        this.utilityTool = utilityTool
+        this.displayArea = displayArea
+        this.Canvas = Canvas
+        this.portsTab = portsTab
+        this.drawer = drawer
+        this.assistant = assistant
 
-        this.power = 'off';
-        this.availableUnit = null;
-        this.reportArea = bootUpElements.reportArea || null;
-        this.screen = bootUpElements.screen || null;
+        this.power = 'off'
+        this.availableUnit = null
+        this.reportArea = bootUpElements.reportArea || null
+        this.screen = bootUpElements.screen || null
 
         // Track attached components and cables
 //        this.attachedComponents = new Set();
@@ -22,23 +22,27 @@ class PCUnit {
 //      this.requiredComponents = ['motherboard', 'cpu', 'storage', 'psu', 'ram'];
 //      this.requiredCables = ['24-pin-power', '8-pin-power'];
 
-        // Components checklist
+        // CHECKLIST:
+        // - if components are complete (status)
+        // - if components are compatible (compatibility)
+         // - if components are working fine (defect)
+        
         this.XXXcomponentsStatus = {
             motherboard: {
                 component: null,
-                powered: false,
+                powered: false
             },
             cpu: {
                 component: null,
-                powered: false,
+                powered: false
             },
             ram: [],
             gpu: null,
             psu: null,
             storage: [],
             cpuCooling: null,
-            caseCooling: [],
-        };
+            caseCooling: []
+        }
 
         this.componentsStatus = {
             motherboard: null,
@@ -48,25 +52,25 @@ class PCUnit {
             psu: null,
             storage: [],
             cpuCooling: null,
-            caseCooling: [],
-        };
+            caseCooling: []
+        }
 
-        this.bootUpRequirements = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling', 'gpu'];
+        this.bootUpRequirements = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling', 'gpu']
 
         this.unitStatus = {
             PSU_TO_MOTHERBOARD: {
                 compatibility: null,
-                error: null,
+                error: null
             },
             PSU_TO_CPU: {
                 compatibility: null,
-                error: null,
-            },
+                error: null
+            }
             // more status
-        };
+        }
 
-        this.state = ['off', 'on'];
-        this.currentState = this.state[0];
+        this.state = ['off','on']
+        this.currentState = this.state[0]
 
         this.reports = [
             {
@@ -90,8 +94,9 @@ class PCUnit {
         this.troubleshootBtn?.addEventListener('click', () => this.startTroubleshooting());
         this.closeErrorDialogBtn?.addEventListener('click', () => this.closeErrorDialog());
     }
-      // Generate a random boot error message
-      getRandomBootError() {
+    
+    // Generate a random boot error message
+    getRandomBootError() {
         const errors = [
             "No bootable device found.",
             "BIOS checksum error.",
@@ -496,44 +501,44 @@ class PCUnit {
     }
 
     powerOff() {
-        this.power = 'off';
-        this.screen?.classList.remove('screen-on');
-        this.clearReportsArea();
+        this.power = 'off'
+        this.screen?.classList.remove('screen-on')
+        this.clearReportsArea()
     }
 
     powerOn() {
-        this.power = 'on';
+        this.power = 'on'
 
-        this.screen?.classList.add('screen-on');
+        this.screen?.classList.add('screen-on')
 
-        setTimeout(() => this.report(), 500);
+        setTimeout(() => this.report(), 500)
     }
 
     report() {
-        const initialDelay = 1200;
-        const decreaseFactor = 0.75;
+        const initialDelay = 1200
+        const decreaseFactor = 0.75
 
         this.reports.forEach((report, i) => {
-            const delay = initialDelay * Math.pow(decreaseFactor, i);
-            setTimeout(() => this.createReportCell(report), delay);
+            const delay = initialDelay * Math.pow(decreaseFactor, i)
+            setTimeout(() => this.createReportCell(report), delay)
         });
     }
 
     createReportCell(report) {
-        const cell = document.createElement('div');
-        cell.classList = 'reportCell';
+        const cell = document.createElement('div')
+        cell.classList = 'reportCell'
 
-        const tag = document.createElement('div');
-        tag.classList = 'reportCellTag';
-        tag.innerHTML = report.tag;
-        cell.appendChild(tag);
+        const tag = document.createElement('div')
+        tag.classList = 'reportCellTag'
+        tag.innerHTML = report.tag
+        cell.appendChild(tag)
 
-        const def = document.createElement('div');
-        def.classList = 'reportCellDef';
-        def.innerHTML = report.def;
-        cell.appendChild(def);
+        const def = document.createElement('div')
+        def.classList = 'reportCellDef'
+        def.innerHTML = report.def
+        cell.appendChild(def)
 
-        this.reportArea?.appendChild(cell);
+        this.reportArea?.appendChild(cell)
     }
 
     clearReportsArea() {

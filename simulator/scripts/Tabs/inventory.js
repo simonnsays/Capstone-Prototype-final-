@@ -87,6 +87,7 @@ class Inventory {
 
             // Return removed item to inventory
             this.returnToInv(removedComponent)
+            // this.items.push(removedComponent)
         }
     }
     
@@ -117,8 +118,36 @@ class Inventory {
         this.items.push(component)
     }
 
+    // returning components to Inventory 
+    returnToInv(component) {
+        const tempDetachedComponents = []
+
+        const gatherAttachedComponents = (component) => {
+            component.slots.forEach(slot => {
+                if(slot.component) {
+                    tempDetachedComponents.push(slot.component)
+    
+                    gatherAttachedComponents(slot.component)
+
+                    slot.component = null
+                }
+            })
+        }
+
+        gatherAttachedComponents(component)
+
+        // remove attached component first
+        if(tempDetachedComponents.length > 0) {
+            tempDetachedComponents.forEach(tempItem => {
+                this.items.push(tempItem)
+            })
+        }  
+
+        this.items.push(component)
+    }
+
     // Create Port Attributes
-    createPortAttr(port, ref) {
+    createPortAttr(port, ref) { 
         // create a copy of the reference to avoid ports pointing on the same attributes
         const refClone = JSON.parse(JSON.stringify(ref))
 
@@ -141,15 +170,14 @@ class Inventory {
         // find the reference for the specific port type
         const currentRef = refClone.find(refcable => refcable.type === cable.type) 
 
-        // create new class object
-        const newCable = new Cable({
+        // return new class object
+        return new Cable({
             id: this.utilityTool.createID('cable'),
             name: currentRef.name,
             type: currentRef.type,
             ends: currentRef.ends,
             images: currentRef.images
-        })
-        return newCable
+        })  
     }
 
     // Placing of Components to Display Area
@@ -170,11 +198,15 @@ class Inventory {
         component.cables = component.cables.map(cable=> {
             const cableClone = this.createCableAttr(cable, currentCableRef) 
             // adjust psu modularity
-            if(component.type === 'psu') {
-                cableClone.adjustCableModularity(component, cableClone)
-            }
+            
             return cableClone
         })
+        if(component.type === 'psu') {
+            component.cables.forEach(cable => cable.adjustCableModularity(component))
+            
+            component.adjustPortAndCableModularity(component)
+        }
+            
         // add to Table
         if(!table.component) {
             this.displayArea.table.component = component

@@ -73,7 +73,7 @@ body {
 .button {
     height: 70%;
     /* border: 2px solid black; */
-    border-radius: 10px;
+    border-radius: 100px;
     padding: 5px;
 }
 .button:hover {
@@ -101,6 +101,7 @@ body {
     z-index: 1;
     display: flex;
     flex-direction: column;
+    /* position: relative; */
 }
 .button-wrapper > button, #button1, #button2 {
     height: 2.7rem;
@@ -115,6 +116,7 @@ body {
 }
 .button-wrapper > button:hover {
     background-color: var(--mint);
+    /* background-color: rgba(0, 0, 0, .25); */
 }
 [data-type="menu"] {
     z-index: 10;
@@ -134,6 +136,7 @@ body {
 #mountUnmount:hover {
     background-color: none; 
 }
+
 /* MODALS, CONTENTS, ITEM SLIDERS */
 .modal{
     border-radius: 20px;   
@@ -215,7 +218,7 @@ body {
 #wiresModal {
     width: 900px;
     height: 600px;
-    z-index: 3;
+    z-index: 15;
     position: fixed;
     top: calc(50%-600px/2);
     left: calc(50%-900px/2);
@@ -377,7 +380,7 @@ body {
     /* opacity: .7;  */
 }
 
-/* PORT SLIDER FOR LABEL */
+/********************* PORT SLIDER FOR LABEL ************************************/
 .port-slider {
     background-color: var(--teal);
     width: 100%;
@@ -395,9 +398,8 @@ body {
     bottom: 0;
 }
 
-/* WIRES CABLE DRAWER */
+/********************** WIRES CABLE DRAWER ************************************/
 #wiresDrawer {
-    /* width: 1300px; */
     width: 80vw;
     height: 280px;
     display: flex;
@@ -528,7 +530,7 @@ body {
     transform: scale(1.07);
 }
 
-/*COMPONENT INFORMATION */
+/********************************COMPONENT INFORMATION ********************************/
 #itemInfoModal {
     height: 670px;
     width: 450px;
@@ -612,7 +614,6 @@ body {
     background-color: var(--mint);
 }
 
-
 /****************************************** BOOT UP TAB ****************************/ 
 #bootUpTab {
     display: none;
@@ -622,6 +623,11 @@ body {
     background-color: white;
     padding: 20px;
     z-index: 1;
+    /* z-index: 15;
+    position: fixed;
+    background-color: white;
+
+    padding: 20px; */
 }
 
 .bootTabBodyWrapper {
@@ -631,6 +637,7 @@ body {
     display: flex;
     gap: 15px;
     align-items: center;
+
     padding-top: 10px;
 }
 
@@ -719,7 +726,6 @@ body {
     background-color: var(--light-lime);
     position: relative;
     overflow: hidden;
-
     /* border: solid 5px black; */
     border-radius: 20px ;
 }
@@ -735,6 +741,16 @@ body {
     position: absolute;
     top: 120px;
     left: 60px;
+}
+/* #screen { */
+.screen-on {
+    width: 323;
+    height: 176.5;
+    background-color: rgba(255, 255, 255,.25);
+    color: yellow;
+    position: absolute;
+    top: 133;
+    left: 73;
 }
 #unitPlaceHolder {
      width: 200px;
@@ -875,4 +891,17 @@ body {
     70% {transform: rotate(-10deg);}
     100% {transform: rotate(0deg);}
     
+}
+@keyframes reportCellSlide {
+    0% {
+        top: calc(20%);
+        opacity: .0;
+    }
+    50% {
+        opacity: .0;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
 }

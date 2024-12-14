@@ -1,0 +1,72 @@
+LEGEND:
+o = currently working out
+/ = task finished
+| = task not completely finished
+! - Priority
+
+TODO:
+- Process of transferring items from shop to inv
+- Image rendering of Shop Items 
+
+[|] - merge old proto [SHOP] to final proto shop
+    |_ [/] - add search bar functions
+    |_ [/] - add component categories functions
+    |_ [/] - add component details before buying
+            |_ [|] - add change of specs information function
+    |_ [/] - add quick buy function
+
+[o] - microATX are still not supported by the system
+    |_ [] - 
+    
+[] - cpu socket types (AM4, AM5, LG... etc.) are still not implemented
+
+[] - merge old proto [INVENTORY] to final proto inventory
+    |_ [] - add search bar functions
+    |_ [] - add component categories functions
+    |_ [] - add quick buy function
+
+!!!High Priority:
+[!] - Finish Ports Image assets 
+    |_ [/] - Motherboard
+            |_ [/] - 24Pin_power
+            |_ [/] - CPU_8+8pin
+            |_ [] - 
+    |_ [] - PSU 
+            |_ [/] - 24Pin_power
+            |_ [/] - CPU_8x8pin
+            |_ [/] - Pcie 
+            |_ [] - 
+    |_ [/] - GPU
+            |_ [/] - 16pin
+    |_ [/] - Storage
+            |_ [/] - sata data port
+            |_ [/] - sata power port
+            |_ [/] - Cable   
+    |_ [/] - fans
+            |_ [/] - 4pin_power
+    |_ [] - front panels
+            |_ [] - power
+            |_ [] - usb
+            |_ [] - reset
+            |_ [] - LED
+            |_ [] - speakerbf`
+
+**** Boot up feature
+[/] - required components check
+[o o o] - attached components wires check
+
+
+!!! REBOOT THE CABLE ATTACHMENT function
+[] - reboot the funtions
+
+When adding new component:
+
+[/] slot for base component
+[/] new component
+[/] images for component
+        |_ [/] default
+        |_ [/] sides / attached
+[/] new component ports (in portRef)
+        |_ [] port object
+        |_ [/] port images
+[/] new component Wires (in cableRef)
