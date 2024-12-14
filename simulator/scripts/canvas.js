@@ -206,7 +206,7 @@ class Canvas {
         this.user.resetTempProperties()
     }
 
-      // Custom Alert Handling
+    // Custom Alert Handling
     showAlert(message) {
         this.alertMessage.textContent = message
         this.alertBox.classList.remove('hidden')
@@ -305,13 +305,6 @@ class Canvas {
         this.confirmationDialog.style.display = 'none'
         this.componentToRemove = null
     }
-
-    cancelRemoval() {
-        this.user.returnComponentToShelf()
-        this.user.resetTempProperties()
-        this.confirmationDialog.style.display = 'none'
-        this.componentToRemove = null
-    }
     
     // Function to cancel the removal process
     cancelRemoval() {
@@ -324,7 +317,7 @@ class Canvas {
     // Function to remove the component from the canvas
     removeComponentFromCanvas(component) {
         this.displayArea.removeComponent(component)
-        console.log(`${component.name} has been removed.`)
+        // console.log(`${component.name} has been removed.`)
     }
 
     // Redraw the entire canvas to reflect changes

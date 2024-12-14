@@ -122,6 +122,28 @@ class DisplayArea {
         return false
     }
 
+    removeComponent(component) {
+        // console.log(`Removing component: ${component.name}`);
+
+        // Remove from table
+        if (this.table.component && this.table.component.id === component.id) {
+            this.table.component = null;
+            console.log(`${component.name} removed from table.`);
+        }
+
+        // Remove from shelf
+        const shelfIndex = this.shelf.findIndex(
+            (spot) => spot.component && spot.component.id === component.id
+        );
+        if (shelfIndex !== -1) {
+            this.shelf[shelfIndex].component = null;
+            // console.log(`${component.name} removed from shelf.`);
+        }
+
+        // Update display area information
+        this.update();
+    }
+
     // Create Bounding Box
     createBox(component, display, givenSide) {
         // get access to the components default side

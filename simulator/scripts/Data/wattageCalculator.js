@@ -53,10 +53,9 @@ class wattageCalculator {
     // Update the wattage display in the target div
     updateWattageDisplay(displayText) {
         const wattageElement = document.getElementById('wattageDisplay');
-        console.log(wattageElement)
-    if (wattageElement) {
-        wattageElement.textContent = displayText; // Update with formatted text
-    }
+        if (wattageElement) {
+            wattageElement.textContent = displayText; // Update with formatted text
+        }
     }
 }
 export default wattageCalculator

@@ -115,12 +115,12 @@ class Drawer {
     initializePSUCables(component) {
         // Handle non-modular PSU
         if (!component.isModular) {
-            console.log("PSU is non-modular. Attaching all PSU cables by default.");
+            // console.log("PSU is non-modular. Attaching all PSU cables by default.");
 
             // Connect all PSU cables
             component.cables.forEach((cable) => {
                 cable.ends.psu.connected = true;
-                console.log(`Cable ${cable.type} connected to PSU.`);
+                // console.log(`Cable ${cable.type} connected to PSU.`);
             });
         }
     }
@@ -128,7 +128,7 @@ class Drawer {
     initializeStoragePowerCables(storageComponent, psu) {
         // Check if PSU is non-modular
         if (!psu.isModular) {
-            console.log("PSU is non-modular. Attaching storage power cables without ports.");
+            // console.log("PSU is non-modular. Attaching storage power cables without ports.");
     
             // Iterate over storage component's cables
             storageComponent.cables.forEach((cable) => {
@@ -136,13 +136,13 @@ class Drawer {
                 if (cable.type === "sata-power" && cable.ends) {
                     cable.ends.psu.connected = true; // Mark the PSU end as connected
                     cable.ends.storage.connected = true; // Mark the Storage end as connected
-                    console.log(`Storage power cable ${cable.type} connected directly to PSU and storage.`);
+                    // console.log(`Storage power cable ${cable.type} connected directly to PSU and storage.`);
                 } else {
-                    console.warn(`Cable ${cable.type} is not a power cable or lacks ends.`);
+                    // console.warn(`Cable ${cable.type} is not a power cable or lacks ends.`);
                 }
             });
         } else {
-            console.log("PSU is modular. Storage power cables require port connections.");
+            // console.log("PSU is modular. Storage power cables require port connections.");
         }
     }
 
@@ -215,7 +215,6 @@ class Drawer {
             // adjust cable background to indicate what state it is in
             this.adjustCableStateStyle(cable, cableCell)
 
-            // console.log(cable)
             // create image
             const cableImage = document.createElement('img')
             // cableImage.src = cable.images.find(image => image.attachedTo === 'none').imageSrc

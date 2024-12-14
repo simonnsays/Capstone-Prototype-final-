@@ -71,7 +71,7 @@ class Component {
 
     adjustPortAndCableModularity(component) {
         component.ports.forEach(port => {
-            console.log (port)    
+            // console.log (port)    
         })
     }
 }

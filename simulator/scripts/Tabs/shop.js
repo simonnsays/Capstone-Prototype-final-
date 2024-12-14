@@ -47,11 +47,11 @@ class Shop{
         this.isActive = true;
 
     // Automatically select the first category when the shop is opened
-    if (this.categories.length > 0) {
-        const firstCategory = this.categories[0].dataset.id;
-        this.selectCategory(firstCategory);
-        this.update();
-    }
+    // if (this.categories.length > 0) {
+    //     const firstCategory = this.categories[0].dataset.id;
+    //     this.selectCategory(firstCategory);
+    //     this.update();
+    // }
 }
 
     // Close Shop Tab
@@ -89,6 +89,8 @@ class Shop{
         items.forEach(item => {
             const imageSource = item.images.find(image => image.side == item.defaultSource).imageSrc
             const element = this.utilityTool.makeItemElement(item, imageSource) 
+             
+            // console.log(imageSource)
 
             // associate item with the html element 
             element.component = item
@@ -226,14 +228,12 @@ class Shop{
         // apply category filter
         if(this.selectedCategory.length !== 0) {
 
-            this.filteredItems = this.searchResults
-            .filter(item => 
-                item.type.toLowerCase() === this.selectedCategory.toLowerCase())
+            this.filteredItems = this.searchResults.filter(
+                item => item.type.toLowerCase() === this.selectedCategory.toLowerCase())
         } else {
             // apply search filter instead
             this.filteredItems = this.searchResults
         }
-
         // create elements after filter application
         this.createItemElements(this.filteredItems, this.itemsContainer)
 
