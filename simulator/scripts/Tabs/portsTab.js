@@ -267,7 +267,7 @@ class PortsTab {
         // Only set fully connected if both ends are attached
         if (bothEndsConnected) {
             this.attachedCablesStatus[cable.type].fullyConnected = true;
-            console.log(`Cable ${cable.type} is fully connected.`);
+            // console.log(`Cable ${cable.type} is fully connected.`);
         } else {
             this.attachedCablesStatus[cable.type].fullyConnected = false;
         }
