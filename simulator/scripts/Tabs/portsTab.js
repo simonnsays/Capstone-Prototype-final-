@@ -170,9 +170,22 @@ class PortsTab {
             // create a new port object to group components
             const portGroup = {
                 component: currentComponentType,    // name of the component of the group of ports
-                ports: [...component.ports]         // the group of ports
+                ports: []                            // the group of ports
             }
 
+            if(currentComponentType === 'psu') {
+                switch(component.specs.cableModularity) {
+                    case 'non-modular':
+                        portGroup.ports.push(component.ports.find(port => port.type === 'non-modular'))
+                        break
+                    default:
+                        portGroup.ports = [...component.ports]
+                        break
+                }
+            } else {
+                portGroup.ports = [...component.ports]
+            }
+            
             // puh object to the portGroups list
             this.portGroups.push(portGroup) 
         }
@@ -286,14 +299,16 @@ class PortsTab {
     removeHighlights() {
         this.portGroups.forEach(group => {
             group.ports.forEach(port => {
-                Object.keys(port.offset).forEach(key => {
-                    const currentOffset = port.offset[key]
-
-                    if(currentOffset.highlight) {
-                        port.div.removeChild(currentOffset.highlight)
-                        delete currentOffset.highlight
-                    }
-                })
+                if(port.offset) {
+                    Object.keys(port.offset).forEach(key => {
+                        const currentOffset = port.offset[key]
+    
+                        if(currentOffset.highlight) {
+                            port.div.removeChild(currentOffset.highlight)
+                            delete currentOffset.highlight
+                        }
+                    })
+                }
             })
         })
     }
@@ -342,8 +357,8 @@ class PortsTab {
 
     // Display Attached Cables
     displayAttachedCables() {
-        if(this.portGroups.length < 1 || !this.currentGroupPage) return
-        // iterat through group page
+        if(this.portGroups.length < 1 || !this.currentGroupPage || this.currentGroupPage.ports.some(port => port.type === 'non-modular')) return
+        // iterate through group page
         this.currentGroupPage.ports.forEach(port => {
             const baseDiv = port.div    
 
@@ -382,24 +397,26 @@ class PortsTab {
     // ReInitializingh of the Onclick Event
     cableAttachmentListener(cable) {
         this.currentGroupPage.ports.forEach(port => {
-            Object.keys(port.offset).forEach(key => {
-                const currentOffset = port.offset[key] 
-                // highlight onclick
-                if(currentOffset.highlight) {
-                    const clickHandler = () => {
-                        // attempt to attach cable
-                        this.attachCable(currentOffset, cable)
-                        // remove port highlight
-                        this.removeHighlights()
-                        // remove cable highlight
-                        this.drawer.clearSelectedCable()
-                        // update ports and cables
-                        this.update(this.displayArea.table, this.displayArea.shelf)
-                    }
-                    currentOffset.highlight.removeEventListener('click', clickHandler)
-                    currentOffset.highlight.addEventListener('click', clickHandler)
-                }    
-            })
+            if(port.offset) {
+                Object.keys(port.offset).forEach(key => {
+                    const currentOffset = port.offset[key] 
+                    // highlight onclick
+                    if(currentOffset.highlight) {
+                        const clickHandler = () => {
+                            // attempt to attach cable
+                            this.attachCable(currentOffset, cable)
+                            // remove port highlight
+                            this.removeHighlights()
+                            // remove cable highlight
+                            this.drawer.clearSelectedCable()
+                            // update ports and cables
+                            this.update(this.displayArea.table, this.displayArea.shelf)
+                        }
+                        currentOffset.highlight.removeEventListener('click', clickHandler)
+                        currentOffset.highlight.addEventListener('click', clickHandler)
+                    }    
+                })
+            }
         })
     }
 
