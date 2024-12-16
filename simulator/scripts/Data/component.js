@@ -69,7 +69,7 @@ class Component {
         })
     }
 
-    adjustPortAndCableModularity(component) {
+    adjustPSUPortAndCableModularity(component) {
         component.ports.forEach(port => {
             // console.log (port)    
         })

@@ -163,10 +163,9 @@ class Drawer {
 
     // Get Cable Information
     getCables(component) {
-                
-        if (component.type === "psu") {
-            this.initializePSUCables(component); // Ensure initializePSUCables will pass
-        }
+        // if (component.type === "psu") {
+        //     this.initializePSUCables(component); // Ensure initializePSUCables will pass
+        // }
         
         // const ref = cableRef[component.type] // reference for cables (see imports) 
 

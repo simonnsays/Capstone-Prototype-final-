@@ -195,16 +195,38 @@ class Inventory {
         })
 
         // create(fill) cable attributes
-        component.cables = component.cables.map(cable=> {
-            const cableClone = this.createCableAttr(cable, currentCableRef) 
-            // adjust psu modularity
-            
-            return cableClone
-        })
-        if(component.type === 'psu') {
-            component.cables.forEach(cable => cable.adjustCableModularity(component))
-            
-            component.adjustPortAndCableModularity(component)
+        if(component.type !== 'psu') {
+            component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))
+        } else {
+            // different handling for PSUs
+            switch(component.specs.cableModularity) {
+                case 'non-modular':
+                    component.cables = component.cables.map(cable => {
+                        // create cable instance
+                        const newCable = this.createCableAttr(cable, currentCableRef)
+                        // find the next available port that matches the cable type
+                        const availablePort =  component.ports.find(port => 
+                            Object.keys(port.offset).some(key => port.offset[key].takes === cable.type && !port.offset[key].cableAttached))
+
+                        if(availablePort) {
+                            Object.keys(availablePort.offset).forEach(key => {
+                                const currOffset = availablePort.offset[key]
+                                // change logic so that the cable is already attached
+                                if(!currOffset.cableAttached && !newCable.ends[component.type].connected) {
+                                    currOffset.cableAttached = newCable
+                                    newCable.ends[component.type].connected = true
+                                }
+                            })
+                        }
+                        return newCable
+                    })
+                    break
+                case 'semi-modular':
+                    // still to be written code here
+                    break
+                default: 
+                component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))
+            }
         }
             
         // add to Table
