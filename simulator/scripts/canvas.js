@@ -238,12 +238,12 @@ class Canvas {
 
         // Allow GPU to be placed in any GPU slot (forward/backward compatibility for different PCIe generations i.e. pcie 3.0/4.0/5.0/6.0)
         if (componentType === 'gpu' && slotType === 'gpu') {
-            console.log('GPU detected, allowing compatibility for PCIe generations.')
+            // console.log('GPU detected, allowing compatibility for PCIe generations.')
             return true
         }
          // Allow CPU cooler to be placed in any cooling mount (forward/backward compatibility for different cooling mount(amd or intel))
          if (componentType === 'cooling' && slotType === 'cooling') {
-            console.log('CPU cooler detected, allowing compatibility for mount compatibility can be used anywhere.')
+            // console.log('CPU cooler detected, allowing compatibility for mount compatibility can be used anywhere.')
             return true
         }
         // Check if component type is included in data.js
@@ -260,7 +260,7 @@ class Canvas {
        
         // PSU Compatibility Logic
         if (componentType === 'psu') {
-        console.log('PSU detected, checking wattage compatibility.')
+        // console.log('PSU detected, checking wattage compatibility.')
 
         // Calculate the total wattage required by all components
         const totalWatts = this.wattageCalculator.calculateWattage()
@@ -268,11 +268,11 @@ class Canvas {
 
         if (totalWatts > psuWatts) {
             this.showAlert(
-                `Incompatible PSU detected! Total wattage of ${totalWatts}W exceeds PSU capacity of ${psuWatts}W.`
+                // `Incompatible PSU detected! Total wattage of ${totalWatts}W exceeds PSU capacity of ${psuWatts}W.`
             )
             return false
         }
-        console.log(`PSU is compatible. Total Wattage: ${totalWatts}W, PSU Capacity: ${psuWatts}W.`)
+        // console.log(`PSU is compatible. Total Wattage: ${totalWatts}W, PSU Capacity: ${psuWatts}W.`)
         return true
         }
 
@@ -308,8 +308,6 @@ class Canvas {
     
     // Function to cancel the removal process
     cancelRemoval() {
-        this.user.returnComponentToShelf()
-        this.user.resetTempProperties()
         this.confirmationDialog.style.display = 'none'
         this.componentToRemove = null
     }

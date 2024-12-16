@@ -128,7 +128,7 @@ class DisplayArea {
         // Remove from table
         if (this.table.component && this.table.component.id === component.id) {
             this.table.component = null;
-            console.log(`${component.name} removed from table.`);
+            // console.log(`${component.name} removed from table.`);
         }
 
         // Remove from shelf

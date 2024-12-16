@@ -152,16 +152,16 @@ class PortsTab {
 
     // Get Port Informations
     getPorts(component) {
-        // For PSU handling (i.e. modular or non-modular)
-        if (component.type === "psu") {
-            // checking if psu is modular or non-modular
-            if (component.isModular) {
-                console.log("PSU is modular. Including ports in portGroups.");
-            }else {
-                console.log("PSU is non-modular. Ports will not be included.");
-                return; // Skip adding non-modular PSU ports
-            }
-        }
+        // // For PSU handling (i.e. modular or non-modular)
+        // if (component.type === "psu") {
+        //     // checking if psu is modular or non-modular
+        //     if (component.isModular) {
+        //         console.log("PSU is modular. Including ports in portGroups.");
+        //     }else {
+        //         console.log("PSU is non-modular. Ports will not be included.");
+        //         return; // Skip adding non-modular PSU ports
+        //     }
+        // }
 
         // only create groups for components with ports 
         if(component.ports.length > 0) {
