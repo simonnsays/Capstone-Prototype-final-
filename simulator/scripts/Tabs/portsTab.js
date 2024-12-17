@@ -12,7 +12,6 @@ class PortsTab {
         // Open / Close tab buttons
         this.openBtn = this.elements.openBtn
         this.closeBtn = this.elements.closeBtn
-        window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
         
         // Wires / port tab
         this.isActive = false
@@ -30,6 +29,7 @@ class PortsTab {
 
         // This will keep track of the attachment status for cables
         this.attachedCablesStatus = []
+        
 
         // Ports
         this.portGroups = []
@@ -37,20 +37,20 @@ class PortsTab {
         this.i = 0
         this.currentGroupPage = this.portGroups[this.i]
 
+        this.displayArea = {
+            table: null,
+            shelf: null
+        }
+
         // Events
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
         this.closeBtn.addEventListener('click', () => this.closeTab(this.modal)) 
         window.addEventListener('click', (e) => this.handleWindowClick(e))
 
         // port group page change event
+        window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
         this.pageRightBtn.addEventListener('click', () => this.turnPortPageRight())
         this.pageLeftBtn.addEventListener('click', () => this.turnPortPageLeft())
-        window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
-
-        this.displayArea = {
-            table: null,
-            shelf: null
-        }
     }
 
     // Open Tab
@@ -152,16 +152,16 @@ class PortsTab {
 
     // Get Port Informations
     getPorts(component) {
-        // For PSU handling (i.e. modular or non-modular)
-        if (component.type === "psu") {
-            // checking if psu is modular or non-modular
-            if (component.isModular) {
-                console.log("PSU is modular. Including ports in portGroups.");
-            }else {
-                console.log("PSU is non-modular. Ports will not be included.");
-                return; // Skip adding non-modular PSU ports
-            }
-    }
+        // // For PSU handling (i.e. modular or non-modular)
+        // if (component.type === "psu") {
+        //     // checking if psu is modular or non-modular
+        //     if (component.isModular) {
+        //         console.log("PSU is modular. Including ports in portGroups.");
+        //     }else {
+        //         console.log("PSU is non-modular. Ports will not be included.");
+        //         return; // Skip adding non-modular PSU ports
+        //     }
+        // }
 
         // only create groups for components with ports 
         if(component.ports.length > 0) {
@@ -170,9 +170,22 @@ class PortsTab {
             // create a new port object to group components
             const portGroup = {
                 component: currentComponentType,    // name of the component of the group of ports
-                ports: [...component.ports]         // the group of ports
+                ports: []                            // the group of ports
             }
 
+            if(currentComponentType === 'psu') {
+                switch(component.specs.cableModularity) {
+                    case 'non-modular':
+                        portGroup.ports.push(component.ports.find(port => port.type === 'non-modular'))
+                        break
+                    default:
+                        portGroup.ports = [...component.ports]
+                        break
+                }
+            } else {
+                portGroup.ports = [...component.ports]
+            }
+            
             // puh object to the portGroups list
             this.portGroups.push(portGroup) 
         }
@@ -276,20 +289,26 @@ class PortsTab {
             }
         }
         return null;
+        // attach cable in logic
+        port.cableAttached = cable      
+        // update cable connection state
+        cable.ends[this.currentGroupPage.component].connected = true
     }
 
     // Remove Matching Port Highlight
     removeHighlights() {
         this.portGroups.forEach(group => {
             group.ports.forEach(port => {
-                Object.keys(port.offset).forEach(key => {
-                    const currentOffset = port.offset[key]
-
-                    if(currentOffset.highlight) {
-                        port.div.removeChild(currentOffset.highlight)
-                        delete currentOffset.highlight
-                    }
-                })
+                if(port.offset) {
+                    Object.keys(port.offset).forEach(key => {
+                        const currentOffset = port.offset[key]
+    
+                        if(currentOffset.highlight) {
+                            port.div.removeChild(currentOffset.highlight)
+                            delete currentOffset.highlight
+                        }
+                    })
+                }
             })
         })
     }
@@ -299,16 +318,15 @@ class PortsTab {
         Object.keys(cable.ends).forEach(endKey => {
             if (page && endKey === page.component) return true
         }) 
-
-    return false
+    
+        return false
     }
 
     // Show Matching Port Highlight
     highlightPorts(cable) {
         const currentPage = this.currentGroupPage
-
         // don't highlight if cable end is already connected
-        if(!currentPage || this.cableEndsMatchCurrentPage(cable, currentPage) || cable.ends[currentPage.component]?.connected) return   
+        if(!currentPage || this.cableEndsMatchCurrentPage(cable, currentPage) || cable.ends[currentPage.component]?.connected) return
 
         currentPage.ports.forEach(port => {
             const baseDiv = port.div
@@ -339,8 +357,8 @@ class PortsTab {
 
     // Display Attached Cables
     displayAttachedCables() {
-        if(this.portGroups.length < 1 || !this.currentGroupPage) return
-        // iterat through group page
+        if(this.portGroups.length < 1 || !this.currentGroupPage || this.currentGroupPage.ports.some(port => port.type === 'non-modular')) return
+        // iterate through group page
         this.currentGroupPage.ports.forEach(port => {
             const baseDiv = port.div    
 
@@ -354,7 +372,6 @@ class PortsTab {
                     baseDiv.appendChild(attachedCableImageDiv)
                 }   
             })
-        
         })
     }
 
@@ -373,44 +390,33 @@ class PortsTab {
         imgElement.style.left = cableOffset.left
         imgElement.style.transform = 'scale('+ cableImageRef.scale.width + ',' + cableImageRef.scale.height + ')'
         imgElement.style.transformOrigin = 'top left'
-
+        
         return imgElement
     }
 
-    // Highlight on click
-    highlightOnClick(port, cable) {
-        // attempt to attach cable
-        this.attachCable(port, cable)
-
-        // remove port highlight
-        this.removeHighlights()
-
-        // remove cable highlight
-        this.drawer.clearSelectedCable()
-    }
-
-    // 
+    // ReInitializingh of the Onclick Event
     cableAttachmentListener(cable) {
         this.currentGroupPage.ports.forEach(port => {
-            Object.keys(port.offset).forEach(key => {
-                const currentOffset = port.offset[key] 
-                // highlight onclick
-                if(currentOffset.highlight) {
-                    const clickHandler = () => {
-                        // attempt to attach cable
-                        this.attachCable(currentOffset, cable)
-                        // remove port highlight
-                        this.removeHighlights()
-                        // remove cable highlight
-                        this.drawer.clearSelectedCable()
-                        // update ports and cables
-                        this.update(this.displayArea.table, this.displayArea.shelf)
-                    }
-                       
-                    currentOffset.highlight.removeEventListener('click', clickHandler)
-                    currentOffset.highlight.addEventListener('click', clickHandler)
-                }    
-            })
+            if(port.offset) {
+                Object.keys(port.offset).forEach(key => {
+                    const currentOffset = port.offset[key] 
+                    // highlight onclick
+                    if(currentOffset.highlight) {
+                        const clickHandler = () => {
+                            // attempt to attach cable
+                            this.attachCable(currentOffset, cable)
+                            // remove port highlight
+                            this.removeHighlights()
+                            // remove cable highlight
+                            this.drawer.clearSelectedCable()
+                            // update ports and cables
+                            this.update(this.displayArea.table, this.displayArea.shelf)
+                        }
+                        currentOffset.highlight.removeEventListener('click', clickHandler)
+                        currentOffset.highlight.addEventListener('click', clickHandler)
+                    }    
+                })
+            }
         })
     }
 
@@ -424,53 +430,53 @@ class PortsTab {
         this.displayArea.table = table
         this.displayArea.shelf = shelf
 
-            // check if the table has a component
-            if(table.component) {
-                const tableComponent = table.component
+        // check if the table has a component
+        if(table.component) {
+            const tableComponent = table.component
 
-                /*  get ports method;
-                *   this method gets the type of port from data
-                *   and use that as reference to create other port attributes
-                *   taken from portReference.js
-                */
-                this.getPorts(tableComponent)
+            /*  get ports method;
+            *   this method gets the type of port from data
+            *   and use that as reference to create other port attributes
+            *   taken from portReference.js
+            */
+            this.getPorts(tableComponent)
 
-                // get the current port group page
-                this.currentGroupPage = this.portGroups[this.i]
+            // get the current port group page
+            this.currentGroupPage = this.portGroups[this.i]
 
-                // create the cells for port display
-                this. updateTabUI(tableComponent)
+            // create the cells for port display
+            this.updateTabUI(tableComponent)
+            
+            // display attached cables
+            this.displayAttachedCables()
 
-                // display attached cables
-                this.displayAttachedCables()
-
-                // update drawer
-                this.drawer.update(table, shelf)
-            }
-
-            // listen if one of the cable cells are clicked
-            this.drawer.cables.forEach(cable => {
-                cable.div.addEventListener('click', () => {                
-                    // clear previously selected cable
-                    if(this.drawer.cableSelected) {
-                        this.drawer.clearSelectedCable()
-                    }
-                    // select cable
-                    this.drawer.selectCable(cable)
-                
-                    // reset port highlights
-
-                    this.removeHighlights()
-                    this.highlightPorts(cable)
-                
-                    if(!this.currentGroupPage) return
-                
-                    // cable attachment
-                    this.cableAttachmentListener(cable)
-
-                })
-            })
+            // update drawer
+            this.drawer.update(table, shelf)
         }
 
+        // listen if one of the cable cells are clicked
+        this.drawer.cables.forEach(cable => {
+            cable.div.addEventListener('click', () => {                
+                // clear previously selected cable
+                if(this.drawer.cableSelected) {
+                    this.drawer.clearSelectedCable()
+                }
+                // select cable
+                this.drawer.selectCable(cable)
+
+                // reset port highlights
+                
+                this.removeHighlights()
+                this.highlightPorts(cable)
+
+                if(!this.currentGroupPage) return
+
+                // cable attachment
+                this.cableAttachmentListener(cable)
+                
+            })
+        })
     }
-    export default PortsTab
+    
+}
+export default PortsTab

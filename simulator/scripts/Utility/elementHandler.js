@@ -59,6 +59,7 @@ class ElementHandler {
             menuButton: document.querySelector('[data-type="menu"]'),
             tabButtons: document.querySelectorAll('[data-type="button"]'),
             mountToggle: document.querySelector('#mountUnmount')
+            
         } || null
     }
 
@@ -70,9 +71,10 @@ class ElementHandler {
             specsContainer: document.querySelector('#itemInfoSpecs'),
             btn1: document.querySelector('#button1'),
             btn2: document.querySelector('#button2'),
-        }
+        } || null
     }
     
+
     getAssistantElements() {
         return {
             container: document.querySelector('.assistant-container') ,

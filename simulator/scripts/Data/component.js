@@ -1,5 +1,6 @@
 class Component {
     constructor({
+        id,
         name, 
         type,
         size, 
@@ -17,6 +18,7 @@ class Component {
     }) {
 
         // Description
+        this.id = id
         this.name = name
         this.size = size
         this.type = type
@@ -43,9 +45,13 @@ class Component {
 
         // Wattage
         this.watts = watts
+
+        if(this.type === 'psu' && this.specs.cableModularity === 'non-modular') {
+            this.ports.push({type: 'non-modular'})
+        }
     }
 
-    static handleComponent(component) {
+    handleComponent(component) {
         // Handle Image dimensions
         component.images.forEach(element => { 
             // adjust width and height depending on side
@@ -64,6 +70,12 @@ class Component {
                     element.width = component.dimensions.width
                     element.height = component.dimensions.height
             }
+        })
+    }
+
+    adjustPSUPortAndCableModularity(component) {
+        component.ports.forEach(port => {
+            // console.log (port)    
         })
     }
 }

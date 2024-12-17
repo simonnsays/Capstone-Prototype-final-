@@ -1,13 +1,13 @@
 class User {
     constructor(utilityTool) {
         // Utility
-        this.utilityTool = utilityTool;
+        this.utilityTool = utilityTool
 
-        this.isDragging = false;
-        this.dragOffset = { x: 0, y: 0 };
-        this.mousePoint = { x: 0, y: 0 };
-        this.componentSelected = null;
-        this.availableSlots = [];
+        this.isDragging = false
+        this.dragOffset = {x: 0, y: 0}
+        this.mousePoint = {x: 0, y: 0}
+        this.componentSelected = null
+        this.availableSlots = []
 
         this.detachableComponents = []
         this.componentToDetach = null
@@ -34,9 +34,14 @@ class User {
         // component selected
         delete this.componentSelected.origin
         this.componentSelected = null
+
+        // detachables
+        // this.detachableComponents = []
+        // this.componentToDetach = null
+
     }
 
-    // Create Temporary Properties for Selected Component
+    // Create Temporary Properties
     createTempProperties() {
         this.isDragging = true
         this.dragOffset = {

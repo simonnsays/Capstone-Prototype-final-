@@ -137,7 +137,7 @@ const cableRef = {
                 }
             },
             images: {
-                split: [
+                single: [
                     {
                         attachedTo: 'gpu', 
                         imageSrc: './assets/wires/8pin-pcie/8pin-pcie-attached(gen).png',
@@ -264,9 +264,6 @@ const cableRef = {
                 },
             }
         },
-
-    ],
-    storage: [
         {       // sata - power
             name: 'Sata power',
             type: 'sata-power',
@@ -302,6 +299,8 @@ const cableRef = {
                 },
             } 
         },
+    ],
+    storage: [
         {       // sata - data
             name: 'Sata data',
             type: 'sata-data',

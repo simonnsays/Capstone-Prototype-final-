@@ -87,6 +87,7 @@ class Inventory {
 
             // Return removed item to inventory
             this.returnToInv(removedComponent)
+            // this.items.push(removedComponent)
         }
     }
     
@@ -117,8 +118,36 @@ class Inventory {
         this.items.push(component)
     }
 
+    // returning components to Inventory 
+    returnToInv(component) {
+        const tempDetachedComponents = []
+
+        const gatherAttachedComponents = (component) => {
+            component.slots.forEach(slot => {
+                if(slot.component) {
+                    tempDetachedComponents.push(slot.component)
+    
+                    gatherAttachedComponents(slot.component)
+
+                    slot.component = null
+                }
+            })
+        }
+
+        gatherAttachedComponents(component)
+
+        // remove attached component first
+        if(tempDetachedComponents.length > 0) {
+            tempDetachedComponents.forEach(tempItem => {
+                this.items.push(tempItem)
+            })
+        }  
+
+        this.items.push(component)
+    }
+
     // Create Port Attributes
-    createPortAttr(port, ref) {
+    createPortAttr(port, ref) { 
         // create a copy of the reference to avoid ports pointing on the same attributes
         const refClone = JSON.parse(JSON.stringify(ref))
 
@@ -127,7 +156,7 @@ class Inventory {
 
         // copy reference attributes to the copy of the port
         port.image = currentRef.image
-        port.offset = currentRef.offset
+        port.offset = currentRef.offset 
         port.style = currentRef.style
 
         if(currentRef.takes) port.takes = currentRef.takes 
@@ -141,15 +170,14 @@ class Inventory {
         // find the reference for the specific port type
         const currentRef = refClone.find(refcable => refcable.type === cable.type) 
 
-        // create new class object
-        const newCable = new Cable({
+        // return new class object
+        return new Cable({
             id: this.utilityTool.createID('cable'),
             name: currentRef.name,
             type: currentRef.type,
             ends: currentRef.ends,
             images: currentRef.images
-        })
-        return newCable
+        })  
     }
 
     // Placing of Components to Display Area
@@ -167,14 +195,40 @@ class Inventory {
         })
 
         // create(fill) cable attributes
-        component.cables = component.cables.map(cable=> {
-            const cableClone = this.createCableAttr(cable, currentCableRef) 
-            // adjust psu modularity
-            if(component.type === 'psu') {
-                cableClone.adjustCableModularity(component, cableClone)
+        if(component.type !== 'psu') {
+            component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))
+        } else {
+            // different handling for PSUs
+            switch(component.specs.cableModularity) {
+                case 'non-modular':
+                    component.cables = component.cables.map(cable => {
+                        // create cable instance
+                        const newCable = this.createCableAttr(cable, currentCableRef)
+                        // find the next available port that matches the cable type
+                        const availablePort =  component.ports.find(port => 
+                            Object.keys(port.offset).some(key => port.offset[key].takes === cable.type && !port.offset[key].cableAttached))
+
+                        if(availablePort) {
+                            Object.keys(availablePort.offset).forEach(key => {
+                                const currOffset = availablePort.offset[key]
+                                // change logic so that the cable is already attached
+                                if(!currOffset.cableAttached && !newCable.ends[component.type].connected) {
+                                    currOffset.cableAttached = newCable
+                                    newCable.ends[component.type].connected = true
+                                }
+                            })
+                        }
+                        return newCable
+                    })
+                    break
+                case 'semi-modular':
+                    // still to be written code here
+                    break
+                default: 
+                component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))
             }
-            return cableClone
-        })
+        }
+            
         // add to Table
         if(!table.component) {
             this.displayArea.table.component = component
@@ -216,4 +270,4 @@ class Inventory {
     }
 }
 
-export default Inventory
+export default Inventory    

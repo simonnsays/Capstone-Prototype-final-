@@ -14,13 +14,13 @@ class PCUnit {
         this.screen = bootUpElements.screen || null;
 
         // Track attached components and cables
-//        this.attachedComponents = new Set();
-//        this.attachedCables = new Set();
-//        this.cableConnectionStatus = {}; // Stores each cable’s connection status
+        this.attachedComponents = new Set();
+        this.attachedCables = new Set();
+        this.cableConnectionStatus = {}; // Stores each cable’s connection status
 
         // Required components and cables
-//      this.requiredComponents = ['motherboard', 'cpu', 'storage', 'psu', 'ram'];
-//      this.requiredCables = ['24-pin-power', '8-pin-power'];
+        this.requiredComponents = ['motherboard', 'cpu', 'cpuCooling', 'storage', 'psu', 'ram'];
+        this.requiredCables = ['24-pin-power', '8-pin-power'];
 
         // Components checklist
         this.XXXcomponentsStatus = {
@@ -432,13 +432,41 @@ class PCUnit {
             }
         })
     }
+    
+   // Collect all attached cables from PortsTab
+   getAttachedCables() {
+        if (!this.portsTab || typeof this.portsTab.getAttachedCablesStatus !== 'function') {
+            console.error('PortsTab or getAttachedCablesStatus method not found');
+            return;
+        }
 
+       // Refresh attached cables from PortsTab's updated status
+       this.attachedCables.clear();
+       for (const [cableType, status] of Object.entries(this.cableConnectionStatus)) {
+           if (status.fullyConnected) {
+               this.attachedCables.add(cableType);
+           }
+       }
+   
+       console.log("Attached cables:", Array.from(this.attachedCables));
+   }
+   
+    addAttachedComponent(component) {
+        this.attachedComponents.add(component.type);
+    }
+    
     checkPCState(unit) {
         // check defects and compatibility here
         this.fillComponentStatus(unit)
         // console.log(this.componentsStatus)
         let allowBoot = false
-        
+        // Get all attached cables
+        this.getAttachedCables();
+
+        // Filter both missing component and cables
+        const missingComponents = this.requiredComponents.filter((comp) => !this.attachedComponents.has(comp));
+        const missingCables = this.requiredCables.filter((cable) => !this.attachedCables.has(cable));
+
         // check for minimum boot up requirement
         const requiredComponentsArePresent = this.bootUpRequirements.every((req) => this.componentsStatus[req])
         this.checkPowerConnection()
@@ -451,7 +479,6 @@ class PCUnit {
         if(requiredComponentsArePresent) {
             
             this.checkPowerConnection()
-
 
             // proceed to check if everything is wired
             Object.keys(this.componentsStatus).forEach(componentReq => {
@@ -469,9 +496,21 @@ class PCUnit {
 
             if(!allCablesAreAttached) throw new Error ('not all cables are attached')
         }
+
+        return { missingComponents, missingCables}; 
     }
     
     fillComponentStatus(unit) {
+
+        if (!unit) {
+            console.error("Invalid unit passed to fillComponentStatus:", unit);
+            return;
+        }
+        if (!unit.type) {
+            console.error("Unit is missing a type:", unit);
+            return;
+        }
+        console.log("Processing unit:", unit.name || unit.type);
         switch(unit.type) {
             case 'ram':
                 this.componentsStatus.ram.push(unit);
@@ -546,34 +585,6 @@ class PCUnit {
         return component && component.type === 'chassis' ? component : null;
     }
 
-//    // Collect all attached cables from PortsTab
-//    getAttachedCables() {
-//        // Refresh attached cables from PortsTab's updated status
-//        const attachedCablesStatus = this.portsTab.getAttachedCablesStatus();
-//        this.attachedCables.clear();
-//        
-//        for (const cableType in attachedCablesStatus) {
-//            if (attachedCablesStatus[cableType].fullyConnected) {
-//                this.attachedCables.add(cableType);  // Only add fully connected cables
-//            }
-//        }
-//    
-//        console.log("Attached cables:", Array.from(this.attachedCables));
-//    }
-//
-//
-//    addAttachedComponent(component) {
-//        this.attachedComponents.add(component.type);
-//    }
-//
-//    getMissingComponents() {
-//        this.getAttachedCables();
-//
-//        const missingComponents = this.requiredComponents.filter((comp) => !this.attachedComponents.has(comp));
-//        const missingCables = this.requiredCables.filter((cable) => !this.attachedCables.has(cable));
-//
-//        return { missingComponents, missingCables };
-//    }
 }
 
 export default PCUnit;

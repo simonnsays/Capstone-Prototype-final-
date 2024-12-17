@@ -73,6 +73,20 @@ class Drawer {
         return false
     }
 
+    isBeingOpened(mouse) {
+        if(this.utilityTool.isInsideBox(mouse, this.pullBtn.getBoundingClientRect())) {
+            return true
+        } 
+        return false
+    }
+
+    isBeingUsed(mouse) {
+        if(this.utilityTool.isInsideBox(mouse, this.cableContainer.getBoundingClientRect())) {
+            return true
+        } 
+        return false
+    }
+
     // Remind User to Pull Drawer Down
     remindUser() {
         const image = document.querySelector('#pulleyImage')
@@ -101,12 +115,12 @@ class Drawer {
     initializePSUCables(component) {
         // Handle non-modular PSU
         if (!component.isModular) {
-            console.log("PSU is non-modular. Attaching all PSU cables by default.");
+            // console.log("PSU is non-modular. Attaching all PSU cables by default.");
 
             // Connect all PSU cables
             component.cables.forEach((cable) => {
                 cable.ends.psu.connected = true;
-                console.log(`Cable ${cable.type} connected to PSU.`);
+                // console.log(`Cable ${cable.type} connected to PSU.`);
             });
         }
     }
@@ -114,7 +128,7 @@ class Drawer {
     initializeStoragePowerCables(storageComponent, psu) {
         // Check if PSU is non-modular
         if (!psu.isModular) {
-            console.log("PSU is non-modular. Attaching storage power cables without ports.");
+            // console.log("PSU is non-modular. Attaching storage power cables without ports.");
     
             // Iterate over storage component's cables
             storageComponent.cables.forEach((cable) => {
@@ -122,13 +136,13 @@ class Drawer {
                 if (cable.type === "sata-power" && cable.ends) {
                     cable.ends.psu.connected = true; // Mark the PSU end as connected
                     cable.ends.storage.connected = true; // Mark the Storage end as connected
-                    console.log(`Storage power cable ${cable.type} connected directly to PSU and storage.`);
+                    // console.log(`Storage power cable ${cable.type} connected directly to PSU and storage.`);
                 } else {
-                    console.warn(`Cable ${cable.type} is not a power cable or lacks ends.`);
+                    // console.warn(`Cable ${cable.type} is not a power cable or lacks ends.`);
                 }
             });
         } else {
-            console.log("PSU is modular. Storage power cables require port connections.");
+            // console.log("PSU is modular. Storage power cables require port connections.");
         }
     }
 
@@ -149,10 +163,9 @@ class Drawer {
 
     // Get Cable Information
     getCables(component) {
-                
-        if (component.type === "psu") {
-            this.initializePSUCables(component); // Ensure initializePSUCables will pass
-        }
+        // if (component.type === "psu") {
+        //     this.initializePSUCables(component); // Ensure initializePSUCables will pass
+        // }
         
         // const ref = cableRef[component.type] // reference for cables (see imports) 
 
@@ -203,8 +216,9 @@ class Drawer {
 
             // create image
             const cableImage = document.createElement('img')
+            // cableImage.src = cable.images.find(image => image.attachedTo === 'none').imageSrc
             cableImage.src = cable.images.drawer.imageSrc
-            
+
             // create slider
             const cableSlider = document.createElement('div')
             cableSlider.className = 'cable-slider'

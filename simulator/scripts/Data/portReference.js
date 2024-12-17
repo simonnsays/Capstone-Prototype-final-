@@ -206,6 +206,13 @@ const portRef = {
                 }
             },
         },
+        {   //non-modular
+            type: 'non-modular',
+            // style: 'single',
+            image: {
+                imageSrc: './assets/psu/ports/nonmod.png',
+            },
+        }
        
     ],
     gpu: [

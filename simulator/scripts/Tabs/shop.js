@@ -1,3 +1,4 @@
+import Component from "../Data/component.js"
 import components from "../Data/data.js"
 import SearchBar from "../Utility/searchBar.js"
 
@@ -46,11 +47,11 @@ class Shop{
         this.isActive = true;
 
     // Automatically select the first category when the shop is opened
-    if (this.categories.length > 0) {
-        const firstCategory = this.categories[0].dataset.id;
-        this.selectCategory(firstCategory);
-        this.update();
-    }
+    // if (this.categories.length > 0) {
+    //     const firstCategory = this.categories[0].dataset.id;
+    //     this.selectCategory(firstCategory);
+    //     this.update();
+    // }
 }
 
     // Close Shop Tab
@@ -88,6 +89,8 @@ class Shop{
         items.forEach(item => {
             const imageSource = item.images.find(image => image.side == item.defaultSource).imageSrc
             const element = this.utilityTool.makeItemElement(item, imageSource) 
+             
+            // console.log(imageSource)
 
             // associate item with the html element 
             element.component = item
@@ -99,10 +102,27 @@ class Shop{
     // Buy Component
     buyComponent(component) {
         // create clone of the component
-        const componentClone = JSON.parse(JSON.stringify(component))
+        // const componentClone = JSON.parse(JSON.stringify(component))
+        const componentClone = new Component({
+            id: this.utilityTool.createID(component.type),
+            name: component.name,
+            type: component.type,
+            size: component.size,
+            specs: component.specs,
+            watts: component.watts,
+            dimensions: component.dimensions,
+            isRotatable: component.isRotatable,
+            isAttached: component.isAttached,
+            defaultSource: component.defaultSource,
+            images: component.images,
+            slots: component.slots,
+            ports: component.ports,
+            cables: component.cables,
+        })
 
         // render component images
         this.utilityTool.createImages(componentClone.images)
+        componentClone.handleComponent(componentClone)
 
         // create unique ID 
         componentClone.id = this.utilityTool.createID(componentClone.type)        
@@ -210,14 +230,12 @@ class Shop{
         // apply category filter
         if(this.selectedCategory.length !== 0) {
 
-            this.filteredItems = this.searchResults
-            .filter(item => 
-                item.type.toLowerCase() === this.selectedCategory.toLowerCase())
+            this.filteredItems = this.searchResults.filter(
+                item => item.type.toLowerCase() === this.selectedCategory.toLowerCase())
         } else {
             // apply search filter instead
             this.filteredItems = this.searchResults
         }
-
         // create elements after filter application
         this.createItemElements(this.filteredItems, this.itemsContainer)
 
