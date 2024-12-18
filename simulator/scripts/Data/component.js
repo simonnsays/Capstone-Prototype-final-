@@ -46,8 +46,14 @@ class Component {
         // Wattage
         this.watts = watts
 
-        if(this.type === 'psu' && this.specs.cableModularity === 'non-modular') {
-            this.ports.push({type: 'non-modular'})
+        if(this.type === 'psu') {
+            switch(this.specs.cableModularity) {
+                case 'non-modular':
+                    this.ports.push({type: 'non-modular'})
+                    break
+                case 'semi-modular':
+                    this.ports.push({type: 'semi-modular'})
+            }
         }
     }
 

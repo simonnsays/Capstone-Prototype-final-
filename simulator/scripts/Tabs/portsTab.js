@@ -178,6 +178,17 @@ class PortsTab {
                     case 'non-modular':
                         portGroup.ports.push(component.ports.find(port => port.type === 'non-modular'))
                         break
+                    case 'semi-modular':
+                        const nonDisplayedCables = ['24-pin-power', '8-pin-power']
+                        console.log(component.ports) 
+                        portGroup.ports.push(component.ports.find(port => port.type === 'non-modular'))
+                        portGroup.ports = component.ports.filter(port => {
+                            const a = nonDisplayedCables.find(cable => port.type === cable)
+                            if(!a) return port
+                        })
+
+                        console.log(portGroup.ports)
+                        break
                     default:
                         portGroup.ports = [...component.ports]
                         break

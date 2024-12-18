@@ -223,6 +223,7 @@ class Inventory {
                     break
                 case 'semi-modular':
                     // still to be written code here
+                    components.cables.
                     break
                 default: 
                 component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))
