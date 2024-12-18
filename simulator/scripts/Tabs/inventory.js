@@ -204,26 +204,26 @@ class Inventory {
                     component.cables = component.cables.map(cable => {
                         // create cable instance
                         const newCable = this.createCableAttr(cable, currentCableRef)
-                        // find the next available port that matches the cable type
-                        const availablePort =  component.ports.find(port => 
-                            Object.keys(port.offset).some(key => port.offset[key].takes === cable.type && !port.offset[key].cableAttached))
-
+                        //  available port
+                        const availablePort =  component.findAvailablePort(newCable)
                         if(availablePort) {
-                            Object.keys(availablePort.offset).forEach(key => {
-                                const currOffset = availablePort.offset[key]
-                                // change logic so that the cable is already attached
-                                if(!currOffset.cableAttached && !newCable.ends[component.type].connected) {
-                                    currOffset.cableAttached = newCable
-                                    newCable.ends[component.type].connected = true
-                                }
-                            })
+                            component.attachCable(availablePort, newCable, component.type)
                         }
                         return newCable
                     })
                     break
                 case 'semi-modular':
-                    // still to be written code here
-                    components.cables.
+                    component.cables = component.cables.map(cable => {
+                        // cable instance
+                        const newCable = this.createCableAttr(cable, currentCableRef)
+                        // different handling for Motherboard ATX and CPU connectors
+                        if(cable.type === '24-pin-power' || cable.type === '8-pin-power') {
+                            // available port
+                            const availablePort = component.findAvailablePort(newCable)
+                            if(availablePort) component.attachCable(availablePort, newCable, component.type)
+                        } 
+                        return newCable
+                    })
                     break
                 default: 
                 component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))

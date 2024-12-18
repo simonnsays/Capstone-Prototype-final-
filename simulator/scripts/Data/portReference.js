@@ -208,9 +208,14 @@ const portRef = {
         },
         {   //non-modular
             type: 'non-modular',
-            // style: 'single',
             image: {
                 imageSrc: './assets/psu/ports/nonmod.png',
+            },
+        },
+        {   //semi-modular
+            type: 'semi-modular',
+            image: {
+                imageSrc: './assets/psu/ports/semimod.png',
             },
         }
        

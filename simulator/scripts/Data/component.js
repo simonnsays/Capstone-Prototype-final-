@@ -79,9 +79,22 @@ class Component {
         })
     }
 
-    adjustPSUPortAndCableModularity(component) {
-        component.ports.forEach(port => {
-            // console.log (port)    
+    findAvailablePort(cable) {
+        // find the next available port that matches the cable type
+        return this.ports.find(port => 
+            Object.keys(port.offset).some(key => 
+                port.offset[key].takes === cable.type && !port.offset[key].cableAttached)
+        ) || null
+    }
+
+    attachCable(port, cable, componentType) {
+        Object.keys(port.offset).forEach(key => {
+            const currentOffset = port.offset[key]
+
+            if(!currentOffset.cableAttached && !cable.ends[componentType].connected) {
+                currentOffset.cableAttached = cable
+                cable.ends[componentType].connected = true
+            }
         })
     }
 }

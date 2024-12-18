@@ -180,14 +180,10 @@ class PortsTab {
                         break
                     case 'semi-modular':
                         const nonDisplayedCables = ['24-pin-power', '8-pin-power']
-                        console.log(component.ports) 
-                        portGroup.ports.push(component.ports.find(port => port.type === 'non-modular'))
-                        portGroup.ports = component.ports.filter(port => {
-                            const a = nonDisplayedCables.find(cable => port.type === cable)
-                            if(!a) return port
-                        })
-
-                        console.log(portGroup.ports)
+                        // filter out the ATX and CPU connectors
+                        portGroup.ports = component.ports.filter(port => nonDisplayedCables.find(cable => port.type !== cable)) 
+                        // place the semi modular display in start of the array
+                        portGroup.ports.unshift(portGroup.ports.splice(portGroup.ports.findIndex(port => port.type === 'semi-modular'),1)[0])               
                         break
                     default:
                         portGroup.ports = [...component.ports]
@@ -342,6 +338,7 @@ class PortsTab {
         currentPage.ports.forEach(port => {
             const baseDiv = port.div
             // match the cable type to the port.takes
+            if(!port.offset)return
             Object.keys(port.offset).forEach(key => {
                 const currentOffset = port.offset[key]  
 
@@ -368,11 +365,12 @@ class PortsTab {
 
     // Display Attached Cables
     displayAttachedCables() {
-        if(this.portGroups.length < 1 || !this.currentGroupPage || this.currentGroupPage.ports.some(port => port.type === 'non-modular')) return
+        if(this.portGroups.length < 1 || !this.currentGroupPage || this.currentGroupPage.ports.some(port => port.type === 'non-modular' || port.type === 'semi-modular') ) return
         // iterate through group page
         this.currentGroupPage.ports.forEach(port => {
             const baseDiv = port.div    
 
+            console.log(port)
             Object.keys(port.offset).forEach(key => {
                 const currentOffset = port.offset[key]  
 
