@@ -112,6 +112,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
+        tableDisplay: 'left',
         images: [
             {side: 'pack', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-02.png'}, 
@@ -242,6 +243,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am4/Ryzen 9 5900X.png'},  
@@ -308,6 +310,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'left', imageSrc: './assets/memory/corsair vengeance pro attached.png'},  
             {side: 'PACK', imageSrc: './assets/memory/corsair vengeance pro ddr4.png'},  
@@ -325,6 +328,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'right',
         images: [
             {side: 'right', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res.png'},  
             {side: 'PACK', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res - Copy.png'},  
@@ -352,6 +356,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
+        tableDisplay: 'pack',
         images: [
             {side: 'pack', imageSrc: './assets/cooling/be quiet pure rock.png'},  
             {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
@@ -376,6 +381,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
+        tableDisplay: 'pack',
         images: [
             {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
             {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 3060.png'}, 
@@ -383,7 +389,7 @@ const components = [
         ],
         slots: [],
         ports: [
-            {type: '8-pin'}
+            {type: '8-pin-pcie'}
         ]  
     },
     {        // Gigabyte Radeon RX 7900 XTX 16pin
@@ -397,6 +403,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
+        tableDisplay: 'pack',
         images: [
             {side: 'left', imageSrc: './assets/gpu/Gigabyte Radeon RX 7900 XTX.png'}, 
             {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 

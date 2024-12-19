@@ -152,17 +152,6 @@ class PortsTab {
 
     // Get Port Informations
     getPorts(component) {
-        // // For PSU handling (i.e. modular or non-modular)
-        // if (component.type === "psu") {
-        //     // checking if psu is modular or non-modular
-        //     if (component.isModular) {
-        //         console.log("PSU is modular. Including ports in portGroups.");
-        //     }else {
-        //         console.log("PSU is non-modular. Ports will not be included.");
-        //         return; // Skip adding non-modular PSU ports
-        //     }
-        // }
-
         // only create groups for components with ports 
         if(component.ports.length > 0) {
             const currentComponentType = component.type
@@ -176,12 +165,16 @@ class PortsTab {
             if(currentComponentType === 'psu') {
                 switch(component.specs.cableModularity) {
                     case 'non-modular':
+                        // only display the wired display
                         portGroup.ports.push(component.ports.find(port => port.type === 'non-modular'))
                         break
                     case 'semi-modular':
                         const nonDisplayedCables = ['24-pin-power', '8-pin-power']
                         // filter out the ATX and CPU connectors
-                        portGroup.ports = component.ports.filter(port => nonDisplayedCables.find(cable => port.type !== cable)) 
+                        portGroup.ports = component.ports.filter(port => {
+                            const filteredPort = nonDisplayedCables.find(cable => port.type === cable)
+                            if(!filteredPort) return port
+                        })
                         // place the semi modular display in start of the array
                         portGroup.ports.unshift(portGroup.ports.splice(portGroup.ports.findIndex(port => port.type === 'semi-modular'),1)[0])               
                         break
@@ -258,26 +251,26 @@ class PortsTab {
         // Update cable connection state
         cable.ends[component].connected = true;
     
-        // Get cable status for motherboard psu as false(starting value) for both ends
-        if (!this.attachedCablesStatus[cable.type]) {
-            this.attachedCablesStatus[cable.type] = { motherboard: false, psu: false, fullyConnected: false };
-        }
+        // // Get cable status for motherboard psu as false(starting value) for both ends
+        // if (!this.attachedCablesStatus[cable.type]) {
+        //     this.attachedCablesStatus[cable.type] = { motherboard: false, psu: false, fullyConnected: false };
+        // }
     
-        // Update the cable status for this component end
-        this.attachedCablesStatus[cable.type][component] = true;
+        // // Update the cable status for this component end
+        // this.attachedCablesStatus[cable.type][component] = true;
     
-        // Check if both ends are now connected
-        const bothEndsConnected = 
-            (cable.ends.motherboard && cable.ends.motherboard.connected) &&
-            (cable.ends.psu && cable.ends.psu.connected);
+        // // Check if both ends are now connected
+        // const bothEndsConnected = 
+        //     (cable.ends.motherboard && cable.ends.motherboard.connected) &&
+        //     (cable.ends.psu && cable.ends.psu.connected);
     
-        // Only set fully connected if both ends are attached
-        if (bothEndsConnected) {
-            this.attachedCablesStatus[cable.type].fullyConnected = true;
-            // console.log(`Cable ${cable.type} is fully connected.`);
-        } else {
-            this.attachedCablesStatus[cable.type].fullyConnected = false;
-        }
+        // // Only set fully connected if both ends are attached
+        // if (bothEndsConnected) {
+        //     this.attachedCablesStatus[cable.type].fullyConnected = true;
+        //     // console.log(`Cable ${cable.type} is fully connected.`);
+        // } else {
+        //     this.attachedCablesStatus[cable.type].fullyConnected = false;
+        // }
     }       
     
     // Method to get the current attached cables status
@@ -369,8 +362,6 @@ class PortsTab {
         // iterate through group page
         this.currentGroupPage.ports.forEach(port => {
             const baseDiv = port.div    
-
-            console.log(port)
             Object.keys(port.offset).forEach(key => {
                 const currentOffset = port.offset[key]  
 
@@ -469,12 +460,11 @@ class PortsTab {
                 // clear previously selected cable
                 if(this.drawer.cableSelected) {
                     this.drawer.clearSelectedCable()
-                }
+                } 
                 // select cable
                 this.drawer.selectCable(cable)
 
                 // reset port highlights
-                
                 this.removeHighlights()
                 this.highlightPorts(cable)
 

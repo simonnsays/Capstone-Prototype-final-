@@ -154,7 +154,7 @@ class Inventory {
         // find the reference for the specific port type
         const currentRef = refClone.find(refPort => refPort.type === port.type)
 
-        // copy reference attributes to the copy of the port
+        // copy reference attributes to the copy of the port\
         port.image = currentRef.image
         port.offset = currentRef.offset 
         port.style = currentRef.style

@@ -113,6 +113,7 @@ class Shop{
             dimensions: component.dimensions,
             isRotatable: component.isRotatable,
             isAttached: component.isAttached,
+            tableDisplay: component.tableDisplay,
             defaultSource: component.defaultSource,
             images: component.images,
             slots: component.slots,

@@ -11,6 +11,7 @@ class Component {
         isAttached = false,
         isModular = false, // if psu is non modular set value to false | if psu is modular set value to true
         defaultSource, 
+        tableDisplay,
         images, 
         slots = [], 
         ports = [],
@@ -28,6 +29,7 @@ class Component {
         // Image
         this.images = images
         this.defaultSource = defaultSource
+        this.tableDisplay = tableDisplay
 
         // States
         this.isRotatable = isRotatable

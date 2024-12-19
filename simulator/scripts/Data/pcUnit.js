@@ -14,18 +14,18 @@ class PCUnit {
         this.screen = bootUpElements.screen || null
 
         // Track attached components and cables
-//        this.attachedComponents = new Set();
-//        this.attachedCables = new Set();
-//        this.cableConnectionStatus = {}; // Stores each cable’s connection status
+        // this.attachedComponents = new Set();
+        // this.attachedCables = new Set();
+        // this.cableConnectionStatus = {}; // Stores each cable’s connection status
 
         // Required components and cables
-//      this.requiredComponents = ['motherboard', 'cpu', 'storage', 'psu', 'ram'];
-//      this.requiredCables = ['24-pin-power', '8-pin-power'];
+        // this.requiredComponents = ['motherboard', 'cpu', 'storage', 'psu', 'ram'];
+        //  this.requiredCables = ['24-pin-power', '8-pin-power'];
 
         // CHECKLIST:
         // - if components are complete (status)
         // - if components are compatible (compatibility)
-         // - if components are working fine (defect)
+        // - if components are working fine (defect)
         
         this.XXXcomponentsStatus = {
             motherboard: {

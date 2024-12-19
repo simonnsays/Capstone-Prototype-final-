@@ -136,7 +136,7 @@ class Drawer {
                 if (cable.type === "sata-power" && cable.ends) {
                     cable.ends.psu.connected = true; // Mark the PSU end as connected
                     cable.ends.storage.connected = true; // Mark the Storage end as connected
-                    // console.log(`Storage power cable ${cable.type} connected directly to PSU and storage.`);
+                    console.log(`Storage power cable ${cable.type} connected directly to PSU and storage.`);
                 } else {
                     // console.warn(`Cable ${cable.type} is not a power cable or lacks ends.`);
                 }

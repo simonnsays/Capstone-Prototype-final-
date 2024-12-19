@@ -374,7 +374,14 @@ class DisplayArea {
             const tableComponent = this.table.component
 
             // create bounding box for table component adjusted to the current side
-            this.createBox(tableComponent, this.table, this.currentSide)
+            if(tableComponent.isRotatable) {
+                this.createBox(tableComponent, this.table, this.currentSide)
+            } else if(!tableComponent.tableDisplay) {
+                console.log('Missing tableDisplay attribute. See Data.js and compare to component.js:14')
+            } else {
+                this.createBox(tableComponent, this.table, tableComponent.tableDisplay)
+            }
+            
 
             // update labels and rotate buttons visibility
             this.updateRotatableStyles(tableComponent.isRotatable)
