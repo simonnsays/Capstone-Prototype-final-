@@ -158,7 +158,6 @@ class PortsTab {
 
             // create a new port object to group components
             const portGroup = {
-                id: component.id,
                 component: currentComponentType,    // name of the component of the group of ports
                 ports: []                            // the group of ports
             }
@@ -312,17 +311,17 @@ class PortsTab {
 
                 // highlight port when matched and no attached cable yet
                 if (!currentOffset.cableAttached && cable.type === currentOffset.takes) {
-                    currentOffset.highlight = this.createHighlight(currentOffset) 
+                    currentOffset.highlight = this.createHighlight(currentOffset, 'port-highlight') 
                     baseDiv.appendChild(currentOffset.highlight)
                 } 
             })
         })
     }
 
-    createHighlight(offset) {
+    createHighlight(offset, className) {
         // create the highlight div
         const highlight = document.createElement('div')
-        highlight.className = 'port-highlight'
+        highlight.className = className //'port-highlight'
         highlight.style.top = offset.top
         highlight.style.left = offset.left
         highlight.style.width = offset.width
@@ -347,12 +346,14 @@ class PortsTab {
             Object.keys(port.offset).forEach(key => {
                 const currentOffset = port.offset[key]  
                 if(currentOffset.cableAttached) {
+                    // find the cable image reference
                     const cableImageRef = currentOffset.cableAttached.images[port.style].find(image => image.attachedTo === this.currentGroupPage.component)
-                    // currentOffset.cableAttached.div = this.createAttachedCableImage(cableImageRef, key)
-                    const attachedCableImageDiv = this.createAttachedCableImage(cableImageRef, key)
-                    console.log()
+                    // create attached cable image
+                    const attachedCableImageDiv = currentOffset.cableAttached.portDiv = this.createAttachedCableImage(cableImageRef, key)
+                    // append
                     baseDiv.appendChild(attachedCableImageDiv)
-                    // baseDiv.appendChild(currentOffset.cableAttached.div)
+                    console.log(attachedCableImageDiv.getBoundingClientRect())
+
                 }   
             })
         })
@@ -361,7 +362,6 @@ class PortsTab {
     // Creation of Attached Cable Div
     createAttachedCableImage(cableImageRef, key = null) {
         // create image element
-        // console.log(cableImageRef)
         const imgElement = document.createElement('img')
         imgElement.src = cableImageRef.imageSrc
         imgElement.className = 'port-attached'
@@ -460,16 +460,53 @@ class PortsTab {
             })
         })
 
-        // detachment listener
-        // if(!this.currentGroupPage)return
-        // this.currentGroupPage.ports.forEach(port => {
-        //     Object.keys(port.offset).forEach(key => {
-        //         currOffset = port.offset[key]
-        //         if(currOffset.cableAttached) {
-        //             this.createHighlight()
-        //         }
-        //     })
-        // })
+        this.detachmentListener()
+    }
+
+    detachmentListener() {
+        if(!this.currentGroupPage) return
+
+        this.currentGroupPage.ports.forEach(port => {
+            if(port.offset) {
+                Object.keys(port.offset).forEach(key => {
+                    const currentOffset = port.offset[key] 
+                    if(currentOffset.cableAttached) {
+                        console.log('hit')
+                        
+                        console.log(port)
+                        currentOffset.cableAttached.portDiv.onload = () => {
+                            const cableToPortDimensions = currentOffset.cableAttached.portDiv.getBoundingClientRect()
+                            // console.log(cableToPortDimensions)
+                        
+                            // console.log(currentOffset.cableAttached.portDiv.getBoundingClientRect())
+                            currentOffset.cableAttached.cableHighlight = this.createHighlight({
+                                left: cableToPortDimensions.left, 
+                                top: cableToPortDimensions.top, 
+                                width: cableToPortDimensions.width, 
+                                height: cableToPortDimensions.height
+                            }, 'cable-highlight')
+                            console.log(currentOffset.cableAttached.cableHighlight)
+                            port.div.appendChild(currentOffset.cableAttached.cableHighlight)
+
+                        }
+                        
+                        const clickHandler = () => {
+                            // detach cable
+                            currentOffset.cableAttached.ends[this.currentGroupPage.component].connected = false
+                            // currentOffset.cableAttached = null
+                            // remove port highlight
+                            this.removeHighlights()
+                            // remove cable highlight
+                            this.drawer.clearSelectedCable()
+                            // update ports and cables
+                            this.update(this.displayArea.table, this.displayArea.shelf)
+                        }
+                        currentOffset.cableAttached.div.removeEventListener('click', clickHandler)
+                        currentOffset.cableAttached.div.addEventListener('click', clickHandler)
+                    }    
+                })
+            }
+        })
     }
     
 }

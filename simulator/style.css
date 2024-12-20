@@ -329,18 +329,18 @@ body {
 
 /* will refer to data component port.offset */
 /* PORT HIGHLIGHT */
-.port-highlight {
+.port-highlight, .cable-highlight {
     background-color: rgba(0,255,70, .4);
     position: absolute;
 
     /* 
     /   adjustables
     */
-    top: 97;
+    /* top: 97;
     left: 33; 
 
     width: 110;
-    height: 45; 
+    height: 45;  */
 }
 .port-highlight:hover{
     cursor: pointer;
