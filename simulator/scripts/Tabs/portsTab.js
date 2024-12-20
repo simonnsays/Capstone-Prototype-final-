@@ -114,6 +114,7 @@ class PortsTab {
 
     // Turn Port Page Right
     turnPortPageRight() {
+        this.removeHighlights() 
         // adjust this.i and this.currentGroupPage to iterate to the next page
         this.i = (this.i - 1 + this.portGroups.length) % this.portGroups.length;
         this.currentGroupPage = this.portGroups[this.i]
@@ -126,6 +127,7 @@ class PortsTab {
 
     // Turn Port Page Left
     turnPortPageLeft() {
+        this.removeHighlights()
         // adjust this.i and this.currentGroupPage to iterate to the previous page
         this.i = (this.i + 1) % this.portGroups.length
         this.currentGroupPage = this.portGroups[this.i]
@@ -138,6 +140,7 @@ class PortsTab {
 
     // Update Port Page
     updatePage() {
+        console.log(this.currentGroupPage)
         // clear cells
         this.clearCells()
 
@@ -145,6 +148,7 @@ class PortsTab {
         this.updateTabUI()
         this.displayAttachedCables()
         if(this.drawer.cableSelected) {
+            // this.removeHighlights()
             this.highlightPorts(this.drawer.cableSelected)
         }
         this.cableAttachmentListener(this.drawer.cableSelected)      
@@ -158,6 +162,7 @@ class PortsTab {
 
             // create a new port object to group components
             const portGroup = {
+                id: component.id,
                 component: currentComponentType,    // name of the component of the group of ports
                 ports: []                            // the group of ports
             }
@@ -176,7 +181,7 @@ class PortsTab {
                             if(!filteredPort) return port
                         })
                         // place the semi modular display in start of the array
-                        portGroup.ports.unshift(portGroup.ports.splice(portGroup.ports.findIndex(port => port.type === 'semi-modular'),1)[0])               
+                        portGroup.ports.unshift(portGroup.ports.splice(portGroup.ports.findIndex(port => port.type === 'semi-modular'),1)[0])        
                         break
                     default:
                         portGroup.ports = [...component.ports]
@@ -196,7 +201,6 @@ class PortsTab {
                 if(slot.component.ports.length > 0) {
                     this.getPorts(slot.component)
                 }
-                
             }
         })
     }
@@ -204,10 +208,12 @@ class PortsTab {
     // Create Port Grid
     updateTabUI() { 
         if(!this.currentGroupPage) return
-        
-        // set title to the group component of the current group page
-        this.portsGroupLabel.innerHTML = this.currentGroupPage.component.toUpperCase()
+        const groupDuplicates = this.portGroups.filter(group => group.component === this.currentGroupPage.component)
+        // console.log(groupDuplicates)
 
+        // set title to the group component of the current group page
+        this.portsGroupLabel.innerHTML = this.currentGroupPage.component.toUpperCase() + ' ' + (groupDuplicates.findIndex(group => JSON.stringify(group) === JSON.stringify(this.currentGroupPage)) + 1)
+ 
         // create cell for each port of the group
         this.currentGroupPage.ports.forEach(port => {
             // create cell div
@@ -238,7 +244,6 @@ class PortsTab {
     attachCable(port, cable) {
 
         const component = this.currentGroupPage.component;
-
         // Verify if the cable has an end for this component type
         if (cable.ends[component] === undefined) {
             console.error(`Cable end not valid for component: ${component}`);
@@ -304,6 +309,7 @@ class PortsTab {
                         const currentOffset = port.offset[key]
     
                         if(currentOffset.highlight) {
+                            console.log(port)
                             port.div.removeChild(currentOffset.highlight)
                             delete currentOffset.highlight
                         }
@@ -357,9 +363,9 @@ class PortsTab {
     }
 
     // Display Attached Cables
-    displayAttachedCables() {
+    displayAttachedCables() { 
         if(this.portGroups.length < 1 || !this.currentGroupPage || this.currentGroupPage.ports.some(port => port.type === 'non-modular' || port.type === 'semi-modular') ) return
-        // iterate through group page
+        // iterate through page ports
         this.currentGroupPage.ports.forEach(port => {
             const baseDiv = port.div    
             Object.keys(port.offset).forEach(key => {
@@ -367,9 +373,11 @@ class PortsTab {
 
                 if(currentOffset.cableAttached) {
                     const cableImageRef = currentOffset.cableAttached.images[port.style].find(image => image.attachedTo === this.currentGroupPage.component)
+                    // currentOffset.cableAttached.div = this.createAttachedCableImage(cableImageRef, key)
                     const attachedCableImageDiv = this.createAttachedCableImage(cableImageRef, key)
-
+                    console.log()
                     baseDiv.appendChild(attachedCableImageDiv)
+                    // baseDiv.appendChild(currentOffset.cableAttached.div)
                 }   
             })
         })
@@ -378,6 +386,7 @@ class PortsTab {
     // Creation of Attached Cable Div
     createAttachedCableImage(cableImageRef, key = null) {
         // create image element
+        // console.log(cableImageRef)
         const imgElement = document.createElement('img')
         imgElement.src = cableImageRef.imageSrc
         imgElement.className = 'port-attached'
@@ -443,6 +452,7 @@ class PortsTab {
 
             // get the current port group page
             this.currentGroupPage = this.portGroups[this.i]
+            console.log(this.currentGroupPage)
 
             // create the cells for port display
             this.updateTabUI(tableComponent)
@@ -475,6 +485,17 @@ class PortsTab {
                 
             })
         })
+
+        // detachment listener
+        // if(!this.currentGroupPage)return
+        // this.currentGroupPage.ports.forEach(port => {
+        //     Object.keys(port.offset).forEach(key => {
+        //         currOffset = port.offset[key]
+        //         if(currOffset.cableAttached) {
+        //             this.createHighlight()
+        //         }
+        //     })
+        // })
     }
     
 }

@@ -41,6 +41,7 @@ class UtilityTool {
 
     // Create of Unique ID
     createID(componentType) {
+        console.log(this.idCount)
         // prefixes to separate component types
         const types = {
             chassis: 'ch',
