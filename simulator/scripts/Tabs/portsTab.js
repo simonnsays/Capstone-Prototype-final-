@@ -250,27 +250,6 @@ class PortsTab {
     
         // Update cable connection state
         cable.ends[component].connected = true;
-    
-        // // Get cable status for motherboard psu as false(starting value) for both ends
-        // if (!this.attachedCablesStatus[cable.type]) {
-        //     this.attachedCablesStatus[cable.type] = { motherboard: false, psu: false, fullyConnected: false };
-        // }
-    
-        // // Update the cable status for this component end
-        // this.attachedCablesStatus[cable.type][component] = true;
-    
-        // // Check if both ends are now connected
-        // const bothEndsConnected = 
-        //     (cable.ends.motherboard && cable.ends.motherboard.connected) &&
-        //     (cable.ends.psu && cable.ends.psu.connected);
-    
-        // // Only set fully connected if both ends are attached
-        // if (bothEndsConnected) {
-        //     this.attachedCablesStatus[cable.type].fullyConnected = true;
-        //     // console.log(`Cable ${cable.type} is fully connected.`);
-        // } else {
-        //     this.attachedCablesStatus[cable.type].fullyConnected = false;
-        // }
     }       
     
     // Method to get the current attached cables status
@@ -289,10 +268,6 @@ class PortsTab {
             }
         }
         return null;
-        // attach cable in logic
-        port.cableAttached = cable      
-        // update cable connection state
-        cable.ends[this.currentGroupPage.component].connected = true
     }
 
     // Remove Matching Port Highlight
@@ -358,13 +333,19 @@ class PortsTab {
 
     // Display Attached Cables
     displayAttachedCables() { 
-        if(this.portGroups.length < 1 || !this.currentGroupPage || this.currentGroupPage.ports.some(port => port.type === 'non-modular' || port.type === 'semi-modular') ) return
+        if(this.portGroups.length < 1 || !this.currentGroupPage ) return
+        let updatedPorts = this.currentGroupPage.ports
+
+        // remove semi modular and modular titles for displaying cables
+        if(this.currentGroupPage.ports.some(port => port.type === 'semi-modular' || port.type === 'non-modular')) {
+            updatedPorts = this.currentGroupPage.ports.filter(port => port.type !== 'semi-modular' && port.type !== 'non-modular')
+        }
+
         // iterate through page ports
-        this.currentGroupPage.ports.forEach(port => {
-            const baseDiv = port.div    
+        updatedPorts.forEach(port => {
+            const baseDiv = port.div               
             Object.keys(port.offset).forEach(key => {
                 const currentOffset = port.offset[key]  
-
                 if(currentOffset.cableAttached) {
                     const cableImageRef = currentOffset.cableAttached.images[port.style].find(image => image.attachedTo === this.currentGroupPage.component)
                     // currentOffset.cableAttached.div = this.createAttachedCableImage(cableImageRef, key)
@@ -446,7 +427,6 @@ class PortsTab {
 
             // get the current port group page
             this.currentGroupPage = this.portGroups[this.i]
-            console.log(this.currentGroupPage)
 
             // create the cells for port display
             this.updateTabUI(tableComponent)
