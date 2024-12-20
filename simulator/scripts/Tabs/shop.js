@@ -90,8 +90,6 @@ class Shop{
             const imageSource = item.images.find(image => image.side == item.defaultSource).imageSrc
             const element = this.utilityTool.makeItemElement(item, imageSource) 
              
-            // console.log(imageSource)
-
             // associate item with the html element 
             element.component = item
 
@@ -102,23 +100,23 @@ class Shop{
     // Buy Component
     buyComponent(component) {
         // create clone of the component
-        // const componentClone = JSON.parse(JSON.stringify(component))
+        const componentRef = JSON.parse(JSON.stringify(component))
         const componentClone = new Component({
             id: this.utilityTool.createID(component.type),
-            name: component.name,
-            type: component.type,
-            size: component.size,
-            specs: component.specs,
-            watts: component.watts,
-            dimensions: component.dimensions,
-            isRotatable: component.isRotatable,
-            isAttached: component.isAttached,
-            tableDisplay: component.tableDisplay,
-            defaultSource: component.defaultSource,
-            images: component.images,
-            slots: component.slots,
-            ports: component.ports,
-            cables: component.cables,
+            name: componentRef.name,
+            type: componentRef.type,
+            size: componentRef.size,
+            specs: componentRef.specs,
+            watts: componentRef.watts,
+            dimensions: componentRef.dimensions,
+            isRotatable: componentRef.isRotatable,
+            isAttached: componentRef.isAttached,
+            tableDisplay: componentRef.tableDisplay,
+            defaultSource: componentRef.defaultSource,
+            images: componentRef.images,
+            slots: componentRef.slots,
+            ports: componentRef.ports,
+            cables: componentRef.cables,
         })
 
         // render component images

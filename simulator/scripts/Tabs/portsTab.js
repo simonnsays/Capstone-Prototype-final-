@@ -114,7 +114,6 @@ class PortsTab {
 
     // Turn Port Page Right
     turnPortPageRight() {
-        this.removeHighlights() 
         // adjust this.i and this.currentGroupPage to iterate to the next page
         this.i = (this.i - 1 + this.portGroups.length) % this.portGroups.length;
         this.currentGroupPage = this.portGroups[this.i]
@@ -127,7 +126,6 @@ class PortsTab {
 
     // Turn Port Page Left
     turnPortPageLeft() {
-        this.removeHighlights()
         // adjust this.i and this.currentGroupPage to iterate to the previous page
         this.i = (this.i + 1) % this.portGroups.length
         this.currentGroupPage = this.portGroups[this.i]
@@ -140,7 +138,6 @@ class PortsTab {
 
     // Update Port Page
     updatePage() {
-        console.log(this.currentGroupPage)
         // clear cells
         this.clearCells()
 
@@ -148,7 +145,6 @@ class PortsTab {
         this.updateTabUI()
         this.displayAttachedCables()
         if(this.drawer.cableSelected) {
-            // this.removeHighlights()
             this.highlightPorts(this.drawer.cableSelected)
         }
         this.cableAttachmentListener(this.drawer.cableSelected)      
@@ -209,7 +205,6 @@ class PortsTab {
     updateTabUI() { 
         if(!this.currentGroupPage) return
         const groupDuplicates = this.portGroups.filter(group => group.component === this.currentGroupPage.component)
-        // console.log(groupDuplicates)
 
         // set title to the group component of the current group page
         this.portsGroupLabel.innerHTML = this.currentGroupPage.component.toUpperCase() + ' ' + (groupDuplicates.findIndex(group => JSON.stringify(group) === JSON.stringify(this.currentGroupPage)) + 1)
@@ -309,7 +304,6 @@ class PortsTab {
                         const currentOffset = port.offset[key]
     
                         if(currentOffset.highlight) {
-                            console.log(port)
                             port.div.removeChild(currentOffset.highlight)
                             delete currentOffset.highlight
                         }
