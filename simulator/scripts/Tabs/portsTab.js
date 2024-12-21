@@ -159,6 +159,7 @@ class PortsTab {
 
             // create a new port object to group components
             const portGroup = {
+                id: component.id,
                 component: currentComponentType,    // name of the component of the group of ports
                 ports: []                            // the group of ports
             }
@@ -204,11 +205,16 @@ class PortsTab {
     // Create Port Grid
     updateTabUI() { 
         if(!this.currentGroupPage) return
-        const groupDuplicates = this.portGroups.filter(group => group.component === this.currentGroupPage.component)
+        let groupDuplicates = this.portGroups.filter(group => group.component === this.currentGroupPage.component).reverse()
 
         // set title to the group component of the current group page
-        this.portsGroupLabel.innerHTML = this.currentGroupPage.component.toUpperCase() + ' ' + (groupDuplicates.findIndex(group => JSON.stringify(group) === JSON.stringify(this.currentGroupPage)) + 1)
- 
+        console.log(groupDuplicates)
+        if(groupDuplicates.length === 1) {
+            this.portsGroupLabel.innerHTML = this.currentGroupPage.component.toUpperCase()
+        } else {
+            this.portsGroupLabel.innerHTML = this.currentGroupPage.component.toUpperCase() + ' ' + (groupDuplicates.findIndex(group => JSON.stringify(group) === JSON.stringify(this.currentGroupPage)) + 1)
+        }
+        
         // create cell for each port of the group
         this.currentGroupPage.ports.forEach(port => {
             // create cell div
@@ -246,10 +252,10 @@ class PortsTab {
         }
     
         // Attach cable in logic
-        port.cableAttached = cable;
+        port.cableAttached = cable
     
         // Update cable connection state
-        cable.ends[component].connected = true;
+        cable.ends[component].connected = true
     }       
     
     // Method to get the current attached cables status
