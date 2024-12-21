@@ -163,24 +163,14 @@ class Drawer {
 
     // Get Cable Information
     getCables(component) {
-        // if (component.type === "psu") {
-        //     this.initializePSUCables(component); // Ensure initializePSUCables will pass
-        // }
-        
-        // const ref = cableRef[component.type] // reference for cables (see imports) 
-
         // fill drawer
         component.cables.forEach(cable => {
-            // const cableCopy = this.createCableAttr(cable, ref)
-
             this.cables.push(cable)
         })
 
         // do the same for attached components (recursive)
         component.slots.forEach(slot => {
-            if(slot.component) {
-                this.getCables(slot.component)
-            }
+            if(slot.component) this.getCables(slot.component)
         })
     }
 
@@ -216,7 +206,6 @@ class Drawer {
 
             // create image
             const cableImage = document.createElement('img')
-            // cableImage.src = cable.images.find(image => image.attachedTo === 'none').imageSrc
             cableImage.src = cable.images.drawer.imageSrc
 
             // create slider
