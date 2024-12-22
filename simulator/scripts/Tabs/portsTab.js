@@ -208,7 +208,6 @@ class PortsTab {
         let groupDuplicates = this.portGroups.filter(group => group.component === this.currentGroupPage.component).reverse()
 
         // set title to the group component of the current group page
-        console.log(groupDuplicates)
         if(groupDuplicates.length === 1) {
             this.portsGroupLabel.innerHTML = this.currentGroupPage.component.toUpperCase()
         } else {
@@ -489,14 +488,14 @@ class PortsTab {
                             // make sure the image is rendered
                             cableAttached.portDiv.onload = () => {
                                 const cableToPortDimensions = cableAttached.portDiv.getBoundingClientRect()
-                                const cableStyle = cableAttached.images[port.style]
+                                const cableStyle = cableAttached.images[port.style].find(style => style.attachedTo == this.currentGroupPage.component)
                                 
                                 // create highlight
                                 cableAttached.cableHighlight = this.createHighlight({
-                                    left: cableStyle.find(style => style.attachedTo == this.currentGroupPage.component).offset.left, 
-                                    top: cableStyle.find(style => style.attachedTo == this.currentGroupPage.component).offset.top, 
-                                    width: cableToPortDimensions.width, 
-                                    height: cableToPortDimensions.height
+                                    left: (cableStyle?.offset.left ?? cableStyle?.offset[key]?.left) -5, 
+                                    top: (cableStyle?.offset.top ?? cableStyle?.offset[key]?.top - 5),
+                                    width: cableToPortDimensions.width + 10, 
+                                    height: cableToPortDimensions.height + 10
                                 }, 'cable-highlight')
                                 port.div.appendChild(cableAttached.cableHighlight)
 
@@ -536,6 +535,9 @@ class PortsTab {
                             // Remove the highlight when the mouse leaves
                             if (cableAttached.cableHighlight) {
                                 port.div.removeChild(cableAttached.cableHighlight)
+                                cableAttached.cableHighlight = null; // Clear reference
+                            } else {
+                                console.warn('Highlight not found or not a child of port.div', cableAttached.cableHighlight);
                             }
                         }
 

@@ -441,7 +441,6 @@ class PCUnit {
     checkPCState(unit) {
         // check defects and compatibility here
         this.fillComponentStatus(unit)
-        // console.log(this.componentsStatus)
         let allowBoot = false
         
         // check for minimum boot up requirement
