@@ -10,6 +10,7 @@ import BootUpTab from "./scripts/Tabs/bootUpTab.js"
 import Assistant from "./assistant/assistant.js"
 import PCUnit from "./scripts/Data/pcUnit.js"
 import wattageCalculator from "./scripts/Data/wattageCalculator.js"
+import components from "./scripts/Data/data.js"
 class Main {
     constructor() {
         // Utility Modules
@@ -108,6 +109,30 @@ class Main {
         this.displayArea.init()
         this.canvas.animate()   
         this.assistant.asstInit() 
+
+        // Sample boot up reqs
+        const  fullSet = this.bootUpTab.pcUnit.bootUpRequirements
+        fullSet.push('ram')
+        fullSet.push('storage')
+        fullSet.push('storage')
+        fullSet.unshift('chassis')
+
+        // buy the full set
+        fullSet.forEach(reqItem => {      
+            const itemToBuy = this.shop.items.find(shopItem => {
+                
+                if(reqItem === 'cpuCooling' && shopItem.specs?.category == 'cpu' || reqItem === shopItem.type) {
+                    return shopItem
+                }
+                return null
+            } )
+            this.shop.buyComponent(itemToBuy)
+        })
+
+        // place sample build
+        // console.log(this.inventory.items)
+        // this.inventory.placeComponent(this.inventory.items.find(component => component.type === 'motherboard'))
+        
     }
 }
 

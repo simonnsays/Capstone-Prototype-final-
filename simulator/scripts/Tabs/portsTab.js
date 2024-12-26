@@ -393,6 +393,7 @@ class PortsTab {
                         const clickHandler = () => {
                             // attempt to attach cable
                             this.attachCable(currentOffset, cable)
+                            console.log(current.offset)
                             // remove port highlight
                             this.removeHighlights()
                             // remove cable highlight
