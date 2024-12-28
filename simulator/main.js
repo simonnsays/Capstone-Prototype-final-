@@ -169,11 +169,22 @@ class Main {
         this.displayArea.swapComponents(this.displayArea.shelf.find(spot => spot.component && spot.component.type === 'chassis').component)
 
         this.displayArea.table.component.slots.forEach(slot =>  {
-            
+            if(slot.type == 'motherboard' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'motherboard')) {
+                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'motherboard').component, slot)
+            }
+            if(slot.type == 'storage' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'storage')) {
+                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'storage').component, slot)
+            }
+            if(slot.type == 'psu' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'psu')) {
+                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'psu').component, slot)
+            }
         })
 
         this.inventory.update()
         this.displayArea.update()
+
+        // connect cables
+        console.log(this.displayArea.table.component)
     }
 }
 
