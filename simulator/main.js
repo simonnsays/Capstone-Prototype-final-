@@ -110,13 +110,19 @@ class Main {
         this.canvas.animate()   
         this.assistant.asstInit() 
 
+        // buy the full set sample
+        this.buyFullSetSample()
+    }
+
+    buyFullSetSample() {
         // Sample boot up reqs
-        const  fullSet = this.bootUpTab.pcUnit.bootUpRequirements
+        const fullSet = this.bootUpTab.pcUnit.bootUpRequirements
         fullSet.push('ram')
         fullSet.push('storage')
         fullSet.push('storage')
         fullSet.unshift('chassis')
 
+        
         // buy the full set
         fullSet.forEach(reqItem => {      
             const itemToBuy = this.shop.items.find(shopItem => {
@@ -129,10 +135,45 @@ class Main {
             this.shop.buyComponent(itemToBuy)
         })
 
-        // place sample build
-        // console.log(this.inventory.items)
-        // this.inventory.placeComponent(this.inventory.items.find(component => component.type === 'motherboard'))
+        // place everything in motherboard first
+        this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'motherboard'),1)[0])
+        this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'ram'),1)[0])
+        this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'ram'),1)[0])
+        this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'cpu'),1)[0])
+        this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'cooling'),1)[0])
+        this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'gpu'),1)[0])
+
+        // attach components to motherboard
+        this.displayArea.table.component.slots.forEach(slot => {
+            if(slot.type == 'ram' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'ram')) {
+                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'ram').component, slot)
+            }
+            if(slot.type == 'cpu' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'cpu')) {
+                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'cpu').component, slot)
+            }
+            if(slot.type == 'cooling' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'cooling')) {
+                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'cooling').component, slot)
+            }
+            if(slot.type == 'gpu' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'gpu')) {
+                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'gpu').component, slot)
+            }
+        })
+
+        // place other components
+        this.inventory.items.forEach(item => {
+            this.inventory.placeComponent(item)
+        })
+        this.inventory.items = []
         
+        // swap chassis to table
+        this.displayArea.swapComponents(this.displayArea.shelf.find(spot => spot.component && spot.component.type === 'chassis').component)
+
+        this.displayArea.table.component.slots.forEach(slot =>  {
+            
+        })
+
+        this.inventory.update()
+        this.displayArea.update()
     }
 }
 

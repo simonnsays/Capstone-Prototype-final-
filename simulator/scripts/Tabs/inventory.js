@@ -254,7 +254,7 @@ class Inventory {
         let containerChildren = Array.from(this.itemsContainer.children) 
 
         containerChildren.forEach((child, index) => {
-            console.log(child)
+            // console.log(child)
             child.addEventListener('click', () => {
                 // remove component from inventory
                 const removedComponent = this.items.splice(index, 1)
