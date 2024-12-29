@@ -245,8 +245,8 @@ class PortsTab {
 
         const component = this.currentGroupPage.component;
         // Verify if the cable has an end for this component type
-        if (cable.ends[component] === undefined) {
-            console.error(`Cable end not valid for component: ${component}`);
+        if (!cable.ends[component]) {
+            // console.error(`Cable end not valid for component: ${component}`);
             return;
         }
     
@@ -393,7 +393,7 @@ class PortsTab {
                         const clickHandler = () => {
                             // attempt to attach cable
                             this.attachCable(currentOffset, cable)
-                            console.log(current.offset)
+                            // console.log(current.offset)
                             // remove port highlight
                             this.removeHighlights()
                             // remove cable highlight
@@ -407,68 +407,6 @@ class PortsTab {
                 })
             }
         })
-    }
-
-    // Main Update Function
-    update(table, shelf) {
-        // delete port cells
-        this.clearCells()
-        this.portGroups = []
-        this.drawer.cables = []
-
-        this.displayArea.table = table
-        this.displayArea.shelf = shelf
-
-        // check if the table has a component
-        if(table.component) {
-            const tableComponent = table.component
-
-            /*  get ports method;
-            *   this method gets the type of port from data
-            *   and use that as reference to create other port attributes
-            *   taken from portReference.js
-            */
-            this.getPorts(tableComponent)
-
-            // get the current port group page
-            this.currentGroupPage = this.portGroups[this.i]
-
-            // create the cells for port display
-            this.updateTabUI(tableComponent)
-            
-            // display attached cables
-            this.displayAttachedCables()
-
-            // update drawer
-            this.drawer.update(table, shelf)
-        }
-
-        // Listen for Cable detachment
-        this.detachmentListener()
-
-        // listen if one of the cable cells are clicked
-        this.drawer.cables.forEach(cable => {
-            cable.div.addEventListener('click', () => {                
-                // clear previously selected cable
-                if(this.drawer.cableSelected) {
-                    this.drawer.clearSelectedCable()
-                } 
-                // select cable
-                this.drawer.selectCable(cable)
-
-                // reset port highlights
-                this.removeHighlights()
-                this.highlightPorts(cable)
-
-                if(!this.currentGroupPage) return
-
-                // cable attachment
-                this.cableAttachmentListener(cable)
-                
-            })
-        })
-
-        
     }
 
     detachmentListener() {
@@ -549,6 +487,66 @@ class PortsTab {
                    }    
                 })
             }
+        })
+    }
+
+    // Main Update Function
+    update(table, shelf) {
+        // delete port cells
+        this.clearCells()
+        this.portGroups = []
+        this.drawer.cables = []
+
+        this.displayArea.table = table
+        this.displayArea.shelf = shelf
+
+        // check if the table has a component
+        if(table.component) {
+            const tableComponent = table.component
+
+            /*  get ports method;
+            *   this method gets the type of port from data
+            *   and use that as reference to create other port attributes
+            *   taken from portReference.js
+            */
+            this.getPorts(tableComponent)
+
+            // get the current port group page
+            this.currentGroupPage = this.portGroups[this.i]
+
+            // create the cells for port display
+            this.updateTabUI(tableComponent)
+            
+            // display attached cables
+            this.displayAttachedCables()
+
+            // update drawer
+            this.drawer.update(table, shelf)
+        }
+
+        // Listen for Cable detachment
+        this.detachmentListener()
+
+        // listen if one of the cable cells are clicked
+        this.drawer.cables.forEach(cable => {
+            cable.div.addEventListener('click', () => {                
+                // clear previously selected cable
+                if(this.drawer.cableSelected) {
+                    this.drawer.clearSelectedCable()
+                } 
+                // select cable
+                this.drawer.selectCable(cable)
+
+                // reset port highlights
+                this.removeHighlights()
+                this.highlightPorts(cable)
+
+                if(!this.currentGroupPage) return
+
+                // cable attachment
+                this.cableAttachmentListener(cable)
+                
+            })
         })
     }
 }

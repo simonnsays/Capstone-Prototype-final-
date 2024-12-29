@@ -228,6 +228,7 @@ class Drawer {
 
     // Main Update Function
     update(table, shelf) {
+        let scrollPosition = this.cableContainer.scrollTop
         // delete cable cells
         while(this.cableContainer.firstChild) {
             this.cableContainer.removeChild(this.cableContainer.firstChild)
@@ -248,6 +249,7 @@ class Drawer {
 
         // create cells
         this.createCableCells()
+        this.cableContainer.scrollTop = scrollPosition
     }
 }
 

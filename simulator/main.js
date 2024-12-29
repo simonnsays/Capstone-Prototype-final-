@@ -180,11 +180,78 @@ class Main {
             }
         })
 
+        // connect cables
+
+        // MOTHERBOARD to PSU
+        let motherboardPortsGroup = this.portsTab.portGroups.find(group => group.component === 'motherboard')
+        let psuPorts = this.portsTab.portGroups.find(group => group.component === 'psu')
+        
+        // connect ATX cables
+        const atxCable = this.portsTab.drawer.cables.find(cable => cable.type === '24-pin-power')
+        let motherboardAtxPort = motherboardPortsGroup.ports.find(port => port.type === '24-pin-power')
+        this.portsTab.attachCable(motherboardAtxPort.offset['first'], atxCable)
+
+        // connect cpu power cables
+        const motherboardCPUPort = motherboardPortsGroup.ports.find(port => port.type === '8-pin-power')
+        Object.keys(motherboardCPUPort.offset).forEach(key => {
+            const cpuCable = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-power' && !cable.ends['motherboard'].connected)
+            this.portsTab.attachCable(motherboardCPUPort.offset[key], cpuCable)
+        })
+
+
+        // MOTHERBOARD TO STORAGE
+        let storageTwoPorts = this.portsTab.portGroups.find(group => group.component === 'storage')
+        let storageOnePorts = this.portsTab.portGroups.find(group => group.component === 'storage' && group.id !== storageTwoPorts.id)
+
+        // connect sata data
+        motherboardPortsGroup.ports.forEach(port => {
+            if(port.type === 'sata-data') {
+                const sataDataCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-data' && !cable.ends['motherboard'].connected) 
+                if(sataDataCable) {
+                    this.portsTab.attachCable(port.offset['first'], sataDataCable)
+                }
+            }
+        })
+        storageOnePorts.ports.forEach(port => {
+            const sataDataCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-data' && !cable.ends['storage'].connected)
+            this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
+            this.portsTab.attachCable(port.offset['first'], sataDataCable)
+        })
+        storageTwoPorts.ports.forEach(port => {
+            const sataDataCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-data' && !cable.ends['storage'].connected) 
+            this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
+            this.portsTab.attachCable(port.offset['first'], sataDataCable)
+        })
+
+        // connect sata power
+        this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === psuPorts.id)
+        psuPorts.ports.forEach(port => {
+            if(port.type === 'sata-power') {
+                const sataPowerCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-power' && !cable.ends['psu'].connected) 
+                if(sataPowerCable) {
+                    this.portsTab.attachCable(port.offset['first'], sataPowerCable)
+                }
+            }
+        })
+        storageOnePorts.ports.forEach(port => {
+            const sataPowerCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-power' && !cable.ends['storage'].connected)
+            this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
+            this.portsTab.attachCable(port.offset['second'], sataPowerCable)
+            console.log(port)
+        })
+        storageTwoPorts.ports.forEach(port => {
+            const sataPowerCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-power' && !cable.ends['storage'].connected) 
+            this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
+            this.portsTab.attachCable(port.offset['second'], sataPowerCable)
+            console.log(port)
+        })
+
+        // connect gpu
+        this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === psuPorts.id)
+        psuPorts.ports
+
         this.inventory.update()
         this.displayArea.update()
-
-        // connect cables
-        console.log(this.displayArea.table.component)
     }
 }
 
