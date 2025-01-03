@@ -30,12 +30,12 @@ class Main {
             this.pcUnit)
 
         // PC Unit
-        this.pcUnit = new PCUnit(
-            this.utilityTool, 
-            this.displayArea, 
-            this.canvas, 
-            this.portsTab, 
-            this.drawer)
+        // this.pcUnit = new PCUnit(
+        //     this.utilityTool, 
+        //     this.displayArea, 
+        //     this.canvas, 
+        //     this.portsTab, 
+        //     this.drawer)
 
         // Boot Up Tab
         this.bootUpTab = new BootUpTab(
@@ -112,6 +112,7 @@ class Main {
 
         // buy the full set sample
         this.buyFullSetSample()
+        this.bootUpTab.openTab()
     }
 
     buyFullSetSample() {
@@ -181,10 +182,14 @@ class Main {
         })
 
         // connect cables
-
-        // MOTHERBOARD to PSU
         let motherboardPortsGroup = this.portsTab.portGroups.find(group => group.component === 'motherboard')
-        let psuPorts = this.portsTab.portGroups.find(group => group.component === 'psu')
+        let psuPortsGroup = this.portsTab.portGroups.find(group => group.component === 'psu')
+        let storageTwoPorts = this.portsTab.portGroups.find(group => group.component === 'storage')
+        let storageOnePorts = this.portsTab.portGroups.find(group => group.component === 'storage' && group.id !== storageTwoPorts.id)
+        let gpuPortsGroup = this.portsTab.portGroups.find(group => group.component === 'gpu')
+
+        /////////////// MOTHERBOARD to PSU
+        
         
         // connect ATX cables
         const atxCable = this.portsTab.drawer.cables.find(cable => cable.type === '24-pin-power')
@@ -199,10 +204,7 @@ class Main {
         })
 
 
-        // MOTHERBOARD TO STORAGE
-        let storageTwoPorts = this.portsTab.portGroups.find(group => group.component === 'storage')
-        let storageOnePorts = this.portsTab.portGroups.find(group => group.component === 'storage' && group.id !== storageTwoPorts.id)
-
+        /////////////// MOTHERBOARD TO STORAGE
         // connect sata data
         motherboardPortsGroup.ports.forEach(port => {
             if(port.type === 'sata-data') {
@@ -224,8 +226,8 @@ class Main {
         })
 
         // connect sata power
-        this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === psuPorts.id)
-        psuPorts.ports.forEach(port => {
+        this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === psuPortsGroup.id)
+        psuPortsGroup.ports.forEach(port => {
             if(port.type === 'sata-power') {
                 const sataPowerCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-power' && !cable.ends['psu'].connected) 
                 if(sataPowerCable) {
@@ -237,18 +239,35 @@ class Main {
             const sataPowerCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-power' && !cable.ends['storage'].connected)
             this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
             this.portsTab.attachCable(port.offset['second'], sataPowerCable)
-            console.log(port)
         })
         storageTwoPorts.ports.forEach(port => {
             const sataPowerCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-power' && !cable.ends['storage'].connected) 
             this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
             this.portsTab.attachCable(port.offset['second'], sataPowerCable)
-            console.log(port)
         })
 
-        // connect gpu
-        this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === psuPorts.id)
-        psuPorts.ports
+        /////////////// MOTHERBOARD TO FRONT PANEL
+        this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.component === 'motherboard')
+        const frontPanelPort = motherboardPortsGroup.ports.find(port => port.type === 'frontPanel')
+        const panelCable = this.portsTab.drawer.cables.find(cable => cable.type === 'frontPanel')
+        this.portsTab.attachCable(frontPanelPort.offset['first'], panelCable)
+
+        /////////////// MOTHERBOARD TO COOLING
+        const coolingPort = motherboardPortsGroup.ports.find(port => port.type === 'cooling')
+        const coolingCable = this.portsTab.drawer.cables.find(cable => cable.type === '3-pin-cooling')
+        this.portsTab.attachCable(coolingPort.offset['first'], coolingCable)
+
+        /////////////// PSU TO GPU
+        // connect to psu
+        this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === psuPortsGroup.id)
+        const gpuPortPsu = psuPortsGroup.ports.find(port => port.type === '8-pin-pcie')
+        const gpuCablePsu = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-pcie')
+        this.portsTab.attachCable(gpuPortPsu.offset['first'], gpuCablePsu)
+        // connect to gpu
+        this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === gpuPortsGroup.id)
+        const gpuPortGpu = gpuPortsGroup.ports.find(port => port.type === '8-pin-pcie')
+        const gpuCableGpu = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-pcie')
+        this.portsTab.attachCable(gpuPortGpu.offset['first'], gpuCableGpu)
 
         this.inventory.update()
         this.displayArea.update()

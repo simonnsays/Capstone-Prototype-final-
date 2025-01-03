@@ -242,13 +242,14 @@ class PortsTab {
 
     // Attach Cable
     attachCable(port, cable) {
-
         const component = this.currentGroupPage.component;
         // Verify if the cable has an end for this component type
         if (!cable.ends[component]) {
-            // console.error(`Cable end not valid for component: ${component}`);
+            console.warn(`Cable end not valid for component: ${component}; \n\nChange CurrentGroupPage`);
             return;
         }
+
+        // console.log(port, cable)
     
         // Attach cable in logic
         port.cableAttached = cable
@@ -529,7 +530,8 @@ class PortsTab {
 
         // listen if one of the cable cells are clicked
         this.drawer.cables.forEach(cable => {
-            cable.div.addEventListener('click', () => {                
+            cable.div.addEventListener('click', () => { 
+                console.log(cable)               
                 // clear previously selected cable
                 if(this.drawer.cableSelected) {
                     this.drawer.clearSelectedCable()
