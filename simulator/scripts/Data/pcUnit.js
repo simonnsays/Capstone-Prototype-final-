@@ -53,13 +53,28 @@ class PCUnit {
         }
 
         this.componentsStatus = {
-            motherboard: null,
-            cpu: null,
+            motherboard: {
+                component: null,
+                isPowered: false,
+            },
+            cpu: {
+                component: null,
+                isPowered: false,
+            },
             ram: [],
-            gpu: null,
-            psu: null,
+            gpu: {
+                component: null,
+                isPowered: false,
+            },
+            psu: {
+                component: null,
+                isPowered: false,
+            },
             storage: [],
-            cpuCooling: null,
+            cpuCooling: {
+                component: null,
+                isPowered: false,
+            },
             caseCooling: []
         }
 
@@ -408,14 +423,14 @@ class PCUnit {
             // different components will have different ways of checks
             switch(key) {
                 case 'motherboard': {
-                    console.log(supply)
-                    // console.log(this.componentsStatus)
-                    console.log(this.displayArea)
-                    // const cable = supply.cables.find(cable => cable.type === '24-pin-power')
-                    // if(cable && Object.keys(cable.ends).every(endKey => cable.ends[endKey].connected)) {
-                    //     console.log('motherboard is connected')
-                    //     this.XXXcomponentsStatus.motherboard.powered = true
-                    // }
+                    const portToCheck = this.componentsStatus.motherboard.ports.find(port => port.type === '24-pin-power').offset['first']
+                    const supplyToCheck = supply.ports.find(port => port.type === '24-pin-power')
+
+                    console.log()
+
+                    if(portToCheck.offset['first'].cableAttached.id === supplyToCheck.offset['first'].cableAttached.id) {
+                        console.log('Motherboard is Powered')
+                    }
                     break
                 }
                         
@@ -482,24 +497,29 @@ class PCUnit {
         }
     }
     
-    fillComponentStatus(unit) {
-        switch(unit.type) {
+    fillComponentStatus(component) {
+        let compStatus  = {
+            component: null,
+            isConnected: false
+
+        }
+        switch(component.type) {
             case 'ram':
-                this.componentsStatus.ram.push(unit);
+                this.componentsStatus.ram.push(compStatus);
                 break
             case 'storage':
-                this.componentsStatus.storage.push(unit)
+                this.componentsStatus.storage.push(compStatus)
                 break
             case 'cooling':
-                if(unit.specs.category === 'cpu') this.componentsStatus.cpuCooling = unit
-                if(unit.specs.category === 'chassis') this.componentsStatus.caseCooling = unit
+                if(component.specs.category === 'cpu') this.componentsStatus.cpuCooling = compStatus
+                if(component.specs.category === 'chassis') this.componentsStatus.caseCooling = compStatus
                 break
             default:
-                this.componentsStatus[unit.type] = unit
+                this.componentsStatus[component.type] = compStatus
         }
     
         // Recursively check slots for attached components
-        unit.slots.forEach(slot => {
+        component.slots.forEach(slot => {
             if (slot.component) {
                 this.fillComponentStatus(slot.component)
             }
