@@ -417,18 +417,17 @@ class PCUnit {
     }
 
     checkPowerConnection() {
-        const supply = this.componentsStatus.psu
+        const supply = this.componentsStatus.psu.component
         // check if all components are supplied with power
         Object.keys(this.componentsStatus).forEach(key => {
             // different components will have different ways of checks
             switch(key) {
                 case 'motherboard': {
-                    const portToCheck = this.componentsStatus.motherboard.ports.find(port => port.type === '24-pin-power').offset['first']
-                    const supplyToCheck = supply.ports.find(port => port.type === '24-pin-power')
+                    console.log(this.componentsStatus.motherboard.component.ports)
+                    const portToCheck = this.componentsStatus.motherboard.component.ports.find(port => port.type === '24-pin-power').offset['first']
+                    const supplyToCheck = supply.ports.find(port => port.type === '24-pin-power').offset['first']
 
-                    console.log()
-
-                    if(portToCheck.offset['first'].cableAttached.id === supplyToCheck.offset['first'].cableAttached.id) {
+                    if(portToCheck.cableAttached.id === supplyToCheck.cableAttached.id) {
                         console.log('Motherboard is Powered')
                     }
                     break
@@ -478,7 +477,6 @@ class PCUnit {
             
             this.checkPowerConnection()
 
-
             // proceed to check if everything is wired
             Object.keys(this.componentsStatus).forEach(componentReq => {
                 const component = this.componentsStatus[componentReq] 
@@ -499,7 +497,7 @@ class PCUnit {
     
     fillComponentStatus(component) {
         let compStatus  = {
-            component: null,
+            component: component,
             isConnected: false
 
         }
