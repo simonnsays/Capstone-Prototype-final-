@@ -2,79 +2,26 @@ class PCUnit {
     constructor(bootUpElements, ) {
         // utilityTool, displayArea, Canvas, portsTab, drawer, assistant
         this.bootUpElements = bootUpElements
-        // this.utilityTool = utilityTool
-        // this.displayArea = displayArea
-        // this.Canvas = Canvas
-        // this.portsTab = portsTab
-        // this.drawer = drawer
-        // this.assistant = assistant
-
-        // console.log(displayArea)
-        // console.log(Canvas)
-        // console.log(portsTab)
-        // console.log(drawer)
-        // console.log(assistant)
-        // console.log(this)
 
         this.power = 'off'
         this.availableUnit = null
         this.reportArea = bootUpElements.reportArea || null
         this.screen = bootUpElements.screen || null
 
-        // Track attached components and cables
-        // this.attachedComponents = new Set();
-        // this.attachedCables = new Set();
-        // this.cableConnectionStatus = {}; // Stores each cable’s connection status
-
-        // Required components and cables
-        // this.requiredComponents = ['motherboard', 'cpu', 'storage', 'psu', 'ram'];
-        //  this.requiredCables = ['24-pin-power', '8-pin-power'];
-
         // CHECKLIST:
         // - if components are complete (status)
         // - if components are compatible (compatibility)
         // - if components are working fine (defect)
-        
-        this.XXXcomponentsStatus = {
-            motherboard: {
-                component: null,
-                powered: false
-            },
-            cpu: {
-                component: null,
-                powered: false
-            },
-            ram: [],
-            gpu: null,
-            psu: null,
-            storage: [],
-            cpuCooling: null,
-            caseCooling: []
-        }
+
 
         this.componentsStatus = {
-            motherboard: {
-                component: null,
-                isPowered: false,
-            },
-            cpu: {
-                component: null,
-                isPowered: false,
-            },
+            motherboard: {},
+            cpu: {},
             ram: [],
-            gpu: {
-                component: null,
-                isPowered: false,
-            },
-            psu: {
-                component: null,
-                isPowered: false,
-            },
+            gpu: {},
+            psu: {},
             storage: [],
-            cpuCooling: {
-                component: null,
-                isPowered: false,
-            },
+            cpuCooling: {},
             caseCooling: []
         }
 
@@ -416,55 +363,59 @@ class PCUnit {
         // this.reportArea.appendChild(cell);
     }
 
-    checkPowerConnection() {
-        const supply = this.componentsStatus.psu.component
-        // check if all components are supplied with power
-        Object.keys(this.componentsStatus).forEach(key => {
-            // different components will have different ways of checks
-            switch(key) {
-                case 'motherboard': {
-                    console.log(this.componentsStatus.motherboard.component.ports)
-                    const portToCheck = this.componentsStatus.motherboard.component.ports.find(port => port.type === '24-pin-power').offset['first']
-                    const supplyToCheck = supply.ports.find(port => port.type === '24-pin-power').offset['first']
+    attemptPowerOn(unit) {
+        this.fillComponentStatus(unit)
 
-                    if(portToCheck.cableAttached.id === supplyToCheck.cableAttached.id) {
-                        console.log('Motherboard is Powered')
-                    }
-                    break
-                }
-                        
-                case 'cpu': {
-                    break
-                    const cables = supply.cables.filter(cable => cable.type === '8-pin-power') 
-                    if(cables.length !== 0) {
-                        let allCablesConnected = cables.every(cable => Object.keys(cable.ends).every(endKey => cable.ends[endKey].connected) )
-                        
+        // Power the powersuplly
+        this.componentsStatus.psu.isPowered = true
 
-                        console.log(allCablesConnected)
-                        if(allCablesConnected) {
-                            console.log('cpu is connected')
-                            this.XXXcomponentsStatus.cpu.powered = true
-                        }
-                    }
-                    break
-                }
+        // Power Components from PSU
+        this.powerComponents(this.componentsStatus.psu.component)
 
-                case 'gpu': {
-                    break
-                    const portType = this.componentsStatus.gpu.specs.portType
-                    switch(portType) {
-                        case '8-pin':
-                            const cable = this.componentsStatus.gpu.cables
-                            break
-                    }
-                }
-            }
-        })
+        const state = this.checkPCState(unit)
+        // if check attempts are good, power on
+        this.powerOn()
     }
+
+    powerComponents(supply) {
+        // find ports that has cables
+        const portsToPower = supply.ports.filter(port =>  port.offset && Object.keys(port.offset).some(key => port.offset[key].cableAttached))
+        const cablesConnected = []
+    
+        Object.keys(this.componentsStatus).forEach(csKey => {
+            const currCompStatus = this.componentsStatus[csKey]
+            switch(csKey) {
+                case 'motherboard':
+                    // power if both ports are connected by the same cable
+                    const moboPort = currCompStatus.component.ports.find(port => port.offset && Object.keys(port.offset).find(key => port.offset[key].takes == '24-pin-power')).offset.first
+                    const psuPort = portsToPower.find(port => port.offset && Object.keys(port.offset).find(key => port.offset[key].takes == '24-pin-power')).offset.first
+
+                    if(moboPort.cableAttached === psuPort.cableAttached){
+                        console.log('connected')
+                        this.componentsStatus.motherboard.isPowered = true
+                    } 
+                case 'cpu':
+                    // power if motherboard is powered and ports attached are of the same cable
+                    if(!this.componentsStatus.motherboard.isPowered) {
+                        // log or record some error
+                        break
+                    }
+
+                    // if()
+
+
+            }
+            
+            // power motherboard
+        })
+        console.log(this.componentsStatus)
+
+       
+    }
+
 
     // Main check for allowing the PC unit to boot (check defects and compatibility here)
     checkPCState(unit) {
-        this.fillComponentStatus(unit)
         let allowBoot = false
         
         // check for minimum boot up requirement
@@ -472,33 +423,12 @@ class PCUnit {
         /*  CHECK FOR POWER SUPPLY CONNECTIONS
         *   take the power supply and check every compoent if power is being supplied
         */
-        let allCablesAreAttached = true
-        if(requiredComponentsArePresent) {
-            
-            this.checkPowerConnection()
-
-            // proceed to check if everything is wired
-            Object.keys(this.componentsStatus).forEach(componentReq => {
-                const component = this.componentsStatus[componentReq] 
-                // ram and storage handling
-                if(Array.isArray(component)) {
-                    component.forEach(item => {
-                        // allCablesAreAttached = this.checkAllAttachedCables(component, allCablesAreAttached)           
-                    })
-                // other component handling
-                } else {
-                    // allCablesAreAttached = this.checkAllAttachedCables(component, allCablesAreAttached)
-                }
-            })
-
-            if(!allCablesAreAttached) throw new Error ('not all cables are attached')
-        }
     }
     
     fillComponentStatus(component) {
         let compStatus  = {
             component: component,
-            isConnected: false
+            isPowered: false
 
         }
         switch(component.type) {
@@ -528,6 +458,14 @@ class PCUnit {
         this.power = 'off'
         this.screen?.classList.remove('screen-on')
         this.clearReportsArea()
+
+        for(let key in this.componentsStatus) {
+            if(Array.isArray(this.componentsStatus[key])) {
+                this.componentsStatus[key] = []
+            } else {
+                this.componentsStatus[key] = null
+            }
+        }
     }
 
     powerOn() {
@@ -536,6 +474,7 @@ class PCUnit {
         this.screen?.classList.add('screen-on')
 
         setTimeout(() => this.report(), 500)
+        // console.log(this.componentsStatus)
     }
 
     report() {

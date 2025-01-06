@@ -9,6 +9,10 @@ class Cable {
         Object.keys(this.ends).forEach(key => {
             this.ends[key].portAttachedTo = null
         })
+
+        Object.keys(ends).forEach(key => {
+            ends[key].portAttachedTo = null
+        })
     }   
 }
 

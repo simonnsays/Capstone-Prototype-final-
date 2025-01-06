@@ -80,17 +80,15 @@ class BootUpTab {
     }
 
     togglePower(unit) {
-        const state = this.pcUnit.checkPCState(unit)
         // turn on
         if(this.pcUnit.power === 'off') {
             /*
             *   Main Power on Sequence
             */
 
-            // check for pc parts
-            
+            // attempt power on
             this.pcUnit.power = 'on'
-            this.pcUnit.powerOn()
+            this.pcUnit.attemptPowerOn(unit)
             return
         }
 
@@ -106,7 +104,6 @@ class BootUpTab {
     }
 
     update(component) {
-        // throw new Error('error test')
         // Set New PC Unit(Only accepting chassis)
         this.pcUnit.availableUnit = this.pcUnit.checkIfAvailableUnit(component) || null
         this.clearCurrentUnitElement()
@@ -114,7 +111,6 @@ class BootUpTab {
         if(!this.pcUnit.availableUnit) {
             this.togglePowerButtonState('locked')
             this.pcUnit.availableUnit = null
-            // this.powerBtn.removeEventListener('click', () => this.pcUnit.powerOn)    
             return
         } 
 

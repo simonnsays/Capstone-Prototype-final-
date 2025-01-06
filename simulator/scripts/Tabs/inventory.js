@@ -158,8 +158,6 @@ class Inventory {
         port.image = currentRef.image
         port.offset = currentRef.offset 
         port.style = currentRef.style
-
-        if(currentRef.takes) port.takes = currentRef.takes 
     }
 
    // Create Cable Attributes

@@ -179,28 +179,36 @@ class Main {
             if(slot.type == 'psu' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'psu')) {
                 this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'psu').component, slot)
             }
-        })
+        }) 
 
+        this.bootUpTab.pcUnit.fillComponentStatus(this.displayArea.table.component)
         // connect cables
         let motherboardPortsGroup = this.portsTab.portGroups.find(group => group.component === 'motherboard')
-        let psuPortsGroup = this.portsTab.portGroups.find(group => group.component === 'psu')
+        let psuPortsGroup = this.bootUpTab.pcUnit.componentsStatus.psu.component
         let storageTwoPorts = this.portsTab.portGroups.find(group => group.component === 'storage')
         let storageOnePorts = this.portsTab.portGroups.find(group => group.component === 'storage' && group.id !== storageTwoPorts.id)
         let gpuPortsGroup = this.portsTab.portGroups.find(group => group.component === 'gpu')
 
         /////////////// MOTHERBOARD to PSU
-        
-        
         // connect ATX cables
+        // to mobo
         const atxCable = this.portsTab.drawer.cables.find(cable => cable.type === '24-pin-power')
         let motherboardAtxPort = motherboardPortsGroup.ports.find(port => port.type === '24-pin-power')
         this.portsTab.attachCable(motherboardAtxPort.offset['first'], atxCable)
+        // to  psu
+        const psuATXPort = psuPortsGroup.ports.find(port => port.type === '24-pin-power')
+        this.portsTab.attachCable(psuATXPort.offset['first'], atxCable)
 
         // connect cpu power cables
         const motherboardCPUPort = motherboardPortsGroup.ports.find(port => port.type === '8-pin-power')
         Object.keys(motherboardCPUPort.offset).forEach(key => {
             const cpuCable = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-power' && !cable.ends['motherboard'].connected)
             this.portsTab.attachCable(motherboardCPUPort.offset[key], cpuCable)
+        })
+        const psuCPUPort = psuPortsGroup.ports.find(port => port.type === '8-pin-power')
+        Object.keys(psuCPUPort.offset).forEach(key => {
+            const cpuCable = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-power' && cable.ends['psu'].connected)
+            this.portsTab.attachCable(psuCPUPort.offset[key], cpuCable)
         })
 
 
@@ -271,6 +279,8 @@ class Main {
 
         this.inventory.update()
         this.displayArea.update()
+        this.bootUpTab.pcUnit.powerOff()
+        this.bootUpTab.pcUnit.attemptPowerOn(this.displayArea.table.component)
     }
 }
 

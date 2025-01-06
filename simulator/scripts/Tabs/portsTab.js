@@ -256,6 +256,7 @@ class PortsTab {
     
         // Update cable connection state
         cable.ends[component].connected = true
+        cable.ends[component].portAttachedTo = port
     }       
     
     // Method to get the current attached cables status
