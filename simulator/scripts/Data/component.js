@@ -84,17 +84,15 @@ class Component {
     findAvailablePort(cable) {
         // find the next available port that matches the cable type
         return this.ports.find(port => 
-            Object.keys(port.offset).some(key => 
-                port.offset[key].takes === cable.type && !port.offset[key].cableAttached)
+            port.offsets.some(offset => 
+                offset.takes === cable.type && !offset.cableAttached)
         ) || null
     }
 
     attachCable(port, cable, componentType) {
-        Object.keys(port.offset).forEach(key => {
-            const currentOffset = port.offset[key]
-
-            if(!currentOffset.cableAttached && !cable.ends[componentType].connected) {
-                currentOffset.cableAttached = cable
+        port.offsets.forEach(offset => {
+            if(!offset.cableAttached && !cable.ends[componentType].connected) {
+                offset.cableAttached = cable
                 cable.ends[componentType].connected = true
             }
         })

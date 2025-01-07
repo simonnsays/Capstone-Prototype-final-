@@ -194,21 +194,21 @@ class Main {
         // to mobo
         const atxCable = this.portsTab.drawer.cables.find(cable => cable.type === '24-pin-power')
         let motherboardAtxPort = motherboardPortsGroup.ports.find(port => port.type === '24-pin-power')
-        this.portsTab.attachCable(motherboardAtxPort.offset['first'], atxCable)
+        this.portsTab.attachCable(motherboardAtxPort.offsets[0], atxCable)
         // to  psu
         const psuATXPort = psuPortsGroup.ports.find(port => port.type === '24-pin-power')
-        this.portsTab.attachCable(psuATXPort.offset['first'], atxCable)
+        this.portsTab.attachCable(psuATXPort.offsets[0], atxCable)
 
         // connect cpu power cables
         const motherboardCPUPort = motherboardPortsGroup.ports.find(port => port.type === '8-pin-power')
-        Object.keys(motherboardCPUPort.offset).forEach(key => {
+        motherboardCPUPort.offsets.forEach(offset => {
             const cpuCable = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-power' && !cable.ends['motherboard'].connected)
-            this.portsTab.attachCable(motherboardCPUPort.offset[key], cpuCable)
+            this.portsTab.attachCable(offset, cpuCable)
         })
         const psuCPUPort = psuPortsGroup.ports.find(port => port.type === '8-pin-power')
-        Object.keys(psuCPUPort.offset).forEach(key => {
+        psuCPUPort.offsets.forEach(offset => {
             const cpuCable = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-power' && cable.ends['psu'].connected)
-            this.portsTab.attachCable(psuCPUPort.offset[key], cpuCable)
+            this.portsTab.attachCable(offset, cpuCable)
         })
 
 
@@ -218,19 +218,19 @@ class Main {
             if(port.type === 'sata-data') {
                 const sataDataCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-data' && !cable.ends['motherboard'].connected) 
                 if(sataDataCable) {
-                    this.portsTab.attachCable(port.offset['first'], sataDataCable)
+                    this.portsTab.attachCable(port.offsets[0], sataDataCable)
                 }
             }
         })
         storageOnePorts.ports.forEach(port => {
             const sataDataCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-data' && !cable.ends['storage'].connected)
             this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
-            this.portsTab.attachCable(port.offset['first'], sataDataCable)
+            this.portsTab.attachCable(port.offsets[0], sataDataCable)
         })
         storageTwoPorts.ports.forEach(port => {
             const sataDataCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-data' && !cable.ends['storage'].connected) 
             this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
-            this.portsTab.attachCable(port.offset['first'], sataDataCable)
+            this.portsTab.attachCable(port.offsets[0], sataDataCable)
         })
 
         // connect sata power
@@ -239,43 +239,43 @@ class Main {
             if(port.type === 'sata-power') {
                 const sataPowerCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-power' && !cable.ends['psu'].connected) 
                 if(sataPowerCable) {
-                    this.portsTab.attachCable(port.offset['first'], sataPowerCable)
+                    this.portsTab.attachCable(port.offsets[0], sataPowerCable)
                 }
             }
         })
         storageOnePorts.ports.forEach(port => {
             const sataPowerCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-power' && !cable.ends['storage'].connected)
             this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
-            this.portsTab.attachCable(port.offset['second'], sataPowerCable)
+            this.portsTab.attachCable(port.offsets[1], sataPowerCable)
         })
         storageTwoPorts.ports.forEach(port => {
             const sataPowerCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-power' && !cable.ends['storage'].connected) 
             this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
-            this.portsTab.attachCable(port.offset['second'], sataPowerCable)
+            this.portsTab.attachCable(port.offsets[1], sataPowerCable)
         })
 
         /////////////// MOTHERBOARD TO FRONT PANEL
         this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.component === 'motherboard')
         const frontPanelPort = motherboardPortsGroup.ports.find(port => port.type === 'frontPanel')
         const panelCable = this.portsTab.drawer.cables.find(cable => cable.type === 'frontPanel')
-        this.portsTab.attachCable(frontPanelPort.offset['first'], panelCable)
+        this.portsTab.attachCable(frontPanelPort.offsets[0], panelCable)
 
         /////////////// MOTHERBOARD TO COOLING
         const coolingPort = motherboardPortsGroup.ports.find(port => port.type === 'cooling')
         const coolingCable = this.portsTab.drawer.cables.find(cable => cable.type === '3-pin-cooling')
-        this.portsTab.attachCable(coolingPort.offset['first'], coolingCable)
+        this.portsTab.attachCable(coolingPort.offsets[0], coolingCable)
 
         /////////////// PSU TO GPU
         // connect to psu
         this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === psuPortsGroup.id)
         const gpuPortPsu = psuPortsGroup.ports.find(port => port.type === '8-pin-pcie')
         const gpuCablePsu = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-pcie')
-        this.portsTab.attachCable(gpuPortPsu.offset['first'], gpuCablePsu)
+        this.portsTab.attachCable(gpuPortPsu.offsets[0], gpuCablePsu)
         // connect to gpu
         this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === gpuPortsGroup.id)
         const gpuPortGpu = gpuPortsGroup.ports.find(port => port.type === '8-pin-pcie')
         const gpuCableGpu = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-pcie')
-        this.portsTab.attachCable(gpuPortGpu.offset['first'], gpuCableGpu)
+        this.portsTab.attachCable(gpuPortGpu.offsets[0], gpuCableGpu)
 
         this.inventory.update()
         this.displayArea.update()

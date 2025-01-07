@@ -156,7 +156,7 @@ class Inventory {
 
         // copy reference attributes to the copy of the port\
         port.image = currentRef.image
-        port.offset = currentRef.offset 
+        port.offsets = currentRef.offsets
         port.style = currentRef.style
     }
 

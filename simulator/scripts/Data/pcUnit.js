@@ -379,21 +379,25 @@ class PCUnit {
 
     powerComponents(supply) {
         // find ports that has cables
-        const portsToPower = supply.ports.filter(port =>  port.offset && Object.keys(port.offset).some(key => port.offset[key].cableAttached))
+        const portsToPower = supply.ports.filter(port =>  port.offsets && port.offsets.some(offset => offset.cableAttached))
         const cablesConnected = []
     
+        console.log(this.componentsStatus)
         Object.keys(this.componentsStatus).forEach(csKey => {
             const currCompStatus = this.componentsStatus[csKey]
             switch(csKey) {
                 case 'motherboard':
                     // power if both ports are connected by the same cable
-                    const moboPort = currCompStatus.component.ports.find(port => port.offset && Object.keys(port.offset).find(key => port.offset[key].takes == '24-pin-power')).offset.first
-                    const psuPort = portsToPower.find(port => port.offset && Object.keys(port.offset).find(key => port.offset[key].takes == '24-pin-power')).offset.first
+                    
+                    const moboPort = currCompStatus.component.ports.find(port => port.offsets && port.offsets.find(offset => offset.takes == '24-pin-power')).offsets[0]
+                    const psuPort = portsToPower.find(port => port.offsets && port.offsets.find(offset => offset.takes == '24-pin-power')).offsets[0]
+                    console.log(moboPort)
 
                     if(moboPort.cableAttached === psuPort.cableAttached){
-                        console.log('connected')
+                        // console.log('connected')
                         this.componentsStatus.motherboard.isPowered = true
                     } 
+                    break
                 case 'cpu':
                     // power if motherboard is powered and ports attached are of the same cable
                     if(!this.componentsStatus.motherboard.isPowered) {
@@ -401,14 +405,17 @@ class PCUnit {
                         break
                     }
 
-                    // if()
+                    // console.log(this.componentsStatus.motherboard.component.ports)
+                    const cpuPorts = this.componentsStatus.motherboard.component.ports.filter(port => port.offsets && port.offsets.some(offset => offset.takes == '8-pin-power'))
+                    const psuPorts = portsToPower.filter(port => port.offsets && port.offsets.some(offset => offset.takes == '8-pin-power'))
+                    // console.log(psuPorts)
 
-
+                    // cpuPorts.forEach(port => port.offsets.forEach(key))
             }
             
             // power motherboard
         })
-        console.log(this.componentsStatus)
+        // console.log(this.componentsStatus)
 
        
     }

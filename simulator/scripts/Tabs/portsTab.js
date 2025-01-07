@@ -282,12 +282,12 @@ class PortsTab {
         this.portGroups.forEach(group => {
             group.ports.forEach(port => {
                 if(port.offset) {
-                    Object.keys(port.offset).forEach(key => {
-                        const currentOffset = port.offset[key]
+                    port.offsets.forEach(offset => {
     
-                        if(currentOffset.highlight) {
-                            port.div.removeChild(currentOffset.highlight)
-                            delete currentOffset.highlight
+    
+                        if(offset.highlight) {
+                            port.div.removeChild(offset.highlight)
+                            delete offset.highlight
                         }
                     })
                 }
@@ -314,13 +314,12 @@ class PortsTab {
             const baseDiv = port.div
             // match the cable type to the port.takes
             if(!port.offset)return
-            Object.keys(port.offset).forEach(key => {
-                const currentOffset = port.offset[key]  
+            port.offsets.forEach(offset => {  
 
                 // highlight port when matched and no attached cable yet
-                if (!currentOffset.cableAttached && cable.type === currentOffset.takes) {
-                    currentOffset.highlight = this.createHighlight(currentOffset, 'port-highlight') 
-                    baseDiv.appendChild(currentOffset.highlight)
+                if (!offset.cableAttached && cable.type === offset.takes) {
+                    offset.highlight = this.createHighlight(offset, 'port-highlight') 
+                    baseDiv.appendChild(offset.highlight)
                 } 
             })
         })
@@ -350,14 +349,16 @@ class PortsTab {
 
         // iterate through page ports
         updatedPorts.forEach(port => {
-            const baseDiv = port.div               
-            Object.keys(port.offset).forEach(key => {
-                const currentOffset = port.offset[key]  
-                if(currentOffset.cableAttached) {
+            const baseDiv = port.div    
+            // console.log(port)           
+            port.offsets.forEach((offset, index) => {  
+                if(offset.cableAttached) {
                     // find the cable image reference
-                    const cableImageRef = currentOffset.cableAttached.images[port.style].find(image => image.attachedTo === this.currentGroupPage.component)
+                    const cableImageRef = offset.cableAttached.images[port.style].find(image => image.attachedTo === this.currentGroupPage.component)
                     // create attached cable image
-                    const attachedCableImageDiv = currentOffset.cableAttached.portDiv = this.createAttachedCableImage(cableImageRef, key)
+                    console.log(cableImageRef)
+                    const attachedCableImageDiv = offset.cableAttached.portDiv = this.createAttachedCableImage(cableImageRef, index)
+                    
                     // append
                     baseDiv.appendChild(attachedCableImageDiv)
                 }   
@@ -388,13 +389,13 @@ class PortsTab {
     cableAttachmentListener(cable) {
         this.currentGroupPage.ports.forEach(port => {
             if(port.offset) {
-                Object.keys(port.offset).forEach(key => {
-                    const currentOffset = port.offset[key] 
+                port.offsets.forEach(offset => {
+ 
                     // highlight onclick
-                    if(currentOffset.highlight) {
+                    if(offset.highlight) {
                         const clickHandler = () => {
                             // attempt to attach cable
-                            this.attachCable(currentOffset, cable)
+                            this.attachCable(offset, cable)
                             // console.log(current.offset)
                             // remove port highlight
                             this.removeHighlights()
@@ -403,8 +404,8 @@ class PortsTab {
                             // update ports and cables
                             this.update(this.displayArea.table, this.displayArea.shelf)
                         }
-                        currentOffset.highlight.removeEventListener('click', clickHandler)
-                        currentOffset.highlight.addEventListener('click', clickHandler)
+                        offset.highlight.removeEventListener('click', clickHandler)
+                        offset.highlight.addEventListener('click', clickHandler)
                     }    
                 })
             }
@@ -417,12 +418,12 @@ class PortsTab {
         // listen to every cable that is already attached
         this.currentGroupPage.ports.forEach(port => {
             if(port.offset) {
-                Object.keys(port.offset).forEach(key => {
-                    const currentOffset = port.offset[key] 
+                port.offsets.forEach(offset => {
+ 
                     // check for attached cable
-                    if(currentOffset.cableAttached) {
+                    if(offset.cableAttached) {
                         // ATTACHED CABLE REFERENCE
-                        let cableAttached = currentOffset.cableAttached
+                        let cableAttached = offset.cableAttached
                         
                         // cableAttached onMouseHover
                         const hoverHandler = () => {
@@ -461,7 +462,7 @@ class PortsTab {
                         const clickHandler = () => {
                             // detach cable
                             cableAttached.ends[this.currentGroupPage.component].connected = false
-                            currentOffset.cableAttached = null
+                            offset.cableAttached = null
                             // remove port highlight
                             this.removeHighlights()
                             // remove cable highlight

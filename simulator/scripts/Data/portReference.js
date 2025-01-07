@@ -10,8 +10,8 @@ const portRef = {
             },
             
             // will be used in highlights
-            offset: {
-                first: {
+            offsets: [
+                {
                     top: 26,
                     left: 145,
                     width: 34, // used in highlight sizes
@@ -19,7 +19,7 @@ const portRef = {
                     cableAttached: null,
                     takes: '24-pin-power',
                 }
-            },
+            ],
         },
         {   // 8pin - power
             name: 'CPU Power',
@@ -28,8 +28,8 @@ const portRef = {
             image: {
                 imageSrc: './assets/motherboard/ports/mobo_port-cpu.png',
             },
-            offset: {  // for ports that share the same image
-                first: {
+            offsets: [  // for ports that share the same image
+                {
                     top: 87, 
                     left: 43,
                     width: 100, 
@@ -39,7 +39,7 @@ const portRef = {
                     cableAttached: null
                 },
                 
-                second: {
+                {
                     top: 87, 
                     left: 143,
                     width: 100, 
@@ -48,7 +48,7 @@ const portRef = {
                     takes: '8-pin-power',
                     cableAttached: null
                 }
-            }    
+            ]    
         },
         {   // sata - data
             name: 'CPU EPS Connector',
@@ -57,8 +57,8 @@ const portRef = {
             image: {
                 imageSrc: './assets/motherboard/ports/mobo_port-sata.png',
             },
-            offset: {  // for ports that share the same image
-                first: {
+            offsets: [ // for ports that share the same image
+                {
                     top: 97, 
                     left: 65,
                     width: 140, 
@@ -66,7 +66,7 @@ const portRef = {
                     cableAttached: null,
                     takes: 'sata-data',
                 }  
-            },
+            ],
         },
         {   // cooling
             type: 'cooling',
@@ -74,8 +74,8 @@ const portRef = {
             image: {
                 imageSrc: './assets/motherboard/ports/mobo_port-fan.png',
             },
-            offset: {
-                first: {
+            offsets: [
+                {
                     top: 85,
                     left: 110,
                     width: 69,
@@ -83,7 +83,7 @@ const portRef = {
                     cableAttached: null,
                     takes: '3-pin-cooling',
                 }
-            },
+            ],
         },
         {   // front panel
             type: 'frontPanel',
@@ -91,8 +91,8 @@ const portRef = {
             image: {
                 imageSrc: './assets/motherboard/ports/mobo_port-fpanel.png',
             },
-            offset: {
-                first: {
+            offsets: [
+                {
                     top: 97,
                     left: 33,
                     width: 110,
@@ -100,7 +100,7 @@ const portRef = {
                     cableAttached: null,
                     takes: 'frontPanel',
                 }
-            },
+            ],
         },
     ],
     psu: [
@@ -110,8 +110,8 @@ const portRef = {
             image: {
                 imageSrc: './assets/psu/ports/ATX.png',
             },
-            offset: {
-                first: {
+            offsets: [
+                {
                     top: 84,
                     left: 23,
                     width: 235,
@@ -119,7 +119,7 @@ const portRef = {
                     cableAttached: null,
                     takes: '24-pin-power',
                 }
-            },
+            ],
         },
         {   // 8pin - power
             type: '8-pin-power',
@@ -127,8 +127,8 @@ const portRef = {
             image: {
                 imageSrc: './assets/psu/ports/cpu.png',
             },
-            offset: { 
-                first: {
+            offsets: [
+                {
                     top: 77,
                     left: 69,
                     width: 147,
@@ -136,7 +136,7 @@ const portRef = {
                     cableAttached: null,
                     takes: '8-pin-power',
                 }
-            },
+            ],
         },
         {   // 8pin - pcie
             type: '8-pin-pcie',
@@ -144,8 +144,8 @@ const portRef = {
             image: {
                 imageSrc: './assets/psu/ports/vga(pcie)-power.png',
             },
-            offset: {
-                first: {
+            offsets: [
+                {
                     top: 83,
                     left: 79,
                     width: 121,
@@ -153,7 +153,7 @@ const portRef = {
                     cableAttached: null,
                     takes: '8-pin-pcie',
                 }
-            },
+            ],
         },
         {   // 6pin - pcie
             type: '6-pin-pcie',
@@ -161,8 +161,8 @@ const portRef = {
             image: {
                 imageSrc: './assets/psu/ports/perif.png',
             },
-            offset: {
-                first: {
+            offsets: [
+                {
                     top: 110,
                     left: 79,
                     width: 121,
@@ -170,7 +170,7 @@ const portRef = {
                     cableAttached: null,
                     takes: '6-pin-pcie',
                 }
-            },
+            ],
         },
         {   // sata - power
             type: 'sata-power',
@@ -178,8 +178,8 @@ const portRef = {
             image: {
                 imageSrc: './assets/psu/ports/sata.png',
             },
-            offset: {
-                first: {
+            offsets: [
+                {
                     top: 31,
                     left: 71,
                     width: 147,
@@ -187,7 +187,7 @@ const portRef = {
                     cableAttached: null,
                     takes: 'sata-power',
                 }
-            },
+            ],
         },
         {   //12vhpwr
             type: '12vhpwr',
@@ -195,8 +195,8 @@ const portRef = {
             image: {
                 imageSrc: './assets/psu/ports/12vhpwr.png',
             },
-            offset: {
-                first: {
+            offsets: [
+                {
                     top: 83,
                     left: 76,
                     width: 140,
@@ -204,7 +204,7 @@ const portRef = {
                     cableAttached: null,
                     takes: '12vhpwr',
                 }
-            },
+            ],
         },
         {   //non-modular
             type: 'non-modular',
@@ -228,8 +228,8 @@ const portRef = {
                 imageSrc: './assets/gpu/ports/8+8pin_power.png',
             },
             
-            offset: { 
-                first: {
+            offsets: [
+                {
                     top: 107,
                     left: 61,
                     width: 88,
@@ -239,7 +239,7 @@ const portRef = {
                     cableAttached: null
                 },
                 
-                second: {
+                {
                     top: 107,
                     left: 149, 
                     width: 88,
@@ -248,7 +248,7 @@ const portRef = {
                     takes: '8-pin-pcie',
                     cableAttached: null
                 }
-            } , 
+            ] , 
         },
         {   // 8+6 pin - pcie for data.js add to port 14-pin-pcie
             type: '14-pin-pcie',
@@ -256,8 +256,8 @@ const portRef = {
             image: {
                 imageSrc: './assets/gpu/ports/8+6pin_power.png',
             },
-            offset: { 
-                first: {
+            offsets: [
+                {
                     top: 53,
                     left: 31,
                     width: 90,
@@ -267,7 +267,7 @@ const portRef = {
                     cableAttached: null
                 },
                 
-                second: {
+                {
                     top: 107,
                     left: 149, 
                     width: 88,
@@ -276,7 +276,7 @@ const portRef = {
                     takes: '6-pin-pcie',
                     cableAttached: null
                 }
-            } , 
+            ], 
         },
         {   // 12vhpwr for data.js add to port 14-pin-pcie
             type: '12vhpwr',
@@ -285,8 +285,8 @@ const portRef = {
                 imageSrc: './assets/gpu/ports/12vhpwr.png',
             },
             
-            offset: { 
-                first: {
+            offsets: [
+                {
                     top: 87,
                     left: 94,
                     width: 120,
@@ -294,7 +294,7 @@ const portRef = {
                     cableAttached: null,
                     takes: '12vhpwr',
                 }
-            },
+            ],
         },
         {   // 8pin - pcie
             type: '8-pin-pcie',
@@ -303,8 +303,8 @@ const portRef = {
                 imageSrc: './assets/gpu/ports/8pin_power.png',
             },
             
-            offset: { 
-                first:{
+            offsets:[
+                {
                     top: 70,
                     left: 80,
                     width: 130,
@@ -312,7 +312,7 @@ const portRef = {
                     takes: '8-pin-pcie',
                     cableAttached: null,
                 }
-            } ,
+            ],
         },
         {   // 6pin - pcie
             type: '6-pin-pcie',
@@ -321,8 +321,8 @@ const portRef = {
                 imageSrc: './assets/gpu/ports/6pin_power.png',
             },
             
-            offset: { 
-                first: {
+            offsets: [
+                {
                     top: 60,
                     left: 50,
                     width: 170,
@@ -330,7 +330,7 @@ const portRef = {
                     takes: '6-pin-pcie',
                     cableAttached: null
                 }
-            }, 
+            ], 
         },
     ],
     storage: [
@@ -341,8 +341,8 @@ const portRef = {
                 imageSrc: './assets/storage/ports/sata-power+data.png',
             },
             
-            offset: { 
-                first: {
+            offsets: [
+                {
                     top: 114,
                     left: 52,
                     width: 112,
@@ -352,7 +352,7 @@ const portRef = {
                     cableAttached: null
                 },
                 
-                second: {
+                {
                     top: 114,
                     left: 167, 
                     width: 69,
@@ -361,7 +361,7 @@ const portRef = {
                     takes: 'sata-data',
                     cableAttached: null
                 }
-            }
+            ]
         },
     ]
 }
