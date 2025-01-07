@@ -112,7 +112,7 @@ class Main {
 
         // buy the full set sample
         this.buyFullSetSample()
-        this.bootUpTab.openTab()
+        // this.bootUpTab.openTab()
     }
 
     buyFullSetSample() {
@@ -181,6 +181,15 @@ class Main {
             }
         }) 
 
+        this.connectedCables()
+        
+        this.inventory.update()
+        this.displayArea.update()
+        // this.bootUpTab.pcUnit.powerOff()
+        // this.bootUpTab.pcUnit.attemptPowerOn(this.displayArea.table.component)
+    }
+
+    connectedCables() {
         this.bootUpTab.pcUnit.fillComponentStatus(this.displayArea.table.component)
         // connect cables
         let motherboardPortsGroup = this.portsTab.portGroups.find(group => group.component === 'motherboard')
@@ -277,10 +286,6 @@ class Main {
         const gpuCableGpu = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-pcie')
         this.portsTab.attachCable(gpuPortGpu.offsets[0], gpuCableGpu)
 
-        this.inventory.update()
-        this.displayArea.update()
-        this.bootUpTab.pcUnit.powerOff()
-        this.bootUpTab.pcUnit.attemptPowerOn(this.displayArea.table.component)
     }
 }
 
