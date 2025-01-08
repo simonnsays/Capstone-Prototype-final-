@@ -191,7 +191,7 @@ class PCUnit {
                     break
             // STORAGE
                 case 'storage':
-                    isPowered = this.checkStoragePowerAndData()
+                    isPowered = this.checkStoragePowerAndData(compStatus, portsToPower)
                     // console.log(compStatus)
                     break
             }
@@ -204,8 +204,8 @@ class PCUnit {
     }
     checkGpuPower(compStatus, psuPorts) {
         const gpuPorts = compStatus.component.ports.filter(port => port.offsets && port.offsets.some(offset => offset.takes == '8-pin-pcie'))
-        psuPorts = portsToPower.filter(port => port.offsets && port.offsets.some(offset => offset.takes == '8-pin-pcie'))
-        isPowered = true
+        psuPorts = psuPorts.filter(port => port.offsets && port.offsets.some(offset => offset.takes == '8-pin-pcie'))
+        let isPowered = true
         psuPorts.forEach(psuPort => {
             psuPort.offsets.forEach(psuOffset => {
                 // check if cableAttached is correctly attached to each components
@@ -225,7 +225,16 @@ class PCUnit {
         // console.log('GPU powered')
         return true 
     }
-    // checkStoragePowerAndData(compStatus, psuPorts)
+    checkStoragePowerAndData(compStatus, psuPorts) {
+        let storagePorts = []
+        console.log(compStatus)
+        compStatus.forEach(storage => {
+            storage.component.ports.forEach(romPort => {
+                storagePorts.push(romPort)
+            })
+        })
+        console.log(storagePorts)
+    }
 
     // Main check for allowing the PC unit to boot (check defects and compatibility here)
     checkPCState(unit) {
