@@ -193,12 +193,11 @@ class Inventory {
         })
 
         // create(fill) cable attributes
-        if(component.type !== 'psu') {
-            component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))
-        } else {
-            // different handling for PSUs
-            switch(component.specs.cableModularity) {
-                case 'non-modular':
+        switch(component.type) {
+            case 'psu':
+                // different handling for PSUs
+                const modularity = component.specs.cableModularity
+                if(modularity === 'non-modular') {
                     component.cables = component.cables.map(cable => {
                         // create cable instance
                         const newCable = this.createCableAttr(cable, currentCableRef)
@@ -209,8 +208,7 @@ class Inventory {
                         }
                         return newCable
                     })
-                    break
-                case 'semi-modular':
+                } else if (modularity === 'semi-modular') {
                     component.cables = component.cables.map(cable => {
                         // cable instance
                         const newCable = this.createCableAttr(cable, currentCableRef)
@@ -222,10 +220,17 @@ class Inventory {
                         } 
                         return newCable
                     })
-                    break
-                default: 
+                } else {
+                    component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))
+                }  
+                break 
+            case 'cooling':
                 component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))
-            }
+                // update logic so that cooling cables are already attached
+                component.ports[0].offsets[0].cableAttached = component.cables[0]
+                break
+            default: 
+            component.cables = component.cables.map(cable=> this.createCableAttr(cable, currentCableRef))
         }
             
         // add to Table

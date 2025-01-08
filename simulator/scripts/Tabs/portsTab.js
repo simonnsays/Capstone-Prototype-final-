@@ -189,7 +189,9 @@ class PortsTab {
             }
             
             // puh object to the portGroups list
-            this.portGroups.push(portGroup) 
+            if(portGroup.component !== 'cooling') {
+                this.portGroups.push(portGroup)
+            }
         }
         
         // do the same for attached components (recursive)

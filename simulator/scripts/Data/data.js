@@ -362,9 +362,12 @@ const components = [
             {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
         ],
         slots: [],
+        ports: [
+            {type: 'cooling'}
+        ],
         cables: [
-                    {type: '3-pin-cooling'}
-                ]
+            {type: '3-pin-cooling'}
+        ]
     },
     {        // Gigabyte Nvidia GeForce RTX 3060
         name: 'Gigabyte Nvidia GeForce RTX 3060',
@@ -418,7 +421,5 @@ const components = [
         ]  
     }
 ]
-
-
 
 export default components

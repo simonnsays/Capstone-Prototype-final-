@@ -363,6 +363,25 @@ const portRef = {
                 }
             ]
         },
+    ],
+    cooling: [
+        {   // cooling
+            type: 'cooling',
+            style: 'single',
+            image: {
+                imageSrc: './assets/motherboard/ports/mobo_port-fan.png',
+            },
+            offsets: [
+                {
+                    top: 0,
+                    left: 0,
+                    width: 0,
+                    height: 40,
+                    cableAttached: null,
+                    takes: '3-pin-cooling',
+                }
+            ],
+        },
     ]
 }
 
