@@ -39,6 +39,15 @@ class DisplayArea {
             { area: { x: 980, y: 460, width: 310, height: 210 }, component: null }
         ]
 
+        this.trashBin = {
+            element: this.elements.trashBin ,
+            area: {
+                x: 570, y: 20, width: 80, height: 80
+            },
+            confirmBtn: this.elements.confirmBtn,
+            cancelBtn:  this.elements.cancelBtn
+        }
+
         // Mode
         this.mountModeButton = this.elements.mountToggle
         this.isInMountMode = true

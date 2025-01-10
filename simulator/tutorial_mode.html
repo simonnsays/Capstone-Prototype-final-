@@ -8,6 +8,21 @@
     <link rel="icon" href="../favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
     <style>
+        @keyframes blink {
+            0% {
+            opacity: 0;
+            }
+            50% {
+            opacity: 1;
+            }
+            100% {
+            opacity: 0;
+            }
+        }
+        
+        .blinking-element {
+            animation: blink 1.5s infinite;
+        }
        .checkmark {
         width: 30px;
         height: 30px;
@@ -41,7 +56,7 @@
         color: #333;
         }
 
-        #drawtrashBox {
+        #trashBin {
         position: absolute;
         top: 20px;
         left: 570px;
@@ -57,17 +72,17 @@
         user-select: none;
         }
 
-        #drawtrashBox img {
+        #trashBin img {
         width: 80%;
         height: 80%;
         opacity: 70%;
         }
 
-        #drawtrashBox:hover {
+        #trashBin:hover {
         background-color: #888;
         }
 
-        #drawtrashBox:hover {
+        #trashBin:hover {
         box-shadow: 3.4px 2.5px 4.9px rgba(0, 0, 0, 0.025),
                     8.6px 6.3px 12.4px rgba(0, 0, 0, 0.035),
                     17.5px 12.8px 25.3px rgba(0, 0, 0, 0.045),
@@ -140,6 +155,8 @@
     </style>
 </head>
 <body>
+    <!-- <div class="blinking-element">Loading...</div> -->
+
     <!-- GAME CONTAINER -->
     <div class="game-container">
         <div id="wattageDisplay" class="wattC">Total Watts: 0W</div>
@@ -156,7 +173,7 @@
         <!-- canvas -->
         <canvas id="simCanvas"></canvas>
 
-        <div id="drawtrashBox" class="trash-icon">
+        <div id="trashBin" class="trash-icon">
             <img src="./assets/trash-bin.png" alt="Trash Icon">
             <div class="tooltiptext">remove</div>
         </div>
@@ -165,7 +182,7 @@
          <div id="confirmationDialog" class="dialog">
             <div class="dialog-content">
                 <p>Are you sure you want to remove this component?</p>
-                <button id="confirmBtn">Yes</button>
+                <button id="button1">Yes</button>
                 <button id="cancelBtn">No</button>
             </div>
         </div>
@@ -552,7 +569,7 @@
 
     <!-------------------------- S C R I P T S ------------------------------->
     <script type="module" src="main.js"></script>
-    <!-- <script>
+    <script>
         // Assistant task function
         document.addEventListener('DOMContentLoaded', function () {
         const taskCells = document.querySelectorAll('.task-cell');
@@ -671,6 +688,6 @@
 
         // Ensure no task is initially marked as completed
         markTaskCompleted(-1);  // Reset task completion at the start
-    </script> -->
+    </script>
 </body>
 </html>

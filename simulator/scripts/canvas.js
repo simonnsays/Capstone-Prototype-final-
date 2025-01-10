@@ -1,12 +1,10 @@
 class Canvas {
-    constructor(elementHandler, utilityTool, displayArea, user, inventory, wattageCalculator, pcUnit, bootUpTab) {
+    constructor(elementHandler, utilityTool, displayArea, user, inventory, wattageCalculator) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
         this.inventory = inventory
         this.wattageCalculator = wattageCalculator
-        this.pcUnit = pcUnit
-        this.bootUpTab = bootUpTab
 
         // Canvas Area
         this.element = elementHandler.getSimCanvas();
@@ -31,13 +29,10 @@ class Canvas {
         // User
         this.user = user;
 
-        // Trash Icon 
-        this.trashBox = { x: 570, y: 20, width: 80, height: 80 }
-
         // Dialog elements
         this.confirmationDialog = document.getElementById('confirmationDialog')
-        this.confirmBtn = document.getElementById('confirmBtn')
-        this.cancelBtn = document.getElementById('cancelBtn')
+        // this.confirmBtn = document.getElementById('confirmBtn')
+        // this.cancelBtn = document.getElementById('cancelBtn')
         this.componentToRemove = null // Placeholder for the component to remove
 
         // Mouse Events
@@ -153,7 +148,7 @@ class Canvas {
         };
 
         // Check if component is dropped on the trash icon
-        if (this.utilityTool.isInsideBox(adjustedMousePoint, this.trashBox)) {
+        if (this.utilityTool.isInsideBox(this.user.mousePoint, this.displayArea.trashBin.area)) {
             this.showConfirmationDialog(this.user.componentSelected); // Show confirmation dialog
             this.user.returnComponentToShelf();
             this.user.resetTempProperties();
@@ -296,32 +291,26 @@ class Canvas {
 
     // Confirmation Dialog Handling
     showConfirmationDialog(component) {
-        this.componentToRemove = component
+        // this.componentToRemove = component
         this.confirmationDialog.style.display = 'block'
     }
 
     confirmRemoval() {
         if (this.componentToRemove) this.removeComponentFromCanvas(this.componentToRemove)
         this.confirmationDialog.style.display = 'none'
-        this.componentToRemove = null
+        // this.componentToRemove = null
     }
     
     // Function to cancel the removal process
     cancelRemoval() {
         this.confirmationDialog.style.display = 'none'
-        this.componentToRemove = null
+        // this.componentToRemove = null
     }
 
     // Function to remove the component from the canvas
     removeComponentFromCanvas(component) {
         this.displayArea.removeComponent(component)
         // console.log(`${component.name} has been removed.`)
-    }
-
-    // Redraw the entire canvas to reflect changes
-    redrawCanvas() {
-        this.c.clearRect(0, 0, this.element.width, this.element.height)
-        this.animate() // Re-draw components
     }
 
     // Display Slots
@@ -365,16 +354,6 @@ class Canvas {
             box.y,
             box.width,
             box.height
-        )
-    }
-
-    // Trash box
-    drawtrashBox() {
-        this.c.fillRect(
-            this.trashBox.x, 
-            this.trashBox.y, 
-            this.trashBox.width, 
-            this.trashBox.height
         )
     }
 
@@ -475,14 +454,7 @@ class Canvas {
                         radius: 20,
                         color: 'rgba(255,170,0, 0.3)'
                     }
-                    this.fillRoundRect(
-                        highlight.left, 
-                        highlight.top, 
-                        highlight.width, 
-                        highlight.height, 
-                        highlight.radius, 
-                        highlight.color
-                    )
+                    this.fillRoundRect(highlight.left, highlight.top, highlight.width, highlight.height, highlight.radius, highlight.color)
                 }
 
                 // all shelf components will use default source

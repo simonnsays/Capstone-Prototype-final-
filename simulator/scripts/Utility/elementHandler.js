@@ -51,14 +51,20 @@ class ElementHandler {
 
     getDisplayAreaElements() {
         return {
+            // display ui elements
             leftBtn: document.querySelector('#left'),
             rightBtn: document.querySelector('#right'),
             compLabel: document.querySelector('#compLabel'),
             compName: document.querySelector('#compName'),
             panelIndicator: document.querySelector('#panelIndicator'),
+            // ui button elements
             menuButton: document.querySelector('[data-type="menu"]'),
             tabButtons: document.querySelectorAll('[data-type="button"]'),
-            mountToggle: document.querySelector('#mountUnmount')
+            mountToggle: document.querySelector('#mountUnmount'),
+            // trash bin elements
+            trashBin: document.querySelector('#trashBin'),
+            confirmBtn: document.querySelector('#confirmBtn'),
+            cancelBtn: document.querySelector('#cancelBtn')
             
         } || null
     }

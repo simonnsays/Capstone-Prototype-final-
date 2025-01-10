@@ -185,8 +185,11 @@ class Main {
         
         this.inventory.update()
         this.displayArea.update()
-        this.bootUpTab.pcUnit.powerOff()
-        this.bootUpTab.pcUnit.attemptPowerOn(this.displayArea.table.component)
+
+        this.bootUpTab.powerOff()
+        this.bootUpTab.togglePower(this.displayArea.table.component)
+        // this.bootUpTab.powerOn()
+        // this.bootUpTab.pcUnit.attemptPowerOn(this.displayArea.table.component)
     }
 
     connectedCables() {

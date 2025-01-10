@@ -1,11 +1,10 @@
 class PCUnit {
-    constructor(bootUpElements, ) {
+    constructor(bootUpElements,) {
         // utilityTool, displayArea, Canvas, portsTab, drawer, assistant
         this.bootUpElements = bootUpElements
 
         this.power = 'off'
         this.availableUnit = null
-        this.reportArea = bootUpElements.reportArea || null
         this.screen = bootUpElements.screen || null
 
         // CHECKLIST:
@@ -26,18 +25,6 @@ class PCUnit {
         }
 
         this.bootUpRequirements = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling', 'gpu']
-
-        this.unitStatus = {
-            PSU_TO_MOTHERBOARD: {
-                compatibility: null,
-                error: null
-            },
-            PSU_TO_CPU: {
-                compatibility: null,
-                error: null
-            }
-            // more status
-        }
 
         this.state = ['off','on']
         this.currentState = this.state[0]
@@ -81,7 +68,8 @@ class PCUnit {
 
         const state = this.checkPCState()
         // if check attempts are good, power on
-        this.powerOn()
+        if(state)return true
+        else return false
     }
 
     fillComponentStatus(component) {
@@ -298,64 +286,10 @@ class PCUnit {
         
         if(stateIsAllowed === true) {
             console.log("components are powered up, Booting Up")
+            return true
         } else {
             console.log('Err...')
-        }
-    }
-
-    powerOn() {
-        this.power = 'on'
-
-        this.screen?.classList.add('screen-on')
-
-        setTimeout(() => this.report(), 500)
-        // console.log(this.componentsStatus)
-    }
-
-    powerOff() {
-        this.power = 'off'
-        this.screen?.classList.remove('screen-on')
-        this.clearReportsArea()
-
-        for(let key in this.componentsStatus) {
-            if(Array.isArray(this.componentsStatus[key])) {
-                this.componentsStatus[key] = []
-            } else {
-                this.componentsStatus[key] = null
-            }
-        }
-    }
-
-    report() {
-        const initialDelay = 1200
-        const decreaseFactor = 0.75
-
-        this.reports.forEach((report, i) => {
-            const delay = initialDelay * Math.pow(decreaseFactor, i)
-            setTimeout(() => this.createReportCell(report), delay)
-        });
-    }
-
-    createReportCell(report) {
-        const cell = document.createElement('div')
-        cell.classList = 'reportCell'
-
-        const tag = document.createElement('div')
-        tag.classList = 'reportCellTag'
-        tag.innerHTML = report.tag
-        cell.appendChild(tag)
-
-        const def = document.createElement('div')
-        def.classList = 'reportCellDef'
-        def.innerHTML = report.def
-        cell.appendChild(def)
-
-        this.reportArea?.appendChild(cell)
-    }
-
-    clearReportsArea() {
-        while (this.reportArea?.firstChild) {
-            this.reportArea.removeChild(this.reportArea.firstChild)
+            return false
         }
     }
 
@@ -661,8 +595,8 @@ class PCUnit {
         // this.reportArea.appendChild(cell);
     }
 
-//    // Collect all attached cables from PortsTab
-//    getAttachedCables() {
+   // Collect all attached cables from PortsTab
+   getAttachedCables() {
 //        // Refresh attached cables from PortsTab's updated status
 //        const attachedCablesStatus = this.portsTab.getAttachedCablesStatus();
 //        this.attachedCables.clear();
@@ -688,7 +622,7 @@ class PCUnit {
 //        const missingCables = this.requiredCables.filter((cable) => !this.attachedCables.has(cable));
 //
 //        return { missingComponents, missingCables };
-//    }
+   }
 }
 
 export default PCUnit;

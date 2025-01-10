@@ -15,6 +15,8 @@ class BootUpTab {
         this.pcPlaceHolder = this.elements.pcPlaceHolder
         this.powerBtn = this.elements.powerBtn
         this.powerBtn.disabled = true
+        this.reportArea = this.elements.reportArea
+
         
         // PC Unit
         this.pcUnit = new PCUnit(this.elements)
@@ -88,18 +90,78 @@ class BootUpTab {
 
             // attempt power on
             this.pcUnit.power = 'on'
-            this.pcUnit.attemptPowerOn(unit)
+            const pcState = this.pcUnit.attemptPowerOn(unit)
+            if(pcState) {
+                this.powerOn()
+            } else {
+                //////////// AREA OF REPORT ERRORS 
+            }
             return
         }
 
         // turn off
-        this.pcUnit.power = 'off' 
-        this.pcUnit.powerOff()
+        this.power = 'off' 
+        this.powerOff()
+    }
+
+    powerOn() {
+        this.pcUnit.power = 'on'
+
+        this.pcUnit.screen?.classList.add('screen-on')
+
+        setTimeout(() => this.report(), 500)
+    }
+
+    powerOff() {
+        this.pcUnit.power = 'off'
+        this.screen?.classList.remove('screen-on')
+        this.clearReportsArea()
+
+        for(let key in this.pcUnit.componentsStatus) {
+            if(Array.isArray(this.pcUnit.componentsStatus[key])) {
+                this.pcUnit.componentsStatus[key] = []
+            } else {
+                this.pcUnit.componentsStatus[key] = null
+            }
+        }
     }
 
     powerBtnClick = (unit) => {
         if(!this.powerBtn.disabled) {
             this.togglePower(unit)
+        }
+    }
+
+    report() {
+        const initialDelay = 1200
+        const decreaseFactor = 0.75
+
+        this.pcUnit.reports.forEach((report, i) => {
+            const delay = initialDelay * Math.pow(decreaseFactor, i)
+            setTimeout(() => this.createReportCell(report), delay)
+        });
+    }
+
+    createReportCell(report) {
+        const cell = document.createElement('div')
+        cell.classList = 'reportCell'
+
+        const tag = document.createElement('div')
+        tag.classList = 'reportCellTag'
+        tag.innerHTML = report.tag
+        cell.appendChild(tag)
+
+        const def = document.createElement('div')
+        def.classList = 'reportCellDef'
+        def.innerHTML = report.def
+        cell.appendChild(def)
+
+        this.reportArea?.appendChild(cell)
+    }
+
+    clearReportsArea() {
+        while (this.reportArea?.firstChild) {
+            this.reportArea.removeChild(this.reportArea.firstChild)
         }
     }
 
