@@ -11,6 +11,8 @@ class User {
 
         this.detachableComponents = []
         this.componentToDetach = null
+
+        this.componentToTrash = null
     }
 
     returnComponentToShelf() {
@@ -34,11 +36,6 @@ class User {
         // component selected
         delete this.componentSelected.origin
         this.componentSelected = null
-
-        // detachables
-        // this.detachableComponents = []
-        // this.componentToDetach = null
-
     }
 
     // Create Temporary Properties

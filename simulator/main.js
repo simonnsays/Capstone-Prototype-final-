@@ -8,9 +8,8 @@ import PortsTab from "./scripts/Tabs/portsTab.js"
 import DisplayArea from "./scripts/displayArea.js"
 import BootUpTab from "./scripts/Tabs/bootUpTab.js"
 import Assistant from "./assistant/assistant.js"
-import PCUnit from "./scripts/Data/pcUnit.js"
 import wattageCalculator from "./scripts/Data/wattageCalculator.js"
-import components from "./scripts/Data/data.js"
+
 class Main {
     constructor() {
         // Utility Modules
@@ -28,14 +27,6 @@ class Main {
             this.elementHandler, 
             this.utilityTool, 
             this.pcUnit)
-
-        // PC Unit
-        // this.pcUnit = new PCUnit(
-        //     this.utilityTool, 
-        //     this.displayArea, 
-        //     this.canvas, 
-        //     this.portsTab, 
-        //     this.drawer)
 
         // Boot Up Tab
         this.bootUpTab = new BootUpTab(
@@ -92,11 +83,13 @@ class Main {
 
     handleMouseDown() {
         // prevent use of canvas when tabs are open
-        if(this.shop.isActive || 
+        if( this.displayArea.trashBin.isActive ||
+            this.portsTab.drawer.isActive ||
+            this.bootUpTab.isActive ||
             this.inventory.isActive || 
             this.portsTab.isActive || 
-            this.portsTab.drawer.isActive ||
-            this.bootUpTab.isActive) {
+            this.shop.isActive
+        ) {
                 this.canvas.isActive = false
             } else {
                 this.canvas.isActive = true
@@ -110,12 +103,15 @@ class Main {
         this.canvas.animate()   
         this.assistant.asstInit() 
 
-        // buy the full set sample
-        this.buyFullSetSample()
-        this.bootUpTab.openTab()
+        // TEST: BOOT UP
+        // this.testBootUp()
+
+        // TEST: TRASH BIN
+        this.testTrashBin()
+        
     }
 
-    buyFullSetSample() {
+    testBootUp() {
         // Sample boot up reqs
         const fullSet = this.bootUpTab.pcUnit.bootUpRequirements
         fullSet.push('ram')
@@ -143,6 +139,8 @@ class Main {
         this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'cpu'),1)[0])
         this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'cooling'),1)[0])
         this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'gpu'),1)[0])
+
+        
 
         // attach components to motherboard
         this.displayArea.table.component.slots.forEach(slot => {
@@ -181,18 +179,20 @@ class Main {
             }
         }) 
 
-        this.connectedCables()
+        this.connectCables()
+
+        
+        
         
         this.inventory.update()
         this.displayArea.update()
 
         this.bootUpTab.powerOff()
         this.bootUpTab.togglePower(this.displayArea.table.component)
-        // this.bootUpTab.powerOn()
-        // this.bootUpTab.pcUnit.attemptPowerOn(this.displayArea.table.component)
+        this.bootUpTab.openTab()
     }
 
-    connectedCables() {
+    connectCables() {
         this.bootUpTab.pcUnit.fillComponentStatus(this.displayArea.table.component)
         // connect cables
         let motherboardPortsGroup = this.portsTab.portGroups.find(group => group.component === 'motherboard')
@@ -289,6 +289,18 @@ class Main {
         const gpuCableGpu = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-pcie')
         this.portsTab.attachCable(gpuPortGpu.offsets[0], gpuCableGpu)
 
+    }
+
+    testTrashBin() {
+        this.shop.buyComponent(this.shop.items[3])
+        this.shop.buyComponent(this.shop.items[1])
+        this.inventory.items.forEach(item => {
+            this.inventory.placeComponent(item)
+        })
+        this.inventory.items = []
+        
+        this.inventory.update()
+        this.displayArea.update()
     }
 }
 

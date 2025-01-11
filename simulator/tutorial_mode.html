@@ -139,7 +139,9 @@
         }
         
         .dialog-content button {
-            padding: 10px 20px;
+            min-width: 200px;
+            min-height: 55px;
+            padding: 10px 15px;
             margin: 10px;
             border: none;
             background-color: #f04f4f;
@@ -179,11 +181,12 @@
         </div>
         
          <!-- Custom confirmation dialog (initially hidden) -->
-         <div id="confirmationDialog" class="dialog">
+         <div id="trashConfrimDialog" class="dialog">
+            <div id="trashClose" class="closeBtn">&times;</div>
             <div class="dialog-content">
                 <p>Are you sure you want to remove this component?</p>
-                <button id="button1">Yes</button>
-                <button id="cancelBtn">No</button>
+                <button id="trashConfirm">Yes</button>
+                <button id="trashReturn">Return To<br>Inventory Instead</button>
             </div>
         </div>
 

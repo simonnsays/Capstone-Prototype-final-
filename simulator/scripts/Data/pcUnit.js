@@ -285,7 +285,7 @@ class PCUnit {
         // ..
         
         if(stateIsAllowed === true) {
-            console.log("components are powered up, Booting Up")
+            // console.log("components are powered up, Booting Up")
             return true
         } else {
             console.log('Err...')

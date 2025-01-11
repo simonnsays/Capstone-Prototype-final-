@@ -6,6 +6,7 @@ class DisplayArea {
         this.bootUpTab = bootUpTab
         this.user = user
         this.wattageCalculator = wattageCalculator
+        console.log(user)
         // Elements
         this.elements = this.elementHandler.getDisplayAreaElements()
         if (!this.elements) {
@@ -39,13 +40,15 @@ class DisplayArea {
             { area: { x: 980, y: 460, width: 310, height: 210 }, component: null }
         ]
 
+        // Bin
         this.trashBin = {
-            element: this.elements.trashBin ,
-            area: {
-                x: 570, y: 20, width: 80, height: 80
-            },
-            confirmBtn: this.elements.confirmBtn,
-            cancelBtn:  this.elements.cancelBtn
+            element: this.elements.trashBin,
+            dialog: this.elements.trashDialog,
+            area: { x: 570, y: 20, width: 80, height: 80 },
+            confirmBtn: this.elements.trashConfirm,
+            closeBtn: this.elements.trashClose,
+            returnBtn: this.elements.trashReturn,
+            isActive: false
         }
 
         // Mode
@@ -60,6 +63,9 @@ class DisplayArea {
         // Events
         this.leftBtn.addEventListener('click', () => this.rotateLeft())
         this.rightBtn.addEventListener('click', () => this.rotateRight())
+
+        this.trashBin.closeBtn.addEventListener('click', () => this.cancelRemoval())
+        this.trashBin.confirmBtn.addEventListener('click', () => this.confirmRemoval())
     }
 
     // Rotate Left
@@ -74,6 +80,26 @@ class DisplayArea {
         this.curr = (this.curr - 1 + this.displaySides.length) % this.displaySides.length;
         this.currentSide = this.displaySides[this.curr]
         this.update()
+    }
+
+    // Confirmation Dialog Handling
+    showConfirmationDialog(component) {
+        // this.componentToRemove = component
+        this.trashBin.dialog.style.display = 'block'
+    }
+
+    confirmRemoval() {
+        console.log(this.user)
+        this.removeComponent(this.user.componentSelected)
+        
+        this.trashBin.dialog.style.display = 'none'
+        // this.user.componentSelected = null
+    }
+    
+    // Function to cancel the removal process
+    cancelRemoval() {
+        this.trashBin.dialog.style.display = 'none'
+        // this.componentToRemove = null
     }
 
     // Attach Component
@@ -132,6 +158,7 @@ class DisplayArea {
     }
 
     removeComponent(component) {
+        console.log(component)
         // console.log(`Removing component: ${component.name}`);
 
         // Remove from table

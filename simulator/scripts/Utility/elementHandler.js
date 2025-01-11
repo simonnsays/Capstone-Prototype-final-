@@ -63,8 +63,11 @@ class ElementHandler {
             mountToggle: document.querySelector('#mountUnmount'),
             // trash bin elements
             trashBin: document.querySelector('#trashBin'),
-            confirmBtn: document.querySelector('#confirmBtn'),
-            cancelBtn: document.querySelector('#cancelBtn')
+            trashDialog: document.querySelector('#trashConfrimDialog'),
+            trashConfirm: document.querySelector('#trashConfirm'),
+            trashReturn: document.querySelector('#trashReturn'),
+            trashClose: document.querySelector('#trashClose')
+            
             
         } || null
     }

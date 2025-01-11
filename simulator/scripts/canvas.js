@@ -5,6 +5,7 @@ class Canvas {
         this.utilityTool = utilityTool
         this.inventory = inventory
         this.wattageCalculator = wattageCalculator
+        console.log(this)
 
         // Canvas Area
         this.element = elementHandler.getSimCanvas();
@@ -29,20 +30,12 @@ class Canvas {
         // User
         this.user = user;
 
-        // Dialog elements
-        this.confirmationDialog = document.getElementById('confirmationDialog')
-        // this.confirmBtn = document.getElementById('confirmBtn')
-        // this.cancelBtn = document.getElementById('cancelBtn')
-        this.componentToRemove = null // Placeholder for the component to remove
-
         // Mouse Events
         window.addEventListener('mousedown', (e) => this.handleMouseDown(e))
         window.addEventListener('mousemove', (e) => this.handleMouseMove(e))
         window.addEventListener('mouseup', () => this.handleMouseUp())
 
-        // Dialog Events
-        this.confirmBtn.addEventListener('click', () => this.confirmRemoval())
-        this.cancelBtn.addEventListener('click', () => this.cancelRemoval())
+        // Dialog Events        
         this.alertOkButton.addEventListener('click', () => this.closeAlert())
     }
     
@@ -142,16 +135,14 @@ class Canvas {
         // return if no selected component
         if (!this.user.componentSelected) return;
 
-        const adjustedMousePoint = {
-            x: this.user.mousePoint.x,
-            y: this.user.mousePoint.y
-        };
-
         // Check if component is dropped on the trash icon
         if (this.utilityTool.isInsideBox(this.user.mousePoint, this.displayArea.trashBin.area)) {
-            this.showConfirmationDialog(this.user.componentSelected); // Show confirmation dialog
+            this.displayArea.showConfirmationDialog(this.user.componentSelected); // Show confirmation dialog
+            this.user.isDragging = false
             this.user.returnComponentToShelf();
-            this.user.resetTempProperties();
+
+            console.log(this.user.componentSelected.id)
+            // this.user.resetTempProperties();
             return;
         }
 
@@ -194,7 +185,7 @@ class Canvas {
             this.user.returnComponentToShelf()
         } else{
             // Update wattage calculation
-           this.wattageCalculator.calculateWattage()
+        //    this.wattageCalculator.calculateWattage()
        }
 
         // clear temporary properties
@@ -287,30 +278,6 @@ class Canvas {
         }
         
         return true
-    }
-
-    // Confirmation Dialog Handling
-    showConfirmationDialog(component) {
-        // this.componentToRemove = component
-        this.confirmationDialog.style.display = 'block'
-    }
-
-    confirmRemoval() {
-        if (this.componentToRemove) this.removeComponentFromCanvas(this.componentToRemove)
-        this.confirmationDialog.style.display = 'none'
-        // this.componentToRemove = null
-    }
-    
-    // Function to cancel the removal process
-    cancelRemoval() {
-        this.confirmationDialog.style.display = 'none'
-        // this.componentToRemove = null
-    }
-
-    // Function to remove the component from the canvas
-    removeComponentFromCanvas(component) {
-        this.displayArea.removeComponent(component)
-        // console.log(`${component.name} has been removed.`)
     }
 
     // Display Slots
