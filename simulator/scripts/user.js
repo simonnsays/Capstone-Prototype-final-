@@ -34,7 +34,7 @@ class User {
         this.availableSlots = [];
 
         // component selected
-        delete this.componentSelected.origin
+        delete this.componentSelected?.origin
         this.componentSelected = null
     }
 

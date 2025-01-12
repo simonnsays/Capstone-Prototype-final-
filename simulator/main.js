@@ -107,10 +107,11 @@ class Main {
         // this.testBootUp()
 
         // TEST: TRASH BIN
-        this.testTrashBin()
+        // this.testTrashBin()
         
     }
 
+    /////////////////// TEST: BOOT UP
     testBootUp() {
         // Sample boot up reqs
         const fullSet = this.bootUpTab.pcUnit.bootUpRequirements
@@ -139,8 +140,6 @@ class Main {
         this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'cpu'),1)[0])
         this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'cooling'),1)[0])
         this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'gpu'),1)[0])
-
-        
 
         // attach components to motherboard
         this.displayArea.table.component.slots.forEach(slot => {
@@ -180,10 +179,7 @@ class Main {
         }) 
 
         this.connectCables()
-
-        
-        
-        
+ 
         this.inventory.update()
         this.displayArea.update()
 
@@ -191,7 +187,7 @@ class Main {
         this.bootUpTab.togglePower(this.displayArea.table.component)
         this.bootUpTab.openTab()
     }
-
+    // ^^^
     connectCables() {
         this.bootUpTab.pcUnit.fillComponentStatus(this.displayArea.table.component)
         // connect cables
@@ -291,6 +287,7 @@ class Main {
 
     }
 
+    /////////////////// TEST: TRASH BIN
     testTrashBin() {
         this.shop.buyComponent(this.shop.items[3])
         this.shop.buyComponent(this.shop.items[1])

@@ -5,7 +5,6 @@ class Canvas {
         this.utilityTool = utilityTool
         this.inventory = inventory
         this.wattageCalculator = wattageCalculator
-        console.log(this)
 
         // Canvas Area
         this.element = elementHandler.getSimCanvas();
@@ -130,7 +129,7 @@ class Canvas {
         }
     }
 
-    // Mouse Up Event - Handle dropping on trash
+    // Mouse Up Event
     handleMouseUp() {
         // return if no selected component
         if (!this.user.componentSelected) return;
@@ -138,11 +137,11 @@ class Canvas {
         // Check if component is dropped on the trash icon
         if (this.utilityTool.isInsideBox(this.user.mousePoint, this.displayArea.trashBin.area)) {
             this.displayArea.showConfirmationDialog(this.user.componentSelected); // Show confirmation dialog
-            this.user.isDragging = false
-            this.user.returnComponentToShelf();
-
-            console.log(this.user.componentSelected.id)
-            // this.user.resetTempProperties();
+            
+            // this.user.isDragging = false
+            this.user.returnComponentToShelf()
+            // this.user.componentSelected = null
+            this.user.resetTempProperties()
             return;
         }
 
@@ -282,6 +281,7 @@ class Canvas {
 
     // Display Slots
     displaySlots(baseComponent, componentSelected) {
+        if(!baseComponent) return
         // match slot type to selected component type
         baseComponent.slots.forEach((slot) => {
             if (slot.type === componentSelected.type && !slot.component) {

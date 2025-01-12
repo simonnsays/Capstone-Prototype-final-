@@ -6,12 +6,14 @@ class DisplayArea {
         this.bootUpTab = bootUpTab
         this.user = user
         this.wattageCalculator = wattageCalculator
-        console.log(user)
         // Elements
         this.elements = this.elementHandler.getDisplayAreaElements()
         if (!this.elements) {
             throw new Error('Missing Display Area Elements')
         }
+
+        // Inventory
+        this.inventory = null
 
         // Wires Tab
         this.portsTab = portsTab
@@ -64,8 +66,10 @@ class DisplayArea {
         this.leftBtn.addEventListener('click', () => this.rotateLeft())
         this.rightBtn.addEventListener('click', () => this.rotateRight())
 
+        this.trashBin.element.addEventListener('click', () => this.showConfirmationDialog(this.table.component))
         this.trashBin.closeBtn.addEventListener('click', () => this.cancelRemoval())
         this.trashBin.confirmBtn.addEventListener('click', () => this.confirmRemoval())
+        this.trashBin.returnBtn.addEventListener('click', () => this.returnTrashToInv(this.user.componentToTrash))
     }
 
     // Rotate Left
@@ -84,22 +88,23 @@ class DisplayArea {
 
     // Confirmation Dialog Handling
     showConfirmationDialog(component) {
-        // this.componentToRemove = component
         this.trashBin.dialog.style.display = 'block'
+        this.trashBin.isActive = true
+
+        
+        this.user.componentToTrash = component
     }
 
     confirmRemoval() {
-        console.log(this.user)
-        this.removeComponent(this.user.componentSelected)
-        
+        this.removeComponent(this.user.componentToTrash)
         this.trashBin.dialog.style.display = 'none'
-        // this.user.componentSelected = null
+        this.trashBin.isActive = false
     }
     
     // Function to cancel the removal process
     cancelRemoval() {
         this.trashBin.dialog.style.display = 'none'
-        // this.componentToRemove = null
+        this.trashBin.isActive = false  
     }
 
     // Attach Component
@@ -158,7 +163,6 @@ class DisplayArea {
     }
 
     removeComponent(component) {
-        console.log(component)
         // console.log(`Removing component: ${component.name}`);
 
         // Remove from table
@@ -178,6 +182,17 @@ class DisplayArea {
 
         // Update display area information
         this.update();
+    }
+
+    // returning components to Inventory 
+    returnTrashToInv(component) {
+        this.inventory.returnToInv(component)
+        this.inventory.update()
+
+        this.removeComponent(component)
+        this.update()
+        this.trashBin.dialog.style.display = 'none'
+        this.trashBin.isActive = false
     }
 
     // Create Bounding Box
@@ -220,6 +235,15 @@ class DisplayArea {
     updateComponentLabels(component) {
         this.compLabel.innerHTML = component.type.toUpperCase()
         this.compName.innerHTML = component.name
+    }
+
+    // clear Display
+    clearDisplay() {
+        this.compLabel.innerHTML = ''
+        this.compName.innerHTML = ''
+        this.rightBtn.style.visibility = 'hidden'
+        this.leftBtn.style.visibility = 'hidden'
+        this.panelIndicator.style.visibility = 'hidden'
     }
 
     // Update Slot Box
@@ -405,6 +429,7 @@ class DisplayArea {
 
     // Main Dispay Area Update Method 
     update() {
+        this.clearDisplay()
         this.user.detachableComponents = []
         if(this.table.component) {
             const tableComponent = this.table.component

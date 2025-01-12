@@ -9,9 +9,6 @@ class Inventory {
         this.elements = elementHandler.getInventoryElements()
         if(!this.elements) throw new Error('Missing Inventory Elements')
 
-        // Display Area
-        this.displayArea = displayArea
-
         // Elements
         this.openBtn = this.elements.openBtn
         this.closeBtn = this.elements.closeBtn
@@ -21,6 +18,10 @@ class Inventory {
 
         // Items
         this.items = []
+
+        // Display Area
+        this.displayArea = displayArea
+        displayArea.inventory = this
 
         // Events
         this.openBtn.addEventListener('click', () => this.openTab(this.modal))
@@ -103,33 +104,6 @@ class Inventory {
                     gatherAttachedComponents(slot.component)
                     slot.component = null
                     
-                }
-            })
-        }
-
-    gatherAttachedComponents(component)
-        // remove attached component first
-        if(tempDetachedComponents.length > 0) {
-            tempDetachedComponents.forEach(tempItem => {
-                this.items.push(tempItem)
-            })
-        }  
-
-        this.items.push(component)
-    }
-
-    // returning components to Inventory 
-    returnToInv(component) {
-        const tempDetachedComponents = []
-
-        const gatherAttachedComponents = (component) => {
-            component.slots.forEach(slot => {
-                if(slot.component) {
-                    tempDetachedComponents.push(slot.component)
-    
-                    gatherAttachedComponents(slot.component)
-
-                    slot.component = null
                 }
             })
         }
@@ -257,7 +231,6 @@ class Inventory {
         let containerChildren = Array.from(this.itemsContainer.children) 
 
         containerChildren.forEach((child, index) => {
-            // console.log(child)
             child.addEventListener('click', () => {
                 // remove component from inventory
                 const removedComponent = this.items.splice(index, 1)
