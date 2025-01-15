@@ -66,7 +66,9 @@ class DisplayArea {
         this.leftBtn.addEventListener('click', () => this.rotateLeft())
         this.rightBtn.addEventListener('click', () => this.rotateRight())
 
-        this.trashBin.element.addEventListener('click', () => this.showConfirmationDialog(this.table.component))
+        this.trashBin.element.addEventListener('click', () => {
+            if(this.table.component)this.showConfirmationDialog(this.table.component)
+        })
         this.trashBin.closeBtn.addEventListener('click', () => this.cancelRemoval())
         this.trashBin.confirmBtn.addEventListener('click', () => this.confirmRemoval())
         this.trashBin.returnBtn.addEventListener('click', () => this.returnTrashToInv(this.user.componentToTrash))
@@ -90,7 +92,6 @@ class DisplayArea {
     showConfirmationDialog(component) {
         this.trashBin.dialog.style.display = 'block'
         this.trashBin.isActive = true
-
         
         this.user.componentToTrash = component
     }
@@ -99,6 +100,8 @@ class DisplayArea {
         this.removeComponent(this.user.componentToTrash)
         this.trashBin.dialog.style.display = 'none'
         this.trashBin.isActive = false
+
+        this.update()
     }
     
     // Function to cancel the removal process
@@ -190,9 +193,9 @@ class DisplayArea {
         this.inventory.update()
 
         this.removeComponent(component)
-        this.update()
         this.trashBin.dialog.style.display = 'none'
         this.trashBin.isActive = false
+
     }
 
     // Create Bounding Box

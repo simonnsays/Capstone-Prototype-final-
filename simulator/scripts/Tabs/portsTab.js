@@ -517,10 +517,10 @@ class PortsTab {
             
             // display attached cables
             this.displayAttachedCables()
-
-            // update drawer
-            this.drawer.update(table, shelf)
         }
+
+        // update drawer
+        this.drawer.update(table, shelf)
 
         // Listen for Cable detachment
         this.detachmentListener()
@@ -543,7 +543,6 @@ class PortsTab {
 
                 // cable attachment
                 this.cableAttachmentListener(cable)
-                
             })
         })
     }

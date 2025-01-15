@@ -104,7 +104,7 @@ class Main {
         this.assistant.asstInit() 
 
         // TEST: BOOT UP
-        // this.testBootUp()
+        this.testBootUp()
 
         // TEST: TRASH BIN
         // this.testTrashBin()
@@ -184,7 +184,7 @@ class Main {
         this.displayArea.update()
 
         this.bootUpTab.powerOff()
-        this.bootUpTab.togglePower(this.displayArea.table.component)
+        // this.bootUpTab.togglePower(this.displayArea.table.component)
         this.bootUpTab.openTab()
     }
     // ^^^

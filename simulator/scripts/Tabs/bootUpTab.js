@@ -92,6 +92,7 @@ class BootUpTab {
             this.pcUnit.power = 'on'
             const pcState = this.pcUnit.attemptPowerOn(unit)
             if(pcState) {
+                console.log('All components are good, Booting up')
                 this.powerOn()
             } else {
                 //////////// AREA OF REPORT ERRORS 
