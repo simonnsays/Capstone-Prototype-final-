@@ -706,6 +706,16 @@ body {
     border-radius: 5px;
 }
 
+#monitorScreen img{
+    position: absolute;
+    z-index: 3;
+    height: 178;
+    width: 326;
+    top: 132;
+    left: 70px;
+    overflow: hidden;
+}
+
 /* Boot Error Dialog */
 .bootErrorDialog {
     position: fixed;

@@ -24,6 +24,16 @@ class PCUnit {
             caseCooling: []
         }
 
+        this.motherboardBrand = {
+            aorus:{},
+            msi:{},
+            evga:{},
+            rog:{},
+            gigabyte:{},
+            asrock:{},
+            biostar:{},
+        }
+
         this.bootUpRequirements = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling', 'gpu']
 
         this.state = ['off','on']
@@ -65,6 +75,9 @@ class PCUnit {
         this.moboPowerUp()
         this.cpuInit()
 
+        // Monitor display poweron
+        this.powerOnMonitor()
+
         // Star proces for Power-On-Self-Test
         this.processPOST(this.componentsStatus.psu.component)
 
@@ -73,6 +86,56 @@ class PCUnit {
         if(state)return true
         else return false
     }
+
+    powerOnMonitor(){ // takes everything from displaying the splashscreen to displayingos and shows it inside the div monitorScreen
+       this.displaySplashScreen();
+    }
+
+    getMotherboardName(){ // logic to get motherboard name from component and check for the brandImages for a match
+        const motherboardComponent = this.componentsStatus.motherboard;
+        if (motherboardComponent && motherboardComponent.component && motherboardComponent.component.name) {
+            return motherboardComponent.component.name;
+        }
+        return '';
+    }
+
+    displaySplashScreen(){ // get the component.type.monitor name and check the brand if it hits a brandImages then display the corresponding brand image and after 5 secs remove the img from the div
+        const splashScreen = document.getElementById('monitorScreen');
+        const brandImages = {
+            evga: 'evga.png',
+            aorus: 'aorus.png',
+            asrock: 'asrock.png',
+            rog: 'rog.png',
+            biostar: 'biostar.png',
+            gigabyte: 'gigabyte.png',
+            msi: 'msi.png',
+        };
+
+        const motherboardName = this.getMotherboardName(); // Call out function getMotherboardName
+        const brand = Object.keys(brandImages).find(brand => motherboardName.toLowerCase().includes(brand)); // Check brandImages const and include lowercases
+        if (brand) {
+            const imgSrc = `./assets/boot/boot_logo/${brandImages[brand]}`;
+            splashScreen.innerHTML = `<img src="${imgSrc}" alt="${brand} logo">`;
+            setTimeout(() => {
+                splashScreen.innerHTML = ''; // Clear the splash screen after 5 seconds
+                this.displayOS(); // Proceed to display the OS
+            }, 10000);
+        } else {
+            splashScreen.innerHTML = ''; // Clear the splash screen if no matching brand is found
+        }
+    }
+    
+    displayOS(){ // display the operating system booting gif from ./assets/boot/os/windows_boot.gif and then show then after another 5 secs display the windows desktop img from ./assets/boot/os/desktop.png
+        const splashScreen = document.getElementById('monitorScreen');
+        const osBootGif = './assets/boot/os/windows_boot.gif';
+        const osDesktopImg = './assets/boot/os/desktop.png';
+
+        splashScreen.innerHTML = `<img src="${osBootGif}" alt="OS Booting">`;
+        setTimeout(() => {
+            splashScreen.innerHTML = `<img src="${osDesktopImg}" alt="OS Desktop">`;
+        }, 5000);
+    }
+
 
     fillComponentStatus(component) {
         let compStatus  = {
@@ -148,7 +211,7 @@ class PCUnit {
         this.componentsStatus.cpu.isPowered = true
         // console.log('CPU powered')
     }
-
+    
     processPOST(supply) {
         // find ports that has cables
         const portsToPower = supply.ports.filter(port =>  port.offsets && port.offsets.some(offset => offset.cableAttached))
