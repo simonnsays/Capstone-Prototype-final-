@@ -5,24 +5,10 @@
     <link rel="stylesheet" href="./assistant/assistant.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="icon" href="../favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
     <style>
-        @keyframes blink {
-            0% {
-            opacity: 0;
-            }
-            50% {
-            opacity: 1;
-            }
-            100% {
-            opacity: 0;
-            }
-        }
-        
-        .blinking-element {
-            animation: blink 1.5s infinite;
-        }
        .checkmark {
         width: 30px;
         height: 30px;
@@ -155,13 +141,48 @@
             background-color: #d43e3e;
         }
 
-        .glowing-container
+        /* .glowing-container { */
+            /* background-color: rgba(171, 214, 153, .8); */
+            /* background-color: #c62828; */
+            /* background: linear-gradient(to bottom, red, black); */
+            /* background: radial-gradient(circle at center, red, yellow);
+
+
+            font-weight:normal;
+            width: 500;
+            height: 200;
+            position: relative;
+
+            margin-bottom: 10px;
+            border-radius: 20px;
+            padding: 5px;
+
+            overflow: auto;
+            /* animation: reportCellSlide .4s ease-in; */
+            /* animation: blink 1.5s infinite; */ 
+        /* } */
+
+        @keyframes blink {
+            0% {
+            opacity: .5;
+            }
+            50% {
+            opacity: 1;
+            }
+            100% {
+            opacity: .5;
+            }
+        }
+        
+        /* .blinking-element {
+            animation: blink 1.5s infinite;
+        } */
     </style>
 </head>
 <body>
-    <div class="glowing-container">
+    <!-- <div class="glowing-container">
         <div class="blinking-element">Loading...</div>
-    </div>
+    </div> -->
 
     <!-- GAME CONTAINER -->
     <div class="game-container">
@@ -389,14 +410,14 @@
                 <div class="bootTabBodyWrapper">
                     <!-- report -->
                     <div id="bootTabReport">
-                        <!-- <div class="reportCell">
+                        <div class="reportCell">
                             <div class="reportCellTag"> Temperature:</div>
                             <div class="reportCellDef">71 degrees</div>
                         </div>
                         <div class="reportCell">
                             <div class="reportCellTag"> Wattage:</div>
                             <div class="reportCellDef">600W / 800W</div>
-                        </div> -->
+                        </div>
                     </div>
     
                     <div class="vertLine"></div>
