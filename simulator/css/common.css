@@ -40,6 +40,7 @@
 
 body {
     background: linear-gradient(to right, var(--light-lime),var(--teal) );
+    /* background: linear-gradient(to right, var(--darkMode-blue2), var(--darkMode-blue1)); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,35 +48,8 @@ body {
     animation: fadeInAnimation ease 1s ;
 }
 
-/* Start New Styles Here */
-
-.game-container {
-    position: relative;
-}
-
-#simCanvas {
-    /* background-color: var(--darkMode-green1); */
-    background-color: var(--pastel-yellow);
-
-    /* border: 3px solid black; */
-    border-radius: 30px
-}
-
-.rotate-wrapper {
-    width: 600px;
-    height: 50px;   
-    position: absolute;
-    bottom: 30;
-    left: 30;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-
-}
-
 .button {
     height: 70%;
-    /* border: 2px solid black; */
     border-radius: 100px;
     padding: 5px;
 }
@@ -83,34 +57,11 @@ body {
     background-color: rgba(0,0,0, .1);
 }
 
-.arrow {
-    height: 100%;
-}
-
-#panelIndicator, #compLabel, #compName {
-    text-align: center;
-    margin: 5px 0;
-}
-
-#left, #right {
-    visibility: hidden;
-}
-
 ::-webkit-scrollbar-thumb {
     background: grey; 
     border-radius: 10px;
 }
 
-
-
-
-.item-info {
-    display: flex column;
-}
-
-.info-dialog {
-    display: flex column;
-}
 
 .game-container {
     position: relative;
