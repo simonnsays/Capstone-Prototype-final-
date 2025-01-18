@@ -91,6 +91,10 @@ class PCUnit {
        this.displaySplashScreen();
     }
 
+    powerOffMonitor(){
+        !this.displaySplashScreen();
+    }
+
     getMotherboardName(){ // logic to get motherboard name from component and check for the brandImages for a match
         const motherboardComponent = this.componentsStatus.motherboard;
         if (motherboardComponent && motherboardComponent.component && motherboardComponent.component.name) {
@@ -114,8 +118,8 @@ class PCUnit {
         const motherboardName = this.getMotherboardName(); // Call out function getMotherboardName
         const brand = Object.keys(brandImages).find(brand => motherboardName.toLowerCase().includes(brand)); // Check brandImages const and include lowercases
         if (brand) {
-            const imgSrc = `./assets/boot/boot_logo/${brandImages[brand]}`;
-            splashScreen.innerHTML = `<img src="${imgSrc}" alt="${brand} logo">`;
+            const imgSrc = `./assets/boot/boot_logo/${brandImages[brand]}`; // get image from filepath
+            splashScreen.innerHTML = `<img src="${imgSrc}" alt="${brand} logo">`; // add as html inside div monitorScreen
             setTimeout(() => {
                 splashScreen.innerHTML = ''; // Clear the splash screen after 5 seconds
                 this.displayOS(); // Proceed to display the OS

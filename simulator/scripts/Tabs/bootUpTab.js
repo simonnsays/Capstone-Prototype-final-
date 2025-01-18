@@ -117,6 +117,7 @@ class BootUpTab {
         this.pcUnit.power = 'off'
         this.screen?.classList.remove('screen-on')
         this.clearReportsArea()
+        this.powerOffMonitor()
 
         for(let key in this.pcUnit.componentsStatus) {
             if(Array.isArray(this.pcUnit.componentsStatus[key])) {
@@ -124,6 +125,13 @@ class BootUpTab {
             } else {
                 this.pcUnit.componentsStatus[key] = null
             }
+        }
+    }
+
+    powerOffMonitor(){
+        const screenDisplay = document.getElementById('monitorScreen');
+        if (screenDisplay){
+          screenDisplay.innerHTML = '';
         }
     }
 
