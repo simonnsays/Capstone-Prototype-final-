@@ -1,0 +1,249 @@
+/****************** SHOP AND INVENTORY MODALS *****************/
+#shop,
+#inventory {
+  width: 580px;
+  height: 550px;
+  border: 3px solid black;
+  padding: 0;
+}
+
+/* Sticky Header */
+.top {
+  position: sticky;
+  background-color: white;
+  top: 0;
+  z-index: 2;
+  padding-top: 20px;
+}
+
+.headline {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  overflow: auto;
+}
+
+.title {
+  text-align: center;
+}
+
+/****************** SEARCH BAR *****************/
+.search-bar {
+  width: 300px;
+  margin: 5px;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
+  padding: 0 10px;
+}
+
+.search-bar:focus {
+  border: none;
+}
+
+.headline-right {
+  justify-self: flex-end;
+  margin-right: 20px;
+  height: 100%;
+}
+
+#money {
+  text-align: center;
+}
+
+.category-scroll {
+  display: flex;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  overflow: auto;
+}
+
+hr {
+  margin: 10px 20px;
+}
+
+.items-shop,
+.items-inv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  overflow: auto;
+  padding: 10px;
+}
+
+/* Sticky Footer */
+.bottom {
+  position: sticky;
+  background-color: white;
+  bottom: 0;
+  padding: 1px 5px 20px 5px;
+}
+
+.bottom-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/****************** BUTTONS *****************/
+.btn-container {
+  position: absolute;
+  align-self: center;
+  top: 5px;
+  left: 5px;
+  margin: 10px;
+}
+
+button[data-category] {
+  height: 2.7rem;
+  width: 9rem;
+  border-radius: 20px;
+  margin: 5px;
+}
+
+button[data-category]:hover {
+  background-color: var(--mint);
+}
+
+.category-btn {
+  border: 1px solid var(--light-lime);
+  padding: 0 10px;
+}
+
+[data-selected="true"] {
+  background-color: var(--mint);
+}
+
+input[type="checkbox"] {
+  margin: 0 10px;
+}
+
+/****************** ITEM ELEMENTS *****************/
+.content {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.content:hover {
+  transform: scale(1.05);
+  background: var(--light-lime);
+}
+
+.content:active {
+  transform: scale(1);
+}
+
+.slider {
+  width: 100%;
+  height: 25%;
+  position: absolute;
+  top: 100%;
+  background-color: #dce9e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: small;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.content:hover .slider {
+  transform: translateY(-100%);
+}
+
+/****************** MODAL BODY *****************/
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 10px;
+}
+
+/****************** COMPONENT INFORMATION *****************/
+#itemInfoModal {
+  height: 670px;
+  width: 450px;
+  padding: 15px;
+}
+
+.itemInfoContainer {
+  width: calc(100% - 30px);
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 21px;
+  padding: 0 15px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#itemInfoImage {
+  background-color: var(--mint);
+  width: 180px;
+  height: 180px;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  border-radius: 10px;
+}
+
+#itemInfoNameContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#itemInfoNameContainer p {
+  width: 70%;
+  padding-left: 10px;
+  margin: 0;
+}
+
+.infoLineBreak {
+  height: 0;
+  width: 100%;
+  border: 3px solid black;
+  border-radius: 5px;
+  align-self: center;
+}
+
+#itemInfoSpecsContainer {
+  width: 100%;
+  max-height: 260px;
+  padding-left: 10px;
+  overflow: auto;
+}
+
+#itemInfoSpecsContainer h5 {
+  margin: 0;
+}
+
+.itemInfoBottomContainer {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.itemInfoButtonsContainer {
+  padding-top: 15px;
+  align-self: center;
+  display: flex;
+  gap: 40px;
+}
+
+#button1:hover,
+#button2:hover {
+  background-color: var(--mint);
+}

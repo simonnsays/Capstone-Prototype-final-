@@ -3,9 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <link rel="stylesheet" href="./assistant/assistant.css">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="css/style.css">
+
     <link rel="icon" href="../favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
     <style>
@@ -40,106 +39,7 @@
         font-size: 18px;
         font-weight: bold;
         color: #333;
-        }
-
-        #trashBin {
-        position: absolute;
-        top: 20px;
-        left: 570px;
-        width: 80px;
-        height: 80px;
-        background-color: #fef9db;
-        border-radius: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 0px solid transparent;
-        transition: all 0.2 linear;
-        user-select: none;
-        }
-
-        #trashBin img {
-        width: 80%;
-        height: 80%;
-        opacity: 70%;
-        }
-
-        #trashBin:hover {
-        background-color: #888;
-        }
-
-        #trashBin:hover {
-        box-shadow: 3.4px 2.5px 4.9px rgba(0, 0, 0, 0.025),
-                    8.6px 6.3px 12.4px rgba(0, 0, 0, 0.035),
-                    17.5px 12.8px 25.3px rgba(0, 0, 0, 0.045),
-                    36.1px 26.3px 52.2px rgba(0, 0, 0, 0.055),
-                    99px 72px 143px rgba(0, 0, 0, 0.08);
-        }
-
-        .tooltiptext {
-         visibility: hidden;
-         width: 4em;
-         background-color: rgba(0, 0, 0, 0.253);
-         color: #fff;
-         text-align: center;
-         border-radius: 6px;
-         padding: 5px 0;
-         position: absolute;
-         z-index: 1;
-         top: 25%;
-         left: 110%;
-        }
-
-        .tooltiptext::after {
-         content: "";
-         position: absolute;
-         top: 50%;
-         right: 100%;
-         margin-top: -5px;
-         border-width: 5px;
-         border-style: solid;
-         border-color: transparent rgba(0, 0, 0, 0.386) transparent transparent;
-        }
-
-        .trash-icon:hover .tooltiptext {
-         visibility: visible;
-        }
-
-        .dialog {
-            display: none; 
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            background-color: white;
-            border: 1px solid #888;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        
-        .dialog-content {
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .dialog-content button {
-            min-width: 200px;
-            min-height: 55px;
-            padding: 10px 15px;
-            margin: 10px;
-            border: none;
-            background-color: #f04f4f;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        .dialog-content button:hover {
-            background-color: #d43e3e;
-        }
+        }   
 
         /* .glowing-container { */
             /* background-color: rgba(171, 214, 153, .8); */
