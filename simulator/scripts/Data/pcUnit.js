@@ -394,31 +394,31 @@ class PCUnit {
 
    // Collect all attached cables from PortsTab
    getAttachedCables() {
-//        // Refresh attached cables from PortsTab's updated status
-//        const attachedCablesStatus = this.portsTab.getAttachedCablesStatus();
-//        this.attachedCables.clear();
-//        
-//        for (const cableType in attachedCablesStatus) {
-//            if (attachedCablesStatus[cableType].fullyConnected) {
-//                this.attachedCables.add(cableType);  // Only add fully connected cables
-//            }
-//        }
-//    
-//        console.log("Attached cables:", Array.from(this.attachedCables));
-//    }
+ //       // Refresh attached cables from PortsTab's updated status
+ //       const attachedCablesStatus = this.portsTab.getAttachedCablesStatus();
+ //       this.attachedCables.clear();
+ //       
+ //       for (const cableType in attachedCablesStatus) {
+ //           if (attachedCablesStatus[cableType].fullyConnected) {
+ //               this.attachedCables.add(cableType);  // Only add fully connected cables
+ //           }
+ //       }
+ //   
+ //       console.log("Attached cables:", Array.from(this.attachedCables));
+ //   }
 //
 //
-//    addAttachedComponent(component) {
-//        this.attachedComponents.add(component.type);
-//    }
+ //   addAttachedComponent(component) {
+ //       this.attachedComponents.add(component.type);
+ //   }
 //
-//    getMissingComponents() {
-//        this.getAttachedCables();
+ //   getMissingComponents() {
+ //       this.getAttachedCables();
 //
-//        const missingComponents = this.requiredComponents.filter((comp) => !this.attachedComponents.has(comp));
-//        const missingCables = this.requiredCables.filter((cable) => !this.attachedCables.has(cable));
+ //       const missingComponents = this.requiredComponents.filter((comp) => !this.attachedComponents.has(comp));
+ //       const missingCables = this.requiredCables.filter((cable) => !this.attachedCables.has(cable));
 //
-//        return { missingComponents, missingCables };
+ //       return { missingComponents, missingCables };
    }
 }
 
