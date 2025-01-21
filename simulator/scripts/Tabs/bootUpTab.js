@@ -84,10 +84,7 @@ class BootUpTab {
     togglePower(unit) {
         // turn on
         if(this.pcUnit.power === 'off') {
-            /*
-            *   Main Power on Sequence
-            */
-
+            /*  Main Power on Sequence */
             // attempt power on
             this.pcUnit.power = 'on'
             const pcState = this.pcUnit.attemptPowerOn(unit)
@@ -96,6 +93,7 @@ class BootUpTab {
                 this.powerOn()
             } else {
                 //////////// AREA OF REPORT ERRORS 
+                console.log("An Error has occured")
             }
             return
         }
@@ -131,6 +129,10 @@ class BootUpTab {
         if(!this.powerBtn.disabled) {
             this.togglePower(unit)
         }
+    }
+
+    createError(errorType) {
+
     }
 
     report() {

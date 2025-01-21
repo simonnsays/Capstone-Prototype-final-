@@ -65,7 +65,7 @@ class PCUnit {
         this.moboPowerUp()
         this.cpuInit()
 
-        // Star proces for Power-On-Self-Test
+        // Start process for Power-On-Self-Test
         this.processPOST(this.componentsStatus.psu.component)
 
         const state = this.checkPCState()
@@ -109,6 +109,11 @@ class PCUnit {
     }
 
     moboPowerUp() {
+        // console.log(this.componentsStatus.motherboard)
+        if(!this.componentsStatus.motherboard) {
+            // set some missing error
+            return
+        }
         const moboPort = this.componentsStatus.motherboard.component.ports.find(port => 
             port.offsets && port.offsets.find(offset => offset.takes == '24-pin-power')).offsets[0]
         const psuPort = this.componentsStatus.psu.component.ports.find(port => 
@@ -120,12 +125,14 @@ class PCUnit {
         } 
     }
     cpuInit() {
+        const moboStat = this.componentsStatus.motherboard
         // power if motherboard is powered and ports attached are of the same cable
-        if(!this.componentsStatus.motherboard.isPowered) {
+        if(!moboStat || !moboStat.isPowered) {
             // log or record some error relating to unpowered motherboard
+            console.log('motherboard is not powered')
             return
         }
-        const cpuPorts = this.componentsStatus.motherboard.component.ports.filter(port => port.offsets && port.offsets.some(offset => offset.takes == '8-pin-power'))
+        const cpuPorts =!moboStat ||  moboStat.component.ports.filter(port => port.offsets && port.offsets.some(offset => offset.takes == '8-pin-power'))
         const psuPorts = this.componentsStatus.psu.component.ports.filter(port => port.offsets && port.offsets.some(offset => offset.takes == '8-pin-power'))
         let isFullyPowered = true
 
@@ -157,45 +164,55 @@ class PCUnit {
         Object.keys(this.componentsStatus).forEach(csKey => {
             const compStatus = this.componentsStatus[csKey]
             let isPowered = false
-            switch(csKey) {
-            // MOTHERBOARD and CPU
-                case 'motherboard':
-                    isPowered = compStatus.isPowered
-                case 'cpu':
-                    isPowered = compStatus.isPowered
-                    break
-            // RAM    
-                case 'ram':
-                    if(this.componentsStatus.motherboard.isPowered && this.componentsStatus.cpu.isPowered) {
-                        compStatus.forEach(ram => ram.isPowered = true) 
-                        isPowered = true
-                    }
-                    break
-            // GPU  
-                case 'gpu':
-                    isPowered = this.checkGpuPower(compStatus, portsToPower)
-                    break
-            // STORAGE
-                case 'storage':
-                    isPowered = this.checkStoragePower(compStatus, portsToPower)
-                    break
-            // CPU COOLING
-                case 'cpuCooling':
-                    isPowered = this.checkCpuCoolingPower(compStatus, this.componentsStatus.motherboard)
-                    break
-            // CHASSIS
-                case 'chassis': 
-                    isPowered = this.checkChassisPower(this.componentsStatus.motherboard)
+            if(compStatus) {
+                switch(csKey) {
+                // PSU, MOTHERBOARD and CPU
+                    case 'psu':
+                        isPowered = compStatus.isPowered 
+                        break
+                    case 'motherboard':
+                        isPowered = compStatus.isPowered  
+                        break
+                    case 'cpu':
+                        isPowered = compStatus.isPowered 
+                        break
+                // RAM    
+                    case 'ram':
+                        if(!this.componentsStatus.motherboard || !this.componentsStatus.cpu) break
+                        if(this.componentsStatus.motherboard.isPowered && this.componentsStatus.cpu.isPowered) {
+                            compStatus.forEach(ram => ram.isPowered = true) 
+                            isPowered = true
+                        }
+                        break
+                // GPU  
+                    case 'gpu':
+                        isPowered = this.checkGpuPower(compStatus, portsToPower)
+                        break
+                // STORAGE
+                    case 'storage':
+                        isPowered = this.checkStoragePower(compStatus, portsToPower)
+                        break
+                // CPU COOLING
+                    case 'cpuCooling':
+                        isPowered = this.checkCpuCoolingPower(compStatus, this.componentsStatus.motherboard)
+                        break
+                // CHASSIS
+                    case 'chassis': 
+                        isPowered = this.checkChassisPower(this.componentsStatus.motherboard)
+                }
             }
-
             
-
-            if(isPowered) {
+            console.log(this.componentsStatus)
+            if(compStatus && isPowered) {
                 // console.log(csKey + ' is powered')
                 Array.isArray(compStatus) 
                 ? compStatus.forEach(comp => comp.isPowered = true)
                 : compStatus.isPowered = true
-            } 
+            } else if(compStatus){
+                Array.isArray(compStatus) 
+                ? compStatus.forEach(comp => comp.isPowered = false)
+                : compStatus.isPowered = false
+            }
         })
         // console.log(this.componentsStatus)
     }
@@ -263,6 +280,7 @@ class PCUnit {
         return true
     }
     checkChassisPower(motherboard) {
+        if(!motherboard) return
         const chassisCable = motherboard.component.ports.find(port => port.type === 'frontPanel').offsets[0].cableAttached
         if(chassisCable.ends.chassis.connected) return true
         return false
@@ -271,6 +289,7 @@ class PCUnit {
     // Main check for allowing the PC unit to boot (check defects and compatibility here)
     checkPCState() {
         let allowBoot = false
+        this.checkComponentStatus()
         let stateIsAllowed = Object.values(this.componentsStatus).every(compStat => {
             // console.log(compStat)
             if(!Array.isArray(compStat)) {
@@ -287,13 +306,17 @@ class PCUnit {
         // other checks here
         // ..
         
-        if(stateIsAllowed === true) {
+        if(stateIsAllowed) {
             // console.log("components are powered up, Booting Up")
             return true
         } else {
-            console.log('Err...')
+            // console.log('Err...')
             return false
         }
+    }
+
+    checkComponentStatus() {
+
     }
 
     checkIfAvailableUnit(component) {
