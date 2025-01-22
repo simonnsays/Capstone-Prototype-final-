@@ -223,7 +223,7 @@
     </dialog>
 
     <!-- WIRES MODAL -->
-    <div id="wiresModal" class="modal" style="z-index: 1;">
+    <div id="wiresModal" class="modal">
         <div class="modal-wrapper">
             <!-- modal header -->
             <div class="modal-header no-margin">
@@ -376,7 +376,8 @@
             <div class="task-container">
                 <h1 class="header" style="margin-left: 50%;">TASKS</h1>
                 <div class="hr-line"></div>
-
+            
+                <!-- Open Shop Task -->
                 <div class="task-cell" data-task-action="openShop">
                     <div class="task-icon">
                         <img src="assets/Assistant/shop.png" alt="shop icon">
@@ -386,7 +387,8 @@
                 <img class="checkmark" src="assets/svg/check.svg" alt="Completed" style="display: none;"> <!-- Hidden by default -->
                 <div class="task-description">
                 <p>Look for your PC components and buy them.</p>
-                <p style="padding-bottom: 10px;">Ensure to check prices and specifications before making a purchase.</p>
+                <br>
+                <p>Ensure to check prices and specifications before making a purchase.</p>
                 <p>The components that you will need are the following:</p>
                 <p>1.Case</p>
                 <p>2.motherboard</p>
@@ -396,6 +398,7 @@
                 <p>6.Storage Device - HDD or SSD</p>
                 <p>7.Cooling</p>
                 <p>8.GPU or Graphics card</p>
+                <br>
                 <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
                 <p><img src="assets/Assistant/shop1.png" class="timg" alt="shop1" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <p><img src="assets/Assistant/shop2.png" class="timg" alt="shop2" style="height: 300px; width: 400px;padding: 10px;"></p>
@@ -406,7 +409,8 @@
             </div>
 
                 <div class="hr-line"></div>
-
+            
+                <!-- Open Inventory Task -->
                 <div class="task-cell" data-task-action="openInventory">
                     <div class="task-icon">
                         <img src="assets/Assistant/inventory.png" alt="shop icon">
@@ -415,7 +419,8 @@
                 <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
                 <img class="checkmark" src="assets/svg/check.svg" alt="Completed" style="display: none;"> <!-- Hidden by default -->
                 <div class="task-description">
-                <p style="padding-bottom: 10px;">Place the components you've chosen to the components shelf by clicking the components in your inventory</p>
+                <p>Place the components you've chosen to the components shelf by clicking the components in your inventory</p>
+                <br>
                 <p>Place each component in regards to their order:</p>
                 <p>1.Case</p>
                 <p>2.motherboard</p>
@@ -425,6 +430,7 @@
                 <p>6.Storage Device - HDD or SSD</p>
                 <p>7.Power Supply Unit</p>
                 <p>8.GPU or Graphics card</p>
+                <br>
                 <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
                 <p><img src="assets/Assistant/inv1.png" class="timg" alt="inv1" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <p><img src="assets/Assistant/inv2.png" class="timg" alt="inv2" style="height: 300px; width: 400px;padding: 10px;"></p>
@@ -434,7 +440,8 @@
             </div>
 
                 <div class="hr-line"></div>
-
+            
+                <!-- Open portsTab Task -->
                 <div class="task-cell" data-task-action="connectWires">
                     <div class="task-icon">
                         <img src="assets/Assistant/wires.png" alt="shop icon">
@@ -444,10 +451,11 @@
                 <img class="checkmark" src="assets/svg/check.svg" alt="Completed" style="display: none;"> <!-- Hidden by default -->
                 <div class="task-description">
                 <p>Now we dive in to plugging each wire for each component either for power or data connection.</p>
+                <br>
                 <p>There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. 
                 Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicator, reset button, and 3.5mm audio jack ports. </p>                    
                 <p>To connect the wires simply open the wires drawer and click the wires to their respective highlighted slots</p>
-                <p>To connect the wires simply open the wires inventory and drag the wires to their respective slots</p>
+                <br>
                 <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
                 <p><img src="assets/Assistant/wires1.png" class="timg" alt="wre1" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <p><img src="assets/Assistant/wires2.png" class="timg" alt="wre2" style="height: 300px; width: 400px;padding: 10px;"></p>
@@ -464,6 +472,7 @@
 
                 <div class="hr-line"></div>
 
+                <!-- Open BootUpTab Task-->
                 <div class="task-cell" data-task-action="powerOnPC">
                     <div class="task-icon">
                         <img src="assets/Assistant/power-button.png" alt="shop icon">
@@ -473,7 +482,24 @@
                 <img class="checkmark" src="assets/svg/check.svg" alt="Completed" style="display: none;"> <!-- Hidden by default -->
                 <div class="task-description">
                 <p>Power on your pc by pressing the power on button</p>
-                <p>To turn on your build all you need is to click the power on button</p>
+                <br>
+                <p>Important note:</p>
+                <ul>Check if you have compatible components before turning on your PC</ul>
+                <ul>Check if you have all the necessary components before turning on your PC</ul>
+                <ul>Check if you have all the necessary wires connected to each components</ul>
+                <br>
+                <p>After checking all the necessary components and wires you can now power on your PC by pressing the power button</p>
+                <p>After pressing the power button you will see the boot up screen and the computer will start to boot up</p>
+                <p>After booting up you will see the desktop screen and you have successfully assembled your PC</p>
+                <br>
+                <p>Also notice that when the reports on the left side has different colors it means that:</p>
+                <ul>Green - All components are connected and working properly</ul>
+                <ul>Red - There are components that are not connected or not working properly</ul>
+                <ul>Yellow - All components are connected and working but needs optimization</ul>
+                <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
+                <p><img src="assets/Assistant/power1.png" class="timg" alt="power1" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/power2.png" class="timg" alt="power2" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="assets/Assistant/power3.png" class="timg" alt="power3" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <button class="start-task-btn" data-task="powerOnPC">Start Task</button>
                 </div>
             </div>
@@ -498,125 +524,5 @@
 
     <!-------------------------- S C R I P T S ------------------------------->
     <script type="module" src="main.js"></script>
-    <script>
-        // Assistant task function
-        document.addEventListener('DOMContentLoaded', function () {
-        const taskCells = document.querySelectorAll('.task-cell');
-        
-        // Event listener for each task cell click
-        taskCells.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                toggleTaskDescription(index);   // Show description
-                markTaskCompleted(index);       // Mark task as completed
-            });
-        });
-
-        // Event listener for "Start Task" button clicks inside descriptions
-        const startTaskButtons = document.querySelectorAll('.start-task-btn');
-            startTaskButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const action = button.getAttribute('data-task');
-                    if (action) {
-                        performTaskAction(action);  // Perform the task action (open shop, inventory, etc.)
-                    }
-                    e.stopPropagation();  // Prevent toggling the description when button is clicked
-                });
-            });
-        });
-
-        // Mark tasks as completed and gray them out
-        function markTaskCompleted(taskIndex) {
-            const taskCells = document.querySelectorAll('.task-cell');
-            taskCells.forEach((cell, index) => {
-                if (index <= taskIndex) {
-                    cell.classList.add('completed-task');  // Add gray-out effect and completed style
-                    const checkmark = cell.querySelector('.checkmark');
-                    if (checkmark) {
-                        checkmark.style.display = 'block';  // Show the checkmark icon
-                    }
-                } else {
-                    cell.classList.remove('completed-task');
-                    const checkmark = cell.querySelector('.checkmark');
-                    if (checkmark) {
-                        checkmark.style.display = 'none';  // Hide the checkmark icon for incomplete tasks
-                    }
-                }
-            });
-        }
-
-        // Toggle the visibility of task descriptions
-        function toggleTaskDescription(taskIndex) {
-            const taskDescriptions = document.querySelectorAll('.task-description');
-
-            // Loop through all descriptions and hide the others
-            taskDescriptions.forEach((description, index) => {
-                if (index === taskIndex) {
-                    description.style.display = 'block';  // Show the current task description
-                } else {
-                    description.style.display = 'none';   // Hide other task descriptions
-                }
-            });
-
-            // Update the task status display
-            updateTaskStatus(taskIndex);
-        }
-
-        // Update the task status in the task-status element
-        function updateTaskStatus(taskIndex) {
-            const taskTitles = document.querySelectorAll('.tasktitle');
-            const taskStatus = document.querySelector('#task-status');
-
-            // Update status based on the current task
-            if (taskIndex >= 0 && taskIndex < taskTitles.length) {
-                const currentTaskTitle = taskTitles[taskIndex].textContent;
-                taskStatus.textContent = `Current Task: ${taskIndex + 1} - ${currentTaskTitle}`;
-            } else {
-                taskStatus.textContent = 'No task selected';
-            }
-        }
-
-        // Perform the corresponding task action (open modal or do something)
-        function performTaskAction(action) {
-            switch(action) {
-                case 'openShop':
-                    openShopModal();
-                    break;
-                case 'openInventory':
-                    openInventoryModal();
-                    break;
-                case 'connectWires':
-                    openWiresModal();
-                    break;
-                case 'powerOnPC':
-                    powerOnPC();
-                    break;
-                default:
-                    console.log("Unknown task action");
-            }
-        }
-
-        // Modal opening functions
-        function openShopModal() {
-            const shopModal = document.querySelector('#shopModal');
-            if (shopModal) shopModal.showModal();
-        }
-
-        function openInventoryModal() {
-            const invModal = document.querySelector('#invModal');
-            if (invModal) invModal.showModal();
-        }
-
-        function openWiresModal() {
-            const wiresModal = document.querySelector('#wiresModal');
-            if (wiresModal) wiresModal.style.display = 'block';  // or use .showModal() if it's a dialog
-        }
-
-        function powerOnPC() {
-            alert("PC is powering on!");
-        }
-
-        // Ensure no task is initially marked as completed
-        markTaskCompleted(-1);  // Reset task completion at the start
-    </script>
 </body>
 </html>
