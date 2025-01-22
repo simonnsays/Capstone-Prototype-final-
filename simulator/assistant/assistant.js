@@ -174,6 +174,7 @@ class Assistant {
                 console.log("Unknown task action");
         }
     }
+
     // Function to close the assistant tab
     function closeAssistantTab() {
         const assistantTab = document.querySelector('.assistant-modal');

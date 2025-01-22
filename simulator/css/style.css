@@ -1067,10 +1067,10 @@ input[type=checkbox] {
   position: absolute;
   z-index: 3;
   height: 178;
-  width: 326;
+  width: 325;
   top: 132;
-  left: 70px;
-  overflow: hidden;
+  left: 75px;
+  overflow: none;
 }
 
 /* #screen { */
