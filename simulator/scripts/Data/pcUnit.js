@@ -24,6 +24,10 @@ class PCUnit {
             caseCooling: []
         }
 
+        this.errorCodes = [
+            { code: 'CRT001', description: 'PSU not powered' },
+        ]
+
         this.bootUpRequirements = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling', 'gpu']
 
         this.state = ['off','on']
@@ -59,6 +63,11 @@ class PCUnit {
         this.fillComponentStatus(unit)
 
         // Power Supply Activation
+        if(!this.componentsStatus.psu || !this.componentsStatus.psu.component) {
+            // report missing component
+            this.createError('Critical',   'Missing PSU Component')
+            return false
+        }
         this.psuActivation()
 
         // Motherboard and CPU Power Up
@@ -72,6 +81,20 @@ class PCUnit {
         // if check attempts are good, power on
         if(state)return true
         else return false
+    }
+
+    createReport(tag, description) {
+            
+    }
+
+    createError(severity, description) {
+        console.log(severity, description)
+        const err = {
+            type: 'error',
+            tag: severity,
+            def: description,
+        }
+        this.reports.push(err) 
     }
 
     fillComponentStatus(component) {
@@ -107,7 +130,6 @@ class PCUnit {
         // Power the powersuplly
         this.componentsStatus.psu.isPowered = true
     }
-
     moboPowerUp() {
         // console.log(this.componentsStatus.motherboard)
         if(!this.componentsStatus.motherboard) {
@@ -202,7 +224,7 @@ class PCUnit {
                 }
             }
             
-            console.log(this.componentsStatus)
+            // console.log(this.componentsStatus)
             if(compStatus && isPowered) {
                 // console.log(csKey + ' is powered')
                 Array.isArray(compStatus) 
@@ -289,12 +311,12 @@ class PCUnit {
     // Main check for allowing the PC unit to boot (check defects and compatibility here)
     checkPCState() {
         let allowBoot = false
-        this.checkComponentStatus()
+        // this.checkComponentStatus()
         let stateIsAllowed = Object.values(this.componentsStatus).every(compStat => {
             // console.log(compStat)
             if(!Array.isArray(compStat)) {
 
-                return compStat.isPowered
+                return compStat?.isPowered
                 // return compStat.every(comp => comp.isPowered)
             } else {
                 return compStat.every(comp => {
@@ -313,10 +335,6 @@ class PCUnit {
             // console.log('Err...')
             return false
         }
-    }
-
-    checkComponentStatus() {
-
     }
 
     checkIfAvailableUnit(component) {

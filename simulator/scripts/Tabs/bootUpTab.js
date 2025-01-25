@@ -82,6 +82,7 @@ class BootUpTab {
     }
 
     togglePower(unit) {
+        this.pcUnit.reports = []
         // turn on
         if(this.pcUnit.power === 'off') {
             /*  Main Power on Sequence */
@@ -90,11 +91,13 @@ class BootUpTab {
             const pcState = this.pcUnit.attemptPowerOn(unit)
             if(pcState) {
                 console.log('All components are good, Booting up')
-                this.powerOn()
+                // this.powerOn()
             } else {
                 //////////// AREA OF REPORT ERRORS 
                 console.log("An Error has occured")
             }
+
+            setTimeout(() => this.report(), 500)
             return
         }
 
@@ -114,7 +117,7 @@ class BootUpTab {
     powerOff() {
         this.pcUnit.power = 'off'
         this.screen?.classList.remove('screen-on')
-        this.clearReportsArea()
+        // this.clearReportsArea()
 
         for(let key in this.pcUnit.componentsStatus) {
             if(Array.isArray(this.pcUnit.componentsStatus[key])) {
@@ -131,13 +134,14 @@ class BootUpTab {
         }
     }
 
-    createError(errorType) {
-
-    }
+ 
 
     report() {
         const initialDelay = 1200
         const decreaseFactor = 0.75
+
+        this.clearReportsArea()
+        console.log(this.pcUnit.reports)
 
         this.pcUnit.reports.forEach((report, i) => {
             const delay = initialDelay * Math.pow(decreaseFactor, i)
@@ -148,6 +152,9 @@ class BootUpTab {
     createReportCell(report) {
         const cell = document.createElement('div')
         cell.classList = 'reportCell'
+        console.log(report)
+        
+        console.log(cell)
 
         const tag = document.createElement('div')
         tag.classList = 'reportCellTag'
@@ -158,6 +165,22 @@ class BootUpTab {
         def.classList = 'reportCellDef'
         def.innerHTML = report.def
         cell.appendChild(def)
+
+        switch(report.tag) {
+            case 'Hazard': 
+                cell.classList.add('reportHazard')
+                break
+            case 'Error':
+                cell.classList.add('reportError')
+                break
+            case 'Critical':
+                cell.classList.add('reportCritical')
+                const exlaimElement = document.createElement('div')
+                exlaimElement.classList = 'exclamationPoint'
+                exlaimElement.innerHTML = '!'
+                cell.appendChild(exlaimElement)
+                break
+        }
 
         this.reportArea?.appendChild(cell)
     }
