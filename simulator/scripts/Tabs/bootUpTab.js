@@ -92,8 +92,7 @@ class BootUpTab {
                 console.log('All components are good, Booting up')
                 this.powerOn()
             } else {
-                //////////// AREA OF REPORT ERRORS 
-                console.log("An Error has occured")
+                this.pcUnit.displayErrorScreen() // display error screen if no power is detected
             }
             return
         }
@@ -107,7 +106,6 @@ class BootUpTab {
         this.pcUnit.power = 'on'
 
         this.pcUnit.screen?.classList.add('screen-on')
-
         setTimeout(() => this.report(), 500)
     }
 
@@ -115,6 +113,7 @@ class BootUpTab {
         this.pcUnit.power = 'off'
         this.screen?.classList.remove('screen-on')
         this.clearReportsArea()
+        this.pcUnit.powerOffMonitor()
 
         for(let key in this.pcUnit.componentsStatus) {
             if(Array.isArray(this.pcUnit.componentsStatus[key])) {
@@ -124,6 +123,7 @@ class BootUpTab {
             }
         }
     }
+
 
     powerBtnClick = (unit) => {
         if(!this.powerBtn.disabled) {

@@ -6,7 +6,8 @@ class PCUnit {
         this.power = 'off'
         this.availableUnit = null
         this.screen = bootUpElements.screen || null
-
+        this.isErrorDisplayed = false; 
+        this.timeoutIds = []
         // CHECKLIST:
         // - if components are complete (status)
         // - if components are compatible (compatibility)
@@ -22,6 +23,16 @@ class PCUnit {
             storage: [],
             cpuCooling: {},
             caseCooling: []
+        }
+
+        this.motherboardBrand = {
+            aorus:{},
+            msi:{},
+            evga:{},
+            rog:{},
+            gigabyte:{},
+            asrock:{},
+            biostar:{},
         }
 
         this.bootUpRequirements = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling', 'gpu']
@@ -65,13 +76,94 @@ class PCUnit {
         this.moboPowerUp()
         this.cpuInit()
 
-        // Start process for Power-On-Self-Test
+        // Monitor display poweron
+        this.powerOnMonitor()
+
+        // Star proces for Power-On-Self-Test
         this.processPOST(this.componentsStatus.psu.component)
 
         const state = this.checkPCState()
         // if check attempts are good, power on
         if(state)return true
         else return false
+    }
+
+    powerOnMonitor(){ // takes everything from displaying the splashscreen to displayingos and shows it inside the div monitorScreen
+        this.displaySplashScreen();
+    }
+
+    powerOffMonitor(){
+        const splashScreen = document.getElementById('monitorScreen');
+        if (splashScreen){
+          splashScreen.innerHTML = '';
+        }
+
+        // Clear all pending timeouts
+        this.timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
+        this.timeoutIds = []; // Reset the timeout IDs array
+        this.isErrorDisplayed = false; // Reset the error display flag
+    }
+
+    getMotherboardName(){ // logic to get motherboard name from component and check for the brandImages for a match
+        const motherboardComponent = this.componentsStatus.motherboard;
+        if (motherboardComponent && motherboardComponent.component && motherboardComponent.component.name) {
+            return motherboardComponent.component.name;
+        }
+        return '';
+    }
+
+    displaySplashScreen(){ // get the component.type.monitor name and check the brand if it hits a brandImages then display the corresponding brand image and after 5 secs remove the img from the div
+        if (this.isErrorDisplayed) return;// Skip if error screen is displayed
+        const splashScreen = document.getElementById('monitorScreen');
+        const brandImages = {
+            evga: 'evga.png',
+            aorus: 'aorus.png',
+            asrock: 'asrock.png',
+            rog: 'rog.png',
+            biostar: 'biostar.png',
+            gigabyte: 'gigabyte.png',
+            msi: 'msi.png',
+        };
+
+    const motherboardName = this.getMotherboardName(); // Call out function getMotherboardName
+    const brand = Object.keys(brandImages).find(brand => motherboardName.toLowerCase().includes(brand)); // Check brandImages const and include lowercases
+
+    if (brand) {
+        const imgSrc = `./assets/boot/boot_logo/${brandImages[brand]}`; // get image from filepath
+        splashScreen.innerHTML = `<img src="${imgSrc}" alt="${brand} logo">`; // add as html inside div monitorScreen
+        const timeoutId = setTimeout(() => {
+            if (this.isErrorDisplayed) return; // Skip if error screen is displayed
+            splashScreen.innerHTML = ''; // Clear the splash screen after 5 seconds
+            this.displayOS(); // Proceed to display the OS
+        }, 5000);
+        this.timeoutIds.push(timeoutId); // Store the timeout ID
+    } else {
+         splashScreen.innerHTML = ''; // Clear the splash screen if no matching brand is found
+    }
+ }
+    
+    displayOS(){ // display the operating system booting gif from ./assets/boot/os/windows_boot.gif and then show then after another 5 secs display the windows desktop img from ./assets/boot/os/desktop.png
+        if (this.isErrorDisplayed) return; //  Skip if error screen is displayed
+        const splashScreen = document.getElementById('monitorScreen');
+        const osBootGif = './assets/boot/os/windows_boot.gif';
+        const osDesktopImg = './assets/boot/os/desktop.png';
+
+        splashScreen.innerHTML = `<img src="${osBootGif}" alt="OS Booting">`;
+        const timeoutId = setTimeout(() => {
+            if (this.isErrorDisplayed) return; // Skip if error screen is displayed
+            splashScreen.innerHTML = `<img src="${osDesktopImg}" alt="OS Desktop">`;
+        }, 5000);
+        this.timeoutIds.push(timeoutId); // Store the timeout ID
+    }
+
+    displayErrorScreen(){
+        this.isErrorDisplayed = true; // Indicate that error screen is displayed
+        const splashScreen = document.getElementById('monitorScreen');
+        splashScreen.innerHTML = ''; // Clear the div before displaying the error screen
+
+        //const errorMessage = `Missing components: ${Array.isArray(missingComponents) ? missingComponents.join(', ') : 'Unknown'}`;        
+        const imgSrc = './assets/boot/error_screen/warning3.png';
+        splashScreen.innerHTML = `<img src = "${imgSrc}" alt="WARNING">` //add for showing error message<p>${errorMessage}</p>
     }
 
     fillComponentStatus(component) {
@@ -155,7 +247,7 @@ class PCUnit {
         this.componentsStatus.cpu.isPowered = true
         // console.log('CPU powered')
     }
-
+    
     processPOST(supply) {
         // find ports that has cables
         const portsToPower = supply.ports.filter(port =>  port.offsets && port.offsets.some(offset => offset.cableAttached))
@@ -315,13 +407,38 @@ class PCUnit {
         }
     }
 
-    checkComponentStatus() {
-
-    }
-
     checkIfAvailableUnit(component) {
         return component && component.type === 'chassis' ? component : null
-    }   
+    }
+
+   // Collect all attached cables from PortsTab
+   getAttachedCables() {
+ //       // Refresh attached cables from PortsTab's updated status
+ //       const attachedCablesStatus = this.portsTab.getAttachedCablesStatus();
+ //       this.attachedCables.clear();
+ //       
+ //       for (const cableType in attachedCablesStatus) {
+ //           if (attachedCablesStatus[cableType].fullyConnected) {
+ //               this.attachedCables.add(cableType);  // Only add fully connected cables
+ //           }
+ //       }
+ //   
+ //       console.log("Attached cables:", Array.from(this.attachedCables));
+ //   }
+//
+//
+ //   addAttachedComponent(component) {
+ //       this.attachedComponents.add(component.type);
+ //   }
+//
+ //   getMissingComponents() {
+ //       this.getAttachedCables();
+//
+ //       const missingComponents = this.requiredComponents.filter((comp) => !this.attachedComponents.has(comp));
+ //       const missingCables = this.requiredCables.filter((cable) => !this.attachedCables.has(cable));
+//
+ //       return { missingComponents, missingCables };
+   }
 }
 
 export default PCUnit;

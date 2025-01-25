@@ -156,6 +156,7 @@ class Assistant {
     
     // Perform the corresponding task action (open modal or do something)
     function performTaskAction(action) {
+        closeAssistantTab();  // Close the assistant tab after a task is started
         switch(action) {
             case 'openShop':
                 openShopModal();
@@ -173,7 +174,13 @@ class Assistant {
                 console.log("Unknown task action");
         }
     }
-    
+
+    // Function to close the assistant tab
+    function closeAssistantTab() {
+        const assistantTab = document.querySelector('.assistant-modal');
+        if (assistantTab) assistantTab.close();
+    }
+
     // Modal opening functions
     function openShopModal() {
         const shopModal = document.querySelector('#shopModal');
