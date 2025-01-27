@@ -1,3 +1,5 @@
+import errorCodes from "../Data/errorCodes.js"
+
 class PCUnit {
     constructor(bootUpElements,) {
         // utilityTool, displayArea, Canvas, portsTab, drawer, assistant
@@ -65,7 +67,7 @@ class PCUnit {
         // Power Supply Activation
         if(!this.componentsStatus.psu || !this.componentsStatus.psu.component) {
             // report missing component
-            this.createError('Critical',   'Missing PSU Component')
+            this.createError('ERR-01')
             return false
         }
         this.psuActivation()
@@ -87,12 +89,12 @@ class PCUnit {
             
     }
 
-    createError(severity, description) {
-        console.log(severity, description)
+    createError(code) {
+        const codeDetails = errorCodes[code]
         const err = {
             type: 'error',
-            tag: severity,
-            def: description,
+            tag: codeDetails.severity,
+            def: codeDetails.description,
         }
         this.reports.push(err) 
     }

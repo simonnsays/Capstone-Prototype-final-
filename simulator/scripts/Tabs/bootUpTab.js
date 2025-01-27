@@ -1,5 +1,4 @@
 import PCUnit from "../Data/pcUnit.js"
-import errorCodes from "../Data/errorCodes.js"
 
 class BootUpTab {
     constructor(elementHandler, utilityTool) {
@@ -135,8 +134,6 @@ class BootUpTab {
         }
     }
 
- 
-
     report() {
         const initialDelay = 1200
         const decreaseFactor = 0.75
@@ -154,14 +151,14 @@ class BootUpTab {
         const cell = document.createElement('div')
         cell.classList = 'reportCell'
         console.log(report)
-        switch(report.tag) {
-            case 'Hazard': 
+        switch(report.tag.toLowerCase()) {
+            case 'hazard': 
                 cell.classList.add('reportHazard')
                 break
-            case 'Error':
+            case 'error':
                 cell.classList.add('reportError')
                 break
-            case 'Critical':
+            case 'critical':
                 cell.classList.add('reportCritical')
                 const exlaimElement = document.createElement('div')
                 exlaimElement.classList = 'exclamationPoint'
