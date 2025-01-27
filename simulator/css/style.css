@@ -154,6 +154,26 @@ dialog {
     opacity: 1;
   }
 }
+@keyframes critPoint {
+  0% {
+    transform: rotate(0deg) translateY(-50%) translateX(0px);
+  }
+  15% {
+    transform: rotate(10deg) translateY(-50%) translateX(-5px);
+  }
+  30% {
+    transform: rotate(-10deg) translateY(-50%) translateX(5px);
+  }
+  55% {
+    transform: rotate(10deg) translateY(-50%) translateX(-5px);
+  }
+  70% {
+    transform: rotate(-10deg) translateY(-50%) translateX(5px);
+  }
+  100% {
+    transform: rotate(0deg) translateY(-50%) translateX(0px);
+  }
+}
 /* Custom Alert Box */
 .alert {
   text-align: center;
@@ -976,7 +996,7 @@ input[type=checkbox] {
   margin-bottom: 10px;
   border-radius: 10px;
   padding: 7px 10px;
-  padding-right: 25px;
+  padding-right: 30px;
   overflow: auto;
   animation: reportCellSlide 0.4s ease-in;
   /* animation: blink 1.5s infinite; */
@@ -1008,9 +1028,9 @@ input[type=checkbox] {
   font-size: 40;
   font-weight: bold;
   position: absolute;
-  right: 15px;
+  right: 12px;
   top: 50%;
-  transform: translateY(-50%);
+  animation: critPoint 1.3s infinite ease-in-out;
 }
 
 .vertLine {

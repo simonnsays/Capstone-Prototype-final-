@@ -1,4 +1,5 @@
 import PCUnit from "../Data/pcUnit.js"
+import errorCodes from "../Data/errorCodes.js"
 
 class BootUpTab {
     constructor(elementHandler, utilityTool) {
@@ -117,7 +118,7 @@ class BootUpTab {
     powerOff() {
         this.pcUnit.power = 'off'
         this.screen?.classList.remove('screen-on')
-        // this.clearReportsArea()
+        this.clearReportsArea()
 
         for(let key in this.pcUnit.componentsStatus) {
             if(Array.isArray(this.pcUnit.componentsStatus[key])) {
@@ -153,19 +154,6 @@ class BootUpTab {
         const cell = document.createElement('div')
         cell.classList = 'reportCell'
         console.log(report)
-        
-        console.log(cell)
-
-        const tag = document.createElement('div')
-        tag.classList = 'reportCellTag'
-        tag.innerHTML = report.tag
-        cell.appendChild(tag)
-
-        const def = document.createElement('div')
-        def.classList = 'reportCellDef'
-        def.innerHTML = report.def
-        cell.appendChild(def)
-
         switch(report.tag) {
             case 'Hazard': 
                 cell.classList.add('reportHazard')
@@ -181,6 +169,20 @@ class BootUpTab {
                 cell.appendChild(exlaimElement)
                 break
         }
+        
+        console.log(cell)
+
+        const tag = document.createElement('div')
+        tag.classList = 'reportCellTag'
+        tag.innerHTML = report.tag
+        cell.appendChild(tag)
+
+        const def = document.createElement('div')
+        def.classList = 'reportCellDef'
+        def.innerHTML = report.def
+        cell.appendChild(def)
+
+        
 
         this.reportArea?.appendChild(cell)
     }
