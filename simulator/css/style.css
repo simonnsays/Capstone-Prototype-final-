@@ -159,16 +159,16 @@ dialog {
     transform: rotate(0deg) translateY(-50%) translateX(0px);
   }
   15% {
-    transform: rotate(10deg) translateY(-50%) translateX(-5px);
+    transform: rotate(5deg) translateY(-50%) translateX(-2.5px);
   }
   30% {
-    transform: rotate(-10deg) translateY(-50%) translateX(5px);
+    transform: rotate(-5deg) translateY(-50%) translateX(2.5px);
   }
   55% {
-    transform: rotate(10deg) translateY(-50%) translateX(-5px);
+    transform: rotate(5deg) translateY(-50%) translateX(-2.5px);
   }
   70% {
-    transform: rotate(-10deg) translateY(-50%) translateX(5px);
+    transform: rotate(-5deg) translateY(-50%) translateX(2.5px);
   }
   100% {
     transform: rotate(0deg) translateY(-50%) translateX(0px);

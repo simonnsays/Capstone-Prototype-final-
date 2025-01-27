@@ -1,9 +1,8 @@
-const errorCodes = [
-    {
-        code: 'ERR-001',
+const errorCodes = {
+    'ERR-01': {
         severity: 'ERROR',
-        message: 'Missing PSU Component',
+        description: 'Missing PSU Component',
     }
-]
+}
 
 export default errorCodes;
