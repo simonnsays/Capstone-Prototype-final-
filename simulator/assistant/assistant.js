@@ -8,13 +8,14 @@ class Assistant {
         this.image = elements.image;
         this.infoContainer = elements.infoContainer;
         this.modal = elements.modal;        
+        this.bubble = document.getElementById('assistantBubble');
+        this.originalParent = this.container.parentElement;
 
         // TUTORIAL STEP BY STEPS
         this.tasks = [{ title: '', description: '' }];
 
         this.notifCount = 1;
     }
-
     isInArea(area, mouse) {
         if (!area) return false; // Guard clause for undefined area
         let point = { x: mouse.clientX, y: mouse.clientY };
@@ -62,7 +63,8 @@ class Assistant {
 
         this.container?.addEventListener('click', () => {
             if (this.modal) {
-                this.modal.showModal ? this.modal.showModal() : this.modal.style.display = 'block';
+                this.modal.showModal ? this.modal.showModal() : (this.modal.style.display = 'block');
+                this.moveAssistantContainerToBubble();
             }
         });
 
@@ -73,8 +75,44 @@ class Assistant {
                 } else if (this.modal) {
                     this.modal.style.display = 'none';
                 }
+                this.moveAssistantContainerBack(); // Move back when modal closes
             }
         });
+    }
+    
+    moveAssistantContainerToBubble() {
+        const assistantContainer = document.getElementById('assistantContainer');
+        const assistantBubble = document.getElementById('assistantBubble');
+        if (assistantContainer && assistantBubble && !assistantBubble.contains(assistantContainer)) { // Ensure the container is not already in the bubble
+            assistantBubble.appendChild(assistantContainer); // Move assistant container to bubble
+            assistantContainer.classList.add('in-modal'); // Add a class to style the assistant container in the bubble
+            assistantContainer.classList.remove('in-original'); // Remove the original class to prevent conflicts
+            this.createBubbleMessage(); // Create a bubble message below the assistant container
+        }
+    }
+
+    moveAssistantContainerBack() {
+        const assistantContainer = document.getElementById('assistantContainer');
+        const originalPlace = this.originalParent; // Get the original parent of the assistant container
+        if (assistantContainer && originalPlace && originalPlace !== assistantContainer.parentElement) { // Ensure the container is not already in the original place
+            originalPlace.appendChild(assistantContainer); // Move the assistant container back to its original place
+            assistantContainer.classList.add('in-original'); // Add class for original styles
+            assistantContainer.classList.remove('in-modal'); // Remove class for modal styles
+        }
+    }
+
+    // Function to create a bubble message below the assistant container
+    createBubbleMessage() {
+        const assistantBubble = document.getElementById('assistantBubble');
+        const existingMessage = assistantBubble.querySelector('.bubble-message');
+    
+        // Prevent duplicate messages
+        if (!existingMessage) {
+            const bubbleMessage = document.createElement('div');
+            bubbleMessage.className = 'bubble-message';
+            bubbleMessage.textContent = 'Here are your tasks. Follow the instructions to complete them.';
+            assistantBubble.appendChild(bubbleMessage);
+        }
     }
 }
 
@@ -97,6 +135,7 @@ class Assistant {
                 const action = button.getAttribute('data-task');
                 if (action) {
                     performTaskAction(action);  // Perform the task action (open shop, inventory, etc.)
+                    moveAssistantContainerBack();  // Move the assistant container back to its original place
                 }
                 e.stopPropagation();  // Prevent toggling the description when button is clicked
             });
@@ -205,5 +244,27 @@ class Assistant {
     // Ensure no task is initially marked as completed
     markTaskCompleted(-1);  // Reset task completion at the start
 
+   
+     // Initialize the assistant tab and get the toggle switch element
+     document.addEventListener("DOMContentLoaded", function () {
+        const toggleSwitch = document.getElementById("switch");
+        const taskContainer = document.querySelector(".task-container");
+        const errorContainer = document.querySelector(".error-container");
+    
+        // Ensure error container is hidden by default
+        errorContainer.style.display = "none";
+    
+        toggleSwitch.addEventListener("change", function () {
+            if (toggleSwitch.checked) {
+                // Show Errors View
+                taskContainer.style.display = "none";
+                errorContainer.style.display = "flex";
+            } else {
+                // Show Tasks View
+                taskContainer.style.display = "flex";
+                errorContainer.style.display = "none";
+            }
+        });
+    });
     
 export default Assistant;

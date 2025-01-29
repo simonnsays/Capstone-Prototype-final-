@@ -297,61 +297,68 @@
         </div>
     </div>
 
-        <!-- BOOT UP MODAL -->
-        <div id="bootUpTab" class="modal" >
-            <div class="modal-wrapper">
-                <!-- header -->
-                <div class="modal-header no-margin">
-                    BOOT UP
-                    <span id="closeBootTab" class="closeBtn">&times;</span>
+    <!-- BOOT UP MODAL -->
+    <div id="bootUpTab" class="modal" >
+        <div class="modal-wrapper">
+            <!-- header -->
+            <div class="modal-header no-margin">
+                BOOT UP
+                <span id="closeBootTab" class="closeBtn">&times;</span>
+            </div>
+
+            <!-- body -->
+            <div class="bootTabBodyWrapper">
+                <!-- report -->
+                <div id="bootTabReport">
+                    <div class="reportCell">
+                        <div class="reportCellTag"> Temperature:</div>
+                        <div class="reportCellDef">71 degrees</div>
+                    </div>
+                    <div class="reportCell">
+                        <div class="reportCellTag"> Wattage:</div>
+                        <div class="reportCellDef">600W / 800W</div>
+                    </div>
                 </div>
-    
-                <!-- body -->
-                <div class="bootTabBodyWrapper">
-                    <!-- report -->
-                    <div id="bootTabReport">
-                        <div class="reportCell">
-                            <div class="reportCellTag"> Temperature:</div>
-                            <div class="reportCellDef">71 degrees</div>
-                        </div>
-                        <div class="reportCell">
-                            <div class="reportCellTag"> Wattage:</div>
-                            <div class="reportCellDef">600W / 800W</div>
-                        </div>
+
+                <div class="vertLine"></div>
+                <div class = "errorDialog"></div>
+                <!-- display -->
+                <div id="bootDisplay">
+                    <img id="desk" src="./assets/desk.png" >
+                    <div id="monitorScreen"></div>
+                    <img id="monitor" src="./assets/monitor.png" >
+                    <div id="unitPlaceHolder">
+                        <!-- image element here -->
                     </div>
-    
-                    <div class="vertLine"></div>
-                    <div class = "errorDialog"></div>
-                    <!-- display -->
-                    <div id="bootDisplay">
-                        <img id="desk" src="./assets/desk.png" >
-                        <div id="monitorScreen"></div>
-                        <img id="monitor" src="./assets/monitor.png" >
-                        <div id="unitPlaceHolder">
-                            <!-- image element here -->
-                        </div>
-                        <div id="powerButton">
-                            <img src="./assets/svg/power-button.svg" alt="">
-                        </div>
+                    <div id="powerButton">
+                        <img src="./assets/svg/power-button.svg" alt="">
                     </div>
+
+                    <!-- Troubleshooting -->
+                    <div id="troubleShooting"></div>
+
                 </div>
             </div>
         </div>
 
+    </div>
+    
         <!-- Boot Error Dialog -->
         <dialog id="bootErrorDialog" class="modal">
             <div class="dialog-content">
                 <h3>Boot Error</h3>
-                <p id="errorMessage">An unknown error occurred during boot-up.</p> <!-- Error message placeholder -->
+                <p id="errorMessage">An unknown error occurred during boot-up.</p> <!-- create a dynamic Error message for identifying issue  -->
                 <button id="troubleshootBtn">Troubleshoot</button> <!-- Button to initiate troubleshooting -->
                 <button id="closeErrorDialogBtn">Close</button> <!-- Button to close the dialog -->
             </div>
         </dialog>
+        
+        
     <div id="task-status">Task to be done: Click me "The Assistant" </div>
     
 
  <!------------------------- ASSISTANT ----------------------------------->
-    <div class="assistant-container" class="rect">
+    <div id="assistantContainer" class="assistant-container rect">
         <!-- <a href="https://www.flaticon.com/free-icons/processor" title="processor icons">Processor icons created by 3ab2ou - Flaticon</a> -->
         <!-- ASSISTANT IMAGE -->
         <div class="assistant-image-container"> 
@@ -370,8 +377,22 @@
     </div>
 
     <!-- FULL PAGE INFO / TASKS -->
-    <dialog class="assistant-modal">
+    <dialog id="assistantModal" class="assistant-modal">
         <div class="assistant-modal-container"> 
+
+    <!-- assistant bubble messages -->
+         <div id="assistantBubble" class="assistantBubble"> 
+    </div>
+        
+        <!-- toggle -->
+        <div class="toggleWrapper">
+            <span class="switch-x-text">View Mode</span>
+            <input value="private" name="switch" id="switch" type="checkbox" class="switch">
+            <label for="switch">
+                <span class="switch-x-toggletext"> <!-- add text for errors view or tasks view --></span>
+            </label>
+        </div>
+
             <!-- tasks -->
             <div class="task-container">
                 <h1 class="header" style="margin-left: 50%;">TASKS</h1>
@@ -406,7 +427,7 @@
                 <!--New Task Button-->
                 <button class="start-task-btn" data-task="openShop">Start Task</button>
                 </div>
-            </div>
+                </div>
 
                 <div class="hr-line"></div>
             
@@ -437,7 +458,7 @@
                 <p><img src="assets/Assistant/inv3.png" class="timg" alt="inv3" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <button class="start-task-btn" data-task="openInventory">Start Task</button>
                 </div>
-            </div>
+                </div>
 
                 <div class="hr-line"></div>
             
@@ -468,7 +489,7 @@
                 <p><img src="assets/Assistant/wires6.png" class="timg" alt="wre8" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <button class="start-task-btn" data-task="connectWires">Start Task</button>
                 </div>
-            </div>
+                </div>
 
                 <div class="hr-line"></div>
 
@@ -502,10 +523,22 @@
                 <p><img src="assets/Assistant/power3.png" class="timg" alt="power3" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <button class="start-task-btn" data-task="powerOnPC">Start Task</button>
                 </div>
-            </div>
+                </div>
 
                 <div class="hr-line"></div>
-        </div>
+            </div>
+
+             <!-- errors -->
+            <div class="error-container">
+                <h1 class="header" style="margin-left: 50%;">ERRORS</h1>
+                <div class="hr-line"></div>
+            
+            <!-- test error 1 -->
+            <div class="error-cell" data-error-action="error1">
+                <div class="error-icon">
+                    <img src="./assets/boot/error_screen/warning.png" alt="error icon">
+            </div>
+
     </dialog>
 
     <!-- Assistant Error Message -->
