@@ -1,3 +1,4 @@
+import  errorCodes from '../scripts/Data/errorCodes.js';
 class Assistant {
     constructor(elementHandler) {
         // DOM ELEMENTS
@@ -64,7 +65,7 @@ class Assistant {
         this.container?.addEventListener('click', () => {
             if (this.modal) {
                 this.modal.showModal ? this.modal.showModal() : (this.modal.style.display = 'block');
-                this.moveAssistantContainerToBubble();
+                this.moveAssistantContainerToBubble(); // Move assistant container to bubble
             }
         });
 
@@ -75,11 +76,12 @@ class Assistant {
                 } else if (this.modal) {
                     this.modal.style.display = 'none';
                 }
-                this.moveAssistantContainerBack(); // Move back when modal closes
+                this.moveAssistantContainerBack(); // Move assistant container back to its original place
             }
         });
     }
-    
+
+    // Function to move the assistant container to the bubble
     moveAssistantContainerToBubble() {
         const assistantContainer = document.getElementById('assistantContainer');
         const assistantBubble = document.getElementById('assistantBubble');
@@ -91,6 +93,7 @@ class Assistant {
         }
     }
 
+    // Function to move the assistant container back to its original place
     moveAssistantContainerBack() {
         const assistantContainer = document.getElementById('assistantContainer');
         const originalPlace = this.originalParent; // Get the original parent of the assistant container
@@ -108,12 +111,13 @@ class Assistant {
     
         // Prevent duplicate messages
         if (!existingMessage) {
-            const bubbleMessage = document.createElement('div');
+            const bubbleMessage = document.createElement('div'); // Create a new div element then add text content to it
             bubbleMessage.className = 'bubble-message';
             bubbleMessage.textContent = 'Here are your tasks. Follow the instructions to complete them.';
-            assistantBubble.appendChild(bubbleMessage);
+            assistantBubble.appendChild(bubbleMessage); // Add the message to the bubble
         }
     }
+    
 }
 
     // Assistant task function
@@ -246,7 +250,7 @@ class Assistant {
 
    
      // Initialize the assistant tab and get the toggle switch element
-     document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
         const toggleSwitch = document.getElementById("switch");
         const taskContainer = document.querySelector(".task-container");
         const errorContainer = document.querySelector(".error-container");
@@ -266,5 +270,36 @@ class Assistant {
             }
         });
     });
-    
+
+    // Initialize the assistant tab and get the error-container element then populate it with the bootup errors
+    document.addEventListener("DOMContentLoaded", function () {
+        const errorContainer = document.querySelector('.error-container');
+
+        errorContainer.innerHTML = `
+            <h1 class="header" style="margin-left: 50%;">ERRORS</h1>
+            <div class="hr-line"></div>
+        `;
+
+        Object.values(errorCodes).forEach(error => { // Loop through each error code and create an error element
+            const errorElement = document.createElement('div');
+            errorElement.classList.add('error-cell');
+            errorElement.dataset.errorAction = error.code;
+
+            // Add error details to the error element
+            errorElement.innerHTML = `  
+                <div class="error-icon">
+                <img src="./assets/boot/error_screen/warning.png" alt="error icon">
+            </div>
+            <div class="error-details">
+                <h2>${error.name} (${error.code})</h2> 
+                <p><strong>Severity:</strong> ${error.severity}</p>
+                <p>${error.description}</p>
+                <p><strong>Troubleshooting:</strong> ${error.troubleshooting}</p>
+            </div>
+            `;
+
+            errorContainer.appendChild(errorElement); // Add the error element to the error container
+        });
+    });
+
 export default Assistant;
