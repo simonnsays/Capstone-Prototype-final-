@@ -104,7 +104,10 @@ class Main {
         this.assistant.asstInit() 
 
         // TEST: BOOT UP
-        this.testBootUp()
+        // this.testBootUp()
+
+        // TEST: MISSING COMPONENTS
+        this.testMissingComponents()
 
         // TEST: TRASH BIN
         // this.testTrashBin()
@@ -286,6 +289,14 @@ class Main {
         this.portsTab.attachCable(gpuPortGpu.offsets[0], gpuCableGpu)
 
     }
+
+    /////////////////// TEST: BOOT UP
+    testMissingComponents() {
+        this.testBootUp()
+        this.displayArea.table.component.slots.find(slot => slot.type === 'psu').component = null
+        this.displayArea.update()
+    }
+
 
     /////////////////// TEST: TRASH BIN
     testTrashBin() {

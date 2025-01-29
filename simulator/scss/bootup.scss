@@ -40,42 +40,53 @@
     overflow: auto;
 }
 .reportCell {
-    /* background-color: var(--light-lime); */
+    display: flex;
+    flex-direction: column;
     background-color: rgba(171, 214, 153, .8);
-    /* background: radial-gradient(circle at center, #f8f600 50%,  #ff0000); */
-
-
-    /* background-color: rgba(251, 211, 141, 0.4);  */
-    /* background-color: #ff5757; */
-
-
-    /* background-color: rgba(248,156,0, 0.4); */
-    /* background-color: #fbd38d; */
-
-    /* background-color: rgba(229, 115, 115, 0.8); */
-    /* background-color: #fbd38d; */
-
-    /* background-color: rgba(255, 87, 87, 0.7); */
-    /* background-color: #fbd38d; */
-    /* background-color: rgba(255, 87, 87, 1); */
-    
 
     font-weight:normal;
-    width: calc(100% - 10px);
+    max-width: calc(100% - 10px);
     height: auto;
     position: relative;
 
     margin-bottom: 10px;
     border-radius: 10px;
-    padding: 5px;
+    padding: 7px 10px;
+    padding-right: 30px;
 
     overflow: auto;
     animation: reportCellSlide .4s ease-in;
     /* animation: blink 1.5s infinite; */
 }
+
+.reportHazard {
+    background-color: #fbd38d; // HAZARD
+}
+.reportError {
+    background-color: rgba(255, 87, 87, 0.7); // ERROR 
+}
+.reportCritical {
+    background-color: rgba(255, 87, 87, 1); // CRITITCAL
+}
+
+.reportCellTag {
+    margin-bottom: 6px;
+}
+
 .reportCellDef {
     font-weight: normal;
-    margin-left: 15px;
+    margin-left: 4px;
+    margin-bottom: 6px;
+}
+
+.exclamationPoint {
+    font-size: 40;
+    font-weight: bold;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    // transform: translateY(-50%);
+    animation: critPoint 1.3s infinite ease-in-out;
 }
 
 .vertLine {

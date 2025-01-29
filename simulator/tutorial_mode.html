@@ -319,19 +319,38 @@
                         <div class="reportCellDef">600W / 800W</div>
                     </div>
                 </div>
-
-                <div class="vertLine"></div>
-                <div class = "errorDialog"></div>
-                <!-- display -->
-                <div id="bootDisplay">
-                    <img id="desk" src="./assets/desk.png" >
-                    <div id="monitorScreen"></div>
-                    <img id="monitor" src="./assets/monitor.png" >
-                    <div id="unitPlaceHolder">
-                        <!-- image element here -->
+    
+                <!-- body -->
+                <div class="bootTabBodyWrapper">
+                    <!-- report -->
+                    <div id="bootTabReport">
+                        <div class="reportCell reportHazard">
+                            <div class="reportCellTag"> Temperature:</div>
+                            <div class="reportCellDef">71 degrees</div>
+                        </div>
+                        <div class="reportCell reportError" >
+                            <div class="reportCellTag"> Wattage:</div>
+                            <div class="reportCellDef">600W / 800W</div>
+                            <div></div>
+                        </div>
+                        <div class="reportCell reportCritical" >
+                            <div class="reportCellTag"> CITICAL</div>
+                            <div class="reportCellDef">Component CPU not detected</div>
+                            <div class="exclamationPoint">!</div>
+                        </div>
                     </div>
-                    <div id="powerButton">
-                        <img src="./assets/svg/power-button.svg" alt="">
+                    <div class="vertLine"></div>
+                    <div class = "errorDialog"></div>
+                    <!-- display -->
+                    <div id="bootDisplay">
+                        <img id="desk" src="./assets/desk.png" >
+                        <img id="monitor" src="./assets/monitor.png" >
+                        <div id="unitPlaceHolder">
+                            <!-- image element here -->
+                        </div>
+                        <div id="powerButton">
+                            <img src="./assets/svg/power-button.svg" alt="">
+                        </div>
                     </div>
 
                     <!-- Troubleshooting -->

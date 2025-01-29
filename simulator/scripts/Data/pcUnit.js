@@ -1,3 +1,5 @@
+import errorCodes from "../Data/errorCodes.js"
+
 class PCUnit {
     constructor(bootUpElements,) {
         // utilityTool, displayArea, Canvas, portsTab, drawer, assistant
@@ -34,6 +36,9 @@ class PCUnit {
             asrock:{},
             biostar:{},
         }
+        this.errorCodes = [
+            { code: 'CRT001', description: 'PSU not powered' },
+        ]
 
         this.bootUpRequirements = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling', 'gpu']
 
@@ -70,6 +75,11 @@ class PCUnit {
         this.fillComponentStatus(unit)
 
         // Power Supply Activation
+        if(!this.componentsStatus.psu || !this.componentsStatus.psu.component) {
+            // report missing component
+            this.createError('ERR-01')
+            return false
+        }
         this.psuActivation()
 
         // Motherboard and CPU Power Up
@@ -88,82 +98,18 @@ class PCUnit {
         else return false
     }
 
-    powerOnMonitor(){ // takes everything from displaying the splashscreen to displayingos and shows it inside the div monitorScreen
-        this.displaySplashScreen();
+    createReport(tag, description) {
+            
     }
 
-    powerOffMonitor(){
-        const splashScreen = document.getElementById('monitorScreen');
-        if (splashScreen){
-          splashScreen.innerHTML = '';
+    createError(code) {
+        const codeDetails = errorCodes[code]
+        const err = {
+            type: 'error',
+            tag: codeDetails.severity,
+            def: codeDetails.description,
         }
-
-        // Clear all pending timeouts
-        this.timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
-        this.timeoutIds = []; // Reset the timeout IDs array
-        this.isErrorDisplayed = false; // Reset the error display flag
-    }
-
-    getMotherboardName(){ // logic to get motherboard name from component and check for the brandImages for a match
-        const motherboardComponent = this.componentsStatus.motherboard;
-        if (motherboardComponent && motherboardComponent.component && motherboardComponent.component.name) {
-            return motherboardComponent.component.name;
-        }
-        return '';
-    }
-
-    displaySplashScreen(){ // get the component.type.monitor name and check the brand if it hits a brandImages then display the corresponding brand image and after 5 secs remove the img from the div
-        if (this.isErrorDisplayed) return;// Skip if error screen is displayed
-        const splashScreen = document.getElementById('monitorScreen');
-        const brandImages = {
-            evga: 'evga.png',
-            aorus: 'aorus.png',
-            asrock: 'asrock.png',
-            rog: 'rog.png',
-            biostar: 'biostar.png',
-            gigabyte: 'gigabyte.png',
-            msi: 'msi.png',
-        };
-
-    const motherboardName = this.getMotherboardName(); // Call out function getMotherboardName
-    const brand = Object.keys(brandImages).find(brand => motherboardName.toLowerCase().includes(brand)); // Check brandImages const and include lowercases
-
-    if (brand) {
-        const imgSrc = `./assets/boot/boot_logo/${brandImages[brand]}`; // get image from filepath
-        splashScreen.innerHTML = `<img src="${imgSrc}" alt="${brand} logo">`; // add as html inside div monitorScreen
-        const timeoutId = setTimeout(() => {
-            if (this.isErrorDisplayed) return; // Skip if error screen is displayed
-            splashScreen.innerHTML = ''; // Clear the splash screen after 5 seconds
-            this.displayOS(); // Proceed to display the OS
-        }, 5000);
-        this.timeoutIds.push(timeoutId); // Store the timeout ID
-    } else {
-         splashScreen.innerHTML = ''; // Clear the splash screen if no matching brand is found
-    }
- }
-    
-    displayOS(){ // display the operating system booting gif from ./assets/boot/os/windows_boot.gif and then show then after another 5 secs display the windows desktop img from ./assets/boot/os/desktop.png
-        if (this.isErrorDisplayed) return; //  Skip if error screen is displayed
-        const splashScreen = document.getElementById('monitorScreen');
-        const osBootGif = './assets/boot/os/windows_boot.gif';
-        const osDesktopImg = './assets/boot/os/desktop.png';
-
-        splashScreen.innerHTML = `<img src="${osBootGif}" alt="OS Booting">`;
-        const timeoutId = setTimeout(() => {
-            if (this.isErrorDisplayed) return; // Skip if error screen is displayed
-            splashScreen.innerHTML = `<img src="${osDesktopImg}" alt="OS Desktop">`;
-        }, 5000);
-        this.timeoutIds.push(timeoutId); // Store the timeout ID
-    }
-
-    displayErrorScreen(){
-        this.isErrorDisplayed = true; // Indicate that error screen is displayed
-        const splashScreen = document.getElementById('monitorScreen');
-        splashScreen.innerHTML = ''; // Clear the div before displaying the error screen
-
-        //const errorMessage = `Missing components: ${Array.isArray(missingComponents) ? missingComponents.join(', ') : 'Unknown'}`;        
-        const imgSrc = './assets/boot/error_screen/warning3.png';
-        splashScreen.innerHTML = `<img src = "${imgSrc}" alt="WARNING">` //add for showing error message<p>${errorMessage}</p>
+        this.reports.push(err) 
     }
 
     fillComponentStatus(component) {
@@ -199,7 +145,6 @@ class PCUnit {
         // Power the powersuplly
         this.componentsStatus.psu.isPowered = true
     }
-
     moboPowerUp() {
         // console.log(this.componentsStatus.motherboard)
         if(!this.componentsStatus.motherboard) {
@@ -294,7 +239,7 @@ class PCUnit {
                 }
             }
             
-            console.log(this.componentsStatus)
+            // console.log(this.componentsStatus)
             if(compStatus && isPowered) {
                 // console.log(csKey + ' is powered')
                 Array.isArray(compStatus) 
@@ -381,12 +326,12 @@ class PCUnit {
     // Main check for allowing the PC unit to boot (check defects and compatibility here)
     checkPCState() {
         let allowBoot = false
-        this.checkComponentStatus()
+        // this.checkComponentStatus()
         let stateIsAllowed = Object.values(this.componentsStatus).every(compStat => {
             // console.log(compStat)
             if(!Array.isArray(compStat)) {
 
-                return compStat.isPowered
+                return compStat?.isPowered
                 // return compStat.every(comp => comp.isPowered)
             } else {
                 return compStat.every(comp => {

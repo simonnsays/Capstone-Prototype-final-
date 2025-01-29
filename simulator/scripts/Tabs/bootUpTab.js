@@ -82,6 +82,7 @@ class BootUpTab {
     }
 
     togglePower(unit) {
+        this.pcUnit.reports = []
         // turn on
         if(this.pcUnit.power === 'off') {
             /*  Main Power on Sequence */
@@ -90,10 +91,12 @@ class BootUpTab {
             const pcState = this.pcUnit.attemptPowerOn(unit)
             if(pcState) {
                 console.log('All components are good, Booting up')
-                this.powerOn()
+                // this.powerOn()
             } else {
                 this.pcUnit.displayErrorScreen() // display error screen if no power is detected
             }
+
+            setTimeout(() => this.report(), 500)
             return
         }
 
@@ -131,13 +134,12 @@ class BootUpTab {
         }
     }
 
-    createError(errorType) {
-
-    }
-
     report() {
         const initialDelay = 1200
         const decreaseFactor = 0.75
+
+        this.clearReportsArea()
+        console.log(this.pcUnit.reports)
 
         this.pcUnit.reports.forEach((report, i) => {
             const delay = initialDelay * Math.pow(decreaseFactor, i)
@@ -148,6 +150,24 @@ class BootUpTab {
     createReportCell(report) {
         const cell = document.createElement('div')
         cell.classList = 'reportCell'
+        console.log(report)
+        switch(report.tag.toLowerCase()) {
+            case 'hazard': 
+                cell.classList.add('reportHazard')
+                break
+            case 'error':
+                cell.classList.add('reportError')
+                break
+            case 'critical':
+                cell.classList.add('reportCritical')
+                const exlaimElement = document.createElement('div')
+                exlaimElement.classList = 'exclamationPoint'
+                exlaimElement.innerHTML = '!'
+                cell.appendChild(exlaimElement)
+                break
+        }
+        
+        console.log(cell)
 
         const tag = document.createElement('div')
         tag.classList = 'reportCellTag'
@@ -158,6 +178,8 @@ class BootUpTab {
         def.classList = 'reportCellDef'
         def.innerHTML = report.def
         cell.appendChild(def)
+
+        
 
         this.reportArea?.appendChild(cell)
     }
