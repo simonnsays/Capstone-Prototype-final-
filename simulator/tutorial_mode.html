@@ -320,25 +320,6 @@
                     </div>
                 </div>
     
-                <!-- body -->
-                <div class="bootTabBodyWrapper">
-                    <!-- report -->
-                    <div id="bootTabReport">
-                        <div class="reportCell reportHazard">
-                            <div class="reportCellTag"> Temperature:</div>
-                            <div class="reportCellDef">71 degrees</div>
-                        </div>
-                        <div class="reportCell reportError" >
-                            <div class="reportCellTag"> Wattage:</div>
-                            <div class="reportCellDef">600W / 800W</div>
-                            <div></div>
-                        </div>
-                        <div class="reportCell reportCritical" >
-                            <div class="reportCellTag"> CITICAL</div>
-                            <div class="reportCellDef">Component CPU not detected</div>
-                            <div class="exclamationPoint">!</div>
-                        </div>
-                    </div>
                     <div class="vertLine"></div>
                     <div class = "errorDialog"></div>
                     <!-- display -->
@@ -390,8 +371,9 @@
         <!-- INFO/TIPS -->
         <div class="assistant-info-container hidden" style="cursor: pointer;"> 
             <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
-            <p style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
-            <p style="font-weight: normal; cursor: pointer;">...</p> 
+            <p class="taskTip" style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
+            <p class="errorTip hidden" style="font-weight: normal;">Oops! Looks like you got an error from your end. Let me assist you. Please click me to view errors.</p>
+            <p style="font-weight: normal; cursor: pointer;">...</p>    
             <!-- <p id="phrase2">LISTEN HERE YOU LITTLE BITCH</p>  -->
         </div>
     </div>
@@ -419,7 +401,7 @@
                 <div class="hr-line"></div>
             
                 <!-- Open Shop Task -->
-                <div class="task-cell" data-task-action="openShop">
+                <div class="task-cell" data-task-action="openShop" >
                     <div class="task-icon">
                         <img src="assets/Assistant/shop.png" alt="shop icon">
                     </div>
@@ -550,7 +532,7 @@
 
              <!-- errors -->
             <div class="error-container">
-                <h1 class="header" style="margin-left: 50%;">ERRORS</h1>
+                <h1 class="header" >ERRORS</h1>
                 <div class="hr-line"></div>
             
             <!-- test error 1 -->

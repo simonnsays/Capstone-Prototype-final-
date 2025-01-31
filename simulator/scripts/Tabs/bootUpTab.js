@@ -1,5 +1,5 @@
 import PCUnit from "../Data/pcUnit.js"
-
+import errorCodes from "../Data/errorCodes.js"
 class BootUpTab {
     constructor(elementHandler, utilityTool) {
         // Utility
@@ -147,27 +147,102 @@ class BootUpTab {
         });
     }
 
+    // function to create an error overview div
+    openErrorView(errorCode) {
+         // Get error details from errorCodes
+         const errorData = errorCodes[errorCode] || {
+            //sample error data
+            code: 'ERR-01',
+            name: 'No Boot Device Found',
+            severity: 'Error',
+            description: 'The system did not detect a boot device.',
+            troubleshooting: 'Check if the boot device is properly connected and configured in BIOS.'
+        };
+
+        // Create container div
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-overview';
+        errorDiv.id = 'error-overview';
+        errorDiv.innerHTML = `
+            <div class="error-header">
+                <h2>${errorData.name}</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="error-body">
+                <div class="error-meta">
+                    <span class="error-code">Code: ${errorData.code}</span>
+                    <span class="error-severity ${errorData.severity}">${errorData.severity} ${this.getSeverityIcon(errorData.severity)}</span>
+                </div>
+                <p class="error-description">${errorData.description}</p>
+                <div class="troubleshooting">
+                    <h3>Recommended Solutions:</h3>
+                    <p>${errorData.troubleshooting}</p>
+                </div>
+            </div>
+        `;
+
+        // Add close button event listener
+        const closeBtn = errorDiv.querySelector('.close-btn');
+        closeBtn.addEventListener('click', () => {
+            document.body.removeChild(overlay);
+            errorDiv.remove();
+        });
+
+        // Create overlay in which it closes the error div when the user clicks outside
+        const overlay = document.createElement('div');
+        overlay.className = 'error-overlay';
+        overlay.id = 'error-overlay';
+        overlay.addEventListener('click', () => {
+            document.body.removeChild(overlay);
+            errorDiv.remove();
+        });
+
+        // Add to DOM
+        document.body.appendChild(overlay);
+        document.body.appendChild(errorDiv);
+    } 
+    
+    // Helper methods
+    getSeverityIcon(severity) {
+        const icons = {
+            Critical: '❗', // Hard Drive Failure, CPU Overheating, BIOS Corruption, Power Failure
+            Hazard: '⚠️', // High Temperatures, Power Surge, Fan Speed Abnormal
+            Error: '❌', // GPU Failure, No Boot Device Found, Memory Error, Missing Component
+        };
+        return icons[severity];
+    }
+
     createReportCell(report) {
-        const cell = document.createElement('div')
-        cell.classList = 'reportCell'
-        console.log(report)
-        switch(report.tag.toLowerCase()) {
-            case 'hazard': 
-                cell.classList.add('reportHazard')
-                break
-            case 'error':
-                cell.classList.add('reportError')
-                break
-            case 'critical':
-                cell.classList.add('reportCritical')
-                const exlaimElement = document.createElement('div')
-                exlaimElement.classList = 'exclamationPoint'
-                exlaimElement.innerHTML = '!'
-                cell.appendChild(exlaimElement)
-                break
-        }
-        
-        console.log(cell)
+    const cell = document.createElement('div')
+    cell.classList = 'reportCell'
+    
+    // Get error code data
+    //const errorData = errorCodes[report.code] || {
+    //    code: 'ERR-00',
+    //    severity: 'error',
+    //};
+
+    // Add severity class
+    //cell.classList.add(`report-${errorData.severity.toLowerCase()}`);
+
+       console.log(report)
+       switch(report.tag.toLowerCase()) {
+           case 'hazard': 
+               cell.classList.add('reportHazard')
+               break
+           case 'error':
+               cell.classList.add('reportError')
+               break
+           case 'critical':
+               cell.classList.add('reportCritical')
+               const exlaimElement = document.createElement('div')
+               exlaimElement.classList = 'exclamationPoint'
+               exlaimElement.innerHTML = '!'
+               cell.appendChild(exlaimElement)
+               break
+       }
+       cell.addEventListener('click', () => this.openErrorView(report.code)); // Add event listener to report cells opening error view
+       console.log(cell)
 
         const tag = document.createElement('div')
         tag.classList = 'reportCellTag'

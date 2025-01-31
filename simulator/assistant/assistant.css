@@ -302,12 +302,22 @@ color: #333;
 /* Errors cell */
 .error-container {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: center;
+    align-items: stretch;
+    gap: 5%;
+    /*display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
+    align-items: flex-start;*/
     width: 100%;
     height: 100%;
     overflow-y: auto;
+}
+.error-container h1{
+    position:relative;
+    left: -200px;
 }
 
 /* Toggle */
@@ -387,9 +397,74 @@ color: #333;
     -webkit-transform: translate3d(24px, 0, 0);
     transform: translate3d(24px, 0, 0);
   }
+  /*
+ .error-cell{
+    left: 5px;
+    height: 100px;
+    width: 95%;
+    padding: 20px;
+    background: linear-gradient(to right, var(--light-lime),var(--teal) );
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
 
+  .error-cell:hover {
+    transform: translateY(-5px);
+    box-shadow: 10 10 80px #75c9b7;
+  }
 
-  
+  .error-title {
+    font-size: 1rem;
+    font-weight: bold;
+    flex-grow: 1;
+ }
+  */
+
+  .error-icon img{
+    position: relative;
+    width: 30px;
+    height: 30x;
+    left: 130px;
+  }
+
+.error-cell {
+    width: 300px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin: 12px 0;
+    padding: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+/* Compact version for assistant tab */
+.error-overview.compact {
+    padding: 12px;
+    margin: 8px 0;
+}
+
+.error-overview.compact:hover {
+    transform: translateY(-2px);
+}
+
+/* Unified severity styling */
+.error-severity {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.error-severity.critical { background: #ffebee; color: #c62828; }
+.error-severity.hazard { background: #fff3e0; color: #ef6c00; }
+.error-severity.error { background: #fbe9e7; color: #d84315; }
+
 
 /* Animations */
 @keyframes pulse {

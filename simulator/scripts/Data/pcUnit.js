@@ -15,6 +15,8 @@ class PCUnit {
         // - if components are compatible (compatibility)
         // - if components are working fine (defect)
 
+       // this.requiredComponents = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling']
+       // this.requiredCables = ['24-pin-power', '8-pin-power', 'sata-power', 'frontPanel']
 
         this.componentsStatus = {
             motherboard: {},
@@ -102,6 +104,7 @@ class PCUnit {
     createReport(tag, description) {
             
     }
+
     powerOnMonitor(){ // takes everything from displaying the splashscreen to displayingos and shows it inside the div monitorScreen
         this.displaySplashScreen();
     }
@@ -172,11 +175,13 @@ class PCUnit {
     displayErrorScreen(){
         this.isErrorDisplayed = true; // Indicate that error screen is displayed
         const splashScreen = document.getElementById('monitorScreen');
+        const missingComponents = this.reports.map(report => report.tag); // Get the missing components from the reports
         splashScreen.innerHTML = ''; // Clear the div before displaying the error screen
-
+        
         //const errorMessage = `Missing components: ${Array.isArray(missingComponents) ? missingComponents.join(', ') : 'Unknown'}`;        
         const imgSrc = './assets/boot/error_screen/warning3.png';
-        splashScreen.innerHTML = `<img src = "${imgSrc}" alt="WARNING">` //add for showing error message<p>${errorMessage}</p>
+       
+        splashScreen.innerHTML = `<p id="warning"><img src = "${imgSrc}" alt="WARNING"></p>` //add for showing error message<p>${errorMessage}</p> 
     }
 
     createError(code) {

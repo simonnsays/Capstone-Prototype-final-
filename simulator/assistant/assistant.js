@@ -1,4 +1,5 @@
 import  errorCodes from '../scripts/Data/errorCodes.js';
+
 class Assistant {
     constructor(elementHandler) {
         // DOM ELEMENTS
@@ -11,6 +12,9 @@ class Assistant {
         this.modal = elements.modal;        
         this.bubble = document.getElementById('assistantBubble');
         this.originalParent = this.container.parentElement;
+        this.taskContainer = document.querySelector('.task-container');
+        this.errorContainer = document.querySelector('.error-container');
+        this.notifCount = 1;
 
         // TUTORIAL STEP BY STEPS
         this.tasks = [{ title: '', description: '' }];
@@ -79,6 +83,11 @@ class Assistant {
                 this.moveAssistantContainerBack(); // Move assistant container back to its original place
             }
         });
+        document.addEventListener('DOMContentLoaded', () => {
+            this.populateErrors();
+            this.toggleErrorView();
+            this.setupTaskEventListeners();
+        });
     }
 
     // Function to move the assistant container to the bubble
@@ -117,78 +126,57 @@ class Assistant {
             assistantBubble.appendChild(bubbleMessage); // Add the message to the bubble
         }
     }
-    
-}
 
-    // Assistant task function
-    document.addEventListener('DOMContentLoaded', function () {
+    // Attach Event Listeners to Task Cells
+    setupTaskEventListeners() {
         const taskCells = document.querySelectorAll('.task-cell');
-        
-        // Event listener for each task cell click
-        taskCells.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                toggleTaskDescription(index);   // Show description
-                markTaskCompleted(index);       // Mark task as completed
+        taskCells.forEach((cell, index) => { // Loop through each task cell and add an event listener click
+            cell.addEventListener('click', () => {
+                this.toggleTaskDescription(index);  
+                this.markTaskCompleted(index);      
             });
         });
-    
-        // Event listener for "Start Task" button clicks inside descriptions
+
         const startTaskButtons = document.querySelectorAll('.start-task-btn');
         startTaskButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
+            button.addEventListener('click', (e) => { // Add event listener click to each "Start Task" button
                 const action = button.getAttribute('data-task');
                 if (action) {
-                    performTaskAction(action);  // Perform the task action (open shop, inventory, etc.)
-                    moveAssistantContainerBack();  // Move the assistant container back to its original place
+                    this.performTaskAction(action); 
+                    this.moveAssistantContainerBack();
                 }
-                e.stopPropagation();  // Prevent toggling the description when button is clicked
+                e.stopPropagation();  
             });
         });
-    });
-    
-    // Mark tasks as completed and gray them out
-    function markTaskCompleted(taskIndex) {
+    }
+
+    markTaskCompleted(taskIndex) {
         const taskCells = document.querySelectorAll('.task-cell');
         taskCells.forEach((cell, index) => {
             if (index <= taskIndex) {
-                cell.classList.add('completed-task');  // Add gray-out effect and completed style
+                cell.classList.add('completed-task');
                 const checkmark = cell.querySelector('.checkmark');
-                if (checkmark) {
-                    checkmark.style.display = 'block';  // Show the checkmark icon
-                }
+                if (checkmark) checkmark.style.display = 'block';
             } else {
                 cell.classList.remove('completed-task');
                 const checkmark = cell.querySelector('.checkmark');
-                if (checkmark) {
-                    checkmark.style.display = 'none';  // Hide the checkmark icon for incomplete tasks
-                }
+                if (checkmark) checkmark.style.display = 'none';
             }
         });
     }
-    
-    // Toggle the visibility of task descriptions
-    function toggleTaskDescription(taskIndex) {
+
+    toggleTaskDescription(taskIndex) {
         const taskDescriptions = document.querySelectorAll('.task-description');
-    
-        // Loop through all descriptions and hide the others
         taskDescriptions.forEach((description, index) => {
-            if (index === taskIndex) {
-                description.style.display = 'block';  // Show the current task description
-            } else {
-                description.style.display = 'none';   // Hide other task descriptions
-            }
+            description.style.display = index === taskIndex ? 'block' : 'none';
         });
-    
-        // Update the task status display
-        updateTaskStatus(taskIndex);
+
+        this.updateTaskStatus(taskIndex);
     }
-    
-    // Update the task status in the task-status element
-    function updateTaskStatus(taskIndex) {
+
+    updateTaskStatus(taskIndex) {
         const taskTitles = document.querySelectorAll('.tasktitle');
         const taskStatus = document.querySelector('#task-status');
-    
-        // Update status based on the current task
         if (taskIndex >= 0 && taskIndex < taskTitles.length) {
             const currentTaskTitle = taskTitles[taskIndex].textContent;
             taskStatus.textContent = `Current Task: ${taskIndex + 1} - ${currentTaskTitle}`;
@@ -197,109 +185,281 @@ class Assistant {
         }
     }
     
-    // Perform the corresponding task action (open modal or do something)
-    function performTaskAction(action) {
-        closeAssistantTab();  // Close the assistant tab after a task is started
-        switch(action) {
-            case 'openShop':
-                openShopModal();
-                break;
-            case 'openInventory':
-                openInventoryModal();
-                break;
-            case 'connectWires':
-                openWiresModal();
-                break;
-            case 'powerOnPC':
-                powerOnPC();
-                break;
-            default:
-                console.log("Unknown task action");
+    performTaskAction(action) {
+        this.closeAssistantTab();
+        switch (action) {
+            case 'openShop': this.openShopModal(); break;
+            case 'openInventory': this.openInventoryModal(); break;
+            case 'connectWires': this.openWiresModal(); break;
+            case 'powerOnPC': this.powerOnPC(); break;
+            default: console.log("Unknown task action");
         }
     }
 
-    // Function to close the assistant tab
-    function closeAssistantTab() {
+    closeAssistantTab() {
         const assistantTab = document.querySelector('.assistant-modal');
         if (assistantTab) assistantTab.close();
     }
 
-    // Modal opening functions
-    function openShopModal() {
+    openShopModal() {
         const shopModal = document.querySelector('#shopModal');
         if (shopModal) shopModal.showModal();
     }
-    
-    function openInventoryModal() {
+
+    openInventoryModal() {
         const invModal = document.querySelector('#invModal');
         if (invModal) invModal.showModal();
     }
-    
-    function openWiresModal() {
+
+    openWiresModal() {
         const wiresModal = document.querySelector('#wiresModal');
-        if (wiresModal) wiresModal.style.display = 'block';  // or use .showModal() if it's a dialog
+        if (wiresModal) wiresModal.style.display = 'block';
     }
-    
-    function powerOnPC() {
+
+    powerOnPC() {
         const bootUpTab = document.querySelector('#bootUpTab');
-        if (bootUpTab) bootUpTab.style.display = 'block';  
+        if (bootUpTab) bootUpTab.style.display = 'block';
     }
-    
-    // Ensure no task is initially marked as completed
-    markTaskCompleted(-1);  // Reset task completion at the start
 
-   
-     // Initialize the assistant tab and get the toggle switch element
-    document.addEventListener("DOMContentLoaded", function () {
-        const toggleSwitch = document.getElementById("switch");
-        const taskContainer = document.querySelector(".task-container");
-        const errorContainer = document.querySelector(".error-container");
-    
-        // Ensure error container is hidden by default
-        errorContainer.style.display = "none";
-    
-        toggleSwitch.addEventListener("change", function () {
-            if (toggleSwitch.checked) {
-                // Show Errors View
-                taskContainer.style.display = "none";
-                errorContainer.style.display = "flex";
-            } else {
-                // Show Tasks View
-                taskContainer.style.display = "flex";
-                errorContainer.style.display = "none";
-            }
-        });
-    });
+    toggleErrorView() {
+        if (this.taskContainer && this.errorContainer) {
+            this.errorContainer.style.display = "none";
+            document.getElementById("switch").addEventListener("change", () => {
+                if (document.getElementById("switch").checked) {
+                    this.taskContainer.style.display = "none";
+                    this.errorContainer.style.display = "flex";
+                } else {
+                    this.taskContainer.style.display = "flex";
+                    this.errorContainer.style.display = "none";
+                }
+            });
+        }
+    }
 
-    // Initialize the assistant tab and get the error-container element then populate it with the bootup errors
-    document.addEventListener("DOMContentLoaded", function () {
-        const errorContainer = document.querySelector('.error-container');
+    // Helper methods
+    getSeverityIcon(severity) {
+        const icons = {
+            Critical: '❗', // Hard Drive Failure, CPU Overheating, BIOS Corruption, Power Failure
+            Hazard: '⚠️', // High Temperatures, Power Surge, Fan Speed Abnormal
+            Error: '❌', // GPU Failure, No Boot Device Found, Memory Error, Missing Component
+        };
+        return icons[severity] || "❓";
+    }
 
-        errorContainer.innerHTML = `
+    populateErrors() {
+        if (!this.errorContainer) return;
+        const self = this;
+
+        this.errorContainer.innerHTML = `
             <h1 class="header" style="margin-left: 50%;">ERRORS</h1>
             <div class="hr-line"></div>
         `;
-
-        Object.values(errorCodes).forEach(error => { // Loop through each error code and create an error element
-            const errorElement = document.createElement('div');
-            errorElement.classList.add('error-cell');
-            errorElement.dataset.errorAction = error.code;
-
-            // Add error details to the error element
-            errorElement.innerHTML = `  
-                <div class="error-icon">
+       Object.values(errorCodes).forEach((error) => { // Loop through each error code and create an error element
+           const errorElement = document.createElement('div');
+           errorElement.classList.add('error-cell');
+           errorElement.innerHTML = `  
+              <div class="error-icon">
                 <img src="./assets/boot/error_screen/warning.png" alt="error icon">
-            </div>
-            <div class="error-details">
-                <h2>${error.name} (${error.code})</h2> 
-                <p><strong>Severity:</strong> ${error.severity}</p>
-                <p>${error.description}</p>
-                <p><strong>Troubleshooting:</strong> ${error.troubleshooting}</p>
-            </div>
-            `;
+              </div>
+              <div class="error-details">
+              <h2>${error.name} (${error.code})</h2> 
+              <p><strong>Severity:</strong> ${error.severity} ${this.getSeverityIcon(error.severity)}</p>
+              <p>${error.description}</p>
+              </div>
+          `;
+           this.errorContainer.appendChild(errorElement);
+       });
+    } 
+}
 
-            errorContainer.appendChild(errorElement); // Add the error element to the error container
-        });
-    });
+ //   // Assistant task function
+ //   document.addEventListener('DOMContentLoaded', function () {
+ //       const taskCells = document.querySelectorAll('.task-cell');
+ //       
+ //       // Event listener for each task cell click
+ //       taskCells.forEach((button, index) => {
+ //           button.addEventListener('click', () => {
+ //               toggleTaskDescription(index);   // Show description
+ //               markTaskCompleted(index);       // Mark task as completed
+ //           });
+ //       });
+ //   
+ //       // Event listener for "Start Task" button clicks inside descriptions
+ //       const startTaskButtons = document.querySelectorAll('.start-task-btn');
+ //       startTaskButtons.forEach(button => {
+ //           button.addEventListener('click', (e) => {
+ //               const action = button.getAttribute('data-task');
+ //               if (action) {
+ //                   performTaskAction(action);  // Perform the task action (open shop, inventory, etc.)
+ //                   moveAssistantContainerBack();  // Move the assistant container back to its original place
+ //               }
+ //               e.stopPropagation();  // Prevent toggling the description when button is clicked
+ //           });
+ //       });
+ //   });
+
+ //   // Mark tasks as completed and gray them out
+ //   function markTaskCompleted(taskIndex) {
+ //       const taskCells = document.querySelectorAll('.task-cell');
+ //       taskCells.forEach((cell, index) => {
+ //           if (index <= taskIndex) {
+ //               cell.classList.add('completed-task');  // Add gray-out effect and completed style
+ //               const checkmark = cell.querySelector('.checkmark');
+ //               if (checkmark) {
+ //                   checkmark.style.display = 'block';  // Show the checkmark icon
+ //               }
+ //           } else {
+ //               cell.classList.remove('completed-task');
+ //               const checkmark = cell.querySelector('.checkmark');
+ //               if (checkmark) {
+ //                   checkmark.style.display = 'none';  // Hide the checkmark icon for incomplete tasks
+ //               }
+ //           }
+ //       });
+ //   }
+
+ //   // Toggle the visibility of task descriptions
+ //   function toggleTaskDescription(taskIndex) {
+ //       const taskDescriptions = document.querySelectorAll('.task-description');
+ //   
+ //       // Loop through all descriptions and hide the others
+ //       taskDescriptions.forEach((description, index) => {
+ //           if (index === taskIndex) {
+ //               description.style.display = 'block';  // Show the current task description
+ //           } else {
+ //               description.style.display = 'none';   // Hide other task descriptions
+ //           }
+ //       });
+ //   
+ //       // Update the task status display
+ //       updateTaskStatus(taskIndex);
+ //   }
+
+ //   // Update the task status in the task-status element
+ //   function updateTaskStatus(taskIndex) {
+ //       const taskTitles = document.querySelectorAll('.tasktitle');
+ //       const taskStatus = document.querySelector('#task-status');
+ //   
+ //       // Update status based on the current task
+ //       if (taskIndex >= 0 && taskIndex < taskTitles.length) {
+ //           const currentTaskTitle = taskTitles[taskIndex].textContent;
+ //           taskStatus.textContent = `Current Task: ${taskIndex + 1} - ${currentTaskTitle}`;
+ //       } else {
+ //           taskStatus.textContent = 'No task selected';
+ //       }
+ //   }
+
+ //   // Perform the corresponding task action (open modal or do something)
+ //   function performTaskAction(action) {
+ //       closeAssistantTab();  // Close the assistant tab after a task is started
+ //       switch(action) {
+ //           case 'openShop':
+ //               openShopModal();
+ //               break;
+ //           case 'openInventory':
+ //               openInventoryModal();
+ //               break;
+ //           case 'connectWires':
+ //               openWiresModal();
+ //               break;
+ //           case 'powerOnPC':
+ //               powerOnPC();
+ //               break;
+ //           default:
+ //               console.log("Unknown task action");
+ //       }
+ //   }
+
+ //  // Function to close the assistant tab
+ //  function closeAssistantTab() {
+ //      const assistantTab = document.querySelector('.assistant-modal');
+ //      if (assistantTab) assistantTab.close();
+ //  }
+ //  // Modal opening functions
+ //  function openShopModal() {
+ //      const shopModal = document.querySelector('#shopModal');
+ //      if (shopModal) shopModal.showModal();
+ //  }
+ //  
+ //  function openInventoryModal() {
+ //      const invModal = document.querySelector('#invModal');
+ //      if (invModal) invModal.showModal();
+ //  }
+ //  
+ //  function openWiresModal() {
+ //      const wiresModal = document.querySelector('#wiresModal');
+ //      if (wiresModal) wiresModal.style.display = 'block';  // or use .showModal() if it's a dialog
+ //  }
+ //  
+ //  function powerOnPC() {
+ //      const bootUpTab = document.querySelector('#bootUpTab');
+ //      if (bootUpTab) bootUpTab.style.display = 'block';  
+ //  }
+
+ //  // Ensure no task is initially marked as completed
+ //   markTaskCompleted(-1);  // Reset task completion at the start
+
+ //  
+ //    // Initialize the assistant tab and get the toggle switch element
+ //   document.addEventListener("DOMContentLoaded", function () {
+ //       const toggleSwitch = document.getElementById("switch");
+ //       const taskContainer = document.querySelector(".task-container");
+ //       const errorContainer = document.querySelector(".error-container");
+ //   
+ //       // Ensure error container is hidden by default
+ //       errorContainer.style.display = "none";
+ //   
+ //       toggleSwitch.addEventListener("change", function () {
+ //           if (toggleSwitch.checked) {
+ //               // Show Errors View
+ //               taskContainer.style.display = "none";
+ //               errorContainer.style.display = "flex";
+ //           } else {
+ //               // Show Tasks View
+ //               taskContainer.style.display = "flex";
+ //               errorContainer.style.display = "none";
+ //           }
+ //       });
+ //   });
+
+ //   // Initialize the assistant tab and get the error-container element then populate it with the bootup errors
+ //   document.addEventListener("DOMContentLoaded", function () {
+ //       const errorContainer = document.querySelector('.error-container');
+
+ //       errorContainer.innerHTML = `
+ //           <h1 class="header" style="margin-left: 50%;">ERRORS</h1>
+ //           <div class="hr-line"></div>
+ //       `;
+
+ //       Object.values(errorCodes).forEach(error => { // Loop through each error code and create an error element
+ //           const errorElement = document.createElement('div');
+ //           //const errorData = errorCodes[error.code];
+ //           
+ //           errorElement.classList.add('error-cell');
+ //             // Get error details from errorCodes
+ //           const errorData = errorCodes[errorCodes] || {
+ //           //sample error data
+ //           code: 'ERR-01',
+ //           name: 'No Boot Device Found',
+ //           severity: 'error',
+ //           description: 'The system did not detect a boot device.',
+ //           troubleshooting: 'Check if the boot device is properly connected and configured in BIOS.'
+ //       };
+
+ //           // Add error details to the error element
+ //          errorElement.innerHTML = `  
+ //              <div class="error-icon">
+ //              <img src="./assets/boot/error_screen/warning.png" alt="error icon">
+ //          </div>
+ //          <div class="error-details">
+ //              <h2>${error.name} (${error.code})</h2> 
+ //              <p><strong>Severity:</strong> ${error.severity}</p>
+ //              <p>${error.description}</p>
+ //          </div>
+ //          `;
+ //           errorContainer.appendChild(errorElement); // Add the error element to the error container
+ //       });
+ //   });
+
 
 export default Assistant;
