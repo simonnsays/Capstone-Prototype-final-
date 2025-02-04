@@ -103,11 +103,14 @@ class Main {
         this.canvas.animate()   
         this.assistant.asstInit() 
 
+        // this.bootUpTab.powerBtn.addEventListener('mouseup', () => this.bootUpTab.powerBtnClick(this.bootUpTab.pcUnit.availableUnit));
+
+
         // TEST: BOOT UP
-        // this.testBootUp()
+        this.testBootUp()
 
         // TEST: MISSING COMPONENTS
-        this.testMissingComponents()
+        // this.testMissingComponents()
 
         // TEST: TRASH BIN
         // this.testTrashBin()

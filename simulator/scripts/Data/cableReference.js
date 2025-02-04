@@ -326,7 +326,7 @@ const cableRef = {
     ],
     cooling: [
         {       // fan
-            name: '3-pin-cooling',
+            name: 'Heatsink',
             type: '3-pin-cooling',
             ends: {
                 cooling: {

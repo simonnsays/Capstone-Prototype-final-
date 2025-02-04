@@ -1,3 +1,4 @@
+import components from "../Data/data.js"
 import PCUnit from "../Data/pcUnit.js"
 
 class BootUpTab {
@@ -90,11 +91,11 @@ class BootUpTab {
             this.pcUnit.power = 'on'
             const pcState = this.pcUnit.attemptPowerOn(unit)
             if(pcState) {
-                console.log('All components are good, Booting up')
+                // console.log('All components are good, Booting up')
                 // this.powerOn()
             } else {
                 //////////// AREA OF REPORT ERRORS 
-                console.log("An Error has occured")
+                // console.log("An Error has occured")
             }
 
             setTimeout(() => this.report(), 500)
@@ -126,6 +127,7 @@ class BootUpTab {
                 this.pcUnit.componentsStatus[key] = null
             }
         }
+        // console.log(this.pcUnit.componentsStatus)
     }
 
     powerBtnClick = (unit) => {
@@ -139,7 +141,6 @@ class BootUpTab {
         const decreaseFactor = 0.75
 
         this.clearReportsArea()
-        console.log(this.pcUnit.reports)
 
         this.pcUnit.reports.forEach((report, i) => {
             const delay = initialDelay * Math.pow(decreaseFactor, i)
@@ -150,7 +151,6 @@ class BootUpTab {
     createReportCell(report) {
         const cell = document.createElement('div')
         cell.classList = 'reportCell'
-        console.log(report)
         switch(report.tag.toLowerCase()) {
             case 'hazard': 
                 cell.classList.add('reportHazard')
@@ -167,8 +167,6 @@ class BootUpTab {
                 break
         }
         
-        console.log(cell)
-
         const tag = document.createElement('div')
         tag.classList = 'reportCellTag'
         tag.innerHTML = report.tag
@@ -178,8 +176,6 @@ class BootUpTab {
         def.classList = 'reportCellDef'
         def.innerHTML = report.def
         cell.appendChild(def)
-
-        
 
         this.reportArea?.appendChild(cell)
     }
