@@ -23,6 +23,9 @@ const errorCodes = {
         severity: 'Error',
         description: 'UNDEFINED ERROR ',
     },
+
+
+    // old error codes
     'ERR-00': {
         code: 'ERR-00',
         severity: 'Error',
