@@ -21,7 +21,7 @@ const errorCodes = {
     },
     'ERR-404': {
         severity: 'Error',
-        description: 'UNDEFINED ERROR',
+        description: 'UNDEFINED ERROR ',
     }
 }
 
