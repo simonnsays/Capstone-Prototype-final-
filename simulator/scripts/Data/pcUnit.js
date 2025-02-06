@@ -1,18 +1,25 @@
 import errorCodes from "../Data/errorCodes.js"
 
 class PCUnit {
-    constructor(bootUpElements,) {
+    constructor(bootUpElements,assistant) {
         // utilityTool, displayArea, Canvas, portsTab, drawer, assistant
         this.bootUpElements = bootUpElements
+        this.assistant = assistant
 
         this.power = 'off'
         this.availableUnit = null
         this.screen = bootUpElements.screen || null
-
+        this.isErrorDisplayed = false; 
+        this.timeoutIds = []
         // CHECKLIST:
         // - if components are complete (status)
         // - if components are compatible (compatibility)
         // - if components are working fine (defect)
+
+        /////////////////////////// dan code ///////////////////////////
+        this.reports = []
+        this.currentErrorCode = null
+        /////////////////////////// dan code ///////////////////////////
 
         this.componentsStatus = {
             motherboard: {},
@@ -25,9 +32,15 @@ class PCUnit {
             caseCooling: []
         }
 
-        this.errorCodes = [
-            { code: 'CRT001', description: 'PSU not powered' },
-        ]
+        this.motherboardBrand = {
+            aorus:{},
+            msi:{},
+            evga:{},
+            rog:{},
+            gigabyte:{},
+            asrock:{},
+            biostar:{},
+        }
 
         this.bootUpRequirements = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling', 'gpu']
 
@@ -98,8 +111,191 @@ class PCUnit {
         })
 
         return true
+        ///////////////////////////////////////////////// dan code ////////////////////////////////////////////////////////
+        // Check if all components are available and powered
+        if(!this.componentsStatus.psu || !this.componentsStatus.psu.component) {
+            // report missing component
+            this.createError('ERR-07') // Takes errorCode and show it as report cell in bootuptab
+            this.populateErrors()
+            return false;
+        }
+
+        // Power Supply Activation
+        this.psuActivation()
+
+        // Motherboard and CPU Power Up
+        this.moboPowerUp()
+        this.cpuInit()
+
+        // Monitor display poweron
+        this.powerOnMonitor()
+
+        // Star proces for Power-On-Self-Test
+        this.processPOST(this.componentsStatus.psu.component)
+
+        const state = this.checkPCState()
+        // if check attempts are good, power on
+        if(state)return true
+        else return false
     }
 
+    // Add error-cells into assistant tab errors view
+    populateErrors() {
+        const errorCell = document.querySelector('.error-cell');
+        //const errorContainer =  document.querySelector('')
+        if (!errorCell) return;
+
+        // Get the current error code from pcUnit
+        const errorCode = this.currentErrorCode;
+        if (errorCode) {
+            const errorData = errorCodes[errorCode];
+            if (!errorData) {
+                console.error(`Error code ${errorCode} not found in errorCodes.`);
+                return;
+            }
+            errorCell.innerHTML = `  
+                <div class="error-icon">
+                    <img src="./assets/boot/error_screen/warning.png" alt="error icon">
+                </div>
+                <div class="error-details">
+                    <h2>${errorData.description} (${errorCode})</h2> 
+                    <p><strong>Severity:</strong> ${errorData.severity} ${this.getSeverityIcon(errorData.severity)}</p>
+                </div>
+            `;
+            console.log(errorCode);
+
+            // Add click event listener to the error cell
+            errorCell.addEventListener('click', () => this.expandErrorCell(errorCell, errorData));
+        }
+    } 
+
+    // Helper methods
+    getSeverityIcon(severity) {
+       const icons = {
+           Critical: '❗', // Hard Drive Failure, CPU Overheating, BIOS Corruption, Power Failure
+           Hazard: '⚠️', // High Temperatures, Power Surge, Fan Speed Abnormal
+           Error: '❌', // GPU Failure, No Boot Device Found, Memory Error, Missing Component
+       };
+       return icons[severity] || "❓";
+    }
+
+    expandErrorCell(errorCell, errorData) {
+        // Toggle the expanded class
+        errorCell.classList.toggle('expanded');
+
+        // Add in-depth troubleshooting guide
+        if (errorCell.classList.contains('expanded')) {
+            const troubleshootingGuide = document.createElement('div');
+            troubleshootingGuide.classList.add('troubleshooting-guide');
+            troubleshootingGuide.innerHTML = `
+                <h3>Troubleshooting Guide</h3>
+                <p>${errorData.troubleshooting}</p>
+            `;
+            errorCell.appendChild(troubleshootingGuide);
+        } else {
+            const troubleshootingGuide = errorCell.querySelector('.troubleshooting-guide');
+            if (troubleshootingGuide) {
+                troubleshootingGuide.remove();
+            }
+        }
+    }
+
+    createReport(tag, description) {
+            
+    }
+
+    powerOnMonitor(){ // takes everything from displaying the splashscreen to displayingos and shows it inside the div monitorScreen
+        this.displaySplashScreen();
+    }
+    
+    powerOffMonitor(){
+        const splashScreen = document.getElementById('monitorScreen');
+        if (splashScreen){
+          splashScreen.innerHTML = '';
+        }
+
+        // Clear all pending timeouts
+        this.timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
+        this.timeoutIds = []; // Reset the timeout IDs array
+        this.isErrorDisplayed = false; // Reset the error display flag
+    }
+
+    getMotherboardName(){ // logic to get motherboard name from component and check for the brandImages for a match
+        const motherboardComponent = this.componentsStatus.motherboard;
+        if (motherboardComponent && motherboardComponent.component && motherboardComponent.component.name) {
+            return motherboardComponent.component.name;
+        }
+        return '';
+    }
+
+    displaySplashScreen(){ // get the component.type.monitor name and check the brand if it hits a brandImages then display the corresponding brand image and after 5 secs remove the img from the div
+        if (this.isErrorDisplayed) return;// Skip if error screen is displayed
+        const splashScreen = document.getElementById('monitorScreen');
+        const brandImages = {
+            evga: 'evga.png',
+            aorus: 'aorus.png',
+            asrock: 'asrock.png',
+            rog: 'rog.png',
+            biostar: 'biostar.png',
+            gigabyte: 'gigabyte.png',
+            msi: 'msi.png',
+        };
+
+       const motherboardName = this.getMotherboardName(); // Call out function getMotherboardName
+       const brand = Object.keys(brandImages).find(brand => motherboardName.toLowerCase().includes(brand)); // Check brandImages const and include lowercases
+
+       if (brand) {
+           const imgSrc = `./assets/boot/boot_logo/${brandImages[brand]}`; // get image from filepath
+           splashScreen.innerHTML = `<img src="${imgSrc}" alt="${brand} logo">`; // add as html inside div monitorScreen
+           const timeoutId = setTimeout(() => {
+               if (this.isErrorDisplayed) return; // Skip if error screen is displayed
+               splashScreen.innerHTML = ''; // Clear the splash screen after 5 seconds
+               this.displayOS(); // Proceed to display the OS
+           }, 5000);
+           this.timeoutIds.push(timeoutId); // Store the timeout ID
+       } else {
+            splashScreen.innerHTML = ''; // Clear the splash screen if no matching brand is found
+       }
+    }
+    
+    displayOS(){ // display the operating system booting gif from ./assets/boot/os/windows_boot.gif and then show then after another 5 secs display the windows desktop img from ./assets/boot/os/desktop.png
+        if (this.isErrorDisplayed) return; //  Skip if error screen is displayed
+        const splashScreen = document.getElementById('monitorScreen');
+        const osBootGif = './assets/boot/os/windows_boot.gif';
+        const osDesktopImg = './assets/boot/os/desktop.png';
+
+        splashScreen.innerHTML = `<img src="${osBootGif}" alt="OS Booting">`;
+        const timeoutId = setTimeout(() => {
+            if (this.isErrorDisplayed) return; // Skip if error screen is displayed
+            splashScreen.innerHTML = `<img src="${osDesktopImg}" alt="OS Desktop">`;
+        }, 5000);
+        this.timeoutIds.push(timeoutId); // Store the timeout ID
+    }
+
+    displayErrorScreen(){
+        this.isErrorDisplayed = true; // Indicate that error screen is displayed
+        const splashScreen = document.getElementById('monitorScreen');
+        splashScreen.innerHTML = ''; // Clear the div before displaying the error screen
+        
+        //const errorMessage = `Missing components: ${Array.isArray(missingComponents) ? missingComponents.join(', ') : 'Unknown'}`;        
+        const imgSrc = './assets/boot/error_screen/warning3.png';
+       
+        splashScreen.innerHTML = `<p id="warning"><img src = "${imgSrc}" alt="WARNING"></p>` //add for showing error message<p>${errorMessage}</p> 
+    }
+
+    createError(code) {
+        const codeDetails = errorCodes[code];
+        const err = {
+            type: 'error',
+            tag: codeDetails.severity,
+            def: codeDetails.description,
+            code: code // Store the error code
+        };
+        this.reports.push(err);
+        this.currentErrorCode = code;
+    }
+
+    ///////////////////////////////////////////////// dan code ////////////////////////////////////////////////////////
     fillComponentStatus(component) {
         let compStatus  = {
             component: component,

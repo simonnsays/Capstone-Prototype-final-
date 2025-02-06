@@ -8,13 +8,17 @@ class Assistant {
         this.image = elements.image;
         this.infoContainer = elements.infoContainer;
         this.modal = elements.modal;        
+        this.bubble = document.getElementById('assistantBubble');
+        this.originalParent = this.container.parentElement;
+        this.taskContainer = document.querySelector('.task-container');
+        this.errorContainer = document.querySelector('.error-container');
+        this.notifCount = 1;
 
         // TUTORIAL STEP BY STEPS
         this.tasks = [{ title: '', description: '' }];
 
         this.notifCount = 1;
     }
-
     isInArea(area, mouse) {
         if (!area) return false; // Guard clause for undefined area
         let point = { x: mouse.clientX, y: mouse.clientY };
@@ -62,7 +66,8 @@ class Assistant {
 
         this.container?.addEventListener('click', () => {
             if (this.modal) {
-                this.modal.showModal ? this.modal.showModal() : this.modal.style.display = 'block';
+                this.modal.showModal ? this.modal.showModal() : (this.modal.style.display = 'block');
+                this.moveAssistantContainerToBubble(); // Move assistant container to bubble
             }
         });
 
@@ -73,79 +78,105 @@ class Assistant {
                 } else if (this.modal) {
                     this.modal.style.display = 'none';
                 }
+                this.moveAssistantContainerBack(); // Move assistant container back to its original place
             }
         });
+        document.addEventListener('DOMContentLoaded', () => {
+            this.toggleErrorView();
+            this.setupTaskEventListeners();
+        });
     }
-}
 
-    // Assistant task function
-    document.addEventListener('DOMContentLoaded', function () {
+    // Function to move the assistant container to the bubble
+    moveAssistantContainerToBubble() {
+        const assistantContainer = document.getElementById('assistantContainer');
+        const assistantBubble = document.getElementById('assistantBubble');
+        if (assistantContainer && assistantBubble && !assistantBubble.contains(assistantContainer)) { // Ensure the container is not already in the bubble
+            assistantBubble.appendChild(assistantContainer); // Move assistant container to bubble
+            assistantContainer.classList.add('in-modal'); // Add a class to style the assistant container in the bubble
+            assistantContainer.classList.remove('in-original'); // Remove the original class to prevent conflicts
+            this.createBubbleMessage(); // Create a bubble message below the assistant container
+        }
+    }
+
+    // Function to move the assistant container back to its original place
+    moveAssistantContainerBack() {
+        const assistantContainer = document.getElementById('assistantContainer');
+        const originalPlace = this.originalParent; // Get the original parent of the assistant container
+        if (assistantContainer && originalPlace && originalPlace !== assistantContainer.parentElement) { // Ensure the container is not already in the original place
+            originalPlace.appendChild(assistantContainer); // Move the assistant container back to its original place
+            assistantContainer.classList.add('in-original'); // Add class for original styles
+            assistantContainer.classList.remove('in-modal'); // Remove class for modal styles
+        }
+    }
+
+    // Function to create a bubble message below the assistant container
+    createBubbleMessage() {
+        const assistantBubble = document.getElementById('assistantBubble');
+        const existingMessage = assistantBubble.querySelector('.bubble-message');
+    
+        // Prevent duplicate messages
+        if (!existingMessage) {
+            const bubbleMessage = document.createElement('div'); // Create a new div element then add text content to it
+            bubbleMessage.className = 'bubble-message';
+            bubbleMessage.textContent = 'Here are your tasks. Follow the instructions to complete them.';
+            assistantBubble.appendChild(bubbleMessage); // Add the message to the bubble
+        }
+    }
+
+    // Attach Event Listeners to Task Cells
+    setupTaskEventListeners() {
         const taskCells = document.querySelectorAll('.task-cell');
-        
-        // Event listener for each task cell click
-        taskCells.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                toggleTaskDescription(index);   // Show description
-                markTaskCompleted(index);       // Mark task as completed
+        taskCells.forEach((cell, index) => { // Loop through each task cell and add an event listener click
+            cell.addEventListener('click', () => {
+                this.toggleTaskDescription(index);  
+                this.markTaskCompleted(index);      
             });
         });
-    
-        // Event listener for "Start Task" button clicks inside descriptions
+
         const startTaskButtons = document.querySelectorAll('.start-task-btn');
         startTaskButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
+            button.addEventListener('click', (e) => { // Add event listener click to each "Start Task" button
                 const action = button.getAttribute('data-task');
                 if (action) {
-                    performTaskAction(action);  // Perform the task action (open shop, inventory, etc.)
+                    this.performTaskAction(action); 
+                    this.moveAssistantContainerBack();
                 }
-                e.stopPropagation();  // Prevent toggling the description when button is clicked
+                e.stopPropagation();  
             });
         });
-    });
-    
+    }
+
     // Mark tasks as completed and gray them out
-    function markTaskCompleted(taskIndex) {
+    markTaskCompleted(taskIndex) {
         const taskCells = document.querySelectorAll('.task-cell');
         taskCells.forEach((cell, index) => {
             if (index <= taskIndex) {
-                cell.classList.add('completed-task');  // Add gray-out effect and completed style
+                cell.classList.add('completed-task');
                 const checkmark = cell.querySelector('.checkmark');
-                if (checkmark) {
-                    checkmark.style.display = 'block';  // Show the checkmark icon
-                }
+                if (checkmark) checkmark.style.display = 'block';
             } else {
                 cell.classList.remove('completed-task');
                 const checkmark = cell.querySelector('.checkmark');
-                if (checkmark) {
-                    checkmark.style.display = 'none';  // Hide the checkmark icon for incomplete tasks
-                }
+                if (checkmark) checkmark.style.display = 'none';
             }
         });
     }
-    
+
     // Toggle the visibility of task descriptions
-    function toggleTaskDescription(taskIndex) {
+    toggleTaskDescription(taskIndex) {
         const taskDescriptions = document.querySelectorAll('.task-description');
-    
-        // Loop through all descriptions and hide the others
         taskDescriptions.forEach((description, index) => {
-            if (index === taskIndex) {
-                description.style.display = 'block';  // Show the current task description
-            } else {
-                description.style.display = 'none';   // Hide other task descriptions
-            }
+            description.style.display = index === taskIndex ? 'block' : 'none';
         });
-    
-        // Update the task status display
-        updateTaskStatus(taskIndex);
+
+        this.updateTaskStatus(taskIndex);
     }
-    
+
     // Update the task status in the task-status element
-    function updateTaskStatus(taskIndex) {
+    updateTaskStatus(taskIndex) {
         const taskTitles = document.querySelectorAll('.tasktitle');
         const taskStatus = document.querySelector('#task-status');
-    
-        // Update status based on the current task
         if (taskIndex >= 0 && taskIndex < taskTitles.length) {
             const currentTaskTitle = taskTitles[taskIndex].textContent;
             taskStatus.textContent = `Current Task: ${taskIndex + 1} - ${currentTaskTitle}`;
@@ -155,48 +186,57 @@ class Assistant {
     }
     
     // Perform the corresponding task action (open modal or do something)
-    function performTaskAction(action) {
-        switch(action) {
-            case 'openShop':
-                openShopModal();
-                break;
-            case 'openInventory':
-                openInventoryModal();
-                break;
-            case 'connectWires':
-                openWiresModal();
-                break;
-            case 'powerOnPC':
-                powerOnPC();
-                break;
-            default:
-                console.log("Unknown task action");
+    performTaskAction(action) {
+        this.closeAssistantTab();
+        switch (action) {
+            case 'openShop': this.openShopModal(); break;
+            case 'openInventory': this.openInventoryModal(); break;
+            case 'connectWires': this.openWiresModal(); break;
+            case 'powerOnPC': this.powerOnPC(); break;
+            default: console.log("Unknown task action");
         }
     }
-    
-    // Modal opening functions
-    function openShopModal() {
+
+    closeAssistantTab() {
+        const assistantTab = document.querySelector('.assistant-modal');
+        if (assistantTab) assistantTab.close();
+    }
+
+    openShopModal() {
         const shopModal = document.querySelector('#shopModal');
         if (shopModal) shopModal.showModal();
     }
-    
-    function openInventoryModal() {
+
+    openInventoryModal() {
         const invModal = document.querySelector('#invModal');
         if (invModal) invModal.showModal();
     }
-    
-    function openWiresModal() {
-        const wiresModal = document.querySelector('#wiresModal');
-        if (wiresModal) wiresModal.style.display = 'block';  // or use .showModal() if it's a dialog
-    }
-    
-    function powerOnPC() {
-        const bootUpTab = document.querySelector('#bootUpTab');
-        if (bootUpTab) bootUpTab.style.display = 'block';  
-    }
-    
-    // Ensure no task is initially marked as completed
-    markTaskCompleted(-1);  // Reset task completion at the start
 
-    
+    openWiresModal() {
+        const wiresModal = document.querySelector('#wiresModal');
+        if (wiresModal) wiresModal.style.display = 'block';
+    }
+
+    powerOnPC() {
+        const bootUpTab = document.querySelector('#bootUpTab');
+        if (bootUpTab) bootUpTab.style.display = 'block';
+    }
+
+    // Toggle between the task and error views
+    toggleErrorView() {
+        if (this.taskContainer && this.errorContainer) {
+            this.errorContainer.style.display = "none";
+            document.getElementById("switch").addEventListener("change", () => {
+                if (document.getElementById("switch").checked) {
+                    this.taskContainer.style.display = "none";
+                    this.errorContainer.style.display = "flex";
+                } else {
+                    this.taskContainer.style.display = "flex";
+                    this.errorContainer.style.display = "none";
+                }
+            });
+        }
+    }
+}
+
 export default Assistant;
