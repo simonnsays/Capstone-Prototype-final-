@@ -372,7 +372,6 @@
         <div class="assistant-info-container hidden" style="cursor: pointer;"> 
             <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
             <p class="taskTip" style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
-            <p class="errorTip hidden" style="font-weight: normal;">Oops! Looks like you got an error from your end. Let me assist you. Please click me to view errors.</p>
             <p style="font-weight: normal; cursor: pointer;">...</p>    
             <!-- <p id="phrase2">LISTEN HERE YOU LITTLE BITCH</p>  -->
         </div>
@@ -486,7 +485,7 @@
                 <p><img src="assets/Assistant/wires4.png" class="timg" alt="wre4" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <p><img src="assets/Assistant/wires4.1.png" class="timg" alt="wre5" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <p style="padding: 5px;">Also please note that the wire will be colored green when they are connected on both components however it will be colored red if it is only connected on one end.</p>
-                <p><img src="assets/Assistant/wires4.2.png"  alt="wre6" style="height: 200px; width: 580px;padding: 10px; left: 30px;"></p>
+                <p><img src="assets/Assistant/wires4.2.png"  alt="wre6" style="height: 200px; width: 380px;padding: 10px; left: 30px;"></p>
                 <p><img src="assets/Assistant/wires5.png" class="timg" alt="wre67" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <p><img src="assets/Assistant/wires6.png" class="timg" alt="wre8" style="height: 300px; width: 400px;padding: 10px;"></p>
                 <button class="start-task-btn" data-task="connectWires">Start Task</button>
@@ -518,11 +517,13 @@
                 <p>Also notice that when the reports on the left side has different colors it means that:</p>
                 <ul>Green - All components are connected and working properly</ul>
                 <ul>Red - There are components that are not connected or not working properly</ul>
+                <ul>Red with ! - The components are critical meaning it does not work and could affect the other components as well</ul>
                 <ul>Yellow - All components are connected and working but needs optimization</ul>
                 <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
-                <p><img src="assets/Assistant/power1.png" class="timg" alt="power1" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/power2.png" class="timg" alt="power2" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/power3.png" class="timg" alt="power3" style="height: 300px; width: 400px;padding: 10px;"></p>
+                <p><img src="/simulator/assets/Assistant/power.png" class="timg" alt="green" style="height: 100px; width: 300px;padding: 10px;"></p>
+                <p><img src="/simulator/assets/Assistant/power1.png" class="timg" alt="green" style="height: 100px; width: 300px;padding: 10px;"></p>
+                <p><img src="/simulator/assets/Assistant/power2.png" class="timg" alt="red" style="height: 100px; width: 300px;padding: 10px;"></p>
+                <p><img src="/simulator/assets/Assistant/power3.png" class="timg" alt="yellow" style="height: 100px; width: 300px;padding: 10px;"></p>
                 <button class="start-task-btn" data-task="powerOnPC">Start Task</button>
                 </div>
                 </div>
@@ -533,12 +534,16 @@
              <!-- errors -->
             <div class="error-container">
                 <h1 class="header" >ERRORS</h1>
-                <div class="hr-line"></div>
-            
-            <!-- test error 1 -->
-            <div class="error-cell" data-error-action="error1">
-                <div class="error-icon">
-                    <img src="./assets/boot/error_screen/warning.png" alt="error icon">
+                
+                <!-- test error 1 -->
+                <div class="error-cell" data-error-action="error1">
+                    <div class="error-icon">
+                        <img src="./assets/boot/error_screen/warning.png" alt="error icon">
+                        <p>No issues Found.</p>
+                        <div class="error-details">
+                            <!-- Error details will be populated here -->
+                        </div>
+                </div>
             </div>
 
     </dialog>

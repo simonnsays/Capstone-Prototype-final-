@@ -150,19 +150,17 @@ class BootUpTab {
     // function to create an error overview div
     openErrorView(errorCode) {
          // Get error details from errorCodes
-         const errorData = errorCodes[errorCode] || {
-            //sample error data
-            code: 'ERR-01',
-            name: 'No Boot Device Found',
-            severity: 'Error',
-            description: 'The system did not detect a boot device.',
-            troubleshooting: 'Check if the boot device is properly connected and configured in BIOS.'
-        };
-
+        const errorData = errorCodes[errorCode];
+        if (!errorData) {
+            console.error(`Error code ${errorCode} not found in errorCodes.`);
+            return;
+        }
         // Create container div
         const errorDiv = document.createElement('div');
         errorDiv.className = 'error-overview';
         errorDiv.id = 'error-overview';
+        const assistantInfo = document.querySelector(".assistant-info-container");
+        const assistantContainer = document.getElementById("assistantContainer");      
         errorDiv.innerHTML = `
             <div class="error-header">
                 <h2>${errorData.name}</h2>
@@ -176,14 +174,32 @@ class BootUpTab {
                 <p class="error-description">${errorData.description}</p>
                 <div class="troubleshooting">
                     <h3>Recommended Solutions:</h3>
-                    <p>${errorData.troubleshooting}</p>
+                    <p>Open up Assistant Tab to see troubleshooting guide</p>
                 </div>
             </div>
+        `;  
+
+        // Update the assistant message based on error
+        assistantInfo.classList.remove ('hidden');
+        assistantInfo.innerHTML = `
+            <p><strong> Oops it looks like you're facing an issue in your bootup</strong>.</p>
+            <p style="font-weight: normal;">Please click me to open the errors view & let me assist you regarding the issue of "${errorData.name}"</p>
+            <p style="font-weight: normal; cursor: pointer;">...</p>    
         `;
+
+        // Make sure the assistant container is visible
+        assistantContainer.classList.add ('extended');
+        assistantContainer.classList.remove('hidden');
 
         // Add close button event listener
         const closeBtn = errorDiv.querySelector('.close-btn');
         closeBtn.addEventListener('click', () => {
+            assistantContainer.classList.remove('extended');
+            assistantInfo.classList.add ('hidden');
+            assistantInfo.innerHTML = ` <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
+            <p class="taskTip" style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
+            <p class="errorTip hidden" style="font-weight: normal;">Oops! Looks like you got an error from your end. Let me assist you. Please click me to view errors.</p>
+            <p style="font-weight: normal; cursor: pointer;">...</p>    `;
             document.body.removeChild(overlay);
             errorDiv.remove();
         });
@@ -195,13 +211,27 @@ class BootUpTab {
         overlay.addEventListener('click', () => {
             document.body.removeChild(overlay);
             errorDiv.remove();
+            assistantContainer.classList.remove('extended'); 
+            assistantInfo.classList.add ('hidden');
+            assistantInfo.innerHTML = ` <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
+            <p class="taskTip" style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
+            <p class="errorTip hidden" style="font-weight: normal;">Oops! Looks like you got an error from your end. Let me assist you. Please click me to view errors.</p>
+            <p style="font-weight: normal; cursor: pointer;">...</p>    `;
         });
 
         // Add to DOM
         document.body.appendChild(overlay);
         document.body.appendChild(errorDiv);
+
+        // Add event listener to close error overview when assistant tab is opened
+        assistantContainer.addEventListener('click', () => {
+            errorDiv.remove();
+            overlay.remove();
+        });
+        
+
     } 
-    
+
     // Helper methods
     getSeverityIcon(severity) {
         const icons = {
@@ -241,6 +271,7 @@ class BootUpTab {
                cell.appendChild(exlaimElement)
                break
        }
+
        cell.addEventListener('click', () => this.openErrorView(report.code)); // Add event listener to report cells opening error view
        console.log(cell)
 

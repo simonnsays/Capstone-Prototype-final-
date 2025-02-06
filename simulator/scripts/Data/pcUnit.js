@@ -1,9 +1,10 @@
 import errorCodes from "../Data/errorCodes.js"
 
 class PCUnit {
-    constructor(bootUpElements,) {
+    constructor(bootUpElements,assistant) {
         // utilityTool, displayArea, Canvas, portsTab, drawer, assistant
         this.bootUpElements = bootUpElements
+        this.assistant = assistant
 
         this.power = 'off'
         this.availableUnit = null
@@ -15,8 +16,8 @@ class PCUnit {
         // - if components are compatible (compatibility)
         // - if components are working fine (defect)
 
-       // this.requiredComponents = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling']
-       // this.requiredCables = ['24-pin-power', '8-pin-power', 'sata-power', 'frontPanel']
+        this.reports = []
+        this.currentErrorCode = null
 
         this.componentsStatus = {
             motherboard: {},
@@ -38,10 +39,6 @@ class PCUnit {
             asrock:{},
             biostar:{},
         }
-        
-        this.errorCodes = [
-            { code: 'CRT001', description: 'PSU not powered' },
-        ]
 
         this.bootUpRequirements = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling', 'gpu']
 
@@ -77,12 +74,15 @@ class PCUnit {
         // reInitiate Components and their Status
         this.fillComponentStatus(unit)
 
-        // Power Supply Activation
+        // Check if all components are available and powered
         if(!this.componentsStatus.psu || !this.componentsStatus.psu.component) {
             // report missing component
-            this.createError('ERR-01')
-            return false
+            this.createError('ERR-07') // Takes errorCode and show it as report cell in bootuptab
+            this.populateErrors()
+            return false;
         }
+
+        // Power Supply Activation
         this.psuActivation()
 
         // Motherboard and CPU Power Up
@@ -101,6 +101,67 @@ class PCUnit {
         else return false
     }
 
+    // Add error-cells into assistant tab errors view
+    populateErrors() {
+        const errorCell = document.querySelector('.error-cell');
+        //const errorContainer =  document.querySelector('')
+        if (!errorCell) return;
+
+        // Get the current error code from pcUnit
+        const errorCode = this.currentErrorCode;
+        if (errorCode) {
+            const errorData = errorCodes[errorCode];
+            if (!errorData) {
+                console.error(`Error code ${errorCode} not found in errorCodes.`);
+                return;
+            }
+            errorCell.innerHTML = `  
+                <div class="error-icon">
+                    <img src="./assets/boot/error_screen/warning.png" alt="error icon">
+                </div>
+                <div class="error-details">
+                    <h2>${errorData.description} (${errorCode})</h2> 
+                    <p><strong>Severity:</strong> ${errorData.severity} ${this.getSeverityIcon(errorData.severity)}</p>
+                </div>
+            `;
+            console.log(errorCode);
+
+            // Add click event listener to the error cell
+            errorCell.addEventListener('click', () => this.expandErrorCell(errorCell, errorData));
+        }
+    } 
+
+    // Helper methods
+    getSeverityIcon(severity) {
+       const icons = {
+           Critical: '❗', // Hard Drive Failure, CPU Overheating, BIOS Corruption, Power Failure
+           Hazard: '⚠️', // High Temperatures, Power Surge, Fan Speed Abnormal
+           Error: '❌', // GPU Failure, No Boot Device Found, Memory Error, Missing Component
+       };
+       return icons[severity] || "❓";
+    }
+
+    expandErrorCell(errorCell, errorData) {
+        // Toggle the expanded class
+        errorCell.classList.toggle('expanded');
+
+        // Add in-depth troubleshooting guide
+        if (errorCell.classList.contains('expanded')) {
+            const troubleshootingGuide = document.createElement('div');
+            troubleshootingGuide.classList.add('troubleshooting-guide');
+            troubleshootingGuide.innerHTML = `
+                <h3>Troubleshooting Guide</h3>
+                <p>${errorData.troubleshooting}</p>
+            `;
+            errorCell.appendChild(troubleshootingGuide);
+        } else {
+            const troubleshootingGuide = errorCell.querySelector('.troubleshooting-guide');
+            if (troubleshootingGuide) {
+                troubleshootingGuide.remove();
+            }
+        }
+    }
+
     createReport(tag, description) {
             
     }
@@ -108,6 +169,7 @@ class PCUnit {
     powerOnMonitor(){ // takes everything from displaying the splashscreen to displayingos and shows it inside the div monitorScreen
         this.displaySplashScreen();
     }
+    
     powerOffMonitor(){
         const splashScreen = document.getElementById('monitorScreen');
         if (splashScreen){
@@ -175,7 +237,6 @@ class PCUnit {
     displayErrorScreen(){
         this.isErrorDisplayed = true; // Indicate that error screen is displayed
         const splashScreen = document.getElementById('monitorScreen');
-        const missingComponents = this.reports.map(report => report.tag); // Get the missing components from the reports
         splashScreen.innerHTML = ''; // Clear the div before displaying the error screen
         
         //const errorMessage = `Missing components: ${Array.isArray(missingComponents) ? missingComponents.join(', ') : 'Unknown'}`;        
@@ -185,13 +246,15 @@ class PCUnit {
     }
 
     createError(code) {
-        const codeDetails = errorCodes[code]
+        const codeDetails = errorCodes[code];
         const err = {
             type: 'error',
             tag: codeDetails.severity,
             def: codeDetails.description,
-        }
-        this.reports.push(err) 
+            code: code // Store the error code
+        };
+        this.reports.push(err);
+        this.currentErrorCode = code;
     }
 
     fillComponentStatus(component) {
@@ -437,35 +500,6 @@ class PCUnit {
     checkIfAvailableUnit(component) {
         return component && component.type === 'chassis' ? component : null
     }
-
-   // Collect all attached cables from PortsTab
-   getAttachedCables() {
- //       // Refresh attached cables from PortsTab's updated status
- //       const attachedCablesStatus = this.portsTab.getAttachedCablesStatus();
- //       this.attachedCables.clear();
- //       
- //       for (const cableType in attachedCablesStatus) {
- //           if (attachedCablesStatus[cableType].fullyConnected) {
- //               this.attachedCables.add(cableType);  // Only add fully connected cables
- //           }
- //       }
- //   
- //       console.log("Attached cables:", Array.from(this.attachedCables));
- //   }
-//
-//
- //   addAttachedComponent(component) {
- //       this.attachedComponents.add(component.type);
- //   }
-//
- //   getMissingComponents() {
- //       this.getAttachedCables();
-//
- //       const missingComponents = this.requiredComponents.filter((comp) => !this.attachedComponents.has(comp));
- //       const missingCables = this.requiredCables.filter((cable) => !this.attachedCables.has(cable));
-//
- //       return { missingComponents, missingCables };
-   }
 }
 
 export default PCUnit;
