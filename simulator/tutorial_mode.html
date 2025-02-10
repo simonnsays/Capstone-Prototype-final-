@@ -355,7 +355,7 @@
         </dialog>
         
         
-    <div id="task-status">Task to be done: Click me "The Assistant" </div>
+    <div id="task-status">First Step → Click 'The Assistant' to Proceed!</div>
     
 
  <!------------------------- ASSISTANT ----------------------------------->
@@ -385,19 +385,15 @@
          <div id="assistantBubble" class="assistantBubble"> 
     </div>
         
-        <!-- toggle -->
-        <div class="toggleWrapper">
-            <span class="switch-x-text">View Mode</span>
-            <input value="private" name="switch" id="switch" type="checkbox" class="switch">
-            <label for="switch">
-                <span class="switch-x-toggletext"> <!-- add text for errors view or tasks view --></span>
-            </label>
+        <!-- toggle view -->
+        <div id="toggle">
+            <div id="theader" class="theader">TASKS</div>
+            <div id="eheader" class="eheader" >ERRORS</div>
         </div>
-
+        
             <!-- tasks -->
             <div class="task-container">
-                <h1 class="header" style="margin-left: 50%;">TASKS</h1>
-                <div class="hr-line"></div>
+                
             
                 <!-- Open Shop Task -->
                 <div class="task-cell" data-task-action="openShop" >
@@ -533,7 +529,6 @@
 
              <!-- errors -->
             <div class="error-container">
-                <h1 class="header" >ERRORS</h1>
                 
                 <!-- test error 1 -->
                 <div class="error-cell" data-error-action="error1">

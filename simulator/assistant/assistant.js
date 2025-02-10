@@ -224,18 +224,31 @@ class Assistant {
 
     // Toggle between the task and error views
     toggleErrorView() {
-        if (this.taskContainer && this.errorContainer) {
-            this.errorContainer.style.display = "none";
-            document.getElementById("switch").addEventListener("change", () => {
-                if (document.getElementById("switch").checked) {
-                    this.taskContainer.style.display = "none";
-                    this.errorContainer.style.display = "flex";
-                } else {
-                    this.taskContainer.style.display = "flex";
-                    this.errorContainer.style.display = "none";
-                }
-            });
-        }
+        const taskContainer = document.querySelector(".task-container");
+        const errorContainer = document.querySelector(".error-container");
+        const taskHeader = document.querySelector(".theader");
+        const errorHeader = document.querySelector(".eheader");
+
+        // Default state: show tasks, hide errors
+        taskContainer.style.display = "flex";
+        errorContainer.style.display = "none";
+        taskHeader.classList.add("live");
+        errorHeader.classList.remove("live");
+
+        // Event listeners for toggling views
+        taskHeader.addEventListener("click", () => {
+            taskContainer.style.display = "flex";
+            errorContainer.style.display = "none";
+            taskHeader.classList.add("live");
+            errorHeader.classList.remove("live");
+        });
+
+        errorHeader.addEventListener("click", () => {
+            taskContainer.style.display = "none";
+            errorContainer.style.display = "flex";
+            errorHeader.classList.add("live");
+            taskHeader.classList.remove("live");
+        });
     }
 }
 
