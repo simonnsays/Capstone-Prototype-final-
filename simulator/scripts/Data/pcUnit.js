@@ -99,6 +99,7 @@ class PCUnit {
             // immediately return if an error is found
             if (result !== true) { 
                 this.createError(result)
+                this.populateErrors()
                 bootStatus = false
                 return false
             }
@@ -110,6 +111,9 @@ class PCUnit {
             def: 'System Booted Successfully',
         })
 
+        // Monitor display poweron
+        this.powerOnMonitor()
+        
         return true
         ///////////////////////////////////////////////// dan code ////////////////////////////////////////////////////////
         // Check if all components are available and powered
@@ -548,8 +552,10 @@ class PCUnit {
             type: 'error',
             tag: codeDetails.severity,
             def: codeDetails.description,
+            code: code
         }
-        this.reports.push(err) 
+        this.reports.push(err)
+        this.currentErrorCode = code 
     }
 
     checkIfAvailableUnit(component) {

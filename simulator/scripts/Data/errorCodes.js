@@ -1,18 +1,24 @@
 const errorCodes = {
     'HZD-00': {
+        code: 'ERR-100',
         severity: 'Hazard',
         description: 'low memory',
         // HAZARD DETAILS
     },
     'ERR-100': {
+        code: 'ERR-100',
         severity: 'Error',
+        name: 'Missing Component',
         description: 'Missing PSU Component',
+        troubleshooting: 'Check if all components are properly installed and connected.'
     },
     'ERR-200': {
+        code: 'ERR-100',
         severity: 'Error',
         description: 'Missing Motherboard Component',
     },
     'ERR-300': {
+        code: 'ERR-100',
         severity: 'Error',
         description: 'Missing CPU Component',
     },
@@ -20,6 +26,7 @@ const errorCodes = {
         // CRITICAL DETAILS
     },
     'ERR-404': {
+        code: 'ERR-100',
         severity: 'Error',
         description: 'UNDEFINED ERROR ',
     },
