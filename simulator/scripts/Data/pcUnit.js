@@ -380,26 +380,40 @@ class PCUnit {
             }      
         })
 
+        if (!this.componentsStatus.motherboard || !this.componentsStatus.motherboard.component) {
+            return 'ERR-200'; 
+        }
+
         // Find remaining unpowered components connected from the Motherboard
         if(this.componentsStatus.motherboard.isPowered) {
-            const moboPortsToGivePower = this.componentsStatus.motherboard.component.ports.filter(port => port.type === 'cooling' || port.type === 'frontPanel')
+            const moboPortsToGivePower = this.componentsStatus.motherboard.component.ports?.filter(port => port.type === 'cooling' || port.type === 'frontPanel'|| [])
 
             // Follow  the cables to find the remaining components to power
             const moboCablesToFollow = []
             moboPortsToGivePower.forEach(port => {
-                port.offsets.forEach(offset => {
-                    moboCablesToFollow.push(offset.cableAttached)
+                port.offsets?.forEach(offset => {
+                    if (offset?.cableAttached) {
+                        moboCablesToFollow.push(offset.cableAttached);
+                    }
                 })
             })
 
-            // ! ! ! ! ! !  unsure code
+            // Check motherboard cables for other components connected to motherboard if component is being powered
             moboCablesToFollow.forEach(cable => {
-                if(cable.type === 'frontPanel') {
-                    this.componentsStatus.chassis.isPowered = true
+                if (cable.type === 'frontPanel') {
+                    if (this.componentsStatus.chassis && this.componentsStatus.chassis.isPowered) {
+                        return true;
+                    } else {
+                        return 'ERR-201';
+                    }
                 }
-
-                if(cable.name === 'Heatsink') {
-                    this.componentsStatus.cpuCooling.isPowered = true
+            
+                if (cable.name === 'Heatsink') {
+                    if (this.componentsStatus.cpuCooling) {
+                        return true
+                    } else {
+                        return 'ERR-701'
+                    }
                 }
             })
         }
@@ -432,8 +446,8 @@ class PCUnit {
         const motherboard = this.componentsStatus.motherboard
 
         // Check if motherboard front panel is connected
-        const chassisCable = motherboard.component.ports.find(port => port.type === 'frontPanel').offsets[0].cableAttached
-        if(!chassisCable.ends.chassis.connected) {
+        const chassisCable = motherboard.component.ports.find(port => port.type === 'frontPanel')?.offsets[0]?.cableAttached // iterate through every port and theres no cable attached then return errorcode
+        if(!chassisCable?.ends?.chassis?.connected) {
             return 'ERR-201' // Missing Front Panel Connection
         } 
        
