@@ -1,30 +1,86 @@
 const errorCodes = {
+    // Hazard errors
     'HZD-00': {
         code: 'ERR-100',
         severity: 'Hazard',
         description: 'low memory',
         // HAZARD DETAILS
     },
+
+    // Missing component/cables errors
     'ERR-100': {
         code: 'ERR-100',
         severity: 'Error',
-        name: 'Missing Component',
-        description: 'Missing PSU Component',
+        description: 'Missing PSU component',
         troubleshooting: 'Check if all components are properly installed and connected.'
     },
     'ERR-200': {
-        code: 'ERR-100',
+        code: 'ERR-200',
         severity: 'Error',
-        description: 'Missing Motherboard Component',
+        description: 'Missing Motherboard component',
+    },
+    'ERR-201': {
+        code: 'ERR-201',
+        severity: 'Error',
+        description: 'Missing Front Panel connection',
+    },
+    'ERR-202': {
+        code: 'ERR-202',
+        severity: 'Error',
+        description: 'Motherboard not powered',
     },
     'ERR-300': {
-        code: 'ERR-100',
+        code: 'ERR-301',
         severity: 'Error',
-        description: 'Missing CPU Component',
+        description: 'Missing CPU component',
     },
+    'ERR-301': {
+        code: 'ERR-301',
+        severity: 'Error',
+        description: 'CPU not powered',
+    },
+    'ERR-400': {
+        code: 'ERR-400',
+        severity: 'Error',
+        description: 'Missing RAM component',
+    },
+    'ERR-500': {
+        code: 'ERR-500',
+        severity: 'Error',
+        description: 'Missing storage device',
+    },
+    'ERR-501': {
+        code: 'ERR-501',
+        severity: 'Error',
+        description: 'Storage device is not powered',
+    },
+    'ERR-600': {
+        code: 'ERR-600',
+        severity: 'Error',
+        description: 'Missing Graphics Card Unit',
+    },
+    'ERR-601': {
+        code: 'ERR-601',
+        severity: 'Error',
+        description: 'Graphics Card Unit is not powered',
+    },
+    'ERR-700': {
+        code: 'ERR-700',
+        severity: 'Error',
+        description: 'Missing CPU cooler',
+    },
+    'ERR-701': {
+        code: 'ERR-701',
+        severity: 'Error',
+        description: 'CPU cooler not powered',
+    },
+
+    // Critical errors
     'CRT-02': {
         // CRITICAL DETAILS
     },
+
+    // Error undefined
     'ERR-404': {
         code: 'ERR-100',
         severity: 'Error',

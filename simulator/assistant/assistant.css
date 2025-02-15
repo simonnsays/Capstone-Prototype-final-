@@ -240,6 +240,7 @@
 }
 
 .start-task-btn:hover {
+    transform: scale(1.1);
     background-color: #E10E42;
     box-shadow: 0 0 20px rgba(255, 56, 92, 0.5);
 }
