@@ -86,6 +86,8 @@ class PCUnit {
 
     attemptPowerOn(unit) {
         let bootStatus = true
+        let errorQueue = [] // now store errors inside an array to show inside reports area
+
         // Inittiate / Reinitiate Components and their Status
         this.fillComponentStatus(unit)
 
@@ -97,12 +99,19 @@ class PCUnit {
             let result = sequence()
     
             // immediately return if an error is found
-            if (result !== true) { 
-                this.createError(result)
+            if (result != true) { 
+                errorQueue.push(result)
+            }
+        }
+
+        // Makes the error have a queue making reports show more errors. Errors prioritise missing components then not powered next in priority.
+        if (errorQueue.length > 0) {
+            errorQueue.forEach(errorCode => { // Take all error codes and display each inside create error function as error cells which then populate errors will take and show inside assistant
+                this.createError(errorCode)
                 this.populateErrors()
                 bootStatus = false
-                return false
-            }
+            });
+            return false; 
         }
 
         // if all checks are successful
@@ -145,31 +154,58 @@ class PCUnit {
 
     // Add error-cells into assistant tab errors view
     populateErrors() {
-        const errorCell = document.querySelector('.error-cell');
+        const errorContainer = document.querySelector('.error-container')
         //const errorContainer =  document.querySelector('')
-        if (!errorCell) return;
+        // Remove first test error 1 before populating error-container with errors 
+        const defaultError = errorContainer.querySelector('.error-cell[data-error-action="error1"]')
+        if (defaultError) {
+            defaultError.remove()
+        }
+
+        // Add a error task completion whenever user clicks on another error cell
+        const previousError = errorContainer.querySelector('.error-cell:not(.etask-completed)')
+        if (previousError) {
+            previousError.classList.add('etask-completed'); // Mark previous error as completed
+        }
 
         // Get the current error code from pcUnit
-        const errorCode = this.currentErrorCode;
+        const errorCode = this.currentErrorCode
         if (errorCode) {
-            const errorData = errorCodes[errorCode];
-            if (!errorData) {
-                console.error(`Error code ${errorCode} not found in errorCodes.`);
-                return;
-            }
-            errorCell.innerHTML = `  
+        const errorData = errorCodes[errorCode]
+        
+        // Prevent duplicate errorcode showing inside error-container
+        let existingErrorCell = errorContainer.querySelector(`.error-cell[data-error-action="${errorCode}"]`)
+        if (existingErrorCell) {
+            return 
+        }
+
+            const errorCell = document.createElement('div')
+            errorCell.classList.add('error-cell')
+            errorCell.setAttribute('data-error-action', errorCode)
+            errorCell.innerHTML = ` 
                 <div class="error-icon">
                     <img src="./assets/boot/error_screen/warning.png" alt="error icon">
-                </div>
-                <div class="error-details">
-                    <h2>${errorData.description} (${errorCode})</h2> 
-                    <p><strong>Severity:</strong> ${errorData.severity} ${this.getSeverityIcon(errorData.severity)}</p>
+                    <div class="error-details">
+                        <h2>${errorData.description} (${errorCode})</h2> 
+                        <p><strong>Severity:</strong> ${errorData.severity} ${this.getSeverityIcon(errorData.severity)}</p>
+                    </div>
                 </div>
             `;
-            console.log(errorCode);
 
             // Add click event listener to the error cell
-            errorCell.addEventListener('click', () => this.expandErrorCell(errorCell, errorData));
+            errorCell.addEventListener('click', () => {
+
+            // Mark previous error cells as completed
+            document.querySelectorAll('.error-cell:not(.etask-complete)').forEach(cell => {
+                cell.classList.add('etask-complete')
+            })
+                
+                // Expand the clicked error to show troubleshooting
+                this.expandErrorCell(errorCell, errorData)
+            })
+            
+            // Append the new errorCell to the assistant container
+            errorContainer.appendChild(errorCell)
         }
     } 
 
@@ -180,7 +216,7 @@ class PCUnit {
            Hazard: '⚠️', // High Temperatures, Power Surge, Fan Speed Abnormal
            Error: '❌', // GPU Failure, No Boot Device Found, Memory Error, Missing Component
        };
-       return icons[severity] || "❓";
+       return icons[severity] || "❓"
     }
 
     expandErrorCell(errorCell, errorData) {
@@ -189,17 +225,24 @@ class PCUnit {
 
         // Add in-depth troubleshooting guide
         if (errorCell.classList.contains('expanded')) {
-            const troubleshootingGuide = document.createElement('div');
-            troubleshootingGuide.classList.add('troubleshooting-guide');
+            const troubleshootingGuide = document.createElement('div')
+            troubleshootingGuide.classList.add('troubleshooting-guide')
+            
+            // Generate list items dynamically
+            const troubleshootingList = errorData.troubleshooting
+            .map(step => `<li>${step}</li>`) // takes each troubleshooting step in <li> element
+            .join("") // Join array into a single HTML string
+
             troubleshootingGuide.innerHTML = `
                 <h3>Troubleshooting Guide</h3>
-                <p>${errorData.troubleshooting}</p>
+                <ul>${troubleshootingList}</ul>
             `;
-            errorCell.appendChild(troubleshootingGuide);
+
+            errorCell.appendChild(troubleshootingGuide)
         } else {
             const troubleshootingGuide = errorCell.querySelector('.troubleshooting-guide');
             if (troubleshootingGuide) {
-                troubleshootingGuide.remove();
+                troubleshootingGuide.remove()
             }
         }
     }
@@ -385,37 +428,19 @@ class PCUnit {
         }
 
         // Find remaining unpowered components connected from the Motherboard
-        if(this.componentsStatus.motherboard.isPowered) {
-            const moboPortsToGivePower = this.componentsStatus.motherboard.component.ports?.filter(port => port.type === 'cooling' || port.type === 'frontPanel'|| [])
+        if (this.componentsStatus.motherboard?.isPowered) {
+            const moboPortsToGivePower = this.componentsStatus.motherboard.component.ports?.filter(port => port.type === 'cooling' || port.type === 'frontPanel') || []; // filter ports for cooling and frontpanel
 
-            // Follow  the cables to find the remaining components to power
-            const moboCablesToFollow = []
+            // Check if cpu heatsink gets power from motherboard
             moboPortsToGivePower.forEach(port => {
-                port.offsets?.forEach(offset => {
-                    if (offset?.cableAttached) {
-                        moboCablesToFollow.push(offset.cableAttached);
+                port.offsets?.forEach(offset => { // Iterate ports 
+                    if (offset?.cableAttached?.name === 'Heatsink') { // Iterate ports with cableattached for Heatsink
+                        if (this.componentsStatus.cpuCooling) { // If the componenstatus is powered then return true else proceed with testing
+                            this.componentsStatus.cpuCooling.isPowered = true;
+                        }
                     }
-                })
-            })
-
-            // Check motherboard cables for other components connected to motherboard if component is being powered
-            moboCablesToFollow.forEach(cable => {
-                if (cable.type === 'frontPanel') {
-                    if (this.componentsStatus.chassis && this.componentsStatus.chassis.isPowered) {
-                        return true;
-                    } else {
-                        return 'ERR-201';
-                    }
-                }
-            
-                if (cable.name === 'Heatsink') {
-                    if (this.componentsStatus.cpuCooling) {
-                        return true
-                    } else {
-                        return 'ERR-701'
-                    }
-                }
-            })
+                });
+            });
         }
 
         return true
@@ -547,30 +572,6 @@ class PCUnit {
     }
 
     /*************************************************************************************************************************/
-
-    createReport(tag, description) {
-            
-    }
-
-    createError(code) {
-        const codeDetails = errorCodes[code]
-        if(!codeDetails) {
-            this.reports.push({
-                type: 'error',
-                tag: 'Error',
-                def: `UNDEFINED ERROR: <br> <u> ${code} </u>`,
-            })
-            return
-        }
-        const err = {
-            type: 'error',
-            tag: codeDetails.severity,
-            def: codeDetails.description,
-            code: code
-        }
-        this.reports.push(err)
-        this.currentErrorCode = code 
-    }
 
     checkIfAvailableUnit(component) {
         return component && component.type === 'chassis' ? component : null

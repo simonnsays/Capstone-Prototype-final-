@@ -274,6 +274,7 @@ transition: opacity 0.3s ease;
     background-color: #e0ffe0;
     color: #333;
     transition: background-color 0.3s ease;
+    
 }
 .completed-task .tasktitle {
     text-decoration: line-through;
@@ -331,6 +332,11 @@ color: #333;
     position: relative;
     border: 2px solid black;
     border-radius: 30px;
+    gap: 5%;
+}
+
+.etask-complete{
+    text-decoration: line-through;
 }
 
 .error-container:hover{
