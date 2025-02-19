@@ -60,7 +60,7 @@ class Main {
             this.itemInfo)
 
         //Assistant
-        this.assistant = new Assistant(this.elementHandler)
+        this.assistant = new Assistant(this.elementHandler, this.utilityTool)
 
         // Prevent Canvas Interaction when tabs are open
         window.addEventListener('mousedown', () => this.handleMouseDown())
@@ -101,7 +101,7 @@ class Main {
         this.shop.init() 
         this.displayArea.init()
         this.canvas.animate()   
-        this.assistant.asstInit() 
+        this.assistant.init() 
 
         // this.bootUpTab.powerBtn.addEventListener('mouseup', () => this.bootUpTab.powerBtnClick(this.bootUpTab.pcUnit.availableUnit));
 

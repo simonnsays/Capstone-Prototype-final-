@@ -86,12 +86,18 @@ class ElementHandler {
 
     getAssistantElements() {
         return {
-            container: document.querySelector('.assistant-container') ,
-            imageContainer: document.querySelector('.assistant-image-container') , 
-            pulse: document.querySelector('#pulse') ,
             image: document.querySelector('.assistant-image') ,
-            infoContainer: document.querySelector('.assistant-info-container') ,
-            modal: document.querySelector('.assistant-modal') ,
+            // mini assistant elements
+            assistantMini: document.querySelector('#assistantMini') ,
+            iconSec: document.querySelector('.icon-section') , 
+            pulse: document.querySelector('.pulse') ,
+            infoSec: document.querySelector('.info-section') ,
+            // full assistant elements
+            assistantFull: document.querySelector('#assistantFull') ,
+            modalIconArea: document.querySelector('.icon-area'),
+            modalBody: document.querySelector('.asst-body'),
+            tasksBtn: document.querySelector('#tasksButton'),
+            errorsBtn: document.querySelector('#errorsButton'),
         } 
     } 
     
