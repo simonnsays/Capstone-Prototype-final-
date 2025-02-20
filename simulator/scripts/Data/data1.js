@@ -6,6 +6,12 @@ const components = [
         name: 'NZXT H5 Flow',
         type: 'chassis',
         size: 'mid-tower',
+        specs:{
+            color: 'White',
+            size: 'Mid-Tower',
+            motherboard: 'ATX, microATX, miniATX',
+            dimensions:'430 mm (D) x 225 mm (W) x 465 mm (H)',      
+        },
         dimensions: {
             depth: 446,
             width: 227,
@@ -102,9 +108,14 @@ const components = [
         ]
     },
     {        // Corsair AF Render
-        name: 'Corsair AF Render',
+        name: 'Corsair 3000D AF',
         type: 'chassis',
         size: 'mid-tower',
+        specs:{
+            color: 'Black',
+            size: 'Mid-Tower',
+            dimensions:'462 mm (D) x 230 mm (W) x 466 mm (H)',          
+        },
         dimensions: {
             depth: 466,
             width: 230,
@@ -210,6 +221,11 @@ const components = [
         name: 'Fractal Designs Pop Air',
         type: 'chassis',
         size: 'mid-tower',
+        specs:{
+            color: 'Black and Orange',
+            size: 'Mid-Tower',
+            dimensions: '473.5 mm (D) x 215 mm (W) x 454 mm(H)', 
+        },
         dimensions: {
             depth: 436,
             width: 215,
@@ -218,6 +234,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'left',
+        
         images: [
             {side: 'left', imageSrc: './assets/chassis/Fractal Design/pop_air_left.png'}, 
             {side: 'front', imageSrc: './assets/chassis/Fractal Design/pop_air_front.png'}, 
@@ -342,6 +359,11 @@ const components = [
         name: 'Lian Li LanCool',
         type: 'chassis',
         size: 'mid-tower',
+        specs:{
+            color: 'Black',
+            size: 'Mid-Tower',
+            dimensions: '462 mm (D) x 215 mm (W) x 482 mm (H)',
+        },
         dimensions: {
             depth: 462,
             width: 215,
@@ -461,6 +483,11 @@ const components = [
         name: 'Phanteks Enthoo Pro M',
         type: 'chassis',
         size: 'mid-tower',
+        specs:{
+            color: 'Black',
+            size: 'Mid-Tower',
+            dimensions: '500 mm (D) x 235 mm(W) x 480 mm(H)', 
+        },
         dimensions: {
             depth: 462,
             width: 235,
@@ -610,6 +637,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
+        tableDisplay: 'left',
         images: [
             {side: 'pack', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/AM4/B550 AORUS ELITE V2-02.png'}, 
@@ -741,6 +769,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/AM4/X570 PG Velocita(L1).png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASRock/AM4/X570 PG Velocita(L2).png'}, 
@@ -872,6 +901,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/AM4/X570 Taichi(M1).png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASRock/AM4/X570 Taichi(M2).png'},             
@@ -1002,6 +1032,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/AM4/ROG STRIX B550-F GAMING WIFI.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/AM4/ROG STRIX B550-F GAMING WIFI II.png'}, 
@@ -1132,6 +1163,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/AM4/ROG STRIX B550-XE GAMING WIFI Pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/AM4/ROG STRIX B550-XE GAMING WIFI.png'}, 
@@ -1262,6 +1294,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/AM4/B550GTA PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/AM4/B550GTA.png'}, 
@@ -1392,6 +1425,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/AM4/X570GTA PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/AM4/X570GTA.png'}, 
@@ -1522,6 +1556,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/EVGA/AM4/EVGA X570 FTW PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/EVGA/AM4/EVGA X570 FTW.png'},
@@ -1652,6 +1687,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/AM4/B550 GAMING X V2/B550 GAMING X V2-04.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/AM4/B550 GAMING X V2/B550 GAMING X V2-02.png'}, 
@@ -1782,6 +1818,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/AM4/B550 VISION D/B550 VISION D PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/AM4/B550 VISION D/B550 VISION D.png'},
@@ -1914,6 +1951,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Aorus/AM5/B650E AORUS ELITE X AX ICE-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/AM5/B650E AORUS ELITE X AX ICE-02.png'}, 
@@ -2044,6 +2082,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/AM5/B650 LiveMixer(M1).png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASRock/AM5/b650 Livemixer.png'},
@@ -2174,6 +2213,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/AM5/X670E PG Lightning(L1).png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASRock/AM5/X670E PG Lightning(L3).png'}, 
@@ -2304,6 +2344,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/AM5/ROG STRIX B650E-E GAMING WIFI pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/AM5/ROG STRIX B650E-E GAMING WIFI.png'}, 
@@ -2434,6 +2475,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/AM5/X670E VALKYRIE pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/AM5/X670E VALKYRIE.png'}, 
@@ -2564,6 +2606,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/AM5/X870E VALKYRIE pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/AM5/X870E VALKYRIE.png'}, 
@@ -2694,6 +2737,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/AM5/B650 GAMING X/B650 GAMING X-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/AM5/B650 GAMING X/B650 GAMING X-02.png'}, 
@@ -2824,6 +2868,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/AM5/B650 UD AX/B650 UD AX-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/AM5/B650 UD AX/B650 UD AX-02.png'}, 
@@ -2954,6 +2999,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/MSI/AM5/MPG B650 CARBON WIFI PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/MSI/AM5/MPG B650 CARBON WIFI.png'}, 
@@ -3084,6 +3130,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/MSI/AM5/MPG X670E CARBON WIFI PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/MSI/AM5/MPG X670E CARBON WIFI.png'}, 
@@ -3216,6 +3263,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Aorus/LGA 1200/Z590 AORUS MASTER (rev. 1.0)/1.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/LGA 1200/Z590 AORUS MASTER (rev. 1.0)/2.png'}, 
@@ -3346,6 +3394,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Aorus/LGA 1200/Z590 AORUS XTREME (rev. 1.0)/1.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/LGA 1200/Z590 AORUS XTREME (rev. 1.0)/2.png'},
@@ -3477,6 +3526,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/LGA 1200/W480 Creator(M1).png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASRock/LGA 1200/W480 Creator(M2).png'}, 
@@ -3607,6 +3657,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/LGA 1200/Z590 PG Velocita(L3).png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASRock/LGA 1200/Z590 PG Velocita(L5).png'},
@@ -3737,6 +3788,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/LGA1200/ROG STRIX B560-E GAMING WIFI PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/LGA1200/ROG STRIX B560-E GAMING WIFI.png'}, 
@@ -3868,6 +3920,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/LGA1200/ROG STRIX Z490-A GAMING PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/LGA1200/ROG STRIX Z490-A GAMING.png'}, 
@@ -3998,6 +4051,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/LGA 1200/Z590 VALKYRIE PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/LGA 1200/Z590 VALKYRIE.png'}, 
@@ -4128,6 +4182,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/LGA 1200/Z590GTA PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/LGA 1200/Z590GTA.png'}, 
@@ -4256,6 +4311,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/LGA 1200/Z590 GAMING X/Z590 GAMING X PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/LGA 1200/Z590 GAMING X/Z590 GAMING X.png'}, 
@@ -4386,6 +4442,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/LGA 1200/Z590 VISION D/6.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/LGA 1200/Z590 VISION D/2.png'}, 
@@ -4516,6 +4573,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/MSI/LGA 1200/MAG Z590 TORPEDO PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/MSI/LGA 1200/MAG Z590 TORPEDO.png'}, 
@@ -4646,6 +4704,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/MSI/LGA 1200/Z590 PRO WIFI (CEC) PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/MSI/LGA 1200/Z590 PRO WIFI (CEC).png'}, 
@@ -4778,6 +4837,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/MSI/LGA 1700/MPG Z790 CARBON MAX WIFI II PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/MSI/LGA 1700/MPG Z790 CARBON MAX WIFI II.png'}, 
@@ -4908,6 +4968,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/MSI/LGA 1700/MPG Z790 EDGE WIFI PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/MSI/LGA 1700/MPG Z790 EDGE WIFI.png'}, 
@@ -5040,6 +5101,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Aorus/LGA 1700/B760 AORUS MASTER DDR4-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/LGA 1700/B760 AORUS MASTER DDR4-02.png'}, 
@@ -5171,6 +5233,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Aorus/LGA 1700/Z790 AORUS PRO X-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Aorus/LGA 1700/Z790 AORUS PRO X-02.png'}, 
@@ -5301,6 +5364,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/LGA 1700/Z790 LiveMixer(M1).png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASRock/LGA 1700/z790 Livemixer.png'},
@@ -5432,6 +5496,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASRock/LGA 1700/Z790 PG Riptide(L1).png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASRock/LGA 1700/Z790 PG Riptide(L3).png'}, 
@@ -5562,6 +5627,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/LGA1700/ROG STRIX Z790-A GAMING WIFI II pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/LGA1700/ROG STRIX Z790-A GAMING WIFI II.png'}, 
@@ -5692,6 +5758,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/ASUS ROG/LGA1700/ROG MAXIMUS Z790 DARK HERO PACK.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/ASUS ROG/LGA1700/ROG MAXIMUS Z790 DARK HERO.png'}, 
@@ -5822,6 +5889,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/LGA 1700/Z690A VALKYRIE pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/LGA 1700/Z690A VALKYRIE.png'}, 
@@ -5952,6 +6020,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Biostar/LGA 1700/Z790 VALKYRIE pack.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Biostar/LGA 1700/Z790 VALKYRIE.png'}, 
@@ -6082,6 +6151,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/LGA 1700/B760 DS3H AX V2/B760 DS3H AX V2-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/LGA 1700/B760 DS3H AX V2/B760 DS3H AX V2-02.png'}, 
@@ -6212,6 +6282,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/motherboard/Gigabyte/LGA 1700/Z790 GAMING PLUS AX/Z790 GAMING PLUS AX-01.png'}, 
             {side: 'left', imageSrc: './assets/motherboard/Gigabyte/LGA 1700/Z790 GAMING PLUS AX/Z790 GAMING PLUS AX-02.png'}, 
@@ -6344,6 +6415,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1700/i9 14900K.png'},  
@@ -6365,6 +6437,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1200.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1200/i9 11900K.png'},  
@@ -6386,6 +6459,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1700/i7-14700K.png'},  
@@ -6407,6 +6481,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1200.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1200/i7 11700K.png'},  
@@ -6428,6 +6503,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1700/i5 14400.png'},  
@@ -6449,6 +6525,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1200/i5 11600k.png'},  
@@ -6470,6 +6547,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1700/i3 14100.png'},  
@@ -6491,6 +6569,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1200.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1200/i3 11305f.png'},  
@@ -6514,6 +6593,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am5.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am5/Ryzen 9 7900X3D.png'},  
@@ -6534,6 +6614,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am4/Ryzen 9 5900X.png'},  
@@ -6554,6 +6635,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am5.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am5/7 7800X3D.png'},  
@@ -6574,6 +6656,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am4/Ryzen 7 5700G.png'},  
@@ -6594,6 +6677,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am5.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am5/Ryzen 5 7600X.png'},  
@@ -6614,6 +6698,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am4/Ryzen 5 5600GT.png'},  
@@ -6634,6 +6719,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am5.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am5/Ryzen 3 8300G.png'},  
@@ -6654,6 +6740,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am4/Ryzen 3 5300G.png'},  
@@ -6680,6 +6767,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA/EVGA SuperNOVA 1300 P+ - pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/EVGA/EVGA SuperNOVA/EVGA SuperNOVA 1300 P+ - left.png'}, 
@@ -6713,10 +6801,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
     {        // Silverstone EX1200r-pl
@@ -6736,6 +6820,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Silverstone technology co. Ltd/EX1200r-pl/ex1200r-pm-21.png'}, 
             {side: 'left', imageSrc: './assets/psu/Silverstone technology co. Ltd/EX1200r-pl/ex1200r-pl-9.png'}, 
@@ -6762,9 +6847,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
     {        // Corsair AX1600i Digital
@@ -6784,6 +6866,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Corsair/Corsair ax1600i digital atx fully modular/Corsair ax1600i digital atx fully modular pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/Corsair/Corsair ax1600i digital atx fully modular/Corsair ax1600i digital atx fully modular.png'}, 
@@ -6811,10 +6894,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
     {        // Cooler Master X Silent 1300w MAX Platinum
@@ -6834,6 +6913,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/cm x silent max 1300/pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/Cooler master technology inc/cm x silent max 1300/left.png'}, 
@@ -6862,10 +6942,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
             {type: '12vhpwr'},
         ]
     },
@@ -6886,6 +6962,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/cm v p 1600/pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/Cooler master technology inc/cm v p 1600/left.png'}, 
@@ -6914,10 +6991,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
             {type: '12vhpwr'}
         ]
     },
@@ -6938,6 +7011,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Thermaltake/thermaltake toughpower gf3 1000w/toughpower gf3 pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/Thermaltake/thermaltake toughpower gf3 1000w/toughpower gf3 left.png'}, 
@@ -6947,6 +7021,7 @@ const components = [
         ],
         slots: [],
         ports: [
+            {type: '24-pin-power'},
             {type: '8-pin-power'},
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
@@ -6985,6 +7060,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Corsair/Corsair CX750/Corsair CX750 pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/Corsair/Corsair CX750/Corsair CX750.png'}, 
@@ -6994,9 +7070,11 @@ const components = [
         ],
         slots: [],
         ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
-            {type: '6-pin-pcie'},
             {type: '6-pin-pcie'},
             {type: 'sata-power'},
             {type: 'sata-power'},
@@ -7004,14 +7082,14 @@ const components = [
         ],
         cables: [
             {type: '24-pin-power'},
-            {type: '8-pin-power' },
+            {type: '8-pin-power'},
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
         ]
     },
-        
+
     {        // EVGA 850 Bq, 80+ Bronze 850W, Semi Modular
         name: 'EVGA 850 Bq 80+ Bronze',
         type: 'psu',
@@ -7029,6 +7107,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA 850 Bq, 80+ Bronze 850W, Semi Modular/EVGA 850 Bq, 80+ Bronze 850W, Semi Modular pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/EVGA/EVGA 850 Bq, 80+ Bronze 850W, Semi Modular/EVGA 850 Bq, 80+ Bronze 850W, Semi Modular left.png'}, 
@@ -7038,6 +7117,9 @@ const components = [
         ],
         slots: [],
         ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
@@ -7049,13 +7131,11 @@ const components = [
         ],
         cables: [
             {type: '24-pin-power'},
-            {type: '8-pin-power' },
+            {type: '8-pin-power'},
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
             {type: '8-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
     
@@ -7076,6 +7156,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Silverstone technology co. Ltd/et750-hg/et750-hg-package-2.png'}, 
             {side: 'left', imageSrc: './assets/psu/Silverstone technology co. Ltd/et750-hg/et750-hg-side-left.jpg'}, 
@@ -7085,6 +7166,9 @@ const components = [
         ],
         slots: [],
         ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
@@ -7099,13 +7183,11 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
     
     {        // thermaltake smart BM3 Bronze 650W
-        name: 'Thermaltake smart BM3 Bronze 850W',
+        name: 'Thermaltake smart BM3 Bronze 650W',
         type: 'psu',
         size: 'ATX', 
         specs:{
@@ -7117,10 +7199,11 @@ const components = [
             depth: 200,
             height: 150,
         },
-        watts: '850',
+        watts: '650',
         isRotatable: true,
         isAttached: true,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Thermaltake/thermaltake smart BM3 Bronze 650W/pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/Thermaltake/thermaltake smart BM3 Bronze 650W/side.jpg'}, 
@@ -7129,7 +7212,10 @@ const components = [
             {side: 'rear', imageSrc: './assets/psu/Thermaltake/thermaltake smart BM3 Bronze 650W/rear.jpg'}
         ],
         slots: [],
-        ports: [            
+        ports: [    
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},        
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
@@ -7145,8 +7231,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
     
@@ -7167,6 +7251,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Silverstone technology co. Ltd/da1000-gh/da1000-gh-18.png'}, 
             {side: 'left', imageSrc: './assets/psu/Silverstone technology co. Ltd/da1000-gh/da1000-gh-9.jpg'}, 
@@ -7176,12 +7261,17 @@ const components = [
         ],
         slots: [],
         ports: [
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
+            {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
             {type: '6-pin-pcie'},
+            {type: 'sata-power'},
+            {type: 'sata-power'},
             {type: 'sata-power'},
             {type: 'sata-power'},
         ],
@@ -7192,8 +7282,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
 
@@ -7215,6 +7303,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Thermaltake/thermaltake smart 500w/thermaltake smart 500w pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/Thermaltake/thermaltake smart 500w/thermaltake smart 500w left.png'}, 
@@ -7225,7 +7314,7 @@ const components = [
         slots: [],
         ports: [
             {type: '24-pin-power'},
-            {type: '8-pin-power' },
+            {type: '8-pin-power'},
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
@@ -7240,8 +7329,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
 
@@ -7262,6 +7349,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gx2 600w/thermaltake toughpower pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/Thermaltake/Thermaltake Toughpower gx2 600w/thermaltake toughpower left.png'}, 
@@ -7272,7 +7360,7 @@ const components = [
         slots: [],
         ports: [
             {type: '24-pin-power'},
-            {type: '8-pin-power' },
+            {type: '8-pin-power'},
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
@@ -7287,8 +7375,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
 
@@ -7309,6 +7395,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Cooler master technology inc/mwe bronze 650 v3 230v/pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/Cooler master technology inc/mwe bronze 650 v3 230v/left.png'}, 
@@ -7319,7 +7406,7 @@ const components = [
         slots: [],
         ports: [
             {type: '24-pin-power'},
-            {type: '8-pin-power' },
+            {type: '8-pin-power'},
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
@@ -7334,8 +7421,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
 
@@ -7356,6 +7441,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/EVGA/EVGA 500 GE, 80 Plus Gold 500W/EVGA 500 GE, 80 Plus Gold 500W pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/EVGA/EVGA 500 GE, 80 Plus Gold 500W/EVGA 500 GE, 80 Plus Gold 500W left.png'}, 
@@ -7365,8 +7451,8 @@ const components = [
         ],
         slots: [],
         ports: [
-           {type: '24-pin-power'},
-            {type: '8-pin-power' },
+            {type: '24-pin-power'},
+            {type: '8-pin-power'},
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
@@ -7381,8 +7467,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
 
@@ -7403,6 +7487,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Corsair/CORSAIR CX750 80 Plus Bronze Non Modular Low-Noise ATX 750 Watt Power Supply/CORSAIR CX750 pack.png'}, 
             {side: 'left', imageSrc: './assets/psu/Corsair/CORSAIR CX750 80 Plus Bronze Non Modular Low-Noise ATX 750 Watt Power Supply/CORSAIR CX750 left.png'}, 
@@ -7413,7 +7498,7 @@ const components = [
         slots: [],
         ports: [
             {type: '24-pin-power'},
-            {type: '8-pin-power' },
+            {type: '8-pin-power'},
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
@@ -7428,8 +7513,6 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
 
@@ -7450,6 +7533,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'left',
         images: [
             {side: 'PACK', imageSrc: './assets/psu/Silverstone technology co. Ltd/st60f-es230/st60f-es230-package-2.png'}, 
             {side: 'left', imageSrc: './assets/psu/Silverstone technology co. Ltd/st60f-es230/st60f-es230-side.jpg'}, 
@@ -7460,7 +7544,7 @@ const components = [
         slots: [],
         ports: [
             {type: '24-pin-power'},
-            {type: '8-pin-power' },
+            {type: '8-pin-power'},
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
@@ -7475,12 +7559,10 @@ const components = [
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
             {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
         ]
     },
 
-  //Storage hdd
+    //Storage hdd
     { //Seagate Barracuda
         name: 'Seagate Barracuda',
         type: 'storage',
@@ -7494,6 +7576,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
             {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
@@ -7504,10 +7587,11 @@ const components = [
             {type: 'sata'}
         ],
         cables: [
+            {type: 'sata-power'},
             {type: 'sata-data'}
         ]
-     },
-     { //Toshiba X300
+    },
+    { //Toshiba X300
         name: 'Toshiba X300',
         type: 'storage',
         size: 'hdd',
@@ -7520,6 +7604,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
             {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
@@ -7530,10 +7615,11 @@ const components = [
             {type: 'sata'}
         ],
         cables: [
+            {type: 'sata-power'},
             {type: 'sata-data'}
         ]
-     },
-     { //Toshiba X300 PRO
+    },
+    { //Toshiba X300 PRO
         name: 'Toshiba X300 PRO',
         type: 'storage',
         size: 'hdd',
@@ -7546,6 +7632,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
             {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
@@ -7553,13 +7640,14 @@ const components = [
         ],
         slots: [],
         ports: [
+            {type: 'sata-power'},
             {type: 'sata'}
         ],
         cables: [
             {type: 'sata-data'}
         ]
-     },
-     { //Toshiba P300
+    },
+    { //Toshiba P300
         name: 'Toshiba P300',
         type: 'storage',
         size: 'hdd',
@@ -7572,6 +7660,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
             {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
@@ -7582,10 +7671,11 @@ const components = [
             {type: 'sata'}
         ],
         cables: [
+            {type: 'sata-power'},
             {type: 'sata-data'}
         ]
-     },
-     { //Western Digital Gaming Black
+    },
+    { //Western Digital Gaming Black
         name: 'Western Digital Gaming Black',
         type: 'storage',
         size: 'hdd',
@@ -7598,6 +7688,7 @@ const components = [
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
+        tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
             {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
@@ -7605,14 +7696,16 @@ const components = [
         ],
         slots: [],
         ports: [
+            
             {type: 'sata'}
         ],
         cables: [
+            {type: 'sata-power'},
             {type: 'sata-data'}
         ]
-     },
- //Storage ssd
-     { //Seagate Barracuda Q1 SSD
+    },
+    //Storage ssd
+    { //Seagate Barracuda Q1 SSD
     name: 'Seagate Barracuda SSD',
     type: 'storage',
     size: 'ssd',
@@ -7625,6 +7718,7 @@ const components = [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
+    tableDisplay: 'PACK',
     images: [
         {side: 'left', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res.png'},  
         {side: 'right', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res.png'},  
@@ -7635,10 +7729,11 @@ const components = [
         {type: 'sata'}
     ],
     cables: [
+        {type: 'sata-power'},
         {type: 'sata-data'}
     ]
-     },     
-     { //Samsung EVO SSD
+    },     
+    { //Samsung EVO SSD
     name: 'Samsung EVO SSD',
     type: 'storage',
     size: 'ssd',
@@ -7651,6 +7746,7 @@ const components = [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
+    tableDisplay: 'PACK',
     images: [
         {side: 'left', imageSrc: './assets/storage/ssd/samsung ssd.png'},  
         {side: 'right', imageSrc: './assets/storage/ssd/samsung ssd.png'},  
@@ -7661,10 +7757,11 @@ const components = [
         {type: 'sata'}
     ],
     cables: [
+        {type: 'sata-power'},
         {type: 'sata-data'}
     ]
-     },     
-     { //Sandisk Plus SSD
+    },     
+    { //Sandisk Plus SSD
     name: 'Sandisk Plus SSD',
     type: 'storage',
     size: 'ssd',
@@ -7677,6 +7774,7 @@ const components = [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
+    tableDisplay: 'PACK',
     images: [
         {side: 'left', imageSrc: './assets/storage/ssd/sandisk ssd plus.png'},  
         {side: 'right', imageSrc: './assets/storage/ssd/sandisk ssd plus.png'},  
@@ -7689,8 +7787,8 @@ const components = [
     cables: [
         {type: 'sata-data'}
     ]
-     },     
-     { //Sandisk Ultra SSD
+    },     
+    { //Sandisk Ultra SSD
     name: 'Sandisk Ultra SSD',
     type: 'storage',
     size: 'ssd',
@@ -7703,6 +7801,7 @@ const components = [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
+    tableDisplay: 'PACK',
     images: [
         {side: 'left', imageSrc: './assets/storage/ssd/sandisk.png'},  
         {side: 'right', imageSrc: './assets/storage/ssd/sandisk.png'},  
@@ -7713,14 +7812,19 @@ const components = [
         {type: 'sata'}
     ],
     cables: [
+        {type: 'sata-power'},
         {type: 'sata-data'}
     ]
-     },
-     // Cooling
+    },
+    // Cooling
     { //AMD wraith Prism
     name: 'AMD wraith Prism',
     type: 'cooling',
     size: 'amd',
+    specs:{
+        wattage: 150,
+        category: 'cpu'
+    },
     watts: '150',
     dimensions: {
         width: 200,
@@ -7730,11 +7834,15 @@ const components = [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'pack', imageSrc: './assets/cooling/amd wraith prism pack.png'},  
         {side: 'left', imageSrc: './assets/cooling/amd wraith prism fan.png'}
     ],
     slots: [],
+    ports: [
+        {type: 'cooling'}
+    ],
     cables: [
         {type: '3-pin-cooling'}
     ]
@@ -7743,6 +7851,10 @@ const components = [
     name: 'AMD wraith Spire',
     type: 'cooling',
     size: 'amd',
+    specs:{
+        wattage: 150,
+        category: 'cpu'
+    },
     watts: '150',
     dimensions: {
         width: 200,
@@ -7752,11 +7864,15 @@ const components = [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'pack', imageSrc: './assets/cooling/amd wraith spire pack.png'},  
         {side: 'left', imageSrc: './assets/cooling/amd wraith spire.png'}
     ],
     slots: [],
+    ports: [
+        {type: 'cooling'}
+    ],
     cables: [
         {type: '3-pin-cooling'}
     ]
@@ -7765,6 +7881,10 @@ const components = [
     name: 'Arctic Freezer 36',
     type: 'cooling',
     size: 'amd',
+    specs:{
+        wattage: 150,
+        category: 'cpu'
+    },
     watts: '150',
     dimensions: {
         width: 200,
@@ -7774,11 +7894,15 @@ const components = [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'pack', imageSrc: './assets/cooling/arctic freezer 36 pack.png'},  
         {side: 'left', imageSrc: './assets/cooling/arctic freezer 36.png'}
     ],
     slots: [],
+    ports: [
+        {type: 'cooling'}
+    ],
     cables: [
         {type: '3-pin-cooling'}
     ]
@@ -7787,6 +7911,10 @@ const components = [
     name: 'Be Quiet Pure Rock 2',
     type: 'cooling',
     size: 'amd',
+    specs:{
+        wattage: 150,
+        category: 'cpu'
+    },
     watts: '150',
     dimensions: {
         width: 200,
@@ -7796,11 +7924,15 @@ const components = [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'pack', imageSrc: './assets/cooling/be quiet pure rock.png'},  
         {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
     ],
     slots: [],
+    ports: [
+        {type: 'cooling'}
+    ],
     cables: [
             {type: '3-pin-cooling'}
         ]
@@ -7809,6 +7941,10 @@ const components = [
     name: 'be quiet dark rock 4',
     type: 'cooling',
     size: 'amd',
+    specs:{
+        wattage: 150,
+        category: 'cpu'
+    },
     watts: '150',
     dimensions: {
         width: 200,
@@ -7818,11 +7954,15 @@ const components = [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'pack', imageSrc: './assets/cooling/be quiet dark rock 4.png'},  
         {side: 'left', imageSrc: './assets/cooling/be quiet pure rock fan.png'}
     ],
     slots: [],
+    ports: [
+        {type: 'cooling'}
+    ],
     cables: [
             {type: '3-pin-cooling'}
         ]
@@ -7831,6 +7971,10 @@ const components = [
     name: 'Cooler Master 212 Hyper',
     type: 'cooling',
     size: 'amd',
+    specs:{
+        wattage: 150,
+        category: 'cpu'
+    },
     watts: '150',
     dimensions: {
         width: 200,
@@ -7840,11 +7984,15 @@ const components = [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'pack', imageSrc: './assets/cooling/cooler master 212 hyper pack.png'},  
         {side: 'left', imageSrc: './assets/cooling/cooler master 212 hyper.png'}
     ],
     slots: [],
+    ports: [
+        {type: 'cooling'}
+    ],
     cables: [
             {type: '3-pin-cooling'}
         ]
@@ -7853,6 +8001,10 @@ const components = [
     name: 'DeepCool AK500 Digital',
     type: 'cooling',
     size: 'amd',
+    specs:{
+        wattage: 150,
+        category: 'cpu'
+    },
     watts: '150',
     dimensions: {
         width: 200,
@@ -7862,11 +8014,15 @@ const components = [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'pack', imageSrc: './assets/cooling/deepcool ak500 digital pack.png'},  
         {side: 'left', imageSrc: './assets/cooling/deepcool ak500 digital fan.png'}
     ],
     slots: [],
+    ports: [
+        {type: 'cooling'}
+    ],
     cables: [
             {type: '3-pin-cooling'}
         ]
@@ -7876,6 +8032,10 @@ const components = [
      name: 'Intel Laminar RH1 cooling fan',
      type: 'cooling',
      size: 'intel',
+     specs:{
+        wattage: 150,
+        category: 'cpu'
+    },
     watts: '150',
      dimensions: {
         width: 200,
@@ -7885,12 +8045,16 @@ const components = [
      isRotatable: false,
      isAttached: false,
      defaultSource: 'pack',
+     tableDisplay: 'pack',
      images: [
          {side: 'pack', imageSrc: './assets/cooling/intel laminar pack.png'},  
          {side: 'left', imageSrc: './assets/cooling/intel laminar rh1.png'},  
      ],
      slots: [],
-cables: [
+     ports: [
+        {type: 'cooling'}
+    ],
+    cables: [
             {type: '3-pin-cooling'}
         ]
     },
@@ -7898,6 +8062,10 @@ cables: [
     name: 'Intel Laminar RM1 cooling fan',
     type: 'cooling',
     size: 'intel',
+    specs:{
+        wattage: 150,
+        category: 'cpu'
+    },
     watts: '150',
     dimensions: {
         width: 200,
@@ -7906,11 +8074,15 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
+    tableDisplay: 'PACK',
     images: [
         {side: 'PACK', imageSrc: './assets/cooling/intel laminar pack.png'},  
         {side: 'left', imageSrc: './assets/cooling/intel laminar rm1.png'},  
     ],
     slots: [],
+    ports: [
+        {type: 'cooling'}
+    ],
     cables: [
             {type: '3-pin-cooling'}
         ]
@@ -7929,6 +8101,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
+    tableDisplay: 'PACK',
     images: [
         {side: 'left', imageSrc: './assets/memory/HyperX Beast RGB DDR4 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/HyperX Beast RGB DDR4 pack.png'},  
@@ -7947,6 +8120,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
+    tableDisplay: 'PACK',
     images: [
         {side: 'left', imageSrc: './assets/memory/corsair dominator platinum pc4 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/corsair dominator platinum pc4.png'},  
@@ -7965,6 +8139,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
+    tableDisplay: 'PACK',
     images: [
         {side: 'left', imageSrc: './assets/memory/gskill ripjaws v pc4 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/gskill ripjaws v pc4.png'},  
@@ -7983,6 +8158,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
+    tableDisplay: 'PACK',
     images: [
         {side: 'left', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4.png'},  
@@ -8001,6 +8177,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
+    tableDisplay: 'PACK',
     images: [
         {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/tforce delta tuf pc4.png'},  
@@ -8019,6 +8196,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
+    tableDisplay: 'PACK',
     images: [
         {side: 'left', imageSrc: './assets/memory/crucial pro ddr4 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/crucial pro ddr4.png'},  
@@ -8037,6 +8215,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
+    tableDisplay: 'PACK',
     images: [
         {side: 'left', imageSrc: './assets/memory/corsair vengeance pro attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/corsair vengeance pro ddr4.png'},  
@@ -8055,6 +8234,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
@@ -8075,6 +8255,7 @@ cables: [
       isRotatable: false,
       isAttached: false,
       defaultSource: 'pack',
+      tableDisplay: 'pack',
       images: [
           {side: 'left', imageSrc: './assets/memory/Dominator Tianium DDR5 - attached.png'},  
           {side: 'pack', imageSrc: './assets/memory/Dominator Tianium DDR5.png'},  
@@ -8093,6 +8274,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'left', imageSrc: './assets/memory/gskill trident z5 pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/gskill trident z5 pc5.png'},  
@@ -8111,6 +8293,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'left', imageSrc: './assets/memory/kingston fury beast pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/kingston fury renegade pc5.png'},  
@@ -8129,6 +8312,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
@@ -8147,6 +8331,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'left', imageSrc: './assets/memory/crucial ballistix attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/crucial ballistix.png'},  
@@ -8165,6 +8350,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'left', imageSrc: './assets/memory/crucial ballistix rgb attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/crucial ballistix rgb.png'},  
@@ -8183,6 +8369,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'left', imageSrc: './assets/memory/gskill trident z5 silver attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/gskill trident z5 silver.png'},  
@@ -8201,6 +8388,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'left', imageSrc: './assets/memory/corsair vengeance attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/corsair vengeance.png'},  
@@ -8209,13 +8397,14 @@ cables: [
  
      //GPU [gpu file is for general left side img assets] [gpu.1 is for pack side img assets]
     {        // Gigabyte Radeon RX 7900 XTX 16pin
-    name: 'Gigabyte Radeon RX 7900 XTX',
+    name: 'Gigabyte Nvidia GeForce RTX 3060',
     type: 'gpu',
     size: 'ATX',
     specs: {
         portCount: 2,
         portType: '16-pin-pcie'
     },
+    watts: '170',
     dimensions: {
         width: 200,
         height: 200,
@@ -8224,6 +8413,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'left', imageSrc: './assets/gpu/Gigabyte Radeon RX 7900 XTX.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
@@ -8257,6 +8447,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'left', imageSrc: './assets/gpu/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'}, 
         {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
@@ -8288,6 +8479,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/Intel.png'}, 
@@ -8319,6 +8511,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 3060.png'}, 
@@ -8350,6 +8543,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4070 windforce oc.png'}, 
@@ -8381,6 +8575,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4090.png'}, 
@@ -8412,6 +8607,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx eagle 3060.png'}, 
@@ -8443,6 +8639,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce gtx 1650.png'}, 
@@ -8474,6 +8671,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/radeon rx7600.png'}, 
@@ -8505,6 +8703,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4090 gaming oc.png'}, 
@@ -8536,6 +8735,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/aero nvidia geforce rtx 4060 oc.png'}, 
@@ -8567,6 +8767,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce gtx 1660 super.png'}, 
@@ -8598,6 +8799,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4060.png'}, 
@@ -8629,6 +8831,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4070 super.png'}, 
@@ -8656,6 +8859,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce 3050.png'}, 
@@ -8682,6 +8886,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/radeon rx6500 xt.png'}, 
@@ -8713,6 +8918,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 2080 super.png'}, 
@@ -8744,6 +8950,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/radeon rx6750 xt.png'}, 
@@ -8775,6 +8982,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/radeon rx5300 OEM.png'}, 
@@ -8806,6 +9014,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia Tesla T40.png'}, 
@@ -8837,6 +9046,7 @@ cables: [
     isRotatable: false,
     isAttached: false,
     defaultSource: 'pack',
+    tableDisplay: 'pack',
     images: [
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce 1080 ti.png'}, 

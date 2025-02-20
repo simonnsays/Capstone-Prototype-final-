@@ -1,5 +1,5 @@
 class wattageCalculator {
-    constructor(displayArea, calculatorElementId = "wattsCalculator", canvas) {
+    constructor(displayArea, calculatorElementId = "wattageDisplay", canvas) {
         this.canvas = canvas
         this.displayArea = displayArea;
         this.calculatorElement = document.getElementById(calculatorElementId);

@@ -185,7 +185,7 @@ class BootUpTab {
         assistantInfo.classList.remove ('hidden');
         assistantInfo.innerHTML = `
             <p><strong> Oops it looks like you're facing an issue in your bootup</strong>.</p>
-            <p style="font-weight: normal;">Please click me to open the errors view & let me assist you regarding the issue of "${errorData.name}"</p>
+            <p style="font-weight: normal;">Please click me to open the errors view & let me assist you regarding the issue of "${errorData.description}"</p>
             <p style="font-weight: normal; cursor: pointer;">...</p>    
         `;
 
@@ -229,6 +229,12 @@ class BootUpTab {
         assistantContainer.addEventListener('click', () => {
             errorDiv.remove();
             overlay.remove();
+            const assistant = document.querySelector('.assistant-info-container');
+            assistant.innerHTML = `
+                <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
+                <p class="taskTip" style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
+                <p style="font-weight: normal; cursor: pointer;">...</p>    
+            `;
         });
         
 

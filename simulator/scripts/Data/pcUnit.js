@@ -1,4 +1,5 @@
 import errorCodes from "../Data/errorCodes.js"
+import BootUpTab from "../Tabs/bootUpTab.js"
 
 class PCUnit {
     constructor(bootUpElements,assistant) {
@@ -47,16 +48,7 @@ class PCUnit {
         this.state = ['off','on']
         this.currentState = this.state[0]
 
-        this.reports = [
-            {
-                tag: 'Temperature',
-                def: '71 degrees',
-            },
-            {
-                tag: 'Wattage',
-                def: '600W / 1200W',
-            },
-        ];
+        
         this.reportCount = 0;
         this.bootSequence = [
             () => this.psuTest(),
@@ -122,7 +114,7 @@ class PCUnit {
 
         // Monitor display poweron
         this.powerOnMonitor()
-        
+        bootStatus = true
         return true
         ///////////////////////////////////////////////// dan code ////////////////////////////////////////////////////////
         // Check if all components are available and powered
@@ -374,6 +366,11 @@ class PCUnit {
     }
 
     powerComponents() {
+        // Check if PSU component is available
+        if (!this.componentsStatus.psu?.component) {
+            return true; 
+        }
+        
         // find ports that connects from the PSU
         const portsToGivePower = this.componentsStatus.psu.component.ports.filter(port =>  port.offsets && port.offsets.some(offset => offset.cableAttached))
 
@@ -423,9 +420,6 @@ class PCUnit {
             }      
         })
 
-        if (!this.componentsStatus.motherboard || !this.componentsStatus.motherboard.component) {
-            return 'ERR-200'; 
-        }
 
         // Find remaining unpowered components connected from the Motherboard
         if (this.componentsStatus.motherboard?.isPowered) {
@@ -457,6 +451,11 @@ class PCUnit {
         // Power the powersuplly
         this.componentsStatus.psu.isPowered = true
         
+        // Critical Error: PSU Failure
+        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
+            return 'CRT-06'; 
+        }
+
         // add reports if no errors are found
         //..
         
@@ -481,6 +480,15 @@ class PCUnit {
             return 'ERR-202' // Motherboard not powered
         } 
 
+        // Critical error
+        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
+            return 'CRT-01'; // Motherboard Failure
+        }
+
+        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
+            return 'CRT-03'; // Motherboard Failure
+        }
+
         // add reports if no errors are found
         //..
 
@@ -498,6 +506,16 @@ class PCUnit {
             return 'ERR-301' // CPU not powered
         }
 
+        // Hazard Error: High CPU Temperature
+        if (Math.random() < 0.1 + Math.random * 0.1) { // 10% to 20% chance of error showing
+            return 'HZD-200'; 
+        }
+
+        // Critical Error: CPU Failure
+        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
+            return 'CRT-02'; // CPU Failure
+        }
+
         // add reports if no errors are found
         //..
 
@@ -508,6 +526,11 @@ class PCUnit {
         // check if hardware is available (seated)
         if(!this.componentsStatus.ram || !this.componentsStatus.ram.length) {
             return 'ERR-400' // Missing RAM Component
+        }
+
+        // Critical Error: Memory Failure
+        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
+            return 'CRT-04'; 
         }
 
         // add reports if no errors are found
@@ -526,6 +549,16 @@ class PCUnit {
         if(!this.componentsStatus.storage.some(storage => storage.isPowered)) {
             return 'ERR-501' // Storage Device not powered
         }
+
+        // Critical Error: BOOT Device Failure
+        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
+            return 'CRT-08'; 
+        }
+        // OS corruption
+        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
+            return 'CRT-09'; 
+        }
+
 
         // check if at least one storage device can transfer data
         // check if canDataTransfer attribute is true
@@ -548,6 +581,11 @@ class PCUnit {
             return 'ERR-601' // Graphics Card not Powered
         }
 
+        // Critical Error: GPU Failure
+        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
+            return 'CRT-05'; 
+        }
+
         // add reports if no errors are found
         //..
 
@@ -563,6 +601,14 @@ class PCUnit {
         // check if the cpuCooling is powered
         if(!this.componentsStatus.cpuCooling.isPowered) {
             return 'ERR-701'
+        }
+        // Hazard Error: CPU fan speed low
+        if (Math.random() < 0.1 + Math.random * 0.2) { // 1% to 5% chance of error showing
+            return 'HZD-100'; // CPU fan speed low
+        }
+        // Critical Error: Overheating issue
+        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
+            return 'CRT-07'; 
         }
 
         // add reports if no errors are found

@@ -83,15 +83,6 @@
     animation: fadeIn .3s forwards;
 }
 
-.assistant-modal {
-    width: 80vw;
-    height: 80vh;
-    background-color: var(--pastel-yellow);
-    overflow: auto;
-    padding: 20px;
-    transition: all 1.5s ease-in-out;
-}
-
 .assistant-modal::backdrop {
     background-color: black;
     opacity: .3;
@@ -432,14 +423,13 @@ color: #333;
 /*----------------------------------- Toggle -----------------------------------------------*/
 #toggle {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     padding: 10px;
     border-radius: 10px;
     width: 300px;
     position: relative;
-    top: 32px;
+    top: 39px;
     left: 950px;
-    gap: 10%;
     z-index: 10;
 }
 

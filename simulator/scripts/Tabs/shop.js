@@ -1,5 +1,5 @@
 import Component from "../Data/component.js"
-import components from "../Data/data.js"
+import components from "../Data/data1.js"
 import SearchBar from "../Utility/searchBar.js"
 
 class Shop{
@@ -195,8 +195,21 @@ class Shop{
         this.itemInfo.infoName.innerHTML = component.name
 
         // change specs list 
-        document.getElementById('type').textContent = `Type: ${component.type}`;
-        document.getElementById('size').textContent = `Size: ${component.size}`;
+        const specsList = document.getElementById("itemInfoSpecs");
+        specsList.innerHTML = ""; // Clear previous specs
+
+        if (component.specs) {
+            for (const [key, value] of Object.entries(component.specs)) {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `<strong>${key}:</strong> ${value}`;
+                specsList.appendChild(listItem);
+            }
+        } else {
+            const listItem = document.createElement("li");
+            listItem.innerText = "No specifications available";
+            specsList.appendChild(listItem);
+        }
+
         // button events
         const buyEvent = () => {
             this.buyComponent(component)

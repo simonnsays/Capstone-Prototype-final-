@@ -1,10 +1,46 @@
 const errorCodes = {
     // Hazard errors
-    'HZD-00': {
-        code: 'ERR-100',
+    'HZD-100': {
+        code: 'HZD-100',
         severity: 'Hazard',
-        description: 'low memory',
-        // HAZARD DETAILS
+        description: 'CPU fan speed too low',
+        troubleshooting: [
+             "Check if the CPU fan is spinning properly.",
+             "Ensure that the CPU fan is connected to the correct header on the motherboard.",
+             "Check the BIOS settings for fan speed control and adjust if necessary."
+        ],
+    },
+    'HZD-101': {
+        code: 'HZD-101',
+        severity: 'Hazard',
+        description: 'Insufficient cooling detected',
+        troubleshooting: [
+            "Check if the case fans are spinning properly.",
+            "Ensure that the case fans are connected to the correct headers on the motherboard.",
+            "Ensure that the thermal paste is applied correctly and evenly.",
+            "Check the CPU and GPU temperatures in the BIOS/UEFI."
+        ],
+    },
+    'HZD-200': {
+        code: 'HZD-200',
+        severity: 'Hazard',
+        description: 'High CPU temperature',
+        troubleshooting: [
+            "Check if the CPU cooler is properly installed and making good contact with the CPU.",
+            "Ensure that the thermal paste is applied correctly and evenly.",
+            "Check the CPU fan speed and make adjustments in the BIOS/UEFI if necessary."
+        ],
+    },
+    'HZD-300': {
+        code: 'HZD-300',
+        severity: 'Hazard',
+        description: 'High GPU temperature',
+        troubleshooting: [
+            "Check if the GPU cooler is properly installed and making good contact with the GPU.",
+            "Ensure that the thermal paste is applied correctly and evenly.",
+            "Try closing any background applications that may be causing the GPU to overheat.",
+            "Check the GPU fan speed and adjust using dedicated software if necessary."
+        ],
     },
 
     // Missing component/cables errors
@@ -138,8 +174,95 @@ const errorCodes = {
     },
 
     // Critical errors
+    'CRT-01': {
+        code: 'CRT-01',
+        severity: 'Critical',
+        description: 'BIOS/UEFI corruption',
+        troubleshooting: [
+            "Attempt to reset the BIOS/UEFI to default settings.",
+            "Flash the BIOS/UEFI with the latest firmware version.",
+            "If the issue persists, consider replacing the motherboard."
+        ],
+    },
     'CRT-02': {
-        // CRITICAL DETAILS
+        code: 'CRT-02',
+        severity: 'Critical',
+        description: 'CPU failure',
+        troubleshooting: [
+            "Check for any physical damage to the CPU.",
+            "Reseat the CPU and ensure that it is properly installed.",
+            "Test the CPU on another system to confirm hardware failure."
+        ],
+    },
+    'CRT-03': {
+        code: 'CRT-03',
+        severity: 'Critical',
+        description: 'Motherboard failure',
+        troubleshooting: [
+            "Inspect the motherboard for any visible damage or blown capacitors.",
+            "Test the motherboard with minimal components to isolate the issue.",
+            "If the issue persists, consider replacing the motherboard."
+        ],
+    },
+    'CRT-04': {
+        code: 'CRT-04',
+        severity: 'Critical',
+        description: 'RAM failure',
+        troubleshooting: [
+            "Test each RAM module individually to identify the faulty module.",
+            "Reseat the RAM modules and ensure they are properly installed.",
+            "If the issue persists, consider replacing the faulty RAM module."
+        ],
+    },
+    'CRT-05': {
+        code: 'CRT-05',
+        severity: 'Critical',
+        description: 'GPU failure',
+        troubleshooting: [
+            "Test the GPU on another system to confirm hardware failure.",
+            "Check for any physical damage or loose connections on the GPU.",
+            "If the issue persists, consider replacing the GPU."
+        ],
+    },
+    'CRT-06': {
+        code: 'CRT-06',
+        severity: 'Critical',
+        description: 'PSU failure',
+        troubleshooting: [
+            "Test the PSU with a multimeter to check for proper voltage output.",
+            "Inspect the PSU for any visible damage or signs of overheating.",
+            "If the issue persists, consider replacing the PSU."
+        ],
+    },
+    'CRT-07': {
+        code: 'CRT-07',
+        severity: 'Critical',
+        description: 'Overheating issue',
+        troubleshooting: [
+            "Check for proper airflow and ventilation in the case.",
+            "Ensure that all fans are functioning correctly.",
+            "Consider upgrading the cooling system if necessary."
+        ],
+    },
+    'CRT-08': {
+        code: 'CRT-08',
+        severity: 'Critical',
+        description: 'Boot device failure',
+        troubleshooting: [
+            "Check the boot device (e.g., HDD, SSD) for any physical damage.",
+            "Test the boot device on another system to confirm hardware failure.",
+            "If the issue persists, consider replacing the boot device."
+        ],
+    },
+    'CRT-09': {
+        code: 'CRT-09',
+        severity: 'Critical',
+        description: 'Operating System corruption',
+        troubleshooting: [
+            "Attempt to repair the OS using the installation media.",
+            "Reinstall the OS if repair is not possible.",
+            "Consider backing up important data before reinstalling the OS."
+        ],
     },
 
     // Error undefined

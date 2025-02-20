@@ -864,34 +864,37 @@ input[type=checkbox] {
 
 /****************** COMPONENT INFORMATION *****************/
 #itemInfoModal {
-  height: 670px;
-  width: 450px;
-  padding: 15px;
+  position: fixed;
+  top: 58%;
+  left: 26%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  max-width: 90%;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  border-color: black 3px solid;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 .itemInfoContainer {
-  width: calc(100% - 30px);
-  height: 100%;
-  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 21px;
-  padding: 0 15px;
-  border-radius: 20px;
-  overflow: hidden;
+  align-items: center;
+  text-align: center;
 }
 
 #itemInfoImage {
-  background-color: var(--mint);
-  width: 180px;
+  width: 100%;
+  max-width: 180px;
   height: 180px;
-  align-self: center;
+  background: var(--mint);
+  border-radius: 8px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: 5px;
-  border-radius: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 #itemInfoNameContainer {
@@ -901,9 +904,21 @@ input[type=checkbox] {
   gap: 10px;
 }
 
+#itemInfoName {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#itemInfoSpecsContainer h5 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 #itemInfoNameContainer p {
   width: 70%;
-  padding-left: 10px;
+  padding-left: 50px;
   margin: 0;
 }
 
@@ -933,16 +948,60 @@ input[type=checkbox] {
   flex-direction: column;
 }
 
-.itemInfoButtonsContainer {
-  padding-top: 15px;
-  align-self: center;
-  display: flex;
-  gap: 40px;
+#itemInfoSpecsContainer h5 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-#button1:hover,
+#itemInfoSpecs {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+#itemInfoSpecs li {
+  font-size: 14px;
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+#itemInfoSpecs li:last-child {
+  border-bottom: none;
+}
+
+.itemInfoButtonsContainer {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+#button1 {
+  background: #28a745;
+  color: white;
+}
+
+#button1:hover {
+  background: #218838;
+}
+
+#button2 {
+  background: #dc3545;
+  color: white;
+}
+
 #button2:hover {
-  background-color: var(--mint);
+  background: #c82333;
 }
 
 /****************************************** BOOT UP TAB ****************************/

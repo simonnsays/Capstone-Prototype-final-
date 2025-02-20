@@ -67,8 +67,6 @@ class Main {
 
         // Wattage Calculator
         this.wattageCalculator = new wattageCalculator(this.displayArea, this.canvas)
-        // Prevent Canvas Interaction when tabs are open
-        window.addEventListener('mousedown', () => this.handleMouseDown())
 
         // Canvas
         this.canvas = new Canvas(
@@ -107,7 +105,7 @@ class Main {
 
 
         // TEST: BOOT UP
-        this.testBootUp()
+       //this.testBootUp()
 
         // TEST: MISSING COMPONENTS
         // this.testMissingComponents()

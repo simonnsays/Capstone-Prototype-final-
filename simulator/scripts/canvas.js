@@ -184,7 +184,7 @@ class Canvas {
             this.user.returnComponentToShelf()
         } else{
             // Update wattage calculation
-        //    this.wattageCalculator.calculateWattage()
+            this.wattageCalculator.calculateWattage()
        }
 
         // clear temporary properties
