@@ -21,8 +21,6 @@ class Assistant {
         this.tasksBtn = this.elements.tasksBtn  
         this.errorsBtn = this.elements.errorsBtn  
 
-        this.notifCount = 1
-
         this.dialogue = [
             'Hello! I am your assistant. Click on me to get started.',
         ]
@@ -31,18 +29,18 @@ class Assistant {
         this.tasks = [{ title: '', description: '' }]
 
         this.notifCount = 1
+        this.boundMouseHover = this.handleMouseHover.bind(this)
     }
 
     init() {
-        window.addEventListener('mousemove', (e) => {
-            this.handleMouseHover(e)
-        })
-
+        // Mini Element Listeners
+        window.addEventListener('mousemove', this.boundMouseHover)
+                
         window.addEventListener('click', (e) => {
             const mouse = {x: e.clientX, y: e.clientY}
             const miniElementBox = this.miniElement.getBoundingClientRect()
             const fullElementBox = this.fullElement.modal.getBoundingClientRect()
-
+            
             if(this.utilityTool.isInsideBox(mouse, miniElementBox) && !this.fullElement.isActive) {
                 this.openModal() // open page                
             } else if(!this.utilityTool.isInsideBox(mouse, fullElementBox) && this.fullElement.isActive) {
@@ -50,49 +48,51 @@ class Assistant {
             }
         })
 
-        this.tasksBtn.classList.add('asst-active')
-        this.errorsBtn.classList.add('asst-inactive')
+        // Full Page Element Listeners
+        this.revealTasks()
+        
+        this.tasksBtn.addEventListener('click', () => this.revealTasks())
 
-        this.tasksBtn.addEventListener('click', () => {
-            console.log('tasks reavealing')
-            this.tasksBtn.classList.remove('asst-inactive')
-            if(!this.tasksBtn.classList.contains('asst-active')) {
-                this.tasksBtn.classList.add('asst-active')
-            }
+        this.errorsBtn.addEventListener('click', () => this.revealErrors())
+    }
 
-            this.errorsBtn.classList.remove('asst-active')
-            if(!this.errorsBtn.classList.contains('asst-inactive')) {
-                this.errorsBtn.classList.add('asst-inactive')
-            }
+    revealTasks() {
+        console.log('tasks reavealing')
+        // change task button styling
+        this.tasksBtn.classList.remove('asst-inactive')
+        if(!this.tasksBtn.classList.contains('asst-active')) {
+            this.tasksBtn.classList.add('asst-active')
+        }
 
-            this.modalBody.classList.add('show-tasks')
-            if(this.modalBody.classList.contains('show-errors')) {
-                this.modalBody.classList.remove('show-errors')
-            }
-        })
+        // change errors button styling
+        this.errorsBtn.classList.remove('asst-active')
+        if(!this.errorsBtn.classList.contains('asst-inactive')) {
+            this.errorsBtn.classList.add('asst-inactive')
+        }
 
-        this.errorsBtn.addEventListener('click', () => {
-            console.log('errors reavealing')
-            this.errorsBtn.classList.remove('asst-inactive')
-            if(!this.errorsBtn.classList.contains('asst-active')) {
-                this.errorsBtn.classList.add('asst-active')
-            }
+        // change asst body styling
+        this.modalBody.classList.add('show-tasks')
+        if(this.modalBody.classList.contains('show-errors')) {
+            this.modalBody.classList.remove('show-errors')
+        }
+    }
 
-            this.tasksBtn.classList.remove('asst-active')
-            if(!this.tasksBtn.classList.contains('asst-inactive')) {
-                this.tasksBtn.classList.add('asst-inactive')
-            }
+    revealErrors() {
+        console.log('errors reavealing')
+        this.errorsBtn.classList.remove('asst-inactive')
+        if(!this.errorsBtn.classList.contains('asst-active')) {
+            this.errorsBtn.classList.add('asst-active')
+        }
 
-            this.modalBody.classList.add('show-errors')
-            if(this.modalBody.classList.contains('show-tasks')) {
-                this.modalBody.classList.remove('show-tasks')
-            }
-        })
+        this.tasksBtn.classList.remove('asst-active')
+        if(!this.tasksBtn.classList.contains('asst-inactive')) {
+            this.tasksBtn.classList.add('asst-inactive')
+        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            this.toggleErrorView()
-            // this.setupTaskEventListeners()
-        })
+        this.modalBody.classList.add('show-errors')
+        if(this.modalBody.classList.contains('show-tasks')) {
+            this.modalBody.classList.remove('show-tasks')
+        }
     }
 
     openModal() {
@@ -101,7 +101,11 @@ class Assistant {
 
         // transfer icon to modal
         this.miniElement.classList.add('in-modal')
+        this.miniElement.classList.add('extended')
+        this.iconSec.style.animation = 'float 2s ease-in-out infinite'
         this.modalIconArea.appendChild(this.miniElement)
+
+        window.removeEventListener('mousemove', this.boundMouseHover)
     }
 
     closeModal() {
@@ -111,7 +115,11 @@ class Assistant {
 
         // transfer back to web page
         this.miniElement.classList.remove('in-modal')
+        this.miniElement.classList.remove('extended')
+        this.miniElement.style.animation = 'none'
         windowBody.appendChild(this.miniElement)
+
+        window.addEventListener('mousemove', this.boundMouseHover)
     }
 
     handleMouseHover(e) {

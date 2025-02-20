@@ -384,8 +384,16 @@
             </div>
         </div>
         <div class="asst-body">
-            <div id="task-container" class="asst-container"></div>
-            <div id="errors-container" class="asst-container"></div>
+            <div id="taskContainer" class="asst-container">
+                <div class="task-cell"></div>
+                <div class="task-cell"></div>
+                <div class="task-cell"></div>
+                <div class="task-cell"></div>
+                <div class="task-cell"></div>
+                <div class="task-cell"></div>
+                <div class="task-cell"></div>
+            </div>
+            <div id="errorsContainer" class="asst-container"></div>
         </div>
 
     </dialog>
@@ -409,7 +417,7 @@
     <script>
         [...document.querySelectorAll('*')].forEach(el => {
             let z = window.getComputedStyle(el).zIndex;
-            if (z !== 'auto') console.log(el.tagName, el.className, el.id, '=> z-index:', z);
+            // if (z !== 'auto') console.log(el.tagName, el.className, el.id, '=> z-index:', z);
         });
 
     </script>
