@@ -116,7 +116,7 @@ class Assistant {
         // transfer back to web page
         this.miniElement.classList.remove('in-modal')
         this.miniElement.classList.remove('extended')
-        this.miniElement.style.animation = 'none'
+        this.iconSec.style.animation = 'none'
         windowBody.appendChild(this.miniElement)
 
         window.addEventListener('mousemove', this.boundMouseHover)
@@ -148,19 +148,6 @@ class Assistant {
             //     }, 10)
             // })  
         }
-    }
-
-    isInArea(area, mouse) {
-        if (!area) return false // Guard clause for undefined area
-        let point = { x: mouse.clientX, y: mouse.clientY }
-        let rect = area.getBoundingClientRect()
-
-        return (
-            point.x > rect.x &&
-            point.x < rect.x + rect.width &&
-            point.y > rect.y &&
-            point.y < rect.y + rect.height
-        )
     }
 
     ////////////////////////////    TASKS    ////////////////////////////

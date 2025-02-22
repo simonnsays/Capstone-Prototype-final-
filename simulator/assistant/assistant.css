@@ -485,9 +485,9 @@ color: #333;
 }
 
 @keyframes float {
-    0% { transform: translateY(5); }
+    0% { transform: translateY(5px); }
     50% { transform: translateY(-5px); }
-    100% { transform: translateY(5); }
+    100% { transform: translateY(5px); }
       
 }
 
@@ -681,17 +681,32 @@ p {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     flex-shrink: 0;
-    
+    overflow: hidden;
     transition: all .4s ease-in-out;
+    display: flex;
 }
 
 .task-cell:hover {
     /* transform: translateY(-5px);
     box-shadow: 10 10 60px #75c9b7; */
-    width: 700px;
+    width: 800px;
 
 }
 
 .cell-extended {
     width: 1000px;
+}
+
+.unopened {
+    width: 250px;
+    height: 100%;
+    background-color: blue;
+    flex-shrink: 0;
+}
+
+.opened {
+    width: 550px;
+    height: 100%;
+    background-color: green;
+    flex-shrink: 0;
 }
