@@ -98,6 +98,8 @@ class ElementHandler {
             modalBody: document.querySelector('.asst-body'),
             tasksBtn: document.querySelector('#tasksButton'),
             errorsBtn: document.querySelector('#errorsButton'),
+            tasksContainer: document.querySelector('#tasksContainer'),
+            errorsContainer: document.querySelector('#errorsContainer'),
         } 
     } 
     

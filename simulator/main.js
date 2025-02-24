@@ -84,6 +84,7 @@ class Main {
     handleMouseDown() {
         // prevent use of canvas when tabs are open
         if( this.displayArea.trashBin.isActive ||
+            this.assistant.fullElement.isActive ||
             this.portsTab.drawer.isActive ||
             this.bootUpTab.isActive ||
             this.inventory.isActive || 

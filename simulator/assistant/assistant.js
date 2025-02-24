@@ -20,13 +20,20 @@ class Assistant {
         this.modalBody = this.elements.modalBody  
         this.tasksBtn = this.elements.tasksBtn  
         this.errorsBtn = this.elements.errorsBtn  
+        this.tasksContainer = this.elements.tasksContainer
+        this.errorsContainer = this.elements.errorsContainer
 
         this.dialogue = [
             'Hello! I am your assistant. Click on me to get started.',
         ]
 
         // TUTORIAL STEP BY STEPS
-        this.tasks = [{ title: '', description: '' }]
+        this.tasks = [
+            { title: 'Shop', description: 'Open Shop and Buy Components' },
+            { title: 'Inventory', description: 'Open Inventory and Place Components' },
+            { title: 'Assemble', description: 'Drag and Drop components to their corresponding places to attach' },
+            { title: 'Boot Up', description: 'Open the Boot Interface and press the Power Button' },
+        ]
 
         this.notifCount = 1
         this.boundMouseHover = this.handleMouseHover.bind(this)
@@ -54,6 +61,57 @@ class Assistant {
         this.tasksBtn.addEventListener('click', () => this.revealTasks())
 
         this.errorsBtn.addEventListener('click', () => this.revealErrors())
+
+        // Task Creations
+        this.createTasks()
+
+        window.addEventListener('click', () => this.toggleTaskCellStates())
+    }
+
+    toggleTaskCellStates() {
+        if (!this.tasksContainer.children.length > 0) {
+            return
+        }
+    
+        Object.values(this.tasksContainer.children).forEach(taskCell => {
+            // Ensure only one event listener is attached
+            if (!taskCell.dataset.listenerAttached) {
+                taskCell.addEventListener('click', () => {
+                    // Close any previously opened task cell
+                    document.querySelectorAll('.task-cell.opened').forEach(openedCell => {
+                        if (openedCell !== taskCell) {
+                            openedCell.classList.remove('opened')
+                        }
+                    })
+    
+                    // Toggle the clicked task cell
+                    taskCell.classList.toggle('opened')
+                })
+                taskCell.dataset.listenerAttached = true  // Mark as handled
+            }
+        })
+    }   
+
+    createTasks() {
+        this.tasks.forEach(task => {
+            const taskCell = document.createElement('div')
+            taskCell.classList.add('task-cell')
+
+            // title element
+            const cellTitle = document.createElement('p')
+            cellTitle.classList.add('task-title')
+            cellTitle.textContent = task.title
+            taskCell.appendChild(cellTitle)
+
+            // description element
+            const cellDescription = document.createElement('p')
+            cellDescription.classList.add('task-description')
+            cellDescription.textContent = task.description
+            taskCell.appendChild(cellDescription)
+
+            this.tasksContainer.appendChild(taskCell)
+            console.log(taskCell.innerHTML)
+        })
     }
 
     revealTasks() {
@@ -65,33 +123,34 @@ class Assistant {
         }
 
         // change errors button styling
-        this.errorsBtn.classList.remove('asst-active')
-        if(!this.errorsBtn.classList.contains('asst-inactive')) {
-            this.errorsBtn.classList.add('asst-inactive')
-        }
+        this.errorsBtn.classList.toggle('asst-active', false)
+        this.errorsBtn.classList.toggle('asst-inactive', true)
 
         // change asst body styling
-        this.modalBody.classList.add('show-tasks')
-        if(this.modalBody.classList.contains('show-errors')) {
-            this.modalBody.classList.remove('show-errors')
+        this.modalBody.classList.toggle('show-tasks', true)
+        this.modalBody.classList.toggle('show-errors', false)
+
+        // body container styling 
+        this.tasksContainer.style.display = 'flex'
+        if(this.errorsContainer.style.display === 'flex') {
+            this.errorsContainer.style.display = 'none'
         }
     }
 
     revealErrors() {
         console.log('errors reavealing')
-        this.errorsBtn.classList.remove('asst-inactive')
-        if(!this.errorsBtn.classList.contains('asst-active')) {
-            this.errorsBtn.classList.add('asst-active')
-        }
+        this.errorsBtn.classList.toggle('asst-inactive', false)
+        this.errorsBtn.classList.toggle('asst-active', true)
 
-        this.tasksBtn.classList.remove('asst-active')
-        if(!this.tasksBtn.classList.contains('asst-inactive')) {
-            this.tasksBtn.classList.add('asst-inactive')
-        }
+        this.tasksBtn.classList.toggle('asst-active', false)
+        this.tasksBtn.classList.toggle('asst-inactive', true)
 
-        this.modalBody.classList.add('show-errors')
-        if(this.modalBody.classList.contains('show-tasks')) {
-            this.modalBody.classList.remove('show-tasks')
+        this.modalBody.classList.toggle('show-errors', true)
+        this.modalBody.classList.toggle('show-tasks', false)
+
+        this.errorsContainer.style.display = 'flex'
+        if(this.tasksContainer.style.display === 'flex') {
+            this.tasksContainer.style.display = 'none'
         }
     }
 
@@ -123,86 +182,71 @@ class Assistant {
     }
 
     handleMouseHover(e) {
-        if(this.utilityTool.isInsideBox({x: e.clientX, y: e.clientY}, this.miniElement.getBoundingClientRect())) {
-            this.notifCount = 0
+        const isHovering = this.utilityTool.isInsideBox(
+            {x: e.clientX, y: e.clientY}, 
+            this.miniElement.getBoundingClientRect()
+        )
 
-            this.miniElement?.classList.add('extended')
-            this.miniElement.style.cursor = 'pointer'
-
-            this.pulse?.classList.add('hidden')
-            
-            this.miniElement?.addEventListener('transitionend', () => {
-                setTimeout(() => {
-                    this.infoSec?.classList.remove('hidden')
-                }, 1)
-            })
-        } else {
-            this.notifCount = 1
-            this.miniElement?.classList.remove('extended')
-            this.miniElement.style.cursor = 'default'
-            this.pulse?.classList.remove('hidden')
-            this.infoSec?.classList.add('hidden')
-
-            // this.miniElement?.addEventListener('transitionend', () => {
-            //     setTimeout(() => {
-            //     }, 10)
-            // })  
-        }
+        isHovering ? this.notifCount = 0 : this.notifCount = 1
+        this.miniElement.classList.toggle('extended', isHovering)
+        this.miniElement.style.cursor = isHovering ? 'pointer' : 'default'
+        this.pulse.classList.toggle('hidden', isHovering)
+        this.infoSec.classList.toggle('hidden', !isHovering)
     }
 
-    ////////////////////////////    TASKS    ////////////////////////////
+    ////////////////////////////    TASKS / CODE BELOW DEPRECATED   ////////////////////////////
 
     // Function to move the assistant container to the bubble
     moveAssistantContainerToBubble() {
-        const assistantContainer = document.getElementById('assistantContainer')
-        const assistantBubble = document.getElementById('assistantBubble')
-        if (assistantContainer && assistantBubble && !assistantBubble.contains(assistantContainer)) { // Ensure the container is not already in the bubble
-            assistantBubble.appendChild(assistantContainer) // Move assistant container to bubble
-            assistantContainer.classList.add('in-modal') // Add a class to style the assistant container in the bubble
-            assistantContainer.classList.remove('in-original') // Remove the original class to prevent conflicts
-            this.createBubbleMessage() // Create a bubble message below the assistant container
-        }
+        // const assistantContainer = document.getElementById('assistantContainer')
+        // const assistantBubble = document.getElementById('assistantBubble')
+        // if (assistantContainer && assistantBubble && !assistantBubble.contains(assistantContainer)) { // Ensure the container is not already in the bubble
+        //     assistantBubble.appendChild(assistantContainer) // Move assistant container to bubble
+        //     assistantContainer.classList.add('in-modal') // Add a class to style the assistant container in the bubble
+        //     assistantContainer.classList.remove('in-original') // Remove the original class to prevent conflicts
+        //     this.createBubbleMessage() // Create a bubble message below the assistant container
+        // }
     }
 
     // Function to move the assistant container back to its original place
     moveAssistantContainerBack() {
-        const assistantContainer = document.getElementById('assistantContainer')
-        const originalPlace = this.originalParent // Get the original parent of the assistant container
-        if (assistantContainer && originalPlace && originalPlace !== assistantContainer.parentElement) { // Ensure the container is not already in the original place
-            originalPlace.appendChild(assistantContainer) // Move the assistant container back to its original place
-            assistantContainer.classList.add('in-original') // Add class for original styles
-            assistantContainer.classList.remove('in-modal') // Remove class for modal styles
-        }
+        // const assistantContainer = document.getElementById('assistantContainer')
+        // const originalPlace = this.originalParent // Get the original parent of the assistant container
+        // if (assistantContainer && originalPlace && originalPlace !== assistantContainer.parentElement) { // Ensure the container is not already in the original place
+        //     originalPlace.appendChild(assistantContainer) // Move the assistant container back to its original place
+        //     assistantContainer.classList.add('in-original') // Add class for original styles
+        //     assistantContainer.classList.remove('in-modal') // Remove class for modal styles
+        // }
     }
 
     // Function to create a bubble message below the assistant container
     createBubbleMessage() {
-        const assistantBubble = document.getElementById('assistantBubble')
-        const existingMessage = assistantBubble.querySelector('.bubble-message')
+        // const assistantBubble = document.getElementById('assistantBubble')
+        // const existingMessage = assistantBubble.querySelector('.bubble-message')
     
-        // Prevent duplicate messages
-        if (!existingMessage) {
-            const bubbleMessage = document.createElement('div') // Create a new div element then add text content to it
-            bubbleMessage.className = 'bubble-message'
-            bubbleMessage.textContent = 'Here are your tasks. Follow the instructions to complete them.'
-            assistantBubble.appendChild(bubbleMessage) // Add the message to the bubble
-        }
+        // // Prevent duplicate messages
+        // if (!existingMessage) {
+        //     const bubbleMessage = document.createElement('div') // Create a new div element then add text content to it
+        //     bubbleMessage.className = 'bubble-message'
+        //     bubbleMessage.textContent = 'Here are your tasks. Follow the instructions to complete them.'
+        //     assistantBubble.appendChild(bubbleMessage) // Add the message to the bubble
+        // }
     }
 
     // Toggle between the task and error views
     toggleErrorView() {
-        if (this.taskContainer && this.errorContainer) {
-            this.errorContainer.style.display = "none"
-            document.getElementById("switch").addEventListener("change", () => {
-                if (document.getElementById("switch").checked) {
-                    this.taskContainer.style.display = "none"
-                    this.errorContainer.style.display = "flex"
-                } else {
-                    this.taskContainer.style.display = "flex"
-                    this.errorContainer.style.display = "none"
-                }
-            })
-        }
+        // if (this.taskContainer && this.errorContainer) {
+        //     this.errorContainer.style.display = "none"
+        //     document.getElementById("switch").addEventListener("change", () => {
+        //         if (document.getElementById("switch").checked) {
+        //             this.taskContainer.style.display = "none"
+        //             this.errorContainer.style.display = "flex"
+        //         } else {
+        //             this.taskContainer.style.display = "flex"
+        //             this.errorContainer.style.display = "none"
+        //         }
+        //     })
+        // }
     }
 }
 
