@@ -1,3 +1,4 @@
+import tasks from "./tasks.js"
 class Assistant {
     constructor(elementHandler, utilityTool) {
         // DOM ELEMENTS
@@ -28,12 +29,6 @@ class Assistant {
         ]
 
         // TUTORIAL STEP BY STEPS
-        this.tasks = [
-            { title: 'Shop', description: 'Open Shop and Buy Components' },
-            { title: 'Inventory', description: 'Open Inventory and Place Components' },
-            { title: 'Assemble', description: 'Drag and Drop components to their corresponding places to attach' },
-            { title: 'Boot Up', description: 'Open the Boot Interface and press the Power Button' },
-        ]
 
         this.notifCount = 1
         this.boundMouseHover = this.handleMouseHover.bind(this)
@@ -93,14 +88,11 @@ class Assistant {
     }   
 
     createTasks() {
-        this.tasks.forEach(task => {
+        tasks.forEach(task => {
             const taskCell = document.createElement('div')
             taskCell.classList.add('task-cell')
 
-            // title element
-            const cellTitle = document.createElement('p')
-            cellTitle.classList.add('task-title')
-            cellTitle.textContent = task.title
+            const cellTitle = this.createTaskTtitle(task)
             taskCell.appendChild(cellTitle)
 
             // description element
@@ -110,8 +102,39 @@ class Assistant {
             taskCell.appendChild(cellDescription)
 
             this.tasksContainer.appendChild(taskCell)
-            console.log(taskCell.innerHTML)
         })
+    }
+
+    createTaskTtitle(task) {
+        // title element
+        const cellTitle = document.createElement('p')
+        cellTitle.classList.add('task-title')
+        // > task icon
+        const taskIcon = document.createElement('div')
+        taskIcon.classList.add('task-icon')
+        // > > task icon image
+        const taskIconImage = document.createElement('img')
+        taskIconImage.src = task.title.imageSrc
+        taskIcon.appendChild(taskIconImage)
+
+        // > task name
+        const taskName = document.createElement('div')
+        taskName.classList.add('task-name')
+        // > > task name text
+        const taskNameText = document.createElement('h3')
+        taskNameText.textContent = task.title.text
+        taskName.appendChild(taskNameText)
+        // > > task name status
+        const taskNameStatus = document.createElement('p')
+        taskNameStatus.textContent = 'Completed'
+        taskNameStatus.classList.add('task-status')
+        taskNameStatus.visibility = 'hidden'
+        taskName.appendChild(taskNameStatus)
+
+        cellTitle.appendChild(taskIcon)
+        cellTitle.appendChild(taskName)
+
+        return cellTitle
     }
 
     revealTasks() {
