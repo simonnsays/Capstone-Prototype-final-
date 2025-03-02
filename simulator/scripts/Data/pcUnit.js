@@ -147,7 +147,6 @@ class PCUnit {
     // Add error-cells into assistant tab errors view
     populateErrors() {
         const errorContainer = document.querySelector('.error-container')
-        //const errorContainer =  document.querySelector('')
         // Remove first test error 1 before populating error-container with errors 
         const defaultError = errorContainer.querySelector('.error-cell[data-error-action="error1"]')
         if (defaultError) {

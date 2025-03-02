@@ -9,7 +9,6 @@ const components = [
         specs:{
             color: 'White',
             size: 'Mid-Tower',
-            motherboard: 'ATX, microATX, miniATX',
             dimensions:'430 mm (D) x 225 mm (W) x 465 mm (H)',      
         },
         dimensions: {
@@ -629,6 +628,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',
         watts: '100',
+        specs:{
+            chipset: 'AMD B550',
+            cpuslot: 'AM4',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -761,6 +768,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD X550',
+            cpuslot: 'AM4',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -893,6 +908,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD X570',
+            cpuslot: 'AM4',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -1024,6 +1047,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD B550',
+            cpuslot: 'AM4',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -1155,6 +1186,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD B550',
+            cpuslot: 'AM4',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -1286,6 +1325,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD B550',
+            cpuslot: 'AM4',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -1417,6 +1464,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD X570',
+            cpuslot: 'AM4',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -1548,6 +1603,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD X570',
+            cpuslot: 'AM4',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -1679,6 +1742,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD B550',
+            cpuslot: 'AM4',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -1810,6 +1881,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD B550',
+            cpuslot: 'AM4',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -1943,6 +2022,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD B650E',
+            cpuslot: 'AM5',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -2074,6 +2161,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD B650',
+            cpuslot: 'AM5',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -2205,6 +2300,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD X670E',
+            cpuslot: 'AM5',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -2336,6 +2439,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD B650E',
+            cpuslot: 'AM5',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -2467,6 +2578,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD X670E',
+            cpuslot: 'AM5',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -2598,6 +2717,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD X870E',
+            cpuslot: 'AM5',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -2729,6 +2856,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD B650',
+            cpuslot: 'AM5',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -2860,6 +2995,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD B650',
+            cpuslot: 'AM5',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -2991,6 +3134,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD B650',
+            cpuslot: 'AM5',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -3122,6 +3273,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'AMD X670E',
+            cpuslot: 'AM5',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -3255,6 +3414,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z590',
+            cpuslot: 'LGA 1200',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -3386,6 +3553,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z590',
+            cpuslot: 'LGA 1200',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -3518,6 +3693,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel W480',
+            cpuslot: 'LGA 1200',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -3649,6 +3832,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z590',
+            cpuslot: 'LGA 1200',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -3780,6 +3971,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel B560-E',
+            cpuslot: 'LGA 1200',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -3912,6 +4111,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z490-A',
+            cpuslot: 'LGA 1200',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -4043,6 +4250,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z590',
+            cpuslot: 'LGA 1200',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -4174,6 +4389,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z590',
+            cpuslot: 'LGA 1200',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -4297,12 +4520,19 @@ const components = [
         ],
         cables: []
     },
-
     {        // Gigabyte Z590 GAMING X
         name: 'Gigabyte Z590 GAMING X',
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z590',
+            cpuslot: 'LGA 1200',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -4434,6 +4664,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z590',
+            cpuslot: 'LGA 1200',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -4565,6 +4803,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z590',
+            cpuslot: 'LGA 1200',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -4696,6 +4942,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z590',
+            cpuslot: 'LGA 1200',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -4829,6 +5083,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z790',
+            cpuslot: 'LGA 1700',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 300,
@@ -4960,6 +5222,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z790',
+            cpuslot: 'LGA 1700',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -5093,6 +5363,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel B760',
+            cpuslot: 'LGA 1700',
+            slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -5225,6 +5503,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z790',
+            cpuslot: 'LGA 1700',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -5356,6 +5642,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z790',
+            cpuslot: 'LGA 1700',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -5488,6 +5782,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z790',
+            cpuslot: 'LGA 1700',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -5619,6 +5921,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z790-A',
+            cpuslot: 'LGA 1700',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -5750,6 +6060,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z790',
+            cpuslot: 'LGA 1700',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -5881,6 +6199,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z690-A',
+            cpuslot: 'LGA 1700',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -6012,6 +6338,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z790',
+            cpuslot: 'LGA 1700',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -6143,6 +6477,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z760',
+            cpuslot: 'LGA 1700',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -6274,6 +6616,14 @@ const components = [
         type: 'motherboard',
         size: 'ATX',        
         watts: '100',
+        specs:{
+            chipset: 'Intel Z790',
+            cpuslot: 'LGA 1700',
+            slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
+            ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
+            storage: 'SATA',
+            dimensions:'244 mm (D) x 244 mm (W) x 305 mm (H)',
+        },
         dimensions: {
             depth: 244,
             width: 244,
@@ -6407,6 +6757,14 @@ const components = [
         type: 'cpu',
         size: 'LGA 1700',
         watts: '275',
+        specs:{
+            generation: 'Core i9 (Raptor Lake)',
+            socket: 'LGA 1700',
+            cores: '24',
+            baseclock: '3.2 GHz',
+            boostclock: '6 GHz',
+            TDP: '275W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6429,6 +6787,14 @@ const components = [
         type: 'cpu',
         size: 'LGA 1200',
         watts: '275',
+        specs:{
+            generation: 'Core i9 (Rocket Lake)',
+            socket: 'LGA 1200',
+            cores: '8',
+            baseclock: '3.5 GHz',
+            boostclock: '5.3 GHz',
+            TDP: '275W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6451,6 +6817,14 @@ const components = [
         type: 'cpu',
         size: 'LGA 1700',
         watts: '275',
+        specs:{
+            generation: 'Core i7 (Raptor Lake-R)',
+            socket: 'LGA 1700',
+            cores: '20',
+            baseclock: '3.4 GHz',
+            boostclock: '5.6 GHz',
+            TDP: '275W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6473,6 +6847,14 @@ const components = [
         type: 'cpu',
         size: 'LGA 1200',
         watts: '275',
+        specs:{
+            generation: 'Core i7 (Rocket Lake)',
+            socket: 'LGA 1700',
+            cores: '8',
+            baseclock: '3.6 GHz',
+            boostclock: '5 GHz',
+            TDP: '275W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6495,6 +6877,14 @@ const components = [
         type: 'cpu',
         size: 'LGA 1700',
         watts: '215',
+        specs:{
+            generation: 'Core i5 (Raptor Lake-R)',
+            socket: 'LGA 1700',
+            cores: '16',
+            baseclock: '2.5 GHz',
+            boostclock: '4.7 GHz',
+            TDP: '215W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6517,6 +6907,14 @@ const components = [
         type: 'cpu',
         size: 'LGA 1200',      
         watts: '275',
+        specs:{
+            generation: 'Core i5 (Rocket Lake)',
+            socket: 'LGA 1200',
+            cores: '6',
+            baseclock: '3.9 GHz',
+            boostclock: '4.9 GHz',
+            TDP: '275W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6539,6 +6937,14 @@ const components = [
         type: 'cpu',
         size: 'LGA 1700',
         watts: '208',
+        specs:{
+            generation: 'Core i3 (Raptor Lake-R)',
+            socket: 'LGA 1700',
+            cores: '4',
+            baseclock: '3.5 GHz',
+            boostclock: '4.7 GHz',
+            TDP: '208W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6556,11 +6962,19 @@ const components = [
         slots: [],
         ports: []
     },
-    {        // Intel Core i3 11305F
-        name: 'Intel Core i3-11305F',
+    {        // Intel Core i3 10350K
+        name: 'Intel Core i3-10350K',
         type: 'cpu',
         size: 'LGA 1200',
         watts: '208',
+        specs:{
+            generation: 'Core i3 (Comet Lake)',
+            socket: 'LGA 1200',
+            cores: '4',
+            baseclock: '4.1 GHz',
+            boostclock: '4.8 GHz',
+            TDP: '208W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6572,7 +6986,7 @@ const components = [
         tableDisplay: 'PACK',
         images: [
             {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1200.png'},  
-            {side: 'PACK', imageSrc: './assets/cpu/intel/lga1200/i3 11305f.png'},  
+            {side: 'PACK', imageSrc: './assets/cpu/intel/lga1200/i3 10350k.png'},  
 
         ],
         slots: [],
@@ -6585,6 +6999,14 @@ const components = [
         type: 'cpu',
         size: 'AM5',
         watts: '270',
+        specs:{
+            generation: 'Ryzen 9 Zen 4 (Raphael)',
+            socket: 'AMD AM5',
+            cores: '12',
+            baseclock: '4.4 GHz',
+            boostclock: '5.6 GHz',
+            TDP: '270W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6606,6 +7028,14 @@ const components = [
         type: 'cpu',
         size: 'AM4',
         watts: '255',
+        specs:{
+            generation: 'Ryzen 9 Zen 3 (Vermeer)',
+            socket: 'AMD AM4',
+            cores: '12',
+            baseclock: '3.7 GHz',
+            boostclock: '4.8 GHz',
+            TDP: '255W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6627,6 +7057,14 @@ const components = [
         type: 'cpu',
         size: 'AM5',
         watts: '270',
+        specs:{
+            generation: 'Ryzen 7 Zen 4 (Raphael)',
+            socket: 'AMD AM5',
+            cores: '8',
+            baseclock: '4.2 GHz',
+            boostclock: '5 GHz',
+            TDP: '270W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6648,6 +7086,14 @@ const components = [
         type: 'cpu',
         size: 'AM4',
         watts: '215',
+        specs:{
+            generation: 'Ryzen 7 Zen 3 (Cezanne)',
+            socket: 'AMD AM4',
+            cores: '8',
+            baseclock: '3.8 GHz',
+            boostclock: '4.6 GHz',
+            TDP: '215W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6669,6 +7115,14 @@ const components = [
         type: 'cpu',
         size: 'AM5',
         watts: '255',
+        specs:{
+            generation: 'Ryzen 5 Zen 4 (Raphael)',
+            socket: 'AMD AM5',
+            cores: '6',
+            baseclock: '4.7 GHz',
+            boostclock: '5.3 GHz',
+            TDP: '255W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6690,6 +7144,14 @@ const components = [
         type: 'cpu',
         size: 'AM4',
         watts: '215',
+        specs:{
+            generation: 'Ryzen 5 Zen 3 (Cezanne)',
+            socket: 'AMD AM4',
+            cores: '6',
+            baseclock: '3.6 GHz',
+            boostclock: '4.6 GHz',
+            TDP: '215W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6711,6 +7173,14 @@ const components = [
         type: 'cpu',
         size: 'AM5',
         watts: '250',
+        specs:{
+            generation: 'Ryzen 3 Zen 4 (Phoenix2)',
+            socket: 'AMD AM5',
+            cores: '4',
+            baseclock: '3.4 GHz',
+            boostclock: '4.9 GHz',
+            TDP: '250W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6732,6 +7202,14 @@ const components = [
         type: 'cpu',
         size: 'AM4',
         watts: '215',
+        specs:{
+            generation: 'Ryzen 3 Zen 3 (Cezanne)',
+            socket: 'AMD AM4',
+            cores: '4',
+            baseclock: '4 GHz',
+            boostclock: '4.2 GHz',
+            TDP: '215W',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -6756,7 +7234,9 @@ const components = [
         size: 'ATX',
         specs:{
             wattage: 1300,
-            cableModularity: 'modular'
+            cableModularity: 'modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
+            ports: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power'
         },
         dimensions: {
             width: 150,
@@ -6809,7 +7289,9 @@ const components = [
         size: 'ATX',
         specs:{
             wattage: 1200,
-            cableModularity: 'modular'
+            cableModularity: 'modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
+            ports: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power'
         },
         dimensions: {
             width: 150,
@@ -6855,7 +7337,9 @@ const components = [
         size: 'ATX',
         specs:{
             wattage: 1600,
-            cableModularity: 'modular'
+            cableModularity: 'modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
+            ports: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power'
         },
         dimensions: {
             width: 150,
@@ -6902,7 +7386,9 @@ const components = [
         size: 'ATX',
         specs:{
             wattage: 1300,
-            cableModularity: 'modular'
+            cableModularity: 'modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
+            ports: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power'
         },
         dimensions: {
             width: 150,
@@ -6951,7 +7437,9 @@ const components = [
         size: 'ATX',
         specs:{
             wattage: 1600,
-            cableModularity: 'modular'
+            cableModularity: 'modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
+            ports: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power'
         },
         dimensions: {
             width: 150,
@@ -7000,7 +7488,9 @@ const components = [
         size: 'ATX',
         specs:{
             wattage: 1000,
-            cableModularity: 'modular'
+            cableModularity: 'modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
+            ports: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power'
         },
         dimensions: {
             width: 150,
@@ -7049,7 +7539,9 @@ const components = [
         size: 'ATX',
         specs:{
             wattage: 750,
-            cableModularity: 'semi-modular'
+            cableModularity: 'semi-modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
+            ports: '8-pin-pcie, 6-pin-pcie, sata-power'
         },
         dimensions: {
             width: 150,
@@ -7096,7 +7588,9 @@ const components = [
         size: 'ATX',
         specs:{
             wattage: 850,
-            cableModularity: 'semi-modular'
+            cableModularity: 'semi-modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
+            ports: '8-pin-pcie, 6-pin-pcie, sata-power'
         },
         dimensions: {
             width: 150,
@@ -7145,7 +7639,9 @@ const components = [
         size: 'ATX', 
         specs:{
             wattage: 750,
-            cableModularity: 'semi-modular'
+            cableModularity: 'semi-modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
+            ports: '8-pin-pcie, 6-pin-pcie, sata-power'
         },
         dimensions: {
             width: 150,
@@ -7192,7 +7688,9 @@ const components = [
         size: 'ATX', 
         specs:{
             wattage: 850,
-            cableModularity: 'semi-modular'
+            cableModularity: 'semi-modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
+            ports: '8-pin-pcie, 6-pin-pcie, sata-power'
         },
         dimensions: {
             width: 150,
@@ -7240,7 +7738,9 @@ const components = [
         size: 'ATX', 
         specs:{
             wattage: 1000,
-            cableModularity: 'semi-modular'
+            cableModularity: 'semi-modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
+            ports: '8-pin-pcie, 6-pin-pcie, sata-power'
         },
         dimensions: {
             width: 150,
@@ -7292,7 +7792,8 @@ const components = [
         size: 'ATX', 
         specs:{
             wattage: 500,
-            cableModularity: 'non-modular'
+            cableModularity: 'non-modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
         },
         dimensions: {
             width: 150,
@@ -7338,7 +7839,8 @@ const components = [
         size: 'ATX', 
         specs:{
             wattage: 600,
-            cableModularity: 'non-modular'
+            cableModularity: 'non-modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
         },
         dimensions: {
             width: 150,
@@ -7384,7 +7886,8 @@ const components = [
         size: 'ATX', 
         specs:{
             wattage: 850,
-            cableModularity: 'non-modular'
+            cableModularity: 'non-modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
         },
         dimensions: {
             width: 150,
@@ -7430,7 +7933,8 @@ const components = [
         size: 'ATX', 
         specs:{
             wattage: 500,
-            cableModularity: 'non-modular'
+            cableModularity: 'non-modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
         },
         dimensions: {
             width: 150,
@@ -7476,7 +7980,8 @@ const components = [
         size: 'ATX', 
         specs:{
             wattage: 750,
-            cableModularity: 'non-modular'
+            cableModularity: 'non-modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
         },
         dimensions: {
             width: 150,
@@ -7522,7 +8027,8 @@ const components = [
         size: 'ATX', 
         specs:{
             wattage: 600,
-            cableModularity: 'non-modular'
+            cableModularity: 'non-modular',
+            cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
         },
         dimensions: {
             width: 150,
@@ -7568,6 +8074,11 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
+        specs:{
+            rpm: '5400',
+            interface: 'SATA',
+            formFactor: 'HDD 3.5"',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -7596,6 +8107,11 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
+        specs:{
+            rpm: '7200',
+            interface: 'SATA',
+            formFactor: 'HDD 3.5"',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -7624,6 +8140,11 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
+        specs:{
+            rpm: '7200',
+            interface: 'SATA',
+            formFactor: 'HDD 3.5"',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -7652,6 +8173,11 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
+        specs:{
+            rpm: '7200',
+            interface: 'SATA',
+            formFactor: 'HDD 3.5"',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -7680,6 +8206,11 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
+        specs:{
+            rpm: '7200',
+            interface: 'SATA',
+            formFactor: 'HDD 3.5"',
+        },
         dimensions: {
             depth: 125,
             width: 125,
@@ -7710,6 +8241,12 @@ const components = [
     type: 'storage',
     size: 'ssd',
     watts: '4',
+    specs:{
+        formFactor: '2.5"',
+        interface: 'SATA',
+        read: '550MB/s',
+        write: '500MB/s',
+    },
     dimensions: {
         depth: 125,
         width: 125,
@@ -7738,6 +8275,12 @@ const components = [
     type: 'storage',
     size: 'ssd',
     watts: '4',
+    specs:{
+        formFactor: '2.5"',
+        interface: 'SATA',
+        read: '560MB/s',
+        write: '530MB/s',
+    },
     dimensions: {
         depth: 125,
         width: 125,
@@ -7766,6 +8309,12 @@ const components = [
     type: 'storage',
     size: 'ssd',
     watts: '4',
+    specs:{
+        formFactor: '2.5"',
+        interface: 'SATA',
+        read: '530MB/s',
+        write: '400MB/s',
+    },
     dimensions: {
         depth: 125,
         width: 125,
@@ -7793,6 +8342,12 @@ const components = [
     type: 'storage',
     size: 'ssd',
     watts: '4',
+    specs:{
+        formFactor: '2.5"',
+        interface: 'SATA',
+        read: '555MB/s',
+        write: '440MB/s',
+    },
     dimensions: {
         depth: 125,
         width: 125,
@@ -7822,8 +8377,12 @@ const components = [
     type: 'cooling',
     size: 'amd',
     specs:{
-        wattage: 150,
-        category: 'cpu'
+        category: 'cpu',
+        design: 'Tower Style with a copper base',
+        fan: '120mm',
+        rpm: '800-2000',
+        TDP: '150W',
+        mount: 'AM4/AM5',
     },
     watts: '150',
     dimensions: {
@@ -7852,8 +8411,12 @@ const components = [
     type: 'cooling',
     size: 'amd',
     specs:{
-        wattage: 150,
-        category: 'cpu'
+        category: 'cpu',
+        design: 'Tower Style with a copper base',
+        fan: '120mm',
+        rpm: '800-1900',
+        TDP: '150W',
+        mount: 'AM4/AM5',
     },
     watts: '150',
     dimensions: {
@@ -7882,8 +8445,12 @@ const components = [
     type: 'cooling',
     size: 'amd',
     specs:{
-        wattage: 150,
-        category: 'cpu'
+        category: 'cpu',
+        design: 'Dual-Tower design with a direct-touch copper base',
+        fan: '120mm',
+        rpm: '200-2000',
+        TDP: '150W',
+        mount: 'Compatible with Intel and AMD sockets',
     },
     watts: '150',
     dimensions: {
@@ -7907,13 +8474,17 @@ const components = [
         {type: '3-pin-cooling'}
     ]
     },  
-    { //be quiet pure rock
+    { //be quiet pure rock 2
     name: 'Be Quiet Pure Rock 2',
     type: 'cooling',
-    size: 'amd',
+    size: ['amd','intel'],
     specs:{
-        wattage: 150,
-        category: 'cpu'
+        category: 'cpu',
+        design: 'Compact Tower Style with a copper base',
+        fan: '120mm',
+        rpm: '650-1500',
+        TDP: '150W',
+        mount: 'Compatible with Intel and AMD sockets',
     },
     watts: '150',
     dimensions: {
@@ -7942,8 +8513,12 @@ const components = [
     type: 'cooling',
     size: 'amd',
     specs:{
-        wattage: 150,
-        category: 'cpu'
+        category: 'cpu',
+        design: 'Dual-Tower Style with 7 copper heat pipes',
+        fan: '135mm',
+        rpm: '600-1400',
+        TDP: '150W',
+        mount: 'Compatible with Intel and AMD sockets',
     },
     watts: '150',
     dimensions: {
@@ -7972,8 +8547,12 @@ const components = [
     type: 'cooling',
     size: 'amd',
     specs:{
-        wattage: 150,
-        category: 'cpu'
+        category: 'cpu',
+        design: 'Tower Style with 4 copper heat pipes',
+        fan: '120mm',
+        rpm: '650-2050',
+        TDP: '150W',
+        mount: 'Compatible with Intel and AMD sockets',
     },
     watts: '150',
     dimensions: {
@@ -8002,8 +8581,12 @@ const components = [
     type: 'cooling',
     size: 'amd',
     specs:{
-        wattage: 150,
-        category: 'cpu'
+        category: 'cpu',
+        design: 'Tower Style with digital temperature display',
+        fan: '120mm',
+        rpm: '500-1850',
+        TDP: '150W',
+        mount: 'Compatible with Intel and AMD sockets',
     },
     watts: '150',
     dimensions: {
@@ -8033,8 +8616,12 @@ const components = [
      type: 'cooling',
      size: 'intel',
      specs:{
-        wattage: 150,
-        category: 'cpu'
+        category: 'cpu',
+        design: 'Tower Style with a copper base',
+        size: '103x103mm',
+        rpm: '1000-3000',
+        TDP: '150W',
+        mount: 'Intel',
     },
     watts: '150',
      dimensions: {
@@ -8063,8 +8650,12 @@ const components = [
     type: 'cooling',
     size: 'intel',
     specs:{
-        wattage: 150,
-        category: 'cpu'
+        category: 'cpu',
+        design: 'Tower Style with a copper base',
+        size: '100x100mm',
+        rpm: '600-3150',
+        TDP: '150W',
+        mount: 'Intel',
     },
     watts: '150',
     dimensions: {
@@ -8093,6 +8684,12 @@ const components = [
     type: 'ram',
     size: 'ddr4',
     watts: '3',
+    specs:{
+        color: 'RGB',
+        type: 'DDR4',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
       width: 133,
       height: 133,
@@ -8112,6 +8709,12 @@ const components = [
     type: 'ram',
     size: 'ddr4',
     watts: '3',
+    specs:{
+        color: 'RGB',
+        type: 'DDR4',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8131,6 +8734,13 @@ const components = [
     type: 'ram',
     size: 'ddr4',
     watts: '3',
+    specs:{
+        heatsink: 'Aluminum',
+        color: 'RGB',
+        type: 'DDR4',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8150,6 +8760,12 @@ const components = [
     type: 'ram',
     size: 'ddr4',
     watts: '3',
+    specs:{
+        heatsink: 'Aluminum',
+        type: 'DDR4',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8169,6 +8785,12 @@ const components = [
     type: 'ram',
     size: 'ddr4',
     watts: '3',
+    specs:{
+        color: 'RGB',
+        type: 'DDR4',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8188,6 +8810,12 @@ const components = [
     type: 'ram',
     size: 'ddr4',
     watts: '3',
+    specs:{
+        heatsink: 'Aluminum',        
+        type: 'DDR4',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8202,11 +8830,17 @@ const components = [
         {side: 'PACK', imageSrc: './assets/memory/crucial pro ddr4.png'},  
     ],
     },
-    { //Corsiar Vengeance Pro DDR4
-    name: 'Corsiar Vengeance Pro DDR4',
+    { //Corsair Vengeance Pro DDR4
+    name: 'Corsair Vengeance Pro DDR4',
     type: 'ram',
     size: 'ddr4',
     watts: '3',
+    specs:{
+        color: 'RGB',
+        type: 'DDR4',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8226,6 +8860,12 @@ const components = [
     type: 'ram',
     size: 'ddr4',
     watts: '3',
+    specs:{
+        color: 'RGB',
+        type: 'DDR4',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8246,7 +8886,13 @@ const components = [
       name: 'Dominator Titanium DDR5',
       type: 'ram',
       size: 'ddr5',
-    watts: '3',
+      watts: '3',
+      specs:{
+        color: 'RGB',
+        type: 'DDR5',
+        size: 'DIMM',
+        watts: '3',
+      },
       dimensions: {
         width: 133,
         height: 133,
@@ -8266,6 +8912,12 @@ const components = [
     type: 'ram',
     size: 'ddr5',
     watts: '3',
+    specs:{
+        color: 'RGB',
+        type: 'DDR5',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8285,6 +8937,12 @@ const components = [
     type: 'ram',
     size: 'ddr5',
     watts: '3',
+    specs:{
+        heatsink: 'Aluminum',
+        type: 'DDR5',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8304,6 +8962,12 @@ const components = [
     type: 'ram',
     size: 'ddr5',
     watts: '3',
+    specs:{
+        color: 'RGB',
+        type: 'DDR5',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8323,6 +8987,12 @@ const components = [
     type: 'ram',
     size: 'ddr5',
     watts: '3',
+    specs:{
+        heatsink: 'Aluminum',
+        type: 'DDR5',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8342,6 +9012,12 @@ const components = [
     type: 'ram',
     size: 'ddr5',
     watts: '3',
+    specs:{
+        color: 'RGB',
+        type: 'DDR5',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8361,6 +9037,12 @@ const components = [
     type: 'ram',
     size: 'ddr5',
     watts: '3',
+    specs:{
+        color: 'RGB',
+        type: 'DDR5',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8380,6 +9062,12 @@ const components = [
     type: 'ram',
     size: 'ddr5',
     watts: '3',
+    specs:{
+        heatsink: 'Aluminum',
+        type: 'DDR5',
+        size: 'DIMM',
+        watts: '3',
+    },
     dimensions: {
         width: 133,
         height: 133,
@@ -8397,12 +9085,16 @@ const components = [
  
      //GPU [gpu file is for general left side img assets] [gpu.1 is for pack side img assets]
     {        // Gigabyte Radeon RX 7900 XTX 16pin
-    name: 'Gigabyte Nvidia GeForce RTX 3060',
+    name: 'Gigabyte Radeon RX7900 XTX',
     type: 'gpu',
     size: 'ATX',
     specs: {
         portCount: 2,
-        portType: '16-pin-pcie'
+        portType: '16-pin-pcie',
+        architecture: 'AMD RDNA 3',
+        baseClock: '2.3 GHz',
+        boostClock: '2.5 GHz',
+        memory: '24GB GDDR6',
     },
     watts: '170',
     dimensions: {
@@ -8436,7 +9128,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '8-pin-pcie'
+        portType: '8-pin-pcie',
+        architecture: 'NVIDIA Ada Lovelace',
+        baseClock: '1.83 GHz',
+        boostClock: '2.4 GHz',
+        memory: '8GB GDDR6',
     },
     watts: '110',
     dimensions: {
@@ -8462,45 +9158,17 @@ const components = [
     ]  
     },
 
-    {        // Intel ARC A750 8+6pin
-    name: 'Intel ARC A750',
-    type: 'gpu',
-    size: 'ATX',
-    specs: {
-        portCount: 2,
-        portType: '14-pin-pcie'
-    },
-    watts: '225',
-    dimensions: {
-        width: 200,
-        height: 200,
-        depth: 200,
-    },
-    isRotatable: false,
-    isAttached: false,
-    defaultSource: 'pack',
-    tableDisplay: 'pack',
-    images: [
-        {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
-        {side: 'left', imageSrc: './assets/gpu/Intel.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/intel arc.png'}
-    ],
-    slots: [],
-    ports: [
-        {
-            type: '14-pin-pcie',
-            style: 'split'
-        }
-    ]  
-    },
-
     {        // Gigabyte Nvidia GeForce RTX 3060
     name: 'Gigabyte Nvidia GeForce RTX 3060',
     type: 'gpu',
     size: 'ATX', 
     specs: {
         portCount: 1,
-        portType: '8-pin-pcie'
+        portType: '8-pin-pcie',
+        architecture: 'NVIDIA Ampere',
+        baseClock: '1.32 GHz',
+        boostClock: '1.78 GHz',
+        memory: '12GB GDDR6',
     },
     watts: '170',
     dimensions: {
@@ -8532,7 +9200,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '8-pin-pcie'
+        portType: '8-pin-pcie',
+        architecture: 'NVIDIA Ada Lovelace',
+        baseClock: '1.92 GHz',
+        boostClock: '2.5 GHz',
+        memory: '12GB GDDR6',
     },
     watts: '200',
     dimensions: {
@@ -8564,7 +9236,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '12vhpwr'
+        portType: '12vhpwr',
+        architecture: 'NVIDIA Ada Lovelace',
+        baseClock: '2.23 GHz',
+        boostClock: '2.52 GHz',
+        memory: '24GB GDDR6X',
     },
     watts: '450',
     dimensions: {
@@ -8596,7 +9272,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '8-pin-pcie'
+        portType: '8-pin-pcie',
+        architecture: 'NVIDIA Ampere',
+        baseClock: '1.32 GHz',
+        boostClock: '1.78 GHz',
+        memory: '12GB GDDR6',
     },
     watts: '170',
     dimensions: {
@@ -8628,7 +9308,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '8-pin-pcie'
+        portType: '8-pin-pcie',
+        architecture: 'NVIDIA Turing',
+        baseClock: '1.48 GHz',
+        boostClock: '1.67 GHz',
+        memory: '4GB GDDR6',
     },
     watts: '75',
     dimensions: {
@@ -8660,7 +9344,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '8-pin-pcie'
+        portType: '8-pin-pcie',
+        architecture: 'AMD RDNA 3',
+        baseClock: '2.2 GHz',
+        boostClock: '2.5 GHz',
+        memory: '8GB GDDR6',
     },
     watts: '165',
     dimensions: {
@@ -8692,7 +9380,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '8-pin-pcie'
+        portType: '8-pin-pcie',
+        architecture: 'NVIDIA Ada Lovelace',
+        baseClock: '2.23 GHz',
+        boostClock: '2.52 GHz',
+        memory: '24GB GDDR6X',
     },
     watts: '450',
     dimensions: {
@@ -8724,7 +9416,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '8-pin-pcie'
+        portType: '8-pin-pcie',
+        architecture: 'NVIDIA Ada Lovelace',
+        baseClock: '1.83 GHz',
+        boostClock: '2.4 GHz',
+        memory: '8GB GDDR6',
     },
     watts: '125',
     dimensions: {
@@ -8756,7 +9452,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '8-pin-pcie'
+        portType: '8-pin-pcie',
+        architecture: 'NVIDIA Turing',
+        baseClock: '1.53 GHz',
+        boostClock: '1.79 GHz',
+        memory: '6GB GDDR6',
     },
     watts: '125',
     dimensions: {
@@ -8788,7 +9488,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '8-pin-pcie'
+        portType: '8-pin-pcie',
+        architecture: 'NVIDIA Ada Lovelace',
+        baseClock: '1.83 GHz',
+        boostClock: '2.4 GHz',
+        memory: '8GB GDDR6',
     },
     watts: '115',
     dimensions: {
@@ -8820,7 +9524,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '12vhpwr'
+        portType: '12vhpwr',
+        architecture: 'NVIDIA Ada Lovelace',
+        baseClock: '1.92 GHz',
+        boostClock: '2.5 GHz',
+        memory: '12GB GDDR6',
     },
     watts: '220',
     dimensions: {
@@ -8851,6 +9559,13 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     watts: '130',
+    specs: {
+        architecture: 'NVIDIA Ampere',
+        baseClock: '1.50 GHz',
+        boostClock: '1.78 GHz',
+        memory: '8GB GDDR6',
+        powerConnector: 'N/A' 
+    },
     dimensions: {
         width: 200,
         height: 200,
@@ -8875,7 +9590,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '6-pin-pcie'
+        portType: '6-pin-pcie',
+        architecture: 'AMD RDNA 2',
+        baseClock: '2.3 GHz',
+        boostClock: '2.8 GHz',
+        memory: '4GB GDDR6',
     },
     watts: '120',
     dimensions: {
@@ -8907,7 +9626,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '6-pin-pcie'
+        portType: '6-pin-pcie',
+        architecture: 'NVIDIA Turing',
+        baseClock: '1.65 GHz',
+        boostClock: '1.82 GHz',
+        memory: '8GB GDDR6',
     },
     watts: '250',
     dimensions: {
@@ -8939,7 +9662,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '6-pin-pcie'
+        portType: '6-pin-pcie',
+        architecture: 'AMD RDNA 2',
+        baseClock: '2.3 GHz',
+        boostClock: '2.6 GHz',
+        memory: '12GB GDDR6',
     },
     watts: '250',
     dimensions: {
@@ -8971,7 +9698,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '6-pin-pcie'
+        portType: '6-pin-pcie',
+        architecture: 'AMD RDNA 2',
+        baseClock: '1.7 GHz',
+        boostClock: '1.9 GHz',
+        memory: '4GB GDDR6',
     },
     watts: '100',
     dimensions: {
@@ -9003,7 +9734,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '6-pin-pcie'
+        portType: '6-pin-pcie',
+        architecture: 'NVIDIA Turing',
+        baseClock: '1.3 GHz', 
+        boostClock: '1.6 GHz',
+        memory: '8GB GDDR6',
     },
     watts: '245',
     dimensions: {
@@ -9035,7 +9770,11 @@ const components = [
     size: 'ATX',
     specs: {
         portCount: 1,
-        portType: '6-pin-pcie'
+        portType: '6-pin-pcie',
+        architecture: 'NVIDIA Pascal',
+        baseClock: '1.48 GHz',
+        boostClock: '1.58 GHz',
+        memory: '11GB GDDR5X',
     },
     watts: '250',
     dimensions: {
