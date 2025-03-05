@@ -2,8 +2,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
-    <link rel="stylesheet" href="./assistant/assistant.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./assistant/assistant.css">
 
     <link rel="icon" href="../favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
@@ -384,24 +384,49 @@
             </div>
         </div>
         <div class="asst-body">
-            <div id="tasksContainer" class="asst-container">
-                <!-- <div class="task-cell">
-                    <div class="task-title"></div>
-                    <div class="task-description"></div>
-                </div> -->
-                <div class="task-cell">
-                    <div class="task-title">
-                        <div class="task-icon">
-                            <img src="./assets/Assistant/shop.png">
+                <div id="tasksContainer" class="asst-container">
+
+                    <div class="task-cell">
+                        <div class="task-title">
+                            <div class="task-icon">
+                                <img src="./assets/Assistant/shop.png">
+                            </div>
+                            <div class="task-name">
+                                <h3>Enter the Shop</h3>
+                                <p class="task-status">Completed </p>
+                            </div>
                         </div>
-                        <div class="task-name">
-                            <h3>Enter the Shop</h3>
-                            <p class="task-status">Completed </p>
+                        <div class="task-description">
+                            <!-- <div class="description-container"> -->
+                                <p>Look for your PC components and buy them.</p>
+                                <br>
+                                <p>Ensure to check prices and specifications before making a purchase.</p>
+                                <p>The components that you will need are the following:</p>
+                                <p>1. Case</p>
+                                <p>2. motherboard</p>
+                                <p>3. processor</p>
+                                <p>4. Power Supply Unit</p>
+                                <p>5. RAM</p>
+                                <p>6. Storage Device - HDD or SSD</p>
+                                <p>7. Cooling</p>
+                                <p>8. GPU or Graphics card</p>
+                                <br>
+                                <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
+                                <div class="desc-image-carousel">
+                                    <img src="assets/Assistant/shop1.png" id="id1" class="desc-image">
+                                    <!-- <img src="assets/Assistant/shop2.png" id="id2" class="desc-image"> -->
+                                    <!-- <img src="assets/Assistant/shop3.png" id="id3" class="desc-image"> -->
+                                    <img src="./assets/svg/leftArr.svg" class="desc-left">
+                                    <img src="./assets/svg/rightArr.svg" class="desc-right">
+                                </div>
+
+                                <!-- New Task Button -->
+                                <button class="start-task-btn" data-task="openShop">Start Task</button>
+                            <!-- </div> -->
                         </div>
                     </div>
-                    <div class="task-description"></div>
+
                 </div>
-            </div>
             <div id="errorsContainer" class="asst-container">
                 HELLO ERRORS
             </div>

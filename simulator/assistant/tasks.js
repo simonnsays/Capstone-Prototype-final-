@@ -1,5 +1,6 @@
 const tasks = [
     {
+        id: 1,
         title: {
             imageSrc: './assets/Assistant/shop.png',
             text: 'Enter the Shop'

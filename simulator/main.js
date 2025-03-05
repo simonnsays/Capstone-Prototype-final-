@@ -108,7 +108,7 @@ class Main {
 
 
         // TEST: BOOT UP
-        this.testBootUp()
+        // this.testBootUp()
 
         // TEST: MISSING COMPONENTS
         // this.testMissingComponents()
@@ -116,6 +116,8 @@ class Main {
         // TEST: TRASH BIN
         // this.testTrashBin()
         
+        // TEST: ASSISTANT
+        this.assistant.openModal()
     }
 
     /////////////////// TEST: BOOT UP

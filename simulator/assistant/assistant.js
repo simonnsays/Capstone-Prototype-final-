@@ -63,6 +63,37 @@ class Assistant {
         window.addEventListener('click', () => this.toggleTaskCellStates())
     }
 
+    // toggleTaskCellStates() {
+    //     if (!this.tasksContainer.children.length > 0) {
+    //         return;
+    //     }
+    
+    //     Object.values(this.tasksContainer.children).forEach(taskCell => {
+    //         if (!taskCell.dataset.listenerAttached) {
+    //             taskCell.addEventListener('click', (event) => {
+    //                 event.stopPropagation(); // Prevent unintended bubbling
+    
+    //                 // Check if the clicked task cell is already open
+    //                 const isAlreadyOpened = taskCell.classList.contains('opened');
+    
+    //                 // Close any other open task cells
+    //                 document.querySelectorAll('.task-cell.opened').forEach(openedCell => {
+    //                     if (openedCell !== taskCell) {
+    //                         openedCell.classList.remove('opened');
+    //                     }
+    //                 });
+    
+    //                 // If the task cell was not already open, open it
+    //                 if (!isAlreadyOpened) {
+    //                     taskCell.classList.add('opened');
+    //                 }
+    //             });
+    
+    //             taskCell.dataset.listenerAttached = true; // Mark as handled
+    //         }
+    //     });
+    // }
+
     toggleTaskCellStates() {
         if (!this.tasksContainer.children.length > 0) {
             return
@@ -86,6 +117,7 @@ class Assistant {
             }
         })
     }   
+       
 
     createTasks() {
         tasks.forEach(task => {
@@ -96,7 +128,11 @@ class Assistant {
             taskCell.appendChild(cellTitle)
 
             // description element
-            const cellDescription = document.createElement('p')
+            const cellDescription = this.createTaskDescription(task)
+            taskCell.appendChild(cellDescription)
+
+
+            // const cellDescription = document.createElement('p')
             cellDescription.classList.add('task-description')
             cellDescription.textContent = task.description
             taskCell.appendChild(cellDescription)
@@ -135,6 +171,10 @@ class Assistant {
         cellTitle.appendChild(taskName)
 
         return cellTitle
+    }
+
+    createTaskDescription(task) {
+        
     }
 
     revealTasks() {
@@ -185,6 +225,7 @@ class Assistant {
         this.miniElement.classList.add('in-modal')
         this.miniElement.classList.add('extended')
         this.iconSec.style.animation = 'float 2s ease-in-out infinite'
+        this.pulse.classList.add('hidden')
         this.modalIconArea.appendChild(this.miniElement)
 
         window.removeEventListener('mousemove', this.boundMouseHover)
