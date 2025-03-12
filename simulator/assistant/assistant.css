@@ -633,6 +633,10 @@ p {
     top: 15;
 }
 
+.completed {
+    opacity: .5;
+}
+
 .opened {
     width: 850px;
     cursor:default;
@@ -662,11 +666,26 @@ p {
     flex-direction: column;
     align-items: center;
     font-size: 9rem;
+
+    padding: 10px;
+    text-align: center;
 }
 
 .task-status {
     font-size: .7rem;
     font-weight: 600;
+}
+
+.vert-br {
+    width: 0px;
+    height: 85%;
+    border: 1px solid rgba(0, 0, 0, 1);
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 250px;
+    transform: translateY(-50%)
+
 }
 
 .task-description {
@@ -683,12 +702,16 @@ p {
     flex-direction: column;
 }
 
-.task-description > p {
+.task-description > * {
+    font-weight: 100;
+}
+
+ol li {
     font-weight: 100;
 }
 
 .desc-image-carousel {
-    width: 530px; /* Explicit size */
+    width: 530px;
     min-height: 220px;
     display: flex;
     align-items: center;
@@ -696,20 +719,12 @@ p {
     overflow: hidden;
     position: relative;
     margin: 10px 0;
-    
-    /* border: 3px solid white;
-    background-color: red; */
 }
 
 .desc-image {
     max-height: 100%;
-    flex-shrink: 0;
+    max-width: 80%;
 }
-
-/* .desc-image-carousel img {
-    flex-shrink: 0;
-
-} */
 
 .desc-left, .desc-right {
     width: 30px;

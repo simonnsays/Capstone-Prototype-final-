@@ -42,7 +42,7 @@ class Shop{
 
     // Open Shop Tab
     openTab(modal) {
-        modal.showModal();
+        modal.show();
         modal.isOpen = true;
         this.isActive = true;
 

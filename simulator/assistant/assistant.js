@@ -63,78 +63,78 @@ class Assistant {
         window.addEventListener('click', () => this.toggleTaskCellStates())
     }
 
-    // toggleTaskCellStates() {
-    //     if (!this.tasksContainer.children.length > 0) {
-    //         return;
-    //     }
-    
-    //     Object.values(this.tasksContainer.children).forEach(taskCell => {
-    //         if (!taskCell.dataset.listenerAttached) {
-    //             taskCell.addEventListener('click', (event) => {
-    //                 event.stopPropagation(); // Prevent unintended bubbling
-    
-    //                 // Check if the clicked task cell is already open
-    //                 const isAlreadyOpened = taskCell.classList.contains('opened');
-    
-    //                 // Close any other open task cells
-    //                 document.querySelectorAll('.task-cell.opened').forEach(openedCell => {
-    //                     if (openedCell !== taskCell) {
-    //                         openedCell.classList.remove('opened');
-    //                     }
-    //                 });
-    
-    //                 // If the task cell was not already open, open it
-    //                 if (!isAlreadyOpened) {
-    //                     taskCell.classList.add('opened');
-    //                 }
-    //             });
-    
-    //             taskCell.dataset.listenerAttached = true; // Mark as handled
-    //         }
-    //     });
-    // }
-
     toggleTaskCellStates() {
         if (!this.tasksContainer.children.length > 0) {
             return
         }
     
         Object.values(this.tasksContainer.children).forEach(taskCell => {
-            // Ensure only one event listener is attached
             if (!taskCell.dataset.listenerAttached) {
-                taskCell.addEventListener('click', () => {
-                    // Close any previously opened task cell
+                taskCell.addEventListener('click', (event) => {
+                    event.stopPropagation() // Prevent unintended bubbling
+    
+                    // Check if the clicked task cell is already open
+                    const isAlreadyOpened = taskCell.classList.contains('opened')
+    
+                    // Close any other open task cells
                     document.querySelectorAll('.task-cell.opened').forEach(openedCell => {
                         if (openedCell !== taskCell) {
                             openedCell.classList.remove('opened')
                         }
                     })
     
-                    // Toggle the clicked task cell
-                    taskCell.classList.toggle('opened')
+                    // If the task cell was not already open, open it
+                    if (!isAlreadyOpened) {
+                        taskCell.classList.add('opened')
+                    }
                 })
-                taskCell.dataset.listenerAttached = true  // Mark as handled
+    
+                taskCell.dataset.listenerAttached = true // Mark as handled
             }
         })
-    }   
+    }
+
+    // toggleTaskCellStates() {
+    //     if (!this.tasksContainer.children.length > 0) {
+    //         return
+    //     }
+    
+    //     Object.values(this.tasksContainer.children).forEach(taskCell => {
+    //         // Ensure only one event listener is attached
+    //         if (!taskCell.dataset.listenerAttached) {
+    //             taskCell.addEventListener('click', () => {
+    //                 // Close any previously opened task cell
+    //                 document.querySelectorAll('.task-cell.opened').forEach(openedCell => {
+    //                     if (openedCell !== taskCell) {
+    //                         openedCell.classList.remove('opened')
+    //                     }
+    //                 })
+    
+    //                 // Toggle the clicked task cell
+    //                 taskCell.classList.toggle('opened')
+    //             })
+    //             taskCell.dataset.listenerAttached = true  // Mark as handled
+    //         }
+    //     })
+    // }   
        
 
     createTasks() {
         tasks.forEach(task => {
+            // task cell element
             const taskCell = document.createElement('div')
             taskCell.classList.add('task-cell')
 
+            // title element
             const cellTitle = this.createTaskTtitle(task)
             taskCell.appendChild(cellTitle)
 
+            const divider = document.createElement('div')
+            divider.classList.add('vert-br')
+            taskCell.appendChild(divider)
+
             // description element
             const cellDescription = this.createTaskDescription(task)
-            taskCell.appendChild(cellDescription)
-
-
-            // const cellDescription = document.createElement('p')
-            cellDescription.classList.add('task-description')
-            cellDescription.textContent = task.description
             taskCell.appendChild(cellDescription)
 
             this.tasksContainer.appendChild(taskCell)
@@ -161,11 +161,13 @@ class Assistant {
         taskNameText.textContent = task.title.text
         taskName.appendChild(taskNameText)
         // > > task name status
-        const taskNameStatus = document.createElement('p')
-        taskNameStatus.textContent = 'Completed'
-        taskNameStatus.classList.add('task-status')
-        taskNameStatus.visibility = 'hidden'
-        taskName.appendChild(taskNameStatus)
+        if(task.status === 'complete') {
+            const taskNameStatus = document.createElement('p')
+            taskNameStatus.textContent = 'Completed'
+            taskNameStatus.classList.add('task-status')
+            taskNameStatus.visibility = 'hidden'
+            taskName.appendChild(taskNameStatus)
+        }
 
         cellTitle.appendChild(taskIcon)
         cellTitle.appendChild(taskName)
@@ -174,7 +176,100 @@ class Assistant {
     }
 
     createTaskDescription(task) {
-        
+        // main description element
+        const cellDescription = document.createElement('div')
+        cellDescription.classList.add('task-description')
+
+        task.description.forEach(desc => {
+            let descElement = null
+            switch(desc.type) {
+                case 'text':
+                    descElement = document.createElement('p')
+                    descElement.textContent = desc.content
+                    break
+                case 'br':
+                    descElement = document.createElement('br')
+                    break
+                case 'list':
+                    descElement = desc.style == 'unordered' 
+                    ?document.createElement('ul') 
+                    :document.createElement('ol');
+                    
+                    desc.items.forEach(item => {
+                        const listItem = document.createElement('li')
+                        listItem.textContent = item
+                        descElement.appendChild(listItem)
+                    })
+                    break
+                case 'imageGroup':
+                    // Main image carousel container
+                    descElement = document.createElement('div')
+                    descElement.classList.add('desc-image-carousel')
+    
+                    // State: Track currently visible image
+                    let activeIndex = desc.index || 0
+    
+                    // Left Arrow button
+                    const arrowLeft = document.createElement('img')
+                    arrowLeft.src = './assets/svg/leftArr.svg'
+                    arrowLeft.classList.add('desc-left')
+                    arrowLeft.addEventListener('click', () => {     // Left arrow event listener
+                        if (activeIndex > 0) {
+                            activeIndex--
+                            updateCarousel()
+                        }
+                    })
+                    descElement.appendChild(arrowLeft)
+                    
+                    // Right Arrow button
+                    const arrowRight = document.createElement('img')
+                    arrowRight.src = './assets/svg/rightArr.svg'
+                    arrowRight.classList.add('desc-right')
+                    arrowRight.addEventListener('click', () => {    // Right arrow event listener
+                        if (activeIndex < images.length - 1) {
+                            activeIndex++
+                            updateCarousel()
+                        }
+                    })
+                    
+                    descElement.appendChild(arrowRight)
+                    
+                    const images = desc.images.map((imgSrc, index) => {
+                        const img = document.createElement('img')
+                        img.src = imgSrc
+                        img.classList.add('desc-image')
+                        img.style.display = index === activeIndex ? 'block' : 'none'
+                        descElement.appendChild(img)
+                        return img // Store reference
+                    })
+    
+                    // Function to update image visibility and arrow states
+                    const updateCarousel = () => {
+
+                        images.forEach((img, index) => {
+                            img.style.display = index === activeIndex ? 'block' : 'none'
+                        })
+    
+                        // Disable left arrow if at the first image
+                        arrowLeft.style.opacity = activeIndex === 0 ? '0.5' : '1'
+                        arrowLeft.style.pointerEvents = activeIndex === 0 ? 'none' : 'auto'
+    
+                        // Disable right arrow if at the last image
+                        arrowRight.style.opacity = activeIndex === images.length - 1 ? '0.5' : '1'
+                        arrowRight.style.pointerEvents = activeIndex === images.length - 1 ? 'none' : 'auto'
+                    }
+    
+                    // Initial update for correct arrow states
+                    updateCarousel()
+                    break
+            }
+
+            if(descElement) {
+                cellDescription.appendChild(descElement)
+            }
+        })
+
+        return cellDescription
     }
 
     revealTasks() {
