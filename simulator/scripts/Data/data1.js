@@ -750,6 +750,34 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 69, y: 158, width: 75, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: false,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 69, y: 216, width: 75, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            }
         ],
         ports: [
             {type: '24-pin-power'},
@@ -884,6 +912,34 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 184, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                hidden: true,
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 63, y: 153, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                hidden: true,
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 256, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -1029,6 +1085,48 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 65, y: 158, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 72, y: 218, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 90, y: 258, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
         ],
         ports: [
             {type: '24-pin-power'},
@@ -1163,6 +1261,34 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 185, y: 33, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 65, y: 158, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 120, y: 263, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -1307,6 +1433,34 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 65, y: 158, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 120, y: 257, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
         ],
         ports: [
             {type: '24-pin-power'},
@@ -1441,6 +1595,34 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 174, y: 25, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 56.8, y: 158, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 78, y: 257, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -1585,6 +1767,20 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 53, y: 159, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
         ],
         ports: [
             {type: '24-pin-power'},
@@ -1719,6 +1915,34 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 174, y: 17, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 240, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -1863,6 +2087,32 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 63, y: 158, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 63, y: 257, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
         ],
         ports: [
             {type: '24-pin-power'},
@@ -1997,6 +2247,34 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 178.7, y: 31, width: 8, height: 137.5}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 65, y: 157, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 65, y: 215, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -2143,6 +2421,48 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 157, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 209, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 233, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
         ],
         ports: [
             {type: '24-pin-power'},
@@ -2277,6 +2597,48 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 185, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 58, y: 157, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 48, y: 255, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 131, y: 255, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -2421,6 +2783,34 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 159, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 80, y: 257, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
         ],
         ports: [
             {type: '24-pin-power'},
@@ -2555,6 +2945,62 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 179, y: 28, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 77, y: 159, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 157, y: 235, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 50, y: 257, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 138, y: 257, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -2699,6 +3145,48 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 195, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 222, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 257, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
         ],
         ports: [
             {type: '24-pin-power'},
@@ -2833,6 +3321,62 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 181, y: 29, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 195, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 222, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 57, y: 257, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 140, y: 257, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -2977,6 +3521,48 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 213, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 235, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
         ],
         ports: [
             {type: '24-pin-power'},
@@ -3111,6 +3697,45 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 177, y: 31, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 65, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 65, y: 193, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 65, y: 213, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -3255,6 +3880,48 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 76, y: 212, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 120, y: 260, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
         ],
         ports: [
             {type: '24-pin-power'},
@@ -3389,6 +4056,62 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 177, y: 32, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 65, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 50, y: 175, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 215, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 50, y: 235, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -3534,6 +4257,48 @@ const components = [
                         accessible: true
                     }
                 }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 213, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 259, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
             },           
         ],
         ports: [
@@ -3674,6 +4439,48 @@ const components = [
                     }
                 }
             }, 
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 64, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 64, y: 214, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 64, y: 258, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },   
 
         ],
         ports: [
@@ -3809,6 +4616,48 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 182, y: 22, width: 7, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },   
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 154.5, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 81, y: 213.5, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 254, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -3953,6 +4802,48 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 65, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 75, y: 213, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 120, y: 253, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },   
         ],
         ports: [
             {type: '24-pin-power'},
@@ -4091,7 +4982,49 @@ const components = [
                         accessible: true
                     }
                 }
-            },  
+            }, 
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 65, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 206, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 125, y: 257, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },    
 
         ],
         ports: [
@@ -4232,6 +5165,33 @@ const components = [
                     }
                 }
             }, 
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 198, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 134, y: 257, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },   
         ],
         ports: [
             {type: '24-pin-power'},
@@ -4371,6 +5331,48 @@ const components = [
                     }
                 }
             }, 
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 156.5, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 218, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 259, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },   
         ],
         ports: [
             {type: '24-pin-power'},
@@ -4510,6 +5512,48 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 159, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 203, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 259, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },   
         ],
         ports: [
             {type: '24-pin-power'},
@@ -4646,6 +5690,47 @@ const components = [
                     }
                 }
             }, 
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 70, y: 215, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 256, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },   
         ],
         ports: [
             {type: '24-pin-power'},
@@ -4785,6 +5870,48 @@ const components = [
                     }
                 }
             }, 
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 175, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 195, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 231, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },   
         ],
         ports: [
             {type: '24-pin-power'},
@@ -4924,6 +6051,47 @@ const components = [
                     }
                 }
             }, 
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 75, y: 213, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 80, y: 259, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },   
         ],
         ports: [
             {type: '24-pin-power'},
@@ -5062,7 +6230,34 @@ const components = [
                         accessible: true
                     }
                 }
-            },    
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 147, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 72, y: 255, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },       
         ],
         ports: [
             {type: '24-pin-power'},
@@ -5204,6 +6399,76 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 74, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 176, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 220, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },   
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 40, y: 259, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 122, y: 259, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },  
         ],
         ports: [
             {type: '24-pin-power'},
@@ -5343,8 +6608,76 @@ const components = [
                     }
                 }
             },
-
-    
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 74, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 77, y: 200, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 87, y: 225, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },   
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 48, y: 258, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 130, y: 258, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            }, 
         ],
         ports: [
             {type: '24-pin-power'},
@@ -5484,7 +6817,48 @@ const components = [
                     }
                 }
             },
-
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 65, y: 155, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 206, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 230, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },    
         ],
         ports: [
             {type: '24-pin-power'},
@@ -5624,6 +6998,49 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 157, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 200, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 225, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+
         ],
         ports: [
             {type: '24-pin-power'},
@@ -5758,6 +7175,61 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 181, y: 33, width: 8, height: 138}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 58, y: 157, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 74, y: 215, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 48, y: 255, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 131, y: 255, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -5903,6 +7375,61 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 157, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 48, y: 220, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 45, y: 255, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 130, y: 255, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
         ],
         ports: [
             {type: '24-pin-power'},
@@ -6042,6 +7569,77 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 157, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 74, y: 233, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 154, y: 233, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 50, y: 257.6, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 135, y: 257.6, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+
         ],
         ports: [
             {type: '24-pin-power'},
@@ -6181,6 +7779,77 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 158, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 195, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 215, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 235, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 150, y: 258, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+
         ],
         ports: [
             {type: '24-pin-power'},
@@ -6315,6 +7984,62 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 183, y: 24, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 158, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 195, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 222, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 257, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -6459,6 +8184,62 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 158, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 195, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 222, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 257, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
         ],
         ports: [
             {type: '24-pin-power'},
@@ -6598,6 +8379,34 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 154, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 67, y: 213, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+
         ],
         ports: [
             {type: '24-pin-power'},
@@ -6732,6 +8541,46 @@ const components = [
                     left: {
                         offsets: {
                             default: {x: 179, y: 27, width: 8, height: 140}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                hidden: true,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 60, y: 158, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 66, y: 213, width: 80, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 66, y: 233, width: 80, height: 20}
                         },
                         accessible: true
                     }
@@ -8235,7 +10084,7 @@ const components = [
             {type: 'sata-data'}
         ]
     },
-    //Storage ssd
+    //Storage SSD SATA
     { //Seagate Barracuda Q1 SSD
     name: 'Seagate Barracuda SSD',
     type: 'storage',
@@ -8370,6 +10219,142 @@ const components = [
         {type: 'sata-power'},
         {type: 'sata-data'}
     ]
+    },
+    // Storage m.2 
+    { // Samsung 970 EVO Plus 
+        name: 'Samsung 970 EVO Plus',
+        type: 'storage',
+        size: 'm.2',
+        compatibility: ['m-key'],
+        dimensions: {
+            width: 150,
+            height: 150,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        tableDisplay: 'pack',
+        specs: {
+            readSpeed: '3500MB/s',
+            writeSpeed: '3300MB/s',
+            nandType: 'V-NAND',
+            controller: 'Samsung Phoenix',        
+            formFactor: '2280',
+            interface: 'PCIe 3.0 x4',
+            keyType: 'M',
+        },
+        images: [
+            { side: 'left', imageSrc: './assets/storage/m.2/Samsung 970 EVO Plus NVMe SSD attached.png' },
+            { side: 'pack', imageSrc: './assets/storage/m.2/Samsung_970_EVO_Plus_NVMe_SSD.png' },
+        ],
+    },
+    { // Western Digital Black SN850X 
+        name: 'Western Digital Black SN850X',
+        type: 'storage',
+        size: 'm.2',
+        compatibility: ['b-key'],
+        dimensions: {
+            width: 150,
+            height: 150,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        tableDisplay: 'pack',
+        specs: {
+            readSpeed: '7300MB/s',
+            writeSpeed: '6300MB/s',
+            nandType: '3D NAND',
+            controller: 'WD Black G2',
+            formFactor: '2280',
+            interface: 'PCIe 4.0 x4',
+            keyType: 'M',
+        },
+        images: [
+            { side: 'pack', imageSrc: './assets/storage/m.2/Western_Digital_Black_SN850X_M.2_SSD.png' },
+            { side: 'left', imageSrc: './assets/storage/m.2/Western Digital Black SN850X M.2 SSD attached.png' },
+        ],
+    },
+    { // Kingston KC3000 
+        name: 'Kingston KC3000',
+        type: 'storage',
+        size: 'm.2',
+        compatibility: ['m-key'],
+        dimensions: {
+            width: 150,
+            height: 150,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        tableDisplay: 'pack',
+        specs: {
+            readSpeed: '7000MB/s',
+            writeSpeed: '7000MB/s',
+            nandType: '3D TLC NAND',
+            controller: 'Phison E18',
+            formFactor: '2280',
+            interface: 'PCIe 4.0 x4',
+            keyType: 'M',
+        },
+        images: [
+            { side: 'pack', imageSrc: './assets/storage/m.2/Kingston KC3000.png' },
+            { side: 'left', imageSrc: './assets/storage/m.2/Kingston KC3000 attached.png' },
+        ],
+    },
+    { // Crucial P3
+        name: 'Crucial P3',
+        type: 'storage',
+        size: 'm.2',
+        compatibility: ['b-key'],
+        dimensions: {
+            width: 150,
+            height: 150,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        tableDisplay: 'pack',
+        specs: {
+            readSpeed: '3500MB/s',
+            writeSpeed: '3000MB/s',
+            nandType: 'Micron Advanced 3D NAND',
+            controller: 'Phison E21T',
+            formFactor: '2280',
+            interface: 'PCIe 4.0 x4',
+            keyType: 'M',
+        },
+        images: [
+            { side: 'pack', imageSrc: './assets/storage/m.2/Crucial P3.png' },
+            { side: 'left', imageSrc: './assets/storage/m.2/Crucial P3 attached.png' },
+        ],
+    },
+    { // Seagate FireCuda 520
+        name: 'Seagate FireCuda 520',
+        type: 'storage',
+        size: 'm.2',
+        compatibility: ['m-key'], 
+        dimensions: {
+            width: 150,
+            height: 150,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        tableDisplay: 'pack',
+        specs: {
+            readSpeed: '5000MB/s',
+            writeSpeed: '4400MB/s',
+            nandType: '3D TLC NAND',
+            controller: 'Phison PS5016-E16',
+            formFactor: '2280',
+            interface: 'PCIe 4.0 x4',
+            keyType: 'M',
+        },
+        images: [
+            { side: 'pack', imageSrc: './assets/storage/m.2/Seagate FireCuda 520.png' },
+            { side: 'left', imageSrc: './assets/storage/m.2/Seagate FireCuda 520 attached.png' },
+        ],
     },
     // Cooling
     { //AMD wraith Prism

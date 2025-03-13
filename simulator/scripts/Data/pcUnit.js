@@ -153,12 +153,6 @@ class PCUnit {
             defaultError.remove()
         }
 
-        // Add a error task completion whenever user clicks on another error cell
-        const previousError = errorContainer.querySelector('.error-cell:not(.etask-completed)')
-        if (previousError) {
-            previousError.classList.add('etask-completed'); // Mark previous error as completed
-        }
-
         // Get the current error code from pcUnit
         const errorCode = this.currentErrorCode
         if (errorCode) {
@@ -184,13 +178,7 @@ class PCUnit {
             `;
 
             // Add click event listener to the error cell
-            errorCell.addEventListener('click', () => {
-
-            // Mark previous error cells as completed
-            document.querySelectorAll('.error-cell:not(.etask-complete)').forEach(cell => {
-                cell.classList.add('etask-complete')
-            })
-                
+            errorCell.addEventListener('click', () => {            
                 // Expand the clicked error to show troubleshooting
                 this.expandErrorCell(errorCell, errorData)
             })
@@ -211,6 +199,11 @@ class PCUnit {
     }
 
     expandErrorCell(errorCell, errorData) {
+        const existingguide= errorCell.querySelector('.troubleshooting-guide')
+        if (existingguide) {
+           return
+        }
+
         // Toggle the expanded class
         errorCell.classList.toggle('expanded');
 
@@ -227,15 +220,17 @@ class PCUnit {
             troubleshootingGuide.innerHTML = `
                 <h3>Troubleshooting Guide</h3>
                 <ul>${troubleshootingList}</ul>
+                <button class="etComplete">Finish Troubleshooting</button>
             `;
 
             errorCell.appendChild(troubleshootingGuide)
-        } else {
-            const troubleshootingGuide = errorCell.querySelector('.troubleshooting-guide');
-            if (troubleshootingGuide) {
-                troubleshootingGuide.remove()
-            }
-        }
+            
+            const etComplete = troubleshootingGuide.querySelector('.etComplete')
+            if (etComplete){etComplete.addEventListener('click', () => {
+                errorCell.classList.add('etask-complete')
+            })}
+
+        } 
     }
 
     createReport(tag, description) {

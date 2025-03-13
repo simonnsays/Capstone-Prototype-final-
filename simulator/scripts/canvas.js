@@ -231,6 +231,7 @@ class Canvas {
             // console.log('CPU cooler detected, allowing compatibility for mount compatibility can be used anywhere.')
             return true
         }
+
         // Check if component type is included in data.js
         if (!componentType) {
             console.error("Error: Component type is undefined or null");
@@ -239,7 +240,7 @@ class Canvas {
 
         // Validate component type 
         if (componentType !== slotType) {
-            this.showAlert(`This slot is not for a ${componentType} component. Please choose the correct slot.`)
+            this.showAlert(`❌ This slot is not for a ${componentType} component. Please choose the correct slot.`)
             return false
         }
        
@@ -253,7 +254,7 @@ class Canvas {
 
         if (totalWatts > psuWatts) {
             this.showAlert(
-                // `Incompatible PSU detected! Total wattage of ${totalWatts}W exceeds PSU capacity of ${psuWatts}W.`
+             `❌ Incompatible PSU detected! Total wattage of ${totalWatts}W exceeds PSU capacity of ${psuWatts}W.`
             )
             return false
         }
@@ -266,13 +267,13 @@ class Canvas {
 
         // Check component size if it is included in data.js
         if (!componentSize) {
-            this.showAlert('Component size is missing. Please choose a valid component.');
+            this.showAlert('❌ Component size is missing. Please choose a valid component.');
             return false
         }
 
         // Validate component slot
         if (!slotSupports.includes(componentSize)) {
-            this.showAlert(`This slot doesn't support a ${componentSize} component. Please choose a compatible component.`)
+            this.showAlert(`❌ This slot doesn't support a ${componentSize} component. Please choose a compatible component.`)
             return false
         }
         
@@ -315,6 +316,7 @@ class Canvas {
 
     // Draw Component Image
     drawComponent(box, image) {
+        if (!image) return
         this.c.drawImage(
             image,
             box.x,
@@ -361,10 +363,15 @@ class Canvas {
         slots.forEach(slot => {
             if (slot.component) {
                 const side = this.utilityTool.getSide(slot.component, currentSide)
+                const isSlotHidden = slot?.hidden === true
                 // draw slots according to the current side
-                if (side) {
+                if (isSlotHidden) {
+                    this.drawComponent(slot.component.box)
+                }else if (side) {
                     this.drawComponent(slot.component.box, side.image)
                 }
+                
+                
                 // draw attached components for components attached to the slot components
                 this.drawAttachedComponents(slot.component.slots, currentSide)
             }

@@ -7,10 +7,11 @@ class Component {
         specs,
         watts,
         dimensions, 
-        isRotatable, 
+        isRotatable,
+        hidden = false,
         isAttached = false,
-        isModular = false, // if psu is non modular set value to false | if psu is modular set value to true
-        defaultSource, 
+        isModular = false,
+        defaultSource,
         tableDisplay,
         images, 
         slots = [], 
@@ -30,7 +31,8 @@ class Component {
         this.images = images
         this.defaultSource = defaultSource
         this.tableDisplay = tableDisplay
-
+        this.hidden = hidden
+        
         // States
         this.isRotatable = isRotatable
         this.isAttached = isAttached

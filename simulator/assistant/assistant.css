@@ -326,8 +326,9 @@ color: #333;
     gap: 5%;
 }
 
-.etask-complete{
+.etask-complete .error-details{
     text-decoration: line-through;
+    opacity: 30%;
 }
 
 .error-container:hover{
@@ -383,6 +384,19 @@ color: #333;
   left: 130px;
 }
 
+.etComplete{
+    padding: 10px 30px;
+    font-size: 1rem;
+    margin-left: 10%;
+    font-weight: bold;
+    background-color: #FF385C;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
 .error-cell {
     scroll-snap-align: end;
     scroll-margin-right: 30px;
@@ -390,6 +404,7 @@ color: #333;
     position: relative;
     left: 20px;
     width: 300px;
+    height: 400px;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
@@ -397,6 +412,8 @@ color: #333;
     padding: 16px;
     cursor: pointer;
     transition: transform 0.2s;
+    overflow: hidden;
+    overflow-y: auto;
 }
 
 /* Compact version for assistant tab */

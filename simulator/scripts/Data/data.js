@@ -218,6 +218,20 @@ const components = [
                     }
                 }
             },
+            {
+                type: 'storage',
+                supports: ['m.2'],
+                compatibility: ['m-key'],
+                component: null,
+                sides: {
+                    left: {
+                        offsets: {
+                            default: {x: 40, y: 158, width: 100, height: 20}
+                        },
+                        accessible: true
+                    }
+                }
+            }
         ],
         ports: [
             {type: '24-pin-power'},
@@ -419,6 +433,61 @@ const components = [
                 style: 'split'
             }
         ]  
+    },
+    { // Samsung 970 EVO Plus NVMe SSD
+        name: 'Samsung 970 EVO Plus NVMe SSD',
+        type: 'storage',
+        size: 'm.2',
+        compatibility: ['m-key'], // NVMe slot, PCIe only
+        dimensions: {
+            width: 150,
+            height: 150,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        tableDisplay: 'pack',
+        specs: {
+            readSpeed: '3500MB/s',
+            writeSpeed: '3300MB/s',
+            nandType: 'V-NAND',
+            controller: 'Samsung Phoenix',        
+            formFactor: '2280',
+            interface: 'PCIe 3.0 x4',
+            keyType: 'M',
+        },
+        images: [
+            { side: 'left', imageSrc: './assets/storage/m.2/M/Samsung 970 EVO Plus NVMe SSD attached.png' },
+            { side: 'pack', imageSrc: './assets/storage/m.2/M/Samsung_970_EVO_Plus_NVMe_SSD.png' },
+        ],
+    },
+    { // Western Digital Black SN850X M.2 SSD
+        name: 'Western Digital Black SN850X',
+        type: 'storage',
+        size: 'm.2',
+        compatibility: ['b-key'], // NVMe slot, PCIe only
+        dimensions: {
+            width: 150,
+            height: 150,
+        },
+        isRotatable: false,
+        isAttached: false,
+        defaultSource: 'pack',
+        tableDisplay: 'pack',
+        specs: {
+            capacity: '2TB',
+            readSpeed: '7300MB/s',
+            writeSpeed: '6300MB/s',
+            nandType: '3D NAND',
+            controller: 'WD Black G2',
+            formFactor: '2280',
+            interface: 'PCIe 4.0 x4',
+            keyType: 'B',
+        },
+        images: [
+            { side: 'pack', imageSrc: './assets/storage/m.2/M/Western_Digital_Black_SN850X_M.2_SSD.png' },
+            { side: 'left', imageSrc: './assets/storage/m.2/M/Western Digital Black SN850X M.2 SSD attached.png' },
+        ],
     }
 ]
 
