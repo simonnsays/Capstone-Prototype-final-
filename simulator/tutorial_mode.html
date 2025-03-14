@@ -2,8 +2,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
-    <link rel="stylesheet" href="./assistant/assistant.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./assistant/assistant.css">
 
     <link rel="icon" href="../favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
@@ -336,89 +336,93 @@
     </div>
     
         <!-- Boot Error Dialog -->
-        <dialog id="bootErrorDialog" class="modal">
+        <!-- <dialog id="bootErrorDialog" class="modal">
             <div class="dialog-content">
                 <h3>Boot Error</h3>
-                <p id="errorMessage">An unknown error occurred during boot-up.</p> <!-- create a dynamic Error message for identifying issue  -->
-                <button id="troubleshootBtn">Troubleshoot</button> <!-- Button to initiate troubleshooting -->
-                <button id="closeErrorDialogBtn">Close</button> <!-- Button to close the dialog -->
+                <p id="errorMessage">An unknown error occurred during boot-up.</p> 
+                <button id="closeErrorDialogBtn">Close</button> 
             </div>
-        </dialog>
+        </dialog> -->
         
         
-    <div id="task-status">First Step → Click 'The Assistant' to Proceed!</div>
+    <!-- <div id="task-status">Task to be done: Click me "The Assistant" </div> -->
     
 
- <!------------------------- ASSISTANT ----------------------------------->
-    <div id="assistantContainer" class="assistant-container rect">
-        <!-- <a href="https://www.flaticon.com/free-icons/processor" title="processor icons">Processor icons created by 3ab2ou - Flaticon</a> -->
-        <!-- ASSISTANT IMAGE -->
-        <div class="assistant-image-container"> 
-            <div id="pulse" class="pulse"> </div>
-            
-            <img src="./assets/Assistant/processor.png" class="assistant-image img-rltv" >
+    <!------------------------- ASSISTANT ----------------------------------->
+    <!-- Mini Element -->
+    <div id="assistantMini" class="assistant-mini">
+        <!-- Icon Side -->
+        <div class="icon-section">
+                <div id="pulse" class="pulse"> </div>
+                <img src="./assets/Assistant/processor.png" class="assistant-icon" >
         </div>
 
-        <!-- INFO/TIPS -->
-        <div class="assistant-info-container hidden" style="cursor: pointer;"> 
-            <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
-            <p class="taskTip" style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
-            <p style="font-weight: normal; cursor: pointer;">...</p>    
-            <!-- <p id="phrase2">LISTEN HERE YOU LITTLE BITCH</p>  -->
+        <!-- Info Side -->
+        <div class="info-section">
+            <p class="tip-title">Hello I'm your Assistant and you have new tasks.</p>
+            <p class="tip-desc">Welcome to the simulation for PC building please click me to view tasks and for more Information</p>
+            <!-- <div class="see-more">...</div>     -->
         </div>
     </div>
 
     <!-- FULL PAGE INFO / TASKS -->
-    <dialog id="assistantModal" class="assistant-modal">
-        <div class="assistant-modal-container"> 
-
-    <!-- assistant bubble messages -->
-         <div id="assistantBubble" class="assistantBubble"> 
-    </div>
-        
-        <!-- toggle view -->
-        <div id="toggle">
-            <div id="theader" class="theader">TASKS</div>
-            <div id="eheader" class="eheader" >ERRORS</div>
+    <dialog id="assistantFull" class="assistant-full">
+        <div class="asst-header">
+            <div class="icon-area"></div>
+            <div class="button-container">
+                <div id="tasksButton" class="asst-button">TASKS</div>
+                <div id="errorsButton" class="asst-button">ERRORS</div>
+            </div>
         </div>
-        
-            <!-- tasks -->
-            <div class="task-container">
-                
-                <!-- Open Shop Task -->
-                <div id="shopTask" class="task-cell" data-task-action="openShop" >
-                </div>
-                <div class="hr-line"></div>
-            
-                <!-- Open Inventory Task -->
-                <div id="invTask" class="task-cell" data-task-action="openInventory">
-                </div>
-                <div class="hr-line"></div>
-            
-                <!-- Open portsTab Task -->
-                <div id="wiresTask" class="task-cell" data-task-action="connectWires">
-                </div>
-                <div class="hr-line"></div>
+        <div class="asst-body">
+                <div id="tasksContainer" class="asst-container">
 
-                <!-- Open BootUpTab Task-->
-                <div id="bootTask" class="task-cell" data-task-action="powerOnPC">
-                </div>
-                <div class="hr-line"></div>
-            </div>
-
-             <!-- errors -->
-            <div class="error-container">
-                
-                <!-- test error 1 -->
-                <div class="error-cell" data-error-action="error1">
-                    <div class="error-icon">
-                        <img src="./assets/boot/error_screen/warning.png" alt="error icon">
-                        <p>No issues Found.</p>
-                        <div class="error-details">
-                            <!-- Error details will be populated here -->
+                    <!-- <div class="task-cell completed">
+                        <div class="task-title">
+                            <div class="task-icon">
+                                <img src="./assets/Assistant/shop.png">
+                            </div>
+                            <div class="task-name">
+                                <h3>Enter the Shop</h3>
+                                <p class="task-status">Completed </p>
+                            </div>
                         </div>
+                        <div class="vert-br"></div>
+                        <div class="task-description">
+                                <p>Look for your PC components and buy them.</p>
+                                <br>
+                                <p>Ensure to check prices and specifications before making a purchase.</p>
+                                <p>The components that you will need are the following:</p>
+                                <ol>
+                                    <li>Case</li>
+                                    <li>motherboard</li>
+                                    <li>processor</li>
+                                    <li>Power Supply Unit</li>
+                                    <li>RAM</li>
+                                    <li>Storage Device - HDD or SSD</li>
+                                    <li>Cooling</li>
+                                    <li>GPU or Graphics card</li>
+                                </ol>
+                                
+                                <br>
+                                <p  >Check the images below for your reference:</p>
+                                <div class="desc-image-carousel">
+                                    <img src="assets/Assistant/shop1.png" id="id1" class="desc-image">
+                                    <img src="assets/Assistant/shop2.png" id="id2" class="desc-image">
+                                    <img src="assets/Assistant/shop3.png" id="id3" class="desc-image">
+                                    <img src="./assets/svg/leftArr.svg" class="desc-left">
+                                    <img src="./assets/svg/rightArr.svg" class="desc-right">
+                                </div>
+
+                                <button class="start-task-btn" data-task="openShop">Start Task</button>
+                        </div>
+                    </div> -->
+
                 </div>
+            <div id="errorsContainer" class="asst-container">
+                HELLO ERRORS
             </div>
+        </div>
 
     </dialog>
 
@@ -438,5 +442,12 @@
 
     <!-------------------------- S C R I P T S ------------------------------->
     <script type="module" src="main.js"></script>
+    <script>
+        [...document.querySelectorAll('*')].forEach(el => {
+            let z = window.getComputedStyle(el).zIndex;
+            // if (z !== 'auto') console.log(el.tagName, el.className, el.id, '=> z-index:', z);
+        });
+
+    </script>
 </body>
 </html>

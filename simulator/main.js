@@ -60,7 +60,7 @@ class Main {
             this.itemInfo)
 
         //Assistant
-        this.assistant = new Assistant(this.elementHandler)
+        this.assistant = new Assistant(this.elementHandler, this.utilityTool)
 
         // Prevent Canvas Interaction when tabs are open
         window.addEventListener('mousedown', () => this.handleMouseDown())
@@ -82,6 +82,7 @@ class Main {
     handleMouseDown() {
         // prevent use of canvas when tabs are open
         if( this.displayArea.trashBin.isActive ||
+            this.assistant.fullElement.isActive ||
             this.portsTab.drawer.isActive ||
             this.bootUpTab.isActive ||
             this.inventory.isActive || 
@@ -99,13 +100,13 @@ class Main {
         this.shop.init() 
         this.displayArea.init()
         this.canvas.animate()   
-        this.assistant.asstInit() 
+        this.assistant.init() 
 
         // this.bootUpTab.powerBtn.addEventListener('mouseup', () => this.bootUpTab.powerBtnClick(this.bootUpTab.pcUnit.availableUnit));
 
 
         // TEST: BOOT UP
-       //this.testBootUp()
+        // this.testBootUp()
 
         // TEST: MISSING COMPONENTS
         // this.testMissingComponents()
@@ -113,6 +114,8 @@ class Main {
         // TEST: TRASH BIN
         // this.testTrashBin()
         
+        // TEST: ASSISTANT
+        this.assistant.openModal()
     }
 
     /////////////////// TEST: BOOT UP

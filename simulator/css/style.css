@@ -702,14 +702,15 @@ dialog {
   height: 550px;
   border: 3px solid black;
   padding: 0;
+  overflow: hidden;
+  position: relative;
 }
 
 /* Sticky Header */
 .top {
-  position: sticky;
   background-color: white;
   top: 0;
-  z-index: 2;
+  z-index: 1;
   padding-top: 20px;
 }
 
@@ -764,16 +765,18 @@ hr {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
-  overflow: auto;
   padding: 10px;
+  height: 55%;
+  overflow: auto;
 }
 
 /* Sticky Footer */
 .bottom {
-  position: sticky;
+  position: absolute;
   background-color: white;
   bottom: 0;
   padding: 1px 5px 20px 5px;
+  width: 90%;
 }
 
 .bottom-container {
@@ -782,7 +785,7 @@ hr {
   align-items: center;
 }
 
-/****************** BUTTONS *****************/
+/********* BUTTONS *********/
 .btn-container {
   position: absolute;
   align-self: center;
@@ -1157,17 +1160,7 @@ input[type=checkbox] {
   height: 278px;
   position: absolute;
   top: 120px;
-  left: 63px;
-}
-
-#monitorScreen img{
-  position: absolute;
-  z-index: 3;
-  height: 178;
-  width: 325;
-  top: 132;
-  left: 75px;
-  overflow: none;
+  left: 60px;
 }
 
 /* #screen { */
@@ -1179,18 +1172,6 @@ input[type=checkbox] {
   position: absolute;
   top: 133;
   left: 73;
-}
-
-.reportCell{
-  cursor: pointer;
-}
-
-#warning img{
-  position: absolute;
-  left: 210px;
-  top: 200px;
-  height: 50px;
-  width: 50px;  
 }
 
 #unitPlaceHolder {
@@ -1237,64 +1218,5 @@ input[type=checkbox] {
   right: 7%; */
   transition: all ease-in-out 0.1s;
 }
-/*Error view*/
-.error-overview {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-  z-index: 1000;
-  width: 80%;
-  max-width: 500px;
-}
 
-.error-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 999;
-}
-
-.error-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.error-meta {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 10px;
-}
-
-.error-severity {
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: bold;
-}
-/* Error severity colors */
-.error-severity.critical { background: #ff000033; color: #ff0000; }
-.error-severity.hazard { background: #ffa50033; color: #cc8400; }
-.error-severity.error { background: #49421833; color: #cc0000; }
-
-.troubleshooting {
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #eee;
-}
 /*# sourceMappingURL=style.css.map */
