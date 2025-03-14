@@ -115,7 +115,41 @@ class Main {
         // this.testTrashBin()
         
         // TEST: ASSISTANT
-        this.assistant.openModal()
+        // this.assistant.openModal()
+
+        // TEST: ADD BASIC COMPONENT
+        this.addBasicComponents()
+    }
+
+    addBasicComponents() {
+        const itemsToBuy = []
+        console.log(this.shop.items)
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'NZXT H5 Flow'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'B550 Aorus Elite v2'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD Ryzen 7 5700G'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'EVGA Supernova 1300 P+'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'Seagate Barracuda SSD'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'Seagate Barracuda SSD'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD wraith Prism'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'Gigabyte Radeon RX7900 XTX'))
+
+        itemsToBuy.forEach(item => {
+            let shopItem = this.shop.items.find(shopItem => shopItem.name === item.name)
+            this.shop.buyComponent(shopItem)
+        })
+        this.shop.buyComponent(this.shop.items[0    ])
+        
+        console.log(this.inventory.items)
+        // this.inventory.placeComponent(this.inventory.items[0])
+        
+        // this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'motherboard'),1)[0])
+        // this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'ram'),1)[0])
+        // this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'ram'),1)[0])
+        // this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'cpu'),1)[0])
+        // this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'cooling'),1)[0])
+        // this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'gpu'),1)[0])
     }
 
     /////////////////// TEST: BOOT UP

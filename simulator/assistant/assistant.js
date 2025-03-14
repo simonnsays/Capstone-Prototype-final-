@@ -389,9 +389,6 @@ class Assistant {
         }
     }
 
-
-    }
-
     // Toggle between the task and error views
     toggleErrorView() {
         if (this.taskContainer && this.errorContainer) {
@@ -408,5 +405,4 @@ class Assistant {
         }
     }
 }
-
 export default Assistant

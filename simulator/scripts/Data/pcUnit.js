@@ -115,7 +115,7 @@ class PCUnit {
         // Monitor display poweron
         this.powerOnMonitor()
         bootStatus = true
-        return true
+        // return true
         ///////////////////////////////////////////////// dan code ////////////////////////////////////////////////////////
         // Check if all components are available and powered
         if(!this.componentsStatus.psu || !this.componentsStatus.psu.component) {
@@ -146,9 +146,10 @@ class PCUnit {
 
     // Add error-cells into assistant tab errors view
     populateErrors() {
-        const errorContainer = document.querySelector('.error-container')
+        const errorContainer = document.querySelector('#errorsContainer')
+        console.log(errorContainer)
         // Remove first test error 1 before populating error-container with errors 
-        const defaultError = errorContainer.querySelector('.error-cell[data-error-action="error1"]')
+        const defaultError = errorContainer?.querySelector('.error-cell[data-error-action="error1"]')
         if (defaultError) {
             defaultError.remove()
         }
