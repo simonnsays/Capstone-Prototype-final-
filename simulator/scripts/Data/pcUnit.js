@@ -98,8 +98,7 @@ class PCUnit {
 
         // Makes the error have a queue making reports show more errors. Errors prioritise missing components then not powered next in priority.
         if (errorQueue.length > 0) {
-            errorQueue.forEach((errorCode, i) => { // Take all error codes and display each inside create error function as error cells which then populate errors will take and show inside assistant
-                console.log(i)
+            errorQueue.forEach(errorCode => { // Take all error codes and display each inside create error function as error cells which then populate errors will take and show inside assistant
                 this.createError(errorCode)
                 this.populateErrors()
                 bootStatus = false
@@ -142,8 +141,9 @@ class PCUnit {
         // const state = this.checkPCState()
         // if check attempts are good, power on
         console.log(this.state)
-        if(state)return true
-        else return false
+        // if(state)return true
+        // else return false
+        return true
     }
 
     // Add error-cells into assistant tab errors view
@@ -335,18 +335,21 @@ class PCUnit {
        const motherboardName = this.getMotherboardName(); // Call out function getMotherboardName
        const brand = Object.keys(brandImages).find(brand => motherboardName.toLowerCase().includes(brand)); // Check brandImages const and include lowercases
 
-       if (brand) {
-           const imgSrc = `./assets/boot/boot_logo/${brandImages[brand]}`; // get image from filepath
-           splashScreen.innerHTML = `<img src="${imgSrc}" alt="${brand} logo">`; // add as html inside div monitorScreen
-           const timeoutId = setTimeout(() => {
-               if (this.isErrorDisplayed) return; // Skip if error screen is displayed
-               splashScreen.innerHTML = ''; // Clear the splash screen after 5 seconds
-               this.displayOS(); // Proceed to display the OS
-           }, 5000);
-           this.timeoutIds.push(timeoutId); // Store the timeout ID
-       } else {
-            splashScreen.innerHTML = ''; // Clear the splash screen if no matching brand is found
-       }
+        if (brand) {
+            const image = document.createElement('img');
+            image.src = `./assets/boot/boot_logo/${brandImages[brand]}`;
+            image.style.width = '100%';
+            image.style.maxHeight = '100%';
+
+            splashScreen.appendChild(image);
+
+            const timeoutId = setTimeout(() => {
+                if (this.isErrorDisplayed) return; // Skip if error screen is displayed
+                image.remove()
+                this.displayOS(); // Proceed to display the OS
+            }, 5000);
+            this.timeoutIds.push(timeoutId); // Store the timeout ID
+        } 
     }
     
     displayOS(){ // display the operating system booting gif from ./assets/boot/os/windows_boot.gif and then show then after another 5 secs display the windows desktop img from ./assets/boot/os/desktop.png
@@ -355,10 +358,17 @@ class PCUnit {
         const osBootGif = './assets/boot/os/windows_boot.gif';
         const osDesktopImg = './assets/boot/os/desktop.png';
 
-        splashScreen.innerHTML = `<img src="${osBootGif}" alt="OS Booting">`;
+        const image = document.createElement('img');
+        image.style.width = '100%';
+        image.style.maxHeight = '100%';
+        image.src = osBootGif;
+        splashScreen.appendChild(image);
+        // splashScreen.innerHTML = `<img src="${osBootGif}" alt="OS Booting">`;
         const timeoutId = setTimeout(() => {
             if (this.isErrorDisplayed) return; // Skip if error screen is displayed
-            splashScreen.innerHTML = `<img src="${osDesktopImg}" alt="OS Desktop">`;
+            // splashScreen.innerHTML = `<img src="${osDesktopImg}" alt="OS Desktop">`;
+            
+            image.src = osDesktopImg
         }, 5000);
         this.timeoutIds.push(timeoutId); // Store the timeout ID
     }
@@ -370,8 +380,10 @@ class PCUnit {
         
         //const errorMessage = `Missing components: ${Array.isArray(missingComponents) ? missingComponents.join(', ') : 'Unknown'}`;        
         const image = document.createElement('img');
-        image.classList.add('.screen-error')
+        // image.classList.add('.screen-error')
         image.src = './assets/boot/error_screen/warning3.png';
+        image.style.width = '100px'
+        image.style.height = '100px'
         splashScreen.appendChild(image);
 
         // splashScreen.innerHTML = `<p id="warning"><img src = "${imgSrc}" alt="WARNING"></p>` //add for showing error message<p>${errorMessage}</p> 
