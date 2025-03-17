@@ -263,7 +263,7 @@ class BootUpTab {
     // Add severity class
     //cell.classList.add(`report-${errorData.severity.toLowerCase()}`);
 
-       console.log(report)
+    //    console.log(report)
        switch(report.tag.toLowerCase()) {
            case 'hazard': 
                cell.classList.add('reportHazard')
@@ -281,7 +281,7 @@ class BootUpTab {
        }
 
        cell.addEventListener('click', () => this.openErrorView(report.code)); // Add event listener to report cells opening error view
-       console.log(cell)
+    //    console.log(cell)
 /////////////////////////////////////////////////// dan code ///////////////////////////////////////////////////
         const tag = document.createElement('div')
         tag.classList = 'reportCellTag'
