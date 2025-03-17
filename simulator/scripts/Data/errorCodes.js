@@ -49,9 +49,9 @@ const errorCodes = {
         severity: 'Error',
         description: 'Missing PSU component',
         troubleshooting: [
-            "Verify that a PSU is physically installed in the chassis.",
-            "Confirm that all power cables (both to the motherboard and other components) are properly connected.",
-            "If PSU is still missing try changing into another one from the shop."
+            {imageSrc: './assets/tbshoot/err/100/100-1.png'},
+            {imageSrc: './assets/tbshoot/err/100/100-2.png'},
+            {imageSrc: './assets/tbshoot/err/100/100-3.png'}
         ],    
     },
     'ERR-200': {
@@ -59,9 +59,8 @@ const errorCodes = {
         severity: 'Error',
         description: 'Missing Motherboard component',
         troubleshooting: [
-            "Ensure that the motherboard is correctly seated in the case.",
-            "Verify that the motherboard’s power connectors (e.g., the 24-pin ATX connector) are connected.",
-            "If motherboard is still missing please replace the component into another one from the shop"
+            {imageSrc: './assets/tbshoot/err/200/200-1.png'},
+            {imageSrc: './assets/tbshoot/err/200/200-2.png'},
         ],
     },
     'ERR-201': {
@@ -69,9 +68,9 @@ const errorCodes = {
         severity: 'Error',
         description: 'Missing Front Panel connection',
         troubleshooting: [
-            "Refer to the motherboard manual to locate the front panel header.",
-            "Confirm that the cables for the power button, reset button, and LEDs are firmly attached.",
-            "Ensure there are no bent pins or misaligned connectors."
+            {imageSrc: './assets/tbshoot/err/201/201-1.png'},
+            {imageSrc: './assets/tbshoot/err/201/201-2.png'},
+            {imageSrc: './assets/tbshoot/err/201/201-3.png'},
         ],
     },
     'ERR-202': {
@@ -79,19 +78,19 @@ const errorCodes = {
         severity: 'Error',
         description: 'Motherboard not powered',
         troubleshooting: [
-            "Double-check that the PSU is fully functional and working",
-            "Inspect the power switch on the case or PSU for proper operation.",
-            "Check if every cable ports on motherboard has a cable properly attached."
+            {imageSrc: './assets/tbshoot/err/202/202-1.png'},
+            {imageSrc: './assets/tbshoot/err/202/202-2.png'},
+            {imageSrc: './assets/tbshoot/err/202/202-3.png'},
+            {imageSrc: './assets/tbshoot/err/202/202-4.png'},
         ],
     },
     'ERR-300': {
-        code: 'ERR-301',
+        code: 'ERR-300',
         severity: 'Error',
         description: 'Missing CPU component',
         troubleshooting: [
-            "Confirm that the CPU is installed in the correct socket with the proper orientation.",
-            "Look for any bent pins (if using a pin grid array) or debris in the socket.",
-            "Reseat the CPU carefully and apply thermal paste if necessary."
+            {imageSrc: './assets/tbshoot/err/300/300-1.png'},
+            {imageSrc: './assets/tbshoot/err/300/300-2.png'},
         ],
     },
     'ERR-301': {
@@ -99,8 +98,11 @@ const errorCodes = {
         severity: 'Error',
         description: 'CPU not powered',
         troubleshooting: [
-            "Verify that the dedicated CPU power connector (often an 8-pin or 4-pin connector) is securely attached.",
-            "Ensure that the PSU cable supplying power to the CPU is in good condition. If the PSU is a fully modular PSU check the cable on the PSU and attach the cable firmly into the port",
+            {imageSrc: './assets/tbshoot/err/301/301-1.png'},
+            {imageSrc: './assets/tbshoot/err/301/301-2.png'},
+            {imageSrc: './assets/tbshoot/err/301/301-3.png'},
+            {imageSrc: './assets/tbshoot/err/301/301-4.png'},
+            {imageSrc: './assets/tbshoot/err/301/301-5.png'},
         ],
     },
     'ERR-400': {
@@ -108,9 +110,8 @@ const errorCodes = {
         severity: 'Error',
         description: 'Missing RAM component',
         troubleshooting: [
-            "Ensure that the RAM modules are firmly inserted into the correct slots.",
-            "Remove and reseat the RAM to clear any possible connection issues.",
-            "Test with one module at a time to isolate potential faulty sticks."
+            {imageSrc: './assets/tbshoot/err/400/400-1.png'},
+            {imageSrc: './assets/tbshoot/err/400/400-2.png'},
         ],
     },
     'ERR-500': {
@@ -118,9 +119,9 @@ const errorCodes = {
         severity: 'Error',
         description: 'Missing storage device',
         troubleshooting: [
-            "Check that the storage device is physically installed in its drive bay.",
-            "Verify that the SATA connections (and power cables) are secure.",
-            "Confirm that the storage device is recognized in the BIOS/UEFI."
+            {imageSrc: './assets/tbshoot/err/500/500-1.png'},
+            {imageSrc: './assets/tbshoot/err/500/500-2.png'},
+            {imageSrc: './assets/tbshoot/err/500/500-3.png'},
         ],
     },
     'ERR-501': {
@@ -128,9 +129,10 @@ const errorCodes = {
         severity: 'Error',
         description: 'Storage device is not powered',
         troubleshooting: [
-            "Ensure that the power connector from the PSU is properly attached to the storage device.",
-            "Look for any signs of cable damage or loose connections.",
-            "Test with another power cable or PSU connector if available."
+            {imageSrc: './assets/tbshoot/err/501/501-1.png'},
+            {imageSrc: './assets/tbshoot/err/501/501-2.png'},
+            {imageSrc: './assets/tbshoot/err/501/501-3.png'},
+            {imageSrc: './assets/tbshoot/err/501/501-4.png'},
         ],
     },
     'ERR-600': {
@@ -138,9 +140,8 @@ const errorCodes = {
         severity: 'Error',
         description: 'Missing Graphics Card Unit',
         troubleshooting: [
-            "Verify that the graphics card is installed in the proper PCIe slot.",
-            "Check that any auxiliary power connectors on the graphics card are connected.",
-            "Reseat the graphics card to ensure it is firmly in place."
+            {imageSrc: './assets/tbshoot/err/600/600-1.png'},
+            {imageSrc: './assets/tbshoot/err/600/600-2.png'},
         ],
     },
     'ERR-601': {
@@ -148,9 +149,10 @@ const errorCodes = {
         severity: 'Error',
         description: 'Graphics Card Unit is not powered',
         troubleshooting: [
-            "Inspect the power cables from the PSU to the graphics card.",
-            "Ensure that the PCIe slot is functioning correctly.",
-            "Ensure that the GPU is firmly attached to the PCIe slot. Test the graphics card in another slot (if available) or on another system to rule out hardware failure."
+            {imageSrc: './assets/tbshoot/err/601/601-1.png'},
+            {imageSrc: './assets/tbshoot/err/601/601-2.png'},
+            {imageSrc: './assets/tbshoot/err/601/601-3.png'},
+            {imageSrc: './assets/tbshoot/err/601/601-4.png'},
         ],
     },
     'ERR-700': {
@@ -158,9 +160,8 @@ const errorCodes = {
         severity: 'Error',
         description: 'Missing CPU cooler',
         troubleshooting: [
-            "Confirm that a compatible CPU cooler is installed.",
-            "If missing, install an appropriate cooler immediately to prevent overheating.",
-            "Check that the cooler is compatible with your CPU socket type if not install a different mounting mechanism for your CPU cooler."
+            {imageSrc: './assets/tbshoot/err/700/700-1.png'},
+            {imageSrc: './assets/tbshoot/err/700/700-2.png'},
         ],
     },
     'ERR-701': {
@@ -168,8 +169,9 @@ const errorCodes = {
         severity: 'Error',
         description: 'CPU cooler not powered',
         troubleshooting: [
-            "Ensure that the fan’s power cable is connected to the correct CPU fan header on the motherboard.",
-            "Check that the fan spins freely and is not obstructed.",
+            {imageSrc: './assets/tbshoot/err/701/701-1.png'},
+            {imageSrc: './assets/tbshoot/err/701/701-2.png'},
+            {imageSrc: './assets/tbshoot/err/701/701-3.png'},
         ],
     },
 

@@ -98,7 +98,8 @@ class PCUnit {
 
         // Makes the error have a queue making reports show more errors. Errors prioritise missing components then not powered next in priority.
         if (errorQueue.length > 0) {
-            errorQueue.forEach(errorCode => { // Take all error codes and display each inside create error function as error cells which then populate errors will take and show inside assistant
+            errorQueue.forEach((errorCode, i) => { // Take all error codes and display each inside create error function as error cells which then populate errors will take and show inside assistant
+                console.log(i)
                 this.createError(errorCode)
                 this.populateErrors()
                 bootStatus = false
@@ -118,28 +119,29 @@ class PCUnit {
         // return true
         ///////////////////////////////////////////////// dan code ////////////////////////////////////////////////////////
         // Check if all components are available and powered
-        if(!this.componentsStatus.psu || !this.componentsStatus.psu.component) {
-            // report missing component
-            this.createError('ERR-07') // Takes errorCode and show it as report cell in bootuptab
-            this.populateErrors()
-            return false;
-        }
+        // if(!this.componentsStatus.psu || !this.componentsStatus.psu.component) {
+        //     // report missing component
+        //     this.createError('ERR-07') // Takes errorCode and show it as report cell in bootuptab
+        //     this.populateErrors()
+        //     return false;
+        // }
 
-        // Power Supply Activation
-        this.psuActivation()
+        // // Power Supply Activation
+        // this.psuActivation()
 
-        // Motherboard and CPU Power Up
-        this.moboPowerUp()
-        this.cpuInit()
+        // // Motherboard and CPU Power Up
+        // this.moboPowerUp()
+        // this.cpuInit()
 
-        // Monitor display poweron
-        this.powerOnMonitor()
+        // // Monitor display poweron
+        // this.powerOnMonitor()
 
-        // Star proces for Power-On-Self-Test
-        this.processPOST(this.componentsStatus.psu.component)
+        // // Star proces for Power-On-Self-Test
+        // this.processPOST(this.componentsStatus.psu.component)
 
-        const state = this.checkPCState()
+        // const state = this.checkPCState()
         // if check attempts are good, power on
+        console.log(this.state)
         if(state)return true
         else return false
     }
@@ -147,7 +149,7 @@ class PCUnit {
     // Add error-cells into assistant tab errors view
     populateErrors() {
         const errorContainer = document.querySelector('#errorsContainer')
-        console.log(errorContainer)
+        // console.log(errorContainer)
         // Remove first test error 1 before populating error-container with errors 
         const defaultError = errorContainer?.querySelector('.error-cell[data-error-action="error1"]')
         if (defaultError) {
@@ -157,13 +159,13 @@ class PCUnit {
         // Get the current error code from pcUnit
         const errorCode = this.currentErrorCode
         if (errorCode) {
-        const errorData = errorCodes[errorCode]
+            const errorData = errorCodes[errorCode]
         
-        // Prevent duplicate errorcode showing inside error-container
-        let existingErrorCell = errorContainer.querySelector(`.error-cell[data-error-action="${errorCode}"]`)
-        if (existingErrorCell) {
-            return 
-        }
+            // Prevent duplicate errorcode showing inside error-container
+            let existingErrorCell = errorContainer.querySelector(`.error-cell[data-error-action="${errorCode}"]`)
+            if (existingErrorCell) {
+                return 
+            }
 
             const errorCell = document.createElement('div')
             errorCell.classList.add('error-cell')
@@ -213,24 +215,79 @@ class PCUnit {
             const troubleshootingGuide = document.createElement('div')
             troubleshootingGuide.classList.add('troubleshooting-guide')
             
-            // Generate list items dynamically
-            const troubleshootingList = errorData.troubleshooting
-            .map(step => `<li>${step}</li>`) // takes each troubleshooting step in <li> element
-            .join("") // Join array into a single HTML string
-
-            troubleshootingGuide.innerHTML = `
-                <h3>Troubleshooting Guide</h3>
-                <ul>${troubleshootingList}</ul>
-                <button class="etComplete">Finish Troubleshooting</button>
-            `;
-
-            errorCell.appendChild(troubleshootingGuide)
+            // Carousel container
+            const carouselContainer = document.createElement('div')
+            carouselContainer.classList.add('troubleshooting-carousel')
+    
+            // State: Track currently active image
+            let activeIndex = 0
+    
+            // Image container (holds all images)
+            const imageContainer = document.createElement('div')
+            imageContainer.classList.add('troubleshooting-images')
+    
+            // Create images dynamically
+            errorData.troubleshooting.forEach((item, index) => {
+                const img = document.createElement('img')
+                img.src = item.imageSrc
+                img.alt = "Troubleshooting Step"
+                img.classList.add('troubleshooting-img')
+                if (index !== 0) img.style.display = "none" // Hide all except first
+                imageContainer.appendChild(img)
+            })
+    
+            // Left Arrow
+            const arrowLeft = document.createElement('img')
+            arrowLeft.src = './assets/svg/leftArr.svg'
+            arrowLeft.classList.add('desc-left')
+            arrowLeft.addEventListener('click', () => {
+                if (activeIndex > 0) {
+                    activeIndex--
+                    updateCarousel()
+                }
+            })
+    
+            // Right Arrow
+            const arrowRight = document.createElement('img')
+            arrowRight.src = './assets/svg/rightArr.svg'
+            arrowRight.classList.add('desc-right')
+            arrowRight.addEventListener('click', () => {
+                if (activeIndex < errorData.troubleshooting.length - 1) {
+                    activeIndex++
+                    updateCarousel()
+                }
+            })
+    
+            // Update Carousel View
+            function updateCarousel() {
+                const images = imageContainer.querySelectorAll('.troubleshooting-img')
+                images.forEach((img, index) => {
+                    img.style.display = index === activeIndex ? "block" : "none"
+                })
+            }
+    
+            // Add elements to carousel
+            carouselContainer.appendChild(arrowLeft)
+            carouselContainer.appendChild(imageContainer)
+            carouselContainer.appendChild(arrowRight)
+    
+            // Add to troubleshooting guide
+            troubleshootingGuide.innerHTML = 
+            `<h3>Troubleshooting Guide</h3>
+            <h4 style="font-size:.7rem">Please refer to the images for reference</h4>
+            `
+            troubleshootingGuide.appendChild(carouselContainer)
             
-            const etComplete = troubleshootingGuide.querySelector('.etComplete')
-            if (etComplete){etComplete.addEventListener('click', () => {
+            // Finish button
+            const etComplete = document.createElement('button')
+            etComplete.classList.add('etComplete')
+            etComplete.textContent = "Finish Troubleshooting"
+            etComplete.addEventListener('click', () => {
                 errorCell.classList.add('etask-complete')
-            })}
+            });
 
+            troubleshootingGuide.appendChild(etComplete);
+            errorCell.appendChild(troubleshootingGuide);
         } 
     }
 
@@ -312,9 +369,12 @@ class PCUnit {
         splashScreen.innerHTML = ''; // Clear the div before displaying the error screen
         
         //const errorMessage = `Missing components: ${Array.isArray(missingComponents) ? missingComponents.join(', ') : 'Unknown'}`;        
-        const imgSrc = './assets/boot/error_screen/warning3.png';
-       
-        splashScreen.innerHTML = `<p id="warning"><img src = "${imgSrc}" alt="WARNING"></p>` //add for showing error message<p>${errorMessage}</p> 
+        const image = document.createElement('img');
+        image.classList.add('.screen-error')
+        image.src = './assets/boot/error_screen/warning3.png';
+        splashScreen.appendChild(image);
+
+        // splashScreen.innerHTML = `<p id="warning"><img src = "${imgSrc}" alt="WARNING"></p>` //add for showing error message<p>${errorMessage}</p> 
     }
 
     createError(code) {
