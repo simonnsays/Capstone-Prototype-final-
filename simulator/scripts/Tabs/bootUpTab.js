@@ -161,11 +161,10 @@ class BootUpTab {
         const errorDiv = document.createElement('div');
         errorDiv.className = 'error-overview';
         errorDiv.id = 'error-overview';
-        const assistantInfo = document.querySelector(".assistant-info-container");
-        const assistantContainer = document.getElementById("assistantContainer");      
+        const assistantInfo = document.querySelector(".info-section");
+        const assistantContainer = document.getElementById("assistantMini");      
         errorDiv.innerHTML = `
             <div class="error-header">
-                <h2>${errorData.name}</h2>
                 <button class="close-btn">&times;</button>
             </div>
             <div class="error-body">
@@ -198,10 +197,10 @@ class BootUpTab {
         closeBtn.addEventListener('click', () => {
             assistantContainer.classList.remove('extended');
             assistantInfo.classList.add ('hidden');
-            assistantInfo.innerHTML = ` <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
-            <p class="taskTip" style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
-            <p class="errorTip hidden" style="font-weight: normal;">Oops! Looks like you got an error from your end. Let me assist you. Please click me to view errors.</p>
-            <p style="font-weight: normal; cursor: pointer;">...</p>    `;
+            assistantInfo.innerHTML = `             
+            <p class="tip-title">Hello I'm your Assistant and you have new tasks.</p>
+            <p class="tip-desc">Welcome to the simulation for PC building please click me to view tasks and for more Information</p>
+`;
             document.body.removeChild(overlay);
             errorDiv.remove();
         });
@@ -215,10 +214,10 @@ class BootUpTab {
             errorDiv.remove();
             assistantContainer.classList.remove('extended'); 
             assistantInfo.classList.add ('hidden');
-            assistantInfo.innerHTML = ` <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
-            <p class="taskTip" style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
-            <p class="errorTip hidden" style="font-weight: normal;">Oops! Looks like you got an error from your end. Let me assist you. Please click me to view errors.</p>
-            <p style="font-weight: normal; cursor: pointer;">...</p>    `;
+            assistantInfo.innerHTML = `             
+            <p class="tip-title">Hello I'm your Assistant and you have new tasks.</p>
+            <p class="tip-desc">Welcome to the simulation for PC building please click me to view tasks and for more Information</p>
+`;
         });
 
         // Add to DOM
@@ -229,11 +228,11 @@ class BootUpTab {
         assistantContainer.addEventListener('click', () => {
             errorDiv.remove();
             overlay.remove();
-            const assistant = document.querySelector('.assistant-info-container');
+            const assistant = document.querySelector('.info-section');
             assistant.innerHTML = `
-                <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
-                <p class="taskTip" style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
-                <p style="font-weight: normal; cursor: pointer;">...</p>    
+            <p class="tip-title">Hello I'm your Assistant and you have new tasks.</p>
+            <p class="tip-desc">Welcome to the simulation for PC building please click me to view tasks and for more Information</p>
+
             `;
         });
         
@@ -263,7 +262,7 @@ class BootUpTab {
     // Add severity class
     //cell.classList.add(`report-${errorData.severity.toLowerCase()}`);
 
-       console.log(report)
+       //console.log(report)
        switch(report.tag.toLowerCase()) {
            case 'hazard': 
                cell.classList.add('reportHazard')
@@ -281,7 +280,7 @@ class BootUpTab {
        }
 
        cell.addEventListener('click', () => this.openErrorView(report.code)); // Add event listener to report cells opening error view
-       console.log(cell)
+       //console.log(cell)
 /////////////////////////////////////////////////// dan code ///////////////////////////////////////////////////
         const tag = document.createElement('div')
         tag.classList = 'reportCellTag'

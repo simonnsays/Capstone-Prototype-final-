@@ -1061,6 +1061,7 @@ input[type=checkbox] {
   padding-right: 30px;
   overflow: auto;
   animation: reportCellSlide 0.4s ease-in;
+  cursor: pointer;
   /* animation: blink 1.5s infinite; */
 }
 
@@ -1163,6 +1164,16 @@ input[type=checkbox] {
   left: 60px;
 }
 
+#monitorScreen img{
+  position: absolute;
+  z-index: 3;
+  height: 50;
+  width: 50;
+  top: 200;
+  left: 210;
+  overflow: none;
+}
+
 /* #screen { */
 .screen-on {
   width: 323;
@@ -1219,4 +1230,66 @@ input[type=checkbox] {
   transition: all ease-in-out 0.1s;
 }
 
+/*Error view*/
+.error-overview {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  z-index: 1000;
+  width: 80%;
+  max-width: 500px;
+}
+
+.error-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+
+.error-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.close-btn {
+  position: absolute;
+  left: 95%;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.error-meta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.error-severity {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+/* Error severity colors */
+.error-severity.critical { background: #ff000033; color: #ff0000; }
+.error-severity.hazard { background: #ffa50033; color: #cc8400; }
+.error-severity.error { background: #49421833; color: #cc0000; }
+
+.troubleshooting {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
 /*# sourceMappingURL=style.css.map */

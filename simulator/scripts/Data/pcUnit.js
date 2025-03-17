@@ -147,7 +147,7 @@ class PCUnit {
     // Add error-cells into assistant tab errors view
     populateErrors() {
         const errorContainer = document.querySelector('#errorsContainer')
-        console.log(errorContainer)
+        //console.log(errorContainer)
         // Remove first test error 1 before populating error-container with errors 
         const defaultError = errorContainer?.querySelector('.error-cell[data-error-action="error1"]')
         if (defaultError) {
@@ -212,26 +212,81 @@ class PCUnit {
         if (errorCell.classList.contains('expanded')) {
             const troubleshootingGuide = document.createElement('div')
             troubleshootingGuide.classList.add('troubleshooting-guide')
+    
+            // Carousel container
+            const carouselContainer = document.createElement('div')
+            carouselContainer.classList.add('troubleshooting-carousel')
+    
+            // State: Track currently active image
+            let activeIndex = 0
+    
+            // Image container (holds all images)
+            const imageContainer = document.createElement('div')
+            imageContainer.classList.add('troubleshooting-images')
+    
+            // Create images dynamically
+            errorData.troubleshooting.forEach((item, index) => {
+                const img = document.createElement('img')
+                img.src = item.imageSrc
+                img.alt = "Troubleshooting Step"
+                img.classList.add('troubleshooting-img')
+                if (index !== 0) img.style.display = "none" // Hide all except first
+                imageContainer.appendChild(img)
+            })
+    
+            // Left Arrow
+            const arrowLeft = document.createElement('img')
+            arrowLeft.src = './assets/svg/leftArr.svg'
+            arrowLeft.classList.add('desc-left')
+            arrowLeft.addEventListener('click', () => {
+                if (activeIndex > 0) {
+                    activeIndex--
+                    updateCarousel()
+                }
+            })
+    
+            // Right Arrow
+            const arrowRight = document.createElement('img')
+            arrowRight.src = './assets/svg/rightArr.svg'
+            arrowRight.classList.add('desc-right')
+            arrowRight.addEventListener('click', () => {
+                if (activeIndex < errorData.troubleshooting.length - 1) {
+                    activeIndex++
+                    updateCarousel()
+                }
+            })
+    
+            // Update Carousel View
+            function updateCarousel() {
+                const images = imageContainer.querySelectorAll('.troubleshooting-img')
+                images.forEach((img, index) => {
+                    img.style.display = index === activeIndex ? "block" : "none"
+                })
+            }
+    
+            // Add elements to carousel
+            carouselContainer.appendChild(arrowLeft)
+            carouselContainer.appendChild(imageContainer)
+            carouselContainer.appendChild(arrowRight)
+    
+            // Add to troubleshooting guide
+            troubleshootingGuide.innerHTML = 
+            `<h3>Troubleshooting Guide</h3>
+            <h4 style="font-size:.7rem">Please refer to the images for reference</h4>
+            `
+            troubleshootingGuide.appendChild(carouselContainer)
             
-            // Generate list items dynamically
-            const troubleshootingList = errorData.troubleshooting
-            .map(step => `<li>${step}</li>`) // takes each troubleshooting step in <li> element
-            .join("") // Join array into a single HTML string
-
-            troubleshootingGuide.innerHTML = `
-                <h3>Troubleshooting Guide</h3>
-                <ul>${troubleshootingList}</ul>
-                <button class="etComplete">Finish Troubleshooting</button>
-            `;
-
-            errorCell.appendChild(troubleshootingGuide)
-            
-            const etComplete = troubleshootingGuide.querySelector('.etComplete')
-            if (etComplete){etComplete.addEventListener('click', () => {
+            // Finish button
+            const etComplete = document.createElement('button')
+            etComplete.classList.add('etComplete')
+            etComplete.textContent = "Finish Troubleshooting"
+            etComplete.addEventListener('click', () => {
                 errorCell.classList.add('etask-complete')
-            })}
-
-        } 
+            });
+            
+            troubleshootingGuide.appendChild(etComplete);
+            errorCell.appendChild(troubleshootingGuide);
+        }
     }
 
     createReport(tag, description) {
