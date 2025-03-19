@@ -106,7 +106,7 @@ class Main {
 
 
         // TEST: BOOT UP
-        this.testBootUp()
+        // this.testBootUp()
 
         // TEST: MISSING COMPONENTS
         // this.testMissingComponents()
@@ -118,7 +118,7 @@ class Main {
         // this.assistant.openModal()
 
         // TEST: ADD BASIC COMPONENT
-        // this.addBasicComponents()
+        this.addBasicComponents()
     }
 
     addBasicComponents() {
@@ -126,14 +126,14 @@ class Main {
         // console.log(this.shop.items)
         itemsToBuy.push(this.shop.items.find(item => item.name == 'NZXT H5 Flow'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'B550 Aorus Elite v2'))
-        //itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD Ryzen 7 5700G'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD Ryzen 7 5700G'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'EVGA Supernova 1300 P+'))
-        //itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
-        //itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'Seagate Barracuda SSD'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'Samsung 970 EVO Plus'))
-        //itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD wraith Prism'))
-        //itemsToBuy.push(this.shop.items.find(item => item.name == 'Gigabyte Radeon RX7900 XTX'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD wraith Prism'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'Gigabyte Radeon RX7900 XTX'))
 
         itemsToBuy.forEach(item => {
             let shopItem = this.shop.items.find(shopItem => shopItem.name === item.name)
@@ -142,11 +142,18 @@ class Main {
         this.shop.buyComponent(this.shop.items[0    ])
         
         // console.log(this.inventory.items)
-        this.inventory.placeComponent(this.inventory.items[0])
-        this.inventory.placeComponent(this.inventory.items[1])
-        this.inventory.placeComponent(this.inventory.items[3])
-        this.inventory.update()
-        this.displayArea.update()
+        for(let i=0; i <= 6; i++) {
+            this.inventory.placeComponent(this.inventory.items[i])
+            this.inventory.update()
+            this.displayArea.update()
+        }
+        // this.inventory.placeComponent(this.inventory.items[0])
+        // this.inventory.placeComponent(this.inventory.items[1])
+        // this.inventory.placeComponent(this.inventory.items[3])
+        // this.inventory.placeComponent(this.inventory.items[4])
+        // this.inventory.placeComponent(this.inventory.items[5])
+        // this.inventory.update()
+        // this.displayArea.update()
         
         // this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'motherboard'),1)[0])
         // this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'ram'),1)[0])
