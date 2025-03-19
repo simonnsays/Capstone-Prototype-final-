@@ -10247,6 +10247,8 @@ const components = [
             { side: 'left', imageSrc: './assets/storage/m.2/Samsung 970 EVO Plus NVMe SSD attached.png' },
             { side: 'pack', imageSrc: './assets/storage/m.2/Samsung_970_EVO_Plus_NVMe_SSD.png' },
         ],
+        cables: [],
+        ports: [],
     },
     { // Western Digital Black SN850X 
         name: 'Western Digital Black SN850X',
@@ -10274,6 +10276,8 @@ const components = [
             { side: 'pack', imageSrc: './assets/storage/m.2/Western_Digital_Black_SN850X_M.2_SSD.png' },
             { side: 'left', imageSrc: './assets/storage/m.2/Western Digital Black SN850X M.2 SSD attached.png' },
         ],
+        cables: [],
+        ports: [],
     },
     { // Kingston KC3000 
         name: 'Kingston KC3000',
@@ -10301,6 +10305,8 @@ const components = [
             { side: 'pack', imageSrc: './assets/storage/m.2/Kingston KC3000.png' },
             { side: 'left', imageSrc: './assets/storage/m.2/Kingston KC3000 attached.png' },
         ],
+        cables: [],
+        ports: [],
     },
     { // Crucial P3
         name: 'Crucial P3',
@@ -10328,6 +10334,8 @@ const components = [
             { side: 'pack', imageSrc: './assets/storage/m.2/Crucial P3.png' },
             { side: 'left', imageSrc: './assets/storage/m.2/Crucial P3 attached.png' },
         ],
+        cables: [],
+        ports: [],
     },
     { // Seagate FireCuda 520
         name: 'Seagate FireCuda 520',
@@ -10355,6 +10363,8 @@ const components = [
             { side: 'pack', imageSrc: './assets/storage/m.2/Seagate FireCuda 520.png' },
             { side: 'left', imageSrc: './assets/storage/m.2/Seagate FireCuda 520 attached.png' },
         ],
+        cables: [],
+        ports: [],
     },
     // Cooling
     { //AMD wraith Prism

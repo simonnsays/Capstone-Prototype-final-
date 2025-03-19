@@ -504,6 +504,15 @@ class PCUnit {
             });
         }
 
+        // M.2 Storage Device Powering
+        if (this.componentsStatus.storage) {
+            this.componentsStatus.storage.forEach(storage => {
+                if (storage.component?.size === 'm.2' && storage.component?.isAttached && this.componentsStatus.motherboard?.isPowered) {
+                    storage.isPowered = true
+                }
+            })
+        }
+
         return true
     }
 
@@ -607,6 +616,7 @@ class PCUnit {
     }
 
     storageDeviceTest() {
+        
         // check if hardware is available (seated)
         if(!this.componentsStatus.storage || !this.componentsStatus.storage.length) {
             return 'ERR-500' // Missing Storage Device
