@@ -11794,30 +11794,7 @@ const components = [
         }
     ]  
     },
-
-//thermal paste
-// new Component ({ 
-//     name: 'Thermal Paste',
-//     type: 'thermal paste',
-//     size: '',
-//     dimensions: {
-//         width: 30,
-//         height: 30,
-//     },
-//     isRotatable: false,
-//     isAttached: false,
-//     defaultSource: 'pack',
-//     images: [
-//         {side: 'left', imageSrc: './assets/thermal paste/thermal paste.png'},  
-//         {side: 'pack', imageSrc: './assets/thermal paste/Thermal-Paste-HY510-Heatsink-Compound.png'},  
-//     ],
-//  }),
-
 ]
 
-
-//components.forEach(component => {
-//    Component.handleComponent(component)
-//})
 
 export default components
