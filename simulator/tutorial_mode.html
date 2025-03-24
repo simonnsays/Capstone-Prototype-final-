@@ -8,75 +8,6 @@
     <link rel="icon" href="../favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
     <style>
-       .checkmark {
-        width: 30px;
-        height: 30px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        }
-
-        .completed-task .checkmark {
-            display: block; /* Make the checkmark visible when completed */
-            opacity: 1;
-        }
-
-        /* Additional style for completed tasks */
-        .completed-task {
-            background-color: #e0ffe0;
-            color: #333;
-            transition: background-color 0.3s ease;
-        }
-
-        .completed-task .tasktitle {
-            text-decoration: line-through;
-            color: #888;
-        }
-
-        #task-status {
-        position: fixed;
-        left: 10px;
-        top: 10px;
-        font-size: 18px;
-        font-weight: bold;
-        color: #333;
-        }   
-
-        /* .glowing-container { */
-            /* background-color: rgba(171, 214, 153, .8); */
-            /* background-color: #c62828; */
-            /* background: linear-gradient(to bottom, red, black); */
-            /* background: radial-gradient(circle at center, red, yellow);
-
-
-            font-weight:normal;
-            width: 500;
-            height: 200;
-            position: relative;
-
-            margin-bottom: 10px;
-            border-radius: 20px;
-            padding: 5px;
-
-            overflow: auto;
-            /* animation: reportCellSlide .4s ease-in; */
-            /* animation: blink 1.5s infinite; */ 
-        /* } */
-
-        @keyframes blink {
-            0% {
-            opacity: .5;
-            }
-            50% {
-            opacity: 1;
-            }
-            100% {
-            opacity: .5;
-            }
-        }
-        
-        /* .blinking-element {
-            animation: blink 1.5s infinite;
-        } */
         .wood {
             opacity: 1;
             position: absolute;
@@ -86,7 +17,6 @@
     </style>
 </head>
 <body>
-    <!-- <img class="wood" src="./assets/display-area/table-wood.png"> -->
     <img class="wood" src="./assets/display-area/table-plank.png">
 
     <!-- GAME CONTAINER -->
@@ -342,19 +272,6 @@
         </div>
 
     </div>
-    
-        <!-- Boot Error Dialog -->
-        <!-- <dialog id="bootErrorDialog" class="modal">
-            <div class="dialog-content">
-                <h3>Boot Error</h3>
-                <p id="errorMessage">An unknown error occurred during boot-up.</p> 
-                <button id="closeErrorDialogBtn">Close</button> 
-            </div>
-        </dialog> -->
-        
-        
-    <!-- <div id="task-status">Task to be done: Click me "The Assistant" </div> -->
-    
 
     <!------------------------- ASSISTANT ----------------------------------->
     <!-- Mini Element -->
@@ -429,18 +346,10 @@
                 </div>
             <div id="errorsContainer" class="error-container">
 
-
                 <!--               ERRORS CONTAINER                      -->
 
-                <!-- HELLO ERRORS -->
             </div>
         </div>
-
-    </dialog>
-
-    <!-- Assistant Error Message -->
-    <dialog class="err-message">
-        <h3>Error!</h3>
     </dialog>
 
     <!-- Custom Alert Box -->
@@ -448,9 +357,6 @@
         <span id="alertMessage"></span>
         <button id="alertOKButton">OK</button>
     </div>
-
-    <!-- Assistant Reassure -->
-    <dialog class="asst-reassure"></dialog>
 
     <!-------------------------- S C R I P T S ------------------------------->
     <script type="module" src="main.js"></script>
