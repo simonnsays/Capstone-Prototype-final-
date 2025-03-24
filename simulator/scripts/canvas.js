@@ -399,6 +399,26 @@ class Canvas {
             this.fillRoundRect(spot.area.x, spot.area.y, spot.area.width, spot.area.height, 20, '#c7ddcc')
         })
 
+        // const img = new Image();
+        // img.src = './assets/display-area/table-wood.png'
+
+        // this.c.drawImage(img, table.area.x + 15, table.area.y + 15, table.area.width - 30, table.area.height - 30)
+
+        // const x = 50, y = 50, width = 150, height = 150, radius = 20;
+      
+        // Draw rounded rectangle mask
+        // this.c.beginPath();
+        // this.c.moveTo(x + radius, y);
+        // this.c.arcTo(x + width, y, x + width, y + height, radius);
+        // this.c.arcTo(x + width, y + height, x, y + height, radius);
+        // this.c.arcTo(x, y + height, x, y, radius);
+        // this.c.arcTo(x, y, x + width, y, radius);
+        // this.c.closePath();
+        // this.c.clip();
+        
+        // Draw the image with rounded borders
+        // this.c.drawImage(img, x, y, width, height);
+
         // draw Display area component
         if(table.component) {
             // draw component
