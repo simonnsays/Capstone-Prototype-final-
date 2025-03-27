@@ -28,6 +28,7 @@ a, a:visited {
 }
 
 .overlay {
+    top: 0px;
     width: 100vw;
     height: 100vh;
     background: linear-gradient(to right, var(--light-lime),var(--teal));
@@ -51,7 +52,6 @@ a, a:visited {
     /* background-color: var(--teal); */
     
     /* border-radius: 20px; */
-    padding: 10px;
 
     animation: fadeInAnimation ease 1s;
 }

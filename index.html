@@ -4,13 +4,33 @@
     <link rel="stylesheet" href="Landing Page/landingpagestyle.css">
     <link rel="stylesheet" href="Landing Page/mode.css">
     <link rel="icon" href="../favicon.png" type="image/x-icon">
-    <title>Prototype v2</title>
+    <title>Build It Yourself</title>
     <link rel="icon" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <style>
 </style>
 <body>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a class="nav-title" href="index.html">Build It Yourself</a>
+    </div>
+    <ul class="nav-links">
+        <li>|</li>
+        <li><a href="#features">Features</a></li>
+        <li>|</li>
+        <li><a href="#showcase">Showcase</a></li>
+        <li>|</li>
+    </ul>
+    <div class="nav-cta">
+        <a class="nav-button" href="#cta">Get Started</a>
+    </div>
+</nav>
+
+  <div class="main-content">
+    <div id="logo" class="logo"><img src="./Landing Page/assets/stock/biylogo.png" alt="logo"></div>
   <!-- Whole body of carousel with navigation buttons -->
   <div class="carousel">
     <div class="carousel__nav">
@@ -33,10 +53,11 @@
         <div class="carousel-item__image"></div>
         <div class="carousel-item__info">
           <div class="carousel-item__container">
-          <h2 class="carousel-item__subtitle">WELCOME TO PC SIMULATION!</h2>
-          <h1 class="carousel-item__title">What is Computer Simulation?</h1>
-          <p class="carousel-item__description">Computer simulation, a potent tool, replicates real-world scenarios virtually, enabling us to model intricate systems, foresee results, and glean insights from basic physics to complex biology. Our ardor lies in leveraging simulation's potential to craft immersive, educational experiences that redefine possibilities.</p>
-          <a class="carousel-item__btn">Simulate</a>
+          <h2 class="carousel-item__subtitle">Welcome to Build It Yourself</h2>
+          <h1 class="carousel-item__title">Master PC Building</h1>
+          <p class="carousel-item__description"> Experience hands-on PC building in a risk-free realistic simulation environment. 
+            Learn component selection, assembly techniques, and troubleshooting with our interactive simulator
+          </p>
             </div>
         </div>
       </div>
@@ -45,10 +66,10 @@
         <div class="carousel-item__image"></div>
         <div class="carousel-item__info">
           <div class="carousel-item__container">
-          <h2 class="carousel-item__subtitle">WELCOME TO PC SIMULATION!</h2>
-          <h1 class="carousel-item__title">Explore Limitless Possibilities:</h1>
-          <p class="carousel-item__description">Immerse in a varied collection of simulations crafted for inspiration, education, and enjoyment. Uncover fluid dynamics' intricacies, revisit history's moments, and journey to limitless technological futures. Our simulations suit all interests and knowledge levels, welcoming students, educators, researchers, and enthusiasts.</p>
-          <a class="carousel-item__btn">Simulate</a>
+          <h2 class="carousel-item__subtitle">Your very own Assistant</h2>
+          <h1 class="carousel-item__title">Assistant</h1>
+          <p class="carousel-item__description">Our assistant will guide you through the PC building process, providing step-by-step instructions and real-time feedback. 
+            Learn at your own pace and build your dream PC with confidence.</p>
             </div>
         </div>
       </div>
@@ -57,10 +78,10 @@
         <div class="carousel-item__image"></div>
         <div class="carousel-item__info">
           <div class="carousel-item__container">
-          <h2 class="carousel-item__subtitle">WELCOME TO PC SIMULATION!</h2>
-          <h1 class="carousel-item__title">Empower Learning and Innovation:</h1>
-          <p class="carousel-item__description">PC Simulation: Where education and innovation converge. Our simulations transcend mere entertainment, serving as potent learning tools that cultivate critical thinking, problem-solving, and creativity. Unleash the potential of simulation-based learning, immersing yourself in interactive experiences that unravel intricate subjects.</p>
-          <a class="carousel-item__btn">Simulate</a>
+          <h2 class="carousel-item__subtitle">Interactive Features</h2>
+          <h1 class="carousel-item__title">Learn by Doing</h1>
+          <p class="carousel-item__description">Experience component interactions, compatibility checking, cable management, 
+            and troubleshooting scenarios in our risk-free detailed simulation environment.</p>
             </div>
         </div>
       </div>
@@ -69,62 +90,91 @@
         <div class="carousel-item__image"></div>
         <div class="carousel-item__info">
           <div class="carousel-item__container">
-          <h2 class="carousel-item__subtitle">WELCOME TO PC SIMULATION!</h2>
-          <h1 class="carousel-item__title">Unleash Your Potential:</h1>
-          <p class="carousel-item__description">Elevate your knowledge through an individual-focused journey in computer simulation. Explore diverse facets, refine your insights, and expand your expertise, all driven by your personal dedication. Your path in this realm is a solitary yet rewarding pursuit of continuous growth.</p>
-          <a class="carousel-item__btn">Simulate</a>
+          <h2 class="carousel-item__subtitle">Get Started Today</h2>
+          <h1 class="carousel-item__title">Build your PC</h1>
+          <p class="carousel-item__description">Start your PC building experience today and
+            learn the basics of PC building and upgrade your skills with our interactive simulator. 
+          </p>
             </div>
         </div>
       </div>
-        
-      <div class="carousel-item carousel-item--5">
-        <div class="carousel-item__image"></div>
-        <div class="carousel-item__info">
-          <div class="carousel-item__container">
-          <h2 class="carousel-item__subtitle">WELCOME TO PC SIMULATION!</h2>
-          <h1 class="carousel-item__title">Ready to Begin Your Journey?</h1>
-          <p class="carousel-item__description">Embrace limitless possibilities with computer simulation. Whether learning, exploring, or immersing in the digital realm, PC Simulation awaits. Fasten your seatbelt and embark on an unparalleled adventure.</p>
-          <a class="carousel-item__btn">Simulate</a>
+  </div>
+
+      <!-- Features Section -->
+      <section id="features" class="section-container">
+        <div class="section-header">
+            <h2 class="section-title">Why Computer Simulation?</h2>
+            <p class="section-subtitle">Learn PC building with our interactive and comprehensive tool</p>
+        </div>
+        <div class="feature-list">
+            <div class="feature-item">
+                <i class="feature-icon fas fa-tools"></i>
+                <h3 class="feature-title">Interactive Learning</h3>
+                <p class="feature-description">Experience hands-on PC building with our realistic simulation environment.</p>
+            </div>
+            <div class="feature-item">
+                <i class="feature-icon fas fa-shield-alt"></i>
+                <h3 class="feature-title">Safe Practice</h3>
+                <p class="feature-description">Learn without the risk of damaging real hardware components.</p>
+            </div>
+            <div class="feature-item">
+                <i class="feature-icon fas fa-graduation-cap"></i>
+                <h3 class="feature-title">Comprehensive Guide</h3>
+                <p class="feature-description">Step-by-step instructions and detailed component information.</p>
+            </div>
+            <div class="feature-item">
+                <i class="feature-icon fas fa-sync-alt"></i>
+                <h3 class="feature-title">Real-time Feedback</h3>
+                <p class="feature-description">Get immediate feedback on your assembly process and compatibility checks.</p>
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- Showcase Section -->
+    <section id="showcase" class="section-container">
+        <div class="section-header">
+            <h2 class="section-title">Explore the Simulation</h2>
+            <p class="section-subtitle">See how our simulator helps you learn PC building</p>
+        </div>
+        <div class="showcase-container">
+
+          <div class="showcase-content">
+            <h3 class="showcase-title">Learn By Doing</h3>
+            <p class="showcase-description">Experience the complete PC building process from component selection to final assembly...</p>
+        </div>
+
+            <img src="./Landing Page/assets/Custombuild.jpg" alt="Simulator Preview" class="showcase-image">
+            <img src="./Landing Page/assets/Custombuild.jpg" alt="Simulator Preview" class="showcase-image">
+            <img src="./Landing Page/assets/Custombuild.jpg" alt="Simulator Preview" class="showcase-image">
+            <img src="./Landing Page/assets/Custombuild.jpg" alt="Simulator Preview" class="showcase-image">
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="cta">
+        <h2>Start Your PC Building Journey</h2>
+        <a class="start-btn" href="./simulator/tutorial_mode.html">Get Started</a>
+    </section>
+  </div>
+
+    <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Build It Yourself</h3>
+        <p>Your gateway to learning PC building through interactive simulation.</p>
+        <div class="social-links">
+          <a href="https://github.com/simonnsays/Capstone-Prototype-final-"><i class="fab fa-github"></i></a>
+
         </div>
       </div>
-    </div>
+
+  </footer>
+  <div class="footer-bottom">
+    <p>&copy; 2024 Build It Yourself. All rights reserved.</p>
+
   </div>
-
-  <!-- overlay -->
-  <div class="overlay"></div>
-
-  <!-- MODE SELECT -->
-  <div class="mode-select-modal">
-    <!-- header -->
-    <h1 class="mode-header">MODE SELECT</h1>
-
-    <!-- MODES -->
-    <div class="modes-container"> 
-      <!-- Tutorial Mode -->
-      <a href="simulator/tutorial_mode.html">
-        <div class="mode">
-          <div class="mode-image">
-            <img src="Landing Page/assets/t-logo.png">
-          </div>
-          
-          <h1>Tutorial Mode</h1>
-          <img class="mode-icon" src="Landing Page/assets/stock/2.png">    
-        </div>
-      </a>
-
-      <!-- Free Build Moed -->
-      <a href="simulator/free_mode.html">
-        <div class="mode">
-          <div class="mode-image">
-            <img src="Landing Page/assets/f-logo.png">
-          </div>
-          <h1>Free Build Mode</h1>
-          <img class="mode-icon fr" src="Landing Page/assets/stock/1.png">
-        </div>
-      </a>
-    </div>
-  </div>
-
 
   <script src="Landing Page/landscript.js"></script>
   <script src="Landing Page/mode.js"></script>

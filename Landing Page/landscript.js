@@ -1,30 +1,42 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const carousel = document.querySelector('.carousel');
     const carouselItems = document.querySelectorAll('.carousel-item');
     const moveLeftButton = document.getElementById('moveLeft');
     const moveRightButton = document.getElementById('moveRight');
-    
+    let isMovingLeft = false;
     let currentSlide = 0;
+    carouselItems[0].classList.add('active');
 
-    // Move to the specified slide
-    function goToSlide(slideIndex) {
-        carouselItems[currentSlide].classList.remove('active');
-        carouselItems[slideIndex].classList.add('active');
-        currentSlide = slideIndex;
+    function moveCarousel(direction) {
+        // Remove active class from current item
+        carouselItems.forEach(item => {item.classList.remove('active', 'previous')});
+             
+        // Calculate new index
+        const previousSlide = currentSlide
+        if (direction === 'right') {
+            currentSlide = (currentSlide + 1) % carouselItems.length;
+        } else {
+            currentSlide = (currentSlide - 1 + carouselItems.length) % carouselItems.length;
+        }
+
+        // add classes to the new items
+       carouselItems[previousSlide].classList.add('previous');
+       carouselItems[currentSlide].classList.add('active');
+
+
+        // Animate the content container
+        const container = carouselItems[currentSlide].querySelector('.carousel-item__container');
+        container.style.transform = isMovingLeft ? 'translateX(-50px)' : 'translateX(50px)';
+        
+        // Reset container position after animation
+        setTimeout(() => {
+            container.style.transform = 'translateX(0)';
+        }, 60);
     }
 
-    // Event listener for the left arrow button
-    moveLeftButton.addEventListener('click', function () {
-        const prevSlide = (currentSlide === 0) ? carouselItems.length - 1 : currentSlide - 1;
-        goToSlide(prevSlide);
-    });
+    // Event Listeners
+    moveLeftButton.addEventListener('click', () => moveCarousel('left'));
+    moveRightButton.addEventListener('click', () => moveCarousel('right'));
 
-    // Event listener for the right arrow button
-    moveRightButton.addEventListener('click', function () {
-        const nextSlide = (currentSlide === carouselItems.length - 1) ? 0 : currentSlide + 1;
-        goToSlide(nextSlide);
-    });
-
-    // Initialize the first slide
-    goToSlide(0);
+    // Optional: Auto-play
+    setInterval(() => moveCarousel('right'), 5000);
 });
