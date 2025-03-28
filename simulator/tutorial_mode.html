@@ -443,7 +443,24 @@
 
     <!-- Assistant Reassure -->
     <dialog class="asst-reassure"></dialog>
-
+    <div class="chat-toggle">
+        <i class="fas fa-comment"> <img src="./assets/Assistant/chat-bot.png" alt="chatbot"></i>
+    </div>
+    <div id="chatbot">
+        <div class="chat-header">
+            <span>Build It Assistant</span>
+            <i class="fas fa-robot"></i>
+        </div>
+        <div id="chat-messages">
+            <!-- Messages will be inserted here -->
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Ask me anything...">
+            <button id="chat-send">
+                <i class="fas fa-paper-plane"><img src="/simulator/assets/Assistant/send.png" alt="send"></i>
+            </button>
+        </div>
+    </div>
     <!-------------------------- S C R I P T S ------------------------------->
     <script type="module" src="main.js"></script>
     <script>

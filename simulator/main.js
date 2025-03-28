@@ -9,7 +9,7 @@ import DisplayArea from "./scripts/displayArea.js"
 import BootUpTab from "./scripts/Tabs/bootUpTab.js"
 import Assistant from "./assistant/assistant.js"
 import wattageCalculator from "./scripts/Data/wattageCalculator.js"
-
+import chatbot from "./scripts/Data/chatbot.js"
 class Main {
     constructor() {
         // Utility Modules
@@ -77,6 +77,9 @@ class Main {
             this.inventory,
             this.wattageCalculator
         )
+
+        //chatbot
+        this.chatbot = new chatbot()
     }
 
     handleMouseDown() {
