@@ -289,10 +289,6 @@ class PCUnit {
         }
     }
 
-    createReport(tag, description) {
-            
-    }
-
     powerOnMonitor(){ // takes everything from displaying the splashscreen to displayingos and shows it inside the div monitorScreen
         this.displaySplashScreen();
     }

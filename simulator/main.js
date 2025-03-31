@@ -78,7 +78,7 @@ class Main {
             this.wattageCalculator
         )
 
-        //chatbot
+        // Chatbot
         this.chatbot = new chatbot()
     }
 
