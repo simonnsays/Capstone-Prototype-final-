@@ -10,21 +10,20 @@ const errorCodes = {
              "Check the BIOS settings for fan speed control and adjust if necessary."
         ],
     },
-    'HZD-101': {
-        code: 'HZD-101',
-        severity: 'Hazard',
-        description: 'Insufficient cooling detected',
-        troubleshooting: [
-            "Check if the case fans are spinning properly.",
-            "Ensure that the case fans are connected to the correct headers on the motherboard.",
-            "Ensure that the thermal paste is applied correctly and evenly.",
-            "Check the CPU and GPU temperatures in the BIOS/UEFI."
-        ],
-    },
     'HZD-200': {
         code: 'HZD-200',
         severity: 'Hazard',
         description: 'High CPU temperature',
+        troubleshooting: [
+            "Check if the CPU cooler is properly installed and making good contact with the CPU.",
+            "Ensure that the thermal paste is applied correctly and evenly.",
+            "Check the CPU fan speed and make adjustments in the BIOS/UEFI if necessary."
+        ],
+    },
+    'HZD-201': {
+        code: 'HZD-201',
+        severity: 'Hazard',
+        description: 'High System temperature',
         troubleshooting: [
             "Check if the CPU cooler is properly installed and making good contact with the CPU.",
             "Ensure that the thermal paste is applied correctly and evenly.",
@@ -177,13 +176,13 @@ const errorCodes = {
 
     // Critical errors
     'CRT-01': {
-        code: 'CRT-01',
+        code: 'CRT-06',
         severity: 'Critical',
-        description: 'BIOS/UEFI corruption',
+        description: 'PSU failure',
         troubleshooting: [
-            "Attempt to reset the BIOS/UEFI to default settings.",
-            "Flash the BIOS/UEFI with the latest firmware version.",
-            "If the issue persists, consider replacing the motherboard."
+            "Test the PSU with a multimeter to check for proper voltage output.",
+            "Inspect the PSU for any visible damage or signs of overheating.",
+            "If the issue persists, consider replacing the PSU."
         ],
     },
     'CRT-02': {
@@ -217,36 +216,6 @@ const errorCodes = {
         ],
     },
     'CRT-05': {
-        code: 'CRT-05',
-        severity: 'Critical',
-        description: 'GPU failure',
-        troubleshooting: [
-            "Test the GPU on another system to confirm hardware failure.",
-            "Check for any physical damage or loose connections on the GPU.",
-            "If the issue persists, consider replacing the GPU."
-        ],
-    },
-    'CRT-06': {
-        code: 'CRT-06',
-        severity: 'Critical',
-        description: 'PSU failure',
-        troubleshooting: [
-            "Test the PSU with a multimeter to check for proper voltage output.",
-            "Inspect the PSU for any visible damage or signs of overheating.",
-            "If the issue persists, consider replacing the PSU."
-        ],
-    },
-    'CRT-07': {
-        code: 'CRT-07',
-        severity: 'Critical',
-        description: 'Overheating issue',
-        troubleshooting: [
-            "Check for proper airflow and ventilation in the case.",
-            "Ensure that all fans are functioning correctly.",
-            "Consider upgrading the cooling system if necessary."
-        ],
-    },
-    'CRT-08': {
         code: 'CRT-08',
         severity: 'Critical',
         description: 'Boot device failure',
@@ -256,7 +225,40 @@ const errorCodes = {
             "If the issue persists, consider replacing the boot device."
         ],
     },
-    'CRT-09': {
+    'CRT-06': {
+        code: 'CRT-05',
+        severity: 'Critical',
+        description: 'GPU failure',
+        troubleshooting: [
+            "Test the GPU on another system to confirm hardware failure.",
+            "Check for any physical damage or loose connections on the GPU.",
+            "If the issue persists, consider replacing the GPU."
+        ],
+    },
+    'CRT-07': {
+        code: 'CRT-06',
+        severity: 'Critical',
+        description: 'PSU failure',
+        troubleshooting: [
+            "Test the PSU with a multimeter to check for proper voltage output.",
+            "Inspect the PSU for any visible damage or signs of overheating.",
+            "If the issue persists, consider replacing the PSU."
+        ],
+    },
+    'CRT-08': {
+        code: 'CRT-08',
+        severity: 'Critical',
+        description: 'Overheating issue',
+        troubleshooting: [
+            "Check for proper airflow and ventilation in the case.",
+            "Ensure that all fans are functioning correctly.",
+            "Consider upgrading the cooling system if necessary."
+        ],
+    },
+
+
+    // Software errors
+    'CRT-0': {
         code: 'CRT-09',
         severity: 'Critical',
         description: 'Operating System corruption',
@@ -266,98 +268,23 @@ const errorCodes = {
             "Consider backing up important data before reinstalling the OS."
         ],
     },
+    
+    'CRT-0': {
+        code: 'CRT-01',
+        severity: 'Critical',
+        description: 'BIOS/UEFI corruption',
+        troubleshooting: [
+            "Attempt to reset the BIOS/UEFI to default settings.",
+            "Flash the BIOS/UEFI with the latest firmware version.",
+            "If the issue persists, consider replacing the motherboard."
+        ],
+    },
 
     // Error undefined
     'ERR-404': {
         code: 'ERR-100',
         severity: 'Error',
         description: 'UNDEFINED ERROR ',
-    },
-
-// -------------------------------------------------old error codes------------------------------------------------------------------------
-    'ERR-00': {
-        code: 'ERR-00',
-        severity: 'Error',
-        name: 'Missing Component',
-        description: 'A critical component is missing from the system.',
-        troubleshooting: 'Check if all components are properly installed and connected.'
-    },
-    'ERR-01': {
-        code: 'ERR-01',
-        severity: 'Error',
-        name: 'No Boot Device Found',
-        description: 'The system did not detect a boot device.',
-        troubleshooting: 'Check if the boot device is properly connected and configured in BIOS.'
-    },
-    'ERR-02': {
-        code: 'ERR-02',
-        severity: 'Error',
-        name: 'Memory Error',
-        description: 'The system detected a memory error.',
-        troubleshooting: 'Reseat the memory modules and run a memory diagnostic tool.'
-    },
-    'ERR-03': {
-        code: 'ERR-03',
-        severity: 'Hazard',
-        name: 'High Temperatures',
-        description: 'The system is experiencing high temperatures.',
-        troubleshooting: 'Ensure proper ventilation and check if the cooling system is functioning.'
-    },
-    'ERR-04': {
-        code: 'ERR-04',
-        severity: 'Critical',
-        name: 'Hard Drive Failure',
-        description: 'The system detected a hard drive failure.',
-        troubleshooting: 'Run a hard drive diagnostic tool and consider replacing the hard drive.'
-    },
-    'ERR-05': {
-        code: 'ERR-05',
-        severity: 'Critical',
-        name: 'BIOS Corruption',
-        description: 'The BIOS is corrupted.',
-        troubleshooting: 'Reset the BIOS to default settings or reflash the BIOS firmware.'
-    },
-    'ERR-06': {
-        code: 'ERR-06',
-        severity: 'Error',
-        name: 'CPU Overheating',
-        description: 'The CPU is overheating.',
-        troubleshooting: 'Check if the CPU cooler is properly installed and consider replacing the thermal paste.'
-    },
-    'ERR-07': {
-        code: 'ERR-07',
-        severity: 'Error',
-        name: 'Power Supply Failure',
-        description: 'The system detected a power supply failure.',
-        troubleshooting: 'Check if the power supply is properly connected and consider replacing it.'
-    },
-    'ERR-08': {
-        code: 'ERR-08',
-        severity: 'Error',
-        name: 'GPU Failure',
-        description: 'The system has not detected a GPU, resulting in no display.',
-        troubleshooting: 'Check if the GPU is properly connected and consider replacing it.'
-    },
-    'ERR-09': {
-        code: 'ERR-09',
-        severity: 'Hazard',
-        name: 'Power Surge',
-        description: 'The system has detected a power hazard.',
-        troubleshooting: 'Check if the power supply is still working properly by inspecting for possible visible damage then individually test major components like the motherboard, RAM, GPU, and hard drive to identify the damaged part on a known working system; if damage is confirmed, replace the affected components.'
-    },
-    'ERR-10': {
-        code: 'ERR-10',
-        severity: 'Hazard',
-        name: 'Fan Speed Abnormal',
-        description: 'The system detected abnormal fan speeds.',
-        troubleshooting: 'Change the fan speed settings in BIOS or replace the fan if the fan speed is still the same after changing the fan settings in BIOS.'
-    },
-    'ERR-11': {
-        code: 'ERR-11',
-        severity: 'Critical',
-        name: 'Power Failure',
-        description: 'System did not boot due to power failure.',
-        troubleshooting: 'Try to boot the system again and check if the system boots up. If the system does not boot up, check if the power supply is properly connected to an outlet; If the issue persists, check for loose cables inside the computer, examine the power supply unit (PSU) for potential damage, and consider testing the computer to another known working PSU if possible; if the problem is still present, you may need to look into potential hardware failures like a faulty motherboard or failing components within the computer.'
     },
 }
 

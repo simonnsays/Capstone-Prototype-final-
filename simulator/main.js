@@ -15,10 +15,8 @@ class Main {
         // Utility Modules
         this.elementHandler = new ElementHandler()
         this.utilityTool = new UtilityTool()
-
         // User
         this.user = new User(this.utilityTool)
-
         // Item Info Modal
         this.itemInfo = this.elementHandler.getItemInfoElements()
 
@@ -35,7 +33,7 @@ class Main {
             this.pcUnit, 
             this.portsTab, 
             this.drawer)
-
+      
         // Display Area
         this.displayArea = new DisplayArea(
             this.elementHandler, 
@@ -79,7 +77,15 @@ class Main {
         )
 
         // Chatbot
-        this.chatbot = new chatbot()
+        this.chatbot = new chatbot(
+            this.pcUnit,
+            this.portsTab,
+            this.bootUpTab,
+            this.drawer,
+            this.inventory,
+            this.shop
+        )
+  
     }
 
     handleMouseDown() {
@@ -90,7 +96,8 @@ class Main {
             this.bootUpTab.isActive ||
             this.inventory.isActive || 
             this.portsTab.isActive || 
-            this.shop.isActive
+            this.shop.isActive ||
+            this.chatbot.isActive 
         ) {
                 this.canvas.isActive = false
             } else {
@@ -109,8 +116,8 @@ class Main {
 
 
         // TEST: BOOT UP
-        // this.testBootUp()
-
+        this.testBootUp()
+        this.testTemperature()
         // TEST: MISSING COMPONENTS
         // this.testMissingComponents()
 
@@ -121,22 +128,25 @@ class Main {
         // this.assistant.openModal()
 
         // TEST: ADD BASIC COMPONENT
-        this.addBasicComponents()
+        //this.addBasicComponents()
     }
-
+    testTemperature(){
+        //this.bootUpTab.pcUnit.biosSettings.temperatures.cpu = 86
+        this.bootUpTab.pcUnit.biosSettings.temperatures.system = 76
+    }
     addBasicComponents() {
         const itemsToBuy = []
         console.log(this.shop.items)
         itemsToBuy.push(this.shop.items.find(item => item.name == 'NZXT H5 Flow'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'B550 Aorus Elite v2'))
-        //itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD Ryzen 7 5700G'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD Ryzen 7 5700G'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'EVGA Supernova 1300 P+'))
-        //itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
         //itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'Seagate Barracuda SSD'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'Samsung 970 EVO Plus'))
-        //itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD wraith Prism'))
-        //itemsToBuy.push(this.shop.items.find(item => item.name == 'Gigabyte Radeon RX7900 XTX'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD wraith Prism'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'Gigabyte Radeon RX7900 XTX'))
 
         itemsToBuy.forEach(item => {
             let shopItem = this.shop.items.find(shopItem => shopItem.name === item.name)
@@ -228,7 +238,7 @@ class Main {
         this.displayArea.update()
 
         this.bootUpTab.powerOff()
-        // this.bootUpTab.togglePower(this.displayArea.table.component)
+        //this.bootUpTab.togglePower(this.displayArea.table.component)
         this.bootUpTab.openTab()
     }
     // ^^^
@@ -330,6 +340,7 @@ class Main {
         this.portsTab.attachCable(gpuPortGpu.offsets[0], gpuCableGpu)
 
     }
+
 
     /////////////////// TEST: BOOT UP
     testMissingComponents() {

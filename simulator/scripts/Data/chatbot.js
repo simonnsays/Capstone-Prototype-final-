@@ -1,5 +1,11 @@
 class chatbot{
-    constructor() {
+    constructor( pcUnit, portsTab, bootUpTab, drawer, inventory, shop,) {
+        this.pcUnit = pcUnit
+        this.portsTab = portsTab
+        this.bootUpTab = bootUpTab
+        this.drawer = drawer
+        this.inventory = inventory
+        this.shop = shop
         this.chatInput = document.getElementById("chat-input")
         this.chatSend = document.getElementById("chat-send")
         this.chatMessages = document.getElementById("chat-messages")
@@ -29,14 +35,19 @@ class chatbot{
         
         // Add event listener in constructor
         this.chatSend.addEventListener("click", this.sendMessage) 
+        this.chatInput.addEventListener('input', () => {
+            const isEmpty = !this.chatInput.value.trim()
+            this.chatSend.disabled = isEmpty
+            this.chatSend.style.opacity = isEmpty ? '0.5' : '1'
+        })
         this.chatInput.addEventListener("keypress", (event) => {
             if (event.key === "Enter") {
                 this.sendMessage()
             }
         })
-        // Add event listener to the shop button
-        this.openShop = this.openShop.bind(this)
 
+        this.chatSend.disabled = true
+        this.chatSend.style.opacity = '0.5'
     }
 
     openShop() {
@@ -79,15 +90,25 @@ class chatbot{
             console.error("Port modal not found!");
         }
     }
+    openBIOS() {
+        let biosModal = document.getElementById("biosModal");
+         if (biosModal) {
+            setTimeout(() => {
+                biosModal.showModal();
+                this.bootUpTab.pcUnit.updateBiosDisplay()
+            }, 1800);
+        } else {
+            console.error("BIOS modal not found!");
+        }
+    }
 
     clearMessages() {
         this.chatMessages.innerHTML = ""; // Clear chat messages
     }
     
-
     generateResponse(query) {
         query = query.toLowerCase()
-        
+       
         // Commands
         if (query.includes('/open shop')) {
             this.openShop(); 
@@ -105,12 +126,20 @@ class chatbot{
             this.openPorts(); 
             return "Opening the portsTab for you...";
         }
+        if (query.includes('/open bios')) {   
+            if(this.bootUpTab.pcUnit.power === 'off'){
+                return "Please power on the system first!"
+            } else if(this.bootUpTab.pcUnit.power === 'on') {  
+                this.openBIOS(); 
+                return "Opening the BIOS for you...";
+            }
+        }
         if (query.includes('/clear')) {
             this.clearMessages(); 
             return "Messages have been cleared, let's start fresh!";
         }
         if (query.includes('/help')) {
-            return `Below are the available commands: <br>/open shop<br>/open inventory <br>/open boot <br>/open port <br>/clear`
+            return `Below are the available commands: <br>/open shop<br>/open inventory <br>/open boot <br>/open port <br>/open bios<br>/clear<br>/help<br>`
         }
 
         // Basic Simulator Questions
@@ -134,30 +163,61 @@ class chatbot{
             return "This simulator allows you to learn PC assembly and troubleshooting through interactive experiences."
         }
 
-        if (query.includes('place' || 'placing') || query.includes('install' || 'installing')) {
-            return "To place components place them first into the canvas by simply clicking them in the inventory tab then drag and drop them into their appropriate slots. A green outline will appear where the component will be placed."
-        }
+        //if (query.includes('place') || query.includes('placing') || query.includes('install') || query.includes('installing')){
+        //    return "To place components place them first into the canvas by simply clicking them in the inventory tab then drag and drop them into their appropriate slots. A green outline will appear where the component will be placed."
+        //}
 
         // Component & Assembly Questions
-        if (query.includes('ports') || query.includes('wires')) {
+        if (query.includes('what are ports') || query.includes('what are wires')) {
             return "The ports and wires are essential for connecting components so make sure to connect them properly! To check the ports and wires in the simulator simply click on the ports tab and wires drawer."
         }
 
+        if (query.includes('where does the power supply go') || query.includes('how to install psu')) {
+            return `To install PSU or power supply, place it into the canvas from your inventory then drag it into the chassis' designated slot. 
+            <br><img src="./assets/tbshoot/err/100/100-2.png" alt="PSU Installation" class="tutorial-image">`
+        }
+
+        if (query.includes('where does the motherboard go') || query.includes('how to install motherboard')) {
+            return `To install motherboard, place it into the canvas from your inventory then drag it into the chassis' designated slot. 
+            <br><img src="./assets/tbshoot/err/200/200-2.png" alt="motherboard Installation" class="tutorial-image">`
+        }
+
+        if (query.includes('where does the cpu go') || query.includes('how to install cpu')) {
+            return `To install CPU or central processing unit, place it into the canvas from your inventory then drag it into the motherboard's designated slot. 
+            <br><img src="./assets/tbshoot/err/300/300-2.png" alt="PSU Installation" class="tutorial-image">`
+        }
+
         if (query.includes('how to install ram') || query.includes('where to place ram')) {
-            return "To install RAM, place it into the canvas from your inventory then drag it into the motherboard's RAM slots."
+            return `To install RAM, place it into the canvas from your inventory then drag it into the motherboard's RAM slots. 
+            <br><img src="./assets/tbshoot/err/400/400-2.png" alt="RAM Installation" class="tutorial-image">`
+        }
+        
+        if (query.includes('how to install storage') || query.includes('where to place storage')) {
+            return "To install storage(SSD,HDD, or M.2), place it into the canvas from your inventory then drag it into the chassis or motherboard designated slots."
+        }
+
+        if (query.includes('where to place m.2')||query.includes('how to install m.2')){
+            return `To install m.2 ssd, place it into the canvas from your inventory then drag it into the designated motherboard slots. 
+            <br><img src="./assets/tbshoot/err/500/500-3.png" alt="M.2 Installation" class="tutorial-image">`
+        }
+
+        if (query.includes('where to place hdd')||query.includes('how to install hdd')||query.includes('where to place ssd')||query.includes('how to install ssd')){
+            return `To install storage(SSD or HDD), place it into the canvas from your inventory then drag it into the chassis' slots. 
+            <br><img src="./assets/tbshoot/err/500/500-2.png" alt="HDDorSSD Installation" class="tutorial-image">`
         }
 
         if (query.includes('how to install gpu') || query.includes('where to put graphics card')) {
-            return "Insert the GPU into the PCIe slot on the motherboard, ensuring it is properly seated."
+            return `To install GPU, place it into the canvas from your inventory then drag it into the designated motherboard's PCIe slots. 
+            <br><img src="./assets/tbshoot/err/600/600-2.png" alt="GPU Installation" class="tutorial-image">`
+        }
+
+        if (query.includes('where does the cooling go') || query.includes('how to install cooling') || query.includes('how to install fan')) {
+            return `To install cpu cooling, place it into the canvas from your inventory then drag it into the motherboard's designated slot. 
+            <br><img src="./assets/tbshoot/err/700/700-2.png" alt="Cooling Installation" class="tutorial-image">`
         }
 
         if (query.includes('how to connect cables') || query.includes('how to use wires')) {
             return "Use the 'Ports' tab to connect power cables and data cables between components."
-        }
-
-        if (query.includes('where does the power supply go') || query.includes('how to install psu')) {
-            return "The power supply (PSU) is placed inside the PC case, and you must connect it to the motherboard and components."
-
         }
 
         // Troubleshooting Questions
@@ -189,7 +249,6 @@ class chatbot{
         if (query.includes('how does the assistant work?') || query.includes('how to use guide?')) {
             return "The assistant provides step-by-step instructions on building your PC. Open the assistant tab to see!"
         }                                
-
         // check static responses if no dynamic response is found
         return  this.autoResponses[query]  ||"I'm not sure about that. Try asking about specific components or features!" 
     }
@@ -202,15 +261,20 @@ class chatbot{
 
     // Send message
     sendMessage() {
-        const userMessage = this.chatInput.value.toLowerCase()
-        this.chatMessages.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`
+        const userMessage = this.chatInput.value.trim() || this.chatInput.value.toLowerCase() 
         
+        // Check if message is empty
+        if (!userMessage) {
+            return; // Exit the function if message is empty
+        }
+        this.chatMessages.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`
         let botResponse = this.generateResponse(userMessage) // Generate bot response based on user input
         setTimeout(() => {
             this.chatMessages.innerHTML += `<p><strong>Bot:</strong> ${botResponse}</p>` // Response of chatbot
             this.chatMessages.scrollTop = this.chatMessages.scrollHeight // Move to the bottom part of chat 
         }, 1000);
-        
+        this.chatSend.disabled = true
+        this.chatSend.style.opacity = '0.5'
         this.chatInput.value = "" // Clear input
     }
 }

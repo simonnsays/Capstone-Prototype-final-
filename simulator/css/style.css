@@ -1164,13 +1164,23 @@ input[type=checkbox] {
   left: 60px;
 }
 
-#monitorScreen img{
+#warning img{
   position: absolute;
   z-index: 3;
   height: 50;
   width: 50;
   top: 200;
   left: 210;
+  overflow: none;
+}
+
+.monitorScreen img{
+  position: absolute;
+  z-index: 3;
+  height: 176.5;
+  width: 325;
+  top: 133;
+  left: 73;
   overflow: none;
 }
 
@@ -1308,6 +1318,25 @@ input[type=checkbox] {
   transition: transform 0.5s ease, opacity 0.3s ease;
 }
 
+#chat-send:disabled {
+  cursor: not-allowed;
+}
+
+.tutorial-image {
+  max-width: 250px;
+  height: auto;
+  margin: 10px 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.tutorial-image:hover {
+  transform: scale(1.5);
+  transition: transform 0.3s ease;
+}
+#chat-messages img {
+  display: block;
+  margin: 8px auto;
+}
 #chatbot.collapsed {
   transform: scale(0);
   opacity: 0;
@@ -1486,5 +1515,178 @@ input[type=checkbox] {
 #chat-messages p {
   animation: messageIn 0.5s ease forwards;
 }
+/* BIOS Styling */
+#biosModal{
+    background-color: #000033;
+    width: 1000px;
+    height: 650px;
+    overflow: hidden;
+}
+.bios-wrapper {
+    background-color: #000033;
+    color: #00ff00;
+    font-family: 'Consolas', monospace;
+    padding: 10px;
+    height: 100%;
+}
 
+#enterBiosBtn{
+    background-color: #ffffff;
+    color: #000033;
+    border: 1px solid #ffffff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.biosButton{
+    padding: 10px 30px;
+    font-size: 1rem;
+    margin-left: 25%;
+    font-weight: bold;
+    background-color: #FF385C;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.bios-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #00ff00;
+    padding-bottom: 10px;
+}
+
+.bios-header h2 {
+    color: #00ff00;
+    margin: 0;
+}
+
+.bios-info {
+    font-size: 0.9em;
+}
+
+.bios-container {
+    display: flex;
+    gap: 20px;
+    height: calc(75% - 0px);
+}
+
+.bios-sidebar {
+    width: 200px;
+    border-right: 1px solid #00ff00;
+}
+
+.bios-menu {
+    list-style: none;
+    padding: 10;
+    margin: 0;
+}
+
+.bios-menu li {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.bios-menu li:hover {
+    background-color: #001a1a;
+}
+
+.bios-menu li.active {
+    background-color: #003300;
+}
+
+.bios-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.bios-section {
+    margin-bottom: 30px;
+}
+
+.bios-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.bios-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border: 1px solid #003300;
+}
+
+.fan-control {
+    background-color: #001a1a;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.fan-profile {
+    margin-bottom: 20px;
+}
+
+.fan-profile select {
+    background-color: #000033;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.fan-speed-control {
+    margin-top: 20px;
+}
+
+#fanSpeed {
+    width: 100%;
+    margin: 10px 0;
+    accent-color: #00ff00;
+}
+
+.current-rpm {
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.bios-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #00ff00;
+}
+
+.key-commands {
+    display: flex;
+    gap: 20px;
+}
+
+.key-commands span {
+    color: #00cc00;
+    font-size: 0.9em;
+}
+
+.bios-save {
+    background-color: #003300;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.bios-save:hover {
+    background-color: #004d00;
+}
 /*# sourceMappingURL=style.css.map */

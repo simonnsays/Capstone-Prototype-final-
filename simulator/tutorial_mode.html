@@ -316,8 +316,8 @@
                     <!-- display -->
                     <div id="bootDisplay">
                         <img id="desk" src="./assets/desk.png" >
-                        <div id="monitorScreen"></div>
-                        <img id="monitor" src="./assets/monitor.png" >
+                        <div id="monitorScreen" class="monitorScreen"></div>
+                        <img id="monitor" src="./assets/monitor.png" >                           
                         <div id="unitPlaceHolder">
                             <!-- image element here -->
                         </div>
@@ -345,9 +345,89 @@
         </dialog> -->
         
         
-    <!-- <div id="task-status">Task to be done: Click me "The Assistant" </div> -->
+    <!-- BIOS -->
     
+    <dialog id="biosModal" class="modal">
+        <div class="bios-wrapper">
+            <div class="bios-header">
+                <h2>BIOS SETUP UTILITY</h2>
+                <span class="bios-info">
+                    <p>Version: 2.0</p>
+                    <p id="biosTime"></p>
+                </span>
+            </div>
+            
+            <div class="bios-container">
+                <div class="bios-sidebar">
+                    <ul class="bios-menu">
+                        <li class="active">Main</li>
+                        <li>Advanced</li>
+                        <li>CPU Configuration</li>
+                        <li>Fan Control</li>
+                        <li>Boot</li>
+                    </ul>
+                </div>
+    
+                <div class="bios-content">
+                    <div class="bios-section">
+                        <h3>System Overview</h3>
+                        <div class="bios-grid">
+                            <div class="bios-item">
+                                <span>Motheboard</span>
+                                <span id="biosMobo"></span>
+                            </div>
+                            <div class="bios-item">
+                                <span>Processor</span>
+                                <span id="biosProcessor"></span>
+                            </div>
+                            <div class="bios-item">
+                                <span>Memory Size</span>
+                                <span id="biosMemory"></span>
+                            </div>
+                            <div class="bios-item">
+                                <span>GPU</span>
+                                <span id="biosGpu"></span>
+                            </div>
+                            <div class="bios-item">
+                                <span>Storage</span>
+                                <span id="biosStorage"></span>
+                            </div>    
+                        </div>
+                    </div>
+    
+                    <div class="bios-section">
+                        <h3>Fan Control</h3>
+                        <div class="fan-control">
+                            <div class="fan-profile">
+                                <label>Profile:</label>
+                                <select id="fanProfile">
+                                    <option value="standard">Default</option>
+                                    <option value="silent">Silent</option>
+                                    <option value="turbo">Turbo</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+                            <div class="fan-speed-control">
+                                <label>CPU Fan Speed: <span id="fanSpeedValue">50%</span></label>
+                                <input type="range" id="fanSpeed" min="0" max="100" value="50">
+                                <div class="current-rpm">Current RPM: <span id="currentRpm"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="bios-footer">
+                <div class="key-commands">
+                    <span>↑↓: Select Item</span>
+                    <span>Enter: Select</span>
+                    <span>ESC: Exit</span>
+                </div>
+                <button id="saveBiosSettings" class="bios-save">Save & Exit</button>
+            </div>
+    </dialog>
 
+    <!-- <div id="task-status">Task to be done: Click me "The Assistant" </div> -->
     <!------------------------- ASSISTANT ----------------------------------->
     <!-- Mini Element -->
     <div id="assistantMini" class="assistant-mini">

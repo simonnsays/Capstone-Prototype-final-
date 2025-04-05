@@ -6,7 +6,6 @@ class PCUnit {
         // utilityTool, displayArea, Canvas, portsTab, drawer, assistant
         this.bootUpElements = bootUpElements
         this.assistant = assistant
-
         this.power = 'off'
         this.availableUnit = null
         this.screen = bootUpElements.screen || null
@@ -47,7 +46,7 @@ class PCUnit {
 
         this.state = ['off','on']
         this.currentState = this.state[0]
-
+        this.bootStatus = false
         
         this.reportCount = 0;
         this.bootSequence = [
@@ -74,12 +73,48 @@ class PCUnit {
         // this.closeErrorDialogBtn?.addEventListener('click', () => this.closeErrorDialog());
 
         this.errorTypes = []
+
+        //BIOS properties
+        this.isBiosOpen = false
+        this.minRpm = 800
+        this.maxRpm = 2400
+        this.currentRpm = this.minRpm
+        this.fanSpeed = this.fanSpeed || 50 // Default fan speed
+        this.biosSettings = {
+            fanProfile: 'standard',
+            fanSpeed: 50,
+            lastSaved: null,
+            systemTime: new Date(),
+            temperatures: {
+                cpu: 45,
+                system: 38
+            }
+        }
+
+        this.fanProfiles = {
+            silent: {
+                speed: 30,
+                minTemp: 35,
+                maxTemp: 75
+            },
+            standard: {
+                speed: 50,
+                minTemp: 40,
+                maxTemp: 80
+            },
+            turbo: {
+                speed: 80,
+                minTemp: 45,
+                maxTemp: 85
+            }
+        }
+        this.initializeBIOS()
     }
 
     attemptPowerOn(unit) {
         let bootStatus = true
         let errorQueue = [] // now store errors inside an array to show inside reports area
-
+        
         // Inittiate / Reinitiate Components and their Status
         this.fillComponentStatus(unit)
 
@@ -103,6 +138,7 @@ class PCUnit {
                 this.populateErrors()
                 bootStatus = false
             });
+            this.bootStatus = false
             return false; 
         }
 
@@ -114,36 +150,10 @@ class PCUnit {
 
         // Monitor display poweron
         this.powerOnMonitor()
-        bootStatus = true
-        // return true
-        ///////////////////////////////////////////////// dan code ////////////////////////////////////////////////////////
-        // Check if all components are available and powered
-        if(!this.componentsStatus.psu || !this.componentsStatus.psu.component) {
-            // report missing component
-            this.createError('ERR-07') // Takes errorCode and show it as report cell in bootuptab
-            this.populateErrors()
-            return false;
-        }
-
-        // Power Supply Activation
-        this.psuActivation()
-
-        // Motherboard and CPU Power Up
-        this.moboPowerUp()
-        this.cpuInit()
-
-        // Monitor display poweron
-        this.powerOnMonitor()
-
-        // Star proces for Power-On-Self-Test
-        this.processPOST(this.componentsStatus.psu.component)
-
-        const state = this.checkPCState()
-        // if check attempts are good, power on
-        if(state)return true
-        else return false
+        this.bootStatus = true
+        return true
     }
-
+   
     // Add error-cells into assistant tab errors view
     populateErrors() {
         const errorContainer = document.querySelector('#errorsContainer')
@@ -283,7 +293,6 @@ class PCUnit {
             etComplete.addEventListener('click', () => {
                 errorCell.classList.add('etask-complete')
             });
-            
             troubleshootingGuide.appendChild(etComplete);
             errorCell.appendChild(troubleshootingGuide);
         }
@@ -653,24 +662,258 @@ class PCUnit {
         if(!this.componentsStatus.cpuCooling || !this.componentsStatus.cpuCooling.component) {
             return 'ERR-700' // Missing Heatsink (CPU Cooling)
         }
-
+        
         // check if the cpuCooling is powered
         if(!this.componentsStatus.cpuCooling.isPowered) {
             return 'ERR-701'
         }
         // Hazard Error: CPU fan speed low
-        if (Math.random() < 0.1 + Math.random * 0.2) { // 1% to 5% chance of error showing
-            return 'HZD-100'; // CPU fan speed low
+        if (this.fanSpeed < 30) {
+            return 'HZD-100' // Fan speed too low
         }
+
+        if (this.biosSettings.temperatures.cpu > 80) {
+            return 'HZD-200' // High CPU temperature
+        }
+        
+        if (this.biosSettings.temperatures.system > 70) {
+            return 'HZD-201' // High System temperature
+        }
+
         // Critical Error: Overheating issue
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
             return 'CRT-07'; 
         }
 
-        // add reports if no errors are found
-        //..
-        // make hazard report for low amount of cooling devices
         return true
+    }
+
+    // --------------------------------------------BIOS HANDLERS--------------------------------------------
+    openBIOS() {
+        let biosModal = document.getElementById("biosModal");
+         if (biosModal) {
+            setTimeout(() => {
+                biosModal.toggleBios();
+                this.updateBiosDisplay(); // Update BIOS display when opened
+            }, 1800);
+        } else {
+            console.error("BIOS modal not found!");
+        }
+    }
+
+    initializeBIOS() {
+    // Get all BIOS UI elements with single object
+    const biosEl = this.biosElements = {
+        modal: document.getElementById('biosModal'),
+        fanSpeed: document.getElementById('fanSpeed'),
+        fanProfile: document.getElementById('fanProfile'),
+        saveBtn: document.getElementById('saveBiosSettings'),
+        timeDisplay: document.getElementById('biosTime'),
+        fanSpeedValue: document.getElementById('fanSpeedValue'),
+        currentRpm: document.getElementById('currentRpm'),
+        motherboard: document.getElementById('biosMobo'),
+        processor: document.getElementById('biosProcessor'),
+        memory: document.getElementById('biosMemory'),
+        gpu: document.getElementById('biosGpu'),
+        storage: document.getElementById('biosStorage'),
+        enterBtn: document.getElementById('biosButton'),
+    }
+
+    biosEl.fanProfile?.addEventListener('change', (e) => {
+        const profile = e.target.value;
+        this.setFanProfile(profile);
+    });
+
+    biosEl.fanSpeed?.addEventListener('input', (e) => {
+        const speed = parseInt(e.target.value);
+        this.setFanSpeed(speed);
+        biosEl.fanProfile.value = 'custom';
+    });
+
+    biosEl.saveBtn?.addEventListener('click', () => this.saveBiosSettings());
+
+    // Start BIOS clock
+    this.startBiosClock();
+    }
+
+    startBiosClock() {
+        const updateClock = () => {
+            if (this.biosElements.timeDisplay) {
+                this.biosElements.timeDisplay.textContent = new Date().toLocaleTimeString()
+            }
+        };
+        updateClock()
+        setInterval(updateClock, 1000)
+    }
+
+    updateBiosDisplay() {
+        const status = this.getBiosStatus();
+        const biosEl = this.biosElements;
+
+        // Early return if biosElements not found
+        if (!biosEl) return;
+
+        // Update all BIOS bios elements with single-line assignments
+        biosEl.fanSpeed && (biosEl.fanSpeed.value = status.fanSpeed);
+        biosEl.fanSpeedValue && (biosEl.fanSpeedValue.textContent = `${status.fanSpeed}%`);
+        biosEl.currentRpm && (biosEl.currentRpm.textContent = status.currentRpm);
+        biosEl.fanProfile && (biosEl.fanProfile.value = status.fanProfile);
+        biosEl.motherboard && (biosEl.motherboard.textContent = status.motherboard);
+        biosEl.processor && (biosEl.processor.textContent = status.processor);
+        biosEl.memory && (biosEl.memory.textContent = status.memory);
+        biosEl.gpu && (biosEl.gpu.textContent = status.gpu);
+        biosEl.storage && (biosEl.storage.textContent = status.storage);
+    }
+
+    // Fan Controls
+    setFanSpeed(percentage) {
+        if (percentage < 0 || percentage > 100) return;
+        
+        this.fanSpeed = percentage;
+        this.currentRpm = Math.round(this.minRpm + ((this.maxRpm - this.minRpm) * (percentage / 100)));
+        this.biosSettings.fanSpeed = percentage;
+        
+        this.updateTemperatures();
+        this.updateBiosDisplay();
+    }
+
+    setFanProfile(profile) {
+           if (this.fanProfiles[profile]) {
+            this.biosSettings.fanProfile = profile;
+            this.setFanSpeed(this.fanProfiles[profile].speed);
+            this.updateTemperatures();
+
+            
+            return this.result
+        }
+    }
+
+    updateTemperatures() {
+        const currentProfile = this.fanProfiles[this.biosSettings.fanProfile]
+        const fanSpeedFactor = this.fanSpeed / 100
+
+        // Calculate temperatures based on fan speed
+        this.biosSettings.temperatures.cpu = Math.round(
+            currentProfile.minTemp + 
+            (currentProfile.maxTemp - currentProfile.minTemp) * (1 - fanSpeedFactor)
+        )
+
+        this.biosSettings.temperatures.system = Math.round(
+            this.biosSettings.temperatures.cpu * 0.85
+        )
+
+        // Check for temperature warnings
+        this.fanAndCoolingTest()
+    }
+
+    toggleBios(show) {
+        const biosEl = this.biosElements;
+        if (!biosEl?.modal) return;
+    
+        if (!this.bootStatus && show) {
+            console.warn('Cannot access BIOS: System not booted');
+            return;
+        }
+    
+        if (show) {
+            biosEl.modal.showModal();
+            this.updateBiosDisplay();
+        } else {
+            biosEl.modal.close();
+        }
+        this.isBiosOpen = show;
+    }
+
+    saveBiosSettings() {
+        this.biosSettings.lastSaved = new Date().toLocaleString();
+
+        // Store current settings
+        const settings = {
+            fanSpeed: this.fanSpeed,
+            fanProfile: this.biosSettings.fanProfile,
+            lastSaved: this.biosSettings.lastSaved
+        };
+
+        // Apply settings
+        if (this.biosSettings.fanProfile === 'custom') {
+            this.setFanSpeed(this.fanSpeed);
+        } else {
+            this.setFanProfile(this.biosSettings.fanProfile);
+        }
+
+        // Option to restart system after BIOS changes
+        const shouldRestart = document.getElementById('saveBiosSettings')
+        const reportsarea= document.getElementById('bootTabReport')
+        this.toggleBios(false);
+
+        if (shouldRestart) {
+            // Power cycle sequence
+            reportsarea.innerHTML = ''
+            this.powerOffMonitor()
+            setTimeout(() => {
+                // Clear any existing errors
+                this.isErrorDisplayed = false;
+                this.reports = [];
+                this.power = 'off'
+                // Attempt power on with current unit
+                if (this.unit) {
+                    this.attemptPowerOn(unit);
+                }
+            }, 2000);
+        }
+
+        return settings;
+    }
+
+    getBiosStatus() {
+        const memoryPerStick = 8; // Each stick is 8GB
+        const totalMemory = this.componentsStatus.ram?.length 
+            ? `${this.componentsStatus.ram.length * memoryPerStick}GB` 
+            : 'Not Detected';
+        return {
+            fanProfile: this.biosSettings.fanProfile,
+            fanSpeed: this.biosSettings.fanSpeed,
+            currentRpm: this.currentRpm,
+            temperatures: this.biosSettings.temperatures,
+            lastSaved: this.biosSettings.lastSaved,
+            motherboard: this.componentsStatus.motherboard?.component?.name || 'Not Detected',
+            processor: this.componentsStatus.cpu?.component?.name || 'Not Detected',
+            memory: totalMemory,
+            gpu: this.componentsStatus.gpu?.component?.name || 'Not Detected',
+            storage: this.componentsStatus.storage?.length 
+                ? `${this.componentsStatus.storage.length} Devices Detected` 
+                : 'Not Detected',
+        }
+    }
+    
+    openBiosSettings() {
+        const biosModal = document.getElementById('biosModal')
+        if (!biosModal) return false
+
+        biosModal.showModal()
+        this.isBiosOpen = true
+
+        // Update BIOS display
+        const status = this.getBiosStatus()
+        document.getElementById('fanSpeed').value = status.fanSpeed
+        document.getElementById('fanSpeedValue').textContent = `${status.fanSpeed}%`
+        document.getElementById('currentRpm').textContent = status.currentRpm
+        document.getElementById('fanProfile').value = status.fanProfile
+        document.getElementById('biosMobo').textContent = status.motherboard
+        document.getElementById('biosProcessor').textContent = status.processor
+        document.getElementById('biosMemory').textContent = status.memory
+        document.getElementById('biosGpu').textContent = status.gpu
+        document.getElementById('biosStorage').textContent = status.storage
+
+        return true
+    }
+
+    updateFanRPM(speedPercentage) {
+        const baseRPM = 800
+        const maxRPM = 2400
+        const rpm = baseRPM + ((maxRPM - baseRPM) * (speedPercentage / 100))
+        document.getElementById('currentRpm').textContent = Math.round(rpm)
+        this.currentRpm = Math.round(rpm)
     }
 
     /*************************************************************************************************************************/

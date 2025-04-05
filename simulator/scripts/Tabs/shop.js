@@ -1,5 +1,5 @@
 import Component from "../Data/component.js"
-import components from "../Data/data1.js"
+import components from "../Data/data.js"
 import SearchBar from "../Utility/searchBar.js"
 
 class Shop{
