@@ -373,7 +373,7 @@
                         <h3>System Overview</h3>
                         <div class="bios-grid">
                             <div class="bios-item">
-                                <span>Motheboard</span>
+                                <span>Motherboard</span>
                                 <span id="biosMobo"></span>
                             </div>
                             <div class="bios-item">
@@ -387,6 +387,7 @@
                             <div class="bios-item">
                                 <span>GPU</span>
                                 <span id="biosGpu"></span>
+                                <div>Temperature: <span id="gpuTemp"></span></div>
                             </div>
                             <div class="bios-item">
                                 <span>Storage</span>
@@ -397,6 +398,7 @@
     
                     <div class="bios-section">
                         <h3>Fan Control</h3>
+                        <!--CPU fan settings-->
                         <div class="fan-control">
                             <div class="fan-profile">
                                 <label>Profile:</label>
@@ -411,6 +413,25 @@
                                 <label>CPU Fan Speed: <span id="fanSpeedValue">50%</span></label>
                                 <input type="range" id="fanSpeed" min="0" max="100" value="50">
                                 <div class="current-rpm">Current RPM: <span id="currentRpm"></span></div>
+                            </div>
+                        </div>
+                        <!--GPU fan settings-->
+                        <div class="fan-control">
+                            <div class="fan-profile">
+                                <label>GPU Profile:</label>
+                                <select id="gpuFanProfile">
+                                    <option value="standard">Default</option>
+                                    <option value="silent">Silent</option>
+                                    <option value="turbo">Turbo</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+                            <div class="fan-speed-control">
+                                <label>GPU Fan Speed: <span id="gpuFanSpeedValue">50%</span></label>
+                                <input type="range" id="gpuFanSpeed" min="0" max="100" value="50">
+                                <div class="gpu-status">
+                                    <div>Current RPM: <span id="gpuCurrentRpm"></span></div>
+                                </div>
                             </div>
                         </div>
                     </div>

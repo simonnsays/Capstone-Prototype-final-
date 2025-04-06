@@ -1631,7 +1631,7 @@ input[type=checkbox] {
     border-radius: 5px;
 }
 
-.fan-profile {
+.fan-profile, .gpuFanProfile {
     margin-bottom: 20px;
 }
 
@@ -1647,7 +1647,7 @@ input[type=checkbox] {
     margin-top: 20px;
 }
 
-#fanSpeed {
+#fanSpeed, #gpuFanSpeed {
     width: 100%;
     margin: 10px 0;
     accent-color: #00ff00;

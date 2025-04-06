@@ -132,7 +132,8 @@ class Main {
     }
     testTemperature(){
         //this.bootUpTab.pcUnit.biosSettings.temperatures.cpu = 86
-        this.bootUpTab.pcUnit.biosSettings.temperatures.system = 76
+        this.bootUpTab.pcUnit.biosSettings.gpuSettings.temperatures.current = 95
+        //this.bootUpTab.pcUnit.biosSettings.temperatures.system = 76
     }
     addBasicComponents() {
         const itemsToBuy = []

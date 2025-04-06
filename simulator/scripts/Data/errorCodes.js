@@ -259,7 +259,7 @@ const errorCodes = {
 
     // Software errors
     'CRT-0': {
-        code: 'CRT-09',
+        code: 'CRT-0',
         severity: 'Critical',
         description: 'Operating System corruption',
         troubleshooting: [
@@ -270,7 +270,7 @@ const errorCodes = {
     },
     
     'CRT-0': {
-        code: 'CRT-01',
+        code: 'CRT-0',
         severity: 'Critical',
         description: 'BIOS/UEFI corruption',
         troubleshooting: [

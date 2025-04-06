@@ -88,6 +88,18 @@ class PCUnit {
             temperatures: {
                 cpu: 45,
                 system: 38
+            },
+            gpuSettings:{
+                fanSpeed: 50,
+                currentRpm: 1200,
+                fanProfile: 'standard',
+                minRpm: 800,
+                maxRpm: 3000,
+                temperatures: {
+                    current: 45,
+                    target: 70,
+                    critical: 85
+                }
             }
         }
 
@@ -651,6 +663,11 @@ class PCUnit {
             return 'CRT-05'; 
         }
 
+        if(this.biosSettings.gpuSettings.temperatures.current >= 
+            this.biosSettings.gpuSettings.temperatures.critical){
+            return 'HZD-300'
+        }
+
         // add reports if no errors are found
         //..
 
@@ -715,10 +732,15 @@ class PCUnit {
         processor: document.getElementById('biosProcessor'),
         memory: document.getElementById('biosMemory'),
         gpu: document.getElementById('biosGpu'),
+        gpuFanSpeed: document.getElementById('gpuFanSpeed'),
+        gpuFanProfile: document.getElementById('gpuFanProfile'),
+        gpuFanSpeedValue: document.getElementById('gpuFanSpeedValue'),
+        gpuCurrentRpm: document.getElementById('gpuCurrentRpm'),
+        gpuTemp: document.getElementById('gpuTemp'),
         storage: document.getElementById('biosStorage'),
         enterBtn: document.getElementById('biosButton'),
     }
-
+    // CPU fan settings
     biosEl.fanProfile?.addEventListener('change', (e) => {
         const profile = e.target.value;
         this.setFanProfile(profile);
@@ -729,7 +751,20 @@ class PCUnit {
         this.setFanSpeed(speed);
         biosEl.fanProfile.value = 'custom';
     });
-
+    // GPU fan settings
+    biosEl.gpuFanSpeed?.addEventListener('input', (e) => {
+        const speed = parseInt(e.target.value);
+        this.setGPUFanSpeed(speed);
+        gpuFanProfile.value = 'custom';
+    });
+    
+    biosEl.gpuFanProfile?.addEventListener('change', (e) => {
+        const profile = e.target.value;
+        if (this.fanProfiles[profile]) {
+            this.biosSettings.gpuSettings.fanProfile = profile;
+            this.setGPUFanSpeed(this.fanProfiles[profile].speed);
+        }
+    });
     biosEl.saveBtn?.addEventListener('click', () => this.saveBiosSettings());
 
     // Start BIOS clock
@@ -762,7 +797,35 @@ class PCUnit {
         biosEl.processor && (biosEl.processor.textContent = status.processor);
         biosEl.memory && (biosEl.memory.textContent = status.memory);
         biosEl.gpu && (biosEl.gpu.textContent = status.gpu);
+        biosEl.gpuFanSpeed && (biosEl.gpuFanSpeed.value = this.biosSettings.gpuSettings.fanSpeed);
+        biosEl.gpuFanSpeedValue && (biosEl.gpuFanSpeedValue.textContent = `${this.biosSettings.gpuSettings.fanSpeed}%`);
+        biosEl.gpuCurrentRpm && (biosEl.gpuCurrentRpm.textContent = this.biosSettings.gpuSettings.currentRpm);
+        biosEl.gpuTemp && (biosEl.gpuTemp.textContent = `${this.biosSettings.gpuSettings.temperatures.current}°C`);
         biosEl.storage && (biosEl.storage.textContent = status.storage);
+    }
+    
+    getBiosStatus() {
+        const memoryPerStick = 8; // Each stick is 8GB
+        const totalMemory = this.componentsStatus.ram?.length 
+            ? `${this.componentsStatus.ram.length * memoryPerStick}GB` 
+            : 'Not Detected';
+        return {
+            fanProfile: this.biosSettings.fanProfile,
+            fanSpeed: this.biosSettings.fanSpeed,
+            currentRpm: this.currentRpm,
+            temperatures: this.biosSettings.temperatures,
+            lastSaved: this.biosSettings.lastSaved,
+            motherboard: this.componentsStatus.motherboard?.component?.name || 'Not Detected',
+            processor: this.componentsStatus.cpu?.component?.name || 'Not Detected',
+            memory: totalMemory,
+            gpu: this.componentsStatus.gpu?.component?.name || 'Not Detected',
+            gpuTemp: this.biosSettings.gpuSettings.temperatures.current || 'Not Detected',
+            gpuCurrentRpm: this.biosSettings.gpuSettings.temperatures.current,
+            gpuFanSpeed: this.biosSettings.gpuSettings.fanSpeed,
+            storage: this.componentsStatus.storage?.length 
+                ? `${this.componentsStatus.storage.length} Devices Detected` 
+                : 'Not Detected',
+        }
     }
 
     // Fan Controls
@@ -774,6 +837,24 @@ class PCUnit {
         this.biosSettings.fanSpeed = percentage;
         
         this.updateTemperatures();
+        this.updateBiosDisplay();
+    }
+
+    setGPUFanSpeed(percentage) {
+        if (percentage < 0 || percentage > 100) return;
+        
+        this.biosSettings.gpuSettings.fanSpeed = percentage;
+        this.biosSettings.gpuSettings.currentRpm = Math.round(this.biosSettings.gpuSettings.minRpm + 
+            ((this.biosSettings.gpuSettings.maxRpm - this.biosSettings.gpuSettings.minRpm) * (percentage / 100)))        
+        
+        // Temperature calculation
+        const fanSpeedFactor = percentage / 100;
+        this.biosSettings.gpuSettings.temperatures.current = Math.max(
+            45, // Minimum temperature
+            this.biosSettings.gpuSettings.temperatures.critical - 
+            ((this.biosSettings.gpuSettings.temperatures.critical - this.biosSettings.gpuSettings.temperatures.target) 
+            * fanSpeedFactor)
+        )
         this.updateBiosDisplay();
     }
 
@@ -804,6 +885,7 @@ class PCUnit {
 
         // Check for temperature warnings
         this.fanAndCoolingTest()
+        this.graphicsCardTest()
     }
 
     toggleBios(show) {
@@ -829,8 +911,16 @@ class PCUnit {
 
         // Store current settings
         const settings = {
-            fanSpeed: this.fanSpeed,
-            fanProfile: this.biosSettings.fanProfile,
+            cpu: {
+                fanSpeed: this.fanSpeed,
+                fanProfile: this.biosSettings.fanProfile,
+                currentRpm: this.currentRpm
+            },
+            gpu: {
+                fanSpeed: this.biosSettings.gpuSettings.fanSpeed,
+                fanProfile: this.biosSettings.gpuSettings.fanProfile,
+                currentRpm: this.biosSettings.gpuSettings.currentRpm
+            },
             lastSaved: this.biosSettings.lastSaved
         };
 
@@ -839,6 +929,25 @@ class PCUnit {
             this.setFanSpeed(this.fanSpeed);
         } else {
             this.setFanProfile(this.biosSettings.fanProfile);
+        }
+
+        // Apply GPU settings
+        const gpuProfile = this.biosSettings.gpuSettings.fanProfile;
+        if (gpuProfile === 'custom') {
+            const gpuSpeed = this.biosSettings.gpuSettings.fanSpeed;
+            this.setGPUFanSpeed(gpuSpeed)
+            // Update temperatures after setting fan speed
+            this.biosSettings.gpuSettings.temperatures.current = Math.max(
+                45, // Minimum temperature
+                this.biosSettings.gpuSettings.temperatures.critical - 
+                ((this.biosSettings.gpuSettings.temperatures.critical - this.biosSettings.gpuSettings.temperatures.target) 
+                * (gpuSpeed / 100))
+            )
+        } else {
+            if (this.fanProfiles[this.biosSettings.gpuSettings.fanProfile]) {
+                const profileSpeed = this.fanProfiles[gpuProfile].speed;
+                this.setGPUFanSpeed(profileSpeed);
+            }
         }
 
         // Option to restart system after BIOS changes
@@ -865,26 +974,6 @@ class PCUnit {
         return settings;
     }
 
-    getBiosStatus() {
-        const memoryPerStick = 8; // Each stick is 8GB
-        const totalMemory = this.componentsStatus.ram?.length 
-            ? `${this.componentsStatus.ram.length * memoryPerStick}GB` 
-            : 'Not Detected';
-        return {
-            fanProfile: this.biosSettings.fanProfile,
-            fanSpeed: this.biosSettings.fanSpeed,
-            currentRpm: this.currentRpm,
-            temperatures: this.biosSettings.temperatures,
-            lastSaved: this.biosSettings.lastSaved,
-            motherboard: this.componentsStatus.motherboard?.component?.name || 'Not Detected',
-            processor: this.componentsStatus.cpu?.component?.name || 'Not Detected',
-            memory: totalMemory,
-            gpu: this.componentsStatus.gpu?.component?.name || 'Not Detected',
-            storage: this.componentsStatus.storage?.length 
-                ? `${this.componentsStatus.storage.length} Devices Detected` 
-                : 'Not Detected',
-        }
-    }
     
     openBiosSettings() {
         const biosModal = document.getElementById('biosModal')
