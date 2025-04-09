@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i');
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i');
+
+:root {
+  --light-lime: #abd699;
+  --fresh-lemon: #ffe26a;
+  --pastel-yellow: #fef9db;
+  --teal: #75c9b7;
+  --mint: #c7ddcc;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  /* background: var(--light-lime);   */
+  position: relative;
+  
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  
+  background: linear-gradient(130deg, var(--light-lime), var(--teal));  
+  /* background: var(--teal);   */
+  z-index: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.bg {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, .2);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+}
+
+.assistant-container {
+  width: 300px;
+  height: 300px;
+  margin: 50px 0 140px 0;
+  /* background-color: blue; */
+  position: relative;
+
+}
+
+.assistant-container::after {
+  border-radius: 50%;
+  content: "";
+  width: 300px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, .4);
+  position: absolute;
+  bottom: -110px;
+  animation: shadow-define ease-in-out infinite 2.5s;
+}
+.assistant {
+  animation: float ease-in-out infinite 2.5s;
+  
+  /* background-color: red; */
+}
+
+.asst-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.dialogue-box {
+  width: 1400px;
+  height: 180px; 
+  background-color: var(--pastel-yellow);
+
+  border-radius: 20px;
+  /* border: 4px solid black; */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+  padding: 15px;
+  overflow: hidden;
+}
+.dialogue-text {
+  font-family: monospace;
+  font-size: 1.5rem;
+  overflow: hidden;
+  /* border: 2px solid black;*/
+  white-space: wrap;
+  width: 100%;
+  height: 100%;
+  line-height: 2.3rem;
+  /* text-align: justify; */
+}
+
+@keyframes float {
+  0% { transform: translateY(13px); }
+  50% { transform: translateY(-13px); }
+  100% { transform: translateY(13px); }
+}
+
+@keyframes shadow-define {
+  0% {width: 280px; transform: translateX(10px); opacity: .5;}
+  50% {width: 300px; transform: none; opacity: .7;}
+  100% {width: 280px; transform: translateX(10px); opacity: .5;}
+}
+
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 13ch; } /* Adjust to match your text length */
+}

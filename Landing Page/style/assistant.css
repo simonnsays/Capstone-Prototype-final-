@@ -1,0 +1,22 @@
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        transform: scale(.2); /* Initial size */
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.4); /* Back to the initial size */
+        opacity: .5;
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    1000% { opacity: 1; }
+}
+/*********************************************************** new components **************************************************************************************/
+
+
+/* ASSISTANT MINI VERSION */
