@@ -12,11 +12,11 @@
   
 </style>
 <body>
-  <!-- <img class="bg" src="./Landing Page/assets/office1.png"> -->
+  <!-- <img class="bg" src="./Landing Page/assets/office2.jpg"> -->
   <section class="page-1">
 
   </section>
-  <div class="overlay"></div>
+  <!-- <div class="overlay"></div> -->
   <div class="assistant-container">
     <div class="assistant">
     <img class="asst-icon" src="Landing Page/assets/assistant.png" class="assistant-icon">
@@ -24,15 +24,17 @@
   </div>
   
   <div class="dialogue-box">
-    <p class="dialogue-text">sorry about that &nbsp;</p>
-    <div class="dialogue-continue">    </div>
+    <p class="dialogue-text"></p>
+    <!-- <div class="dialogue-continue">    -->
+      <img src="./Landing Page/assets/svg/triangle-down.svg" class="dialogue-down" alt="">
+    <!-- </div> -->
   </div>
-
-  <div id="writer"></div>
 
   <script>
     const el = document.querySelector(".dialogue-text");
-    const text = "Writing text like a pro... I learned to slam on the breaks, before i even turn the keys. before I make a mistake. I've learned to slam on the brake Before I even turn the key Before I make the mistake Before I lead with the worst of me Give them no reason to stare No slipping up if you slip away So I got nothing to share No, I got nothing to say Step out, step out of the sun If you keep getting burned Step out, step out of the sun Because you've learned, because you've learned On the outside, always looking in Will I ever be more than I've always been? 'Cause"
+    const text = "Hey there! Welcome to the PC Assembly & Troubleshooting Simulation! This is your space to mess around with building and fixing computers, no real-world risks involved ng computers, no real-world risks involved. "
+    // const text = "In this simulation, you’ll get to assemble a PC, pick the right parts, hook them up, and power it on. But here’s the fun part — you’ll also run into some real-life troubleshooting problems, helping you learn how to spot and fix issues like a pro."
+    // const text = "Whether you’re new to PCs or just brushing up, this is a chill way to learn, make mistakes, and level up your skills — no stress, no pressure. Ready to get started? Let’s build and fix some cool stuff!"
     let i = 0;
 
     function type() {
