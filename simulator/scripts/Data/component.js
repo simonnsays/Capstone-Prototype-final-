@@ -7,6 +7,7 @@ class Component {
         specs,
         watts,
         dimensions, 
+        osInstalled,
         isRotatable,
         hidden = false,
         isAttached = false,
@@ -37,6 +38,7 @@ class Component {
         this.isRotatable = isRotatable
         this.isAttached = isAttached
         this.isModular = isModular 
+        this.osInstalled = osInstalled
 
         // Slots
         this.slots = slots

@@ -75,7 +75,7 @@ class Main {
             this.inventory,
             this.wattageCalculator
         )
-
+        
         // Chatbot
         this.chatbot = new chatbot(
             this.pcUnit,
@@ -117,7 +117,8 @@ class Main {
 
         // TEST: BOOT UP
         this.testBootUp()
-        this.testTemperature()
+        //this.testTemperature()
+        //this.testBootOrder()
         // TEST: MISSING COMPONENTS
         // this.testMissingComponents()
 
@@ -129,6 +130,9 @@ class Main {
 
         // TEST: ADD BASIC COMPONENT
         //this.addBasicComponents()
+    }
+    testBootOrder(){
+        this.bootUpTab.pcUnit.componentsStatus.storage.osInstalled === false
     }
     testTemperature(){
         //this.bootUpTab.pcUnit.biosSettings.temperatures.cpu = 86

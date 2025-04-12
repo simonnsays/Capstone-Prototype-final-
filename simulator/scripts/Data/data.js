@@ -339,6 +339,10 @@ const components = [
             width: 125,
             height: 125,
         },
+        specs:{ 
+            bootable: true
+        },
+        osInstalled: false, 
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
@@ -448,6 +452,7 @@ const components = [
         defaultSource: 'pack',
         tableDisplay: 'pack',
         specs: {
+            bootable: true,
             readSpeed: '3500MB/s',
             writeSpeed: '3300MB/s',
             nandType: 'V-NAND',
@@ -475,6 +480,7 @@ const components = [
         defaultSource: 'pack',
         tableDisplay: 'pack',
         specs: {
+            bootable: true,
             capacity: '2TB',
             readSpeed: '7300MB/s',
             writeSpeed: '6300MB/s',

@@ -9923,7 +9923,8 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
-        specs:{
+        specs:{ 
+            bootable: true,
             rpm: '5400',
             interface: 'SATA',
             formFactor: 'HDD 3.5"',
@@ -9933,6 +9934,7 @@ const components = [
             width: 125,
             height: 125,
         },
+        osInstalled: false, 
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
@@ -9956,7 +9958,8 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
-        specs:{
+        specs:{ 
+            bootable: true,
             rpm: '7200',
             interface: 'SATA',
             formFactor: 'HDD 3.5"',
@@ -9966,6 +9969,7 @@ const components = [
             width: 125,
             height: 125,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
@@ -9989,7 +9993,8 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
-        specs:{
+        specs:{ 
+            bootable: true,
             rpm: '7200',
             interface: 'SATA',
             formFactor: 'HDD 3.5"',
@@ -9999,6 +10004,7 @@ const components = [
             width: 125,
             height: 125,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
@@ -10022,7 +10028,8 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
-        specs:{
+        specs:{ 
+            bootable: true,
             rpm: '7200',
             interface: 'SATA',
             formFactor: 'HDD 3.5"',
@@ -10032,6 +10039,7 @@ const components = [
             width: 125,
             height: 125,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
@@ -10055,7 +10063,8 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
-        specs:{
+        specs:{ 
+            bootable: true,
             rpm: '7200',
             interface: 'SATA',
             formFactor: 'HDD 3.5"',
@@ -10065,6 +10074,7 @@ const components = [
             width: 125,
             height: 125,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
@@ -10090,7 +10100,8 @@ const components = [
     type: 'storage',
     size: 'ssd',
     watts: '4',
-    specs:{
+    specs:{ 
+        bootable: true,
         formFactor: '2.5"',
         interface: 'SATA',
         read: '550MB/s',
@@ -10101,6 +10112,7 @@ const components = [
         width: 125,
         height: 125,
     },
+    osInstalled: false,
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
@@ -10124,7 +10136,8 @@ const components = [
     type: 'storage',
     size: 'ssd',
     watts: '4',
-    specs:{
+    specs:{ 
+        bootable: true,
         formFactor: '2.5"',
         interface: 'SATA',
         read: '560MB/s',
@@ -10135,6 +10148,7 @@ const components = [
         width: 125,
         height: 125,
     },
+    osInstalled: false,
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
@@ -10158,7 +10172,8 @@ const components = [
     type: 'storage',
     size: 'ssd',
     watts: '4',
-    specs:{
+    specs:{ 
+        bootable: true,
         formFactor: '2.5"',
         interface: 'SATA',
         read: '530MB/s',
@@ -10169,6 +10184,7 @@ const components = [
         width: 125,
         height: 125,
     },
+    osInstalled: false,
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
@@ -10191,7 +10207,8 @@ const components = [
     type: 'storage',
     size: 'ssd',
     watts: '4',
-    specs:{
+    specs:{ 
+        bootable: true,
         formFactor: '2.5"',
         interface: 'SATA',
         read: '555MB/s',
@@ -10202,6 +10219,7 @@ const components = [
         width: 125,
         height: 125,
     },
+    osInstalled: false,
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
@@ -10230,11 +10248,13 @@ const components = [
             width: 150,
             height: 150,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
         tableDisplay: 'pack',
-        specs: {
+        specs: { 
+            bootable: true,
             readSpeed: '3500MB/s',
             writeSpeed: '3300MB/s',
             nandType: 'V-NAND',
@@ -10259,11 +10279,13 @@ const components = [
             width: 150,
             height: 150,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
         tableDisplay: 'pack',
-        specs: {
+        specs: { 
+            bootable: true,
             readSpeed: '7300MB/s',
             writeSpeed: '6300MB/s',
             nandType: '3D NAND',
@@ -10288,11 +10310,13 @@ const components = [
             width: 150,
             height: 150,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
         tableDisplay: 'pack',
-        specs: {
+        specs: { 
+            bootable: true,
             readSpeed: '7000MB/s',
             writeSpeed: '7000MB/s',
             nandType: '3D TLC NAND',
@@ -10317,11 +10341,13 @@ const components = [
             width: 150,
             height: 150,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
         tableDisplay: 'pack',
-        specs: {
+        specs: { 
+            bootable: true,
             readSpeed: '3500MB/s',
             writeSpeed: '3000MB/s',
             nandType: 'Micron Advanced 3D NAND',
@@ -10346,11 +10372,13 @@ const components = [
             width: 150,
             height: 150,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
         tableDisplay: 'pack',
-        specs: {
+        specs: { 
+            bootable: true,
             readSpeed: '5000MB/s',
             writeSpeed: '4400MB/s',
             nandType: '3D TLC NAND',

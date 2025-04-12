@@ -134,6 +134,39 @@ const errorCodes = {
             {imageSrc: './assets/tbshoot/err/501/501-4.png'},
         ],
     },
+    'ERR-502': {
+        code: 'ERR-502',
+        severity: 'Error',
+        description: 'No Bootable Device Found',
+        troubleshooting: [
+            {imageSrc: './assets/tbshoot/err/501/501-1.png'},
+            {imageSrc: './assets/tbshoot/err/501/501-2.png'},
+            {imageSrc: './assets/tbshoot/err/501/501-3.png'},
+            {imageSrc: './assets/tbshoot/err/501/501-4.png'},
+        ],
+    },
+    'ERR-503': {
+        code: 'ERR-503',
+        severity: 'Error',
+        description: 'No OS is installed in the boot device',
+        troubleshooting: [
+            {imageSrc: './assets/tbshoot/err/501/501-1.png'},
+            {imageSrc: './assets/tbshoot/err/501/501-2.png'},
+            {imageSrc: './assets/tbshoot/err/501/501-3.png'},
+            {imageSrc: './assets/tbshoot/err/501/501-4.png'},
+        ],
+    },
+    'ERR-504':{
+        code: 'ERR-504',
+        severity: 'Error',
+        description: 'Primary boot device has no OS installed',
+        troubleshooting: [
+            {imageSrc: './assets/tbshoot/err/501/501-1.png'},
+            {imageSrc: './assets/tbshoot/err/501/501-2.png'},
+            {imageSrc: './assets/tbshoot/err/501/501-3.png'},
+            {imageSrc: './assets/tbshoot/err/501/501-4.png'},
+        ],
+    },
     'ERR-600': {
         code: 'ERR-600',
         severity: 'Error',
@@ -255,28 +288,25 @@ const errorCodes = {
             "Consider upgrading the cooling system if necessary."
         ],
     },
+    'CRT-09': {
+        code: 'CRT-09',
+        severity: 'Critical',
+        description: 'Boot device failure',
+        troubleshooting: [
+            "Check for proper airflow and ventilation in the case.",
+            "Ensure that all fans are functioning correctly.",
+            "Consider upgrading the cooling system if necessary."
+        ],
+    },
 
-
-    // Software errors
-    'CRT-0': {
-        code: 'CRT-0',
+    'CRT-10': {
+        code: 'CRT-10',
         severity: 'Critical',
         description: 'Operating System corruption',
         troubleshooting: [
-            "Attempt to repair the OS using the installation media.",
-            "Reinstall the OS if repair is not possible.",
-            "Consider backing up important data before reinstalling the OS."
-        ],
-    },
-    
-    'CRT-0': {
-        code: 'CRT-0',
-        severity: 'Critical',
-        description: 'BIOS/UEFI corruption',
-        troubleshooting: [
-            "Attempt to reset the BIOS/UEFI to default settings.",
-            "Flash the BIOS/UEFI with the latest firmware version.",
-            "If the issue persists, consider replacing the motherboard."
+            "Check for proper airflow and ventilation in the case.",
+            "Ensure that all fans are functioning correctly.",
+            "Consider upgrading the cooling system if necessary."
         ],
     },
 

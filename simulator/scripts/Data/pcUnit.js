@@ -58,15 +58,9 @@ class PCUnit {
             () => this.storageDeviceTest(),
             () => this.graphicsCardTest(),
             () => this.fanAndCoolingTest(),
-            // () => this.bootDeviceSelection(),
-            // () => this.osBootUp()
+            () => this.bootDeviceSelection(),
+            () => this.osBootUp()
         ]
-
-        // Boot error dialog elements
-        this.bootErrorDialog = document.getElementById('bootErrorDialog');
-        this.errorMessageElement = document.getElementById('errorMessage');
-        this.troubleshootBtn = document.getElementById('troubleshootBtn');
-        this.closeErrorDialogBtn = document.getElementById('closeErrorDialogBtn');
 
         // Event Listeners
         // this.troubleshootBtn?.addEventListener('click', () => this.startTroubleshooting());
@@ -85,9 +79,10 @@ class PCUnit {
             fanSpeed: 50,
             lastSaved: null,
             systemTime: new Date(),
+            bootOrder: [],
             temperatures: {
-                cpu: 45,
-                system: 38
+                cpu: Math.floor(Math.random() * 9) + 36, 
+                system: Math.floor(Math.random() * 9) + 38
             },
             gpuSettings:{
                 fanSpeed: 50,
@@ -96,7 +91,7 @@ class PCUnit {
                 minRpm: 800,
                 maxRpm: 3000,
                 temperatures: {
-                    current: 45,
+                    current: Math.floor(Math.random() * 9) + 45,
                     target: 70,
                     critical: 85
                 }
@@ -629,11 +624,11 @@ class PCUnit {
 
         // Critical Error: BOOT Device Failure
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-08'; 
+            return 'CRT-09'; 
         }
         // OS corruption
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-09'; 
+            return 'CRT-10'; 
         }
 
 
@@ -705,6 +700,124 @@ class PCUnit {
         return true
     }
 
+    bootDeviceSelection(){
+        // Find bootable storage devices
+        const bootableDevices = this.componentsStatus.storage?.filter(device => 
+            device.isPowered && device.component.specs?.bootable
+        );
+    
+        if (!bootableDevices || bootableDevices.length === 0) {
+            return 'ERR-500'; // missing storage device
+        }
+    
+        // Initialize boot order if empty
+        if (!this.biosSettings.bootOrder || this.biosSettings.bootOrder.length === 0) {
+            this.biosSettings.bootOrder = bootableDevices.map((device, index) => ({
+                device: device.component.name,
+                isBootable: true,
+                osInstalled: device.component.osInstalled || false,
+                deviceType: device.component.specs.type || 'unknown',
+                isPrimary: index === 0
+            }));
+        }
+
+        return true;
+    }
+
+    installOS(){
+        // Find all bootable devices
+        const bootableDevices = this.componentsStatus.storage?.filter(device => 
+            device.isPowered && device.component.specs?.bootable
+        );
+
+        if (!bootableDevices || bootableDevices.length === 0) {
+            return { success: false, error: 'ERR-500' };
+        }
+
+        // Find suitable device - prefer SSDs/NVMe over HDDs
+        const installTarget = bootableDevices.find(device => 
+            !device.component.osInstalled && 
+            (device.component.specs.type === 'ssd' || device.component.specs.type === 'nvme')
+        ) || bootableDevices.find(device => !device.component.osInstalled);
+
+        if (!installTarget) {
+            return { success: false, error: 'ERR-504' };
+        }
+
+        // Install OS on target device
+        installTarget.component.osInstalled = true;
+
+        // Update boot order
+        this.biosSettings.bootOrder = [
+            {
+                device: installTarget.component.name,
+                isBootable: true,
+                osInstalled: true,
+                deviceType: installTarget.component.size,
+                isPrimary: true
+            },
+            ...bootableDevices
+                .filter(device => device !== installTarget)
+                .map(device => ({
+                    device: device.component.name,
+                    isBootable: true,
+                    osInstalled: device.component.osInstalled,
+                    deviceType: device.component.size,
+                    isPrimary: false
+                }))
+        ];
+
+        // Update BIOS display
+        if (this.isBiosOpen) {
+            this.updateBiosDisplay();
+        }
+
+        return { 
+            success: true, 
+            device: installTarget.component.name,
+            deviceType: installTarget.component.size,
+            bootOrder: this.biosSettings.bootOrder
+        };
+    }
+
+    // os installation handler
+    handleOSInstallation() {
+        const status = this.getBiosStatus();
+        const biosEl = this.biosElements;
+    
+        // Check storage devices
+        if (!status.bootOrder || status.bootOrder.length === 0) {
+            biosEl.osStatus.textContent = 'No bootable devices detected';
+            biosEl.osStatus.classList.add('error');
+            return false;
+        }
+    
+        // Check for existing OS
+        const hasOS = status.bootOrder.some(device => device.osInstalled);
+        biosEl.osStatus.textContent = hasOS ? 
+            'OS Installed' : 
+            'No OS Installed - Select a drive to install';
+        biosEl.osStatus.classList.toggle('installed', hasOS);
+        biosEl.osStatus.classList.toggle('not-installed', !hasOS);
+    
+        return true;
+    }
+
+    osBootUp(){
+        // Check if we have a valid boot device
+        if (!this.biosSettings.bootOrder || this.biosSettings.bootOrder.length === 0) {
+            return 'ERR-502'; // missing storage devices
+        }
+
+        // Simulate OS boot process
+        const primaryBootDevice = this.biosSettings.bootOrder[0];
+        if (!primaryBootDevice.osInstalled) {
+            return 'ERR-503'; // No OS installed on primary boot device
+        }
+
+        return true;
+    }
+
     // --------------------------------------------BIOS HANDLERS--------------------------------------------
     openBIOS() {
         let biosModal = document.getElementById("biosModal");
@@ -722,8 +835,11 @@ class PCUnit {
     // Get all BIOS UI elements with single object
     const biosEl = this.biosElements = {
         modal: document.getElementById('biosModal'),
+        menuItems: document.querySelectorAll('.bios-menu li'),
+        sections: document.querySelectorAll('.bios-section'),
         fanSpeed: document.getElementById('fanSpeed'),
         fanProfile: document.getElementById('fanProfile'),
+        cpuTemp: document.getElementById('cpuTemp'),
         saveBtn: document.getElementById('saveBiosSettings'),
         timeDisplay: document.getElementById('biosTime'),
         fanSpeedValue: document.getElementById('fanSpeedValue'),
@@ -739,7 +855,38 @@ class PCUnit {
         gpuTemp: document.getElementById('gpuTemp'),
         storage: document.getElementById('biosStorage'),
         enterBtn: document.getElementById('biosButton'),
+        bootOrder: document.getElementById('bootOrder'),
+        osStatus: document.getElementById('osStatus'),
+        installOS: document.getElementById('installOS'),
+        installTarget: document.getElementById('installTarget')
     }
+    // Menu moving function for bios
+    biosEl.sections[0].classList.add('show');
+
+    biosEl.menuItems.forEach((item) => {
+        item.addEventListener('click', () => {
+            // Remove active class from all menu items and sections
+            biosEl.menuItems.forEach(i => i.classList.remove('show'));
+            biosEl.sections.forEach(s => s.classList.remove('show'));
+
+            // Add show class to clicked item and corresponding section
+            item.classList.add('show');
+            
+            // Show corresponding section based on menu item
+            switch(item.textContent) {
+                case 'Main':
+                    document.querySelector('.bios-section:nth-child(1)').classList.add('show');
+                    break;
+                case 'Fan Control':
+                    document.querySelector('.bios-section:nth-child(2)').classList.add('show');
+                    break;
+                case 'Boot':
+                    document.querySelector('.bios-section:nth-child(3)').classList.add('show');
+                    break;
+            }
+        });
+    });
+
     // CPU fan settings
     biosEl.fanProfile?.addEventListener('change', (e) => {
         const profile = e.target.value;
@@ -751,6 +898,7 @@ class PCUnit {
         this.setFanSpeed(speed);
         biosEl.fanProfile.value = 'custom';
     });
+
     // GPU fan settings
     biosEl.gpuFanSpeed?.addEventListener('input', (e) => {
         const speed = parseInt(e.target.value);
@@ -765,6 +913,49 @@ class PCUnit {
             this.setGPUFanSpeed(this.fanProfiles[profile].speed);
         }
     });
+
+    // OS installation handler
+    biosEl.installOS?.addEventListener('click', () => {
+        if (!this.handleOSInstallation()) {
+            return; // Exit if pre-checks fail
+        }
+
+        const result = this.installOS();
+        if (result.success) {
+            biosEl.osStatus.textContent = `OS Installed on ${result.device} (${result.deviceType})`;
+            biosEl.osStatus.classList.remove('not-installed', 'error');
+            biosEl.osStatus.classList.add('installed');
+            
+            // Show success message
+            const messageDialog = document.createElement('div');
+            messageDialog.classList.add('os-message-dialog');
+            messageDialog.id = 'osInstallDialog'
+            messageDialog.innerHTML = `
+                <div class="os-message-content">
+                    <div class="os-message-header">
+                        <span class="success-icon">✓</span>
+                        <h3>Installation Complete</h3>
+                    </div>
+                    <p>Successfully installed OS on ${result.device}</p>
+                    <p class="restart-note">System will restart to complete installation.</p>
+                    <button class="restart-button">Restart Now</button>
+                </div>
+            `;
+            biosModal.appendChild(messageDialog);
+            const restartButton = messageDialog.querySelector('.restart-button')
+            // event listener for restart button 
+            restartButton.addEventListener('click', () => {
+                messageDialog.remove();
+                this.restartSystem(); // Use the same restart method
+                });
+            } else {
+                biosEl.osStatus.textContent = `Installation Failed: ${result.error}`;
+                biosEl.osStatus.classList.remove('installed')
+                biosEl.osStatus.classList.add('not-installed')
+            }
+        })
+
+
     biosEl.saveBtn?.addEventListener('click', () => this.saveBiosSettings());
 
     // Start BIOS clock
@@ -793,6 +984,7 @@ class PCUnit {
         biosEl.fanSpeedValue && (biosEl.fanSpeedValue.textContent = `${status.fanSpeed}%`);
         biosEl.currentRpm && (biosEl.currentRpm.textContent = status.currentRpm);
         biosEl.fanProfile && (biosEl.fanProfile.value = status.fanProfile);
+        biosEl.cpuTemp && (biosEl.cpuTemp.textContent = `${this.biosSettings.temperatures.cpu}°C`)
         biosEl.motherboard && (biosEl.motherboard.textContent = status.motherboard);
         biosEl.processor && (biosEl.processor.textContent = status.processor);
         biosEl.memory && (biosEl.memory.textContent = status.memory);
@@ -802,17 +994,58 @@ class PCUnit {
         biosEl.gpuCurrentRpm && (biosEl.gpuCurrentRpm.textContent = this.biosSettings.gpuSettings.currentRpm);
         biosEl.gpuTemp && (biosEl.gpuTemp.textContent = `${this.biosSettings.gpuSettings.temperatures.current}°C`);
         biosEl.storage && (biosEl.storage.textContent = status.storage);
+        if (biosEl.bootOrder) {
+            // Use this.biosSettings.bootOrder directly instead of status.bootOrder
+            biosEl.bootOrder.innerHTML = this.biosSettings.bootOrder.map((device, index) => `
+                <li class="boot-device ${index === 0 ? 'primary' : ''}"
+                    data-index="${index}"
+                    tabindex="0">
+                    <div class="device-info">
+                        <span class="device-name">${device.device}</span>
+                        <span class="device-type">${device.deviceType}</span>
+                    </div>
+                    ${device.osInstalled ? '<span class="os-badge">OS</span>' : ''}
+                    <div class="order-controls">
+                        <button class="move-up" ${index === 0 ? 'disabled' : ''}>↑</button>
+                        <button class="move-down" ${index === this.biosSettings.bootOrder.length - 1 ? 'disabled' : ''}>↓</button>
+                    </div>
+                </li>
+            `).join('');  
+        }
+         // boot devices movement 
+        const items = biosEl.bootOrder.querySelectorAll('li');
+        items.forEach(item => {
+            const upBtn = item.querySelector('.move-up');
+            const downBtn = item.querySelector('.move-down');
+            const index = parseInt(item.dataset.index);
+
+            upBtn?.addEventListener('click', (e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                this.moveBootDevice(index, 'up');
+                this.updateBiosDisplay()
+            });
+
+            downBtn?.addEventListener('click', (e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                this.moveBootDevice(index, 'down');
+                this.updateBiosDisplay()
+            });
+        });
     }
+        
     
     getBiosStatus() {
         const memoryPerStick = 8; // Each stick is 8GB
-        const totalMemory = this.componentsStatus.ram?.length 
+        const totalMemory = this.componentsStatus.ram?.length  
             ? `${this.componentsStatus.ram.length * memoryPerStick}GB` 
             : 'Not Detected';
         return {
             fanProfile: this.biosSettings.fanProfile,
             fanSpeed: this.biosSettings.fanSpeed,
             currentRpm: this.currentRpm,
+            cpuTemp: this.biosSettings.temperatures.cpu || 'Not Detected',
             temperatures: this.biosSettings.temperatures,
             lastSaved: this.biosSettings.lastSaved,
             motherboard: this.componentsStatus.motherboard?.component?.name || 'Not Detected',
@@ -825,10 +1058,146 @@ class PCUnit {
             storage: this.componentsStatus.storage?.length 
                 ? `${this.componentsStatus.storage.length} Devices Detected` 
                 : 'Not Detected',
+            bootOrder: this.componentsStatus.storage?.filter(device => 
+                    device.isPowered).map(device => ({
+                    device: device.component.name,
+                    osInstalled: device.component.osInstalled
+                }))        
         }
     }
 
-    // Fan Controls
+    toggleBios(show) {
+        const biosEl = this.biosElements;
+        if (!biosEl?.modal) return;
+    
+        if (!this.bootStatus && show) {
+            console.warn('Cannot access BIOS: System not booted');
+            return;
+        }
+    
+        if (show) {
+            biosEl.modal.showModal();
+            this.updateBiosDisplay();
+        } else {
+            biosEl.modal.close();
+        }
+        this.isBiosOpen = show;
+    }
+
+    saveBiosSettings() {        
+        // Store current settings
+        const settings = {
+            cpu: {
+                fanSpeed: this.fanSpeed,
+                fanProfile: this.biosSettings.fanProfile,
+                currentRpm: this.currentRpm
+            },
+            gpu: {
+                fanSpeed: this.biosSettings.gpuSettings.fanSpeed,
+                fanProfile: this.biosSettings.gpuSettings.fanProfile,
+                currentRpm: this.biosSettings.gpuSettings.currentRpm
+            },
+            lastSaved: this.biosSettings.lastSaved
+        };
+
+        // Apply settings
+        if (this.biosSettings.fanProfile === 'custom') {
+            this.setFanSpeed(this.fanSpeed);
+        } else {
+            this.setFanProfile(this.biosSettings.fanProfile);
+        }
+
+        // Apply GPU settings
+        const gpuProfile = this.biosSettings.gpuSettings.fanProfile;
+        if (gpuProfile === 'custom') {
+            const gpuSpeed = this.biosSettings.gpuSettings.fanSpeed;
+            this.setGPUFanSpeed(gpuSpeed)
+            // Update temperatures after setting fan speed
+            this.biosSettings.gpuSettings.temperatures.current = Math.max(
+                45, // Minimum temperature
+                this.biosSettings.gpuSettings.temperatures.critical - 
+                ((this.biosSettings.gpuSettings.temperatures.critical - this.biosSettings.gpuSettings.temperatures.target) 
+                * (gpuSpeed / 100))
+            )
+        } else {
+            if (this.fanProfiles[this.biosSettings.gpuSettings.fanProfile]) {
+                const profileSpeed = this.fanProfiles[gpuProfile].speed;
+                this.setGPUFanSpeed(profileSpeed);
+            }
+        }
+
+        // Add boot order to settings
+        const bootOrderSettings = this.biosSettings.bootOrder.map(device => ({
+            device: device.device,
+            isBootable: device.isBootable,
+            osInstalled: device.osInstalled,
+            deviceType: device.deviceType,
+            isPrimary: device.isPrimary
+        }));
+
+
+        // Option to restart system after BIOS changes
+        const shouldRestart = document.getElementById('saveBiosSettings')
+
+        if (shouldRestart) {
+            this.restartSystem();
+        }
+        this.biosSettings.bootOrder = bootOrderSettings;
+        this.biosSettings.lastSaved = new Date().toLocaleString();
+        return {
+            ...settings,
+            bootOrder: bootOrderSettings
+        };
+    }
+
+    restartSystem() {
+        // Close BIOS first
+        this.toggleBios(false);
+
+        // Power off sequence
+        this.power = 'off';
+        this.powerOffMonitor();
+        
+        // Clear states
+        let bootreport = document.getElementById('bootTabReport')
+        bootreport.innerHTML = ''
+        this.isErrorDisplayed = false;
+
+        // Power on delay 
+        setTimeout(() => {
+            this.power = 'on';
+            this.powerOnMonitor();
+            
+            // Run boot sequence first
+            const bootSuccess = this.attemptPowerOn(this.availableUnit);
+            
+            if (bootSuccess) {
+                // Add boot success report
+                this.reports.push({
+                    tag: 'Success',
+                    def: 'System Restarted Successfully',
+                });
+    
+                // Create and display the report
+                const reportCell = document.createElement('div');
+                reportCell.classList.add('report-cell', 'success');
+                reportCell.innerHTML = `
+                    <div class="reportCell">
+                    <div class="reportCellTag">Success</div>
+                    <div class="reportCellDef">System Booted Successfully</div>
+                    </div>
+                `;
+    
+                // Add to boot report area
+                if (bootreport) {
+                    bootreport.appendChild(reportCell);
+                }
+            }
+        }, 2000);
+    }
+    
+
+    //-------------------------- Fan Controls-------------------------------------
     setFanSpeed(percentage) {
         if (percentage < 0 || percentage > 100) return;
         
@@ -887,116 +1256,7 @@ class PCUnit {
         this.fanAndCoolingTest()
         this.graphicsCardTest()
     }
-
-    toggleBios(show) {
-        const biosEl = this.biosElements;
-        if (!biosEl?.modal) return;
     
-        if (!this.bootStatus && show) {
-            console.warn('Cannot access BIOS: System not booted');
-            return;
-        }
-    
-        if (show) {
-            biosEl.modal.showModal();
-            this.updateBiosDisplay();
-        } else {
-            biosEl.modal.close();
-        }
-        this.isBiosOpen = show;
-    }
-
-    saveBiosSettings() {
-        this.biosSettings.lastSaved = new Date().toLocaleString();
-
-        // Store current settings
-        const settings = {
-            cpu: {
-                fanSpeed: this.fanSpeed,
-                fanProfile: this.biosSettings.fanProfile,
-                currentRpm: this.currentRpm
-            },
-            gpu: {
-                fanSpeed: this.biosSettings.gpuSettings.fanSpeed,
-                fanProfile: this.biosSettings.gpuSettings.fanProfile,
-                currentRpm: this.biosSettings.gpuSettings.currentRpm
-            },
-            lastSaved: this.biosSettings.lastSaved
-        };
-
-        // Apply settings
-        if (this.biosSettings.fanProfile === 'custom') {
-            this.setFanSpeed(this.fanSpeed);
-        } else {
-            this.setFanProfile(this.biosSettings.fanProfile);
-        }
-
-        // Apply GPU settings
-        const gpuProfile = this.biosSettings.gpuSettings.fanProfile;
-        if (gpuProfile === 'custom') {
-            const gpuSpeed = this.biosSettings.gpuSettings.fanSpeed;
-            this.setGPUFanSpeed(gpuSpeed)
-            // Update temperatures after setting fan speed
-            this.biosSettings.gpuSettings.temperatures.current = Math.max(
-                45, // Minimum temperature
-                this.biosSettings.gpuSettings.temperatures.critical - 
-                ((this.biosSettings.gpuSettings.temperatures.critical - this.biosSettings.gpuSettings.temperatures.target) 
-                * (gpuSpeed / 100))
-            )
-        } else {
-            if (this.fanProfiles[this.biosSettings.gpuSettings.fanProfile]) {
-                const profileSpeed = this.fanProfiles[gpuProfile].speed;
-                this.setGPUFanSpeed(profileSpeed);
-            }
-        }
-
-        // Option to restart system after BIOS changes
-        const shouldRestart = document.getElementById('saveBiosSettings')
-        const reportsarea= document.getElementById('bootTabReport')
-        this.toggleBios(false);
-
-        if (shouldRestart) {
-            // Power cycle sequence
-            reportsarea.innerHTML = ''
-            this.powerOffMonitor()
-            setTimeout(() => {
-                // Clear any existing errors
-                this.isErrorDisplayed = false;
-                this.reports = [];
-                this.power = 'off'
-                // Attempt power on with current unit
-                if (this.unit) {
-                    this.attemptPowerOn(unit);
-                }
-            }, 2000);
-        }
-
-        return settings;
-    }
-
-    
-    openBiosSettings() {
-        const biosModal = document.getElementById('biosModal')
-        if (!biosModal) return false
-
-        biosModal.showModal()
-        this.isBiosOpen = true
-
-        // Update BIOS display
-        const status = this.getBiosStatus()
-        document.getElementById('fanSpeed').value = status.fanSpeed
-        document.getElementById('fanSpeedValue').textContent = `${status.fanSpeed}%`
-        document.getElementById('currentRpm').textContent = status.currentRpm
-        document.getElementById('fanProfile').value = status.fanProfile
-        document.getElementById('biosMobo').textContent = status.motherboard
-        document.getElementById('biosProcessor').textContent = status.processor
-        document.getElementById('biosMemory').textContent = status.memory
-        document.getElementById('biosGpu').textContent = status.gpu
-        document.getElementById('biosStorage').textContent = status.storage
-
-        return true
-    }
-
     updateFanRPM(speedPercentage) {
         const baseRPM = 800
         const maxRPM = 2400
@@ -1004,7 +1264,41 @@ class PCUnit {
         document.getElementById('currentRpm').textContent = Math.round(rpm)
         this.currentRpm = Math.round(rpm)
     }
+    
+    // ------------------------------------Boot Order-------------------------------------
 
+    moveBootDevice(index, direction) {
+         if (!this.biosSettings.bootOrder || index < 0 || index >= this.biosSettings.bootOrder.length) return;
+
+        const newIndex = direction === 'up' ? index - 1 : index + 1;
+        if (newIndex < 0 || newIndex >= this.biosSettings.bootOrder.length) return;
+        
+        // Swap devices
+        const deviceA = this.biosSettings.bootOrder[index];
+        const deviceB = this.biosSettings.bootOrder[newIndex]; 
+        
+        // Perform the swap
+        this.biosSettings.bootOrder[index] = deviceB;
+        this.biosSettings.bootOrder[newIndex] = deviceA;
+
+        // Update primary status and storage devices
+        this.biosSettings.bootOrder.forEach((device, i) => {
+            device.isPrimary = i === 0;
+
+            // Find and update corresponding storage device
+            const storageDevice = this.componentsStatus.storage.find(
+                storage => storage.component.name === device.device
+            );
+            if (storageDevice) {
+                storageDevice.component.bootPriority = i;
+            }
+        });
+
+        // Update display with new order
+        if (this.isBiosOpen) {
+            this.updateBiosDisplay();
+        }
+    }
     /*************************************************************************************************************************/
 
     checkIfAvailableUnit(component) {

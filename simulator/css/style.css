@@ -1599,13 +1599,22 @@ input[type=checkbox] {
     background-color: #001a1a;
 }
 
-.bios-menu li.active {
+.bios-menu li.show {
     background-color: #003300;
+    border-left: 3px solid #4CAF50;
 }
 
 .bios-content {
     flex: 1;
     overflow-y: auto;
+}
+
+.bios-content > div.bios-section {
+  display: none;
+}
+
+.bios-content > div.bios-section.show {
+  display: block;
 }
 
 .bios-section {
@@ -1619,6 +1628,7 @@ input[type=checkbox] {
 }
 
 .bios-item {
+    background-color: #001a1a;
     display: flex;
     justify-content: space-between;
     padding: 8px;
@@ -1627,8 +1637,9 @@ input[type=checkbox] {
 
 .fan-control {
     background-color: #001a1a;
-    padding: 20px;
+    padding: 15px;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .fan-profile, .gpuFanProfile {
@@ -1688,5 +1699,166 @@ input[type=checkbox] {
 
 .bios-save:hover {
     background-color: #004d00;
+}
+.boot-order{
+  background-color: #001a1a;
+  padding: 20px;
+  border-radius: 5px;
+}
+.os-installation {
+  background-color: #001a1a;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.os-status {
+  margin: 10px 0;
+  padding: 1px;
+  border-radius: 4px;
+}
+
+.os-status.installed {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.os-status.not-installed {
+  background: rgba(255, 152, 0, 0.1);
+  color: #f44336;
+}
+
+.os-status.error {
+  background: rgba(244, 67, 54, 0.1);
+  color: #F44336;
+}
+
+.bios-button {
+  background: #2c2c2c;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+.bios-button:hover {
+  background: #3c3c3c;
+}
+
+#installTarget {
+  background: #2c2c2c;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 5px;
+}
+
+.os-message-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000000000000000000;
+}
+
+.os-message-content {
+  background: #1a1a1a;
+  border: 1px solid #444;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+  color: #fff;
+}
+
+.os-message-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.success-icon {
+  background: #4CAF50;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.restart-note {
+  color: #888;
+  font-size: 0.9em;
+  margin: 15px 0;
+}
+
+.restart-button {
+  background: #2c2c2c;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.restart-button:hover {
+  background: #3c3c3c;
+}
+
+.boot-device {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  margin: 4px;
+  background: #2c2c2c;
+  border: 1px solid #444;
+}
+
+.boot-device.primary {
+  border-left: 3px solid #4CAF50;
+}
+
+.device-info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.device-type {
+  color: #888;
+  font-size: 0.9em;
+}
+
+.os-badge {
+  background: #4CAF50;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.8em;
+}
+
+.order-controls button {
+  background: #1a1a1a;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+
+.order-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.order-controls button:hover:not(:disabled) {
+  background: #3c3c3c;
 }
 /*# sourceMappingURL=style.css.map */

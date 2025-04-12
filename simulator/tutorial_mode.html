@@ -360,16 +360,14 @@
             <div class="bios-container">
                 <div class="bios-sidebar">
                     <ul class="bios-menu">
-                        <li class="active">Main</li>
-                        <li>Advanced</li>
-                        <li>CPU Configuration</li>
+                        <li class="show">Main</li>
                         <li>Fan Control</li>
                         <li>Boot</li>
                     </ul>
                 </div>
-    
+                <!--Main content-->
                 <div class="bios-content">
-                    <div class="bios-section">
+                    <div class="bios-section show">
                         <h3>System Overview</h3>
                         <div class="bios-grid">
                             <div class="bios-item">
@@ -386,16 +384,16 @@
                             </div>
                             <div class="bios-item">
                                 <span>GPU</span>
-                                <span id="biosGpu"></span>
-                                <div>Temperature: <span id="gpuTemp"></span></div>
+                                <span id="biosGpu"></span>                              
                             </div>
                             <div class="bios-item">
                                 <span>Storage</span>
                                 <span id="biosStorage"></span>
-                            </div>    
+                            </div>
                         </div>
-                    </div>
-    
+                    </div> 
+
+                    <!--Fan Control-->
                     <div class="bios-section">
                         <h3>Fan Control</h3>
                         <!--CPU fan settings-->
@@ -410,6 +408,7 @@
                                 </select>
                             </div>
                             <div class="fan-speed-control">
+                                <div>Temperature: <span id="cpuTemp"></span></div>
                                 <label>CPU Fan Speed: <span id="fanSpeedValue">50%</span></label>
                                 <input type="range" id="fanSpeed" min="0" max="100" value="50">
                                 <div class="current-rpm">Current RPM: <span id="currentRpm"></span></div>
@@ -427,6 +426,7 @@
                                 </select>
                             </div>
                             <div class="fan-speed-control">
+                                <div>Temperature: <span id="gpuTemp"></span></div>
                                 <label>GPU Fan Speed: <span id="gpuFanSpeedValue">50%</span></label>
                                 <input type="range" id="gpuFanSpeed" min="0" max="100" value="50">
                                 <div class="gpu-status">
@@ -435,6 +435,28 @@
                             </div>
                         </div>
                     </div>
+
+                    <!--Boot-->
+                    <div class="bios-section">
+                        <h3>Boot Configuration</h3>
+                        <div class="boot-order">
+                            <label>Boot Priority (Drag to reorder):</label>
+                            <ul id="bootOrder" class="boot-list">
+                                <!-- Will be populated dynamically -->
+                            </ul>
+                            
+                            <div class="os-installation">
+                                <div class="os-status">
+                                    <span>OS Status: </span>
+                                    <span id="osStatus">No OS Installed</span>
+                                </div>
+                                <div class="os-controls">
+                                    <button id="installOS" class="bios-button">Install OS</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
     
