@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="./Landing Page/style/land-page.css">
-    <link rel="stylesheet" href="./Landing Page/style/assistant.css">
+    <link rel="stylesheet" href="./Landing Page/style.css">
     <link rel="icon" href="../favicon.png" type="image/x-icon">
     <title>Prototype v2</title>
     <link rel="icon" href="favicon.png">
@@ -13,47 +12,70 @@
 </style>
 <body>
   <!-- <img class="bg" src="./Landing Page/assets/office2.jpg"> -->
-  <section class="page-1">
+  <div id="page1" class="section">
+    <div class="scene">
+      <div class="chip">
+        <div class="face front">
+          <div class="pit">
+            <div class="assistant flushed">
+              <img class="asst-icon" src="Landing Page/assets/assistant.png" class="assistant-icon">
+              <div class="flash"></div>
+            </div>
+          </div>
+        </div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+        <div class="face top"></div>
+        <div class="face bottom"></div>
+        <div class="face back"></div>
+        <!-- <div class="face left">left</div>
+        <div class="face right">right</div>
+        <div class="face top">top</div>
+        <div class="face bottom">bot</div>
+        <div class="face back">back</div> -->
+      </div>
+    </div>
 
-  </section>
-  <!-- <div class="overlay"></div> -->
-  <div class="assistant-container">
-    <div class="assistant">
-    <img class="asst-icon" src="Landing Page/assets/assistant.png" class="assistant-icon">
+    <div class="title-card retro-font">
+      PC Building Simulator
+
+      <div>loading</div>
+    </div>
   </div>
-  </div>
+
+
+
+  <div id="page2" class="section content-center">
   
-  <div class="dialogue-box">
-    <p class="dialogue-text"></p>
-    <!-- <div class="dialogue-continue">    -->
+  </div>
+  <div id="page3" class="section content-center">
+    <!-- <div class="overlay"></div> -->
+    <div class="assistant-container">
+      <div class="assistant float">
+        <img class="asst-icon" src="Landing Page/assets/assistant.png" class="assistant-icon">
+      </div>
+    </div>
+    
+    <div class="dialogue-box">
+      <p class="dialogue-text"></p>
       <img src="./Landing Page/assets/svg/triangle-down.svg" class="dialogue-down" alt="">
-    <!-- </div> -->
+    </div>
   </div>
 
-  <script>
-    const el = document.querySelector(".dialogue-text");
-    const text = "Hey there! Welcome to the PC Assembly & Troubleshooting Simulation! This is your space to mess around with building and fixing computers, no real-world risks involved ng computers, no real-world risks involved. "
-    // const text = "In this simulation, you’ll get to assemble a PC, pick the right parts, hook them up, and power it on. But here’s the fun part — you’ll also run into some real-life troubleshooting problems, helping you learn how to spot and fix issues like a pro."
-    // const text = "Whether you’re new to PCs or just brushing up, this is a chill way to learn, make mistakes, and level up your skills — no stress, no pressure. Ready to get started? Let’s build and fix some cool stuff!"
-    let i = 0;
+  <!-- <section id="page2" class="page-content">
+    <div class="overlay"></div>
+    <div class="assistant-container">
+      <div class="assistant">
+        <img class="asst-icon" src="Landing Page/assets/assistant.png" class="assistant-icon">
+      </div>
+    </div>
+    
+    <div class="dialogue-box">
+      <p class="dialogue-text"></p>
+      <img src="./Landing Page/assets/svg/triangle-down.svg" class="dialogue-down" alt="">
+    </div>
+  </section> -->
 
-    function type() {
-      if (i < text.length) {
-        el.textContent += text.charAt(i) + text.charAt(i+1) + text.charAt(i+2) ;
-        i += 3;
-        setTimeout(type, 40); // speed in ms
-      }
-    }
-    // function type() {
-    //   if (i < text.length) {
-    //     el.textContent += text.charAt(i);
-    //     i ++;
-    //     setTimeout(type, 20); // speed in ms
-    //   }
-    // }
-
-    type();
-
-  </script>
+  <script src="./Landing Page/script.js"></script>
 </body>
 </html>
