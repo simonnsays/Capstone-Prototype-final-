@@ -524,7 +524,7 @@ class PCUnit {
         
         // Critical Error: PSU Failure
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-06'; 
+            return 'CRT-01'
         }
 
         // add reports if no errors are found
@@ -553,11 +553,7 @@ class PCUnit {
 
         // Critical error
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-01'; // Motherboard Failure
-        }
-
-        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-03'; // Motherboard Failure
+            return 'CRT-02'; // Motherboard Failure
         }
 
         // add reports if no errors are found
@@ -577,14 +573,9 @@ class PCUnit {
             return 'ERR-301' // CPU not powered
         }
 
-        // Hazard Error: High CPU Temperature
-        if (Math.random() < 0.1 + Math.random * 0.1) { // 10% to 20% chance of error showing
-            return 'HZD-200'; 
-        }
-
         // Critical Error: CPU Failure
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-02'; // CPU Failure
+            return 'CRT-03'; // CPU Failure
         }
 
         // add reports if no errors are found
@@ -624,11 +615,12 @@ class PCUnit {
 
         // Critical Error: BOOT Device Failure
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-09'; 
+            return 'CRT-05'; 
         }
+        
         // OS corruption
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-10'; 
+            return 'CRT-07'; 
         }
 
 
@@ -655,7 +647,7 @@ class PCUnit {
 
         // Critical Error: GPU Failure
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-05'; 
+            return 'CRT-06'
         }
 
         if(this.biosSettings.gpuSettings.temperatures.current >= 
@@ -690,11 +682,6 @@ class PCUnit {
         
         if (this.biosSettings.temperatures.system > 70) {
             return 'HZD-201' // High System temperature
-        }
-
-        // Critical Error: Overheating issue
-        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-07'; 
         }
 
         return true
@@ -803,10 +790,49 @@ class PCUnit {
         return true;
     }
 
+    deleteOS(deviceName) {
+        // Find the storage device
+        const storageDevice = this.componentsStatus.storage.find(
+            device => device.component.name === deviceName
+        );
+    
+        if (!storageDevice) {
+            return {
+                success: false,
+                error: 'Device not found'
+            };
+        }
+    
+        // Remove OS from device
+        storageDevice.component.osInstalled = false;
+    
+        // Update boot order
+        this.biosSettings.bootOrder = this.biosSettings.bootOrder.map(device => {
+            if (device.device === deviceName) {
+                return {
+                    ...device,
+                    osInstalled: false,
+                    isPrimary: false
+                };
+            }
+            return device;
+        });
+    
+        // Update BIOS display if open
+        if (this.isBiosOpen) {
+            this.updateBiosDisplay();
+        }
+    
+        return {
+            success: true,
+            device: deviceName
+        };
+    }
+
     osBootUp(){
         // Check if we have a valid boot device
         if (!this.biosSettings.bootOrder || this.biosSettings.bootOrder.length === 0) {
-            return 'ERR-502'; // missing storage devices
+            return 'ERR-500'; // missing storage devices
         }
 
         // Simulate OS boot process
@@ -858,7 +884,8 @@ class PCUnit {
         bootOrder: document.getElementById('bootOrder'),
         osStatus: document.getElementById('osStatus'),
         installOS: document.getElementById('installOS'),
-        installTarget: document.getElementById('installTarget')
+        installTarget: document.getElementById('installTarget'),
+        deleteOS: document.getElementById('deleteOS')
     }
     // Menu moving function for bios
     biosEl.sections[0].classList.add('show');
@@ -957,6 +984,44 @@ class PCUnit {
 
 
     biosEl.saveBtn?.addEventListener('click', () => this.saveBiosSettings());
+
+    // Deletion of OS handler
+    biosEl.deleteOS?.addEventListener('click', () => {
+        const selectedDevice = this.biosSettings.bootOrder[0]?.device;
+        if (!selectedDevice) {
+            return;
+        }
+
+        const result = this.deleteOS(selectedDevice);
+        if (result.success) {
+            biosEl.osStatus.textContent = 'OS Deleted - System requires reinstallation';
+            biosEl.osStatus.classList.remove('installed');
+            biosEl.osStatus.classList.add('not-installed');
+
+            // Show deletion message
+            const messageDialog = document.createElement('div');
+            messageDialog.classList.add('os-message-dialog');
+            messageDialog.id = 'osDeleteDialog';
+            messageDialog.innerHTML = `
+                <div class="os-message-content">
+                    <div class="os-message-header">
+                        <span class="warning-icon">⚠️</span>
+                        <h3>OS Deleted</h3>
+                    </div>
+                    <p>Operating System has been removed from ${result.device}</p>
+                    <p class="restart-note">System requires reinstallation</p>
+                    <button class="restart-button">Restart Now</button>
+                </div>
+            `;
+            biosModal.appendChild(messageDialog);
+            
+            const restartButton = messageDialog.querySelector('.restart-button');
+            restartButton.addEventListener('click', () => {
+                messageDialog.remove();
+                this.restartSystem();
+            });
+        }
+    });
 
     // Start BIOS clock
     this.startBiosClock();

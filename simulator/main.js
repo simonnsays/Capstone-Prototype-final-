@@ -117,6 +117,7 @@ class Main {
 
         // TEST: BOOT UP
         this.testBootUp()
+        //this.testFanSpeed()
         //this.testTemperature()
         //this.testBootOrder()
         // TEST: MISSING COMPONENTS
@@ -131,14 +132,20 @@ class Main {
         // TEST: ADD BASIC COMPONENT
         //this.addBasicComponents()
     }
+
     testBootOrder(){
         this.bootUpTab.pcUnit.componentsStatus.storage.osInstalled === false
     }
+
     testTemperature(){
         //this.bootUpTab.pcUnit.biosSettings.temperatures.cpu = 86
         this.bootUpTab.pcUnit.biosSettings.gpuSettings.temperatures.current = 95
         //this.bootUpTab.pcUnit.biosSettings.temperatures.system = 76
     }
+    testFanSpeed(){
+        this.bootUpTab.pcUnit.fanSpeed = 10
+    }
+
     addBasicComponents() {
         const itemsToBuy = []
         console.log(this.shop.items)
@@ -236,9 +243,9 @@ class Main {
                 this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'psu').component, slot)
             }
         }) 
-
+       
         this.connectCables()
- 
+        this.testOS()
         this.inventory.update()
         this.displayArea.update()
 
@@ -345,7 +352,47 @@ class Main {
         this.portsTab.attachCable(gpuPortGpu.offsets[0], gpuCableGpu)
 
     }
+    /////////////////// TEST: OS INSTALLED
+    testOS(){
+        const primaryStorage = this.bootUpTab.pcUnit.componentsStatus.storage[0]
+        if (primaryStorage && primaryStorage.component) {
+            // check device
+            primaryStorage.isPowered = true
+            primaryStorage.component.specs.bootable = true
+            primaryStorage.component.osInstalled = true
+            primaryStorage.component.bootPriority = 0
 
+            // check bios
+            if (!this.bootUpTab.pcUnit.biosSettings) {
+                this.bootUpTab.pcUnit.biosSettings = {}
+            }
+            
+            // set boot order
+            this.bootUpTab.pcUnit.biosSettings.bootOrder = [{
+                device: primaryStorage.component.name,
+                deviceType: primaryStorage.component.type,
+                isBootable: true,
+                osInstalled: true,
+                isPrimary: true
+            }]
+
+            // see if second storage is active
+            const secondaryStorage = this.bootUpTab.pcUnit.componentsStatus.storage[1]
+            if (secondaryStorage && secondaryStorage.component) {
+                secondaryStorage.isPowered = true
+                secondaryStorage.component.specs.bootable = true
+                secondaryStorage.component.bootPriority = 1
+                
+                this.bootUpTab.pcUnit.biosSettings.bootOrder.push({
+                    device: secondaryStorage.component.name,
+                    deviceType: secondaryStorage.component.type,
+                    isBootable: true,
+                    osInstalled: false,
+                    isPrimary: false
+                })
+            }
+        }
+    }
 
     /////////////////// TEST: BOOT UP
     testMissingComponents() {

@@ -1741,6 +1741,11 @@ input[type=checkbox] {
   margin: 5px 0;
 }
 
+.warning-icon {
+  color: #ff9900;
+  font-size: 24px;
+}
+
 .bios-button:hover {
   background: #3c3c3c;
 }

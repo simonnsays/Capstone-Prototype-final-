@@ -5,9 +5,11 @@ const errorCodes = {
         severity: 'Hazard',
         description: 'CPU fan speed too low',
         troubleshooting: [
-             "Check if the CPU fan is spinning properly.",
-             "Ensure that the CPU fan is connected to the correct header on the motherboard.",
-             "Check the BIOS settings for fan speed control and adjust if necessary."
+            {imageSrc: './assets/tbshoot/hzd/100/100-1.png'},
+            {imageSrc: './assets/tbshoot/hzd/100/100-2.png'},
+            {imageSrc: './assets/tbshoot/hzd/100/100-3.png'},
+            {imageSrc: './assets/tbshoot/hzd/100/100-4.png'},
+            {imageSrc: './assets/tbshoot/hzd/100/100-5.png'},
         ],
     },
     'HZD-200': {
@@ -15,9 +17,11 @@ const errorCodes = {
         severity: 'Hazard',
         description: 'High CPU temperature',
         troubleshooting: [
-            "Check if the CPU cooler is properly installed and making good contact with the CPU.",
-            "Ensure that the thermal paste is applied correctly and evenly.",
-            "Check the CPU fan speed and make adjustments in the BIOS/UEFI if necessary."
+            {imageSrc: './assets/tbshoot/hzd/200/200-1.png'},
+            {imageSrc: './assets/tbshoot/hzd/200/200-2.png'},
+            {imageSrc: './assets/tbshoot/hzd/200/200-3.png'},
+            {imageSrc: './assets/tbshoot/hzd/200/200-4.png'},
+            {imageSrc: './assets/tbshoot/hzd/200/200-5.png'},
         ],
     },
     'HZD-201': {
@@ -25,9 +29,11 @@ const errorCodes = {
         severity: 'Hazard',
         description: 'High System temperature',
         troubleshooting: [
-            "Check if the CPU cooler is properly installed and making good contact with the CPU.",
-            "Ensure that the thermal paste is applied correctly and evenly.",
-            "Check the CPU fan speed and make adjustments in the BIOS/UEFI if necessary."
+            {imageSrc: './assets/tbshoot/hzd/201/201-1.png'},
+            {imageSrc: './assets/tbshoot/hzd/201/201-2.png'},
+            {imageSrc: './assets/tbshoot/hzd/201/201-3.png'},
+            {imageSrc: './assets/tbshoot/hzd/201/201-4.png'},
+            {imageSrc: './assets/tbshoot/hzd/201/201-5.png'},
         ],
     },
     'HZD-300': {
@@ -35,10 +41,11 @@ const errorCodes = {
         severity: 'Hazard',
         description: 'High GPU temperature',
         troubleshooting: [
-            "Check if the GPU cooler is properly installed and making good contact with the GPU.",
-            "Ensure that the thermal paste is applied correctly and evenly.",
-            "Try closing any background applications that may be causing the GPU to overheat.",
-            "Check the GPU fan speed and adjust using dedicated software if necessary."
+            {imageSrc: './assets/tbshoot/hzd/300/300-1.png'},
+            {imageSrc: './assets/tbshoot/hzd/300/300-2.png'},
+            {imageSrc: './assets/tbshoot/hzd/300/300-3.png'},
+            {imageSrc: './assets/tbshoot/hzd/300/300-4.png'},
+            {imageSrc: './assets/tbshoot/hzd/300/300-5.png'},        
         ],
     },
 
@@ -137,34 +144,24 @@ const errorCodes = {
     'ERR-502': {
         code: 'ERR-502',
         severity: 'Error',
-        description: 'No Bootable Device Found',
-        troubleshooting: [
-            {imageSrc: './assets/tbshoot/err/501/501-1.png'},
-            {imageSrc: './assets/tbshoot/err/501/501-2.png'},
-            {imageSrc: './assets/tbshoot/err/501/501-3.png'},
-            {imageSrc: './assets/tbshoot/err/501/501-4.png'},
-        ],
-    },
-    'ERR-503': {
-        code: 'ERR-503',
-        severity: 'Error',
         description: 'No OS is installed in the boot device',
         troubleshooting: [
-            {imageSrc: './assets/tbshoot/err/501/501-1.png'},
-            {imageSrc: './assets/tbshoot/err/501/501-2.png'},
-            {imageSrc: './assets/tbshoot/err/501/501-3.png'},
-            {imageSrc: './assets/tbshoot/err/501/501-4.png'},
+            {imageSrc: './assets/tbshoot/err/502/502-1.png'},
+            {imageSrc: './assets/tbshoot/err/502/502-2.png'},
+            {imageSrc: './assets/tbshoot/err/502/502-3.png'},
+            {imageSrc: './assets/tbshoot/err/502/502-4.png'},
         ],
     },
-    'ERR-504':{
-        code: 'ERR-504',
+    'ERR-503':{
+        code: 'ERR-503',
         severity: 'Error',
         description: 'Primary boot device has no OS installed',
         troubleshooting: [
-            {imageSrc: './assets/tbshoot/err/501/501-1.png'},
-            {imageSrc: './assets/tbshoot/err/501/501-2.png'},
-            {imageSrc: './assets/tbshoot/err/501/501-3.png'},
-            {imageSrc: './assets/tbshoot/err/501/501-4.png'},
+            {imageSrc: './assets/tbshoot/err/503/503-1.png'},
+            {imageSrc: './assets/tbshoot/err/503/503-2.png'},
+            {imageSrc: './assets/tbshoot/err/503/503-3.png'},
+            {imageSrc: './assets/tbshoot/err/503/503-4.png'},
+            {imageSrc: './assets/tbshoot/err/503/503-5.png'},
         ],
     },
     'ERR-600': {
@@ -209,105 +206,121 @@ const errorCodes = {
 
     // Critical errors
     'CRT-01': {
-        code: 'CRT-06',
+        code: 'CRT-01',
         severity: 'Critical',
         description: 'PSU failure',
         troubleshooting: [
-            "Test the PSU with a multimeter to check for proper voltage output.",
-            "Inspect the PSU for any visible damage or signs of overheating.",
-            "If the issue persists, consider replacing the PSU."
+            {imageSrc: './assets/tbshoot/crt/1/1-1.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-2.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-3.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-4.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-5.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-6.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-7.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-8.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-9.png'},
         ],
     },
     'CRT-02': {
         code: 'CRT-02',
         severity: 'Critical',
-        description: 'CPU failure',
+        description: 'Motherboard failure',
         troubleshooting: [
-            "Check for any physical damage to the CPU.",
-            "Reseat the CPU and ensure that it is properly installed.",
-            "Test the CPU on another system to confirm hardware failure."
+            {imageSrc: './assets/tbshoot/crt/2/2-1.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-2.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-3.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-4.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-5.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-6.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-7.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-8.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-9.png'},
         ],
+
     },
     'CRT-03': {
         code: 'CRT-03',
         severity: 'Critical',
-        description: 'Motherboard failure',
+        description: 'CPU failure',
         troubleshooting: [
-            "Inspect the motherboard for any visible damage or blown capacitors.",
-            "Test the motherboard with minimal components to isolate the issue.",
-            "If the issue persists, consider replacing the motherboard."
+            {imageSrc: './assets/tbshoot/crt/3/3-1.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-2.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-3.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-4.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-5.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-6.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-7.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-8.png'},
         ],
+
     },
     'CRT-04': {
         code: 'CRT-04',
         severity: 'Critical',
         description: 'RAM failure',
         troubleshooting: [
-            "Test each RAM module individually to identify the faulty module.",
-            "Reseat the RAM modules and ensure they are properly installed.",
-            "If the issue persists, consider replacing the faulty RAM module."
+            {imageSrc: './assets/tbshoot/crt/4/4-1.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-2.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-3.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-4.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-5.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-6.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-7.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-8.png'},
         ],
+
     },
     'CRT-05': {
-        code: 'CRT-08',
+        code: 'CRT-05',
         severity: 'Critical',
         description: 'Boot device failure',
         troubleshooting: [
-            "Check the boot device (e.g., HDD, SSD) for any physical damage.",
-            "Test the boot device on another system to confirm hardware failure.",
-            "If the issue persists, consider replacing the boot device."
+            {imageSrc: './assets/tbshoot/crt/5/5-1.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-2.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-3.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-4.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-5.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-6.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-7.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-8.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-9.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-10.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-11.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-12.png'},
         ],
+
     },
     'CRT-06': {
-        code: 'CRT-05',
+        code: 'CRT-06',
         severity: 'Critical',
         description: 'GPU failure',
         troubleshooting: [
-            "Test the GPU on another system to confirm hardware failure.",
-            "Check for any physical damage or loose connections on the GPU.",
-            "If the issue persists, consider replacing the GPU."
+            {imageSrc: './assets/tbshoot/crt/6/6-1.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-2.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-3.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-4.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-5.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-6.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-7.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-8.png'},
         ],
+
     },
     'CRT-07': {
-        code: 'CRT-06',
-        severity: 'Critical',
-        description: 'PSU failure',
-        troubleshooting: [
-            "Test the PSU with a multimeter to check for proper voltage output.",
-            "Inspect the PSU for any visible damage or signs of overheating.",
-            "If the issue persists, consider replacing the PSU."
-        ],
-    },
-    'CRT-08': {
-        code: 'CRT-08',
-        severity: 'Critical',
-        description: 'Overheating issue',
-        troubleshooting: [
-            "Check for proper airflow and ventilation in the case.",
-            "Ensure that all fans are functioning correctly.",
-            "Consider upgrading the cooling system if necessary."
-        ],
-    },
-    'CRT-09': {
-        code: 'CRT-09',
-        severity: 'Critical',
-        description: 'Boot device failure',
-        troubleshooting: [
-            "Check for proper airflow and ventilation in the case.",
-            "Ensure that all fans are functioning correctly.",
-            "Consider upgrading the cooling system if necessary."
-        ],
-    },
-
-    'CRT-10': {
-        code: 'CRT-10',
+        code: 'CRT-07',
         severity: 'Critical',
         description: 'Operating System corruption',
         troubleshooting: [
-            "Check for proper airflow and ventilation in the case.",
-            "Ensure that all fans are functioning correctly.",
-            "Consider upgrading the cooling system if necessary."
+            {imageSrc: './assets/tbshoot/crt/7/7-1.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-2.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-3.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-4.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-5.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-6.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-7.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-8.png'},
         ],
+
     },
 
     // Error undefined
