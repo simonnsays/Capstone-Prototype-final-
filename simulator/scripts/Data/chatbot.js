@@ -95,7 +95,7 @@ class chatbot{
          if (biosModal) {
             setTimeout(() => {
                 biosModal.showModal();
-                this.bootUpTab.pcUnit.updateBiosDisplay()
+                this.bootUpTab.pcUnit.bios.updateBiosDisplay()
             }, 1800);
         } else {
             console.error("BIOS modal not found!");

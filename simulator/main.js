@@ -10,6 +10,7 @@ import BootUpTab from "./scripts/Tabs/bootUpTab.js"
 import Assistant from "./assistant/assistant.js"
 import wattageCalculator from "./scripts/Data/wattageCalculator.js"
 import chatbot from "./scripts/Data/chatbot.js"
+import bios from "./scripts/Data/bios.js"
 class Main {
     constructor() {
         // Utility Modules
@@ -30,7 +31,8 @@ class Main {
         this.bootUpTab = new BootUpTab(
             this.elementHandler, 
             this.utilityTool, 
-            this.pcUnit, 
+            this.pcUnit,
+            this.bios, 
             this.portsTab, 
             this.drawer)
       
