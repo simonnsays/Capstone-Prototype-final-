@@ -141,11 +141,12 @@ class PCUnit {
             errorCell.classList.add('error-cell')
             errorCell.setAttribute('data-error-action', errorCode)
             errorCell.innerHTML = ` 
-                <div class="error-icon">
-                    <img src="./assets/boot/error_screen/warning.png" alt="error icon">
+                <div class="error-icon-row">
+                    <span class="error-icon">${this.getSeverityIcon(errorData.severity)}</span>
                     <div class="error-details">
-                        <h2>${errorData.description} (${errorCode})</h2> 
-                        <p><strong>Severity:</strong> ${errorData.severity} ${this.getSeverityIcon(errorData.severity)}</p>
+                      <span class="error-title">${errorData.description}</span>
+                      <span class="error-code">${errorCode}</span>
+                      <span class="error-severity">${errorData.severity}</span>
                     </div>
                 </div>
             `;
@@ -242,23 +243,77 @@ class PCUnit {
             carouselContainer.appendChild(arrowRight)
     
             // Add to troubleshooting guide
-            troubleshootingGuide.innerHTML = 
-            `<h3>Troubleshooting Guide</h3>
-            <h4 style="font-size:.7rem">Please refer to the images for reference</h4>
-            `
+            troubleshootingGuide.innerHTML =
+                `<div class="vert-br"></div>
+                <h3>Troubleshooting Guide</h3>
+                <h4>Please refer to the images for reference</h4>
+                `
             troubleshootingGuide.appendChild(carouselContainer)
             
+            // Status message
+            const statusMsg = document.createElement('div')
+            statusMsg.classList.add('troubleshoot-status')
+            statusMsg.style.fontWeight = "500"
+            troubleshootingGuide.appendChild(statusMsg)
+                        
             // Finish button
             const etComplete = document.createElement('button')
             etComplete.classList.add('etComplete')
             etComplete.textContent = "Finish Troubleshooting"
-            etComplete.addEventListener('click', () => {
-                errorCell.classList.add('etask-complete')
-            });
             troubleshootingGuide.appendChild(etComplete);
             errorCell.appendChild(troubleshootingGuide);
+
+            // Initial carousel update
+            updateCarousel();
+    
+            // Map error codes to test functions
+            const errorTest = {
+                'ERR-100': () => this.psuTest(),
+                'ERR-200': () => this.motherboardTest(),
+                'ERR-201': () => this.motherboardTest(),
+                'ERR-202': () => this.motherboardTest(),
+                'ERR-300': () => this.cpuTest(),
+                'ERR-301': () => this.cpuTest(),
+                'ERR-400': () => this.memoryTest(),
+                'ERR-500': () => this.storageDeviceTest(),
+                'ERR-501': () => this.storageDeviceTest(),
+                'ERR-502': () => this.osBootUp(),
+                'ERR-503': () => this.osBootUp(),
+                'ERR-600': () => this.graphicsCardTest(),
+                'ERR-601': () => this.graphicsCardTest(),
+                'ERR-700': () => this.fanAndCoolingTest(),
+                'ERR-701': () => this.fanAndCoolingTest(),
+                'HZD-100': () => this.fanAndCoolingTest(),
+                'HZD-200': () => this.fanAndCoolingTest(),
+                'HZD-201': () => this.fanAndCoolingTest(),
+                'HZD-300': () => this.graphicsCardTest(),
+                'CRT-01': () => this.psuTest(),
+                'CRT-02': () => this.motherboardTest(),
+                'CRT-03': () => this.cpuTest(),
+                'CRT-04': () => this.memoryTest(),
+                'CRT-05': () => this.storageDeviceTest(),
+                'CRT-06': () => this.graphicsCardTest(),
+                'CRT-07': () => this.osBootUp(),
+            };
+
+           // On finish, check if error is resolved
+           etComplete.addEventListener('click', () => {
+            const testFn = errorTest[errorData.code];
+            if (!testFn) {
+                statusMsg.textContent = "Cannot verify fix for this error.";
+                return;
+            }
+            const result = testFn.call(this);
+            if (result === true) {
+                errorCell.classList.add('etask-complete');
+                statusMsg.textContent = "Issue resolved!";
+            } else {
+                statusMsg.textContent = "The issue is not yet fixed. Please check your hardware and try again.";
+            }
+        });
         }
     }
+    
 
     powerOnMonitor(){ // takes everything from displaying the splashscreen to displayingos and shows it inside the div monitorScreen
         this.displaySplashScreen();
@@ -627,7 +682,7 @@ class PCUnit {
             return 'ERR-701'
         }
         // Hazard Error: CPU fan speed low
-        if (this.fanSpeed < 30) {
+        if (this.bios.biosSettings.fanSpeed < 30 || this.bios.fanSpeed < 30) {
             return 'HZD-100' // Fan speed too low
         }
 
@@ -718,7 +773,7 @@ class PCUnit {
             success: true, 
             device: installTarget.component.name,
             deviceType: installTarget.component.size,
-            bootOrder: this.biosSettings.bootOrder
+            bootOrder: this.bios.biosSettings.bootOrder
         };
     }
 

@@ -60,7 +60,7 @@ class Main {
             this.itemInfo)
 
         //Assistant
-        this.assistant = new Assistant(this.elementHandler, this.utilityTool)
+        this.assistant = new Assistant(this,this.elementHandler, this.utilityTool)
 
         // Prevent Canvas Interaction when tabs are open
         window.addEventListener('mousedown', () => this.handleMouseDown())
@@ -113,12 +113,12 @@ class Main {
         this.displayArea.init()
         this.canvas.animate()   
         this.assistant.init() 
-
+        this.assistant.startTutorial() // open assistant modal on start
         // this.bootUpTab.powerBtn.addEventListener('mouseup', () => this.bootUpTab.powerBtnClick(this.bootUpTab.pcUnit.availableUnit));
 
 
         // TEST: BOOT UP
-        this.testBootUp()
+        //this.testBootUp()
         //this.testFanSpeed()
         //this.testTemperature()
         //this.testBootOrder()
@@ -141,11 +141,11 @@ class Main {
 
     testTemperature(){
         //this.bootUpTab.pcUnit.biosSettings.temperatures.cpu = 86
-        this.bootUpTab.pcUnit.biosSettings.gpuSettings.temperatures.current = 95
+        this.bootUpTab.pcUnit.bios.biosSettings.gpuSettings.temperatures.current = 95
         //this.bootUpTab.pcUnit.biosSettings.temperatures.system = 76
     }
     testFanSpeed(){
-        this.bootUpTab.pcUnit.fanSpeed = 10
+        this.bootUpTab.pcUnit.bios.fanSpeed = 10
     }
 
     addBasicComponents() {
@@ -419,4 +419,5 @@ class Main {
 }
 
 const game = new Main()
+window.main = game // make game accessible globally
 game.start()

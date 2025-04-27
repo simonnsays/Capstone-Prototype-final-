@@ -98,7 +98,7 @@ class chatbot{
                 this.bootUpTab.pcUnit.bios.updateBiosDisplay()
             }, 1800);
         } else {
-            console.error("BIOS modal not found!");
+            console.error("BIOS modal not found!"); 
         }
     }
 
@@ -172,6 +172,14 @@ class chatbot{
             return "The ports and wires are essential for connecting components so make sure to connect them properly! To check the ports and wires in the simulator simply click on the ports tab and wires drawer."
         }
 
+        if (query.includes('cpu compatible') || query.includes('motherboard compatible')) {
+            return "CPU and motherboard compatibility depends on the socket type. Make sure your CPU socket matches your motherboard socket (e.g., AM4, LGA1200). You can check compatibility in the component details."
+        }
+        
+        if (query.includes('ram compatible') || query.includes('memory compatible')) {
+            return "RAM compatibility depends on the motherboard's supported memory type (DDR4, DDR5, etc.). Check your motherboard specifications for supported RAM configurations."
+        }
+
         if (query.includes('where does the power supply go') || query.includes('how to install psu')) {
             return `To install PSU or power supply, place it into the canvas from your inventory then drag it into the chassis' designated slot. 
             <br><img src="./assets/tbshoot/err/100/100-2.png" alt="PSU Installation" class="tutorial-image">`
@@ -237,6 +245,13 @@ class chatbot{
             return "Check if the fan is connected properly and if the power supply is turned on."
         }
 
+        if (query.includes('boot loop') || query.includes('keeps restarting')) {
+            return "Boot loops can be caused by RAM issues, overheating, or power problems. Try reseating your RAM, checking all power connections, and ensuring your CPU cooler is properly installed."
+        }
+
+        if (query.includes('blue screen') || query.includes('bsod')) {
+            return "Blue screens are often caused by hardware issues, driver problems, or overheating. Check your system temperatures, update drivers, and run memory diagnostics to troubleshoot."
+        }
         // Gameplay & Assistant Questions
         if (query.includes('play') || query.includes('start') || query.includes('begin')) {
             return "Start the simulation by simply buying components from the shop and placing them in the canvas. Then try to boot up the system!"
