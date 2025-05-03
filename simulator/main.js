@@ -106,7 +106,7 @@ class Main {
 
 
         // TEST: BOOT UP
-        // this.testBootUp()
+        this.testBootUp()
 
         // TEST: MISSING COMPONENTS
         // this.testMissingComponents()
@@ -118,7 +118,7 @@ class Main {
         // this.assistant.openModal()
 
         // TEST: ADD BASIC COMPONENT
-        this.addBasicComponents()
+        // this.addBasicComponents()
     }
 
     addBasicComponents() {

@@ -62,6 +62,10 @@ p {
   transform: translate(-50%, -50%);
 }
 
+.hide-display {
+  display: none;
+}
+
 .float {
   animation: float ease-in-out infinite 2.5s;
 }
@@ -116,7 +120,7 @@ p {
   gap: 50px;
 }
 
-.scene {
+#page1 .scene {
   perspective: 1500px;
   width: 380px;
   height: 380px;
@@ -136,6 +140,15 @@ p {
   /* transform: rotateX(25deg) rotateY(275deg) rotateZ(378deg); */
 
   /* animation: rotate 5s infinite linear; */
+}
+
+.chip .face {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  background:  var(--pastel-yellow);
+  border-radius: 10px ;
+  transform-style: preserve-3d;
 }
 
 .pit {
@@ -216,25 +229,19 @@ p {
   left: -100%;
   background-color: rgba(0, 0, 0, .7);
   transition: all .2s ease-in;
+  border-radius: 20px;
 }
 
-.face {
-  position: absolute;
-  width: 380px;
-  height: 380px;
-  background:  var(--pastel-yellow);
-  border-radius: 10px ;
-  transform-style: preserve-3d;
-}
 
-.front {
+
+.chip .front {
   transform: translateZ(10px);
   /* background-color: pink;
   opacity: .7; */
   border-radius: 5px
 }
 
-.back {
+.chip .back {
   transform: rotateX(180deg) translateZ(10px);
   box-shadow: -14px -12px 40px #000;
 
@@ -242,7 +249,7 @@ p {
   opacity: .7; */
 }
 
-.left {
+.chip .left {
   width: 20px;
   height: calc(100% - 3px);
   transform: rotateY(-90deg) translateZ(10px);
@@ -253,7 +260,7 @@ p {
   border-radius: 5px;
 }
 
-.right {
+.chip .right {
   width: 20px;
   transform: rotateY(90deg) translateZ(10px);
   right: 0px;
@@ -263,7 +270,7 @@ p {
   opacity: .7; */
 }
 
-.top {
+.chip .top {
   height: 25px;
   width: calc(100% - 4px);
   transform: rotateX(90deg) translateZ(10px);
@@ -273,7 +280,7 @@ p {
   /* background-color: orange; */
 }
 
-.bottom {
+.chip .bottom {
   height: 20px;
   width: calc(100% + 2px);
   transform: rotateX(-90deg) translateZ(10px);
@@ -305,17 +312,50 @@ p {
   position: relative;
   /* left: -6px; */
   top: -348px;
-  /* top: 83px; */
+  /* top: 59px; */
   transition: all 2s ease-in-out;
 }
 
 /********************* PAGE 3 **************************/
 
-#page3 .assistant-container {
-  margin: 50px 0 100px 0;
-  visibility: hidden;
-  transition: all 1s ease-in;
+.grid-wrapper {
+  display: grid;
+  row-gap: 100px;
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: 2fr 1fr;
+  place-items: center;
+
+  grid-template-areas: 
+    "asst asst"
+    "dialogue dialogue";
+
+  /* transform: translateX(-420px); */
+  transition: all 2s ease-in;
+  /* animation:  */
 }
+
+.grid-phase1 {
+  grid-template-areas: 
+    "asst scene"
+    "dialogue dialogue";
+}
+
+#page3 .assistant-container {
+  transition: all 1s ease-in-out;
+  grid-area: asst;
+  animation: look-right 2s forwards;
+  transform-origin: bottom;
+
+  /* background-color: pink; */
+}
+
+@keyframes look-right {
+  0% {transform: translateZ(20px)}
+  20% {transform: rotateY(-40deg)  translateZ(20px);}
+  70% {transform: rotateY(-40deg)  translateZ(20px);}
+  100% {transform: rotateY(0) rotateX(0) translateZ(20px);}
+}
+
 #page3 .assistant {
   visibility: hidden;
 }
@@ -335,7 +375,109 @@ p {
   height: 300px;
 } 
 
+#page3 .scene {
+  grid-area: scene;
+  width: 350px;
+  height: 350px;
+  position: relative;
+  top: 50px;
+  perspective: 3000px;
+  display: none;
+
+  /* background-color: lightcoral; */
+  /* overflow: hidden; */
+  /* animation: carousel-appear 2s forwards ease-in; */
+}
+
+@keyframes carousel-appear {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.carousel {
+  height: 350px;
+  width: 350px;
+  /* background-color: blue; */
+  position: relative;
+  right: 30px;
+  /* overflow: hidden; */
+  transform-style: preserve-3d;
+  transition: all .2s ease-out ;
+}
+
+.carousel .face {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  display: grid;
+  place-items: center;
+  transition: all .3s ease-in, opacity .3s ease-in-out;
+  transform-style: preserve-3d;
+} 
+
+.carousel .face img {
+  /* height: 300px; */
+  width: 230px;
+  /* backface-visibility: hidden; */
+  transition: all .3s ease-in-out;
+}
+
+.carousel .face p {
+  position: absolute;
+  bottom: -10px;
+}
+
+.ch {
+  /* background-color: lightseagreen; */
+  transform: translateZ(362px);
+  /* opacity: .7; */
+}
+
+.mb {
+  /* background-color: pink; */
+  transform: rotateY(45deg) translateZ(362px);
+  /* opacity: .7; */
+}
+
+.cp {
+  /* background-color: blue; */
+  transform: rotateY(90deg) translateZ(362px);
+  /* opacity: .7; */
+}
+
+.cl {
+  /* background-color: orange; */
+  transform: rotateY(135deg) translateZ(362px);
+  /* opacity: .7; */
+}
+
+.rm {
+  /* background-color: purple; */
+  transform: rotateY(180deg) translateZ(362px);
+  /* opacity: .7; */
+}
+
+.st {
+  /* background-color: yellow; */
+  transform: rotateY(225deg) translateZ(362px);
+  /* opacity: .7; */
+}
+
+.gp {
+  /* background-color: green; */
+  transform: rotateY(270deg) translateZ(362px);
+  /* opacity: .7; */
+}
+
+.ps {
+  /* background-color: lavender; */
+  transform: rotateY(315deg) translateZ(362px);
+  /* opacity: .7; */
+}
+
 .dialogue-box {
+  grid-area: dialogue;
+  /* background-color: lightskyblue; */
   width: 1400px;
   height: 180px; 
   background-color: var(--pastel-yellow);
@@ -346,8 +488,9 @@ p {
   position: relative;
   display: flex;
   cursor: pointer;
-  opacity: 0;
   transition: all .2s ease-in-out;
+  
+  opacity: 0;
 }
 
 .dialogue-text {
@@ -414,6 +557,11 @@ p {
 
 
 /*vvvvvvvvvv KEYFRAMES vvvvvvvvvvv*/
+
+@keyframes slide-left {
+  0% {transform: none}
+  100% {transform: translateX(-420px)}
+}
 
 @keyframes shake {
   0% {transform: rotateY(0deg) translateZ(8px);}
