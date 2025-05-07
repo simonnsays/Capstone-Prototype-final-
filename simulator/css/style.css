@@ -1968,7 +1968,143 @@ input[type=checkbox] {
 .reassure-close:hover {
   color: #d32f2f;
 }
+.toast-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #fff;
+  border-left: 4px solid #4CAF50;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 16px;
+  border-radius: 8px;
+  max-width: 320px;
+  z-index: 9999;
+  animation: slideIn 0.3s ease-out;
+}
 
+.toast-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.toast-title {
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+.toast-content {
+  font-size: 14px;
+  color: #333;
+}
+
+.toast-specs {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+  font-size: 13px;
+  color: #666;
+}
+
+.setup-wizard {
+  border: none;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 800px;
+  width: 90%;
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.wizard-steps {
+  margin: 32px 0;
+}
+
+.build-option:hover {
+  transform: translateY(-2px);
+}
+
+.build-option.selected {
+  border-color: #000000;
+  background: #E8F5E9;
+}
+
+.build-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.build-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.compatibility-indicator {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.compatibility-indicator.compatible {
+  background: #4CAF50;
+  color: white;
+}
+
+.compatibility-indicator.incompatible {
+  background: #F44336;
+  color: white;
+}
+
+.incompatible {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 0.5px;
+  right: 0.5px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  z-index: 1000;
+}
+
+.remove-btn:hover {
+  scale: 1.1;
+}
+
+@keyframes slideIn {
+  from {
+      transform: translateX(100%);
+      opacity: 0;
+  }
+  to {
+      transform: translateX(0);
+      opacity: 1;
+  }
+}
 @keyframes reassureFadeIn {
   from { opacity: 0; transform: translate(-50%, -75px);}
   to   { opacity: 1; transform: translate(-50%, 0);}

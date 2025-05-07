@@ -80,12 +80,47 @@
     </style>
 </head>
 <body>
-    <!-- <div class="glowing-container">
-        <div class="blinking-element">Loading...</div>
-    </div> -->
+
 
     <!-- GAME CONTAINER -->
     <div class="game-container">
+
+        <dialog id="setupWizard" class="setup-wizard">
+            <div class="wizard-content">
+                <div class="wizard-header">
+                    <h2>Welcome to PC Builder</h2>
+                    <p>Let's customize your building experience</p>
+                </div>
+                
+                <div class="wizard-steps">
+                    <div class="step" data-step="1">
+                        <h3>Choose Your Build Type</h3>
+                        <div class="build-options">
+                            <button class="build-option" data-type="gaming">
+                                <span class="icon">🎮</span>
+                                <span class="label">Gaming</span>
+                            </button>
+                            <button class="build-option" data-type="office">
+                                <span class="icon">💼</span>
+                                <span class="label">Office</span>
+                            </button>
+                            <button class="build-option" data-type="casual">
+                                <span class="icon">🏠</span>
+                                <span class="label">Casual</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional wizard steps -->
+                </div>
+        
+                <div class="wizard-controls">
+                    <button id="prevStep" disabled>Previous</button>
+                    <button id="nextStep">Next</button>
+                </div>
+            </div>
+        </dialog>
+
         <div id="wattageDisplay" class="wattC">Total Watts: 0W</div>
         <div class="button-wrapper">
             <button class="button" id="muneBtn" data-type="menu" data-active="false"></button>

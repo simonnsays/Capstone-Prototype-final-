@@ -58,17 +58,54 @@ class Inventory {
 
     // Create HTML Element for Each Item in Inventory
     createItemElements(items, container) {
+        container.innerHTML = '' // Clear existing items
         items.forEach(item => {
             const imageSource = item.images.find(image => image.side == item.defaultSource).imageSrc
             const element = this.utilityTool.makeItemElement(item, imageSource) 
 
-            // associate item with the html element 
-            element.component = item
+            // Associate the item with the element.
+            element.component = item;
+
+            // Create a remove marker ("X") with absolute positioning.
+            const removeBtn = document.createElement('div');
+            removeBtn.className = 'remove-btn';
+            removeBtn.textContent = '↩'; // palitan na lang pag di trip yung emoji hahaha
+
+            // Bind the click event listener to remove this component from the inventory.
+            removeBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent placement behavior.
+                const index = this.items.indexOf(item);
+                if (index > -1) { // check index if it exists
+                    this.items.splice(index, 1); // Remove the item from the inventory array
+                }
+                // Re-render the inventory display.
+                this.update();
+                // Show notif of item deletion
+                this.showItemDeletionNotification(item);
+            });
+            // append remove button to element
+            element.appendChild(removeBtn);
 
             container.appendChild(element)
         })
     }
 
+    showItemDeletionNotification(item) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.innerHTML = `
+            <div class="toast-header">
+                <span class="toast-title">Item Removed</span>
+                <button class="close-toast">×</button>
+            </div>
+            <div class="toast-content">
+                Removed ${item.name} from inventory
+            </div>
+        `;
+
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
     // Add Component to Shelf
     addToShelf(newComponent, shelf) {
         let added = this.displayArea.fillShelf(newComponent, shelf)

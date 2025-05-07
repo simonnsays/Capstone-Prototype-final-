@@ -87,6 +87,14 @@ class Main {
             this.inventory,
             this.shop
         )
+
+        // setup wizard
+        this.setupWizard = document.getElementById('setupWizard');
+        this.setupWizardState = {
+            buildType: null,
+            //budget: null, // optional if pricing of components is added
+            preferences: {}
+        };
   
     }
 
@@ -112,8 +120,7 @@ class Main {
         this.shop.init() 
         this.displayArea.init()
         this.canvas.animate()   
-        this.assistant.init() 
-        this.assistant.startTutorial() // open assistant modal on start
+        this.showSetupWizard()
         // this.bootUpTab.powerBtn.addEventListener('mouseup', () => this.bootUpTab.powerBtnClick(this.bootUpTab.pcUnit.availableUnit));
 
 
@@ -134,7 +141,32 @@ class Main {
         // TEST: ADD BASIC COMPONENT
         //this.addBasicComponents()
     }
+    showSetupWizard() {
+        if (!this.setupWizard) return;
+        
+        const buildOptions = this.setupWizard.querySelectorAll('.build-option');
+        const nextBtn = document.getElementById('nextStep');
+        const prevBtn = document.getElementById('prevStep');
+        
+        this.setupWizard.showModal();
+        buildOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                buildOptions.forEach(option => option.classList.remove('selected')); 
+                e.currentTarget.classList.add('selected');
+                this.setupWizardState.buildType = e.currentTarget.dataset.type;
+                nextBtn.disabled = false;
+            });
+        });
 
+        nextBtn.addEventListener('click', () => {
+            if (this.setupWizardState.buildType) {
+                this.setupWizard.close();
+                this.shop.setCompatibilityFilters(this.setupWizardState.buildType);
+               //this.assistant.init();
+               //this.assistant.startTutorial();
+            }
+        });
+    }
     testBootOrder(){
         this.bootUpTab.pcUnit.componentsStatus.storage.osInstalled === false
     }

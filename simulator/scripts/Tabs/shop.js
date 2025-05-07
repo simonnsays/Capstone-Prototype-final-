@@ -1,5 +1,5 @@
 import Component from "../Data/component.js"
-import components from "../Data/data.js"
+import components from "../Data/data1.js"
 import SearchBar from "../Utility/searchBar.js"
 
 class Shop{
@@ -38,6 +38,18 @@ class Shop{
         window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
 
         this.isActive = false
+
+        // Compatibility tracking
+        this.compatibilityFilters = {
+            buildType: null,
+            motherboard: null,
+            cpu: null,
+            ram: null,
+            gpu: null
+        };
+
+        // notification system
+        this.notifications = [];
     }
 
     // Open Shop Tab
@@ -94,7 +106,201 @@ class Shop{
             element.component = item
 
             container.appendChild(element)
+            this.updateCompatibilityDisplay()
         })
+    }
+
+    setCompatibilityFilters(buildType) {
+        this.compatibilityFilters.buildType = buildType;
+        this.updateCompatibilityDisplay();
+    }
+    
+    showPurchaseNotification(component) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.innerHTML = `
+            <div class="toast-header">
+                <span class="toast-title">Item Purchased</span>
+                <button class="close-toast">×</button>
+            </div>
+            <div class="toast-content">
+                Added ${component.name} to inventory
+            </div>
+            <div class="toast-specs">
+                ${Object.entries(component.specs)
+                    .slice(0, 2)
+                    .map(([key, value]) => `${key}: ${value}`)
+                    .join(' • ')}
+            </div>
+        `;
+
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    categorizeCPU(component) {
+        const tier = {
+            gaming: ['i9', 'i7', 'Ryzen 9', 'Ryzen 7', '7900X', '7800X'],
+            office: ['i5', 'Ryzen 5'],
+            casual: ['i3', 'Ryzen 3']
+        };
+
+        for (const [category, keywords] of Object.entries(tier)) {
+            if (keywords.some(keyword => component.name.toLowerCase().includes(keyword.toLowerCase()))) {
+                return category;
+            }
+        }
+        return 'casual'; 
+    }
+
+    categorizeGPU(component) {
+        const tier = {
+            gaming: ['RTX 40', 'RTX 30', 'RX 79', 'RX 76','RX 67'],
+            office: ['RTX 20', 'GTX 16', 'RX 65'],
+            casual: ['GTX 10', 'GTX 1650', 'RX 53']
+        };
+
+        for (const [category, keywords] of Object.entries(tier)) {
+            if (keywords.some(keyword => component.name.toLowerCase().includes(keyword.toLowerCase()))) {
+                return category;
+            }   
+        }
+        return 'casual'; 
+    }
+
+
+    checkCompatibility(component) {
+        if (!component) {
+            console.error("Error: Invalid component");
+            return false;
+        }
+
+        const buildType = this.compatibilityFilters.buildType;
+        if (!buildType) return true;
+
+        switch(component.type) {
+            case 'chassis': return true;
+    
+            case 'cpu':
+                const cpuCategory = this.categorizeCPU(component);
+                // Gaming CPUs work for all builds, office CPUs work for office/casual builds
+                if (buildType === 'gaming' && cpuCategory !== 'gaming') return false;
+                if (buildType === 'office' && cpuCategory === 'casual') return false;
+                
+                //  Socket compatibility checking
+                if (this.compatibilityFilters.motherboard) {
+                    const moboSocket = this.compatibilityFilters.motherboard.specs.cpuslot;
+                    return component.specs.socket === moboSocket;
+                }
+                return true;
+
+            case 'gpu':
+                // Specific GPU compatibility checking for gaming,office and casual
+                if (component.type === 'gpu' && this.compatibilityFilters.buildType === 'gaming') {
+                    const gpuCategory = this.categorizeGPU(component);
+                    if (gpuCategory !== 'gaming') return false;
+                }
+                if (component.type === 'gpu' && this.compatibilityFilters.buildType === 'office') {
+                    const gpuCategory = this.categorizeGPU(component);
+                    if (gpuCategory !== 'office') return false;
+                }
+                if (component.type === 'gpu' && this.compatibilityFilters.buildType === 'casual') {
+                    const gpuCategory = this.categorizeGPU(component);
+                    if (gpuCategory !== 'casual') return false;
+                }
+                return true;
+
+            case 'ram':
+                // Check motherboard compatibility
+                if (this.compatibilityFilters.motherboard) {
+                    const ramSlots = this.compatibilityFilters.motherboard.slots.find(
+                        slot => slot.type === 'ram'
+                    );
+                    return ramSlots?.supports.includes(component.size);
+                }
+                return true;
+
+            case 'motherboard':
+                // Check CPU socket compatibility
+                if (this.compatibilityFilters.cpu) {
+                    const cpuSocket = this.compatibilityFilters.cpu.specs.socket;
+                    return component.specs.cpuslot === cpuSocket;
+                }
+                return true;
+    
+            case 'psu':
+                // Check if PSU wattage is sufficient for all components
+                const totalWatts = Object.values(this.compatibilityFilters)
+                .reduce((sum, comp) => { 
+                    // Get component watts, checking both watts and specs.wattage
+                    if (component.type !== 'psu') {// Skip PSU itself
+                        const watts = comp?.watts || comp?.specs?.wattage || 0;
+                        return sum + parseInt(watts);
+                    } 
+                    return sum;
+                }, 0);
+
+                // Get PSU wattage, checking both specs.wattage and watts
+                const psuWatts = parseInt(component.specs?.wattage) || parseInt(component.watts) || 0;
+                
+                if (psuWatts < totalWatts) {
+                    return false;
+                }
+    
+                return true;
+
+            case 'cooling': return true; 
+
+            case 'storage':
+                // Check if chassis has slots for the storage component
+                if (this.compatibilityFilters.chassis) {
+                    // if component is m.2 then pass as true since it is for a motherboard slot
+                    if(component.size === 'm.2'){return true}
+                    // Check if chassis has slots that support the component size
+                    return this.compatibilityFilters.chassis.slots.some(slot => 
+                        slot.type === 'storage' && 
+                        slot.supports.includes(component.size)
+                    );
+                }
+                // Check storage interface compatibility
+                if (this.compatibilityFilters.motherboard) {
+                    if (component.size === 'm.2') {
+                        // Check if motherboard has M.2 slots
+                        return this.compatibilityFilters.motherboard.slots.some(
+                            slot => slot.type === 'storage' && slot.supports.includes('m.2')
+                        );
+                    } else if (component.specs.interface === 'SATA') {
+                        // Check if motherboard has SATA ports
+                        return this.compatibilityFilters.motherboard.ports.some(
+                            port => port.type.includes('sata')
+                        );
+                    }
+                }
+                return true;
+
+            default:
+                console.warn(`Unknown component type: ${component.type}`);
+                return true;
+        }
+    }
+
+
+    updateCompatibilityDisplay() {
+        const items = this.itemsContainer.children;
+        Array.from(items).forEach(item => {
+            const isCompatible = this.checkCompatibility(item.component);
+            item.classList.toggle('incompatible', !isCompatible);
+            
+            // Add compatibility indicator
+            let indicator = item.querySelector('.compatibility-indicator');
+            if (!indicator) {
+                indicator = document.createElement('div');
+                indicator.className = 'compatibility-indicator';
+                item.appendChild(indicator);
+            }
+            indicator.innerHTML = isCompatible ? '✓' : '✗';
+            indicator.className = `compatibility-indicator ${isCompatible ? 'compatible' : 'incompatible'}`;
+        });
     }
     
     // Buy Component
@@ -125,8 +331,17 @@ class Shop{
     
         this.inventory.items.push(componentClone)
 
-         // update inventory container
-         this.inventory.update()
+        // update inventory container
+        this.inventory.update()
+
+        // Update compatibility filters when component is bought
+        this.compatibilityFilters[component.type] = component;
+        
+        // Update compatibility display
+        this.updateCompatibilityDisplay();
+
+        // Show purchase notification
+        this.showPurchaseNotification(component);
     }
 
     // Search Input Handling
@@ -238,8 +453,12 @@ class Shop{
         }
 
         // apply category filter
-        if(this.selectedCategory.length !== 0) {
-
+        if (this.setCompatibilityFilters.buildType) {
+            // Filter items based on buildCategories defined for each component.
+            this.filteredItems = this.searchResults.filter(item => 
+                item.buildCategories && item.buildCategories.includes(this.compatibilityFilters.buildType.toLowerCase()),
+            );
+        } else if(this.selectedCategory.length !== 0) {
             this.filteredItems = this.searchResults.filter(
                 item => item.type.toLowerCase() === this.selectedCategory.toLowerCase())
         } else {
