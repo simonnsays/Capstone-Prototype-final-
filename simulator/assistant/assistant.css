@@ -663,6 +663,10 @@ p {
 
 #errorsContainer {
     display: none;
+    gap: 50px;
+    padding: 0 15px;
+    overflow: auto;
+    outline: none;
 }
 
 .task-cell {

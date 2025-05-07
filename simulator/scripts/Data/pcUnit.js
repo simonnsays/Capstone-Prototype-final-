@@ -248,7 +248,22 @@ class PCUnit {
                 <h3>Troubleshooting Guide</h3>
                 <h4>Please refer to the images for reference</h4>
                 `
+                 // Add troubleshooting steps
+            if (Array.isArray(errorData.steps)) {
+                const stepsList = document.createElement('ol'); // Use <ol> for step-by-step instructions
+                stepsList.classList.add('troubleshooting-steps');
+            
+                errorData.steps.forEach(step => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = step;
+                    stepsList.appendChild(listItem);
+                });
+            
+                // 🔽 Insert step list above the carousel
+                troubleshootingGuide.appendChild(stepsList);
+            }
             troubleshootingGuide.appendChild(carouselContainer)
+           
             
             // Status message
             const statusMsg = document.createElement('div')
@@ -307,6 +322,10 @@ class PCUnit {
             if (result === true) {
                 errorCell.classList.add('etask-complete');
                 statusMsg.textContent = "Issue resolved!";
+                // remove the error cell after 3 seconds
+                setTimeout(() => {
+                    errorCell.remove();
+                }, 3000);
             } else {
                 statusMsg.textContent = "The issue is not yet fixed. Please check your hardware and try again.";
             }
