@@ -96,6 +96,10 @@ class Main {
     }
 
     start() {
+        const gameContainer = document.querySelector('.game-container')
+        gameContainer.style.visibility = "hidden"
+        const labelWrapper = document.querySelector('.rotate-wrapper')
+        labelWrapper.style.visibility = "hidden"
         // main code here
         this.shop.init() 
         this.displayArea.init()
@@ -118,7 +122,7 @@ class Main {
         // this.assistant.openModal()
 
         // TEST: ADD BASIC COMPONENT
-        this.addBasicComponents()
+        // this.addBasicComponents()
     }
 
     addBasicComponents() {
@@ -345,7 +349,6 @@ class Main {
         this.displayArea.table.component.slots.find(slot => slot.type === 'psu').component = null
         this.displayArea.update()
     }
-
 
     /////////////////// TEST: TRASH BIN
     testTrashBin() {
