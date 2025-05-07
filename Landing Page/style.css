@@ -28,11 +28,7 @@ html, body {
   margin: 0px;
   padding: 5;
   z-index: 0;
-  /* overflow-x: hidden; */
-  /* overflow-y: hidden; */
-  
   background: linear-gradient(90deg, var(--light-lime), var(--teal));  
-  /* background: var(--teal);   */
 }
 
 p {
@@ -79,16 +75,6 @@ p {
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
-  /* border: 2px solid black; */
-}
-.section::after { /*not needed*/
-  content: "";
-  height: 100%;
-  /* border: 1px solid black; */
-  position: absolute;
-  left: 50%;
-  top:0;
-  transform: translateX(-50%);
 }
 .content-center {
   display: flex;
@@ -137,9 +123,6 @@ p {
   height: 380px;
   transform-style: preserve-3d;
   transform: rotateX(30deg) rotateY(23deg) rotateZ(339deg);
-  /* transform: rotateX(25deg) rotateY(275deg) rotateZ(378deg); */
-
-  /* animation: rotate 5s infinite linear; */
 }
 
 .chip .face {
@@ -173,20 +156,15 @@ p {
 
 .flushed {
   left: calc(50% - 159px);
-  top: calc(50% - 141px);
-  /* transform: translate(-53%, -47%) */
-  /* display: flex; */  
+  top: calc(50% - 141px); 
 }
 
 .flash {
   width: 140px;
   height: 140px;
-  /* background-color: rgba(255, 255, 255, .4); */
   position: absolute;
   left: 80px;
   top: 80px;
-
-  /* animation: flash 4s forwards  */
 }
 
 .start-button {
@@ -195,9 +173,6 @@ p {
   background-color: var(--pastel-yellow);
   margin-top: 70px;
   margin-left: 280px;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   border-radius: 60px;
   box-shadow: 0 10px 40px -10px black;
   text-align: center;
@@ -232,21 +207,14 @@ p {
   border-radius: 20px;
 }
 
-
-
 .chip .front {
   transform: translateZ(10px);
-  /* background-color: pink;
-  opacity: .7; */
   border-radius: 5px
 }
 
 .chip .back {
   transform: rotateX(180deg) translateZ(10px);
   box-shadow: -14px -12px 40px #000;
-
-  /* background-color: yellow;
-  opacity: .7; */
 }
 
 .chip .left {
@@ -255,8 +223,6 @@ p {
   transform: rotateY(-90deg) translateZ(10px);
   left: 0px;
   top: 3px;
-  /* opacity: .7;
-  background-color: red; */
   border-radius: 5px;
 }
 
@@ -266,8 +232,6 @@ p {
   right: 0px;
   bottom: 0px;
   border-radius:5px ;
-  /* background-color: rebeccapurple;
-  opacity: .7; */
 }
 
 .chip .top {
@@ -277,7 +241,6 @@ p {
   top: -1px;
   left: 1px;
   border-radius: 5px;
-  /* background-color: orange; */
 }
 
 .chip .bottom {
@@ -286,8 +249,6 @@ p {
   transform: rotateX(-90deg) translateZ(10px);
   bottom: 0;
   left: -2.5px;
-
-  /* background-color: olive; */
 } 
 
 .title-card {
@@ -300,7 +261,6 @@ p {
 /********************* PAGE 2  **************************/
 #page2 {
   opacity: 1;
-  /* perspective: 1000px; */
 }
 
 #page2 .wrapper {
@@ -310,9 +270,7 @@ p {
 
 #page2 .assistant-container {
   position: relative;
-  /* left: -6px; */
   top: -348px;
-  /* top: 59px; */
   transition: all 2s ease-in-out;
 }
 
@@ -328,10 +286,7 @@ p {
   grid-template-areas: 
     "asst asst"
     "dialogue dialogue";
-
-  /* transform: translateX(-420px); */
   transition: all 2s ease-in;
-  /* animation:  */
 }
 
 .grid-phase1 {
@@ -345,19 +300,31 @@ p {
   grid-area: asst;
   animation: look-right 2s forwards;
   transform-origin: bottom;
-
-  /* background-color: pink; */
-}
-
-@keyframes look-right {
-  0% {transform: translateZ(20px)}
-  20% {transform: rotateY(-40deg)  translateZ(20px);}
-  70% {transform: rotateY(-40deg)  translateZ(20px);}
-  100% {transform: rotateY(0) rotateX(0) translateZ(20px);}
 }
 
 #page3 .assistant {
   visibility: hidden;
+  
+  transition: all .2s ease-in-out;
+
+}
+
+#page3 .ver2 {
+  position: fixed;
+  bottom: 35px;
+  left: 50px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 10px;
+  animation: shrink 2s forwards;
+}
+
+#page3 .assistant .asst-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
 }
 
 .assistant {
@@ -383,24 +350,13 @@ p {
   top: 50px;
   perspective: 3000px;
   display: none;
-
-  /* background-color: lightcoral; */
-  /* overflow: hidden; */
-  /* animation: carousel-appear 2s forwards ease-in; */
-}
-
-@keyframes carousel-appear {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
 }
 
 .carousel {
   height: 350px;
   width: 350px;
-  /* background-color: blue; */
   position: relative;
   right: 30px;
-  /* overflow: hidden; */
   transform-style: preserve-3d;
   transition: all .2s ease-out ;
 }
@@ -416,9 +372,7 @@ p {
 } 
 
 .carousel .face img {
-  /* height: 300px; */
   width: 230px;
-  /* backface-visibility: hidden; */
   transition: all .3s ease-in-out;
 }
 
@@ -427,57 +381,24 @@ p {
   bottom: -10px;
 }
 
-.ch {
-  /* background-color: lightseagreen; */
-  transform: translateZ(362px);
-  /* opacity: .7; */
-}
+.ch {transform: translateZ(362px);}
 
-.mb {
-  /* background-color: pink; */
-  transform: rotateY(45deg) translateZ(362px);
-  /* opacity: .7; */
-}
+.mb {transform: rotateY(45deg) translateZ(362px);}
 
-.cp {
-  /* background-color: blue; */
-  transform: rotateY(90deg) translateZ(362px);
-  /* opacity: .7; */
-}
+.cp {transform: rotateY(90deg) translateZ(362px);}
 
-.cl {
-  /* background-color: orange; */
-  transform: rotateY(135deg) translateZ(362px);
-  /* opacity: .7; */
-}
+.cl {transform: rotateY(135deg) translateZ(362px);}
 
-.rm {
-  /* background-color: purple; */
-  transform: rotateY(180deg) translateZ(362px);
-  /* opacity: .7; */
-}
+.rm {transform: rotateY(180deg) translateZ(362px);}
 
-.st {
-  /* background-color: yellow; */
-  transform: rotateY(225deg) translateZ(362px);
-  /* opacity: .7; */
-}
+.st {transform: rotateY(225deg) translateZ(362px);}
 
-.gp {
-  /* background-color: green; */
-  transform: rotateY(270deg) translateZ(362px);
-  /* opacity: .7; */
-}
+.gp {transform: rotateY(270deg) translateZ(362px);}
 
-.ps {
-  /* background-color: lavender; */
-  transform: rotateY(315deg) translateZ(362px);
-  /* opacity: .7; */
-}
+.ps {transform: rotateY(315deg) translateZ(362px);}
 
 .dialogue-box {
   grid-area: dialogue;
-  /* background-color: lightskyblue; */
   width: 1400px;
   height: 180px; 
   background-color: var(--pastel-yellow);
@@ -489,8 +410,6 @@ p {
   display: flex;
   cursor: pointer;
   transition: all .2s ease-in-out;
-  
-  opacity: 0;
 }
 
 .dialogue-text {
@@ -501,8 +420,6 @@ p {
   width: 96.5%;
   height: 100%;
   line-height: 2.3rem;
-
-  /* text-align: justify; */
 }
 
 .dialogue-down {
@@ -513,8 +430,6 @@ p {
   height: 30px; 
   animation: float-s ease-in-out infinite 1s;
 }
-
-
 
 /*vvvvvvvvvv COMMON vvvvvvvvvvv*/
 
@@ -546,17 +461,41 @@ p {
 
 #page1 .assistant-container {
   transition: all 1s ease-in-out;
-  /* transform-origin: bottom left; */
-  /* transform: rotateX(25deg) rotateY(275deg) rotateZ(378deg); */
-
-  /* transform:translateY(-150px) translateX(740px) rotateX(326deg) rotateY(308deg) rotateZ(1deg);  */
-  /* animation: popout 2s ease-in forwards; */ 
-  /* animation: shake 4s forwards; */
 }
 
 
 
 /*vvvvvvvvvv KEYFRAMES vvvvvvvvvvv*/
+
+@keyframes shrink {
+  0% {
+    width: 300px;
+    height: 300px;
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    width: 300px;
+    height: 300px;
+    transform: translateX(0) translateY(0);
+    background-color: var(--pastel-yellow);
+    box-shadow: 0 0 10px black;
+    border-radius: 100px;
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+    transform: translateX(-618px) translateY(337px);
+    background-color: var(--pastel-yellow);
+    box-shadow: 0 0 10px black;
+    border-radius: 100px;
+    
+  }
+}
+
+@keyframes carousel-appear {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
 
 @keyframes slide-left {
   0% {transform: none}
@@ -575,14 +514,11 @@ p {
   85% {transform: rotateZ(-3deg) rotateY(3deg) translateZ(8px);}
   90% {transform: rotateZ(3deg) rotateY(-3deg) translateZ(8px);}
   100% {transform: rotateY(0deg) translateZ(0px);}
-
 }
 
 @keyframes popout {
   0% {transform: none;}
   100% {transform: scale(.7) translateX(-200px)  translateZ(900px) rotateX(0deg) rotateY(0deg)  rotateZ(0deg) ;}
-  /* transform: rotateX(30deg) rotateY(23deg) rotateZ(339deg); */
-
 }
 @keyframes popin {
   0% {transform: translateZ(900px) rotateY(-50deg) rotateX(-25deg) rotateZ(27deg);}
@@ -621,11 +557,4 @@ p {
   0% {transform: rotateX(0deg) rotateY(0deg)}
   100% {transform: rotateX(360deg) rotateY(360deg)}
 }
-/* @keyframes rotate {
-  0% {transform: rotateX(0deg)}
-  100% {transform: rotateX(360deg)}
-} */
-/* @keyframes rotate {
-  0% {transform: rotateY(0deg)}
-  100% {transform: rotateY(360deg)}
-} */
+
