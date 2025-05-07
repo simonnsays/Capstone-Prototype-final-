@@ -1,4 +1,4 @@
-const modeButton = document.querySelectorAll('.carousel-item__btn')
+const modeButton = document.querySelectorAll('.start-btn')
 const modePage = document.querySelector('.mode-select-modal')
 const modes = document.querySelectorAll('.mode')
 const overlay = document.querySelector('.overlay')

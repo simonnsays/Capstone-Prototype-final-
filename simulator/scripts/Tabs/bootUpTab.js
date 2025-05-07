@@ -1,6 +1,7 @@
 import components from "../Data/data.js"
 import PCUnit from "../Data/pcUnit.js"
 import errorCodes from "../Data/errorCodes.js"
+import Bios from "../Data/bios.js"
 class BootUpTab {
     constructor(elementHandler, utilityTool) {
         // Utility
@@ -21,7 +22,9 @@ class BootUpTab {
         
         // PC Unit
         this.pcUnit = new PCUnit(this.elements)
-
+        this.bios = new Bios(this.pcUnit, this)
+        this.pcUnit.setBios(this.bios)
+        
         // Events
         this.openBtn.addEventListener('click', () => this.openTab())
         window.addEventListener('mousedown', (e) => this.handleOfBounds(e, this.modal))

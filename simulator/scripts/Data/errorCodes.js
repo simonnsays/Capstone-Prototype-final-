@@ -4,42 +4,74 @@ const errorCodes = {
         code: 'HZD-100',
         severity: 'Hazard',
         description: 'CPU fan speed too low',
-        troubleshooting: [
-             "Check if the CPU fan is spinning properly.",
-             "Ensure that the CPU fan is connected to the correct header on the motherboard.",
-             "Check the BIOS settings for fan speed control and adjust if necessary."
+        steps: [
+            'Power on the system',
+            'Go to the chatbot and type /open bios',
+            'In the BIOS menu, go to Fan Control tab',
+            'From there you can set the CPU and GPU fan to Turbo mode or set a custom fan speed'
         ],
-    },
-    'HZD-101': {
-        code: 'HZD-101',
-        severity: 'Hazard',
-        description: 'Insufficient cooling detected',
         troubleshooting: [
-            "Check if the case fans are spinning properly.",
-            "Ensure that the case fans are connected to the correct headers on the motherboard.",
-            "Ensure that the thermal paste is applied correctly and evenly.",
-            "Check the CPU and GPU temperatures in the BIOS/UEFI."
+            {imageSrc: './assets/tbshoot/hzd/100/100-1.png'},
+            {imageSrc: './assets/tbshoot/hzd/100/100-2.png'},
+            {imageSrc: './assets/tbshoot/hzd/100/100-3.png'},
+            {imageSrc: './assets/tbshoot/hzd/100/100-4.png'},
+            {imageSrc: './assets/tbshoot/hzd/100/100-5.png'},
         ],
     },
     'HZD-200': {
         code: 'HZD-200',
         severity: 'Hazard',
         description: 'High CPU temperature',
+        steps: [
+            'Power on the system',
+            'Go to the chatbot and type /open bios',
+            'In the BIOS menu, go to Fan Control tab and check the CPU fan speed and temperature',
+            'If the CPU temperature is too high, you can set the CPU fan to Turbo mode',
+            'If the CPU fan speed is already set to Turbo mode, you can try to set a custom fan speed to a higher value',
+        ],
         troubleshooting: [
-            "Check if the CPU cooler is properly installed and making good contact with the CPU.",
-            "Ensure that the thermal paste is applied correctly and evenly.",
-            "Check the CPU fan speed and make adjustments in the BIOS/UEFI if necessary."
+            {imageSrc: './assets/tbshoot/hzd/200/200-1.png'},
+            {imageSrc: './assets/tbshoot/hzd/200/200-2.png'},
+            {imageSrc: './assets/tbshoot/hzd/200/200-3.png'},
+            {imageSrc: './assets/tbshoot/hzd/200/200-4.png'},
+            {imageSrc: './assets/tbshoot/hzd/200/200-5.png'},
+        ],
+    },
+    'HZD-201': {
+        code: 'HZD-201',
+        severity: 'Hazard',
+        description: 'High System temperature',
+        steps: [
+            'Power on the system',
+            'Go to the chatbot and type /open bios',
+            'In the BIOS menu, go to Fan Control tab and check the System temperature',
+            'If the System temperature is too high, you can set the CPU fan to Turbo mode or drag the fan speed to a higher value',
+        ],
+        troubleshooting: [
+            {imageSrc: './assets/tbshoot/hzd/201/201-1.png'},
+            {imageSrc: './assets/tbshoot/hzd/201/201-2.png'},
+            {imageSrc: './assets/tbshoot/hzd/201/201-3.png'},
+            {imageSrc: './assets/tbshoot/hzd/201/201-4.png'},
+            {imageSrc: './assets/tbshoot/hzd/201/201-5.png'},
         ],
     },
     'HZD-300': {
         code: 'HZD-300',
         severity: 'Hazard',
         description: 'High GPU temperature',
+        steps: [
+            'Power on the system',
+            'Go to the chatbot and type /open bios',
+            'In the BIOS menu, go to Fan Control tab and check the GPU fan speed and temperature',
+            'If the GPU temperature is too high, you can set the GPU fan to Turbo mode',
+            'If the GPU fan speed is already set to Turbo mode, you can try to set a custom fan speed to a higher value',
+        ],
         troubleshooting: [
-            "Check if the GPU cooler is properly installed and making good contact with the GPU.",
-            "Ensure that the thermal paste is applied correctly and evenly.",
-            "Try closing any background applications that may be causing the GPU to overheat.",
-            "Check the GPU fan speed and adjust using dedicated software if necessary."
+            {imageSrc: './assets/tbshoot/hzd/300/300-1.png'},
+            {imageSrc: './assets/tbshoot/hzd/300/300-2.png'},
+            {imageSrc: './assets/tbshoot/hzd/300/300-3.png'},
+            {imageSrc: './assets/tbshoot/hzd/300/300-4.png'},
+            {imageSrc: './assets/tbshoot/hzd/300/300-5.png'},        
         ],
     },
 
@@ -48,6 +80,12 @@ const errorCodes = {
         code: 'ERR-100',
         severity: 'Error',
         description: 'Missing PSU component',
+        steps: [
+            'Check if you have the PSU component installed',
+            'If not go to the inventory and place it in the canvas',
+            'If there is no PSU in your inventory go to the shop and buy your preferred PSU then place it in the canvas',
+            'If the PSU is already installed, check if the cables drawer have the PSU cables',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/100/100-1.png'},
             {imageSrc: './assets/tbshoot/err/100/100-2.png'},
@@ -58,6 +96,10 @@ const errorCodes = {
         code: 'ERR-200',
         severity: 'Error',
         description: 'Missing Motherboard component',
+        steps: [
+            'Check if you have the Motherboard component installed',
+            'If not go to the shop to buy your preferred motherboard and check your inventory then place it in the canvas',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/200/200-1.png'},
             {imageSrc: './assets/tbshoot/err/200/200-2.png'},
@@ -67,6 +109,11 @@ const errorCodes = {
         code: 'ERR-201',
         severity: 'Error',
         description: 'Missing Front Panel connection',
+        steps: [
+            'Check if you have the Motherboard component installed',
+            'Go to the Ports Tab and check if the Front Panel connection is connected to the motherboard',
+            'If the Front Panel connection is not connected, go to the cables drawer and connect it to the motherboard',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/201/201-1.png'},
             {imageSrc: './assets/tbshoot/err/201/201-2.png'},
@@ -77,6 +124,13 @@ const errorCodes = {
         code: 'ERR-202',
         severity: 'Error',
         description: 'Motherboard not powered',
+        steps: [
+            'Check if you have the Motherboard 24-pin power cable is connected to the motherboard',
+            'If not go to the cables drawer and connect it to the motherboard',
+            'Also check if you have a modular PSU installed remember a modular PSU needs to have the 24-pin cable connected to the PSU',
+            'If you have a modular PSU browse your ports tab and check if the PSU 24-pin port has the 24-pin cable connected',
+            'If not, go to the cables drawer and connect it to the PSU',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/202/202-1.png'},
             {imageSrc: './assets/tbshoot/err/202/202-2.png'},
@@ -87,7 +141,12 @@ const errorCodes = {
     'ERR-300': {
         code: 'ERR-300',
         severity: 'Error',
-        description: 'Missing CPU component',
+        description: 'Missing CPU component', 
+        steps: [
+            'Check if you have the CPU component installed',
+            'If not go to the inventory and place it in the canvas if you have it',
+            'If there is no CPU in your inventory go to the shop and buy your preferred CPU then place it in the canvas',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/300/300-1.png'},
             {imageSrc: './assets/tbshoot/err/300/300-2.png'},
@@ -97,6 +156,13 @@ const errorCodes = {
         code: 'ERR-301',
         severity: 'Error',
         description: 'CPU not powered',
+        steps: [
+            'Check if you have the CPU power cable is connected to the motherboard',
+            'If not go to the cables drawer and connect it to the motherboard',
+            'Also check if you have a modular PSU installed remember a modular PSU needs to have the cable connected to the PSU',
+            'If you have a modular PSU browse your ports tab and check if the PSU CPU port has the cable connected',
+            'If not, go to the cables drawer and connect it to the PSU',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/301/301-1.png'},
             {imageSrc: './assets/tbshoot/err/301/301-2.png'},
@@ -109,6 +175,11 @@ const errorCodes = {
         code: 'ERR-400',
         severity: 'Error',
         description: 'Missing RAM component',
+        steps: [
+            'Check if you have the RAM component installed',
+            'If not go to the inventory and place it in the canvas if you have it',
+            'If there is no RAM in your inventory go to the shop and buy your preferred RAM then place it in the canvas',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/400/400-1.png'},
             {imageSrc: './assets/tbshoot/err/400/400-2.png'},
@@ -118,6 +189,11 @@ const errorCodes = {
         code: 'ERR-500',
         severity: 'Error',
         description: 'Missing storage device',
+        steps: [
+            'Check if you have the Storage component installed',
+            'If not go to the inventory and place it in the canvas if you have it',
+            'If there is no Storage in your inventory go to the shop and buy your preferred Storage component then place it in the canvas',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/500/500-1.png'},
             {imageSrc: './assets/tbshoot/err/500/500-2.png'},
@@ -128,6 +204,12 @@ const errorCodes = {
         code: 'ERR-501',
         severity: 'Error',
         description: 'Storage device is not powered',
+        steps: [
+            'Check if you have the Storage component installed',
+            'If you have the Storage component installed check if the SATA cable is connected to the motherboard',
+            'If you have the SATA cable connected to the motherboard check if the SATA power cable is connected to the PSU',
+            'If you have a modular PSU installed check if both power cables are connected to the PSU and the storage device',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/501/501-1.png'},
             {imageSrc: './assets/tbshoot/err/501/501-2.png'},
@@ -135,10 +217,52 @@ const errorCodes = {
             {imageSrc: './assets/tbshoot/err/501/501-4.png'},
         ],
     },
+    'ERR-502': {
+        code: 'ERR-502',
+        severity: 'Error',
+        description: 'No OS is installed in the boot device',
+        steps: [
+            'Check if you have an Operating System installed in the boot device by going to the BIOS menu',
+            'To access the BIOS menu go to the chatbot and type /open bios',
+            'In the BIOS menu go to the Boot tab and check if you have an Operating System installed in the boot device',
+            'If there is no OS in your storage device simply install an operating system by clicking the Install OS button',
+            'Click the Restart Now to see if the operating system is installed',
+        ],
+        troubleshooting: [
+            {imageSrc: './assets/tbshoot/err/502/502-1.png'},
+            {imageSrc: './assets/tbshoot/err/502/502-2.png'},
+            {imageSrc: './assets/tbshoot/err/502/502-3.png'},
+            {imageSrc: './assets/tbshoot/err/502/502-4.png'},
+        ],
+    },
+    'ERR-503':{
+        code: 'ERR-503',
+        severity: 'Error',
+        description: 'Primary boot device has no OS installed',
+        steps: [
+            'Check if you have an Operating System installed in the boot device by going to the BIOS menu',
+            'To access the BIOS menu go to the chatbot and type /open bios',
+            'In the BIOS menu go to the Boot tab and check if you have an Operating System installed in the boot device',
+            'If there is no OS in your storage device simply install an operating system by clicking the Install OS button',
+            'Click the Restart Now to see if the operating system is installed',
+        ],
+        troubleshooting: [
+            {imageSrc: './assets/tbshoot/err/503/503-1.png'},
+            {imageSrc: './assets/tbshoot/err/503/503-2.png'},
+            {imageSrc: './assets/tbshoot/err/503/503-3.png'},
+            {imageSrc: './assets/tbshoot/err/503/503-4.png'},
+            {imageSrc: './assets/tbshoot/err/503/503-5.png'},
+        ],
+    },
     'ERR-600': {
         code: 'ERR-600',
         severity: 'Error',
         description: 'Missing Graphics Card Unit',
+        steps: [
+            'Check if you have the Graphics Card Unit installed',
+            'If not go to the inventory and place it in the canvas if you have it',
+            'If there is no Graphics Card Unit in your inventory go to the shop and buy your preferred Graphics Card Unit then place it in the canvas',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/600/600-1.png'},
             {imageSrc: './assets/tbshoot/err/600/600-2.png'},
@@ -148,6 +272,11 @@ const errorCodes = {
         code: 'ERR-601',
         severity: 'Error',
         description: 'Graphics Card Unit is not powered',
+        steps: [
+            'Check if you have the Graphics Card Unit installed',
+            'If you have the Graphics Card Unit installed check if the power cable is connected to the Graphics Card Unit',
+            'If you have a modular PSU installed check if both power cables are connected to the PSU and the Graphics Card Unit',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/601/601-1.png'},
             {imageSrc: './assets/tbshoot/err/601/601-2.png'},
@@ -159,6 +288,11 @@ const errorCodes = {
         code: 'ERR-700',
         severity: 'Error',
         description: 'Missing CPU cooler',
+        steps: [
+            'Check if you have the CPU cooler installed',
+            'If not go to the inventory and place it in the canvas if you have it',
+            'If there is no CPU cooler in your inventory go to the shop and buy your preferred CPU cooler then place it in the canvas',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/700/700-1.png'},
             {imageSrc: './assets/tbshoot/err/700/700-2.png'},
@@ -168,6 +302,10 @@ const errorCodes = {
         code: 'ERR-701',
         severity: 'Error',
         description: 'CPU cooler not powered',
+        steps: [
+            'Check if you have the CPU cooler installed',
+            'If you have the CPU cooler installed check if the 3-pin cable is connected to the CPU cooler port in the motherboard',
+        ],
         troubleshooting: [
             {imageSrc: './assets/tbshoot/err/701/701-1.png'},
             {imageSrc: './assets/tbshoot/err/701/701-2.png'},
@@ -179,92 +317,183 @@ const errorCodes = {
     'CRT-01': {
         code: 'CRT-01',
         severity: 'Critical',
-        description: 'BIOS/UEFI corruption',
+        description: 'PSU failure',
+        steps: [
+            'Go to the menu and toggle the mount button to unmount',
+            'Select the PSU to unmount',
+            'A dialog will appear asking if you want to remove the component or return it to the inventory', 
+            'Select the remove option',
+            'Go to the shop again and buy your preferred PSU',
+            'Then after placing it in the canvas, go ahead and install it back in the chassis then proceed to reconnect all the cables to each component installed',
+        ],
         troubleshooting: [
-            "Attempt to reset the BIOS/UEFI to default settings.",
-            "Flash the BIOS/UEFI with the latest firmware version.",
-            "If the issue persists, consider replacing the motherboard."
+            {imageSrc: './assets/tbshoot/crt/1/1-1.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-2.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-3.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-4.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-5.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-6.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-7.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-8.png'},
+            {imageSrc: './assets/tbshoot/crt/1/1-9.png'},
         ],
     },
     'CRT-02': {
         code: 'CRT-02',
         severity: 'Critical',
-        description: 'CPU failure',
-        troubleshooting: [
-            "Check for any physical damage to the CPU.",
-            "Reseat the CPU and ensure that it is properly installed.",
-            "Test the CPU on another system to confirm hardware failure."
+        description: 'Motherboard failure',
+        steps: [
+            'Go to the menu and toggle the mount button to unmount',
+            'Select the Motherboard to unmount',
+            'A dialog will appear asking if you want to remove the component or return it to the inventory', 
+            'Select the remove option',
+            'After removing the faulty motherboard go to the shop again and buy your preferred Motherboard',
+            'Then place the motherboard back in the chassis and reconnect all the cables',
         ],
+        troubleshooting: [
+            {imageSrc: './assets/tbshoot/crt/2/2-1.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-2.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-3.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-4.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-5.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-6.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-7.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-8.png'},
+            {imageSrc: './assets/tbshoot/crt/2/2-9.png'},
+        ],
+
     },
     'CRT-03': {
         code: 'CRT-03',
         severity: 'Critical',
-        description: 'Motherboard failure',
-        troubleshooting: [
-            "Inspect the motherboard for any visible damage or blown capacitors.",
-            "Test the motherboard with minimal components to isolate the issue.",
-            "If the issue persists, consider replacing the motherboard."
+        description: 'CPU failure',
+        steps: [
+            'Go to the menu and toggle the mount button to unmount',
+            'Select the CPU to unmount',
+            'A dialog will appear asking if you want to remove the component or return it to the inventory', 
+            'Select the remove option',
+            'After removing the faulty CPU go to the shop again and buy your preferred CPU',
+            'Then place the CPU back in the motherboard socket',
         ],
+        troubleshooting: [
+            {imageSrc: './assets/tbshoot/crt/3/3-1.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-2.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-3.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-4.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-5.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-6.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-7.png'},
+            {imageSrc: './assets/tbshoot/crt/3/3-8.png'},
+        ],
+
     },
     'CRT-04': {
         code: 'CRT-04',
         severity: 'Critical',
         description: 'RAM failure',
-        troubleshooting: [
-            "Test each RAM module individually to identify the faulty module.",
-            "Reseat the RAM modules and ensure they are properly installed.",
-            "If the issue persists, consider replacing the faulty RAM module."
+        steps: [
+            'Go to the menu and toggle the mount button to unmount',
+            'Select the RAM to unmount',
+            'A dialog will appear asking if you want to remove the component or return it to the inventory', 
+            'Select the remove option',
+            'After removing the faulty RAM go to the shop again and buy your preferred RAM',
+            'Then place the RAM back in the motherboard ram slot',
         ],
+        troubleshooting: [
+            {imageSrc: './assets/tbshoot/crt/4/4-1.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-2.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-3.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-4.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-5.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-6.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-7.png'},
+            {imageSrc: './assets/tbshoot/crt/4/4-8.png'},
+        ],
+
     },
     'CRT-05': {
         code: 'CRT-05',
         severity: 'Critical',
-        description: 'GPU failure',
-        troubleshooting: [
-            "Test the GPU on another system to confirm hardware failure.",
-            "Check for any physical damage or loose connections on the GPU.",
-            "If the issue persists, consider replacing the GPU."
+        description: 'Boot device failure',
+        steps: [
+            'Go to the menu and toggle the mount button to unmount',
+            'Select the Storage device needed to be removed to unmount',
+            'A dialog will appear asking if you want to remove the component or return it to the inventory', 
+            'Select the remove option',
+            'After removing the faulty storage device go to the shop again and buy your preferred storage device',
+            'Then place the storage device back in the chassis and reconnect all the cables',
+            'If you have an m.2 storage device, make sure to place it in the correct m.2 slot',
+            'Proceed to install the operating system after installing the storage device',
+            'To install the operating system go to the chatbot and type /open bios',
+            'In the BIOS menu go to the Boot tab and check if you have an Operating System installed in the boot device',
+            'If there is no OS in your storage device simply install an operating system by clicking the Install OS button',
+            'Click the Restart Now to see if the operating system is installed',
         ],
+        troubleshooting: [
+            {imageSrc: './assets/tbshoot/crt/5/5-1.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-2.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-3.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-4.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-5.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-6.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-7.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-8.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-9.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-10.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-11.png'},
+            {imageSrc: './assets/tbshoot/crt/5/5-12.png'},
+        ],
+
     },
     'CRT-06': {
         code: 'CRT-06',
         severity: 'Critical',
-        description: 'PSU failure',
-        troubleshooting: [
-            "Test the PSU with a multimeter to check for proper voltage output.",
-            "Inspect the PSU for any visible damage or signs of overheating.",
-            "If the issue persists, consider replacing the PSU."
+        description: 'GPU failure',
+        steps: [
+            'Go to the menu and toggle the mount button to unmount',
+            'Select the GPU to unmount',
+            'A dialog will appear asking if you want to remove the component or return it to the inventory', 
+            'Select the remove option',
+            'After removing the faulty GPU go to the shop again and buy your preferred GPU',
+            'Then place the GPU back in the motherboard PCIe slot and reconnect all the cables',
         ],
+        troubleshooting: [
+            {imageSrc: './assets/tbshoot/crt/6/6-1.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-2.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-3.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-4.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-5.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-6.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-7.png'},
+            {imageSrc: './assets/tbshoot/crt/6/6-8.png'},
+        ],
+
     },
     'CRT-07': {
         code: 'CRT-07',
         severity: 'Critical',
-        description: 'Overheating issue',
-        troubleshooting: [
-            "Check for proper airflow and ventilation in the case.",
-            "Ensure that all fans are functioning correctly.",
-            "Consider upgrading the cooling system if necessary."
-        ],
-    },
-    'CRT-08': {
-        code: 'CRT-08',
-        severity: 'Critical',
-        description: 'Boot device failure',
-        troubleshooting: [
-            "Check the boot device (e.g., HDD, SSD) for any physical damage.",
-            "Test the boot device on another system to confirm hardware failure.",
-            "If the issue persists, consider replacing the boot device."
-        ],
-    },
-    'CRT-09': {
-        code: 'CRT-09',
-        severity: 'Critical',
         description: 'Operating System corruption',
-        troubleshooting: [
-            "Attempt to repair the OS using the installation media.",
-            "Reinstall the OS if repair is not possible.",
-            "Consider backing up important data before reinstalling the OS."
+        steps: [
+            'Go to the BIOS menu by typing /open bios in the chatbot',
+            'In the BIOS menu go to the Boot tab and click the delete OS button',
+            'A dialog will appear confirming the deletion of the OS',
+            'Click the restart button to restart the system',
+            'After restarting the system go to the BIOS menu again and click the Install OS button',
+            'A dialog will confirming the successful installation of the OS',
+            'Click the restart button to restart the system',
+            'The system will restart and show OS booting screen',
         ],
+        troubleshooting: [
+            {imageSrc: './assets/tbshoot/crt/7/7-1.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-2.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-3.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-4.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-5.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-6.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-7.png'},
+            {imageSrc: './assets/tbshoot/crt/7/7-8.png'},
+        ],
+
     },
 
     // Error undefined
@@ -272,92 +501,6 @@ const errorCodes = {
         code: 'ERR-100',
         severity: 'Error',
         description: 'UNDEFINED ERROR ',
-    },
-
-// -------------------------------------------------old error codes------------------------------------------------------------------------
-    'ERR-00': {
-        code: 'ERR-00',
-        severity: 'Error',
-        name: 'Missing Component',
-        description: 'A critical component is missing from the system.',
-        troubleshooting: 'Check if all components are properly installed and connected.'
-    },
-    'ERR-01': {
-        code: 'ERR-01',
-        severity: 'Error',
-        name: 'No Boot Device Found',
-        description: 'The system did not detect a boot device.',
-        troubleshooting: 'Check if the boot device is properly connected and configured in BIOS.'
-    },
-    'ERR-02': {
-        code: 'ERR-02',
-        severity: 'Error',
-        name: 'Memory Error',
-        description: 'The system detected a memory error.',
-        troubleshooting: 'Reseat the memory modules and run a memory diagnostic tool.'
-    },
-    'ERR-03': {
-        code: 'ERR-03',
-        severity: 'Hazard',
-        name: 'High Temperatures',
-        description: 'The system is experiencing high temperatures.',
-        troubleshooting: 'Ensure proper ventilation and check if the cooling system is functioning.'
-    },
-    'ERR-04': {
-        code: 'ERR-04',
-        severity: 'Critical',
-        name: 'Hard Drive Failure',
-        description: 'The system detected a hard drive failure.',
-        troubleshooting: 'Run a hard drive diagnostic tool and consider replacing the hard drive.'
-    },
-    'ERR-05': {
-        code: 'ERR-05',
-        severity: 'Critical',
-        name: 'BIOS Corruption',
-        description: 'The BIOS is corrupted.',
-        troubleshooting: 'Reset the BIOS to default settings or reflash the BIOS firmware.'
-    },
-    'ERR-06': {
-        code: 'ERR-06',
-        severity: 'Error',
-        name: 'CPU Overheating',
-        description: 'The CPU is overheating.',
-        troubleshooting: 'Check if the CPU cooler is properly installed and consider replacing the thermal paste.'
-    },
-    'ERR-07': {
-        code: 'ERR-07',
-        severity: 'Error',
-        name: 'Power Supply Failure',
-        description: 'The system detected a power supply failure.',
-        troubleshooting: 'Check if the power supply is properly connected and consider replacing it.'
-    },
-    'ERR-08': {
-        code: 'ERR-08',
-        severity: 'Error',
-        name: 'GPU Failure',
-        description: 'The system has not detected a GPU, resulting in no display.',
-        troubleshooting: 'Check if the GPU is properly connected and consider replacing it.'
-    },
-    'ERR-09': {
-        code: 'ERR-09',
-        severity: 'Hazard',
-        name: 'Power Surge',
-        description: 'The system has detected a power hazard.',
-        troubleshooting: 'Check if the power supply is still working properly by inspecting for possible visible damage then individually test major components like the motherboard, RAM, GPU, and hard drive to identify the damaged part on a known working system; if damage is confirmed, replace the affected components.'
-    },
-    'ERR-10': {
-        code: 'ERR-10',
-        severity: 'Hazard',
-        name: 'Fan Speed Abnormal',
-        description: 'The system detected abnormal fan speeds.',
-        troubleshooting: 'Change the fan speed settings in BIOS or replace the fan if the fan speed is still the same after changing the fan settings in BIOS.'
-    },
-    'ERR-11': {
-        code: 'ERR-11',
-        severity: 'Critical',
-        name: 'Power Failure',
-        description: 'System did not boot due to power failure.',
-        troubleshooting: 'Try to boot the system again and check if the system boots up. If the system does not boot up, check if the power supply is properly connected to an outlet; If the issue persists, check for loose cables inside the computer, examine the power supply unit (PSU) for potential damage, and consider testing the computer to another known working PSU if possible; if the problem is still present, you may need to look into potential hardware failures like a faulty motherboard or failing components within the computer.'
     },
 }
 

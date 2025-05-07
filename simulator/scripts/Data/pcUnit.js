@@ -1,17 +1,17 @@
 import errorCodes from "../Data/errorCodes.js"
 import BootUpTab from "../Tabs/bootUpTab.js"
-
+import Bios from "../Data/bios.js"
 class PCUnit {
     constructor(bootUpElements,assistant) {
         // utilityTool, displayArea, Canvas, portsTab, drawer, assistant
         this.bootUpElements = bootUpElements
         this.assistant = assistant
-
         this.power = 'off'
         this.availableUnit = null
         this.screen = bootUpElements.screen || null
         this.isErrorDisplayed = false; 
         this.timeoutIds = []
+        this.bios = null
         // CHECKLIST:
         // - if components are complete (status)
         // - if components are compatible (compatibility)
@@ -47,7 +47,7 @@ class PCUnit {
 
         this.state = ['off','on']
         this.currentState = this.state[0]
-
+        this.bootStatus = false
         
         this.reportCount = 0;
         this.bootSequence = [
@@ -59,27 +59,24 @@ class PCUnit {
             () => this.storageDeviceTest(),
             () => this.graphicsCardTest(),
             () => this.fanAndCoolingTest(),
-            // () => this.bootDeviceSelection(),
-            // () => this.osBootUp()
+            () => this.bootDeviceSelection(),
+            () => this.osBootUp()
         ]
-
-        // Boot error dialog elements
-        this.bootErrorDialog = document.getElementById('bootErrorDialog');
-        this.errorMessageElement = document.getElementById('errorMessage');
-        this.troubleshootBtn = document.getElementById('troubleshootBtn');
-        this.closeErrorDialogBtn = document.getElementById('closeErrorDialogBtn');
 
         // Event Listeners
         // this.troubleshootBtn?.addEventListener('click', () => this.startTroubleshooting());
         // this.closeErrorDialogBtn?.addEventListener('click', () => this.closeErrorDialog());
 
         this.errorTypes = []
-    }
 
+    }
+    setBios(bios) {
+        this.bios = bios
+    }
     attemptPowerOn(unit) {
         let bootStatus = true
         let errorQueue = [] // now store errors inside an array to show inside reports area
-
+        
         // Inittiate / Reinitiate Components and their Status
         this.fillComponentStatus(unit)
 
@@ -103,6 +100,7 @@ class PCUnit {
                 this.populateErrors()
                 bootStatus = false
             });
+            this.bootStatus = false
             return false; 
         }
 
@@ -114,38 +112,10 @@ class PCUnit {
 
         // Monitor display poweron
         this.powerOnMonitor()
-        bootStatus = true
-        // return true
-        ///////////////////////////////////////////////// dan code ////////////////////////////////////////////////////////
-        // Check if all components are available and powered
-        // if(!this.componentsStatus.psu || !this.componentsStatus.psu.component) {
-        //     // report missing component
-        //     this.createError('ERR-07') // Takes errorCode and show it as report cell in bootuptab
-        //     this.populateErrors()
-        //     return false;
-        // }
-
-        // // Power Supply Activation
-        // this.psuActivation()
-
-        // // Motherboard and CPU Power Up
-        // this.moboPowerUp()
-        // this.cpuInit()
-
-        // // Monitor display poweron
-        // this.powerOnMonitor()
-
-        // // Star proces for Power-On-Self-Test
-        // this.processPOST(this.componentsStatus.psu.component)
-
-        // const state = this.checkPCState()
-        // if check attempts are good, power on
-        console.log(this.state)
-        // if(state)return true
-        // else return false
+        this.bootStatus = true
         return true
     }
-
+   
     // Add error-cells into assistant tab errors view
     populateErrors() {
         const errorContainer = document.querySelector('#errorsContainer')
@@ -171,11 +141,12 @@ class PCUnit {
             errorCell.classList.add('error-cell')
             errorCell.setAttribute('data-error-action', errorCode)
             errorCell.innerHTML = ` 
-                <div class="error-icon">
-                    <img src="./assets/boot/error_screen/warning.png" alt="error icon">
+                <div class="error-icon-row">
+                    <span class="error-icon">${this.getSeverityIcon(errorData.severity)}</span>
                     <div class="error-details">
-                        <h2>${errorData.description} (${errorCode})</h2> 
-                        <p><strong>Severity:</strong> ${errorData.severity} ${this.getSeverityIcon(errorData.severity)}</p>
+                      <span class="error-title">${errorData.description}</span>
+                      <span class="error-code">${errorCode}</span>
+                      <span class="error-severity">${errorData.severity}</span>
                     </div>
                 </div>
             `;
@@ -272,28 +243,96 @@ class PCUnit {
             carouselContainer.appendChild(arrowRight)
     
             // Add to troubleshooting guide
-            troubleshootingGuide.innerHTML = 
-            `<h3>Troubleshooting Guide</h3>
-            <h4 style="font-size:.7rem">Please refer to the images for reference</h4>
-            `
-            troubleshootingGuide.appendChild(carouselContainer)
+            troubleshootingGuide.innerHTML =
+                `<div class="vert-br"></div>
+                <h3>Troubleshooting Guide</h3>
+                <h4>Please refer to the images for reference</h4>
+                `
+                 // Add troubleshooting steps
+            if (Array.isArray(errorData.steps)) {
+                const stepsList = document.createElement('ol'); // Use <ol> for step-by-step instructions
+                stepsList.classList.add('troubleshooting-steps');
             
+                errorData.steps.forEach(step => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = step;
+                    stepsList.appendChild(listItem);
+                });
+            
+                // 🔽 Insert step list above the carousel
+                troubleshootingGuide.appendChild(stepsList);
+            }
+            troubleshootingGuide.appendChild(carouselContainer)
+           
+            
+            // Status message
+            const statusMsg = document.createElement('div')
+            statusMsg.classList.add('troubleshoot-status')
+            statusMsg.style.fontWeight = "500"
+            troubleshootingGuide.appendChild(statusMsg)
+                        
             // Finish button
             const etComplete = document.createElement('button')
             etComplete.classList.add('etComplete')
             etComplete.textContent = "Finish Troubleshooting"
-            etComplete.addEventListener('click', () => {
-                errorCell.classList.add('etask-complete')
-            });
-
             troubleshootingGuide.appendChild(etComplete);
             errorCell.appendChild(troubleshootingGuide);
-        } 
-    }
 
-    createReport(tag, description) {
-            
+            // Initial carousel update
+            updateCarousel();
+    
+            // Map error codes to test functions
+            const errorTest = {
+                'ERR-100': () => this.psuTest(),
+                'ERR-200': () => this.motherboardTest(),
+                'ERR-201': () => this.motherboardTest(),
+                'ERR-202': () => this.motherboardTest(),
+                'ERR-300': () => this.cpuTest(),
+                'ERR-301': () => this.cpuTest(),
+                'ERR-400': () => this.memoryTest(),
+                'ERR-500': () => this.storageDeviceTest(),
+                'ERR-501': () => this.storageDeviceTest(),
+                'ERR-502': () => this.osBootUp(),
+                'ERR-503': () => this.osBootUp(),
+                'ERR-600': () => this.graphicsCardTest(),
+                'ERR-601': () => this.graphicsCardTest(),
+                'ERR-700': () => this.fanAndCoolingTest(),
+                'ERR-701': () => this.fanAndCoolingTest(),
+                'HZD-100': () => this.fanAndCoolingTest(),
+                'HZD-200': () => this.fanAndCoolingTest(),
+                'HZD-201': () => this.fanAndCoolingTest(),
+                'HZD-300': () => this.graphicsCardTest(),
+                'CRT-01': () => this.psuTest(),
+                'CRT-02': () => this.motherboardTest(),
+                'CRT-03': () => this.cpuTest(),
+                'CRT-04': () => this.memoryTest(),
+                'CRT-05': () => this.storageDeviceTest(),
+                'CRT-06': () => this.graphicsCardTest(),
+                'CRT-07': () => this.osBootUp(),
+            };
+
+           // On finish, check if error is resolved
+           etComplete.addEventListener('click', () => {
+            const testFn = errorTest[errorData.code];
+            if (!testFn) {
+                statusMsg.textContent = "Cannot verify fix for this error.";
+                return;
+            }
+            const result = testFn.call(this);
+            if (result === true) {
+                errorCell.classList.add('etask-complete');
+                statusMsg.textContent = "Issue resolved!";
+                // remove the error cell after 3 seconds
+                setTimeout(() => {
+                    errorCell.remove();
+                }, 3000);
+            } else {
+                statusMsg.textContent = "The issue is not yet fixed. Please check your hardware and try again.";
+            }
+        });
+        }
     }
+    
 
     powerOnMonitor(){ // takes everything from displaying the splashscreen to displayingos and shows it inside the div monitorScreen
         this.displaySplashScreen();
@@ -529,7 +568,7 @@ class PCUnit {
         
         // Critical Error: PSU Failure
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-06'; 
+            return 'CRT-01'
         }
 
         // add reports if no errors are found
@@ -558,11 +597,7 @@ class PCUnit {
 
         // Critical error
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-01'; // Motherboard Failure
-        }
-
-        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-03'; // Motherboard Failure
+            return 'CRT-02'; // Motherboard Failure
         }
 
         // add reports if no errors are found
@@ -582,14 +617,9 @@ class PCUnit {
             return 'ERR-301' // CPU not powered
         }
 
-        // Hazard Error: High CPU Temperature
-        if (Math.random() < 0.1 + Math.random * 0.1) { // 10% to 20% chance of error showing
-            return 'HZD-200'; 
-        }
-
         // Critical Error: CPU Failure
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-02'; // CPU Failure
+            return 'CRT-03'; // CPU Failure
         }
 
         // add reports if no errors are found
@@ -629,11 +659,12 @@ class PCUnit {
 
         // Critical Error: BOOT Device Failure
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-08'; 
+            return 'CRT-05'; 
         }
+        
         // OS corruption
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-09'; 
+            return 'CRT-07'; 
         }
 
 
@@ -660,7 +691,12 @@ class PCUnit {
 
         // Critical Error: GPU Failure
         if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-05'; 
+            return 'CRT-06'
+        }
+
+        if(this.bios.biosSettings.gpuSettings.temperatures.current >= 
+            this.bios.biosSettings.gpuSettings.temperatures.critical){
+            return 'HZD-300'
         }
 
         // add reports if no errors are found
@@ -674,26 +710,142 @@ class PCUnit {
         if(!this.componentsStatus.cpuCooling || !this.componentsStatus.cpuCooling.component) {
             return 'ERR-700' // Missing Heatsink (CPU Cooling)
         }
-
+        
         // check if the cpuCooling is powered
         if(!this.componentsStatus.cpuCooling.isPowered) {
             return 'ERR-701'
         }
         // Hazard Error: CPU fan speed low
-        if (Math.random() < 0.1 + Math.random * 0.2) { // 1% to 5% chance of error showing
-            return 'HZD-100'; // CPU fan speed low
-        }
-        // Critical Error: Overheating issue
-        if (Math.random() < 0.01 + Math.random * 0.04) { // 1% to 5% chance of error showing
-            return 'CRT-07'; 
+        if (this.bios.biosSettings.fanSpeed < 30 || this.bios.fanSpeed < 30) {
+            return 'HZD-100' // Fan speed too low
         }
 
-        // add reports if no errors are found
-        //..
-        // make hazard report for low amount of cooling devices
+        if (this.bios.biosSettings.temperatures.cpu > 80) {
+            return 'HZD-200' // High CPU temperature
+        }
+        
+        if (this.bios.biosSettings.temperatures.system > 70) {
+            return 'HZD-201' // High System temperature
+        }
+
         return true
     }
 
+    bootDeviceSelection(){
+        // Find bootable storage devices
+        const bootableDevices = this.componentsStatus.storage?.filter(device => 
+            device.isPowered && device.component.specs?.bootable
+        );
+    
+        if (!bootableDevices || bootableDevices.length === 0) {
+            return 'ERR-500'; // missing storage device
+        }
+    
+        // Initialize boot order if empty
+        if (!this.bios.biosSettings.bootOrder || this.bios.biosSettings.bootOrder.length === 0) {
+            this.bios.biosSettings.bootOrder = bootableDevices.map((device, index) => ({
+                device: device.component.name,
+                isBootable: true,
+                osInstalled: device.component.osInstalled || false,
+                deviceType: device.component.specs.type || 'unknown',
+                isPrimary: index === 0
+            }));
+        }
+
+        return true;
+    }
+
+    installOS(){
+        // Find all bootable devices
+        const bootableDevices = this.componentsStatus.storage?.filter(device => 
+            device.isPowered && device.component.specs?.bootable
+        );
+
+        if (!bootableDevices || bootableDevices.length === 0) {
+            return { success: false, error: 'ERR-500' };
+        }
+
+        // Find suitable device - prefer SSDs/NVMe over HDDs
+        const installTarget = bootableDevices.find(device => 
+            !device.component.osInstalled && 
+            (device.component.specs.type === 'ssd' || device.component.specs.type === 'nvme')
+        ) || bootableDevices.find(device => !device.component.osInstalled);
+
+        if (!installTarget) {
+            return { success: false, error: 'ERR-504' };
+        }
+
+        // Install OS on target device
+        installTarget.component.osInstalled = true;
+
+        // Update boot order
+        this.bios.biosSettings.bootOrder = [
+            {
+                device: installTarget.component.name,
+                isBootable: true,
+                osInstalled: true,
+                deviceType: installTarget.component.size,
+                isPrimary: true
+            },
+            ...bootableDevices
+                .filter(device => device !== installTarget)
+                .map(device => ({
+                    device: device.component.name,
+                    isBootable: true,
+                    osInstalled: device.component.osInstalled,
+                    deviceType: device.component.size,
+                    isPrimary: false
+                }))
+        ];
+
+        // Update BIOS display
+        if (this.isBiosOpen) {
+            this.updateBiosDisplay();
+        }
+
+        return { 
+            success: true, 
+            device: installTarget.component.name,
+            deviceType: installTarget.component.size,
+            bootOrder: this.bios.biosSettings.bootOrder
+        };
+    }
+
+    osBootUp(){
+        // Check if we have a valid boot device
+        if (!this.bios.biosSettings.bootOrder || this.bios.biosSettings.bootOrder.length === 0) {
+            return 'ERR-500'; // missing storage devices
+        }
+
+        // Simulate OS boot process
+        const primaryBootDevice = this.bios.biosSettings.bootOrder[0];
+        if (!primaryBootDevice.osInstalled) {
+            return 'ERR-503'; // No OS installed on primary boot device
+        }
+
+        return true;
+    }
+
+    //-------------------------- Fan Controls-------------------------------------
+    updateTemperatures() {
+        const currentProfile = this.bios.fanProfiles[this.bios.biosSettings.fanProfile]
+        const fanSpeedFactor = this.bios.fanSpeed / 100
+
+        // Calculate temperatures based on fan speed
+        this.bios.biosSettings.temperatures.cpu = Math.round(
+            currentProfile.minTemp + 
+            (currentProfile.maxTemp - currentProfile.minTemp) * (1 - fanSpeedFactor)
+        )
+
+        this.bios.biosSettings.temperatures.system = Math.round(
+            this.bios.biosSettings.temperatures.cpu * 0.85
+        )
+
+        // Check for temperature warnings
+        this.fanAndCoolingTest()
+        this.graphicsCardTest()
+    }
+    
     /*************************************************************************************************************************/
 
     checkIfAvailableUnit(component) {

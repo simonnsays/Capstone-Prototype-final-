@@ -9,16 +9,15 @@ import DisplayArea from "./scripts/displayArea.js"
 import BootUpTab from "./scripts/Tabs/bootUpTab.js"
 import Assistant from "./assistant/assistant.js"
 import wattageCalculator from "./scripts/Data/wattageCalculator.js"
-
+import chatbot from "./scripts/Data/chatbot.js"
+import bios from "./scripts/Data/bios.js"
 class Main {
     constructor() {
         // Utility Modules
         this.elementHandler = new ElementHandler()
         this.utilityTool = new UtilityTool()
-
         // User
         this.user = new User(this.utilityTool)
-
         // Item Info Modal
         this.itemInfo = this.elementHandler.getItemInfoElements()
 
@@ -32,10 +31,11 @@ class Main {
         this.bootUpTab = new BootUpTab(
             this.elementHandler, 
             this.utilityTool, 
-            this.pcUnit, 
+            this.pcUnit,
+            this.bios, 
             this.portsTab, 
             this.drawer)
-
+      
         // Display Area
         this.displayArea = new DisplayArea(
             this.elementHandler, 
@@ -60,7 +60,7 @@ class Main {
             this.itemInfo)
 
         //Assistant
-        this.assistant = new Assistant(this.elementHandler, this.utilityTool)
+        this.assistant = new Assistant(this,this.elementHandler, this.utilityTool)
 
         // Prevent Canvas Interaction when tabs are open
         window.addEventListener('mousedown', () => this.handleMouseDown())
@@ -77,6 +77,25 @@ class Main {
             this.inventory,
             this.wattageCalculator
         )
+        
+        // Chatbot
+        this.chatbot = new chatbot(
+            this.pcUnit,
+            this.portsTab,
+            this.bootUpTab,
+            this.drawer,
+            this.inventory,
+            this.shop
+        )
+
+        // setup wizard
+        this.setupWizard = document.getElementById('setupWizard');
+        this.setupWizardState = {
+            buildType: null,
+            //budget: null, // optional if pricing of components is added
+            preferences: {}
+        };
+  
     }
 
     handleMouseDown() {
@@ -87,7 +106,8 @@ class Main {
             this.bootUpTab.isActive ||
             this.inventory.isActive || 
             this.portsTab.isActive || 
-            this.shop.isActive
+            this.shop.isActive ||
+            this.chatbot.isActive 
         ) {
                 this.canvas.isActive = false
             } else {
@@ -104,14 +124,15 @@ class Main {
         this.shop.init() 
         this.displayArea.init()
         this.canvas.animate()   
-        this.assistant.init() 
-
+        this.showSetupWizard()
         // this.bootUpTab.powerBtn.addEventListener('mouseup', () => this.bootUpTab.powerBtnClick(this.bootUpTab.pcUnit.availableUnit));
 
 
         // TEST: BOOT UP
-        // this.testBootUp()
-
+        //this.testBootUp()
+        //this.testFanSpeed()
+        //this.testTemperature()
+        //this.testBootOrder()
         // TEST: MISSING COMPONENTS
         // this.testMissingComponents()
 
@@ -122,7 +143,45 @@ class Main {
         // this.assistant.openModal()
 
         // TEST: ADD BASIC COMPONENT
-        // this.addBasicComponents()
+        //this.addBasicComponents()
+    }
+    showSetupWizard() {
+        if (!this.setupWizard) return;
+        
+        const buildOptions = this.setupWizard.querySelectorAll('.build-option');
+        const nextBtn = document.getElementById('nextStep');
+        const prevBtn = document.getElementById('prevStep');
+        
+        this.setupWizard.showModal();
+        buildOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                buildOptions.forEach(option => option.classList.remove('selected')); 
+                e.currentTarget.classList.add('selected');
+                this.setupWizardState.buildType = e.currentTarget.dataset.type;
+                nextBtn.disabled = false;
+            });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (this.setupWizardState.buildType) {
+                this.setupWizard.close();
+                this.shop.setCompatibilityFilters(this.setupWizardState.buildType);
+               //this.assistant.init();
+               //this.assistant.startTutorial();
+            }
+        });
+    }
+    testBootOrder(){
+        this.bootUpTab.pcUnit.componentsStatus.storage.osInstalled === false
+    }
+
+    testTemperature(){
+        //this.bootUpTab.pcUnit.biosSettings.temperatures.cpu = 86
+        this.bootUpTab.pcUnit.bios.biosSettings.gpuSettings.temperatures.current = 95
+        //this.bootUpTab.pcUnit.biosSettings.temperatures.system = 76
+    }
+    testFanSpeed(){
+        this.bootUpTab.pcUnit.bios.fanSpeed = 10
     }
 
     addBasicComponents() {
@@ -133,7 +192,7 @@ class Main {
         itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD Ryzen 7 5700G'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'EVGA Supernova 1300 P+'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
-        itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
+        //itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'Seagate Barracuda SSD'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'Samsung 970 EVO Plus'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD wraith Prism'))
@@ -233,14 +292,14 @@ class Main {
                 this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'psu').component, slot)
             }
         }) 
-
+       
         this.connectCables()
- 
+        this.testOS()
         this.inventory.update()
         this.displayArea.update()
 
         this.bootUpTab.powerOff()
-        // this.bootUpTab.togglePower(this.displayArea.table.component)
+        //this.bootUpTab.togglePower(this.displayArea.table.component)
         this.bootUpTab.openTab()
     }
     // ^^^
@@ -342,6 +401,47 @@ class Main {
         this.portsTab.attachCable(gpuPortGpu.offsets[0], gpuCableGpu)
 
     }
+    /////////////////// TEST: OS INSTALLED
+    testOS(){
+        const primaryStorage = this.bootUpTab.pcUnit.componentsStatus.storage[0]
+        if (primaryStorage && primaryStorage.component) {
+            // check device
+            primaryStorage.isPowered = true
+            primaryStorage.component.specs.bootable = true
+            primaryStorage.component.osInstalled = true
+            primaryStorage.component.bootPriority = 0
+
+            // check bios
+            if (!this.bootUpTab.pcUnit.biosSettings) {
+                this.bootUpTab.pcUnit.biosSettings = {}
+            }
+            
+            // set boot order
+            this.bootUpTab.pcUnit.biosSettings.bootOrder = [{
+                device: primaryStorage.component.name,
+                deviceType: primaryStorage.component.type,
+                isBootable: true,
+                osInstalled: true,
+                isPrimary: true
+            }]
+
+            // see if second storage is active
+            const secondaryStorage = this.bootUpTab.pcUnit.componentsStatus.storage[1]
+            if (secondaryStorage && secondaryStorage.component) {
+                secondaryStorage.isPowered = true
+                secondaryStorage.component.specs.bootable = true
+                secondaryStorage.component.bootPriority = 1
+                
+                this.bootUpTab.pcUnit.biosSettings.bootOrder.push({
+                    device: secondaryStorage.component.name,
+                    deviceType: secondaryStorage.component.type,
+                    isBootable: true,
+                    osInstalled: false,
+                    isPrimary: false
+                })
+            }
+        }
+    }
 
     /////////////////// TEST: BOOT UP
     testMissingComponents() {
@@ -365,4 +465,5 @@ class Main {
 }
 
 const game = new Main()
+window.main = game // make game accessible globally
 game.start()

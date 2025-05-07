@@ -56,7 +56,8 @@ class Assistant {
     window.scrollTo({top: 0, behavior: 'smooth'});
     this.startButton.addEventListener('click', () => {if(!this.sequenceStarted) this.startSequence()})
     window.addEventListener('wheel', (e) => this.handleWheel(e), {passive: false})
-    this.adjustCarousel()
+    
+    // this.adjustCarousel() [ DEPRECATED ]
   }
 
   startSequence() {

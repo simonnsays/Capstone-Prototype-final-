@@ -630,7 +630,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD B550',
-            cpuslot: 'AM4',
+            cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -798,7 +798,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD X550',
-            cpuslot: 'AM4',
+            cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -966,7 +966,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD X570',
-            cpuslot: 'AM4',
+            cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -1147,7 +1147,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD B550',
-            cpuslot: 'AM4',
+            cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -1314,7 +1314,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD B550',
-            cpuslot: 'AM4',
+            cpuslot: 'ADM AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -1481,7 +1481,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD B550',
-            cpuslot: 'AM4',
+            cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -1648,7 +1648,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD X570',
-            cpuslot: 'AM4',
+            cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -1801,7 +1801,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD X570',
-            cpuslot: 'AM4',
+            cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -1968,7 +1968,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD B550',
-            cpuslot: 'AM4',
+            cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -2133,7 +2133,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD B550',
-            cpuslot: 'AM4',
+            cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -2302,7 +2302,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD B650E',
-            cpuslot: 'AM5',
+            cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -2483,7 +2483,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD B650',
-            cpuslot: 'AM5',
+            cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -2664,7 +2664,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD X670E',
-            cpuslot: 'AM5',
+            cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -2831,7 +2831,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD B650E',
-            cpuslot: 'AM5',
+            cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -3026,7 +3026,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD X670E',
-            cpuslot: 'AM5',
+            cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -3207,7 +3207,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD X870E',
-            cpuslot: 'AM5',
+            cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -3402,7 +3402,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD B650',
-            cpuslot: 'AM5',
+            cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -3583,7 +3583,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD B650',
-            cpuslot: 'AM5',
+            cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -3761,7 +3761,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD B650',
-            cpuslot: 'AM5',
+            cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -3942,7 +3942,7 @@ const components = [
         watts: '100',
         specs:{
             chipset: 'AMD X670E',
-            cpuslot: 'AM5',
+            cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
             ports: 'FrontPanel, 24-pin power, 8-pin power, SATA, CPU cooling',
             storage: 'SATA',
@@ -9743,7 +9743,7 @@ const components = [
             depth: 200,
             height: 150,
         },
-        watts: '850',
+        watts: '650',
         isRotatable: true,
         isAttached: false,
         defaultSource: 'PACK',
@@ -9923,7 +9923,8 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
-        specs:{
+        specs:{ 
+            bootable: true,
             rpm: '5400',
             interface: 'SATA',
             formFactor: 'HDD 3.5"',
@@ -9933,6 +9934,7 @@ const components = [
             width: 125,
             height: 125,
         },
+        osInstalled: false, 
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
@@ -9956,7 +9958,8 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
-        specs:{
+        specs:{ 
+            bootable: true,
             rpm: '7200',
             interface: 'SATA',
             formFactor: 'HDD 3.5"',
@@ -9966,6 +9969,7 @@ const components = [
             width: 125,
             height: 125,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
@@ -9989,7 +9993,8 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
-        specs:{
+        specs:{ 
+            bootable: true,
             rpm: '7200',
             interface: 'SATA',
             formFactor: 'HDD 3.5"',
@@ -9999,6 +10004,7 @@ const components = [
             width: 125,
             height: 125,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
@@ -10022,7 +10028,8 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
-        specs:{
+        specs:{ 
+            bootable: true,
             rpm: '7200',
             interface: 'SATA',
             formFactor: 'HDD 3.5"',
@@ -10032,6 +10039,7 @@ const components = [
             width: 125,
             height: 125,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
@@ -10055,7 +10063,8 @@ const components = [
         type: 'storage',
         size: 'hdd',
         watts: '10',
-        specs:{
+        specs:{ 
+            bootable: true,
             rpm: '7200',
             interface: 'SATA',
             formFactor: 'HDD 3.5"',
@@ -10065,6 +10074,7 @@ const components = [
             width: 125,
             height: 125,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'PACK',
@@ -10090,7 +10100,8 @@ const components = [
     type: 'storage',
     size: 'ssd',
     watts: '4',
-    specs:{
+    specs:{ 
+        bootable: true,
         formFactor: '2.5"',
         interface: 'SATA',
         read: '550MB/s',
@@ -10101,6 +10112,7 @@ const components = [
         width: 125,
         height: 125,
     },
+    osInstalled: false,
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
@@ -10124,7 +10136,8 @@ const components = [
     type: 'storage',
     size: 'ssd',
     watts: '4',
-    specs:{
+    specs:{ 
+        bootable: true,
         formFactor: '2.5"',
         interface: 'SATA',
         read: '560MB/s',
@@ -10135,6 +10148,7 @@ const components = [
         width: 125,
         height: 125,
     },
+    osInstalled: false,
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
@@ -10158,7 +10172,8 @@ const components = [
     type: 'storage',
     size: 'ssd',
     watts: '4',
-    specs:{
+    specs:{ 
+        bootable: true,
         formFactor: '2.5"',
         interface: 'SATA',
         read: '530MB/s',
@@ -10169,6 +10184,7 @@ const components = [
         width: 125,
         height: 125,
     },
+    osInstalled: false,
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
@@ -10191,7 +10207,8 @@ const components = [
     type: 'storage',
     size: 'ssd',
     watts: '4',
-    specs:{
+    specs:{ 
+        bootable: true,
         formFactor: '2.5"',
         interface: 'SATA',
         read: '555MB/s',
@@ -10202,6 +10219,7 @@ const components = [
         width: 125,
         height: 125,
     },
+    osInstalled: false,
     isRotatable: false,
     isAttached: false,
     defaultSource: 'PACK',
@@ -10230,11 +10248,13 @@ const components = [
             width: 150,
             height: 150,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
         tableDisplay: 'pack',
-        specs: {
+        specs: { 
+            bootable: true,
             readSpeed: '3500MB/s',
             writeSpeed: '3300MB/s',
             nandType: 'V-NAND',
@@ -10259,11 +10279,13 @@ const components = [
             width: 150,
             height: 150,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
         tableDisplay: 'pack',
-        specs: {
+        specs: { 
+            bootable: true,
             readSpeed: '7300MB/s',
             writeSpeed: '6300MB/s',
             nandType: '3D NAND',
@@ -10288,11 +10310,13 @@ const components = [
             width: 150,
             height: 150,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
         tableDisplay: 'pack',
-        specs: {
+        specs: { 
+            bootable: true,
             readSpeed: '7000MB/s',
             writeSpeed: '7000MB/s',
             nandType: '3D TLC NAND',
@@ -10317,11 +10341,13 @@ const components = [
             width: 150,
             height: 150,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
         tableDisplay: 'pack',
-        specs: {
+        specs: { 
+            bootable: true,
             readSpeed: '3500MB/s',
             writeSpeed: '3000MB/s',
             nandType: 'Micron Advanced 3D NAND',
@@ -10346,11 +10372,13 @@ const components = [
             width: 150,
             height: 150,
         },
+        osInstalled: false,
         isRotatable: false,
         isAttached: false,
         defaultSource: 'pack',
         tableDisplay: 'pack',
-        specs: {
+        specs: { 
+            bootable: true,
             readSpeed: '5000MB/s',
             writeSpeed: '4400MB/s',
             nandType: '3D TLC NAND',
@@ -11080,7 +11108,7 @@ const components = [
  
      //GPU [gpu file is for general left side img assets] [gpu.1 is for pack side img assets]
     {        // Gigabyte Radeon RX 7900 XTX 16pin
-    name: 'Gigabyte Radeon RX7900 XTX',
+    name: 'Gigabyte Radeon RX 7900 XTX',
     type: 'gpu',
     size: 'ATX',
     specs: {
@@ -11334,7 +11362,7 @@ const components = [
     },
 
     {        // Gigabyte Radeon RX7600
-    name: 'Gigabyte Radeon RX7600',
+    name: 'Gigabyte Radeon RX 7600',
     type: 'gpu',
     size: 'ATX',
     specs: {
@@ -11580,7 +11608,7 @@ const components = [
     },
 
     {        // Asus Radeon RX6500 XT
-    name: 'Asus Radeon RX6500 XT',
+    name: 'Asus Radeon RX 6500 XT',
     type: 'gpu',
     size: 'ATX',
     specs: {
@@ -11652,7 +11680,7 @@ const components = [
     },
 
     {        // Gigabyte Radeon RX6750 XT
-    name: 'Gigabyte Radeon RX6750 XT',
+    name: 'Gigabyte Radeon RX 6750 XT',
     type: 'gpu',
     size: 'ATX',
     specs: {
@@ -11688,7 +11716,7 @@ const components = [
     },
 
     {        // AMD Radeon RX5300 OEM
-    name: 'AMD Radeon RX5300 OEM',
+    name: 'AMD Radeon RX 5300 OEM',
     type: 'gpu',
     size: 'ATX',
     specs: {
