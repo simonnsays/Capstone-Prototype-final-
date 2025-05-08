@@ -123,6 +123,7 @@ class Bios{
         const speed = parseInt(e.target.value);
         this.setFanSpeed(speed);
         biosEl.fanProfile.value = 'custom';
+        this.biosSettings.fanProfile = 'custom';
     });
 
     // GPU fan settings
@@ -130,6 +131,7 @@ class Bios{
         const speed = parseInt(e.target.value);
         this.setGPUFanSpeed(speed);
         gpuFanProfile.value = 'custom';
+        this.biosSettings.gpuSettings.fanProfile = 'custom';
     });
     
     biosEl.gpuFanProfile?.addEventListener('change', (e) => {
@@ -376,10 +378,15 @@ class Bios{
         };
 
         // Apply settings
-        if (this.biosSettings.fanProfile === 'custom') {
-            this.setFanSpeed(this.fanSpeed);
+        const cpuProfile = this.biosSettings.fanProfile;
+        if (cpuProfile === 'custom') {
+            const cpuSpeed = this.biosSettings.fanSpeed;
+            this.setFanSpeed(cpuSpeed);
         } else {
-            this.setFanProfile(this.biosSettings.fanProfile);
+            const profileSpeed = this.fanProfiles[cpuProfile]?.speed;
+            if (typeof profileSpeed === 'number') {
+                this.setFanSpeed(profileSpeed);
+            }
         }
 
         // Apply GPU settings

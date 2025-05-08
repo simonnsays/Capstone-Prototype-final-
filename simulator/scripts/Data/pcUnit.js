@@ -828,14 +828,20 @@ class PCUnit {
 
     //-------------------------- Fan Controls-------------------------------------
     updateTemperatures() {
-        const currentProfile = this.bios.fanProfiles[this.bios.biosSettings.fanProfile]
-        const fanSpeedFactor = this.bios.fanSpeed / 100
-
-        // Calculate temperatures based on fan speed
-        this.bios.biosSettings.temperatures.cpu = Math.round(
-            currentProfile.minTemp + 
-            (currentProfile.maxTemp - currentProfile.minTemp) * (1 - fanSpeedFactor)
-        )
+        const fanProfileKey = this.bios.biosSettings.fanProfile;
+        const currentProfile = this.bios.fanProfiles[fanProfileKey];
+        const fanSpeedFactor = this.bios.fanSpeed / 100;
+        
+        // Use custom calculation if profile is "custom" or not found
+        if (fanProfileKey === 'custom' || !currentProfile) {
+            this.bios.biosSettings.temperatures.cpu = Math.round(
+                35 + (85 - 35) * (1 - fanSpeedFactor) // Custom temp curve minTemp + (maxTemp-minTemp) * (1 - fanSpeedFactor)
+            );
+        } else {
+            this.bios.biosSettings.temperatures.cpu = Math.round(
+                currentProfile.minTemp + (currentProfile.maxTemp - currentProfile.minTemp) * (1 - fanSpeedFactor)
+            );
+        }
 
         this.bios.biosSettings.temperatures.system = Math.round(
             this.bios.biosSettings.temperatures.cpu * 0.85
