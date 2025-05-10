@@ -120,12 +120,14 @@ class Main {
         // main code here
         this.shop.init() 
         this.displayArea.init()
-        this.canvas.animate()   
+        this.canvas.animate()
+        //this.assistant.init()
+        //this.assistant.endTutorial()   
         this.showSetupWizard()
         // this.bootUpTab.powerBtn.addEventListener('mouseup', () => this.bootUpTab.powerBtnClick(this.bootUpTab.pcUnit.availableUnit));
         
         // TEST: BOOT UP
-        // this.hideGameContainer()
+        //this.hideGameContainer()
         //this.testBootUp()
         //this.testFanSpeed()
         //this.testTemperature()
@@ -142,7 +144,7 @@ class Main {
         // TEST: ADD BASIC COMPONENT
         //this.addBasicComponents()
     }
-
+    
     hideGameContainer() {
         const gameContainer = document.querySelector('.game-container')
         gameContainer.style.visibility = "hidden"
@@ -171,8 +173,7 @@ class Main {
             if (this.setupWizardState.buildType) {
                 this.setupWizard.close();
                 this.shop.setCompatibilityFilters(this.setupWizardState.buildType);
-               //this.assistant.init();
-               //this.assistant.startTutorial();
+                this.assistant.init();
             }
         });
     }

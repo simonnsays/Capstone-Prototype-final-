@@ -8624,8 +8624,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1700/i9 14900K.png'},  
+            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
 
         ],
         slots: [],
@@ -8654,9 +8654,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1200.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1200/i9 11900K.png'},  
-
+            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1200.png'},  
         ],
         slots: [],
         ports: []
@@ -8684,8 +8683,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1700/i7-14700K.png'},  
+            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
 
         ],
         slots: [],
@@ -8714,8 +8713,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1200.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1200/i7 11700K.png'},  
+            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1200.png'},  
 
         ],
         slots: [],
@@ -8744,8 +8743,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1700/i5 14400.png'},  
+            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
 
         ],
         slots: [],
@@ -8774,8 +8773,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1200/i5 11600k.png'},  
+            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
 
         ],
         slots: [],
@@ -8804,8 +8803,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1700/i3 14100.png'},  
+            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1700.png'},  
 
         ],
         slots: [],
@@ -8834,8 +8833,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1200.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/intel/lga1200/i3 10350k.png'},  
+            {side: 'left', imageSrc: './assets/cpu/intel/gen photos/intel 1200.png'},  
 
         ],
         slots: [],
@@ -8866,8 +8865,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am5.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am5/Ryzen 9 7900X3D.png'},  
+            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am5.png'},  
         ],
         slots: [],
         ports: []
@@ -8895,8 +8894,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am4/Ryzen 9 5900X.png'},  
+            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
         ],
         slots: [],
         ports: []
@@ -8924,8 +8923,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am5.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am5/7 7800X3D.png'},  
+            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am5.png'},  
         ],
         slots: [],
         ports: []
@@ -8953,8 +8952,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am4/Ryzen 7 5700G.png'},  
+            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
         ],
         slots: [],
         ports: []
@@ -8982,8 +8981,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am5.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am5/Ryzen 5 7600X.png'},  
+            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am5.png'},  
         ],
         slots: [],
         ports: []
@@ -9011,8 +9010,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am4/Ryzen 5 5600GT.png'},  
+            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
         ],
         slots: [],
         ports: []
@@ -9040,8 +9039,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am5.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am5/Ryzen 3 8300G.png'},  
+            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am5.png'},  
         ],
         slots: [],
         ports: []
@@ -9069,8 +9068,8 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
-            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
             {side: 'PACK', imageSrc: './assets/cpu/amd/am4/Ryzen 3 5300G.png'},  
+            {side: 'left', imageSrc: './assets/cpu/amd/gen photos/amd am4.png'},  
         ],
         slots: [],
         ports: []
@@ -9940,9 +9939,9 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
+            {side: 'PACK', imageSrc: './assets/storage/hdd/Seagate Barracuda 8tb.png'},  
             {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
             {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
-            {side: 'PACK', imageSrc: './assets/storage/hdd/Seagate Barracuda 8tb.png'},  
         ],
         slots: [],
         ports: [
@@ -9975,9 +9974,9 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
+            {side: 'PACK', imageSrc: './assets/storage/hdd/Toshiba p300.png'},  
             {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
             {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
-            {side: 'PACK', imageSrc: './assets/storage/hdd/Toshiba p300.png'},  
         ],
         slots: [],
         ports: [
@@ -10010,9 +10009,9 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
+            {side: 'PACK', imageSrc: './assets/storage/hdd/toshiba x300 pro.png'},  
             {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
             {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
-            {side: 'PACK', imageSrc: './assets/storage/hdd/toshiba x300 pro.png'},  
         ],
         slots: [],
         ports: [
@@ -10045,9 +10044,9 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
+            {side: 'PACK', imageSrc: './assets/storage/hdd/toshiba x300.png'},  
             {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
             {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
-            {side: 'PACK', imageSrc: './assets/storage/hdd/toshiba x300.png'},  
         ],
         slots: [],
         ports: [
@@ -10080,9 +10079,9 @@ const components = [
         defaultSource: 'PACK',
         tableDisplay: 'PACK',
         images: [
+            {side: 'PACK', imageSrc: './assets/storage/hdd/wdc black.png'},  
             {side: 'left', imageSrc: './assets/storage/defaulthdd.png'},  
             {side: 'right', imageSrc: './assets/storage/defaulthdd.png'},   
-            {side: 'PACK', imageSrc: './assets/storage/hdd/wdc black.png'},  
         ],
         slots: [],
         ports: [
@@ -10118,9 +10117,9 @@ const components = [
     defaultSource: 'PACK',
     tableDisplay: 'PACK',
     images: [
+        {side: 'PACK', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res - Copy.png'},  
         {side: 'left', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res.png'},  
         {side: 'right', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res.png'},  
-        {side: 'PACK', imageSrc: './assets/storage/ssd/seagate-barracuda-q1-ssd-front-lo-res - Copy.png'},  
     ],
     slots: [],
     ports: [
@@ -10154,9 +10153,9 @@ const components = [
     defaultSource: 'PACK',
     tableDisplay: 'PACK',
     images: [
+        {side: 'PACK', imageSrc: './assets/storage/ssd/samsung ssd - Copy.png'},  
         {side: 'left', imageSrc: './assets/storage/ssd/samsung ssd.png'},  
         {side: 'right', imageSrc: './assets/storage/ssd/samsung ssd.png'},  
-        {side: 'PACK', imageSrc: './assets/storage/ssd/samsung ssd - Copy.png'},  
     ],
     slots: [],
     ports: [
@@ -10190,9 +10189,9 @@ const components = [
     defaultSource: 'PACK',
     tableDisplay: 'PACK',
     images: [
+        {side: 'PACK', imageSrc: './assets/storage/ssd/sandisk ssd plus - Copy.png'},  
         {side: 'left', imageSrc: './assets/storage/ssd/sandisk ssd plus.png'},  
         {side: 'right', imageSrc: './assets/storage/ssd/sandisk ssd plus.png'},  
-        {side: 'PACK', imageSrc: './assets/storage/ssd/sandisk ssd plus - Copy.png'},  
     ],
     slots: [],
     ports: [
@@ -10225,9 +10224,9 @@ const components = [
     defaultSource: 'PACK',
     tableDisplay: 'PACK',
     images: [
+        {side: 'PACK', imageSrc: './assets/storage/ssd/sandisk - Copy.png'},  
         {side: 'left', imageSrc: './assets/storage/ssd/sandisk.png'},  
         {side: 'right', imageSrc: './assets/storage/ssd/sandisk.png'},  
-        {side: 'PACK', imageSrc: './assets/storage/ssd/sandisk - Copy.png'},  
     ],
     slots: [],
     ports: [
@@ -10264,8 +10263,8 @@ const components = [
             keyType: 'M',
         },
         images: [
-            { side: 'left', imageSrc: './assets/storage/m.2/Samsung 970 EVO Plus NVMe SSD attached.png' },
             { side: 'pack', imageSrc: './assets/storage/m.2/Samsung_970_EVO_Plus_NVMe_SSD.png' },
+            { side: 'left', imageSrc: './assets/storage/m.2/Samsung 970 EVO Plus NVMe SSD attached.png' },
         ],
         cables: [],
         ports: [],
@@ -10723,8 +10722,8 @@ const components = [
     defaultSource: 'PACK',
     tableDisplay: 'PACK',
     images: [
-        {side: 'left', imageSrc: './assets/memory/HyperX Beast RGB DDR4 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/HyperX Beast RGB DDR4 pack.png'},  
+        {side: 'left', imageSrc: './assets/memory/HyperX Beast RGB DDR4 attached.png'},  
     ],
     },
      { //Corsair Dominator Platinum
@@ -10748,8 +10747,8 @@ const components = [
     defaultSource: 'PACK',
     tableDisplay: 'PACK',
     images: [
-        {side: 'left', imageSrc: './assets/memory/corsair dominator platinum pc4 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/corsair dominator platinum pc4.png'},  
+        {side: 'left', imageSrc: './assets/memory/corsair dominator platinum pc4 attached.png'},  
     ],
     },
     { //G.Skill Ripjaws V
@@ -10774,8 +10773,8 @@ const components = [
     defaultSource: 'PACK',
     tableDisplay: 'PACK',
     images: [
+        {side: 'PACK', imageSrc: './assets/memory/gskill ripjaws v pc4.png'},
         {side: 'left', imageSrc: './assets/memory/gskill ripjaws v pc4 attached.png'},  
-        {side: 'PACK', imageSrc: './assets/memory/gskill ripjaws v pc4.png'},  
     ],
     },
     { //Teamgroup Tforce Vulcan Z
@@ -10799,8 +10798,8 @@ const components = [
     defaultSource: 'PACK',
     tableDisplay: 'PACK',
     images: [
+        {side: 'PACK', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4.png'},
         {side: 'left', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4 attached.png'},  
-        {side: 'PACK', imageSrc: './assets/memory/Teamgroup Tforce Vulcan Z ddr4.png'},  
     ],
     },
     { //Teamgroup Tforce TUF
@@ -10824,8 +10823,8 @@ const components = [
     defaultSource: 'PACK',
     tableDisplay: 'PACK',
     images: [
-        {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
         {side: 'PACK', imageSrc: './assets/memory/tforce delta tuf pc4.png'},  
+        {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
     ],
     },
     { //Crucial Pro DDR4
@@ -10849,8 +10848,8 @@ const components = [
     defaultSource: 'PACK',
     tableDisplay: 'PACK',
     images: [
+        {side: 'PACK', imageSrc: './assets/memory/crucial pro ddr4.png'},
         {side: 'left', imageSrc: './assets/memory/crucial pro ddr4 attached.png'},  
-        {side: 'PACK', imageSrc: './assets/memory/crucial pro ddr4.png'},  
     ],
     },
     { //Corsair Vengeance Pro DDR4
@@ -10874,8 +10873,8 @@ const components = [
     defaultSource: 'PACK',
     tableDisplay: 'PACK',
     images: [
+        {side: 'PACK', imageSrc: './assets/memory/corsair vengeance pro ddr4.png'},
         {side: 'left', imageSrc: './assets/memory/corsair vengeance pro attached.png'},  
-        {side: 'PACK', imageSrc: './assets/memory/corsair vengeance pro ddr4.png'},  
     ],
     },
     { //Teamgroup Tforce DDR4
@@ -10899,8 +10898,8 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},
         {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
-        {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
     ],
     },
  
@@ -10926,8 +10925,8 @@ const components = [
       defaultSource: 'pack',
       tableDisplay: 'pack',
       images: [
-          {side: 'left', imageSrc: './assets/memory/Dominator Tianium DDR5 - attached.png'},  
-          {side: 'pack', imageSrc: './assets/memory/Dominator Tianium DDR5.png'},  
+        {side: 'pack', imageSrc: './assets/memory/Dominator Tianium DDR5.png'},
+        {side: 'left', imageSrc: './assets/memory/Dominator Tianium DDR5 - attached.png'},  
       ],
     },
     { //G.Skill Trident z5
@@ -10951,8 +10950,8 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
-        {side: 'left', imageSrc: './assets/memory/gskill trident z5 pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/gskill trident z5 pc5.png'},  
+        {side: 'left', imageSrc: './assets/memory/gskill trident z5 pc5 attached.png'},  
     ],
     },
     { //Kingston Fury Renegade
@@ -10976,8 +10975,8 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
-        {side: 'left', imageSrc: './assets/memory/kingston fury beast pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/kingston fury renegade pc5.png'},  
+        {side: 'left', imageSrc: './assets/memory/kingston fury beast pc5 attached.png'},  
     ],
     },
     { //Teamgroup Tforce 
@@ -11001,8 +11000,8 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
-        {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/Teamgroup Tforce pc5 pack.png'},  
+        {side: 'left', imageSrc: './assets/memory/Teamgroup T force pc5 attached.png'},  
     ],
     },
     { //Crucial Ballistix
@@ -11026,8 +11025,8 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
-        {side: 'left', imageSrc: './assets/memory/crucial ballistix attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/crucial ballistix.png'},  
+        {side: 'left', imageSrc: './assets/memory/crucial ballistix attached.png'},  
     ],
     },
     { //Crucial Ballistix RGB 
@@ -11051,8 +11050,8 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
-        {side: 'left', imageSrc: './assets/memory/crucial ballistix rgb attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/crucial ballistix rgb.png'},  
+        {side: 'left', imageSrc: './assets/memory/crucial ballistix rgb attached.png'},  
     ],
     },
     { //G.Skill Trident Z5 Silver 
@@ -11076,8 +11075,8 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
-        {side: 'left', imageSrc: './assets/memory/gskill trident z5 silver attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/gskill trident z5 silver.png'},  
+        {side: 'left', imageSrc: './assets/memory/gskill trident z5 silver attached.png'},  
     ],
     },
     { //Corsair Vengeance
@@ -11101,8 +11100,8 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
-        {side: 'left', imageSrc: './assets/memory/corsair vengeance attached.png'},  
         {side: 'pack', imageSrc: './assets/memory/corsair vengeance.png'},  
+        {side: 'left', imageSrc: './assets/memory/corsair vengeance attached.png'},  
     ],
     },
  
@@ -11130,11 +11129,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'},  
         {side: 'left', imageSrc: './assets/gpu/Gigabyte Radeon RX 7900 XTX.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'},  
-        {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/gigabyte radeon rx 7900 xtx.png'}
     ],
     slots: [],
     ports: [
@@ -11168,9 +11165,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'},
         {side: 'left', imageSrc: './assets/gpu/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'}, 
         {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/gigabyte nvidia geforce rtx 4060 windforce 8gb OC.png'}
     ],
     slots: [],
     ports: [
@@ -11204,9 +11201,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 3060.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 3060.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 3060.png'}
     ],
     slots: [],
     ports: [
@@ -11240,9 +11237,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4070 windforce oc.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4070 windforce oc.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4070 windforce oc.png'}
     ],
     slots: [],
     ports: [
@@ -11276,9 +11273,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4090.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4090.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4090.png'}
     ],
     slots: [],
     ports: [
@@ -11312,9 +11309,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx eagle 3060.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx eagle 3060.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx eagle 3060.png'}
     ],
     slots: [],
     ports: [
@@ -11348,9 +11345,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce gtx 1650.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce gtx 1650.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce gtx 1650.png'}
     ],
     slots: [],
     ports: [
@@ -11384,9 +11381,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx7600.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/radeon rx7600.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx7600.png'}
     ],
     slots: [],
     ports: [
@@ -11420,9 +11417,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4090 gaming oc.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4090 gaming oc.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4090 gaming oc.png'}
     ],
     slots: [],
     ports: [
@@ -11456,9 +11453,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/aero nvidia geforce rtx 4060 oc.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/aero nvidia geforce rtx 4060 oc.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/aero nvidia geforce rtx 4060 oc.png'}
     ],
     slots: [],
     ports: [
@@ -11492,9 +11489,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce gtx 1660 super.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce gtx 1660 super.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce gtx 1660 super.png'}
     ],
     slots: [],
     ports: [
@@ -11528,9 +11525,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4060.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4060.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4060.png'}
     ],
     slots: [],
     ports: [
@@ -11564,9 +11561,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4070 super.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 4070 super.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 4070 super.png'}
     ],
     slots: [],
     ports: [
@@ -11599,9 +11596,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce 3050.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce 3050.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce 3050.png'}
     ],
     slots: [],
     ports: []  
@@ -11630,9 +11627,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx6500 xt.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/radeon rx6500 xt.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx6500 xt.png'}
     ],
     slots: [],
     ports: [
@@ -11666,9 +11663,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 2080 super.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce rtx 2080 super.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce rtx 2080 super.png'}
     ],
     slots: [],
     ports: [
@@ -11702,9 +11699,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx6750 xt.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/radeon rx6750 xt.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx6750 xt.png'}
     ],
     slots: [],
     ports: [
@@ -11738,9 +11735,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx5300 OEM.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/radeon rx5300 OEM.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/radeon rx5300 OEM.png'}
     ],
     slots: [],
     ports: [
@@ -11774,9 +11771,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia Tesla T40.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia Tesla T40.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia Tesla T40.png'}
     ],
     slots: [],
     ports: [
@@ -11810,9 +11807,9 @@ const components = [
     defaultSource: 'pack',
     tableDisplay: 'pack',
     images: [
+        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce 1080 ti.png'},
         {side: 'rear', imageSrc: './assets/gpu/rear1.png'}, 
         {side: 'left', imageSrc: './assets/gpu/nvidia geforce 1080 ti.png'}, 
-        {side: 'pack', imageSrc: './assets/gpu.1/nvidia geforce 1080 ti.png'}
     ],
     slots: [],
     ports: [

@@ -30,7 +30,7 @@ class PCUnit {
             psu: {},
             storage: [],
             cpuCooling: {},
-            caseCooling: []
+            //caseCooling: []
         }
 
         this.motherboardBrand = {

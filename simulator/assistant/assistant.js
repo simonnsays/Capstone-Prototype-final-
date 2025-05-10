@@ -547,7 +547,8 @@ class Assistant {
             el.classList.remove('highlight-element')
         })
 
-        // add any finalization logic here, like showing a completion message or ending simulation
+        // Show the final build summary
+        this.showFinalBuildSummary();
     }
 
     // automatically open the current task cell in the task list
@@ -594,6 +595,138 @@ class Assistant {
                 elementToHighlight.classList.add('highlight-element')
             }
         }
+    }
+    
+    showFinalBuildSummary() {
+        const modal = document.createElement('div');
+        modal.className = 'tutorial-summary-modal';
+
+        // Get components status
+        const components = this.main.bootUpTab.pcUnit.componentsStatus;
+        const summaryHTML = Object.entries(components).map(([key, info]) => {
+            if (Array.isArray(info)) {
+                // Handle array components like RAM or storage
+                return info.map((slot, i) => {
+                    const component = slot?.component;
+                    const imageSrc = component?.images?.[0]?.imageSrc
+                    const specs = component?.specs || {};
+                    return `
+                        <div class="component-card ${component ? 'installed' : 'empty'}">
+                            <div class="card-header">
+                                <h3>${key.toUpperCase()} SLOT ${i + 1}</h3>
+                                <span class="status-badge">${component ? '🟢' : '🔴'}</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="component-image">
+                                    <img src="${imageSrc}" alt="${component?.name || 'Not Installed'}">
+                                </div>
+                                <div class="component-details">
+                                    <h4>${component?.name || 'Not Installed'}</h4>
+                                    ${component ? `
+                                        <div class="specs-list">
+                                            ${Object.entries(specs)
+                                                .filter(([key]) => !key.includes('image'))
+                                                .map(([key, value]) => `
+                                                    <div class="spec-item">
+                                                        <span class="spec-label">${key}:</span>
+                                                        <span class="spec-value">${value}</span>
+                                                    </div>
+                                                `).join('')}
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                // Handle regular component objects
+                const component = info?.component;
+                const imageSrc = component?.images?.[0]?.imageSrc;
+                const specs = component?.specs || {};
+                return `
+                    <div class="component-card ${component ? 'installed' : 'empty'}">
+                        <div class="card-header">
+                            <h3>${key.toUpperCase()}</h3>
+                            <span class="status-badge">${component ? '🟢' : '🔴'}</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="component-image">
+                                <img src="${imageSrc}" alt="${component?.name || 'Not Installed'}">
+                            </div>
+                            <div class="component-details">
+                                <h4>${component?.name || 'Not Installed'}</h4>
+                                ${component ? `
+                                    <div class="specs-list">
+                                        ${Object.entries(specs)
+                                            .filter(([key]) => !key.includes('image'))
+                                            .map(([key, value]) => `
+                                                <div class="spec-item">
+                                                    <span class="spec-label">${key}:</span>
+                                                    <span class="spec-value">${value}</span>
+                                                </div>
+                                            `).join('')}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }).join('');
+
+        // Calculate total power and get warnings
+        const totalPower = this.main.wattageCalculator.calculateWattage() || 0;
+        const psuWattage = components.psu?.component?.specs?.wattage || 0;
+        const powerWarning = totalPower > psuWattage ? 
+            `<div class="build-warning">⚠️ PSU may be underpowered (${psuWattage}W PSU, ${totalPower}W required)</div>` : 
+            `<div class="build-success">⚡ Power requirements met (${totalPower}W of ${psuWattage}W)</div>`;
+
+        modal.innerHTML = `
+            <div class="summary-content">
+                <div class="summary-header">
+                    <h2>PC Build Summary</h2>
+                    <div class="power-status">
+                        ${powerWarning}
+                    </div>
+                </div>
+                <div class="components-grid">
+                    ${summaryHTML}
+                </div>
+                <div class="summary-footer">
+                    <div class="summary-buttons">
+                        <button class="summary-btn restart-btn">Restart Tutorial</button>
+                        <button class="summary-btn reset-btn">Reset Build</button>
+                        <button class="summary-btn continue-btn">Continue Building</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    
+        document.body.appendChild(modal);
+    
+        // Add event listeners to all buttons 
+
+        //restart
+        modal.querySelector('.restart-btn').addEventListener('click', () => {
+            modal.remove();
+            window.location.href = '../index.html';
+            //this.main.start();
+        });
+        //reset
+        modal.querySelector('.reset-btn').addEventListener('click', () => {
+            modal.remove();
+            this.closeModal();
+            this.main.resetBuild();
+            this.main.refreshSimulator?.();
+        });
+        //continue
+        modal.querySelector('.continue-btn').addEventListener('click', () => {
+            modal.remove();
+            this.closeModal();
+        });
+    
+        
     }
 
 }

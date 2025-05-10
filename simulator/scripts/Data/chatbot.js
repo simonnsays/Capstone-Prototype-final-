@@ -263,7 +263,68 @@ class chatbot{
 
         if (query.includes('how does the assistant work?') || query.includes('how to use guide?')) {
             return "The assistant provides step-by-step instructions on building your PC. Open the assistant tab to see!"
-        }                                
+        }
+        // System Navigation Questions
+        if (query.includes('how to rotate') || query.includes('can i rotate')) {
+            return "You can rotate the view by clicking the rotation arrows in the display area. This helps you see different sides of your build."
+        }
+
+        // Build Type Questions
+        if (query.includes('gaming build') || query.includes('gaming pc')) {
+            return "For a gaming build, focus on high-performance components: a gaming-grade GPU (like RTX 30/40 series), modern CPU (i7/i9 or Ryzen 7/9), and at least 16GB DDR4/DDR5 RAM. Don't forget adequate cooling!"
+        }
+
+        if (query.includes('office build') || query.includes('work pc')) {
+            return "For an office build, you can use mid-range components: an i5/Ryzen 5 CPU, integrated graphics or basic GPU, and 8-16GB RAM. These provide good performance for productivity tasks."
+        }
+
+        if (query.includes('budget build') || query.includes('casual pc')) {
+            return "For a budget/casual build, consider: i3/Ryzen 3 CPU, integrated graphics or entry-level GPU, and 8GB RAM. This setup works well for basic computing needs."
+        }
+
+        // Component Management
+        if (query.includes('remove component') || query.includes('how to uninstall')) {
+            return "To remove an installed component, click and drag it from its slot back to your inventory. For components inside the case, make sure to open the appropriate side panel first."
+        }
+
+        if (query.includes('check temperature') || query.includes('monitor temps')) {
+            return "You can monitor temperatures in the BIOS menu. Access it by powering on the system and using '/open bios' command. Look for CPU and system temperatures in the monitoring section."
+        }
+
+        // BIOS-related Questions
+        if (query.includes('change fan speed') || query.includes('adjust cooling')) {
+            return "To adjust fan speeds: 1. Power on the system 2. Enter BIOS (/open bios) 3. Go to Fan Control section 4. Adjust the fan curve or select a preset profile (Silent/Standard/Turbo)"
+        }
+
+        if (query.includes('boot order') || query.includes('change boot device')) {
+            return "To change boot order: 1. Enter BIOS 2. Go to Boot section 3. Use the up/down arrows to arrange your boot devices in order of priority."
+        }
+
+        // Error Handling
+        if (query.includes('error code') || query.includes('what does error')) {
+            return "Error codes in the boot process indicate specific issues:\nERR-100: PSU issues\nERR-200: Motherboard issues\nERR-300: CPU issues\nERR-400: RAM issues\nERR-500: Storage issues\nERR-600: GPU issues\nERR-700: Cooling issues"
+        }
+
+        // Power Management
+        if (query.includes('check power') || query.includes('power usage')) {
+            return "The system automatically calculates power usage based on your components. Check the wattage indicator when selecting a PSU - it should be at least 100W above your total system power draw."
+        }
+
+        // Performance Optimization
+        if (query.includes('optimize') || query.includes('improve performance')) {
+            return "To optimize your build: 1. Ensure proper cooling (check fan speeds in BIOS) 2. Verify all power connections 3. Use compatible RAM in dual-channel configuration 4. Install OS on SSD/NVMe drive for better performance"
+        }
+
+        // System Testing
+        if (query.includes('test system') || query.includes('how to verify')) {
+            return "To test your build: 1. Check all components are properly seated 2. Verify all power connections 3. Power on the system 4. Monitor temperatures in BIOS 5. Check for any error codes in the boot process"
+        }
+
+        // Storage Management
+        if (query.includes('install os') || query.includes('operating system')) {
+            return "To install an operating system: 1. Ensure you have a bootable storage device 2. Enter BIOS 3. Go to Boot section 4. Select 'Install OS' on your target drive 5. Save and restart"
+        }            
+                            
         // check static responses if no dynamic response is found
         return  this.autoResponses[query]  ||"I'm not sure about that. Try asking about specific components or features!" 
     }
