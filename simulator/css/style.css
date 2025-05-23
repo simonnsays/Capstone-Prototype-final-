@@ -1278,7 +1278,7 @@ input[type=checkbox] {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .tutorial-image:hover {
-  transform: scale(1.5);
+  transform: scale(1.2);
   transition: transform 0.3s ease;
 }
 #chat-messages img {
@@ -1324,7 +1324,66 @@ input[type=checkbox] {
   transition: transform 0.3s ease;
 }
 
-  
+.chat-bubble {
+    position: relative;
+    padding: 12px;
+    margin: 8px;
+    border-radius: 12px;
+    max-width: 80%;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.user-message {
+    background: #c9e8ff;
+    margin-left: auto;
+    border-radius: 12px 12px 2px 12px;
+}
+
+.bot-message {
+    background: #dbdbdba6;
+    margin-right: auto;
+    border-radius: 12px 12px 12px 2px;
+} 
+
+.typing-indicator {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.typing-indicator span {
+    animation: bounce 0.8s infinite;
+}
+
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.suggestion-chip {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 4px;
+    background: #e0e0e0;
+    border-radius: 16px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.suggestion-chip:hover {
+    background: #bdbdbd;
+}
+
 
 /* Chatbot Header */
 .chat-header {
@@ -1351,32 +1410,6 @@ input[type=checkbox] {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-/* Message Bubbles */
-#chat-messages p {
-  max-width: 80%;
-  padding: 10px 15px;
-  border-radius: 15px;
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-/* User Messages */
-#chat-messages p:has(strong:contains("You")) {
-  background: linear-gradient(135deg, #75c9b7, #abd699);
-  color: white;
-  align-self: flex-end;
-  border-bottom-right-radius: 5px;
-}
-
-/* Bot Messages */
-#chat-messages p:has(strong:contains("Bot")) {
-  background: #f0f2f5;
-  color: #1a1a1a;
-  align-self: flex-start;
-  border-bottom-left-radius: 5px;
 }
 
 /* Input Container */
@@ -1419,7 +1452,7 @@ input[type=checkbox] {
   transition: transform 0.2s ease;
   position: relative;
   top: 3px;
-  left: -55px;
+  left: 0px;
 }
 #chat-send img{
   width: 20px;
@@ -1462,6 +1495,33 @@ input[type=checkbox] {
 
 #chat-messages p {
   animation: messageIn 0.5s ease forwards;
+}
+
+.contextual-suggestions {
+    margin-top: 10px;
+    padding: 8px;
+    border-top: 1px solid #eee;
+}
+
+.suggestion-text {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.suggestion-btn {
+    background: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    margin: 3px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background 0.2s;
+}
+
+.suggestion-btn:hover {
+    background: #e0e0e0;
 }
 /* BIOS Styling */
 #biosModal{
@@ -1966,7 +2026,7 @@ input[type=checkbox] {
 }
 
 .wizard-steps {
-  margin: 32px 0;
+  margin: 20px 0;
 }
 
 .wizard-controls{
@@ -1997,7 +2057,6 @@ input[type=checkbox] {
 
 .build-option.selected {
   border-color: #000000;
-  background: #E8F5E9;
 }
 
 .build-options {
@@ -2016,6 +2075,16 @@ input[type=checkbox] {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.build-options button{
+  border-radius: 5px;
+  border: 2px solid #eee;
+  background-color: white;
+  box-shadow: 4px 4px var(--light-lime);
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .compatibility-indicator {
@@ -2215,6 +2284,109 @@ input[type=checkbox] {
 
 .summary-btn:hover {
   filter: brightness(0.9);
+}
+
+.range-wrapper {
+  width: 300px;
+  font-family: sans-serif;
+  margin: 2rem auto;
+}
+
+.range-slider {
+  position: relative;
+  height: 40px;
+}
+
+.range-slider input[type="range"] {
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+  height: 8px;
+  margin: 0;
+  top: 16px;
+  appearance: none;
+  background: none;
+  z-index: 2;
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb {
+  pointer-events: all;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--light-lime);
+  appearance: none;
+}
+
+.range-track {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #ccc;
+  z-index: 1;
+}
+
+.range-track::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  background:  var(--light-lime);
+  z-index: 1;
+}
+
+.price-display {
+  padding: 20px;
+  gap: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--light-lime);
+  box-shadow: 4px 4px var(--teal);
+
+}
+
+#minPriceInput, #maxPriceInput{
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid var(--light-lime);
+  box-shadow: 4px 4px var(--light-lime);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 5px 10px;
+  outline: none;
+  margin: 5px;
+}          
+
+.item-price {
+    position: absolute;
+    bottom: 45px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.price-out-of-range {
+    background: rgba(255, 0, 0, 0.6);
+    text-decoration: line-through;
+}
+
+.price-slider {
+    margin: 10px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.price-inputs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 5px;
 }
 
 @keyframes slideIn {

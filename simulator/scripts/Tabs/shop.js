@@ -46,7 +46,10 @@ class Shop{
             cpu: null,
             ram: null,
             gpu: null
-        };
+        }
+
+        // Price filter
+        this.priceRange = { min: 0, max: 100000 }
 
         // notification system
         this.notifications = [];
@@ -99,15 +102,25 @@ class Shop{
     // Create Interactive Elements to Show in Shop Tab
     createItemElements(items, container) {
         items.forEach(item => {
-            const imageSource = item.images.find(image => image.side == item.defaultSource).imageSrc
-            const element = this.utilityTool.makeItemElement(item, imageSource) 
-             
-            // associate item with the html element 
-            element.component = item
+            const price = parseInt(item.specs?.price) || 0;
+            const isInRange = price >= this.priceRange.min && 
+                            price <= this.priceRange.max;
 
-            container.appendChild(element)
-            this.updateCompatibilityDisplay()
-        })
+            const element = this.utilityTool.makeItemElement(item, 
+                item.images.find(img => img.side === item.defaultSource).imageSrc);
+            
+            // Add price display
+            const priceDisplay = document.createElement('div');
+            priceDisplay.className = `item-price ${isInRange ? '' : 'price-out-of-range'}`;
+            priceDisplay.dataset.price = price;
+            priceDisplay.textContent = `₱${price.toLocaleString()}`;
+            element.appendChild(priceDisplay);
+
+            element.component = item;
+            container.appendChild(element);
+        });
+
+        this.updateCompatibilityDisplay();
     }
 
     setCompatibilityFilters(buildType) {
@@ -283,7 +296,42 @@ class Shop{
                 return true;
         }
     }
+    applyFilters(items) {
+        return items.filter(item => {
+            const price = parseInt(item.specs?.price) || 0;
+            const meetsPrice = price >= this.priceRange.min && 
+                             price <= this.priceRange.max;
+            
+            const meetsBuildType = !this.compatibilityFilters.buildType || 
+                                 this.checkCompatibility(item);
 
+            return meetsPrice && meetsBuildType;
+        });
+    }
+
+    setPriceRange(min, max) {
+        min = Math.max(0, parseInt(min) || 0);
+        max = Math.min(100000, parseInt(max) || 100000);
+        
+        if (min > max) [min, max] = [max, min];
+
+        this.priceRange = { min, max };
+        this.updatePriceUI();
+        this.update(); // refresh shop view
+    }
+
+    updatePriceUI() {
+        // Update price display elements
+        const priceElements = document.querySelectorAll('.item-price');
+        priceElements.forEach(el => {
+            const price = parseInt(el.dataset.price);
+            const isInRange = price >= this.priceRange.min && 
+                            price <= this.priceRange.max;
+            
+            el.classList.toggle('price-out-of-range', !isInRange);
+            el.textContent = `₱${price.toLocaleString()}`
+        });
+    }
 
     updateCompatibilityDisplay() {
         const items = this.itemsContainer.children;
@@ -452,13 +500,14 @@ class Shop{
             this.itemsContainer.removeChild(this.itemsContainer.firstChild)
         }
 
-        // apply category filter
-        if (this.setCompatibilityFilters.buildType) {
-            // Filter items based on buildCategories defined for each component.
-            this.filteredItems = this.searchResults.filter(item => 
-                item.buildCategories && item.buildCategories.includes(this.compatibilityFilters.buildType.toLowerCase()),
-            );
-        } else if(this.selectedCategory.length !== 0) {
+        // Apply all filters in sequence
+        let filteredItems = this.items;
+
+        // Apply all other filters (price, category, build type)
+        filteredItems = this.applyFilters(filteredItems);
+
+        // Apply selected category filter
+        if(this.selectedCategory.length !== 0) {
             this.filteredItems = this.searchResults.filter(
                 item => item.type.toLowerCase() === this.selectedCategory.toLowerCase())
         } else {

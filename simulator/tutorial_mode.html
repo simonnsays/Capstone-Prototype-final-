@@ -29,7 +29,7 @@
                 </div>
                 
                 <div class="wizard-steps">
-                    <div class="step" data-step="1">
+                    <div class="step step-build-type" data-step="1">
                         <h3>Choose Your Build Type</h3>
                         <div class="build-options">
                             <button class="build-option" data-type="gaming">
@@ -45,13 +45,27 @@
                                 <span class="label">Casual</span>
                             </button>
                         </div>
+                    </div>  
+                    <br>
+                    <div class="step step-price-range" data-step="2" style="display: none;">
+                        <label>Input Your Budget</label>
+                        <div class="range-slider">
+                          <input type="range" id="minRange" min="0" max="100000" step="100" value="0">
+                          <input type="range" id="maxRange" min="0" max="100000" step="100" value="100000">
+                          <div class="range-track"></div>
+                        </div>
+                        <div class="price-display">
+                        <label for="minPriceInput">Minimum</label>
+                         ₱<input type="number" id="minPriceInput" min="0" max="100000" step="100" value="10000"> 
+                           
+                        <label for="maxPriceInput">Maximum</label>
+                         ₱<input type="number" id="maxPriceInput" min="0" max="100000" step="100" value="100000">
+                        </div>
+                    </div>
                     </div>
                     
-                    <!-- Additional wizard steps -->
-                </div>
-        
                 <div class="wizard-controls">
-                    <button id="prevStep" disabled>Previous</button>
+                    <button id="prevStep">Previous</button>
                     <button id="nextStep">Next</button>
                 </div>
             </div>
@@ -554,6 +568,7 @@
         </div>
     </div>
     <!-------------------------- S C R I P T S ------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
     <script type="module" src="main.js"></script>
     <script>
         [...document.querySelectorAll('*')].forEach(el => {

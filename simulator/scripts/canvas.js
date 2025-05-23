@@ -378,6 +378,38 @@ class Canvas {
         })
     }
 
+    // add component label under component image
+    drawComponentLabel(component, spot) {
+        if (!component || !component.box) return
+        
+        const text = component.type.toUpperCase()
+        
+        // Text settings
+        this.c.font = '12px Arial'
+        this.c.textAlign = 'center'
+        
+        // Calculate label position (centered at bottom of shelf area)
+        const textWidth = this.c.measureText(text).width
+        const padding = 15
+        
+        // Center component.type label at bottom center of the box
+        if (spot) {
+            const labelY = spot.area.y + spot.area.height - 10 
+
+            // Draw label background
+            this.c.fillStyle = 'rgba(0, 0, 0, 0)';
+            this.c.fillRect(
+                spot.area.x + (spot.area.width - textWidth)/2 - padding,
+                labelY - 12,
+                textWidth + padding * 2, 20
+            );
+
+            // Draw text
+            this.c.fillStyle = 'black';
+            this.c.fillText(text, spot.area.x + spot.area.width/2, labelY);
+        }
+    }
+
     // Main Animate Function
     animate() {
         const table = this.table
@@ -455,6 +487,7 @@ class Canvas {
                 const component = spot.component
                 const componentSide = this.utilityTool.getSide(component, component.defaultSource) 
                 this.drawComponent(component.box, componentSide.image)
+                this.drawComponentLabel(component, spot)
             }
         })
 

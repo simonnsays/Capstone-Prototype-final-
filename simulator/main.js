@@ -85,7 +85,8 @@ class Main {
             this.bootUpTab,
             this.drawer,
             this.inventory,
-            this.shop
+            this.shop,
+            this
         )
 
         // setup wizard
@@ -154,29 +155,109 @@ class Main {
 
     showSetupWizard() {
         if (!this.setupWizard) return;
-        
+
+        const stepBuild = this.setupWizard.querySelector('.step-build-type');
+        const stepPrice = this.setupWizard.querySelector('.step-price-range');
+
+        const minPriceInput = document.getElementById('minPriceInput');
+        const maxPriceInput = document.getElementById('maxPriceInput');
+        const minRange = document.getElementById('minRange');
+        const maxRange = document.getElementById('maxRange');
+        const track = document.querySelector('.range-track');
+        // Collect inputs
+        const updateFromSliders = () => {
+            const min = parseInt(minRange.value);
+            const max = parseInt(maxRange.value);
+            minPriceInput.value = min;
+            maxPriceInput.value = max;
+            updateTrack(min, max);
+            this.shop.setPriceRange(min, max);
+        };
+
+        // Update inputs and update range
+        const updateFromInputs = () => {
+            let min = parseInt(minPriceInput.value);
+            let max = parseInt(maxPriceInput.value);
+            if (min > max) [min, max] = [max, min];
+            minRange.value = min;
+            maxRange.value = max;
+            updateTrack(min, max);
+            this.shop.setPriceRange(min, max);
+        };
+
+        // Update track UI
+        const updateTrack = (min, max) => {
+            const maxRange = 100000
+            const minPercent = (min / maxRange) * 100;
+            const maxPercent = (max / maxRange) * 100;
+            track.style.background = `
+                    linear-gradient(
+                        to right,
+                        #ccc ${minPercent}%,
+                        var(--light-lime) ${minPercent}%,
+                        var(--light-lime) ${maxPercent}%,
+                        #ccc ${maxPercent}%
+                    )
+                `;        
+            };
+
+        // Bind input listeners once
+        minRange.addEventListener('input', updateFromSliders);
+        maxRange.addEventListener('input', updateFromSliders);
+        minPriceInput.addEventListener('input', updateFromInputs);
+        maxPriceInput.addEventListener('input', updateFromInputs);
+
+        // Initialize track and values
+        updateFromSliders();
+
+        // Wizard logic
         const buildOptions = this.setupWizard.querySelectorAll('.build-option');
         const nextBtn = document.getElementById('nextStep');
         const prevBtn = document.getElementById('prevStep');
-        
+
         this.setupWizard.showModal();
+
+        // Build type selection
         buildOptions.forEach(option => {
             option.addEventListener('click', (e) => {
-                buildOptions.forEach(option => option.classList.remove('selected')); 
+                buildOptions.forEach(opt => opt.classList.remove('selected'));
                 e.currentTarget.classList.add('selected');
                 this.setupWizardState.buildType = e.currentTarget.dataset.type;
                 nextBtn.disabled = false;
             });
         });
 
+        // Next / Finish
         nextBtn.addEventListener('click', () => {
-            if (this.setupWizardState.buildType) {
+            if (stepBuild.style.display !== 'none') {
+                if (!this.setupWizardState.buildType) return;
+
+                stepBuild.style.display = 'none';
+                stepPrice.style.display = 'block';
+                prevBtn.style.display = 'inline-block';
+                nextBtn.textContent = 'Finish';
+            } else {
                 this.setupWizard.close();
                 this.shop.setCompatibilityFilters(this.setupWizardState.buildType);
                 this.assistant.init();
             }
         });
+
+        // Previous
+        prevBtn.addEventListener('click', () => {
+            stepPrice.style.display = 'none';
+            stepBuild.style.display = 'block';
+            prevBtn.style.display = 'none';
+            nextBtn.textContent = 'Next';
+        });
+
+        // Initial UI state
+        stepBuild.style.display = 'block';
+        stepPrice.style.display = 'none';
+        prevBtn.style.display = 'none';
+        nextBtn.disabled = true;
     }
+
     testBootOrder(){
         this.bootUpTab.pcUnit.componentsStatus.storage.osInstalled === false
     }
@@ -192,7 +273,7 @@ class Main {
 
     addBasicComponents() {
         const itemsToBuy = []
-        // console.log(this.shop.items)
+        //console.log(this.shop.items)
         itemsToBuy.push(this.shop.items.find(item => item.name == 'NZXT H5 Flow'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'B550 Aorus Elite v2'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD Ryzen 7 5700G'))
@@ -200,22 +281,24 @@ class Main {
         itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
         //itemsToBuy.push(this.shop.items.find(item => item.name == 'Kingston HyperX Beast RGB DDR4'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'Seagate Barracuda SSD'))
-        itemsToBuy.push(this.shop.items.find(item => item.name == 'Samsung 970 EVO Plus'))
+        //itemsToBuy.push(this.shop.items.find(item => item.name == 'Samsung 970 EVO Plus'))
         itemsToBuy.push(this.shop.items.find(item => item.name == 'AMD wraith Prism'))
-        itemsToBuy.push(this.shop.items.find(item => item.name == 'Gigabyte Radeon RX7900 XTX'))
+        itemsToBuy.push(this.shop.items.find(item => item.name == 'Gigabyte Radeon RX 7900 XTX'))
 
         itemsToBuy.forEach(item => {
             let shopItem = this.shop.items.find(shopItem => shopItem.name === item.name)
             this.shop.buyComponent(shopItem)
         })
-        this.shop.buyComponent(this.shop.items[0    ])
+        //this.shop.buyComponent(this.shop.items[0    ])
         
-        // console.log(this.inventory.items)
-        for(let i=0; i <= 6; i++) {
-            this.inventory.placeComponent(this.inventory.items[i])
-            this.inventory.update()
-            this.displayArea.update()
+        //console.log(this.inventory.items)
+        for(let i=0; i <= 6 && this.inventory.items.length >0; i++) {
+            const item = this.inventory.items[0]
+            this.inventory.placeComponent(item)
+            this.inventory.items.splice(0, 1) // at position 0, remove 1 item
         }
+        this.inventory.update()
+        this.displayArea.update()
         // this.inventory.placeComponent(this.inventory.items[0])
         // this.inventory.placeComponent(this.inventory.items[1])
         // this.inventory.placeComponent(this.inventory.items[3])
