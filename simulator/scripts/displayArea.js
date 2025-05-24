@@ -1,8 +1,9 @@
 class DisplayArea {
-    constructor(elementHandler, utilityTool, portsTab, bootUpTab, user, wattageCalculator) {
+    constructor(elementHandler, utilityTool, eventBus, portsTab, bootUpTab, user, wattageCalculator) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
+        this.eventBus = eventBus
         this.bootUpTab = bootUpTab
         this.user = user
         this.wattageCalculator = wattageCalculator
@@ -490,7 +491,10 @@ class DisplayArea {
         this.hideButtons(this.tabButtons)
         // this.bootUpTab.update()
 
-        this.menuButton.addEventListener('click', () => this.toggleMenu(this.menuButton, this.tabButtons, menuImg))
+        this.menuButton.addEventListener('click', () => {
+            this.toggleMenu(this.menuButton, this.tabButtons, menuImg)
+            this.eventBus.emit('tabsMenuOpened')
+        } )
         this.mountModeButton.addEventListener('click', () => this.toggleMountMode())
     }
 }

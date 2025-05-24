@@ -11,6 +11,8 @@ import Assistant from "./assistant/assistant.js"
 import wattageCalculator from "./scripts/Data/wattageCalculator.js"
 import chatbot from "./scripts/Data/chatbot.js"
 import bios from "./scripts/Data/bios.js"
+import EventBus from "./scripts/Utility/eventBus.js"
+import TutorialManager from "./scripts/tutorialManager.js"
 class Main {
     constructor() {
         // Utility Modules
@@ -20,6 +22,8 @@ class Main {
         this.user = new User(this.utilityTool)
         // Item Info Modal
         this.itemInfo = this.elementHandler.getItemInfoElements()
+        // Event Bus
+        this.eventBus = new EventBus()
 
         // Wires Tab
         this.portsTab = new PortsTab(
@@ -39,7 +43,8 @@ class Main {
         // Display Area
         this.displayArea = new DisplayArea(
             this.elementHandler, 
-            this.utilityTool, 
+            this.utilityTool,
+            this.eventBus, 
             this.portsTab, 
             this.bootUpTab,
             this.user
@@ -56,14 +61,15 @@ class Main {
         this.shop = new Shop(
             this.elementHandler, 
             this.utilityTool, 
+            this.eventBus,
             this.inventory, 
             this.itemInfo)
 
         //Assistant
         this.assistant = new Assistant(this,this.elementHandler, this.utilityTool)
 
-        // Prevent Canvas Interaction when tabs are open
-        window.addEventListener('mousedown', () => this.handleMouseDown())
+        // Tutorial Manager
+        this.tutorialManager = new TutorialManager(this.eventBus, this.assistant)
 
         // Wattage Calculator
         this.wattageCalculator = new wattageCalculator(this.displayArea, this.canvas)
@@ -97,6 +103,8 @@ class Main {
             preferences: {}
         };
   
+        // Prevent Canvas Interaction when tabs are open
+        window.addEventListener('mousedown', () => this.handleMouseDown())
     }
 
     handleMouseDown() {
@@ -122,10 +130,11 @@ class Main {
         this.shop.init() 
         this.displayArea.init()
         this.canvas.animate()
-        //this.assistant.init()
+        // this.showSetupWizard()
+
+        this.assistant.init()
+        this.tutorialManager.init()
         //this.assistant.endTutorial()   
-        this.showSetupWizard()
-        // this.bootUpTab.powerBtn.addEventListener('mouseup', () => this.bootUpTab.powerBtnClick(this.bootUpTab.pcUnit.availableUnit));
         
         // TEST: BOOT UP
         //this.hideGameContainer()

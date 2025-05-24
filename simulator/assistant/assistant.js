@@ -1,4 +1,3 @@
-import tasks from "./tasks.js"
 class Assistant {
     constructor(main, elementHandler, utilityTool) {
         // DOM ELEMENTS
@@ -6,6 +5,7 @@ class Assistant {
         this.elements = elementHandler.getAssistantElements()
         this.utilityTool = utilityTool
         this.image = this.elements.image
+        this.overlay = this.elements.overlay
         
         // Mini mode
         this.miniElement = this.elements.assistantMini
@@ -25,38 +25,18 @@ class Assistant {
         this.tasksContainer = this.elements.tasksContainer
         this.errorsContainer = this.elements.errorsContainer
 
-        this.dialogue = [
-            'Hello! I am your assistant. Click on me to get started.',
-        ]
 
         // TUTORIAL STEP BY STEPS
-        this.notifCount = 1
         this.boundMouseHover = this.handleMouseHover.bind(this)
-        this.tasks = tasks
-        this.currentStep = 0
+        this.boundClick = this.handleClick.bind(this)
 
-        // Tutorial tracking
-        this.tutorialInterval = null
-        this.errorTimeout = null
-        this.errorVisible = false
+        this.onTutorial = true
     }
 
     init() {
         // Mini Element Listeners
         window.addEventListener('mousemove', this.boundMouseHover)
                 
-        window.addEventListener('click', (e) => {
-            const mouse = {x: e.clientX, y: e.clientY}
-            const miniElementBox = this.miniElement.getBoundingClientRect()
-            const fullElementBox = this.fullElement.modal.getBoundingClientRect()
-            
-            if(this.utilityTool.isInsideBox(mouse, miniElementBox) && !this.fullElement.isActive) {
-                this.openModal() // open page                
-            } else if(!this.utilityTool.isInsideBox(mouse, fullElementBox) && this.fullElement.isActive) {
-                this.closeModal() // close page
-            }
-        })
-
         // Full Page Element Listeners
         this.revealTasks()
         
@@ -64,13 +44,66 @@ class Assistant {
 
         this.errorsBtn.addEventListener('click', () => this.revealErrors())
 
-        // Task Creations
-        this.createTasks()
-
         window.addEventListener('click', () => this.toggleTaskCellStates())
+        
+        // Start tutorial logic
+        // this.startTutorial()
+    }
 
-       // Start tutorial logic
-       this.startTutorial()
+    handleClick(e) {   
+        const mouse = {x: e.clientX, y: e.clientY}
+        const miniElementBox = this.miniElement.getBoundingClientRect()
+        const fullElementBox = this.fullElement.modal.getBoundingClientRect()
+        
+        if(this.utilityTool.isInsideBox(mouse, miniElementBox) && !this.fullElement.isActive) {
+            this.openModal() // open page                
+        } else if(!this.utilityTool.isInsideBox(mouse, fullElementBox) && this.fullElement.isActive) {
+            this.closeModal() // close page
+        }
+    }
+
+    handleClickWithTask(task) {
+        if (!task.descIndex) task.descIndex = 0
+        console.log(task.id)
+
+        if (this.onTutorial) {
+            // Skip 'break' steps
+            while (
+                task.descIndex < task.description.length &&
+                task.description[task.descIndex].type === 'break'
+            ) {
+                task.descIndex++
+            }
+
+            // If no more steps, you might want to end tutorial here
+            if (task.descIndex >= task.description.length) {
+                    this.resume()
+                return
+            } 
+
+            const step = task.description[task.descIndex]
+
+            this.infoSec.innerHTML = task.descIndex == 0
+            ? `<p class="tip-title">${task.title.text}</p>
+                <p class="tip-desc">${step.content}</p>`
+            : `<p class="tip-desc">${step.content}</p>`
+
+            task.descIndex++ // Move to the next step for next click
+
+        }
+    }
+
+    updateMiniDsiplay(task) {
+        
+    }
+
+    resume() {
+        this.toggleOverlay(false)
+        this.toggleMiniDisplay(false)
+        window.removeEventListener('click', this.boundClickWithTask)
+        window.addEventListener('click', this.boundClick)
+        window.addEventListener('mousemove', this.boundMouseHover)
+        console.log('hit')
     }
 
     toggleTaskCellStates() {
@@ -103,52 +136,43 @@ class Assistant {
             }
         })
     }
-
-    // toggleTaskCellStates() {
-    //     if (!this.tasksContainer.children.length > 0) {
-    //         return
-    //     }
-    
-    //     Object.values(this.tasksContainer.children).forEach(taskCell => {
-    //         // Ensure only one event listener is attached
-    //         if (!taskCell.dataset.listenerAttached) {
-    //             taskCell.addEventListener('click', () => {
-    //                 // Close any previously opened task cell
-    //                 document.querySelectorAll('.task-cell.opened').forEach(openedCell => {
-    //                     if (openedCell !== taskCell) {
-    //                         openedCell.classList.remove('opened')
-    //                     }
-    //                 })
-    
-    //                 // Toggle the clicked task cell
-    //                 taskCell.classList.toggle('opened')
-    //             })
-    //             taskCell.dataset.listenerAttached = true  // Mark as handled
-    //         }
-    //     })
-    // }   
        
+    showCurrentTask(task) {
+        this.createTask(task)
 
-    createTasks() {
-        tasks.forEach(task => {
-            // task cell element
-            const taskCell = document.createElement('div')
-            taskCell.classList.add('task-cell')
+        this.toggleOverlay(true)
+        this.toggleMiniDisplay(true)
+        window.removeEventListener('mousemove', this.boundMouseHover)
+        window.removeEventListener('click', this.boundClick)
 
-            // title element
-            const cellTitle = this.createTaskTtitle(task)
-            taskCell.appendChild(cellTitle)
+        this.boundClickWithTask = this.handleClickWithTask.bind(this, task)
+        console.log('hit')
+        window.addEventListener('click', this.boundClickWithTask)
+    }
 
-            const divider = document.createElement('div')
-            divider.classList.add('vert-br')
-            taskCell.appendChild(divider)
+    toggleOverlay(bool) {
+        bool
+        ? this.overlay.classList.remove('invisible')
+        : this.overlay.classList.add('invisible')
+    }
 
-            // description element
-            const cellDescription = this.createTaskDescription(task)
-            taskCell.appendChild(cellDescription)
+    createTask(task) {
+        const taskCell = document.createElement('div')
+        taskCell.classList.add('task-cell')
 
-            this.tasksContainer.appendChild(taskCell)
-        })
+        // title element
+        const cellTitle = this.createTaskTtitle(task)
+        taskCell.appendChild(cellTitle)
+
+        const divider = document.createElement('div')
+        divider.classList.add('vert-br')
+        taskCell.appendChild(divider)
+
+        // description element
+        const cellDescription = this.createTaskDescription(task)
+        taskCell.appendChild(cellDescription)
+
+        this.tasksContainer.appendChild(taskCell)
     }
 
     createTaskTtitle(task) {
@@ -197,7 +221,7 @@ class Assistant {
                     descElement = document.createElement('p')
                     descElement.textContent = desc.content
                     break
-                case 'br':
+                case 'break':
                     descElement = document.createElement('br')
                     break
                 case 'list':
@@ -283,7 +307,6 @@ class Assistant {
     }
 
     revealTasks() {
-        console.log('tasks reavealing')
         // change task button styling
         this.tasksBtn.classList.remove('asst-inactive')
         if(!this.tasksBtn.classList.contains('asst-active')) {
@@ -306,7 +329,6 @@ class Assistant {
     }
 
     revealErrors() {
-        console.log('errors reavealing')
         this.errorsBtn.classList.toggle('asst-inactive', false)
         this.errorsBtn.classList.toggle('asst-active', true)
 
@@ -356,6 +378,8 @@ class Assistant {
             this.miniElement.getBoundingClientRect()
         )
 
+        this.toggleMiniDisplay(isHovering)
+
         isHovering ? this.notifCount = 0 : this.notifCount = 1
         this.miniElement.classList.toggle('extended', isHovering)
         this.miniElement.style.cursor = isHovering ? 'pointer' : 'default'
@@ -363,234 +387,23 @@ class Assistant {
         this.infoSec.classList.toggle('hidden', !isHovering)
     }
 
-
-
-    // Toggle the visibility of task descriptions
-    toggleTaskDescription(taskIndex) {
-        const taskDescriptions = document.querySelectorAll('.task-description');
-        taskDescriptions.forEach((description, index) => {
-            description.style.display = index === taskIndex ? 'block' : 'none';
-        });
-
-        this.updateTaskStatus(taskIndex);
-    }
-
-    // Update the task status in the task-status element
-    updateTaskStatus(taskIndex) {
-        const taskTitles = document.querySelectorAll('.tasktitle');
-        const taskStatus = document.querySelector('#task-status');
-        if (taskIndex >= 0 && taskIndex < taskTitles.length) {
-            const currentTaskTitle = taskTitles[taskIndex].textContent;
-            taskStatus.textContent = `Current Task: ${taskIndex + 1} - ${currentTaskTitle}`;
-        } else {
-            taskStatus.textContent = 'No task selected';
-        }
-    }
-    
-    // Perform the corresponding task action (open modal or do something)
-    performTaskAction(action) {
-        this.closeAssistantTab();
-        switch (action) {
-            case 'openShop': this.openShopModal(); break;
-            case 'openInventory': this.openInventoryModal(); break;
-            case 'connectWires': this.openWiresModal(); break;
-            case 'powerOnPC': this.powerOnPC(); break;
-            default: console.log("Unknown task action");
-        }
-    }
-
-    // Toggle between the task and error views
-    toggleErrorView() {
-        if (this.taskContainer && this.errorContainer) {
-            this.errorContainer.style.display = "none";
-            document.getElementById("switch").addEventListener("change", () => {
-                if (document.getElementById("switch").checked) {
-                    this.taskContainer.style.display = "none";
-                    this.errorContainer.style.display = "flex";
-                } else {
-                    this.taskContainer.style.display = "flex";
-                    this.errorContainer.style.display = "none";
-                }
-            });
-        }
-    }
-    // ---- tutorial logic ----
-    // initiate the tutorial
-    startTutorial() {
-        // Start at the first task
-        this.currentStep = 0
-        this.highlightCurrentTask()
-        this.openCurrentTaskCell()
-        this.setupTaskTrigger() // set up the trigger for the current task
-        this.setupTutorialTracking()
-        this.openModal() // open the modal to start the tutorial
-    }
-
-    // setup task triggers 
-    setupTaskTrigger() {
-        // Remove previous trigger if any
-        this.removeTaskTrigger();
-    
-        const currentTask = this.tasks[this.currentStep];
-        if (!currentTask || !currentTask.trigger) return;
-    
-        const { selector, event } = currentTask.trigger;
-        const el = document.querySelector(selector);
-        if (!el) return;
-    
-        // Save for removal later
-        this.currentTriggerElement = el;
-        this.currentTriggerHandler = () => this.tryStepCompletion();
-    
-        el.addEventListener(event, this.currentTriggerHandler);
-    }
-    
-    // removal of task triggers
-    removeTaskTrigger() {
-        if (this.currentTriggerElement && this.currentTriggerHandler && this.tasks[this.currentStep]?.trigger) {
-            const { event } = this.tasks[this.currentStep].trigger;
-            this.currentTriggerElement.removeEventListener(event, this.currentTriggerHandler);
-        }
-        this.currentTriggerElement = null;
-        this.currentTriggerHandler = null;
-    }
-
-    // setup tracking for tutorial completion
-    setupTutorialTracking() {
-        // Listen for user actions to check for step completion
-        document.addEventListener('click', this.tryStepCompletion.bind(this))
-        // Polling for completion (for actions not directly tied to clicks)
-        if (this.tutorialInterval) clearInterval(this.tutorialInterval)
-        this.tutorialInterval = setInterval(() => {
-            this.checkCompletionSilently()
-        }, 500)
-    }
-
-    // check if the current step is completed
-    tryStepCompletion() {
-        if (this.isStepCompleted(this.currentStep)) {
-            this.handleStepCompletion()
-        }
-    }
-
-    // check task completion automatically without user interaction from task triggers
-    checkCompletionSilently() {
-        // Only check the current step for tutorial progression
-        if (this.tasks[this.currentStep].status !== 'complete' && this.isStepCompleted(this.currentStep)) {
-            this.handleStepCompletion()
-        }
-    }
-    
-    // completion checker for each task from task.js 
-    isStepCompleted(stepIndex) {
-        const task = this.tasks[stepIndex]
-        if (task && typeof task.completionCheck === 'function') {
-            return task.completionCheck(this.main)
-        }
-        return false
-    }
-
-    // user task completion handler 
-    handleStepCompletion() {
-        this.completeTaskByStep(this.currentStep)
-        // Move to next step if available
-        if (this.currentStep < this.tasks.length - 1) {
-            this.currentStep++
-            this.highlightCurrentTask()
-            this.setupTaskTrigger()
-            this.showTaskCompletionMessage()
-        } else {
-            this.endTutorial()
-        }
-    }
-
-    // creation of task completion message
-    showTaskCompletionMessage(message = `Check the Assistant for your next step.`) {
-        const reassureDialog = document.querySelector('.asst-reassure');
-        if (!reassureDialog) return;
-    
-        reassureDialog.innerHTML = `
-            <div class="reassure-content">
-                <div class="reassure-icon-wrapper">
-                    <span class="reassure-icon" aria-label="Success">🎯</span>
-                </div>
-                <div class="reassure-text">
-                    <div class="reassure-title">Task Complete!</div>
-                    <div class="reassure-message">${message}</div>
-                </div>
-                <button class="reassure-close" aria-label="Close">&times;</button>
-            </div>
-        `;
-        reassureDialog.showModal();
-    
-        // Allow manual close
-        reassureDialog.querySelector('.reassure-close').onclick = () => reassureDialog.close();
-
-        // Auto-close after 3s
-        setTimeout(() => {
-            if (reassureDialog.open) reassureDialog.close();
-            this.openModal()
-            this.openCurrentTaskCell()
-        }, 3000);
-    }
-
-    // end tutorial and remove listeners, intervals, and highlights
-    endTutorial() {
-        // Remove event listeners and intervals
-        if (this.tutorialInterval) clearInterval(this.tutorialInterval)
-
-        // remove click event listeners
-        this.removeTaskTrigger()
-
-        // clear any remaining task highlights
-        document.querySelectorAll('.highlight-element').forEach(el => {
-            el.classList.remove('highlight-element')
-        })
-
-        // Show the final build summary
-        this.showFinalBuildSummary();
-    }
-
-    // automatically open the current task cell in the task list
-    openCurrentTaskCell() {
-        // Close any previously opened task cells
-        document.querySelectorAll('.task-cell.opened').forEach(cell => {
-            cell.classList.remove('opened');
-        });
-    
-        // Open the current task cell
-        const taskCell = this.tasksContainer.children[this.currentStep];
-        if (taskCell) {
-            taskCell.classList.add('opened');
-            // scroll into view
-            taskCell.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    }
-
-    // marker for displaying completed tasks
-    completeTaskByStep(stepIndex) {
-        const taskCell = this.tasksContainer.children[stepIndex]
-        if (!taskCell) return
-        this.tasks[stepIndex].status = 'complete'
-        taskCell.classList.add('completed')
-        const statusElem = taskCell.querySelector('.task-status')
-        if (statusElem) {
-            statusElem.textContent = 'Completed'
-            statusElem.style.visibility = 'visible'
-        }
-        this.highlightCurrentTask()
+    toggleMiniDisplay(bool) {
+        bool ? this.notifCount = 0 : this.notifCount = 1
+        this.miniElement.classList.toggle('extended', bool)
+        this.miniElement.style.cursor = bool ? 'pointer' : 'default'
+        this.pulse.classList.toggle('hidden', bool)
+        this.infoSec.classList.toggle('hidden', !bool)
     }
 
     // hihglight handler for the current task (marks the element for easier navigation in the UI)
-    highlightCurrentTask() {
+    highlightCurrentTask(taskHighlight) {
         // Remove all highlights
         document.querySelectorAll('.highlight-element').forEach(el => {
             el.classList.remove('highlight-element')
         })
         // Highlight the current task's target
-        const currentTask = this.tasks[this.currentStep]
-        if (currentTask && currentTask.highlight) {
-            const elementToHighlight = document.querySelector(currentTask.highlight)
+        if (taskHighlight) {
+            const elementToHighlight = document.querySelector(taskHighlight)
             if (elementToHighlight) {
                 elementToHighlight.classList.add('highlight-element')
             }

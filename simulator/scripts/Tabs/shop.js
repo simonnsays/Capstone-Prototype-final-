@@ -3,11 +3,12 @@ import components from "../Data/data1.js"
 import SearchBar from "../Utility/searchBar.js"
 
 class Shop{
-    constructor(elementHandler, utilityTool, inventory, itemInfo) {
+    constructor(elementHandler, utilityTool, eventBus, inventory, itemInfo) {
         // Utility
         this.utilityTool = utilityTool
         this.elements = elementHandler.getShopElements()
         if(!this.elements) throw new Error('Missing Shop Elements')
+        this.eventBus = eventBus
 
         // Elements
         this.openBtn = this.elements.openBtn
@@ -33,7 +34,10 @@ class Shop{
         this.inventory = inventory
 
         // Events
-        this.openBtn.addEventListener('click', () => this.openTab(this.modal))
+        this.openBtn.addEventListener('click', () => {
+            eventBus.emit('shopOpened')
+            this.openTab(this.modal)
+        })
         this.closeBtn.addEventListener('click', () => this.closeTab(this.modal))
         window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
 

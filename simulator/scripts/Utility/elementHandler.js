@@ -102,6 +102,7 @@ class ElementHandler {
             // errors elements
             errorsBtn: document.querySelector('#errorsButton'),
             errorsContainer: document.querySelector('#errorsContainer'),
+            overlay: document.querySelector('.overlay')
         } 
     } 
     
