@@ -3,7 +3,7 @@
 * PROCEED TO Assistant.createTaskDescription FOR MORE REFERENCE AND IF YOU WANT TO UPDATE THE SUPPORTED TYPES
 */
 const tasks = [
-    // STEP 1
+    // STEP 1 - open tabs
     {
         id: 'openTabs',
         trigger: 'init',
@@ -18,10 +18,10 @@ const tasks = [
             {type: 'text', content: 'To Start, let me show you around.'},
             {type: 'text', content: 'Click on the button over there to expand to your tab buttons.'},
         ],
-        highlight: '#menuBtn',
+        highlight: ['#menuBtn'],
         status: 'incomplete'
     },
-    // STEP 2
+    // STEP 2 - Open shop
     {
         id: 'openShop',
         trigger: 'tabsMenuOpened',
@@ -32,190 +32,156 @@ const tasks = [
         description: [
             {type: 'text', content: 'open the shop'},
         ],
-        highlight: '#openShop',
+        highlight: ['#openShop'],
         status: 'incomplete'
     },  
-    // STEP 3
+    // STEP 3 - Expand Chassis [SHOW CHASSIS COMPONENT FUNCTIONALITY]
     {
-        id: 'buyComponent',
+        id: 'expandChassis',
         trigger: 'shopOpened',
         title: {
             imageSrc: './assets/Assistant/shop.png',
-            text: 'Buy your Chassis'
+            text: 'Choose Chassis'
         },
         description: [
             {type: 'text', content: 'click on the glowing Icon to get your very first component'},
         ],
-        highlight: '#NZXT H5 Flow',
+        highlight: ['[data-name="NZXT H5 Flow"]'],
+        status: 'incomplete'
+    },
+    // STEP 4  - Buy Chassis
+    {
+        id: 'buyChassis',
+        trigger: 'chassisExpanded',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Buy Chassis'
+        },
+        description: [
+            {type: 'text', content: 'These are the Specs, Click the Buy button.'},
+        ],
+        highlight: ['#button1'],
+        status: 'incomplete'
+    },  
+    // STEP 5 - Expand Motherboard
+    {
+        id: 'expandMotherboard',
+        trigger: 'chassisBought',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Choose Motherboard'
+        },
+        description: [
+            {type: 'text', content: 'use the category filters above to filter components then choose the highlighted item.'},
+        ],
+        highlight: ['[data-id="motherboard"]','[data-name="ASRock X570 PG Velocita"]'],
+        status: 'incomplete'
+    },  
+    // STEP 6 - Buy Motherboard
+    {
+        id: 'buyMotherboard',
+        trigger: 'motherboardExpanded',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Buy MotherBoard'
+        },
+        description: [
+            {type: 'text', content: 'click on the buy button once again to buy'},
+        ],
+        highlight: ['#button1'],
+        status: 'incomplete'
+    }, 
+    // STEP 7 - Expand Cpu
+    {
+        id: 'expandCpu',
+        trigger: 'motherboardBought',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Choose CPU '
+        },
+        description: [
+            {type: 'text', content: 'using the filters, got to CPU and choose the highlighted item'},
+        ],
+        highlight: ['[data-id="cpu"]','[data-name="AMD Ryzen 9 5900X"]'],
+        status: 'incomplete'
+    },  
+    // STEP 8 - Buy Cpu
+    {
+        id: 'buyCpu',
+        trigger: 'cpuExpanded',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Buy CPU '
+        },
+        description: [
+            {type: 'text', content: 'press the Buy button to buy the cpu'},
+        ],
+        highlight: ['#button1'],
+        status: 'incomplete'
+    },  
+    // STEP 9 - expand PSU
+    {
+        id: 'expandPsu',
+        trigger: 'cpuBought',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Choose Power Supply '
+        },
+        description: [
+            {type: 'text', content: 'on the category filter, select Power Supply and then select the highlighted item'},
+        ],
+        highlight: ['[data-id="psu"]','[data-name="EVGA Supernova 1300 P+"]'],
+        status: 'incomplete'
+    },  
+    // STEP 10 - buy PSU
+    {
+        id: 'buyPsu',
+        trigger: 'psuExpanded',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Buy Power Supply '
+        },
+        description: [
+            {type: 'text', content: 'Click buy'},
+        ],
+        highlight: ['#button1'],
+        status: 'incomplete'
+    },  
+    // STEP 11 - activate quickbuy
+    {
+        id: 'checkQuickBuy',
+        trigger: 'psuBought',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Quick Buy Feature '
+        },
+        description: [
+            {type: 'text', content: 'Quick Buy is a feature that allows you to buy components quickly'},
+            {type: 'text', content: 'this is because you dont check for specs anymore'},
+            {type: 'text', content: 'to perform this, look for the checkbox on the lower left, make sure that is is checked to activate Quick Buy'},
+        ],
+        highlight: ['label[for="quickBuy"]'],
+        status: 'incomplete'
+    },  
+    // STEP 12- Buy Ram
+    {
+        id: 'buyRam',
+        trigger: 'quickBuyChecked',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Buy Ram'
+        },
+        description: [
+            {type: 'text', content: 'on the category filter, select Memory and then select the highlighted item'},
+            {type: 'text', content: 'Memory is usually preffered to be be used across multiple ram sticks so for this one, buy at least two'},
+        ],
+        condition: {
+            amountRequired: 2,
+            amount:0
+        },
+        highlight: ['[data-id="ram"]','[data-name="Kingston HyperX Beast RGB DDR4"]'],
         status: 'incomplete'
     },  
 ]
 
 export default tasks;
-
-
-    // // STEP 2
-    // { 
-    //     id: 2,
-    //     step: 2,
-    //     title: {
-    //         imageSrc: './assets/Assistant/inventory.png',
-    //         text: 'Check Your Inventory'
-    //     },
-    //     description: [
-    //         {type: 'text', content: "Place the components you've chosen to the components shelf by clicking the components in your inventory"},
-    //         {type: 'break'},
-    //         {type: 'text', content: 'Place each component in regards to their order:'},
-    //         {type: 'list', style: 'ordered', items: [
-    //             'Case',
-    //             'Motherboard',
-    //             'Processor',
-    //             'Power Supply Unit',
-    //             'RAM',
-    //             'Storage Device - HDD or SSD',
-    //             'Cooling',
-    //             'GPU or Graphics Card'
-    //         ]},
-    //         {type: 'break'},
-    //         {type: 'text', content: 'Check the images below for your reference'},
-    //         {type: 'imageGroup',  index: 0, images: [
-    //             './assets/Assistant/inv1.png',
-    //             './assets/Assistant/inv2.png',
-    //             './assets/Assistant/inv3.png'
-    //         ]},
-    //     ],
-    //     highlight: '#openInv',
-    //     trigger :{selector: '#openInv', event: 'click'},
-    //     // Completion: All essential components are placed in the correct slots inside the case
-    //     completionCheck: () => {
-    //         const main = window.main;
-    //         const requiredTypes = ['motherboard', 'cpu', 'ram', 'psu','storage','gpu'];
-    //         const displayArea = main?.displayArea;
-    //         const table = displayArea?.table;
-    //         if (!table?.component || table.component.type !== 'chassis') return false;
-    //         function hasComponent(type, slots) {
-    //             return slots.some(slot => 
-    //                 slot.component && (
-    //                     slot.component.type === type ||
-    //                     (slot.component.slots && hasComponent(type, slot.component.slots))
-    //                 )
-    //             );
-    //         }
-    //         const chassis = table.component;
-    //         return requiredTypes.every(type => hasComponent(type, chassis.slots));
-    //     },
-    //     status: 'incomplete'
-    // },
-    // { 
-    //     id: 3,
-    //     step: 3,
-    //     title: {
-    //         imageSrc: './assets/Assistant/wires.png',
-    //         text: 'Connecting Components with Wires'
-    //     },
-    //     description: [
-    //         {type: 'text', content: "Now we dive in to plugging each wire for each component either for power or data connection."},
-    //         {type: 'break'},
-    //         {type: 'text', content: "There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicator, reset button, and 3.5mm audio jack ports."},
-    //         {type: 'text', content: "To connect the wires simply open the wires drawer and click the wires to their respective highlighted slots"},
-    //         {type: 'break'},
-    //         {type: 'text', content: 'Check the images below for your reference'},
-    //         {type: 'imageGroup',  index: 0, images: [
-    //             './assets/Assistant/wires1.png',
-    //             './assets/Assistant/wires2.png',
-    //             './assets/Assistant/wires3.png',
-    //             './assets/Assistant/wires4.1.png',
-    //         ]},
-    //         {type: 'text', content: "Also please note that the wire will be colored green when they are connected on both components however it will be colored red if it is only connected on one end."},
-    //         {type: 'imageGroup', index: 0, images: [
-    //             './assets/Assistant/wires4.2.png',
-    //             './assets/Assistant/wires5.png',
-    //             './assets/Assistant/wires6.png',
-    //         ]}
-    //     ],
-    //     highlight: '#openWires',
-    //     trigger:{selector: '#openWires', event: 'click'},
-    //     // Completion: All required cables between components are connected
-    //     completionCheck: () => {
-    //         const main = window.main;
-    //         const ports = main?.portsTab;
-    //         if (!ports?.drawer?.cables) return false;
-    //         const table = main?.displayArea?.table;
-    //         if (!table?.component || table.component.type !== 'chassis') return false;
-    //         const chassis = table.component;
-    //         function hasComponent(type, slots) {
-    //             return slots.some(slot =>
-    //                 slot.component && (
-    //                     slot.component.type === type ||
-    //                     (slot.component.slots && hasComponent(type, slot.component.slots))
-    //                 )
-    //             );
-    //         }
-    //         const requiredCables = [
-    //             { type: '24-pin-power', ends: ['motherboard', 'psu'], needed: hasComponent('motherboard', chassis.slots) },
-    //             { type: '8-pin-power', ends: ['motherboard', 'psu'], needed: hasComponent('motherboard', chassis.slots) },
-    //             { type: 'sata-power', ends: ['storage', 'psu'], needed: hasComponent('storage', chassis.slots) },
-    //             { type: 'sata-data', ends: ['storage', 'motherboard'], needed: hasComponent('storage', chassis.slots) },
-    //             { type: 'frontPanel', ends: ['motherboard'], needed: hasComponent('motherboard', chassis.slots) },
-    //             { type: '3-pin-cooling', ends: ['motherboard'], needed: hasComponent('cooling', chassis.slots) }
-    //         ];
-    //         const gpuPresent = hasComponent('gpu', chassis.slots);
-    //         if (gpuPresent) {
-    //             requiredCables.push({ type: '8-pin-pcie', ends: ['gpu', 'psu'], needed: true });
-    //         }
-    //         return requiredCables
-    //             .filter(req => req.needed)
-    //             .every(req => {
-    //                 const cablesOfType = ports.drawer.cables.filter(cable => cable.type === req.type);
-    //                 return cablesOfType.some(cable =>
-    //                     req.ends.every(end => cable.ends[end]?.connected)
-    //                 );
-    //             });
-    //     },
-    //     status: 'incomplete'
-    // },
-    // { 
-    //     id: 4,
-    //     step: 4,
-    //     title: {
-    //         imageSrc: './assets/Assistant/power-button.png',
-    //         text: 'Power On'
-    //     },
-    //     description: [
-    //         {type: 'text', content: "Power on your pc by pressing the power on button"},
-    //         {type: 'break'},
-    //         {type: 'text', content: "Important note:"},
-    //         {type: 'list', style: 'unordered', items: [
-    //             "Check if you have compatible components before turning on your PC",
-    //             "Check if you have all the necessary components before turning on your PC",
-    //             "Check if you have all the necessary wires connected to each components",
-    //         ]},
-    //         {type: 'break'},
-    //         {type: 'text', content: 'After checking all the necessary components and wires you can now power on your PC by pressing the power button'},
-    //         {type: 'text', content: "After pressing the power button you will see the boot up screen and the computer will start to boot up"},
-    //         {type: 'text', content: "After booting up you will see the desktop screen and you have successfully assembled your PC"},
-    //         {type: 'break'},
-    //         {type: 'text', content: "Also notice that when the reports on the left side has different colors it means that:"},
-    //         {type: 'list', style: 'unordered', items: [
-    //             "Green - All components are connected and working properly",
-    //             "Red - There are components that are not connected or not working properly",
-    //             "Red with ! - The components are critical meaning it does not work and could affect the other components as well",
-    //             "Yellow - All components are connected and working but needs optimization"
-    //         ]},
-    //         {type: 'text', content: "Check the images below for your reference:"},
-    //         {type: 'imageGroup',  index: 0, images: [
-    //             './assets/Assistant/power1.png',
-    //             './assets/Assistant/power2.png',
-    //             './assets/Assistant/power3.png',
-    //         ]},
-    //     ],
-    //     highlight: '#openBootTab',
-    //     trigger:{selector: '#openBootTab', event: 'click'},
-    //     // Completion: PC is powered on and booted
-    //     completionCheck: () => {
-    //         const main = window.main;
-    //         const bootTab = main?.bootUpTab;
-    //         return bootTab?.pcUnit?.power === 'on' && bootTab?.pcUnit?.bootStatus === true;
-    //     },
-    //     status: 'incomplete'
-    // },

@@ -369,7 +369,10 @@ class DisplayArea {
             }
 
             // adjust z-index to go under menu button
-            buttons[i].style.zIndex = buttons.length - i
+            buttons.forEach(button => {
+                button.classList.add('.z-0')
+            })
+            // buttons[i].style.zIndex = buttons.length - i
         }
     }
 
@@ -377,6 +380,7 @@ class DisplayArea {
         buttons.forEach(button => {
             if(button.id === 'mountUnmount') button.style['transform'] = 'translateX(155px)'
             else button.style['transform'] = ''
+            button.classList.remove('z-0')
         })
     }
 

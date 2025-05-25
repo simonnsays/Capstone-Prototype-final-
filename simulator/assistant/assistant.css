@@ -582,6 +582,15 @@ p {
     padding: 0 10px;
     position: relative;
 }
+
+#asstClose {
+    font-size: 35px;
+    position: absolute;
+    right: -20;
+    top: -15;
+    cursor: pointer;
+}
+
 .icon-area {
     width: 700px;
     height: 100%;
@@ -742,7 +751,8 @@ p {
 .task-description {
     width: 600px;
     box-sizing: border-box;
-    padding: 15px 20px;
+    padding: 20px;
+    padding-top: 25px;
     display: none;
     flex-shrink: 0;
     overflow: auto;

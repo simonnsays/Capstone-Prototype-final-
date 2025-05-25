@@ -24,7 +24,20 @@ class Assistant {
         this.errorsBtn = this.elements.errorsBtn  
         this.tasksContainer = this.elements.tasksContainer
         this.errorsContainer = this.elements.errorsContainer
+        this.closeBtn = this.elements.closeBtn
+        this.closeBtn.addEventListener('click', () => this.closeModal())
 
+        this.dialogues = [
+            "Hey there! Need a hand with anything today?",
+            "You’ve got this—just take it one step at a time.",
+            "Anything I can help you with right now?",
+            "Hello! Got anything you want to work on today?",
+            "Don’t forget to take a breath—you’re doing great.",
+            "Hey, you! You’ve been on my mind—ready to make progress?",
+            "I'm here if you need some clarity or a boost.",
+            "Hi again! Got a task you want to check from me?",
+        ]
+        this.prevDialogue
 
         // TUTORIAL STEP BY STEPS
         this.boundMouseHover = this.handleMouseHover.bind(this)
@@ -63,8 +76,11 @@ class Assistant {
     }
 
     handleClickWithTask(task) {
+        this.updateMiniDsiplay(task)
+    }
+
+    updateMiniDsiplay(task) {
         if (!task.descIndex) task.descIndex = 0
-        console.log(task.id)
 
         if (this.onTutorial) {
             // Skip 'break' steps
@@ -77,7 +93,8 @@ class Assistant {
 
             // If no more steps, you might want to end tutorial here
             if (task.descIndex >= task.description.length) {
-                    this.resume()
+                if(task.highlight) this.highlightCurrentTask(task.highlight, false)
+                this.resume()
                 return
             } 
 
@@ -93,17 +110,13 @@ class Assistant {
         }
     }
 
-    updateMiniDsiplay(task) {
-        
-    }
-
     resume() {
         this.toggleOverlay(false)
         this.toggleMiniDisplay(false)
+        
         window.removeEventListener('click', this.boundClickWithTask)
         window.addEventListener('click', this.boundClick)
         window.addEventListener('mousemove', this.boundMouseHover)
-        console.log('hit')
     }
 
     toggleTaskCellStates() {
@@ -142,11 +155,14 @@ class Assistant {
 
         this.toggleOverlay(true)
         this.toggleMiniDisplay(true)
+
+        // Proceed with showing the task
+        if(task.highlight) this.highlightCurrentTask(task.highlight, true)
+        
         window.removeEventListener('mousemove', this.boundMouseHover)
         window.removeEventListener('click', this.boundClick)
 
         this.boundClickWithTask = this.handleClickWithTask.bind(this, task)
-        console.log('hit')
         window.addEventListener('click', this.boundClickWithTask)
     }
 
@@ -356,6 +372,11 @@ class Assistant {
         this.modalIconArea.appendChild(this.miniElement)
         this.infoSec.classList.remove('hidden');
         window.removeEventListener('mousemove', this.boundMouseHover)
+
+        // Putrandom Greet from assistant
+        const randomGreet = this.dialogues[[Math.floor(Math.random() * this.dialogues.length)]]
+        this.prevDialogue = this.infoSec.innerHTML
+        this.infoSec.innerHTML = `<p class="tip-desc">${randomGreet}</p>`
     }
 
     closeModal() {
@@ -366,6 +387,8 @@ class Assistant {
         // transfer back to web page
         this.miniElement.classList.remove('in-modal')
         this.miniElement.classList.remove('extended')
+        this.infoSec.innerHTML = this.prevDialogue
+        this.prevDialogue = null
         this.iconSec.style.animation = 'none'
         windowBody.appendChild(this.miniElement)
 
@@ -396,17 +419,20 @@ class Assistant {
     }
 
     // hihglight handler for the current task (marks the element for easier navigation in the UI)
-    highlightCurrentTask(taskHighlight) {
+    highlightCurrentTask(taskHighlights, isBlocked) {
         // Remove all highlights
         document.querySelectorAll('.highlight-element').forEach(el => {
             el.classList.remove('highlight-element')
         })
         // Highlight the current task's target
-        if (taskHighlight) {
-            const elementToHighlight = document.querySelector(taskHighlight)
-            if (elementToHighlight) {
-                elementToHighlight.classList.add('highlight-element')
-            }
+        if (taskHighlights.length > 0) {
+            taskHighlights.forEach(taskHighlight => {
+                const elementToHighlight = document.querySelector(taskHighlight)
+                if (elementToHighlight) {
+                    elementToHighlight.classList.add('highlight-element')
+                    elementToHighlight.classList.toggle('blocked', isBlocked)
+                }
+            })
         }
     }
     

@@ -121,11 +121,23 @@ class Shop{
             element.appendChild(priceDisplay);
 
             element.component = item;
+            element.dataset.name = item.name
+
+            // if(item.name = 'AMD Ryzen 9 5900X') {
+            //     console.log(item)
+            // }
+            element.classList.toggle('highlight-element', !!item.hasElHighlight)
+
+            // Emit Chassis expanded
+            this.addElEmitListeners(element, element.dataset.name, item)
+
+            // Append Element
             container.appendChild(element);
         });
 
         this.updateCompatibilityDisplay();
     }
+    
 
     setCompatibilityFilters(buildType) {
         this.compatibilityFilters.buildType = buildType;
@@ -482,6 +494,9 @@ class Shop{
             this.buyComponent(component)
             itemInfoModal.close()
 
+            // Event Emits
+            this.checkBuyEmitListeners(component.name)
+
             // remove event listener after button events to avoid stacking of components being bought
             this.itemInfo.btn1.removeEventListener('click', buyEvent)
         }
@@ -495,9 +510,53 @@ class Shop{
         })
 
         // display info
-        itemInfoModal.showModal()
+        itemInfoModal.show()
+    }
+///////////////////////////////////// event monitor /////////////////////////////////
+    checkBuyEmitListeners(name) {
+        switch(name) {
+            case 'NZXT H5 Flow': this.eventBus.emit('chassisBought')
+            case 'ASRock X570 PG Velocita': this.eventBus.emit('motherboardBought')
+            case 'AMD Ryzen 9 5900X': this.eventBus.emit('cpuBought')
+            case 'EVGA Supernova 1300 P+': this.eventBus.emit('psuBought')
+            case 'Kingston HyperX Beast RGB DDR4': this.eventBus.emit('ramBought')
+        }
     }
 
+    // On Expand
+    addElEmitListeners(element, name, item) {
+        delete item.hasElHighlight
+        switch(name) {
+            case "NZXT H5 Flow": element.addEventListener('click', () => {this.eventBus.emit('chassisExpanded')})
+            case "ASRock X570 PG Velocita": element.addEventListener('click', () => {this.eventBus.emit('motherboardExpanded')})
+            case "AMD Ryzen 9 5900X": element.addEventListener('click', () => {this.eventBus.emit('cpuExpanded')})
+            case "EVGA Supernova 1300 P+": element.addEventListener('click', () => {this.eventBus.emit('psuExpanded')})
+                
+        }
+    }
+
+    // Listening for Highlight
+    subscribeToEvents() {
+        ['addMotherboardHighlight', 'addCpuHighlight', 'addPsuHighlight', 'addRamHighlight'].forEach(event => {
+            this.eventBus.on(event, (data) => {
+                const foundItem = this.items.find(item => item.name == data)
+                if(!foundItem.hasElHighlight) {
+                    foundItem.hasElHighlight = true
+                }
+            })
+        })
+
+        this.quickBuy.addEventListener('click', () => {
+            if(this.quickBuy.checked) this.eventBus.emit('quickBuyChecked')
+        })
+        // this.eventBus.on('addMotherboardHighlight', (data) => {
+        //     const foundItem = this.items.find(item => item.name == data)
+        //     if(!foundItem.hasElHighlight) {
+        //         foundItem.hasElHighlight = true
+        //     }
+        // })
+    }
+///////////////////////////////////// event monitor ///////////////////////////////// 
     // Main Shop Update Method
     update() {
         while (this.itemsContainer.firstChild) {
@@ -535,10 +594,15 @@ class Shop{
         })
     }
 
+  
+
     // Main Shop Initialization Method
     init() {
         // Fill Shop Items
         this.fillShopItems(components, this.items)
+
+        // Subscribe to eventBus events
+        this.subscribeToEvents()
 
         // search bar event
         this.searchBar.element.addEventListener('input', (e) => this.handleSearchInput(e))

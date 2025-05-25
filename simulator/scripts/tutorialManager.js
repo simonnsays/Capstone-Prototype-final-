@@ -15,8 +15,21 @@ class TutorialManager {
 
     subscribeToEvents() {
 
-        ['tabsMenuOpened', 'shopOpened'].forEach(event => {
-            this.eventBus.on(event, () => this.tryToAdvance(event))  
+        ['tabsMenuOpened', 'shopOpened', 'chassisExpanded', 'chassisBought',
+            'motherboardExpanded', 'motherboardBought', 'cpuExpanded', 'cpuBought',
+            'psuExpanded', 'psuBought', 'quickBuyChecked'
+        ].forEach(event => {
+            this.eventBus.on(event, () =>{
+                this.tryToAdvance(event)
+            } )  
+        })
+
+        this.eventBus.on('ramBought', () => {
+            const ramTask = tasks.find(task => task.condition)
+            ramTask.condition.amount++
+            if(ramTask.condition.amount >= ramTask.condition.amountRequired) {
+                this.tryToAdvance('ramBought')
+            }
         })
 
         // this.eventBus.on('tabsMenuOpened', () => {
@@ -26,25 +39,35 @@ class TutorialManager {
     }
 
     tryToAdvance(triggerName = null) {
+        if(triggerName === 'cpuExpanded') {
+            console.log('step' + this.taskIndex)
+        }
         const currentTask = this.tasks[this.taskIndex]
-        console.log(currentTask)
 
         if (!currentTask) return
 
-        if (currentTask.trigger && currentTask.trigger !== triggerName) {
-            return // Wait for correct trigger
-        }
+        if (currentTask.trigger && currentTask.trigger !== triggerName) return
 
-        // Proceed with showing the task
-        if (currentTask.highlight) {
-            this.assistant.highlightCurrentTask(currentTask.highlight)
-        }
-
+        this.checkEmitListeners(currentTask.id)
+        
+        if(this.taskIndex == 6) console.log(currentTask)
         this.assistant.showCurrentTask(currentTask)
-        // this.assistant.updateMiniDsiplay(currentTask)
 
         // Automatically prep next task for the next trigger
         this.taskIndex++
+    }
+
+    checkEmitListeners(id) {
+        switch(id) {
+            case 'expandMotherboard':
+                this.eventBus.emit('addMotherboardHighlight', "ASRock X570 PG Velocita")
+            case 'expandCpu':
+                this.eventBus.emit('addCpuHighlight', "AMD Ryzen 9 5900X")
+            case 'expandPsu':
+                this.eventBus.emit('addPsuHighlight', "EVGA Supernova 1300 P+")
+            case 'buyRam':
+                this.eventBus.emit('addRamHighlight', "Kingston HyperX Beast RGB DDR4")
+        }
     }
 
     

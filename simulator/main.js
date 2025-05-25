@@ -138,7 +138,7 @@ class Main {
         
         // TEST: BOOT UP
         //this.hideGameContainer()
-        //this.testBootUp()
+        // this.testBootUp()
         //this.testFanSpeed()
         //this.testTemperature()
         //this.testBootOrder()

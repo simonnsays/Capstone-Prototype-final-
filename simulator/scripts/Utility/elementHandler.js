@@ -96,6 +96,7 @@ class ElementHandler {
             assistantFull: document.querySelector('#assistantFull') ,
             modalIconArea: document.querySelector('.icon-area'),
             modalBody: document.querySelector('.asst-body'),
+            closeBtn: document.querySelector('#asstClose'),
             // tasks elements
             tasksBtn: document.querySelector('#tasksButton'),
             tasksContainer: document.querySelector('#tasksContainer'),
