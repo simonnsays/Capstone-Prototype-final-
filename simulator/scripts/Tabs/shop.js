@@ -28,20 +28,10 @@ class Shop{
 
         // Items
         this.items =  []
-        this.filteredItems // when a search or active category happens
+        this.filteredItems
 
         // Inventory (class module)
         this.inventory = inventory
-
-        // Events
-        this.openBtn.addEventListener('click', () => {
-            eventBus.emit('shopOpened')
-            this.openTab(this.modal)
-        })
-        this.closeBtn.addEventListener('click', () => this.closeTab(this.modal))
-        window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
-
-        this.isActive = false
 
         // Compatibility tracking
         this.compatibilityFilters = {
@@ -55,23 +45,27 @@ class Shop{
         // Price filter
         this.priceRange = { min: 0, max: 100000 }
 
-        // notification system
-        this.notifications = [];
+        // State
+        this.isActive = false
+
+        // Events
+        this.openBtn.addEventListener('click', () => {
+            eventBus.emit('shopOpened')
+            this.openTab(this.modal)
+        })
+        this.closeBtn.addEventListener('click', () => this.closeTab(this.modal))
+
+        // this.boundMouseDown = this.handleOutofBounds(e, this.modal)
+        this.boundMouseDown = (e) => this.handleOutofBounds(e, this.modal)
+        // window.addEventListener('mousedown', this.boundMouseDown)
     }
 
     // Open Shop Tab
     openTab(modal) {
         modal.show();
-        modal.isOpen = true;
+        modal.isOpen = true;    
         this.isActive = true;
-
-    // Automatically select the first category when the shop is opened
-    // if (this.categories.length > 0) {
-    //     const firstCategory = this.categories[0].dataset.id;
-    //     this.selectCategory(firstCategory);
-    //     this.update();
-    // }
-}
+    }
 
     // Close Shop Tab
     closeTab(modal) {
@@ -196,7 +190,6 @@ class Shop{
         }
         return 'casual'; 
     }
-
 
     checkCompatibility(component) {
         if (!component) {
@@ -527,16 +520,20 @@ class Shop{
     addElEmitListeners(element, name, item) {
         delete item.hasElHighlight
         switch(name) {
-            case "NZXT H5 Flow": element.addEventListener('click', () => {this.eventBus.emit('chassisExpanded')})
+            case "NZXT H5 Flow": element.addEventListener('click', () => {
+                console.log('hit')
+                this.eventBus.emit('chassisExpanded')})
             case "ASRock X570 PG Velocita": element.addEventListener('click', () => {this.eventBus.emit('motherboardExpanded')})
             case "AMD Ryzen 9 5900X": element.addEventListener('click', () => {this.eventBus.emit('cpuExpanded')})
             case "EVGA Supernova 1300 P+": element.addEventListener('click', () => {this.eventBus.emit('psuExpanded')})
+            case "Kingston HyperX Beast RGB DDR4": element.addEventListener('click', () => {this.eventBus.emit('ramBought')})
                 
         }
     }
 
     // Listening for Highlight
     subscribeToEvents() {
+        // ONs
         ['addMotherboardHighlight', 'addCpuHighlight', 'addPsuHighlight', 'addRamHighlight'].forEach(event => {
             this.eventBus.on(event, (data) => {
                 const foundItem = this.items.find(item => item.name == data)
@@ -546,17 +543,25 @@ class Shop{
             })
         })
 
+        this.eventBus.on('gamePause', () => this.pause())
+        this.eventBus.on('gameResume', () => this.resume())
+
+        // EMITs
         this.quickBuy.addEventListener('click', () => {
             if(this.quickBuy.checked) this.eventBus.emit('quickBuyChecked')
         })
-        // this.eventBus.on('addMotherboardHighlight', (data) => {
-        //     const foundItem = this.items.find(item => item.name == data)
-        //     if(!foundItem.hasElHighlight) {
-        //         foundItem.hasElHighlight = true
-        //     }
-        // })
     }
 ///////////////////////////////////// event monitor ///////////////////////////////// 
+
+    pause() {
+        console.log('hit')
+        window.removeEventListener('mousedown', () => this.boundMouseDown)
+    }
+
+    resume() {
+        window.addEventListener('mousedown', (e) => this.boundMouseDown(e))
+    }
+
     // Main Shop Update Method
     update() {
         while (this.itemsContainer.firstChild) {
@@ -593,8 +598,6 @@ class Shop{
             })
         })
     }
-
-  
 
     // Main Shop Initialization Method
     init() {

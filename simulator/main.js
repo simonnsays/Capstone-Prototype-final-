@@ -66,7 +66,7 @@ class Main {
             this.itemInfo)
 
         //Assistant
-        this.assistant = new Assistant(this,this.elementHandler, this.utilityTool)
+        this.assistant = new Assistant(this,this.elementHandler, this.utilityTool, this.eventBus)
 
         // Tutorial Manager
         this.tutorialManager = new TutorialManager(this.eventBus, this.assistant)

@@ -1,9 +1,12 @@
 class Assistant {
-    constructor(main, elementHandler, utilityTool) {
+    constructor(main, elementHandler, utilityTool, eventBus) {
+        // util
+        this.utilityTool = utilityTool
+        this.eventBus = eventBus
+        
         // DOM ELEMENTS
         this.main = main
         this.elements = elementHandler.getAssistantElements()
-        this.utilityTool = utilityTool
         this.image = this.elements.image
         this.overlay = this.elements.overlay
         
@@ -49,6 +52,9 @@ class Assistant {
     init() {
         // Mini Element Listeners
         window.addEventListener('mousemove', this.boundMouseHover)
+
+        // subscribe to Event Bus
+        this.subscribeToEventBus()
                 
         // Full Page Element Listeners
         this.revealTasks()
@@ -58,9 +64,11 @@ class Assistant {
         this.errorsBtn.addEventListener('click', () => this.revealErrors())
 
         window.addEventListener('click', () => this.toggleTaskCellStates())
-        
-        // Start tutorial logic
-        // this.startTutorial()
+    }
+
+    subscribeToEventBus() {
+        this.eventBus.on('tutManagerInit', (data) => this.updateMiniDsiplay(data))
+        this.eventBus.on('taskAdvanced', (data) => this.showCurrentTask(data))
     }
 
     handleClick(e) {   
@@ -113,10 +121,11 @@ class Assistant {
     resume() {
         this.toggleOverlay(false)
         this.toggleMiniDisplay(false)
-        
+        this.eventBus.emit('gameResume')
         window.removeEventListener('click', this.boundClickWithTask)
         window.addEventListener('click', this.boundClick)
         window.addEventListener('mousemove', this.boundMouseHover)
+
     }
 
     toggleTaskCellStates() {
@@ -152,6 +161,8 @@ class Assistant {
        
     showCurrentTask(task) {
         this.createTask(task)
+
+        this.eventBus.emit('gamePause')
 
         this.toggleOverlay(true)
         this.toggleMiniDisplay(true)

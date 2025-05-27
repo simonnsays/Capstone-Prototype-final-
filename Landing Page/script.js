@@ -57,6 +57,8 @@ class Assistant {
     this.startButton.addEventListener('click', () => {if(!this.sequenceStarted) this.startSequence()})
     window.addEventListener('wheel', (e) => this.handleWheel(e), {passive: false})
     
+
+    window.addEventListener('keydown', (e) => { e.preventDefault() })
     // this.adjustCarousel() [ DEPRECATED ]
   }
 

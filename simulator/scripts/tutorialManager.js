@@ -1,15 +1,15 @@
 import tasks from "../assistant/tasks.js"
 class TutorialManager {
-    constructor(eventBus, assistant) {
+    constructor(eventBus) {
         this.eventBus = eventBus
-        this.assistant = assistant
         this.tasks = tasks
         this.taskIndex = 0
     }
     
     init() {
         this.subscribeToEvents()
-        this.assistant.updateMiniDsiplay(this.tasks[this.taskIndex])
+
+        this.eventBus.emit('tutManagerInit', this.tasks[this.taskIndex])
         this.tryToAdvance('init')
     }
 
@@ -25,17 +25,13 @@ class TutorialManager {
         })
 
         this.eventBus.on('ramBought', () => {
+            // This is saying that we are currently in step[buyRama]
             const ramTask = tasks.find(task => task.condition)
             ramTask.condition.amount++
-            if(ramTask.condition.amount >= ramTask.condition.amountRequired) {
+            if(ramTask.condition.amount == ramTask.condition.amountRequired) {
                 this.tryToAdvance('ramBought')
             }
         })
-
-        // this.eventBus.on('tabsMenuOpened', () => {
-        //     console.log('hit')
-        //     this.tryToAdvance('tabsMenuOpened')
-        // })
     }
 
     tryToAdvance(triggerName = null) {
@@ -45,19 +41,17 @@ class TutorialManager {
         const currentTask = this.tasks[this.taskIndex]
 
         if (!currentTask) return
-
         if (currentTask.trigger && currentTask.trigger !== triggerName) return
 
-        this.checkEmitListeners(currentTask.id)
+        // Succeed to advance
+        this.emitTaskId(currentTask.id)
+        this.eventBus.emit('taskAdvanced', currentTask)
         
-        if(this.taskIndex == 6) console.log(currentTask)
-        this.assistant.showCurrentTask(currentTask)
-
         // Automatically prep next task for the next trigger
         this.taskIndex++
     }
 
-    checkEmitListeners(id) {
+    emitTaskId(id) {
         switch(id) {
             case 'expandMotherboard':
                 this.eventBus.emit('addMotherboardHighlight', "ASRock X570 PG Velocita")
@@ -69,8 +63,6 @@ class TutorialManager {
                 this.eventBus.emit('addRamHighlight', "Kingston HyperX Beast RGB DDR4")
         }
     }
-
-    
 }
 
 export default TutorialManager
