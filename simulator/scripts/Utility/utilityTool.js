@@ -22,6 +22,7 @@ class UtilityTool {
         const element = document.createElement('div')
         element.classList = 'content'
         element.id = item.name
+        element.dataset.name = item.name
 
         // create image for the div
         const image = new Image()

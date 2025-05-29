@@ -8,6 +8,8 @@ class TutorialManager {
     
     init() {
         this.subscribeToEvents()
+        // this.eventBus.emit('gpuBought')
+        // console.log(this.tasks[this.taskIndex])
 
         this.eventBus.emit('tutManagerInit', this.tasks[this.taskIndex])
         this.tryToAdvance('init')
@@ -17,7 +19,9 @@ class TutorialManager {
 
         ['tabsMenuOpened', 'shopOpened', 'chassisExpanded', 'chassisBought',
             'motherboardExpanded', 'motherboardBought', 'cpuExpanded', 'cpuBought',
-            'psuExpanded', 'psuBought', 'quickBuyChecked'
+            'psuExpanded', 'psuBought', 'quickBuyChecked', 'romBought', 
+            'coolingDeviceBought', 'gpuBought', 'invOpened', 'motherboardPlaced',
+            'workAreaIntroduced'
         ].forEach(event => {
             this.eventBus.on(event, () =>{
                 this.tryToAdvance(event)
@@ -35,10 +39,12 @@ class TutorialManager {
     }
 
     tryToAdvance(triggerName = null) {
-        if(triggerName === 'cpuExpanded') {
-            console.log('step' + this.taskIndex)
-        }
         const currentTask = this.tasks[this.taskIndex]
+        
+        // if(triggerName === 'ram bought') {
+        //     console.log('step' + this.taskIndex)
+        //     console.log(currentTask)
+        // }
 
         if (!currentTask) return
         if (currentTask.trigger && currentTask.trigger !== triggerName) return
@@ -55,12 +61,25 @@ class TutorialManager {
         switch(id) {
             case 'expandMotherboard':
                 this.eventBus.emit('addMotherboardHighlight', "ASRock X570 PG Velocita")
+                break
             case 'expandCpu':
                 this.eventBus.emit('addCpuHighlight', "AMD Ryzen 9 5900X")
+                break
             case 'expandPsu':
                 this.eventBus.emit('addPsuHighlight', "EVGA Supernova 1300 P+")
+                break
             case 'buyRam':
                 this.eventBus.emit('addRamHighlight', "Kingston HyperX Beast RGB DDR4")
+                break
+            case 'buyRom':
+                this.eventBus.emit('addRomHighlight', "Seagate Barracuda")
+                break
+            case 'buyCoolingDevice':
+                this.eventBus.emit('addCoolingDeviceHighlight', "AMD wraith Prism")
+                break
+            case 'buyGpu':
+                this.eventBus.emit('addGpuHighlight', "Gigabyte Radeon RX 7900 XTX")
+                break
         }
     }
 }

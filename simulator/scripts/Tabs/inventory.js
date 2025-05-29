@@ -3,9 +3,10 @@ import cableRef from "../Data/cableReference.js"
 import Cable from "../Data/cable.js"
 
 class Inventory {
-    constructor(elementHandler, utilityTool, displayArea) {
+    constructor(elementHandler, utilityTool, eventBus, displayArea) {
         // Utility
         this.utilityTool = utilityTool
+        this.eventBus = eventBus
         this.elements = elementHandler.getInventoryElements()
         if(!this.elements) throw new Error('Missing Inventory Elements')
 
@@ -24,13 +25,46 @@ class Inventory {
         displayArea.inventory = this
 
         // Events
-        this.openBtn.addEventListener('click', () => this.openTab(this.modal))
+        this.openBtn.addEventListener('click', () => {
+            this.eventBus.emit('invOpened')
+            this.openTab(this.modal)
+        })
         this.closeBtn.addEventListener('click', () => this.closeTab(this.modal))
-        window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
+        this.boundMouseDown = (e) => this.handleOutofBounds(e, this.modal)
+        // window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
+    }
+
+    init() {
+        this.subscribeToEvents()
+    }
+
+///////////////////////////////////// event monitor /////////////////////////////////
+    subscribeToEvents() {
+        this.eventBus.on('gamePause', () => this.pause())
+        this.eventBus.on('gameResume', () => this.resume())
+    }
+
+    checkPlaceEmitListeners(name) {
+        switch(name) {
+            case 'ASRock X570 PG Velocita':
+                this.eventBus.emit('motherboardPlaced')
+                this.closeTab(this.modal)
+                break
+        }
+    }
+///////////////////////////////////// event monitor /////////////////////////////////
+
+
+    pause() {
+        window.removeEventListener('mousedown', this.boundMouseDown)
+    }
+
+    resume() {
+        window.addEventListener('mousedown', this.boundMouseDown)
     }
 
     openTab(modal) {
-        modal.showModal()
+        modal.show()
         modal.isOpen = true
 
         // for canvas monitoring 
@@ -274,6 +308,8 @@ class Inventory {
 
                 // place removed component to display area
                 this.placeComponent(removedComponent[0])
+
+                this.checkPlaceEmitListeners(child.dataset.name)
 
                 // update display area information
                 this.displayArea.update()

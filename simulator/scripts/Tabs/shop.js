@@ -508,11 +508,30 @@ class Shop{
 ///////////////////////////////////// event monitor /////////////////////////////////
     checkBuyEmitListeners(name) {
         switch(name) {
-            case 'NZXT H5 Flow': this.eventBus.emit('chassisBought')
-            case 'ASRock X570 PG Velocita': this.eventBus.emit('motherboardBought')
-            case 'AMD Ryzen 9 5900X': this.eventBus.emit('cpuBought')
-            case 'EVGA Supernova 1300 P+': this.eventBus.emit('psuBought')
-            case 'Kingston HyperX Beast RGB DDR4': this.eventBus.emit('ramBought')
+            case 'NZXT H5 Flow': 
+                this.eventBus.emit('chassisBought')
+                break
+            case 'ASRock X570 PG Velocita': 
+                this.eventBus.emit('motherboardBought')
+                break
+            case 'AMD Ryzen 9 5900X': 
+                this.eventBus.emit('cpuBought')
+                break
+            case 'EVGA Supernova 1300 P+': 
+                this.eventBus.emit('psuBought')
+                break
+            case 'Kingston HyperX Beast RGB DDR4': 
+                this.eventBus.emit('ramBought')
+                break
+            case 'Seagate Barracuda': 
+                this.eventBus.emit('romBought')
+                break
+            case 'AMD wraith Prism': 
+                this.eventBus.emit('coolingDeviceBought')
+                break
+            case "Gigabyte Radeon RX 7900 XTX": 
+                this.eventBus.emit('gpuBought')
+            break   
         }
     }
 
@@ -520,21 +539,39 @@ class Shop{
     addElEmitListeners(element, name, item) {
         delete item.hasElHighlight
         switch(name) {
-            case "NZXT H5 Flow": element.addEventListener('click', () => {
-                console.log('hit')
-                this.eventBus.emit('chassisExpanded')})
-            case "ASRock X570 PG Velocita": element.addEventListener('click', () => {this.eventBus.emit('motherboardExpanded')})
-            case "AMD Ryzen 9 5900X": element.addEventListener('click', () => {this.eventBus.emit('cpuExpanded')})
-            case "EVGA Supernova 1300 P+": element.addEventListener('click', () => {this.eventBus.emit('psuExpanded')})
-            case "Kingston HyperX Beast RGB DDR4": element.addEventListener('click', () => {this.eventBus.emit('ramBought')})
-                
+            case "NZXT H5 Flow": 
+                element.addEventListener('click', () => {this.eventBus.emit('chassisExpanded')})
+                break
+            case "ASRock X570 PG Velocita": 
+                element.addEventListener('click', () => {this.eventBus.emit('motherboardExpanded')})
+                break
+            case "AMD Ryzen 9 5900X": 
+                element.addEventListener('click', () => {this.eventBus.emit('cpuExpanded')})
+                break
+            case "EVGA Supernova 1300 P+": 
+                element.addEventListener('click', () => {this.eventBus.emit('psuExpanded')})
+                break
+            case "Kingston HyperX Beast RGB DDR4": 
+                element.addEventListener('click', () => {this.eventBus.emit('ramBought')})
+                break    
+            case "Seagate Barracuda": 
+                element.addEventListener('click', () => {this.eventBus.emit('romBought')})
+                break    
+            case "AMD wraith Prism": 
+                element.addEventListener('click', () => {this.eventBus.emit('coolingDeviceBought')})
+                break    
+            case "Gigabyte Radeon RX 7900 XTX": 
+                element.addEventListener('click', () => {this.eventBus.emit('gpuBought')})
+                break    
         }
     }
 
-    // Listening for Highlight
     subscribeToEvents() {
         // ONs
-        ['addMotherboardHighlight', 'addCpuHighlight', 'addPsuHighlight', 'addRamHighlight'].forEach(event => {
+        ['addMotherboardHighlight', 'addCpuHighlight', 'addPsuHighlight', 'addRamHighlight', 
+            'addRomHighlight', 'addCoolingDeviceHighlight', 'addGpuHighlight'
+        ].forEach(event => {
+            // Listening for Highlight
             this.eventBus.on(event, (data) => {
                 const foundItem = this.items.find(item => item.name == data)
                 if(!foundItem.hasElHighlight) {
@@ -554,12 +591,11 @@ class Shop{
 ///////////////////////////////////// event monitor ///////////////////////////////// 
 
     pause() {
-        console.log('hit')
-        window.removeEventListener('mousedown', () => this.boundMouseDown)
+        window.removeEventListener('mousedown', this.boundMouseDown)
     }
 
     resume() {
-        window.addEventListener('mousedown', (e) => this.boundMouseDown(e))
+        window.addEventListener('mousedown', this.boundMouseDown)
     }
 
     // Main Shop Update Method

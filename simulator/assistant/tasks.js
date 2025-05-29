@@ -182,6 +182,121 @@ const tasks = [
         highlight: ['[data-id="ram"]','[data-name="Kingston HyperX Beast RGB DDR4"]'],
         status: 'incomplete'
     },  
+    // STEP 13- Buy Storage Devices
+    {
+        id: 'buyRom',
+        trigger: 'ramBought',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Buy Storage Devices'
+        },
+        description: [
+            {type: 'text', content: 'on the category filter, select Storage and then select the highlighted item'},
+        ],
+        highlight: ['[data-id="storage"]','[data-name="Seagate Barracuda"]'],
+        status: 'incomplete'
+    },  
+    // STEP 13- Buy Cooling Devices
+    {
+        id: 'buyCoolingDevice',
+        trigger: 'romBought',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Buy Cooling Devices'
+        },
+        description: [
+            {type: 'text', content: 'On the category filter, select Cooling. Use the scrollbar to see the other category filters'},
+            {type: 'text', content: 'Then select the highlighted item'},
+        ],
+        highlight: ['[data-id="cooling"]','[data-name="AMD wraith Prism"]'],
+        status: 'incomplete'
+    },  
+    // STEP 14- Buy GPU
+    {
+        id: 'buyGpu',
+        trigger: 'coolingDeviceBought',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Buy GPU'
+        },
+        description: [
+            {type: 'text', content: 'On the category filter, select GPU then select the highlighted item'}
+        ],
+        highlight: ['[data-id="gpu"]','[data-name="Gigabyte Radeon RX 7900 XTX"]'],
+        status: 'incomplete'
+    },  
+    // STEP 15- Open Inventory
+    {
+        id: 'openInv',
+        trigger: 'gpuBought',
+        title: {
+            imageSrc: './assets/Assistant/shop.png',
+            text: 'Open Inventory'
+        },
+        description: [
+            {type: 'text', content: 'Great Job! You now have a complete set to build your first functional PC.'},
+            {type: 'text', content: 'You can now close the Shop and look once again in your tabs buttons and click on Inventory'}
+        ],
+        highlight: ['#openInv'],
+        status: 'incomplete'
+    },  
+    // STEP 16- Place Item
+    {
+        id: 'placeMotherboard',
+        trigger: 'invOpened',
+        title: {
+            imageSrc: './assets/Assistant/inventory.png',
+            text: 'Place Inventory'
+        },
+        description: [
+            {type: 'text', content: "This is your inventory, in here you can choose to place the items you bought to the work area, or return them if you don't need them anymore"},
+            {type: 'text', content: 'To place an item, simply click on the items themselves. to return items, click on the return button at the corner of the item you want to return'},
+            {type: 'text', content: 'To Continue, try placing the motherboard first.'}
+        ],
+        highlight: [
+            '#invItemsContainer [data-name="ASRock X570 PG Velocita"]',
+        ],
+        status: 'incomplete'
+    },  
+    // STEP 17- Display Introduction
+    {
+        id: 'workAreaIntroduction',
+        trigger: 'motherboardPlaced',
+        title: {
+            imageSrc: './assets/Assistant/inventory.png',
+            text: 'Introduction of the Work Area Area'
+        },
+        description: [
+            {type: 'text', content: "Great, you placed the Motherboard. This is a great time to learn about your display area."},
+            {type: 'text', content: "First, This is your main area. You can drag items from the shelf area on the right towards here"},
+            {type: 'text', content: "Whatever you place here is what will be used in the boot up part of the process"},
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },  
+    // STEP 18- Place Item set 1
+    {
+        id: 'placeItems_1',
+        trigger: 'workAreaIntroduced',
+        title: {
+            imageSrc: './assets/Assistant/inventory.png',
+            text: 'Introduction of the Work Area'
+        },
+        description: [
+            {type: 'text', content: "Now, let's add some more items to be attached to you motherboard, go back to your inventory and select the highlighted items."},
+        ],
+        highlight: [
+            '#openInv',
+            '#invItemsContainer [data-name="ASRock X570 PG Velocita"]',
+            '#invItemsContainer [data-name="AMD Ryzen 9 5900X"]',
+            '#invItemsContainer [data-name="Kingston HyperX Beast RGB DDR4"]',
+            '#invItemsContainer [data-name="Kingston HyperX Beast RGB DDR4"]',
+            '#invItemsContainer [data-name="AMD wraith Prism"]',
+            '#invItemsContainer [data-name="ASRock X570 PG Velocita"]',
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },  
 ]
 
 export default tasks;

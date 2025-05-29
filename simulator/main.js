@@ -53,7 +53,8 @@ class Main {
         // Inventory
         this.inventory = new Inventory(
             this.elementHandler, 
-            this.utilityTool, 
+            this.utilityTool,
+            this.eventBus, 
             this.displayArea
             )
 
@@ -134,6 +135,8 @@ class Main {
 
         this.assistant.init()
         this.tutorialManager.init()
+
+        console.log(this.eventBus.listeners)
         //this.assistant.endTutorial()   
         
         // TEST: BOOT UP

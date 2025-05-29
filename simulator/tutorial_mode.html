@@ -232,25 +232,7 @@
 
                 <!-- ports area container -->
                 <div id="portsContainer" data-length="single" class="length-2 ">
-                   
-                    <!-- port cells here.. -->
-
-                                <!-- use cells reference ||| -->
-                                <!--                     vvv -->
-                    <!-- <div class="portCell"> -->
-                        <!-- actual port  -->
-                        <!-- <img class="port" src="./assets/motherboard/ports/mobo_port-fpanel.png"> -->
-                        
-                        <!-- port highlight -->
-                        <!-- <div class="port-highlight"></div> -->
-                        
-                        <!-- cable attached to port -->
-                        <!-- <img class="port-attached" src="./assets/wires/frontPanel/frontPanel-attached(gen).png"> -->
-                        <!-- <img class="port-attached2" src="./assets/wires/sata-data/sata-data-attached(sata).png"> -->
-                        
-                        <!-- slider div for label -->
-                        <!-- <div class="port-slider">24-Pin Power</div> -->
-                    <!-- </div>    -->
+                
                 </div>
             </div>
         </div>
@@ -481,47 +463,6 @@
         <div class="asst-body">
                 <div id="tasksContainer" class="asst-container">
 
-                    <!-- <div class="task-cell completed">
-                        <div class="task-title">
-                            <div class="task-icon">
-                                <img src="./assets/Assistant/shop.png">
-                            </div>
-                            <div class="task-name">
-                                <h3>Enter the Shop</h3>
-                                <p class="task-status">Completed </p>
-                            </div>
-                        </div>
-                        <div class="vert-br"></div>
-                        <div class="task-description">
-                                <p>Look for your PC components and buy them.</p>
-                                <br>
-                                <p>Ensure to check prices and specifications before making a purchase.</p>
-                                <p>The components that you will need are the following:</p>
-                                <ol>
-                                    <li>Case</li>
-                                    <li>motherboard</li>
-                                    <li>processor</li>
-                                    <li>Power Supply Unit</li>
-                                    <li>RAM</li>
-                                    <li>Storage Device - HDD or SSD</li>
-                                    <li>Cooling</li>
-                                    <li>GPU or Graphics card</li>
-                                </ol>
-                                
-                                <br>
-                                <p  >Check the images below for your reference:</p>
-                                <div class="desc-image-carousel">
-                                    <img src="assets/Assistant/shop1.png" id="id1" class="desc-image">
-                                    <img src="assets/Assistant/shop2.png" id="id2" class="desc-image">
-                                    <img src="assets/Assistant/shop3.png" id="id3" class="desc-image">
-                                    <img src="./assets/svg/leftArr.svg" class="desc-left">
-                                    <img src="./assets/svg/rightArr.svg" class="desc-right">
-                                </div>
-
-                                <button class="start-task-btn" data-task="openShop">Start Task</button>
-                        </div>
-                    </div> -->
-
                 </div>
             <div id="errorsContainer" class="error-container">
 
@@ -559,6 +500,7 @@
             </button>
         </div>
     </div>
+
     <!-------------------------- S C R I P T S ------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
     <script type="module" src="main.js"></script>
@@ -568,6 +510,15 @@
             // if (z !== 'auto') console.log(el.tagName, el.className, el.id, '=> z-index:', z);
         });
 
+    </script>
+    <script>
+        fetch('./assets/svg/overlay-masked.svg')
+        .then(res => res.text())
+        .then(svg => {
+            const el = document.createElement('div');
+            el.innerHTML = svg;
+            document.body.appendChild(el.firstElementChild);
+        });
     </script>
 </body>
 </html>

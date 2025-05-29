@@ -68,7 +68,18 @@ class Assistant {
 
     subscribeToEventBus() {
         this.eventBus.on('tutManagerInit', (data) => this.updateMiniDsiplay(data))
-        this.eventBus.on('taskAdvanced', (data) => this.showCurrentTask(data))
+        this.eventBus.on('taskAdvanced', (data) => {
+            this.adjustOverlayElement(data)
+            this.showCurrentTask(data)
+        } )
+
+    }
+
+    adjustOverlayElement(data) {
+        this.overlay.className = 'overlay'
+        if(data.id === 'workAreaIntroduction') {
+            this.overlay.classList.add('table-mask')
+        }
     }
 
     handleClick(e) {   
@@ -102,6 +113,11 @@ class Assistant {
             // If no more steps, you might want to end tutorial here
             if (task.descIndex >= task.description.length) {
                 if(task.highlight) this.highlightCurrentTask(task.highlight, false)
+
+                if(task.id == 'workAreaIntroduction'){
+                    console.log('emiting signal')
+                    this.eventBus.emit('workAreaIntroduced')
+                } 
                 this.resume()
                 return
             } 
@@ -122,9 +138,12 @@ class Assistant {
         this.toggleOverlay(false)
         this.toggleMiniDisplay(false)
         this.eventBus.emit('gameResume')
-        window.removeEventListener('click', this.boundClickWithTask)
-        window.addEventListener('click', this.boundClick)
-        window.addEventListener('mousemove', this.boundMouseHover)
+
+        setTimeout(() => {
+            window.removeEventListener('click', this.boundClickWithTask)
+            window.addEventListener('click', this.boundClick)
+            window.addEventListener('mousemove', this.boundMouseHover)
+        }, 100)
 
     }
 
@@ -435,16 +454,50 @@ class Assistant {
         document.querySelectorAll('.highlight-element').forEach(el => {
             el.classList.remove('highlight-element')
         })
-        // Highlight the current task's target
-        if (taskHighlights.length > 0) {
-            taskHighlights.forEach(taskHighlight => {
-                const elementToHighlight = document.querySelector(taskHighlight)
-                if (elementToHighlight) {
-                    elementToHighlight.classList.add('highlight-element')
-                    elementToHighlight.classList.toggle('blocked', isBlocked)
-                }
-            })
+
+        const {singles, multiples} = this.splitSinglesAndMultiples(taskHighlights)
+
+        singles.forEach(taskHighlight => {
+            const elementToHighlight = document.querySelector(taskHighlight)
+            if (elementToHighlight) {
+                elementToHighlight.classList.add('highlight-element')
+                elementToHighlight.classList.toggle('blocked', isBlocked)
+            }
+        })
+
+        multiples.forEach(taskHighlights => {
+            const elementsToHighlight = document.querySelectorAll(taskHighlights)
+            for(let el of elementsToHighlight) {
+                el.classList.add('highlight-element')
+                el.classList.toggle('blocked', isBlocked)
+            }
+
+        }) 
+
+          
+
+    }
+
+    splitSinglesAndMultiples(arr) {
+        const countMap = {};
+        const singles = [];
+        const multiples = [];
+
+        // Count occurrences
+        for (const item of arr) {
+            countMap[item] = (countMap[item] || 0) + 1;
         }
+
+        // Separate based on count
+        for (const [item, count] of Object.entries(countMap)) {
+            if (count === 1) {
+            singles.push(item);
+            } else {
+            multiples.push(item);
+            }
+        }
+
+        return { singles, multiples };
     }
     
     showFinalBuildSummary() {

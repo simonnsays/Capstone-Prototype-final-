@@ -526,6 +526,7 @@ p {
 
 .dialogue-box {
   grid-area: dialogue;
+  user-select: none;
   /* background-color: lightskyblue; */
   width: 1400px;
   height: 180px; 
