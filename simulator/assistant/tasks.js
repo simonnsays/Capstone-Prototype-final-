@@ -193,7 +193,7 @@ const tasks = [
         description: [
             {type: 'text', content: 'on the category filter, select Storage and then select the highlighted item'},
         ],
-        highlight: ['[data-id="storage"]','[data-name="Seagate Barracuda"]'],
+        highlight: ['[data-id="storage"]','[data-name="Seagate Barracuda SSD"]'],
         status: 'incomplete'
     },  
     // STEP 13- Buy Cooling Devices
@@ -270,20 +270,7 @@ const tasks = [
             {type: 'text', content: "Great, you placed the Motherboard. This is a great time to learn about your display area."},
             {type: 'text', content: "First, This is your main area. You can drag items from the shelf area on the right towards here"},
             {type: 'text', content: "Whatever you place here is what will be used in the boot up part of the process"},
-        ],
-        highlight: [],
-        status: 'incomplete'
-    },  
-    // STEP 18- Place Item set 1
-    {
-        id: 'placeItems_1',
-        trigger: 'workAreaIntroduced',
-        title: {
-            imageSrc: './assets/Assistant/inventory.png',
-            text: 'Introduction of the Work Area'
-        },
-        description: [
-            {type: 'text', content: "Now, let's add some more items to be attached to you motherboard, go back to your inventory and select the highlighted items."},
+            {type: 'text', content: "Now, let's add some more items to be attached to your motherboard, go back to your inventory and select the highlighted items."},
         ],
         highlight: [
             '#openInv',
@@ -292,11 +279,126 @@ const tasks = [
             '#invItemsContainer [data-name="Kingston HyperX Beast RGB DDR4"]',
             '#invItemsContainer [data-name="Kingston HyperX Beast RGB DDR4"]',
             '#invItemsContainer [data-name="AMD wraith Prism"]',
-            '#invItemsContainer [data-name="ASRock X570 PG Velocita"]',
+            '#invItemsContainer [data-name="Gigabyte Radeon RX 7900 XTX"]',
+        ],
+        status: 'incomplete'
+    },  
+    // STEP 18- Show Shelf
+    {
+        id: 'shelfIntroduction',
+        trigger: 'set1Placed',
+        title: {
+            imageSrc: './assets/Assistant/inventory.png',
+            text: 'Introduction of the Shelf Area'
+        },
+        description: [
+            {type: 'text', content: "Alright, this will be your shelf area. It can only hold up to 6 components at a time. Any component placed after the shelf is full will come back to the inventory"},
+            {type: 'text', content: "Now that you've placed the items in your work area, yiou can now start attaching components. On usual cases, you usually attach the cpu, gpu, ram, and the cpu cooling components on the motherboard"},
+            {type: 'text', content: "Trying pressing on a component on the shelf and you will see a highlight on the mother board as to where you can attach them. Proceed to drag the item towards the highlighted place to attach them"},
+            {type: 'text', content: "Attach all the components currently on your shelf"},
         ],
         highlight: [],
         status: 'incomplete'
-    },  
+    },
+    // STEP 19- Place the rest of the items
+    {
+        id: 'placeSet2',
+        trigger: 'set1Attached',
+        title: {
+            imageSrc: './assets/Assistant/inventory.png',
+            text: 'Place the rest'
+        },
+        description: [
+            {type: 'text', content: "Good job, it's coming together quite well, don't you think?"},
+            {type: 'text', content: "Now, let's complete the build, place the rest of the items from the inventory into the shelf"},
+        ],
+        highlight: [
+            '#openInv',
+            '#invItemsContainer [data-name="NZXT H5 Flow"]',
+            '#invItemsContainer [data-name="EVGA Supernova 1300 P+"]',
+            '#invItemsContainer [data-name="Seagate Barracuda SSD"]'
+        ],
+        status: 'incomplete'
+    },
+    // STEP 20- Place the Chassis to the main area
+    {
+        id: 'placeChassisMain',
+        trigger: 'set2Placed',
+        title: {
+            imageSrc: './assets/Assistant/inventory.png',
+            text: 'Place Chassis in Main Area'
+        },
+        description: [
+            {type: 'text', content: "You can also swap components from the shelf to the main area by dragging the shelf component anywhere on the main area."},
+            {type: 'text', content: "Try dragging the chassis towards the main area to swap its position with the motherboard"}
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 20- Labels Introduction
+    {
+        id: 'labelsIntroduction',
+        trigger: 'chassisPlacedInMain',
+        title: {
+            imageSrc: './assets/Assistant/inventory.png',
+            text: 'Labels Introduction'
+        },
+        description: [
+            {type: 'text', content: "You can find the labels of your current component here such as the name and the type."},
+            {type: 'text', content: "The arrow buttons are used if you want to rotate the component, it is usually used to access location where components are needed to be attached."},
+            {type: 'text', content: "Try rotating the chassis until you're on the 'Right Side' to access the slots for your remaining components."}
+        ],
+        highlight: [
+            '#right',
+            '#left'
+        ],
+        status: 'incomplete'
+    },
+    // STEP 21- Attach Remaining
+    {
+        id: 'attachSet2',
+        trigger: 'rightSideAccessed',
+        title: {
+            imageSrc: './assets/Assistant/inventory.png',
+            text: 'Attach the remaining Components'
+        },
+        description: [
+            {type: 'text', content: "Nice! The right side of the chassis is usually where you find the slots to attach the PSU as well as some storage device compartments."},
+            {type: 'text', content: "Try to drag and attach the remaining components on the shelf, remember to attach the motherboard as well."}
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 22- Trash Bin Introduction
+    {
+        id: 'trashbinIntroduction',
+        trigger: 'storageError',
+        title: {
+            imageSrc: './assets/Assistant/inventory.png',
+            text: 'Trash Bin Introduction'
+        },
+        description: [
+            {type: 'text', content: "Oh no... You just got a storage incompatibility error. This happens when storage slots isn't able to cater to your storage device."},
+            {type: 'text', content: "In this case, your Hard Disk Device(HDD) is too large for the slot, lets buy a smaller Solid State Drive(SSD) instead."},
+            {type: 'text', content: "First drag the current HDD towards the trash bin to remove it from the work area. You can choose to remove it permanently or just return it to the inventory"},
+        ],
+        highlight: ['#trashBin', '#trashConfirm'],
+        status: 'incomplete'
+    },
+    // STEP 23- Buy SSD
+    {
+        id: 'buySSD',
+        trigger: 'storageRemoved',
+        title: {
+            imageSrc: './assets/Assistant/inventory.png',
+            text: 'Buy Right Storage Device'
+        },
+        description: [
+            {type: 'text', content: "Alright, now go buy an SSD from the shop, place it in the work area and continue attaching the components that were left"},
+        ],
+        highlight: ['Seagate Barracuda SSD'],
+        status: 'incomplete'
+    }
 ]
 
 export default tasks;

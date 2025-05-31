@@ -1,8 +1,9 @@
 class Canvas {
-    constructor(elementHandler, utilityTool, displayArea, user, inventory, wattageCalculator) {
+    constructor(elementHandler, utilityTool, eventBus, displayArea, user, inventory, wattageCalculator) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
+        this.eventBus = eventBus
         this.inventory = inventory
         this.wattageCalculator = wattageCalculator
 
@@ -273,6 +274,11 @@ class Canvas {
 
         // Validate component slot
         if (!slotSupports.includes(componentSize)) {
+            console.log(component)
+            console.log(slotSupports)
+            if(component.name === "Seagate Barracuda" && component.size === 'hdd') {
+                this.eventBus.emit('storageError')
+            }
             this.showAlert(`❌ This slot doesn't support a ${componentSize} component. Please choose a compatible component.`)
             return false
         }

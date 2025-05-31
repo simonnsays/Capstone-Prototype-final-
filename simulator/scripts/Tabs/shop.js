@@ -120,6 +120,10 @@ class Shop{
             // if(item.name = 'AMD Ryzen 9 5900X') {
             //     console.log(item)
             // }
+            // if(item.hasElHighlight) {
+            //     console.log(item.name, 'has highlight')
+            //     console.log(item)
+            // }
             element.classList.toggle('highlight-element', !!item.hasElHighlight)
 
             // Emit Chassis expanded
@@ -399,6 +403,9 @@ class Shop{
 
         // Show purchase notification
         this.showPurchaseNotification(component);
+
+        // remove hightlight
+        component.hasElHighlight = false
     }
 
     // Search Input Handling
@@ -537,7 +544,7 @@ class Shop{
 
     // On Expand
     addElEmitListeners(element, name, item) {
-        delete item.hasElHighlight
+        // delete item.hasElHighlight
         switch(name) {
             case "NZXT H5 Flow": 
                 element.addEventListener('click', () => {this.eventBus.emit('chassisExpanded')})
@@ -568,14 +575,16 @@ class Shop{
 
     subscribeToEvents() {
         // ONs
-        ['addMotherboardHighlight', 'addCpuHighlight', 'addPsuHighlight', 'addRamHighlight', 
-            'addRomHighlight', 'addCoolingDeviceHighlight', 'addGpuHighlight'
+        [
+            'addChassisHighlight','addMotherboardHighlight', 'addCpuHighlight', 'addPsuHighlight', 
+            'addRamHighlight', 'addRomHighlight', 'addCoolingDeviceHighlight', 'addGpuHighlight',
+            'addSsdHighlight'
         ].forEach(event => {
             // Listening for Highlight
             this.eventBus.on(event, (data) => {
                 const foundItem = this.items.find(item => item.name == data)
                 if(!foundItem.hasElHighlight) {
-                    foundItem.hasElHighlight = true
+                    foundItem.hasElHighlight = true                    
                 }
             })
         })

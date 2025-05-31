@@ -9,6 +9,8 @@ class EventBus {
     }
 
     emit(event, data) {
+        // console.log(event)
+        // if(data)console.log(data)
         if(!this.listeners[event]) return
         (this.listeners[event] || []).forEach(callback => callback(data))
     }

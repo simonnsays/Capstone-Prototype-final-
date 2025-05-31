@@ -77,8 +77,17 @@ class Assistant {
 
     adjustOverlayElement(data) {
         this.overlay.className = 'overlay'
-        if(data.id === 'workAreaIntroduction') {
-            this.overlay.classList.add('table-mask')
+        switch(data.id) {
+            case 'workAreaIntroduction':
+                this.overlay.classList.add('table-mask')
+                break
+            case 'shelfIntroduction':
+            case 'attachSet2':
+                this.overlay.classList.add('shelf-mask')
+                break
+            case 'labelsIntroduction':
+                this.overlay.classList.add('labels-mask')
+                break
         }
     }
 
@@ -113,11 +122,6 @@ class Assistant {
             // If no more steps, you might want to end tutorial here
             if (task.descIndex >= task.description.length) {
                 if(task.highlight) this.highlightCurrentTask(task.highlight, false)
-
-                if(task.id == 'workAreaIntroduction'){
-                    console.log('emiting signal')
-                    this.eventBus.emit('workAreaIntroduced')
-                } 
                 this.resume()
                 return
             } 
@@ -138,13 +142,11 @@ class Assistant {
         this.toggleOverlay(false)
         this.toggleMiniDisplay(false)
         this.eventBus.emit('gameResume')
-
         setTimeout(() => {
             window.removeEventListener('click', this.boundClickWithTask)
             window.addEventListener('click', this.boundClick)
             window.addEventListener('mousemove', this.boundMouseHover)
         }, 100)
-
     }
 
     toggleTaskCellStates() {

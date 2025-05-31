@@ -63,6 +63,10 @@ class DisplayArea {
         this.curr = 0
         this.currentSide = this.displaySides[this.curr]
 
+        // States
+        this.monitoringShelfTutorial = false
+        this.monitoringTableTutorial = false
+
         // Events
         this.leftBtn.addEventListener('click', () => this.rotateLeft())
         this.rightBtn.addEventListener('click', () => this.rotateRight())
@@ -98,6 +102,13 @@ class DisplayArea {
     }
 
     confirmRemoval() {
+        console.log(this.user.componentToTrash)
+        console.log(this.monitoringTableTutorial)
+        if(this.monitoringTableTutorial && this.user.componentToTrash.name == 'Seagate Barracuda') {
+            console.log('ready to emit removal of ssd')
+            this.eventBus.emit('storageRemoved')
+        }
+
         this.removeComponent(this.user.componentToTrash)
         this.trashBin.dialog.style.display = 'none'
         this.trashBin.isActive = false
@@ -182,6 +193,11 @@ class DisplayArea {
         if (shelfIndex !== -1) {
             this.shelf[shelfIndex].component = null;
             // console.log(`${component.name} removed from shelf.`);
+        }
+
+        // Tutorial Emit Listener 
+        if(component.name == 'Seagate Barracuda') {
+            this.eventBus.emit('hddRemoved')
         }
 
         // Update display area information
@@ -439,9 +455,11 @@ class DisplayArea {
     update() {
         this.clearDisplay()
         this.user.detachableComponents = []
+        const currShelfItems = []
+        const currTableComponents = []
+
         if(this.table.component) {
             const tableComponent = this.table.component
-
             // create bounding box for table component adjusted to the current side
             if(tableComponent.isRotatable) {
                 this.createBox(tableComponent, this.table, this.currentSide)
@@ -451,7 +469,6 @@ class DisplayArea {
                 this.createBox(tableComponent, this.table, tableComponent.tableDisplay)
             }
             
-
             // update labels and rotate buttons visibility
             this.updateRotatableStyles(tableComponent.isRotatable)
             this.updateComponentLabels(tableComponent)
@@ -469,13 +486,26 @@ class DisplayArea {
                 // update slot boxes
                 this.updateSlotBox(tableComponent, slot)
             })
+
+            const fill = (mainComponent) => {
+                mainComponent.slots.forEach(slot => {
+                    if(slot.component) {
+                        currTableComponents.push(slot.component.type)
+                        fill(slot.component)
+                    }
+                })
+            }
+            
+            currTableComponents.push(tableComponent.type)
+            fill(tableComponent)
         }
 
         // create bounding boxes for components inside shelf
         this.shelf.forEach(spot => {
             const shelfComponent = spot.component
-
             if(shelfComponent) {
+                currShelfItems.push(shelfComponent.type)
+
                 this.createBox(shelfComponent, spot, shelfComponent.defaultSource)
             }
         })
@@ -485,6 +515,68 @@ class DisplayArea {
 
         // update BOOT TAB
         this.bootUpTab.update(this.table.component)
+
+        
+
+        // Table Emit Event
+        if(this.monitoringTableTutorial) {
+            this.updateTableEmits(currTableComponents)
+        }
+
+        // Shelf Emit Event
+        if(this.monitoringShelfTutorial) {
+            const proceedReq1 = ['cpu','cooling','ram','gpu']
+            const proceedReq2 = ['chassis', 'psu', 'storage']
+            if(proceedReq1.every(item => currShelfItems.includes(item))) {
+                this.eventBus.emit('set1Placed')
+                console.log('set1 is Placed, continue step18')
+            } else if (proceedReq2.every(item => currShelfItems.includes(item))) {
+                this.eventBus.emit('set2Placed')
+                console.log('set2 is Placed, continue step 20')
+            }
+        }
+    }
+
+    updateTableEmits(currTableComponents) {
+        const  hasRequiredItems = (requiredArr, availableArr) => {
+            const requiredCount = {};
+            const availableCount = {};
+            // Count required items
+            for (let item of requiredArr) {
+                requiredCount[item] = (requiredCount[item] || 0) + 1;
+            }
+            // Count available items
+            for (let item of availableArr) {
+                availableCount[item] = (availableCount[item] || 0) + 1;
+            }
+            // Compare counts
+            for (let item in requiredCount) {
+                if (!availableCount[item] || availableCount[item] < requiredCount[item]) {
+                return false;
+                }
+            }
+            return true;
+        }
+
+
+        console.log(currTableComponents)
+        console.log(this.currentSide)
+        const proceedReq = ['motherboard', 'cpu', 'cooling', 'ram', 'ram', 'gpu']
+        if(hasRequiredItems(proceedReq, currTableComponents)) {
+            this.eventBus.emit('set1Attached')
+            console.log('returned 1')
+            return
+        } 
+        if (this.currentSide == 'right') {
+            this.eventBus.emit('rightSideAccessed')
+            console.log('accessed')
+            return
+        }
+        if (currTableComponents.length === 1 && currTableComponents[0] === 'chassis') {
+            this.eventBus.emit('chassisPlacedInMain')
+            console.log('returned 2')
+            return
+        } 
     }
 
     init() {
@@ -500,6 +592,13 @@ class DisplayArea {
             this.eventBus.emit('tabsMenuOpened')
         } )
         this.mountModeButton.addEventListener('click', () => this.toggleMountMode())
+
+        this.subscribeToEvents()
+    }
+
+    subscribeToEvents() {
+        this.eventBus.on('motherboardPlaced', () => this.monitoringShelfTutorial = true)
+        this.eventBus.on('set1Placed', () => this.monitoringTableTutorial = true) 
     }
 }
 

@@ -4,15 +4,16 @@ class TutorialManager {
         this.eventBus = eventBus
         this.tasks = tasks
         this.taskIndex = 0
+        // this.taskIndex = 11
     }
     
     init() {
         this.subscribeToEvents()
-        // this.eventBus.emit('gpuBought')
-        // console.log(this.tasks[this.taskIndex])
-
         this.eventBus.emit('tutManagerInit', this.tasks[this.taskIndex])
         this.tryToAdvance('init')
+        
+        // TEST STEP FAST FORWARD
+        // this.tryToAdvance('quickBuyChecked')
     }
 
     subscribeToEvents() {
@@ -21,7 +22,9 @@ class TutorialManager {
             'motherboardExpanded', 'motherboardBought', 'cpuExpanded', 'cpuBought',
             'psuExpanded', 'psuBought', 'quickBuyChecked', 'romBought', 
             'coolingDeviceBought', 'gpuBought', 'invOpened', 'motherboardPlaced',
-            'workAreaIntroduced'
+            'workAreaIntroduced', 'motherboardPlaced', 'set1Placed', 'set1Attached',
+            'set2Placed', 'chassisPlacedInMain', 'rightSideAccessed', 'storageError',
+            'storageRemoved'
         ].forEach(event => {
             this.eventBus.on(event, () =>{
                 this.tryToAdvance(event)
@@ -41,7 +44,7 @@ class TutorialManager {
     tryToAdvance(triggerName = null) {
         const currentTask = this.tasks[this.taskIndex]
         
-        // if(triggerName === 'ram bought') {
+        // if(triggerName === 'workAreaIntroduced') {
         //     console.log('step' + this.taskIndex)
         //     console.log(currentTask)
         // }
@@ -59,6 +62,9 @@ class TutorialManager {
 
     emitTaskId(id) {
         switch(id) {
+            case 'expandChassis':
+                this.eventBus.emit('addChassisHighlight', "NZXT H5 Flow")
+                break
             case 'expandMotherboard':
                 this.eventBus.emit('addMotherboardHighlight', "ASRock X570 PG Velocita")
                 break
@@ -80,6 +86,24 @@ class TutorialManager {
             case 'buyGpu':
                 this.eventBus.emit('addGpuHighlight', "Gigabyte Radeon RX 7900 XTX")
                 break
+            case 'workAreaIntroduction':
+                this.eventBus.emit('addInvSetHighlights', [
+                    'ASRock X570 PG Velocita',
+                    'AMD Ryzen 9 5900X',
+                    'Kingston HyperX Beast RGB DDR4',
+                    'AMD wraith Prism',
+                    'Gigabyte Radeon RX 7900 XTX'
+                ])
+                break
+            case 'placeSet2':
+            this.eventBus.emit('addInvSetHighlights', [
+                'NZXT H5 Flow',
+                'EVGA Supernova 1300 P+',
+                'Seagate Barracuda'
+            ])
+            break
+            case 'buySSD':
+                this.eventBus.emit('addSsdHighlight', "Seagate Barracuda SSD")    
         }
     }
 }

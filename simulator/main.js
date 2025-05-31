@@ -79,6 +79,7 @@ class Main {
         this.canvas = new Canvas(
             this.elementHandler, 
             this.utilityTool, 
+            this.eventBus,
             this.displayArea, 
             this.user, 
             this.inventory,
@@ -129,6 +130,7 @@ class Main {
         
         // main code here
         this.shop.init() 
+        this.inventory.init()
         this.displayArea.init()
         this.canvas.animate()
         // this.showSetupWizard()
@@ -136,7 +138,7 @@ class Main {
         this.assistant.init()
         this.tutorialManager.init()
 
-        console.log(this.eventBus.listeners)
+        // console.log(this.eventBus.listeners)
         //this.assistant.endTutorial()   
         
         // TEST: BOOT UP

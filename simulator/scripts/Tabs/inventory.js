@@ -42,6 +42,25 @@ class Inventory {
     subscribeToEvents() {
         this.eventBus.on('gamePause', () => this.pause())
         this.eventBus.on('gameResume', () => this.resume())
+
+        // ['set1Placed', 'set2Placed'].forEach(event => {
+        //     this.eventBus.on(event, () => this.closeTab(this.modal))
+        // })
+        
+        this.eventBus.on('set1Placed', () => this.closeTab(this.modal))
+        this.eventBus.on('set2Placed', () => this.closeTab(this.modal))
+
+        // highlightEvents
+        this.eventBus.on('addInvSetHighlights', (arr) => {
+            arr.forEach(element => {
+                const itemsFound = this.items.filter(item => item.name === element)
+                itemsFound.forEach(item => {
+                    if(!item.hasElHighlight) {
+                        item.hasElHighlight = true 
+                    }
+                })
+            })
+        })
     }
 
     checkPlaceEmitListeners(name) {
@@ -119,6 +138,8 @@ class Inventory {
             });
             // append remove button to element
             element.appendChild(removeBtn);
+
+            element.classList.toggle('highlight-element', !!item.hasElHighlight)
 
             container.appendChild(element)
         })
