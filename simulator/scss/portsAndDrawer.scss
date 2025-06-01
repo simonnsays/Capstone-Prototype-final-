@@ -1,0 +1,281 @@
+/********************* WIRES MODAL [PORTS] *********************/
+#wiresModal {
+    width: 900px;
+    height: 600px;
+    z-index: 15;
+    position: fixed;
+    // top: calc(50% - 600px / 2);
+    left: calc(50% - 900px / 2);
+    background-color: white;
+    padding: 20px;
+    display: none;
+}
+  
+#bodyHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+#portLeft,
+#portRight {
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+  
+#portLeft:hover {
+    transform: translateX(-7px);
+}
+  
+#portRight:hover {
+    transform: translateX(7px);
+}
+  
+#portLeft:active,
+#portRight:active {
+    transform: translateX(0);
+}
+  
+.port-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 50px;
+}
+  
+#mainHead {
+    font-size: 30px;
+}
+  
+#portContainer,
+#portsContainer {
+    background-color: var(--pastel-yellow);
+    width: 880px;
+    height: 80%;
+    margin-top: 15px;
+    border-radius: 20px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+  
+  /********************* PORT LAYOUTS *********************/
+  /* Single Port */
+.length-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.length-1 > .portCell {
+    background-color: var(--mint);
+    width: 700px;
+    height: auto;
+    padding: 20px;
+}
+  
+.length-1 > .portCell > img {
+    width: 100%;
+}
+  
+  /* Multiple Ports */
+.length-2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    background-color: white;
+    padding: 10px;
+}
+  
+  /********************* PORT CELL *********************/
+.portCell {
+    background-color: var(--mint);
+    width: 285px;
+    height: 235px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+}
+  
+.port {
+    max-height: 90%;
+    max-width: 90%;
+    width: auto;
+    height: auto;
+}
+  
+.port-highlight,
+.cable-highlight {
+    background-color: rgba(0, 255, 70, 0.4);
+    position: absolute;
+}
+  
+.port-highlight:hover {
+    cursor: pointer;
+}
+  
+  /* Attached Cable */
+.port-attached {
+    position: absolute;
+    transform-origin: top left;
+}
+  
+.port-attached2 {
+    position: absolute;
+    transform-origin: top left;
+    transform: scale(2, 1.8);
+    top: 93px;
+    left: 67px;
+}
+  
+  /********************* PORT SLIDER *********************/
+.port-slider {
+    background-color: var(--teal);
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -20%;
+    z-index: 10;
+    transition: all 0.2s ease-in-out;
+}
+  
+.portCell:hover .port-slider {
+    bottom: 0;
+}
+  
+  /********************** WIRES CABLE DRAWER **********************/
+#wiresDrawer {
+    width: 80vw;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+    position: fixed;
+    bottom: -226px;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+  
+.pull {
+    animation-name: pullUp;
+}
+  
+.return {
+    animation-name: return;
+}
+  
+#pulley {
+    width: 100px;
+    height: 70px;
+    background-color: var(--pastel-yellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    border: 3px solid black;
+    border-bottom: 0;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    box-shadow: 0 0 10px black;
+    transition: all 1s ease-in-out;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+  
+#pulley:hover {
+    cursor: pointer;
+}
+  
+#pulley > img {
+    width: 30px;
+}
+  
+.remind {
+    animation-name: remind;
+}
+  
+  /********************** CABLE CONTAINER **********************/
+#cableContainer {
+    background-color: var(--pastel-yellow);
+    width: 1200px;
+    height: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 160px;
+    align-items: center;
+    grid-gap: 30px;
+    border: 3px solid black;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px 20px 0 20px;
+    overflow-x: auto;
+}
+  
+.cableCell {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    border-radius: 20px;
+    padding: 10px;
+    transition: all 0.1s ease-in-out;
+    transform-origin: center center;
+    overflow: hidden;
+}
+  
+.unused {
+    background-color: var(--mint);
+}
+  
+.used {
+    background-color: var(--green);
+}
+  
+.semi-used {
+    background-color: var(--orange);
+}
+  
+.cableCell:hover {
+    transform: scale(1.07);
+    border: 3px solid black;
+}
+  
+.cableCell:active {
+    transform: scale(1);
+}
+  
+.cableCell > img {
+    width: 100%;
+    height: 80%;
+}
+  
+.cable-slider {
+    background-color: var(--teal);
+    width: 100%;
+    height: 25%;
+    position: absolute;
+    bottom: -25%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+  
+.cableCell:hover .cable-slider {
+    bottom: 0;
+}
+  
+.active {
+    border: 5px solid var(--maroon);
+    transform: scale(1.07);
+}
+  

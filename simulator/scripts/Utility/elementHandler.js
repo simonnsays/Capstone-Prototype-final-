@@ -36,7 +36,7 @@ class ElementHandler {
             portsGroupLabel: document.querySelector('#portSubhead'),
             pageRightBtn: document.querySelector('#portRight'),
             pageLeftBtn: document.querySelector('#portLeft')
-
+            
         } || null
     }
 
@@ -51,14 +51,23 @@ class ElementHandler {
 
     getDisplayAreaElements() {
         return {
+            // display ui elements
             leftBtn: document.querySelector('#left'),
             rightBtn: document.querySelector('#right'),
             compLabel: document.querySelector('#compLabel'),
             compName: document.querySelector('#compName'),
             panelIndicator: document.querySelector('#panelIndicator'),
+            // ui button elements
             menuButton: document.querySelector('[data-type="menu"]'),
             tabButtons: document.querySelectorAll('[data-type="button"]'),
-            mountToggle: document.querySelector('#mountUnmount')
+            mountToggle: document.querySelector('#mountUnmount'),
+            // trash bin elements
+            trashBin: document.querySelector('#trashBin'),
+            trashDialog: document.querySelector('#trashConfrimDialog'),
+            trashConfirm: document.querySelector('#trashConfirm'),
+            trashReturn: document.querySelector('#trashReturn'),
+            trashClose: document.querySelector('#trashClose')
+            
             
         } || null
     }
@@ -73,18 +82,31 @@ class ElementHandler {
             btn2: document.querySelector('#button2'),
         } || null
     }
+    
 
     getAssistantElements() {
         return {
-            container: document.querySelector('.assistant-container') ,
-            imageContainer: document.querySelector('.assistant-image-container') , 
-            pulse: document.querySelector('#pulse') ,
             image: document.querySelector('.assistant-image') ,
-            infoContainer: document.querySelector('.assistant-info-container') ,
-            modal: document.querySelector('.assistant-modal') 
+            // mini assistant elements
+            assistantMini: document.querySelector('#assistantMini') ,
+            iconSec: document.querySelector('.icon-section') , 
+            pulse: document.querySelector('.pulse') ,
+            infoSec: document.querySelector('.info-section') ,
+            // full assistant elements
+            assistantFull: document.querySelector('#assistantFull') ,
+            modalIconArea: document.querySelector('.icon-area'),
+            modalBody: document.querySelector('.asst-body'),
+            closeBtn: document.querySelector('#asstClose'),
+            // tasks elements
+            tasksBtn: document.querySelector('#tasksButton'),
+            tasksContainer: document.querySelector('#tasksContainer'),
+            // errors elements
+            errorsBtn: document.querySelector('#errorsButton'),
+            errorsContainer: document.querySelector('#errorsContainer'),
+            overlay: document.querySelector('.overlay')
         } 
     } 
-
+    
     getBootUpTabElements() {
         return {
             modal: document.querySelector('#bootUpTab'),
@@ -93,11 +115,14 @@ class ElementHandler {
             powerBtn: document.querySelector('#powerButton'),
             pcPlaceHolder: document.querySelector('#unitPlaceHolder'),
             reportArea: document.querySelector('#bootTabReport'),
-            screen: document.querySelector('#screen')
+            closeErrorDialogBtn: document.querySelector('#closeErrorDialogBtn'),
+            troubleshootBtn: document.querySelector('#troubleshootBtn'),
+            errorMessage: document.querySelector('#errorMessage')
         } || null
     }
 
-    getPcSetElements
+
+    getPcSetElements  
 }
 
 export default ElementHandler

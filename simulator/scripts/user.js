@@ -11,6 +11,8 @@ class User {
 
         this.detachableComponents = []
         this.componentToDetach = null
+
+        this.componentToTrash = null
     }
 
     returnComponentToShelf() {
@@ -25,14 +27,14 @@ class User {
 
     // Reset Temporary Properties
     resetTempProperties() {
-        // user properties
-        this.isDragging = false
+        // Reset dragging status
+        this.isDragging = false;
 
         // ...slots
-        this.availableSlots = []
+        this.availableSlots = [];
 
         // component selected
-        delete this.componentSelected.origin
+        delete this.componentSelected?.origin
         this.componentSelected = null
 
         // detachables
@@ -54,16 +56,15 @@ class User {
             y: this.componentSelected.box.y}
     }
 
-    // Select Component from Shelf 
+    // Select Component from Shelf
     selectComponent(shelf) {
-        // check if mouse is clicking on a certain component
-        const componentFound = shelf.find(spot => spot.component && this.utilityTool.isInsideBox(this.mousePoint, spot.component.box))
+       // check if mouse is clicking on a certain component
+       const componentFound = shelf.find(spot => spot.component && this.utilityTool.isInsideBox(this.mousePoint, spot.component.box))
             
-        // place component found to this.componentSelected
-        return componentFound 
-        ? componentFound.component
-        : null
-
+       // place component found to this.componentSelected
+       return componentFound 
+       ? componentFound.component
+       : null
     }
 
     takeDetachableComponents(baseComponent) {
@@ -82,4 +83,4 @@ class User {
 
 }
 
-export default User
+export default User;

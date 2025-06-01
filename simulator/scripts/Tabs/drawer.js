@@ -1,12 +1,13 @@
 import cableRef from "../Data/cableReference.js";
 
 class Drawer {
-    constructor(elementHandler, utilityTool) {
+    constructor(elementHandler, utilityTool, pcUnit) {
         // Utility
         this.utilityTool = utilityTool
         this.elementHandler = elementHandler
         this.elements = this.elementHandler.getDrawerElements()
         if(!this.elements) throw new Error('Missing Drawer Elements');
+        this.pcUnit = pcUnit
        
         // Elements
         this.modal = this.elements.modal
@@ -20,7 +21,7 @@ class Drawer {
         // Events
         this.pullBtn.addEventListener('click', () => this.toggleDrawer())
     }
-
+    
     // Open Drawer
     openDrawer(image) {
         // pull up drawer
@@ -56,6 +57,20 @@ class Drawer {
         } else {
             this.openDrawer(image)
         }
+    }
+    
+    isBeingOpened(mouse) {
+        if(this.utilityTool.isInsideBox(mouse, this.pullBtn.getBoundingClientRect())) {
+            return true
+        } 
+        return false
+    }
+
+    isBeingUsed(mouse) {
+        if(this.utilityTool.isInsideBox(mouse, this.cableContainer.getBoundingClientRect())) {
+            return true
+        } 
+        return false
     }
 
     isBeingOpened(mouse) {
@@ -96,6 +111,41 @@ class Drawer {
         cable.div.classList.add('active')
     }
 
+    // Attach PSU Cables Automatically if Non-Modular
+    initializePSUCables(component) {
+        // Handle non-modular PSU
+        if (!component.isModular) {
+            // console.log("PSU is non-modular. Attaching all PSU cables by default.");
+
+            // Connect all PSU cables
+            component.cables.forEach((cable) => {
+                cable.ends.psu.connected = true;
+                // console.log(`Cable ${cable.type} connected to PSU.`);
+            });
+        }
+    }
+    
+    initializeStoragePowerCables(storageComponent, psu) {
+        // Check if PSU is non-modular
+        if (!psu.isModular) {
+            // console.log("PSU is non-modular. Attaching storage power cables without ports.");
+    
+            // Iterate over storage component's cables
+            storageComponent.cables.forEach((cable) => {
+                // Handle only sata-power cables
+                if (cable.type === "sata-power" && cable.ends) {
+                    cable.ends.psu.connected = true; // Mark the PSU end as connected
+                    cable.ends.storage.connected = true; // Mark the Storage end as connected
+                    console.log(`Storage power cable ${cable.type} connected directly to PSU and storage.`);
+                } else {
+                    // console.warn(`Cable ${cable.type} is not a power cable or lacks ends.`);
+                }
+            });
+        } else {
+            // console.log("PSU is modular. Storage power cables require port connections.");
+        }
+    }
+
     // Create Cable Attributes
     createCableAttr(cable, ref) {
         // create clone of the port
@@ -113,20 +163,14 @@ class Drawer {
 
     // Get Cable Information
     getCables(component) {
-        // const ref = cableRef[component.type] // reference for cables (see imports) 
-
         // fill drawer
         component.cables.forEach(cable => {
-            // const cableCopy = this.createCableAttr(cable, ref)
-
             this.cables.push(cable)
         })
 
         // do the same for attached components (recursive)
         component.slots.forEach(slot => {
-            if(slot.component) {
-                this.getCables(slot.component)
-            }
+            if(slot.component) this.getCables(slot.component)
         })
     }
 
@@ -162,7 +206,7 @@ class Drawer {
 
             // create image
             const cableImage = document.createElement('img')
-            cableImage.src = cable.images.find(image => image.attachedTo === 'none').imageSrc
+            cableImage.src = cable.images.drawer.imageSrc
 
             // create slider
             const cableSlider = document.createElement('div')
@@ -180,11 +224,11 @@ class Drawer {
             // create bounding box of div for matching
             cable.div.rect = cable.div.getBoundingClientRect()
         })
-        
     }
 
     // Main Update Function
     update(table, shelf) {
+        let scrollPosition = this.cableContainer.scrollTop
         // delete cable cells
         while(this.cableContainer.firstChild) {
             this.cableContainer.removeChild(this.cableContainer.firstChild)
@@ -205,6 +249,7 @@ class Drawer {
 
         // create cells
         this.createCableCells()
+        this.cableContainer.scrollTop = scrollPosition
     }
 }
 

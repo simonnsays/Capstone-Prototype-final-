@@ -1,0 +1,360 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="./assistant/assistant.css">
+    <link rel="icon" href="./favicon.png" type="image/x-icon">
+    <title>PC Assembly and Troubleshooting</title>
+    <style>   
+        #drawtrashBox {
+        position: absolute;
+        top: 20px;
+        left: 570px;
+        width: 80px;
+        height: 80px;
+        background-color: #fef9db;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 0px solid transparent;
+        transition: all 0.2 linear;
+        user-select: none;
+        }
+
+        #drawtrashBox img {
+        width: 80%;
+        height: 80%;
+        opacity: 70%;
+        }
+
+        #drawtrashBox:hover {
+        background-color: #888; /* Highlight color */
+        }
+
+        #drawtrashBox:hover {
+        box-shadow: 3.4px 2.5px 4.9px rgba(0, 0, 0, 0.025),
+                    8.6px 6.3px 12.4px rgba(0, 0, 0, 0.035),
+                    17.5px 12.8px 25.3px rgba(0, 0, 0, 0.045),
+                    36.1px 26.3px 52.2px rgba(0, 0, 0, 0.055),
+                    99px 72px 143px rgba(0, 0, 0, 0.08);
+        }
+       
+        .dialog {
+            display: none; 
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: white;
+            border: 1px solid #888;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .dialog-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .dialog-content button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            background-color: #f04f4f;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dialog-content button:hover {
+            background-color: #d43e3e;
+        }
+        
+        .tooltiptext {
+         visibility: hidden;
+         width: 4em;
+         background-color: rgba(0, 0, 0, 0.253);
+         color: #fff;
+         text-align: center;
+         border-radius: 6px;
+         padding: 5px 0;
+         position: absolute;
+         z-index: 1;
+         top: 25%;
+         left: 110%;
+        }
+
+        .tooltiptext::after {
+         content: "";
+         position: absolute;
+         top: 50%;
+         right: 100%;
+         margin-top: -5px;
+         border-width: 5px;
+         border-style: solid;
+         border-color: transparent rgba(0, 0, 0, 0.386) transparent transparent;
+        }
+
+        .trash-icon:hover .tooltiptext {
+         visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <!-- GAME CONTAINER -->
+    <div class="game-container">
+        <div class="button-wrapper">
+            <button class="button" id="muneBtn" data-type="menu" data-active="true"></button>
+            <button class="button" id="openShop" data-type="tab">SHOP</button>
+            <button class="button" id="openInv" data-type="tab">INVENTORY</button>
+            <button class="button" id="openWires" data-type="tab">PORTS</button>
+            <button class="button" id="openBootTab" data-type="tab">BOOT</button>
+        </div>
+        
+        <!-- canvas -->
+        <canvas id="simCanvas"></canvas>
+        <div id="drawtrashBox" class="trash-icon">
+            <img src="./assets/trash-bin.png" alt="Trash Icon">
+            <div class="tooltiptext">remove</div>
+        </div>
+        <!-- Custom confirmation dialog (initially hidden) -->
+        <div id="confirmationDialog" class="dialog">
+            <div class="dialog-content">
+                <p>Are you sure you want to remove this component?</p>
+                <button id="confirmBtn">Yes</button>
+                <button id="cancelBtn">No</button>
+            </div>
+        </div>
+        <!-- component labels -->
+        <div class="rotate-wrapper">
+            <button class="button" id="left">
+                <img class="arrow" src="./assets/svg/leftArr.svg" alt="left arrow" style="height: 90%;">
+            </button>
+            <div class="wrapper">
+                <p id="compLabel"></p>
+                <p id="compName"></p>
+                <p id="panelIndicator"></p>
+            </div>
+            
+            <button class="button" id="right">
+                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow"  style="height: 90%;">
+            </button>
+        </div>
+    </div>
+
+    <!-- Component Information Modal -->
+    <dialog id="itemInfoModal">
+        <!-- info container -->
+        <div class="itemInfoContainer">
+            <!-- image container -->
+            <div id="itemInfoImage"></div>
+            
+            <!-- item info name -->
+            <div id="itemInfoNameContainer">
+                <div class="infoLineBreak"></div>
+                <p id="itemInfoName"></p>
+                <div class="infoLineBreak"></div>
+            </div>
+            
+            <!-- item info [SPECS] container -->
+            <div id="itemInfoSpecsContainer">
+                <h5>SPECIFICATIONS</h5>
+                <ul id="itemInfoSpecs">
+                    <li id="type"></li>
+                    <li id="size"></li>
+                </ul>
+            </div>
+
+            <!-- Buy and cancel buttons-->
+            <div class="itemInfoBottomContainer">
+                <div class="infoLineBreak"></div>
+                <div class="itemInfoButtonsContainer">
+                    <button id="button1" class="button">Buy</button>
+                    <button id="button2" class="button">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </dialog>
+
+
+    <!-- SHOP MODAL -->
+    <dialog id="shopModal" class="modal">
+        <!-- TOP -->
+        <div class="top">
+            <div class="headline">
+                <h2 class="title">SHOP</h2>
+                <input type="search" class="search-bar" id="shopSearch" placeholder="Search.." autocomplete="off">
+                <h2 id="money">$9999</h2>
+            </div>
+
+            <div class="category-scroll">
+                <button data-category="shop" data-selected="false" data-id="chassis" class="button2 category-btn">Case</button>
+                <button data-category="shop" data-selected="false" data-id="motherboard" class="button2 category-btn">Motherboard</button>
+                <button data-category="shop" data-selected="false" data-id="cpu" class="button2 category-btn">CPU</button>
+                <button data-category="shop" data-selected="false" data-id="psu" class="button2 category-btn">Power&nbsp;Supply</button>
+                <button data-category="shop" data-selected="false" data-id="ram" class="button2 category-btn">Memory</button>
+                <button data-category="shop" data-selected="false" data-id="storage" class="button2 category-btn">Storage</button>
+                <button data-category="shop" data-selected="false" data-id="cooling" class="button2 category-btn">Cooling</button>
+                <button data-category="shop" data-selected="false" data-id="gpu" class="button2 category-btn">GPU</button>
+            </div>
+            <hr>
+        </div>
+        
+        <!-- MIDDLE -->
+        <div class="items-shop">
+            <!-- item divs are placed here -->
+        </div>
+        <!-- BOTTOM -->
+        <div class="bottom">
+            <hr>
+            <div class="bottom-container">
+                <label for="quickBuy" class="quick-buy">
+                    <input type="checkbox" id="quickBuy" checked>Quick Buy
+                </label>
+                <button id="closeShop" class="button shop-btn">CLOSE</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- IVENTORY MODAL -->
+    <dialog id="invModal" class="modal">
+        <div class="modal-wrapper">
+            <div class="modal-header">
+                INVENTORY
+                <span id="closeInv" class="closeBtn">&times;</span>
+            </div>
+
+            <!-- item container -->
+            <div id="invItemsContainer" class="modal-body">
+                
+            </div>
+        </div>
+    </dialog>
+
+    <!-- WIRES MODAL -->
+    <div id="wiresModal" class="modal">
+        <div class="modal-wrapper">
+            <!-- modal header -->
+            <div class="modal-header no-margin">
+                PORTS
+                <span id="closeWires" class="closeBtn">&times;</span>
+            </div>
+
+            <!-- item container -->
+            <div id="wiresItemsContainer" class="wire-body">
+                <!-- body header -->
+                <div id="bodyHeader">
+                    <img src="./assets/svg/leftArr.svg" id="portLeft" width="50px" height="30px" >
+                    <div class="port-label">
+                        <div id="mainHead">PORTS</div>
+                        <div id="portSubHead"> &nbsp</div>
+                    </div>
+                    <img src="./assets/svg/rightArr.svg" id="portRight" width="50px" height="30px">
+                    
+                </div>  
+
+                <!-- ports area container -->
+                <div id="portsContainer" data-length="single" class="length-2 ">
+                   
+                    <!-- port cells here.. -->
+
+                                <!-- use cells reference ||| -->
+                                <!--                     vvv -->
+                    <!-- <div class="portCell"> -->
+                        <!-- actual port  -->
+                        <!-- <img class="port" src="./assets/motherboard/ports/mobo_port-fpanel.png"> -->
+                        
+                        <!-- port highlight -->
+                        <!-- <div class="port-highlight"></div> -->
+                        
+                        <!-- cable attached to port -->
+                        <!-- <img class="port-attached" src="./assets/wires/frontPanel/frontPanel-attached(gen).png"> -->
+                        <!-- <img class="port-attached2" src="./assets/wires/sata-data/sata-data-attached(sata).png"> -->
+                        
+                        <!-- slider div for label -->
+                        <!-- <div class="port-slider">24-Pin Power</div> -->
+                    <!-- </div>    -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DRAWER / CABLES -->
+    <div id="wiresDrawer">
+        <!-- drag up pulley -->
+        <div id="pulley">
+            <img id="pulleyImage" src="./assets/svg/up-arrow-svgrepo-com (1).svg" alt="pulley up arrow">
+        </div>
+
+        <!-- cables / drawer contents -->
+        <div id="cableContainer">
+
+                            <!-- cells reference ||| -->
+                            <!--                 vvv -->
+            <!-- <div class="cableCell unused">
+                <img src="./assets/wires/sata-data/sata-data-default.png">
+                <div class="cable-slider"> 24-Pin Power Cable </div>
+            </div> -->
+            <!-- <div class="cableCell unused">
+                <img src="./assets/wires/ATX-power/ATX-power-default.png">
+                <div class="cable-slider"> 24-Pin Power Cable </div>
+            </div> -->
+            <!-- <div class="cableCell used">
+                <img src="./assets/wires/8pin-power/8pin-power-default.png">
+                <div class="cable-slider"> 24-Pin Power Cable </div>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- BOOT UP MODAL -->
+    <div id="bootUpTab" class="modal">
+        <div class="modal-wrapper">
+            <!-- header -->
+            <div class="modal-header no-margin">
+                BOOT UP
+                <span id="closeBootTab" class="closeBtn">&times;</span>
+            </div>
+
+            <!-- body -->
+            <div class="bootTabBodyWrapper">
+                <!-- report -->
+                <div id="bootTabReport">
+                    <!-- <div class="reportCell">
+                        <div class="reportCellTag"> Temperature:</div>
+                        <div class="reportCellDef">71 degrees</div>
+                    </div>
+                    <div class="reportCell">
+                        <div class="reportCellTag"> Wattage:</div>
+                        <div class="reportCellDef">600W / 800W</div>
+                    </div> -->
+                </div>
+
+                <div class="vertLine"></div>
+
+                <!-- display -->
+                <div id="bootDisplay">
+                    <img id="desk" src="./assets/desk.png" >
+                    <img id="monitor" src="./assets/monitor.png" >
+                    <div id="unitPlaceHolder">
+                        <!-- image element here -->
+                    </div>
+                    <div id="powerButton">
+                        <img src="./assets/svg/power-button.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="main.js"></script>
+    <script>   
+</script>
+</body>
+</html>

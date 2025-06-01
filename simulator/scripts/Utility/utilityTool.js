@@ -14,7 +14,7 @@ class UtilityTool {
             point.x < box.x + box.width &&
             point.y > box.y &&
             point.y < box.y + box.height
-    }    
+    }     
 
     // Creation of HTML Elements for Items
     makeItemElement(item, imageSource){
@@ -22,6 +22,7 @@ class UtilityTool {
         const element = document.createElement('div')
         element.classList = 'content'
         element.id = item.name
+        element.dataset.name = item.name
 
         // create image for the div
         const image = new Image()
@@ -40,7 +41,7 @@ class UtilityTool {
     }
 
     // Create of Unique ID
-    createID(component) {
+    createID(componentType) {
         // prefixes to separate component types
         const types = {
             chassis: 'ch',
@@ -50,19 +51,21 @@ class UtilityTool {
             psu: 'ps',
             storage: 'st',
             cooling: 'fn',
-            ram: 'rm'
+            cpuCooling: 'cpufn',
+            ram: 'rm',
+            cable: 'cb'
         }
 
         // check if valid component type 
-        if (!types.hasOwnProperty(component.type)) {
+        if (!types.hasOwnProperty(componentType)) {
             throw new Error('Not Supported Component, Failed to Create an ID')
         }
 
         const count = this.idCount.toString()
-        const typePrefix = types[component.type]
+        const typePrefix = types[componentType]
         let id = null
 
-        // concatenate to create ID
+        // create ID
         switch(count.length) {
             case 1:
                 id  = typePrefix + ('0' + '0' + count)
@@ -74,11 +77,10 @@ class UtilityTool {
                 id  = typePrefix + count
                 break
         }
-        
-        component.id = id
-
         // change id count number
         this.idCount++
+
+        return id
     }
 
     // Determine Scaling Factor Based on Display Area Height
@@ -94,7 +96,6 @@ class UtilityTool {
 
     // Get Image Side
     getSide(component, side) {
-        // images associated with a side also has their width and height declared
         return component.images.find(element => element.side == side) || null
     }
 

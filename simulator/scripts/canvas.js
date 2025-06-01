@@ -1,13 +1,16 @@
 class Canvas {
-    constructor(elementHandler, utilityTool, displayArea, user, inventory) {
+    constructor(elementHandler, utilityTool, eventBus, displayArea, user, inventory, wattageCalculator) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
-        
+        this.eventBus = eventBus
+        this.inventory = inventory
+        this.wattageCalculator = wattageCalculator
+
         // Canvas Area
-        this.element = elementHandler.getSimCanvas()
-        if(!this.element) {
-            throw new Error('no canvas element found')
+        this.element = elementHandler.getSimCanvas();
+        if (!this.element) {
+            throw new Error('no canvas element found');
         }
         this.element.width = 1300
         this.element.height = 680
@@ -19,25 +22,30 @@ class Canvas {
         this.table = displayArea.table
         this.shelf = displayArea.shelf
 
+        // Custom Alert Elements
+        this.alertBox = document.getElementById('customAlert')
+        this.alertMessage = document.getElementById('alertMessage')
+        this.alertOkButton = document.querySelector('#alertOKButton')
+
         // User
-        this.user = user
+        this.user = user;
 
-        // Inventory
-        this.inventory = inventory
-
-        // Mouse Move Events
+        // Mouse Events
         window.addEventListener('mousedown', (e) => this.handleMouseDown(e))
         window.addEventListener('mousemove', (e) => this.handleMouseMove(e))
         window.addEventListener('mouseup', () => this.handleMouseUp())
-    }
 
+        // Dialog Events        
+        this.alertOkButton.addEventListener('click', () => this.closeAlert())
+    }
+    
     // Mouse Down Event
     handleMouseDown(e) {
         // only accept left click
         if(e.button !== 0 || !this.isActive) return
 
-        // Unmount mode    
-        if(!this.displayArea.isInMountMode) {
+       // Unmount mode    
+       if(!this.displayArea.isInMountMode) {
             if(!this.user.componentToDetach) return
 
             // check if okay to return to shelf or return to inventory 
@@ -50,7 +58,8 @@ class Canvas {
 
             this.user.componentToDetach.base.slots.find(slot => 
                 slot.component === this.user.componentToDetach.attached).component = null
-            
+            // Update wattage calculation
+            this.wattageCalculator.calculateWattage()
             return
         }
 
@@ -96,13 +105,13 @@ class Canvas {
             this.user.detachableComponents = []
             this.user.takeDetachableComponents(this.displayArea.table.component)
 
-            this.user.detachableComponents.forEach(pair => {
+            this.user.detachableComponents.forEach(pair => {              
                 if(this.utilityTool.isInsideBox(this.user.mousePoint, pair.attached.box)) {
-                    this.user.componentToDetach = pair
+                    this.user.componentToDetach = pair                    
                     componentCheck = true
                 }             
             })
-
+        
             if(!componentCheck) {
                 this.user.componentToDetach = null
             }
@@ -116,33 +125,50 @@ class Canvas {
             // return component if out of bounds
             if(!this.utilityTool.isInsideBox(rawMouse, canvasRect)) {
                 this.user.returnComponentToShelf()
-
                 this.user.resetTempProperties()
             }
         }
     }
 
-    // Mouse Up Event 
+    // Mouse Up Event
     handleMouseUp() {
         // return if no selected component
-        if(!this.user.componentSelected) return
+        if (!this.user.componentSelected) return;
+
+        // Check if component is dropped on the trash icon
+        if (this.utilityTool.isInsideBox(this.user.mousePoint, this.displayArea.trashBin.area)) {
+            this.displayArea.showConfirmationDialog(this.user.componentSelected); // Show confirmation dialog
+            
+            // this.user.isDragging = false
+            this.user.returnComponentToShelf()
+            // this.user.componentSelected = null
+            this.user.resetTempProperties()
+            return;
+        }
 
         // check for interaction
-        let isInteracting = false
+        let isInteracting = false;
 
         this.user.availableSlots.forEach(slot => {
-            if(!slot.box) throw new Error('Slot has no Box property')
+            if (!slot.box) throw new Error('Slot has no Box property');
+            
+            if (this.utilityTool.isInsideBox(this.user.mousePoint, slot.box)
+                && slot.sides[this.displayArea.currentSide].accessible) {
 
-            if(this.utilityTool.isInsideBox(this.user.mousePoint, slot.box) 
-            && slot.sides[this.displayArea.currentSide].accessible) {
-                isInteracting = true
+                // Check compatibility function checks compatiblity of each component dropped to their respective slots
+                if (this.checkCompatibility(this.user.componentSelected, slot)) {
+                    isInteracting = true;
 
-                // attach component
-                this.displayArea.attachComponent(this.user.componentSelected, slot)
+                    // Attach component
+                    this.displayArea.attachComponent(this.user.componentSelected, slot);
+                } else {
+                    isInteracting = true;
+                    this.user.returnComponentToShelf();
+                }
             }
         })
 
-        // swap components if component dragged is in table display area
+         // swap components if component dragged is in table display area
         if(!isInteracting && this.utilityTool.isInsideBox(this.user.mousePoint, this.table.area)) {
             isInteracting = true
 
@@ -157,49 +183,146 @@ class Canvas {
         // return to shelf if no interaction
         if(!isInteracting) {
             this.user.returnComponentToShelf()
-        }
+        } else{
+            // Update wattage calculation
+            this.wattageCalculator.calculateWattage()
+       }
 
         // clear temporary properties
         this.user.resetTempProperties()
     }
 
-    // Display Slots (get Available slots)
-    displaySlots(baseComponent,  componentSelected) {
+    // Custom Alert Handling
+    showAlert(message) {
+        this.alertMessage.textContent = message
+        this.alertBox.classList.remove('hidden')
+    }
+
+    closeAlert() {
+        this.alertBox.classList.add('hidden')
+    }
+
+    highlight(box) {
+        this.c.fillStyle = 'rgba(0, 255, 0, 0.4)'
+        this.c.fillRect(
+            box.x,
+            box.y,
+            box.width,
+            box.height
+        )
+    }
+
+    // Check if the component and slot are compatible
+    checkCompatibility(component, slot) {
+        if (!component || !slot) {
+            console.error("Error: Invalid component or slot")
+            return false
+        }
+
+        const componentType = component.type
+        const slotType = slot.type
+
+        // Allow GPU to be placed in any GPU slot (forward/backward compatibility for different PCIe generations i.e. pcie 3.0/4.0/5.0/6.0)
+        if (componentType === 'gpu' && slotType === 'gpu') {
+            // console.log('GPU detected, allowing compatibility for PCIe generations.')
+            return true
+        }
+         // Allow CPU cooler to be placed in any cooling mount (forward/backward compatibility for different cooling mount(amd or intel))
+         if (componentType === 'cooling' && slotType === 'cooling') {
+            // console.log('CPU cooler detected, allowing compatibility for mount compatibility can be used anywhere.')
+            return true
+        }
+
+        // Check if component type is included in data.js
+        if (!componentType) {
+            console.error("Error: Component type is undefined or null");
+            return false
+        }
+
+        // Validate component type 
+        if (componentType !== slotType) {
+            this.showAlert(`❌ This slot is not for a ${componentType} component. Please choose the correct slot.`)
+            return false
+        }
+       
+        // PSU Compatibility Logic
+        if (componentType === 'psu') {
+        // console.log('PSU detected, checking wattage compatibility.')
+
+        // Calculate the total wattage required by all components
+        const totalWatts = this.wattageCalculator.calculateWattage()
+        const psuWatts = parseInt(component.watts, 10) || 0
+
+        if (totalWatts > psuWatts) {
+            this.showAlert(
+             `❌ Incompatible PSU detected! Total wattage of ${totalWatts}W exceeds PSU capacity of ${psuWatts}W.`
+            )
+            return false
+        }
+        // console.log(`PSU is compatible. Total Wattage: ${totalWatts}W, PSU Capacity: ${psuWatts}W.`)
+        return true
+        }
+
+        const componentSize = component.size
+        const slotSupports = slot.supports
+
+        // Check component size if it is included in data.js
+        if (!componentSize) {
+            this.showAlert('❌ Component size is missing. Please choose a valid component.');
+            return false
+        }
+
+        // Validate component slot
+        if (!slotSupports.includes(componentSize)) {
+            console.log(component)
+            console.log(slotSupports)
+            if(component.name === "Seagate Barracuda" && component.size === 'hdd') {
+                this.eventBus.emit('storageError')
+            }
+            this.showAlert(`❌ This slot doesn't support a ${componentSize} component. Please choose a compatible component.`)
+            return false
+        }
+        
+        return true
+    }
+
+    // Display Slots
+    displaySlots(baseComponent, componentSelected) {
+        if(!baseComponent) return
         // match slot type to selected component type
-        baseComponent.slots.forEach(slot => {
-            if(slot.type === componentSelected.type && slot.component === null) {
+        baseComponent.slots.forEach((slot) => {
+            if (slot.type === componentSelected.type && !slot.component) {
                 this.user.availableSlots.push(slot)
             }
-
             // get available slots from attached components
-            if(slot.component) {
-                this.displaySlots(slot.component, componentSelected)
+            if (slot.component) {
+                this.displaySlots(slot.component, componentSelected);
             }
         })
     }
 
     // Rects With Border Radius(bent corners)
     fillRoundRect(left, top, width, height, radius, color) {
-        this.c.beginPath();
-        this.c.moveTo(left + radius, top);
-        this.c.lineTo(left + width - radius, top);
-        this.c.arcTo(left + width, top, left + width, top + radius, radius);
-        this.c.lineTo(left + width, top + height - radius);
-        this.c.arcTo(left + width, top + height, left + width - radius, top + height, radius);
-        this.c.lineTo(left + radius, top + height);
-        this.c.arcTo(left, top + height, left, top + height - radius, radius);
-        this.c.lineTo(left, top + radius);
-        this.c.arcTo(left, top, left + radius, top, radius);
+        this.c.beginPath()
+        this.c.moveTo(left + radius, top)
+        this.c.lineTo(left + width - radius, top)
+        this.c.arcTo(left + width, top, left + width, top + radius, radius)
+        this.c.lineTo(left + width, top + height - radius)
+        this.c.arcTo(left + width, top + height, left + width - radius, top + height, radius)
+        this.c.lineTo(left + radius, top + height)
+        this.c.arcTo(left, top + height, left, top + height - radius, radius)
+        this.c.lineTo(left, top + radius)
+        this.c.arcTo(left, top, left + radius, top, radius)
 
-        // any color you want
         // this.c.fillStyle = '#527e71'; // dark 
         // this.c.fillStyle = '#c7ddcc'; // light 
-        this.c.fillStyle = color;  
-        this.c.fill();
+        this.c.fillStyle = color  
+        this.c.fill()
     }
 
     // Draw Component Image
     drawComponent(box, image) {
+        if (!image) return
         this.c.drawImage(
             image,
             box.x,
@@ -209,14 +332,20 @@ class Canvas {
         )
     }
 
-    // Draw Componnent in Table Area
+    // Draw Component in Table Area
     drawTableComponent(component, currentSide) {
-        // some components can't be rotated so we use default source for that case
-        let componentSide = component.isRotatable 
-        ? this.utilityTool.getSide(component, currentSide) 
-        : this.utilityTool.getSide(component, component.defaultSource)
+       // some components can't be rotated so we use default source for that case
+       let componentSide = null
 
-        this.drawComponent(component.box, componentSide.image)
+       if (component.type === 'motherboard'){
+        componentSide = this.utilityTool.getSide(component, 'left')
+       } else if (component.isRotatable){
+        componentSide = this.utilityTool.getSide(component, currentSide)
+       } else {
+        componentSide = this.utilityTool.getSide(component, component.defaultSource)
+       }
+
+       this.drawComponent(component.box, componentSide.image)
     }
 
     // Draw Available Slots
@@ -236,21 +365,55 @@ class Canvas {
     // Recursively Draw Attached Components
     drawAttachedComponents(slots, currentSide) {
         // do nothing if component has no slots
-        if(slots.length < 1) return
-
+        if (slots.length < 1) return
         slots.forEach(slot => {
-            if(slot.component) {
+            if (slot.component) {
                 const side = this.utilityTool.getSide(slot.component, currentSide)
-
+                const isSlotHidden = slot?.hidden === true
                 // draw slots according to the current side
-                if(side) {
+                if (isSlotHidden) {
+                    this.drawComponent(slot.component.box)
+                }else if (side) {
                     this.drawComponent(slot.component.box, side.image)
                 }
+                
                 
                 // draw attached components for components attached to the slot components
                 this.drawAttachedComponents(slot.component.slots, currentSide)
             }
         })
+    }
+
+    // add component label under component image
+    drawComponentLabel(component, spot) {
+        if (!component || !component.box) return
+        
+        const text = component.type.toUpperCase()
+        
+        // Text settings
+        this.c.font = '12px Arial'
+        this.c.textAlign = 'center'
+        
+        // Calculate label position (centered at bottom of shelf area)
+        const textWidth = this.c.measureText(text).width
+        const padding = 15
+        
+        // Center component.type label at bottom center of the box
+        if (spot) {
+            const labelY = spot.area.y + spot.area.height - 10 
+
+            // Draw label background
+            this.c.fillStyle = 'rgba(0, 0, 0, 0)';
+            this.c.fillRect(
+                spot.area.x + (spot.area.width - textWidth)/2 - padding,
+                labelY - 12,
+                textWidth + padding * 2, 20
+            );
+
+            // Draw text
+            this.c.fillStyle = 'black';
+            this.c.fillText(text, spot.area.x + spot.area.width/2, labelY);
+        }
     }
 
     // Main Animate Function
@@ -273,6 +436,26 @@ class Canvas {
         shelf.forEach(spot => {
             this.fillRoundRect(spot.area.x, spot.area.y, spot.area.width, spot.area.height, 20, '#c7ddcc')
         })
+
+        // const img = new Image();
+        // img.src = './assets/display-area/table-wood.png'
+
+        // this.c.drawImage(img, table.area.x + 15, table.area.y + 15, table.area.width - 30, table.area.height - 30)
+
+        // const x = 50, y = 50, width = 150, height = 150, radius = 20;
+      
+        // Draw rounded rectangle mask
+        // this.c.beginPath();
+        // this.c.moveTo(x + radius, y);
+        // this.c.arcTo(x + width, y, x + width, y + height, radius);
+        // this.c.arcTo(x + width, y + height, x, y + height, radius);
+        // this.c.arcTo(x, y + height, x, y, radius);
+        // this.c.arcTo(x, y, x + width, y, radius);
+        // this.c.closePath();
+        // this.c.clip();
+        
+        // Draw the image with rounded borders
+        // this.c.drawImage(img, x, y, width, height);
 
         // draw Display area component
         if(table.component) {
@@ -303,20 +486,14 @@ class Canvas {
                         radius: 20,
                         color: 'rgba(255,170,0, 0.3)'
                     }
-                    this.fillRoundRect(
-                        highlight.left, 
-                        highlight.top, 
-                        highlight.width, 
-                        highlight.height, 
-                        highlight.radius, 
-                        highlight.color
-                    )
+                    this.fillRoundRect(highlight.left, highlight.top, highlight.width, highlight.height, highlight.radius, highlight.color)
                 }
 
                 // all shelf components will use default source
                 const component = spot.component
                 const componentSide = this.utilityTool.getSide(component, component.defaultSource) 
                 this.drawComponent(component.box, componentSide.image)
+                this.drawComponentLabel(component, spot)
             }
         })
 

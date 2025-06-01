@@ -1,149 +1,82 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="./assistant/assistant.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style2.css">
+
     <link rel="icon" href="../favicon.png" type="image/x-icon">
     <title>PC Assembly and Troubleshooting</title>
     <style>
-       .checkmark {
-        width: 30px;
-        height: 30px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        }
-
-        .completed-task .checkmark {
-            display: block; /* Make the checkmark visible when completed */
+        .wood {
             opacity: 1;
-        }
-
-        /* Additional style for completed tasks */
-        .completed-task {
-            background-color: #e0ffe0;
-            color: #333;
-            transition: background-color 0.3s ease;
-        }
-
-        .completed-task .tasktitle {
-            text-decoration: line-through;
-            color: #888;
-        }
-
-        #task-status {
-        position: fixed;
-        left: 10px;
-        top: 10px;
-        font-size: 18px;
-        font-weight: bold;
-        color: #333;
-        }
-
-        #drawtrashBox {
-        position: absolute;
-        top: 20px;
-        left: 570px;
-        width: 80px;
-        height: 80px;
-        background-color: #fef9db;
-        border-radius: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 0px solid transparent;
-        transition: all 0.2 linear;
-        user-select: none;
-        }
-
-        #drawtrashBox img {
-        width: 80%;
-        height: 80%;
-        opacity: 70%;
-        }
-
-        #drawtrashBox:hover {
-        background-color: #888;
-        }
-
-        #drawtrashBox:hover {
-        box-shadow: 3.4px 2.5px 4.9px rgba(0, 0, 0, 0.025),
-                    8.6px 6.3px 12.4px rgba(0, 0, 0, 0.035),
-                    17.5px 12.8px 25.3px rgba(0, 0, 0, 0.045),
-                    36.1px 26.3px 52.2px rgba(0, 0, 0, 0.055),
-                    99px 72px 143px rgba(0, 0, 0, 0.08);
-        }
-
-        .tooltiptext {
-         visibility: hidden;
-         width: 4em;
-         background-color: rgba(0, 0, 0, 0.253);
-         color: #fff;
-         text-align: center;
-         border-radius: 6px;
-         padding: 5px 0;
-         position: absolute;
-         z-index: 1;
-         top: 25%;
-         left: 110%;
-        }
-
-        .tooltiptext::after {
-         content: "";
-         position: absolute;
-         top: 50%;
-         right: 100%;
-         margin-top: -5px;
-         border-width: 5px;
-         border-style: solid;
-         border-color: transparent rgba(0, 0, 0, 0.386) transparent transparent;
-        }
-
-        .trash-icon:hover .tooltiptext {
-         visibility: visible;
-        }
-
-        .dialog {
-            display: none; 
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            background-color: white;
-            border: 1px solid #888;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        
-        .dialog-content {
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .dialog-content button {
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            background-color: #f04f4f;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        .dialog-content button:hover {
-            background-color: #d43e3e;
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
         }
     </style>
 </head>
 <body>
+    <img class="wood" src="./assets/display-area/table-plank.png">
+
+    <div class="overlay"></div>
+
     <!-- GAME CONTAINER -->
     <div class="game-container">
+
+        <dialog id="setupWizard" class="setup-wizard">
+            <div class="wizard-content">
+                <div class="wizard-header">
+                    <h2>Welcome to PC Builder</h2>
+                    <p>Let's customize your building experience</p>
+                </div>
+                
+                <div class="wizard-steps">
+                    <div class="step step-build-type" data-step="1">
+                        <h3>Choose Your Build Type</h3>
+                        <div class="build-options">
+                            <button class="build-option" data-type="gaming">
+                                <span class="icon">🎮</span>
+                                <span class="label">Gaming</span>
+                            </button>
+                            <button class="build-option" data-type="office">
+                                <span class="icon">💼</span>
+                                <span class="label">Office</span>
+                            </button>
+                            <button class="build-option" data-type="casual">
+                                <span class="icon">🏠</span>
+                                <span class="label">Casual</span>
+                            </button>
+                        </div>
+                    </div>  
+                    <br>
+                    <div class="step step-price-range" data-step="2" style="display: none;">
+                        <label>Input Your Budget</label>
+                        <div class="range-slider">
+                          <input type="range" id="minRange" min="0" max="100000" step="100" value="0">
+                          <input type="range" id="maxRange" min="0" max="100000" step="100" value="100000">
+                          <div class="range-track"></div>
+                        </div>
+                        <div class="price-display">
+                        <label for="minPriceInput">Minimum</label>
+                         ₱<input type="number" id="minPriceInput" min="0" max="100000" step="100" value="10000"> 
+                           
+                        <label for="maxPriceInput">Maximum</label>
+                         ₱<input type="number" id="maxPriceInput" min="0" max="100000" step="100" value="100000">
+                        </div>
+                    </div>
+                    </div>
+                    
+                <div class="wizard-controls">
+                    <button id="prevStep">Previous</button>
+                    <button id="nextStep">Next</button>
+                </div>
+            </div>
+        </dialog>
+
+        <div id="wattageDisplay" class="wattC">Total Watts: 0W</div>
         <div class="button-wrapper">
-            <button class="button" id="muneBtn" data-type="menu" data-active="false"></button>
+            <button class="button" id="menuBtn" data-type="menu" data-active="false"></button>
             <button id="openShop" data-type="button">SHOP</button>
             <button id="openInv" data-type="button">INVENTORY</button>
             <button id="openWires" data-type="button">PORTS</button>
@@ -155,10 +88,25 @@
         <!-- canvas -->
         <canvas id="simCanvas"></canvas>
 
-        <!-- component labels -->
+        <div id="trashBin" class="trash-icon">
+            <img src="./assets/trash-bin.png" alt="Trash Icon">
+            <div class="tooltiptext">remove</div>
+        </div>
+        
+         <!-- Custom confirmation dialog (initially hidden) -->
+         <div id="trashConfrimDialog" class="dialog">
+            <div id="trashClose" class="closeBtn">&times;</div>
+            <div class="dialog-content">
+                <p>Are you sure you want to remove this component?</p>
+                <button id="trashConfirm">Yes</button>
+                <button id="trashReturn">Return To<br>Inventory Instead</button>
+            </div>
+        </div>
+
+            <!-- component labels -->
         <div class="rotate-wrapper">
             <button class="button" id="left">
-                <img class="arrow" src="./assets/svg/leftArr.svg" alt="left arrow">
+                <img class="arrow" style="height: 90%;" src="./assets/svg/leftArr.svg" alt="left arrow">
             </button>
             <div class="wrapper">
                 <p id="compLabel"></p>
@@ -167,10 +115,11 @@
             </div>
             
             <button class="button" id="right">
-                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
+                <img class="arrow" style="height: 90%;" src="./assets/svg/rightArr.svg" alt="right arrow">
             </button>
         </div>
-    </div>
+
+        </div>
 
     <!-- Component Information Modal -->
     <dialog id="itemInfoModal">
@@ -182,7 +131,7 @@
             <!-- item info name -->
             <div id="itemInfoNameContainer">
                 <div class="infoLineBreak"></div>
-                <p id="itemInfoName">EVGA Supernova 1300 P+, 80+ Platinum 1300W (psu)</p>
+                <p id="itemInfoName"></p>
                 <div class="infoLineBreak"></div>
             </div>
             
@@ -190,8 +139,6 @@
             <div id="itemInfoSpecsContainer">
                 <h5>SPECS</h5>
                 <ul id="itemInfoSpecs">
-                    <li>FormFactor</li>
-                    <li>CPU socket</li>
                 </ul>
             </div>
 
@@ -239,7 +186,7 @@
             <hr>
             <div class="bottom-container">
                 <label for="quickBuy" class="quick-buy">
-                    <input type="checkbox" id="quickBuy" checked>Quick Buy
+                    <input type="checkbox" id="quickBuy">Quick Buy
                 </label>
                 <button id="closeShop" class="button shop-btn">CLOSE</button>
             </div>
@@ -261,7 +208,7 @@
         </div>
     </dialog>
 
-    <!-- WIRES(PORTS) MODAL -->
+    <!-- WIRES MODAL -->
     <div id="wiresModal" class="modal">
         <div class="modal-wrapper">
             <!-- modal header -->
@@ -285,25 +232,7 @@
 
                 <!-- ports area container -->
                 <div id="portsContainer" data-length="single" class="length-2 ">
-                   
-                    <!-- port cells here.. -->
-
-                                <!-- use cells reference ||| -->
-                                <!--                     vvv -->
-                    <!-- <div class="portCell"> -->
-                        <!-- actual port  -->
-                        <!-- <img class="port" src="./assets/motherboard/ports/mobo_port-fpanel.png"> -->
-                        
-                        <!-- port highlight -->
-                        <!-- <div class="port-highlight"></div> -->
-                        
-                        <!-- cable attached to port -->
-                        <!-- <img class="port-attached" src="./assets/wires/frontPanel/frontPanel-attached(gen).png"> -->
-                        <!-- <img class="port-attached2" src="./assets/wires/sata-data/sata-data-attached(sata).png"> -->
-                        
-                        <!-- slider div for label -->
-                        <!-- <div class="port-slider">24-Pin Power</div> -->
-                    <!-- </div>    -->
+                
                 </div>
             </div>
         </div>
@@ -337,7 +266,7 @@
     </div>
 
     <!-- BOOT UP MODAL -->
-    <div id="bootUpTab" class="modal">
+    <div id="bootUpTab" class="modal" >
         <div class="modal-wrapper">
             <!-- header -->
             <div class="modal-header no-margin">
@@ -349,298 +278,247 @@
             <div class="bootTabBodyWrapper">
                 <!-- report -->
                 <div id="bootTabReport">
-                    <!-- <div class="reportCell">
-                        <div class="reportCellTag"> Temperature:</div>
-                        <div class="reportCellDef">71 degrees</div>
-                    </div>
-                    <div class="reportCell">
-                        <div class="reportCellTag"> Wattage:</div>
-                        <div class="reportCellDef">600W / 800W</div>
-                    </div> -->
+                   
                 </div>
+    
+                    <div class="vertLine"></div>
+                    <div class = "errorDialog"></div>
+                    <!-- display -->
+                    <div id="bootDisplay">
+                        <img id="desk" src="./assets/desk.png" >
+                        <div id="monitor">
+                            <img src="./assets/monitor.png" >
 
-                <div class="vertLine"></div>
-
-                <!-- display -->
-                <div id="bootDisplay">
-                    <img id="desk" src="./assets/desk.png" >
-                    <img id="monitor" src="./assets/monitor.png" >
-                    <div id="screen"></div>
-
-                    <div id="unitPlaceHolder">
-                        <!-- image element here -->
+                            <div id="monitorScreen"></div>
+                        </div>
+                        <div id="unitPlaceHolder">
+                            <!-- image element here -->
+                        </div>
+                        <div id="powerButton">
+                            <img src="./assets/svg/power-button.svg" alt="">
+                        </div>
                     </div>
-                    <div id="powerButton">
-                        <img src="./assets/svg/power-button.svg" alt="">
-                    </div>
+
+                    <!-- Troubleshooting -->
+                    <div id="troubleShooting"></div>
+
                 </div>
             </div>
         </div>
+
     </div>
 
-    <!------------------------- ASSISTANT ----------------------------------->
-    <div id="task-status">Task to be done: Click me "The Assistant" </div>
-
-
-    <div class="assistant-container" class="rect">
-        <!-- <a href="https://www.flaticon.com/free-icons/processor" title="processor icons">Processor icons created by 3ab2ou - Flaticon</a> -->
-        <!-- ASSISTANT IMAGE -->
-        <div class="assistant-image-container"> 
-            <div id="pulse" class="pulse"> </div>
+    <!-- BIOS -->
+    <dialog id="biosModal" class="modal">
+        <div class="bios-wrapper">
+            <div class="bios-header">
+                <h2>BIOS SETUP UTILITY</h2>
+                <span class="bios-info">
+                    <p>Version: 2.0</p>
+                    <p id="biosTime"></p>
+                </span>
+            </div>
             
-            <img src="./assets/Assistant/processor.png" class="assistant-image img-rltv" >
+            <div class="bios-container">
+                <div class="bios-sidebar">
+                    <ul class="bios-menu">
+                        <li class="show">Main</li>
+                        <li>Fan Control</li>
+                        <li>Boot</li>
+                    </ul>
+                </div>
+                <!--Main content-->
+                <div class="bios-content">
+                    <div class="bios-section show">
+                        <h3>System Overview</h3>
+                        <div class="bios-grid">
+                            <div class="bios-item">
+                                <span>Motherboard</span>
+                                <span id="biosMobo"></span>
+                            </div>
+                            <div class="bios-item">
+                                <span>Processor</span>
+                                <span id="biosProcessor"></span>
+                            </div>
+                            <div class="bios-item">
+                                <span>Memory Size</span>
+                                <span id="biosMemory"></span>
+                            </div>
+                            <div class="bios-item">
+                                <span>GPU</span>
+                                <span id="biosGpu"></span>                              
+                            </div>
+                            <div class="bios-item">
+                                <span>Storage</span>
+                                <span id="biosStorage"></span>
+                            </div>
+                        </div>
+                    </div> 
+
+                    <!--Fan Control-->
+                    <div class="bios-section">
+                        <h3>Fan Control</h3>
+                        <!--CPU fan settings-->
+                        <div class="fan-control">
+                            <div class="fan-profile">
+                                <label>Profile:</label>
+                                <select id="fanProfile">
+                                    <option value="standard">Default</option>
+                                    <option value="silent">Silent</option>
+                                    <option value="turbo">Turbo</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+                            <div class="fan-speed-control">
+                                <div>Temperature: <span id="cpuTemp"></span></div>
+                                <label>CPU Fan Speed: <span id="fanSpeedValue">50%</span></label>
+                                <input type="range" id="fanSpeed" min="0" max="100" value="50">
+                                <div class="current-rpm">Current RPM: <span id="currentRpm"></span></div>
+                            </div>
+                        </div>
+                        <!--GPU fan settings-->
+                        <div class="fan-control">
+                            <div class="fan-profile">
+                                <label>GPU Profile:</label>
+                                <select id="gpuFanProfile">
+                                    <option value="standard">Default</option>
+                                    <option value="silent">Silent</option>
+                                    <option value="turbo">Turbo</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+                            <div class="fan-speed-control">
+                                <div>Temperature: <span id="gpuTemp"></span></div>
+                                <label>GPU Fan Speed: <span id="gpuFanSpeedValue">50%</span></label>
+                                <input type="range" id="gpuFanSpeed" min="0" max="100" value="50">
+                                <div class="gpu-status">
+                                    <div>Current RPM: <span id="gpuCurrentRpm"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Boot-->
+                    <div class="bios-section">
+                        <h3>Boot Configuration</h3>
+                        <div class="boot-order">
+                            <label>Boot Priority (Drag to reorder):</label>
+                            <ul id="bootOrder" class="boot-list">
+                                <!-- Will be populated dynamically -->
+                            </ul>
+                            
+                            <div class="os-installation">
+                                <div class="os-status">
+                                    <span>OS Status: </span>
+                                    <span id="osStatus">No OS Installed</span>
+                                </div>
+                                <div class="os-controls">
+                                    <button id="installOS" class="bios-button">Install OS</button>
+                                    <button id="deleteOS" class="bios-button danger">Delete OS</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    
+            <div class="bios-footer">
+                <div class="key-commands">
+                    <span>↑↓: Select Item</span>
+                    <span>Enter: Select</span>
+                    <span>ESC: Exit</span>
+                </div>
+                <button id="saveBiosSettings" class="bios-save">Save & Exit</button>
+            </div>
+    </dialog>
+
+    <!------------------------- ASSISTANT ----------------------------------->
+    <!-- Mini Element -->
+    <div id="assistantMini" class="assistant-mini">
+        <!-- Icon Side -->
+        <div class="icon-section">
+                <div id="pulse" class="pulse"> </div>
+                <img src="./assets/Assistant/processor.png" class="assistant-icon" >
         </div>
 
-        <!-- INFO/TIPS -->
-        <div class="assistant-info-container hidden" style="cursor: pointer;"> 
-            <p id="tip">Hello I'm your Assistant and you have new tasks.</p>
-            <p style="font-weight: normal;">Welcome to the simulation for PC building please click me to view tasks</p> 
-            <p style="font-weight: normal; cursor: pointer;">...</p> 
-            <!-- <p id="phrase2">LISTEN HERE YOU LITTLE BITCH</p>  -->
+        <!-- Info Side -->
+        <div class="info-section">
+            <p class="tip-title">Hello I'm your Assistant and you have new tasks.</p>
+            <p class="tip-desc">Welcome to the simulation for PC building please click me to view tasks and for more Information</p>
+            <!-- <div class="see-more">...</div>     -->
         </div>
     </div>
 
     <!-- FULL PAGE INFO / TASKS -->
-    <dialog class="assistant-modal">
-        <div class="assistant-modal-container"> 
-            <!-- tasks -->
-            <div class="task-container">
-                <h1 class="header" style="margin-left: 50%;">TASKS</h1>
-                <div class="hr-line"></div>
-
-                <div class="task-cell" data-task-action="openShop">
-                    <div class="task-icon">
-                        <img src="assets/Assistant/shop.png" alt="shop icon">
-                    </div>
-                <h1 class="tasktitle">Enter The Shop</h1>  
-                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
-                <img class="checkmark" src="assets/svg/check.svg" alt="Completed" style="display: none;"> <!-- Hidden by default -->
-                <div class="task-description">
-                <p>Look for your PC components and buy them.</p>
-                <p style="padding-bottom: 10px;">Ensure to check prices and specifications before making a purchase.</p>
-                <p>The components that you will need are the following:</p>
-                <p>1.Case</p>
-                <p>2.motherboard</p>
-                <p>3.processor</p>
-                <p>4.Power Supply Unit</p>
-                <p>5.RAM</p>
-                <p>6.Storage Device - HDD or SSD</p>
-                <p>7.Cooling</p>
-                <p>8.GPU or Graphics card</p>
-                <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
-                <p><img src="assets/Assistant/shop1.png" class="timg" alt="shop1" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/shop2.png" class="timg" alt="shop2" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/shop3.png" class="timg" alt="shop3" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <!--New Task Button-->
-                <button class="start-task-btn" data-task="openShop">Start Task</button>
-                </div>
+    <dialog id="assistantFull" class="assistant-full">
+        <div class="asst-header">
+            <div class="icon-area"></div>
+            <div class="button-container">
+                <div id="tasksButton" class="asst-button">TASKS</div>
+                <div id="errorsButton" class="asst-button">ERRORS</div>
             </div>
+            <div id="asstClose">&times;</div>
+        </div>
+        <div class="asst-body">
+                <div id="tasksContainer" class="asst-container">
 
-                <div class="hr-line"></div>
-
-                <div class="task-cell" data-task-action="openInventory">
-                    <div class="task-icon">
-                        <img src="assets/Assistant/inventory.png" alt="shop icon">
-                    </div>
-                <h1 class="tasktitle">Check your Inventory</h1>
-                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
-                <img class="checkmark" src="assets/svg/check.svg" alt="Completed" style="display: none;"> <!-- Hidden by default -->
-                <div class="task-description">
-                <p style="padding-bottom: 10px;">Place the components you've chosen to the components shelf by clicking the components in your inventory</p>
-                <p>Place each component in regards to their order:</p>
-                <p>1.Case</p>
-                <p>2.motherboard</p>
-                <p>3.processor</p>
-                <p>4.Cooling</p>
-                <p>5.RAM</p>
-                <p>6.Storage Device - HDD or SSD</p>
-                <p>7.Power Supply Unit</p>
-                <p>8.GPU or Graphics card</p>
-                <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
-                <p><img src="assets/Assistant/inv1.png" class="timg" alt="inv1" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/inv2.png" class="timg" alt="inv2" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/inv3.png" class="timg" alt="inv3" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <button class="start-task-btn" data-task="openInventory">Start Task</button>
                 </div>
+            <div id="errorsContainer" class="error-container">
+
+                <!--               ERRORS CONTAINER                      -->
+
             </div>
-
-                <div class="hr-line"></div>
-
-                <div class="task-cell" data-task-action="connectWires">
-                    <div class="task-icon">
-                        <img src="assets/Assistant/wires.png" alt="shop icon">
-                    </div>
-                <h1 class="tasktitle">Connecting Components With Wires</h1>
-                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
-                <img class="checkmark" src="assets/svg/check.svg" alt="Completed" style="display: none;"> <!-- Hidden by default -->
-                <div class="task-description">
-                <p>Now we dive in to plugging each wire for each component either for power or data connection.</p>
-                <p>There are two types of wires in the computer: one for data connection to the ROM, and the other for power supply to essential components like the GPU, ROM, CPU, and Motherboard. 
-                Additionally, there's a connection for the front panel, encompassing the power button, USB ports, and occasionally including a LED light indicator, reset button, and 3.5mm audio jack ports. </p>                    
-                <p>To connect the wires simply open the wires inventory and drag the wires to their respective slots</p>
-                <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
-                <p><img src="assets/Assistant/wires1.png" class="timg" alt="wre1" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/wires2.png" class="timg" alt="wre2" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/wires3.png" class="timg" alt="wre3" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/wires4.png" class="timg" alt="wre4" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/wires4.1.png" class="timg" alt="wre5" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p style="padding: 5px;">Also please note that the wire will be colored green when they are connected on both components however it will be colored red if it is only connected on one end.</p>
-                <p><img src="assets/Assistant/wires4.2.png"  alt="wre6" style="height: 200px; width: 580px;padding: 10px; left: 30px;"></p>
-                <p><img src="assets/Assistant/wires5.png" class="timg" alt="wre67" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <p><img src="assets/Assistant/wires6.png" class="timg" alt="wre8" style="height: 300px; width: 400px;padding: 10px;"></p>
-                <button class="start-task-btn" data-task="connectWires">Start Task</button>
-                </div>
-            </div>
-
-                <div class="hr-line"></div>
-
-                <div class="task-cell" data-task-action="powerOnPC">
-                    <div class="task-icon">
-                        <img src="assets/Assistant/power-button.png" alt="shop icon">
-                    </div>
-                <h1 class="tasktitle">Power On</h1>
-                <img class="arrow" src="./assets/svg/rightArr.svg" alt="right arrow">
-                <img class="checkmark" src="assets/svg/check.svg" alt="Completed" style="display: none;"> <!-- Hidden by default -->
-                <div class="task-description">
-                <p>Power on your pc by pressing the power on button</p>
-                <p>To turn on your build all you need is to click the power on button</p>
-                <button class="start-task-btn" data-task="powerOnPC">Start Task</button>
-                </div>
-            </div>
-
-                <div class="hr-line"></div>
         </div>
     </dialog>
 
-    <!-- Assistant Error Message -->
-    <dialog class="err-message">
-        <h3>Error!</h3>
-    </dialog>
+    <!-- Custom Alert Box -->
+    <div id="customAlert" class="alert hidden">
+        <span id="alertMessage"></span>
+        <button id="alertOKButton">OK</button>
+    </div>
 
     <!-- Assistant Reassure -->
     <dialog class="asst-reassure"></dialog>
     
+    <div class="chat-toggle">                
+        <i class="fas fa-comment"> <img src="./assets/Assistant/chat-bot.png" alt="chatbot"></i>
+    </div>
+    <div id="chatbot">
+        <div class="chat-header">
+            <span><img src="../favicon.png" alt="assistant">Build It Assistant</span>
+            </span>
+            <i class="fas fa-robot"></i>
+        </div>
+        <div id="chat-messages">
+            <!-- Messages will be inserted here -->
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Ask me anything...">
+            <button id="chat-send">
+                <i class="fas fa-paper-plane"><img src="/simulator/assets/Assistant/send.png" alt="send"></i>
+            </button>
+        </div>
+    </div>
+
     <!-------------------------- S C R I P T S ------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
     <script type="module" src="main.js"></script>
     <script>
-        // Assistant task function
-        document.addEventListener('DOMContentLoaded', function () {
-        const taskCells = document.querySelectorAll('.task-cell');
-        
-        // Event listener for each task cell click
-        taskCells.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                toggleTaskDescription(index);   // Show description
-                markTaskCompleted(index);       // Mark task as completed
-            });
+        [...document.querySelectorAll('*')].forEach(el => {
+            let z = window.getComputedStyle(el).zIndex;
+            // if (z !== 'auto') console.log(el.tagName, el.className, el.id, '=> z-index:', z);
         });
 
-        // Event listener for "Start Task" button clicks inside descriptions
-        const startTaskButtons = document.querySelectorAll('.start-task-btn');
-            startTaskButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const action = button.getAttribute('data-task');
-                    if (action) {
-                        performTaskAction(action);  // Perform the task action (open shop, inventory, etc.)
-                    }
-                    e.stopPropagation();  // Prevent toggling the description when button is clicked
-                });
-            });
+    </script>
+    <script>
+        fetch('./assets/svg/overlay-masked.svg')
+        .then(res => res.text())
+        .then(svg => {
+            const el = document.createElement('div');
+            el.innerHTML = svg;
+            document.body.appendChild(el.firstElementChild);
         });
-
-        // Mark tasks as completed and gray them out
-        function markTaskCompleted(taskIndex) {
-            const taskCells = document.querySelectorAll('.task-cell');
-            taskCells.forEach((cell, index) => {
-                if (index <= taskIndex) {
-                    cell.classList.add('completed-task');  // Add gray-out effect and completed style
-                    const checkmark = cell.querySelector('.checkmark');
-                    if (checkmark) {
-                        checkmark.style.display = 'block';  // Show the checkmark icon
-                    }
-                } else {
-                    cell.classList.remove('completed-task');
-                    const checkmark = cell.querySelector('.checkmark');
-                    if (checkmark) {
-                        checkmark.style.display = 'none';  // Hide the checkmark icon for incomplete tasks
-                    }
-                }
-            });
-        }
-
-        // Toggle the visibility of task descriptions
-        function toggleTaskDescription(taskIndex) {
-            const taskDescriptions = document.querySelectorAll('.task-description');
-
-            // Loop through all descriptions and hide the others
-            taskDescriptions.forEach((description, index) => {
-                if (index === taskIndex) {
-                    description.style.display = 'block';  // Show the current task description
-                } else {
-                    description.style.display = 'none';   // Hide other task descriptions
-                }
-            });
-
-            // Update the task status display
-            updateTaskStatus(taskIndex);
-        }
-
-        // Update the task status in the task-status element
-        function updateTaskStatus(taskIndex) {
-            const taskTitles = document.querySelectorAll('.tasktitle');
-            const taskStatus = document.querySelector('#task-status');
-
-            // Update status based on the current task
-            if (taskIndex >= 0 && taskIndex < taskTitles.length) {
-                const currentTaskTitle = taskTitles[taskIndex].textContent;
-                taskStatus.textContent = `Current Task: ${taskIndex + 1} - ${currentTaskTitle}`;
-            } else {
-                taskStatus.textContent = 'No task selected';
-            }
-        }
-
-        // Perform the corresponding task action (open modal or do something)
-        function performTaskAction(action) {
-            switch(action) {
-                case 'openShop':
-                    openShopModal();
-                    break;
-                case 'openInventory':
-                    openInventoryModal();
-                    break;
-                case 'connectWires':
-                    openWiresModal();
-                    break;
-                case 'powerOnPC':
-                    powerOnPC();
-                    break;
-                default:
-                    console.log("Unknown task action");
-            }
-        }
-
-        // Modal opening functions
-        function openShopModal() {
-            const shopModal = document.querySelector('#shopModal');
-            if (shopModal) shopModal.showModal();
-        }
-
-        function openInventoryModal() {
-            const invModal = document.querySelector('#invModal');
-            if (invModal) invModal.showModal();
-        }
-
-        function openWiresModal() {
-            const wiresModal = document.querySelector('#wiresModal');
-            if (wiresModal) wiresModal.style.display = 'block';  // or use .showModal() if it's a dialog
-        }
-
-        function powerOnPC() {
-            alert("PC is powering on!");
-        }
-
-        // Ensure no task is initially marked as completed
-        markTaskCompleted(-1);  // Reset task completion at the start
     </script>
 </body>
 </html>

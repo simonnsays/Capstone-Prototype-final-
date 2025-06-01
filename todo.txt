@@ -49,8 +49,15 @@ TODO:
             |_ [] - usb
             |_ [] - reset
             |_ [] - LED
-            |_ [] - speaker
+            |_ [] - speakerbf`
 
+**** Boot up feature
+[/] - required components check
+[o o o] - attached components wires check
+
+
+!!! REBOOT THE CABLE ATTACHMENT function
+[] - reboot the funtions
 
 When adding new component:
 

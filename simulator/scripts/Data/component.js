@@ -1,12 +1,19 @@
 class Component {
     constructor({
+        id,
         name, 
-        type, 
-        specs, 
+        type,
+        size, 
+        specs,
+        watts,
         dimensions, 
-        isRotatable, 
-        isAttached = false, 
-        defaultSource, 
+        osInstalled,
+        isRotatable,
+        hidden = false,
+        isAttached = false,
+        isModular = false,
+        defaultSource,
+        tableDisplay,
         images, 
         slots = [], 
         ports = [],
@@ -14,7 +21,9 @@ class Component {
     }) {
 
         // Description
+        this.id = id
         this.name = name
+        this.size = size
         this.type = type
         this.specs = specs
         this.dimensions = dimensions
@@ -22,10 +31,14 @@ class Component {
         // Image
         this.images = images
         this.defaultSource = defaultSource
-
+        this.tableDisplay = tableDisplay
+        this.hidden = hidden
+        
         // States
         this.isRotatable = isRotatable
         this.isAttached = isAttached
+        this.isModular = isModular 
+        this.osInstalled = osInstalled
 
         // Slots
         this.slots = slots
@@ -35,9 +48,22 @@ class Component {
 
         // Cables
         this.cables = cables
+
+        // Wattage
+        this.watts = watts
+
+        if(this.type === 'psu') {
+            switch(this.specs.cableModularity) {
+                case 'non-modular':
+                    this.ports.push({type: 'non-modular'})
+                    break
+                case 'semi-modular':
+                    this.ports.push({type: 'semi-modular'})
+            }
+        }
     }
 
-    static handleComponent(component) {
+    handleComponent(component) {
         // Handle Image dimensions
         component.images.forEach(element => { 
             // adjust width and height depending on side
@@ -55,6 +81,23 @@ class Component {
                 default:
                     element.width = component.dimensions.width
                     element.height = component.dimensions.height
+            }
+        })
+    }
+
+    findAvailablePort(cable) {
+        // find the next available port that matches the cable type
+        return this.ports.find(port => 
+            port.offsets.some(offset => 
+                offset.takes === cable.type && !offset.cableAttached)
+        ) || null
+    }
+
+    attachCable(port, cable, componentType) {
+        port.offsets.forEach(offset => {
+            if(!offset.cableAttached && !cable.ends[componentType].connected) {
+                offset.cableAttached = cable
+                cable.ends[componentType].connected = true
             }
         })
     }
