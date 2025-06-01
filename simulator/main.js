@@ -29,6 +29,7 @@ class Main {
         this.portsTab = new PortsTab(
             this.elementHandler, 
             this.utilityTool, 
+            this.eventBus,
             this.pcUnit)
 
         // Boot Up Tab

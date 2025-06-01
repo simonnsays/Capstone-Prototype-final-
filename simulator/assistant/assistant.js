@@ -88,6 +88,9 @@ class Assistant {
             case 'labelsIntroduction':
                 this.overlay.classList.add('labels-mask')
                 break
+            case 'portCategories':
+                this.overlay.classList.add('port-label-mask')
+                break
         }
     }
 

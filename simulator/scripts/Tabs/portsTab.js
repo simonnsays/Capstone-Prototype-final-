@@ -1,13 +1,13 @@
 import Drawer from "./drawer.js"
 
 class PortsTab {
-    constructor(elementHandler, utilityTool, pcUnit, drawer) {
+    constructor(elementHandler, utilityTool, eventBus, pcUnit) {
         // Utility
         this.utilityTool = utilityTool
+        this.eventBus = eventBus
         this.elements = elementHandler.getWiresElements()
         if(!this.elements) throw new Error('Missing Connections Elements')
         this.pcUnit = pcUnit
-        this.drawer = drawer
 
         // Open / Close tab buttons
         this.openBtn = this.elements.openBtn
@@ -43,14 +43,37 @@ class PortsTab {
         }
 
         // Events
-        this.openBtn.addEventListener('click', () => this.openTab(this.modal))
+        this.openBtn.addEventListener('click', () => {
+            eventBus.emit('portsTabOpened')
+            this.openTab(this.modal)
+        })
         this.closeBtn.addEventListener('click', () => this.closeTab(this.modal)) 
         window.addEventListener('click', (e) => this.handleWindowClick(e))
 
         // port group page change event
-        window.addEventListener('mousedown', (e) => this.handleOutofBounds(e, this.modal))
-        this.pageRightBtn.addEventListener('click', () => this.turnPortPageRight())
+        this.boundHandleOutofBounds = (e) => this.handleOutofBounds(e, this.modal)
+        window.addEventListener('mousedown', this.boundHandleOutofBounds)
+        this.pageRightBtn.addEventListener('click', () => {
+            this.turnPortPageRight()
+        })
         this.pageLeftBtn.addEventListener('click', () => this.turnPortPageLeft())
+    }
+
+    init() {
+        this.subscribeToEvents() 
+    }
+
+    subscribeToEvents() {
+        this.eventBus.on('gamePause', () => this.pause())
+        this.eventBus.on('gameResume', () => this.resume())
+    }
+
+    pause() {
+        this.removeEventListener('mousedown', this.boundHandleOutofBounds)
+    }
+
+    resume() {
+        this.addEventListener('mousedown', this.boundHandleOutofBounds)
     }
 
     // Open Tab

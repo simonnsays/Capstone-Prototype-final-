@@ -196,7 +196,7 @@ const tasks = [
         highlight: ['[data-id="storage"]','[data-name="Seagate Barracuda SSD"]'],
         status: 'incomplete'
     },  
-    // STEP 13- Buy Cooling Devices
+    // STEP 14- Buy Cooling Devices
     {
         id: 'buyCoolingDevice',
         trigger: 'romBought',
@@ -211,7 +211,7 @@ const tasks = [
         highlight: ['[data-id="cooling"]','[data-name="AMD wraith Prism"]'],
         status: 'incomplete'
     },  
-    // STEP 14- Buy GPU
+    // STEP 15- Buy GPU
     {
         id: 'buyGpu',
         trigger: 'coolingDeviceBought',
@@ -225,7 +225,7 @@ const tasks = [
         highlight: ['[data-id="gpu"]','[data-name="Gigabyte Radeon RX 7900 XTX"]'],
         status: 'incomplete'
     },  
-    // STEP 15- Open Inventory
+    // STEP 16- Open Inventory
     {
         id: 'openInv',
         trigger: 'gpuBought',
@@ -240,7 +240,7 @@ const tasks = [
         highlight: ['#openInv'],
         status: 'incomplete'
     },  
-    // STEP 16- Place Item
+    // STEP 17- Place Item
     {
         id: 'placeMotherboard',
         trigger: 'invOpened',
@@ -258,7 +258,7 @@ const tasks = [
         ],
         status: 'incomplete'
     },  
-    // STEP 17- Display Introduction
+    // STEP 18- Display Introduction
     {
         id: 'workAreaIntroduction',
         trigger: 'motherboardPlaced',
@@ -283,7 +283,7 @@ const tasks = [
         ],
         status: 'incomplete'
     },  
-    // STEP 18- Show Shelf
+    // STEP 19- Show Shelf
     {
         id: 'shelfIntroduction',
         trigger: 'set1Placed',
@@ -300,7 +300,7 @@ const tasks = [
         highlight: [],
         status: 'incomplete'
     },
-    // STEP 19- Place the rest of the items
+    // STEP 20- Place the rest of the items
     {
         id: 'placeSet2',
         trigger: 'set1Attached',
@@ -316,11 +316,11 @@ const tasks = [
             '#openInv',
             '#invItemsContainer [data-name="NZXT H5 Flow"]',
             '#invItemsContainer [data-name="EVGA Supernova 1300 P+"]',
-            '#invItemsContainer [data-name="Seagate Barracuda SSD"]'
+            '#invItemsContainer [data-name="Seagate Barracuda"]'
         ],
         status: 'incomplete'
     },
-    // STEP 20- Place the Chassis to the main area
+    // STEP 21- Place the Chassis to the main area
     {
         id: 'placeChassisMain',
         trigger: 'set2Placed',
@@ -335,7 +335,7 @@ const tasks = [
         highlight: [],
         status: 'incomplete'
     },
-    // STEP 20- Labels Introduction
+    // STEP 22- Labels Introduction
     {
         id: 'labelsIntroduction',
         trigger: 'chassisPlacedInMain',
@@ -354,7 +354,7 @@ const tasks = [
         ],
         status: 'incomplete'
     },
-    // STEP 21- Attach Remaining
+    // STEP 23- Attach Remaining
     {
         id: 'attachSet2',
         trigger: 'rightSideAccessed',
@@ -369,7 +369,7 @@ const tasks = [
         highlight: [],
         status: 'incomplete'
     },
-    // STEP 22- Trash Bin Introduction
+    // STEP 24- Trash Bin Introduction
     {
         id: 'trashbinIntroduction',
         trigger: 'storageError',
@@ -385,18 +385,61 @@ const tasks = [
         highlight: ['#trashBin', '#trashConfirm'],
         status: 'incomplete'
     },
-    // STEP 23- Buy SSD
+    // STEP 25- Complete Assembly
     {
-        id: 'buySSD',
+        id: 'completeAssembly',
         trigger: 'storageRemoved',
         title: {
             imageSrc: './assets/Assistant/inventory.png',
-            text: 'Buy Right Storage Device'
+            text: 'Complete Assembly'
         },
         description: [
             {type: 'text', content: "Alright, now go buy an SSD from the shop, place it in the work area and continue attaching the components that were left"},
         ],
         highlight: ['Seagate Barracuda SSD'],
+        status: 'incomplete'
+    },
+    // STEP xx (26)- Complete Assembly
+    // {
+    //     id: 'completeAssembly',
+    //     trigger: 'ssdBought',
+    //     title: {
+    //         imageSrc: './assets/Assistant/inventory.png',
+    //         text: 'Buy Right Storage Device'
+    //     },
+    //     description: [
+    //         {type: 'text', content: "Alright, now go buy an SSD from the shop, place it in the work area and continue attaching the components that were left"},
+    //     ],
+    //     highlight: [],
+    //     status: 'incomplete'
+    // },
+    // STEP 26- Ports Introduction
+    {
+        id: 'openPortsTab',
+        trigger: 'assemblyCompleted',
+        title: {
+            imageSrc: './assets/Assistant/inventory.png',
+            text: 'Open Ports Tab'
+        },
+        description: [
+            {type: 'text', content: "Good Job! You successfully attached every required component. Let's now go to the Ports tab and start connecting them"},
+            {type: 'text', content: "On the tabs menu button, click on Ports"},
+        ],
+        highlight: ['#openWires'],
+        status: 'incomplete'
+    },
+    // STEP 27- Ports Introduction
+    {
+        id: 'portCategories',
+        trigger: 'portsTabOpened',
+        title: {
+            imageSrc: './assets/Assistant/inventory.png',
+            text: 'Port Categories'
+        },
+        description: [
+            {type: 'text', content: "This is where all ports of the component from the main area is handled. It looks overwhelming at first but really "}
+        ],
+        highlight: ['#portLeft', '#portRight'],
         status: 'incomplete'
     }
 ]

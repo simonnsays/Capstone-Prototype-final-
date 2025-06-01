@@ -539,42 +539,48 @@ class DisplayArea {
 
     updateTableEmits(currTableComponents) {
         const  hasRequiredItems = (requiredArr, availableArr) => {
-            const requiredCount = {};
-            const availableCount = {};
+            const requiredCount = {}
+            const availableCount = {}
             // Count required items
             for (let item of requiredArr) {
-                requiredCount[item] = (requiredCount[item] || 0) + 1;
+                requiredCount[item] = (requiredCount[item] || 0) + 1
             }
             // Count available items
             for (let item of availableArr) {
-                availableCount[item] = (availableCount[item] || 0) + 1;
+                availableCount[item] = (availableCount[item] || 0) + 1
             }
             // Compare counts
             for (let item in requiredCount) {
                 if (!availableCount[item] || availableCount[item] < requiredCount[item]) {
-                return false;
+                return false
                 }
             }
-            return true;
+            return true
         }
 
 
-        console.log(currTableComponents)
-        console.log(this.currentSide)
-        const proceedReq = ['motherboard', 'cpu', 'cooling', 'ram', 'ram', 'gpu']
-        if(hasRequiredItems(proceedReq, currTableComponents)) {
+        // console.log(currTableComponents)
+        // console.log(this.currentSide)
+        const proceedReq1 = ['motherboard', 'cpu', 'cooling', 'ram', 'ram', 'gpu']
+        const proceedReq2 = ['chassis', 'motherboard', 'cpu', 'cooling', 'ram', 'ram', 'gpu', 'psu', 'storage']
+        if(hasRequiredItems(proceedReq2, currTableComponents)) {
+            console.log('returned 2: unit Assembled')
+            this.eventBus.emit('assemblyCompleted')
+            return
+        } 
+        if(hasRequiredItems(proceedReq1, currTableComponents)) {
             this.eventBus.emit('set1Attached')
-            console.log('returned 1')
+            // console.log('returned 1')
             return
         } 
         if (this.currentSide == 'right') {
             this.eventBus.emit('rightSideAccessed')
-            console.log('accessed')
+            // console.log('accessed')
             return
         }
         if (currTableComponents.length === 1 && currTableComponents[0] === 'chassis') {
             this.eventBus.emit('chassisPlacedInMain')
-            console.log('returned 2')
+            // console.log('returned 3')
             return
         } 
     }

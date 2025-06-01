@@ -24,7 +24,7 @@ class TutorialManager {
             'coolingDeviceBought', 'gpuBought', 'invOpened', 'motherboardPlaced',
             'workAreaIntroduced', 'motherboardPlaced', 'set1Placed', 'set1Attached',
             'set2Placed', 'chassisPlacedInMain', 'rightSideAccessed', 'storageError',
-            'storageRemoved'
+            'storageRemoved', 'ssdBought', 'assemblyCompleted', 'portsTabOpened'
         ].forEach(event => {
             this.eventBus.on(event, () =>{
                 this.tryToAdvance(event)
@@ -43,6 +43,7 @@ class TutorialManager {
 
     tryToAdvance(triggerName = null) {
         const currentTask = this.tasks[this.taskIndex]
+        console.log('step: ', this.taskIndex + 1)
         
         // if(triggerName === 'workAreaIntroduced') {
         //     console.log('step' + this.taskIndex)
