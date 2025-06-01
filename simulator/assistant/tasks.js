@@ -399,20 +399,6 @@ const tasks = [
         highlight: ['Seagate Barracuda SSD'],
         status: 'incomplete'
     },
-    // STEP xx (26)- Complete Assembly
-    // {
-    //     id: 'completeAssembly',
-    //     trigger: 'ssdBought',
-    //     title: {
-    //         imageSrc: './assets/Assistant/inventory.png',
-    //         text: 'Buy Right Storage Device'
-    //     },
-    //     description: [
-    //         {type: 'text', content: "Alright, now go buy an SSD from the shop, place it in the work area and continue attaching the components that were left"},
-    //     ],
-    //     highlight: [],
-    //     status: 'incomplete'
-    // },
     // STEP 26- Ports Introduction
     {
         id: 'openPortsTab',
