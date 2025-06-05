@@ -419,13 +419,28 @@ const tasks = [
         id: 'portCategories',
         trigger: 'portsTabOpened',
         title: {
-            imageSrc: './assets/Assistant/inventory.png',
+            imageSrc: './assets/Assistant/Wires.png',
             text: 'Port Categories'
         },
         description: [
-            {type: 'text', content: "This is where all ports of the component from the main area is handled. It looks overwhelming at first but really "}
+            {type: 'text', content: "This is where all ports of the component from the main area is handled. It is categorized by component."},
+            {type: 'text', content: "Use the arrows to navigate through each component page. Try navigating until you reach the motherboard once more"}
         ],
         highlight: ['#portLeft', '#portRight'],
+        status: 'incomplete'
+    },
+    // STEP 28- Port Items
+    {
+        id: 'portItems',
+        trigger: 'categoriesNavigated',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Ports'
+        },
+        description: [
+            {type: 'text', content: "Now, these are all the ports that are found per component. To proeced, try hovering on one of the ports to reveal what kind of port it is."},
+        ],
+        highlight: [],
         status: 'incomplete'
     }
 ]

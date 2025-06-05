@@ -245,6 +245,8 @@ dialog {
   background-color: rgba(0,0,0, .5);
   z-index: 15;
 
+  /* mask: linear-gradient(#000 7%, transparent 10% 23%, #000 26% 100%),
+        linear-gradient(to left, #000 32%, transparent 35% 61%, #000 64%); */
 }
 
 .table-mask {

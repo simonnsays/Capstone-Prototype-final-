@@ -293,6 +293,7 @@ class Canvas {
         baseComponent.slots.forEach((slot) => {
             if (slot.type === componentSelected.type && !slot.component) {
                 this.user.availableSlots.push(slot)
+                console.log(slot)
             }
             // get available slots from attached components
             if (slot.component) {
@@ -355,8 +356,10 @@ class Canvas {
 
         // highlight default slot box (not necessarily compatible yet)
         this.user.availableSlots.forEach(slot => {
+            // console.log(slot)
             // draw slot if a boudning box for slot is created
-            if(slot.box) {
+            if(slot.box && slot.sides[this.displayArea.currentSide]?.accessible) {
+                console.log(slot)
                 this.highlight(slot.box)                
             }
         })

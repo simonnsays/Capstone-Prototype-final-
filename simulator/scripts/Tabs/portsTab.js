@@ -41,6 +41,7 @@ class PortsTab {
             table: null,
             shelf: null
         }
+        this.portsMonitoring = false
 
         // Events
         this.openBtn.addEventListener('click', () => {
@@ -66,6 +67,8 @@ class PortsTab {
     subscribeToEvents() {
         this.eventBus.on('gamePause', () => this.pause())
         this.eventBus.on('gameResume', () => this.resume())
+
+        this.eventBus.on('portsTabOpened', () => {this.portsMonitoring = true})
     }
 
     pause() {
@@ -263,6 +266,10 @@ class PortsTab {
             this.portsContainer.appendChild(cellObj)
             port.div = cellObj
         })
+
+        if(this.currentGroupPage.component === 'motherboard') {
+            this.eventBus.emit('categoriesNavigated')
+        }
     }
 
     // Attach Cable
@@ -513,6 +520,11 @@ class PortsTab {
 
     // Main Update Function
     update(table, shelf) {
+        // Get drawer scroll position BEFORE update
+        const drawerElement = this.drawer.cableContainer || document.querySelector('.drawer-container') // adjust selector as needed
+        const scrollTop = drawerElement ? drawerElement.scrollTop : 0
+        const scrollLeft = drawerElement ? drawerElement.scrollLeft : 0
+
         // delete port cells
         this.clearCells()
         this.portGroups = []
@@ -546,7 +558,7 @@ class PortsTab {
         this.drawer.update(table, shelf)
 
         // Listen for Cable detachment
-        this.detachmentListener()
+        // this.detachmentListener()
 
         // listen if one of the cable cells are clicked
         this.drawer.cables.forEach(cable => {
@@ -568,6 +580,18 @@ class PortsTab {
                 this.cableAttachmentListener(cable)
             })
         })
+
+        // Restore scroll AFTER drawer update
+        if (drawerElement) {
+            drawerElement.scrollTop = scrollTop
+            drawerElement.scrollLeft = scrollLeft
+        }
+
+        // at the end of update()
+        setTimeout(() => {
+        this.detachmentListener();
+        }, 0);
+
     }
 }
 export default PortsTab
