@@ -117,13 +117,6 @@ class Shop{
             element.component = item;
             element.dataset.name = item.name
 
-            // if(item.name = 'AMD Ryzen 9 5900X') {
-            //     console.log(item)
-            // }
-            // if(item.hasElHighlight) {
-            //     console.log(item.name, 'has highlight')
-            //     console.log(item)
-            // }
             element.classList.toggle('highlight-element', !!item.hasElHighlight)
 
             // Emit Chassis expanded
@@ -629,19 +622,6 @@ class Shop{
         }
         // create elements after filter application
         this.createItemElements(this.filteredItems, this.itemsContainer)
-
-        // Purchase event
-        Array.from(this.itemsContainer.children).forEach(child => {
-            child.addEventListener('click', () => {
-                if(this.quickBuy.checked) {
-                    // buy component
-                    this.buyComponent(child.component)
-                } else {
-                    // display component information first
-                    this.displayItemInfo(child.component)
-                }
-            })
-        })
     }
 
     // Main Shop Initialization Method
@@ -663,6 +643,20 @@ class Shop{
                 
                 this.update()
             })
+        })
+
+        // Purchase event
+        this.itemsContainer.addEventListener('click', (e) => {
+            const foundElement = e.target.closest('.content')
+            if(!foundElement) return
+
+            if(this.quickBuy.checked) {
+                // buy component
+                this.buyComponent(foundElement.component)
+            } else {
+                // display component information first
+                this.displayItemInfo(foundElement.component)
+            }
         })
 
         // use update method

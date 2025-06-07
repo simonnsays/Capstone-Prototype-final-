@@ -30,6 +30,8 @@ class Assistant {
         this.closeBtn = this.elements.closeBtn
         this.closeBtn.addEventListener('click', () => this.closeModal())
 
+        this.tasks = []
+
         this.dialogues = [
             "Hey there! Need a hand with anything today?",
             "You’ve got this—just take it one step at a time.",
@@ -72,7 +74,20 @@ class Assistant {
             this.adjustOverlayElement(data)
             this.showCurrentTask(data)
         } )
+        this.eventBus.on('taskCompleted', (data) => {
+            if (!data) return
+            
+            const foundElement = document.querySelector(`#${data.id}`)
+            if(!foundElement) return
+            if(foundElement.dataset.completed === 'true') return
 
+            foundElement.style.opacity = 0.4
+            foundElement.dataset.completed = 'true'
+            const taskNameStatus = document.createElement('p')
+            taskNameStatus.textContent = 'Completed'
+            taskNameStatus.classList.add('task-complete')
+            foundElement.querySelector(`.task-name`)?.appendChild(taskNameStatus)
+        })
     }
 
     adjustOverlayElement(data) {
@@ -126,10 +141,10 @@ class Assistant {
         if (!task.descIndex) task.descIndex = 0
 
         if (this.onTutorial) {
-            // Skip 'break' steps
+            // Skip non-'text' steps
             while (
                 task.descIndex < task.description.length &&
-                task.description[task.descIndex].type === 'break'
+                task.description[task.descIndex].type !== 'text'
             ) {
                 task.descIndex++
             }
@@ -163,10 +178,10 @@ class Assistant {
             window.addEventListener('mousemove', this.boundMouseHover)
         }, 100)
     }
- 
+
+    
     showCurrentTask(task) {
         this.createTask(task)
-
         this.eventBus.emit('gamePause')
 
         this.toggleOverlay(true)
@@ -174,10 +189,10 @@ class Assistant {
 
         // Proceed with showing the task
         if(task.highlight) this.highlightCurrentTask(task.highlight, true)
-        
-        window.removeEventListener('mousemove', this.boundMouseHover)
-        window.removeEventListener('click', this.boundClick)
-
+            
+            window.removeEventListener('mousemove', this.boundMouseHover)
+            window.removeEventListener('click', this.boundClick)
+            
         this.boundClickWithTask = this.handleClickWithTask.bind(this, task)
         window.addEventListener('click', this.boundClickWithTask)
     }
@@ -222,6 +237,7 @@ class Assistant {
     createTask(task) {
         const taskCell = document.createElement('div')
         taskCell.classList.add('task-cell')
+        taskCell.id = task.id
 
         // title element
         const cellTitle = this.createTaskTtitle(task)
@@ -235,7 +251,7 @@ class Assistant {
         const cellDescription = this.createTaskDescription(task)
         taskCell.appendChild(cellDescription)
 
-        this.tasksContainer.appendChild(taskCell)
+        this.tasksContainer.insertBefore(taskCell, this.tasksContainer.firstChild)
     }
 
     createTaskTtitle(task) {
@@ -257,14 +273,6 @@ class Assistant {
         const taskNameText = document.createElement('h3')
         taskNameText.textContent = task.title.text
         taskName.appendChild(taskNameText)
-        // > > task name status
-        if(task.status === 'complete') {
-            const taskNameStatus = document.createElement('p')
-            taskNameStatus.textContent = 'Completed'
-            taskNameStatus.classList.add('task-status')
-            taskNameStatus.visibility = 'hidden'
-            taskName.appendChild(taskNameStatus)
-        }
 
         cellTitle.appendChild(taskIcon)
         cellTitle.appendChild(taskName)

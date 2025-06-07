@@ -733,7 +733,7 @@ p {
     text-align: center;
 }
 
-.task-status {
+.task-complete {
     font-size: .7rem;
     font-weight: 600;
 }

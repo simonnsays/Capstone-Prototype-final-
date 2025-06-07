@@ -44,9 +44,15 @@ class TutorialManager {
     }
 
     tryToAdvance(triggerName = null) {
+        // mark complete
+        if(this.taskIndex > 0) {
+            this.eventBus.emit('taskCompleted', tasks[this.taskIndex-1])
+            tasks[this.taskIndex-1].status = 'complete'
+        }
+
         const currentTask = this.tasks[this.taskIndex]
         console.log('step: ', this.taskIndex + 1)
-        
+
         // if(triggerName === 'workAreaIntroduced') {
         //     console.log('step' + this.taskIndex)
         //     console.log(currentTask)
@@ -58,7 +64,7 @@ class TutorialManager {
         // Succeed to advance
         this.emitTaskId(currentTask.id)
         this.eventBus.emit('taskAdvanced', currentTask)
-        
+                
         // Automatically prep next task for the next trigger
         this.taskIndex++
     }

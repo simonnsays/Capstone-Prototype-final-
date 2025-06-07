@@ -23,7 +23,7 @@ const tasks = [
     },
     // STEP 2 - Open shop
     {
-        id: 'openShop',
+        id: 'openShopTab',
         trigger: 'tabsMenuOpened',
         title: {
             imageSrc: './assets/Assistant/shop.png',
@@ -518,14 +518,21 @@ const tasks = [
     },
     // STEP 34- attach every component
     {
-        id: 'attachOtherConnectors',
+        id: 'attachOtherConnectors ',
         trigger: '24pinPsuAttached',
         title: {
             imageSrc: './assets/Assistant/Wires.png',
-            text: 'aa'
+            text: 'Connect other connectors'
         },
         description: [
-            {type: 'text', content: "aa"}
+            {type: 'text', content: "The green indicator on the connector's background means that BOTH ends are connected to components while the orange indicator means only one end of the cable is connected"},
+            {type: 'break'},
+            {type: 'imageGroup',  index: 0, images: [
+                './assets/Assistant/wires4.2.png',
+            ]},
+            {type: 'break'},
+            {type: 'text', content: "now, try connecting every other connector you see. Power Cables are usually meant to connect to the PSU while other types connects to other components"},
+
         ],
         highlight: [],
         status: 'incomplete'
