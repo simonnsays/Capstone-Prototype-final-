@@ -102,8 +102,6 @@ class DisplayArea {
     }
 
     confirmRemoval() {
-        console.log(this.user.componentToTrash)
-        console.log(this.monitoringTableTutorial)
         if(this.monitoringTableTutorial && this.user.componentToTrash.name == 'Seagate Barracuda') {
             console.log('ready to emit removal of ssd')
             this.eventBus.emit('storageRemoved')
@@ -529,10 +527,8 @@ class DisplayArea {
             const proceedReq2 = ['chassis', 'psu', 'storage']
             if(proceedReq1.every(item => currShelfItems.includes(item))) {
                 this.eventBus.emit('set1Placed')
-                console.log('set1 is Placed, continue step18')
             } else if (proceedReq2.every(item => currShelfItems.includes(item))) {
                 this.eventBus.emit('set2Placed')
-                console.log('set2 is Placed, continue step 20')
             }
         }
     }

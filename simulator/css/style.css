@@ -245,8 +245,11 @@ dialog {
   background-color: rgba(0,0,0, .5);
   z-index: 15;
 
-  /* mask: linear-gradient(#000 7%, transparent 10% 23%, #000 26% 100%),
-        linear-gradient(to left, #000 32%, transparent 35% 61%, #000 64%); */
+}
+
+.port-highlight-mask {
+  mask: linear-gradient(#000 19%, transparent 22% 58%, #000 61% ),
+        linear-gradient(to left, #000 56%, transparent 58% 78%, #000 80%);
 }
 
 .table-mask {
@@ -267,6 +270,16 @@ dialog {
 .port-label-mask {
   mask: linear-gradient(#000 7%, transparent 10% 23%, #000 26% 100%),
         linear-gradient(to left, #000 32%, transparent 35% 61%, #000 64%);
+}
+
+.ports-mask {
+  mask: linear-gradient(#000 19%, transparent 22% 91%, #000 94% ),
+        linear-gradient(to left, #000 16%, transparent 19% 78%, #000 81%);
+}
+
+.drawer-mask {
+  mask: linear-gradient(#000 67%, transparent 70% 98%, #000 100% ),
+        linear-gradient(to left, #000 8%, transparent 10% 90%, #000 92%);
 }
 
 .game-container {

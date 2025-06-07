@@ -2,7 +2,7 @@ import tasks from "../assistant/tasks.js"
 class TutorialManager {
     constructor(eventBus) {
         this.eventBus = eventBus
-        this.tasks = tasks
+        this.tasks = tasks  
         this.taskIndex = 0
         // this.taskIndex = 11
     }
@@ -24,7 +24,9 @@ class TutorialManager {
             'coolingDeviceBought', 'gpuBought', 'invOpened', 'motherboardPlaced',
             'workAreaIntroduced', 'motherboardPlaced', 'set1Placed', 'set1Attached',
             'set2Placed', 'chassisPlacedInMain', 'rightSideAccessed', 'storageError',
-            'storageRemoved', 'ssdBought', 'assemblyCompleted', 'portsTabOpened'
+            'storageRemoved', 'ssdBought', 'assemblyCompleted', 'portsTabOpened', 
+            'portGroupsNavigated', 'cellHovered', 'drawerPulled', '24pinSelected',
+            '24pinMoboAttached', 'psuNavigated', '24pinPsuAttached'
         ].forEach(event => {
             this.eventBus.on(event, () =>{
                 this.tryToAdvance(event)
@@ -62,6 +64,7 @@ class TutorialManager {
     }
 
     emitTaskId(id) {
+        // component highlight
         switch(id) {
             case 'expandChassis':
                 this.eventBus.emit('addChassisHighlight', "NZXT H5 Flow")
@@ -98,13 +101,14 @@ class TutorialManager {
                 break
             case 'placeSet2':
             this.eventBus.emit('addInvSetHighlights', [
-                'NZXT H5 Flow',
-                'EVGA Supernova 1300 P+',
-                'Seagate Barracuda'
-            ])
-            break
-            case 'buySSD':
-                this.eventBus.emit('addSsdHighlight', "Seagate Barracuda SSD")    
+                    'NZXT H5 Flow',
+                    'EVGA Supernova 1300 P+',
+                    'Seagate Barracuda'
+                ])
+                break
+            case 'completeAssembly':
+                this.eventBus.emit('addSsdHighlight', "Seagate Barracuda SSD")
+                break   
         }
     }
 }

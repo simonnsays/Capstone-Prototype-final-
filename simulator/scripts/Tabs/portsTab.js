@@ -22,7 +22,7 @@ class PortsTab {
         this.pageLeftBtn = this.elements.pageLeftBtn
 
         // Drawer
-        this.drawer = new Drawer(elementHandler, utilityTool)
+        this.drawer = new Drawer(elementHandler, utilityTool, this.eventBus)
         
         // Wires
         this.wires = []
@@ -72,11 +72,11 @@ class PortsTab {
     }
 
     pause() {
-        this.removeEventListener('mousedown', this.boundHandleOutofBounds)
+        window.removeEventListener('mousedown', this.boundHandleOutofBounds)
     }
 
     resume() {
-        this.addEventListener('mousedown', this.boundHandleOutofBounds)
+        window.addEventListener('mousedown', this.boundHandleOutofBounds)
     }
 
     // Open Tab
@@ -146,6 +146,10 @@ class PortsTab {
 
         if(!this.currentGroupPage) return
 
+        this.emitPageName(this.currentGroupPage.component)
+        // if(this.currentGroupPage.component === 'motherboard') {
+        //     this.eventBus.emit('portGroupsNavigated')
+        // }
         // update port page
         this.updatePage()
     }
@@ -155,11 +159,25 @@ class PortsTab {
         // adjust this.i and this.currentGroupPage to iterate to the previous page
         this.i = (this.i + 1) % this.portGroups.length
         this.currentGroupPage = this.portGroups[this.i]
-
+        
         if (!this.currentGroupPage) return
-
+        
+        this.emitPageName(this.currentGroupPage.component)
+        // if(this.currentGroupPage.component === 'motherboard') {
+        //     this.eventBus.emit('portGroupsNavigated')
+        // }
         // update port page
         this.updatePage()
+    }
+    
+    emitPageName(name) {
+        switch(name) {
+            case 'motherboard':
+                this.eventBus.emit('portGroupsNavigated')
+                break
+            case 'psu':
+                this.eventBus.emit('psuNavigated')
+        }
     }
 
     // Update Port Page
@@ -262,14 +280,16 @@ class PortsTab {
             cellObj.appendChild(cellImg)
             cellObj.appendChild(celllSlider)
 
+            cellObj.addEventListener('mouseenter', () => {
+                console.log('mouseEntered')
+                setTimeout(() => 
+                    this.eventBus.emit('cellHovered')
+                    , 1000)   
+            })
             // append to container
             this.portsContainer.appendChild(cellObj)
             port.div = cellObj
         })
-
-        if(this.currentGroupPage.component === 'motherboard') {
-            this.eventBus.emit('categoriesNavigated')
-        }
     }
 
     // Attach Cable
@@ -347,6 +367,17 @@ class PortsTab {
                 // highlight port when matched and no attached cable yet
                 if (!offset.cableAttached && cable.type === offset.takes) {
                     offset.highlight = this.createHighlight(offset, 'port-highlight') 
+                    console.log(port)
+                    if(this.portsMonitoring && port.type == "24-pin-power") {
+                        switch (currentPage.component) {
+                            case 'motherboard':
+                                offset.highlight.addEventListener('click', () => {this.eventBus.emit('24pinMoboAttached')})
+                                break
+                            case 'psu':
+                                offset.highlight.addEventListener('click', () => {this.eventBus.emit('24pinPsuAttached')})
+                                break
+                        }
+                    }
                     baseDiv.appendChild(offset.highlight)
                 } 
             })
@@ -563,6 +594,11 @@ class PortsTab {
         // listen if one of the cable cells are clicked
         this.drawer.cables.forEach(cable => {
             cable.div.addEventListener('click', () => { 
+                // Share if 24-pin-power cable is being selected
+                if(this.portsMonitoring && cable.div.dataset.type === '24-pin-power') {
+                    this.eventBus.emit('24pinSelected')
+                }
+
                 // clear previously selected cable
                 if(this.drawer.cableSelected) {
                     this.drawer.clearSelectedCable()

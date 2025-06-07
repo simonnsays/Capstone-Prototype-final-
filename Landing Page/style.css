@@ -352,10 +352,12 @@ p {
 
 
 #page3 .assistant {
+    position: relative;
+    bottom: 400px;
   visibility: hidden;
   /* background-color: var(--pastel-yellow); */
   
-  transition: all .2s ease-in-out;
+  transition: all 1s ease-in-out;
 
 }
 @keyframes shrink {

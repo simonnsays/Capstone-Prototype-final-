@@ -3,8 +3,7 @@ class Assistant {
     this.sequenceStarted = false
     // pages
     this.page1 = document.querySelector('#page1 .assistant-container');
-    this.page2 = document.querySelector('#page2 .assistant-container');
-    this.page3 = {
+    this.page2 = {
       asst: document.querySelector('#page3 .assistant-container'),
       gridWrapper: document.querySelector('.grid-wrapper'),
       scene: document.querySelector('#page3 .scene'),
@@ -29,13 +28,6 @@ class Assistant {
         some cool stuff!`,
       `I'll be here if you need me, Click on me to view your tasks and progress.`
     ]
-    this.componentDialogues = [
-      [
-        `This is the Chassis, or Computer Case. The Chassis is the enclosure that houses and protects all internal components
-          of a PC, including the motherboard, power supply, storage devices, and cooling systems. It ensures
-          proper airflow, cable management, and structural support for safe and efficient system operation.`
-      ]
-    ]
         
     // Start Button
     this.startButton = document.querySelector("#startBtn");
@@ -43,23 +35,13 @@ class Assistant {
     this.progress = 0
 
     this.phase = 0
-
-    // Carousel  [ deprecated ]
-    // this.carousel = document.querySelector('.carousel')
-    // this.angle = 45
-    // this.currentRotation = 0
-    // this.carouselImages = document.querySelectorAll('.carousel .face img')
-    // this.frontFace = 0
   }
 
   init() {
     window.scrollTo({top: 0, behavior: 'smooth'});
     this.startButton.addEventListener('click', () => {if(!this.sequenceStarted) this.startSequence()})
     window.addEventListener('wheel', (e) => this.handleWheel(e), {passive: false})
-    
-
-    window.addEventListener('keydown', (e) => { e.preventDefault() })
-    // this.adjustCarousel() [ DEPRECATED ]
+    window.addEventListener('keydown', (e) => { if(e) e.preventDefault() })
   }
 
   startSequence() {
@@ -72,50 +54,30 @@ class Assistant {
     setTimeout(() => {
       this.page1.style.animation = "popout 2s ease-in forwards";
     }, dur);
-
     // After animation ends, hide page1 and show page2
     setTimeout(() => {
       this.page1.style.display = "none";  
-      this.page2.style.display = "block"; 
-      // this.page2.style.top = "76px";
-      this.page2.style.top = "60px";
-
       // Scroll to dialogue area
       const winHeight = window.innerHeight * 2;
       window.scrollTo({
         top: winHeight, 
         behavior: 'smooth'
       });
-
       // Start displaying shadow
-      this.page3.asst.style.visibility = "visible"
+      this.page2.asst.style.visibility = "visible"
     }, dur + 2100);
-
-    // Swap Elements from page2 to page3
+    // Assistant falls down
     setTimeout(() => {
-      this.page3.asst.firstElementChild.style.visibility = "visible"
+      this.page2.asst.firstElementChild.style.visibility = "visible"
+      this.page2.asst.firstElementChild.style.bottom = "0"
+    }, dur + 3000);
+    // Dialogue box pop up
+    setTimeout(() => {      
       this.dialogueBox.style.opacity = 1
-    }, dur + 4000);
-
-    setTimeout(() => {
-      this.page2.style.display = "none"
-
       this.type(this.introDialogues[this.dialogueIndex]);
       this.dialogueBox.addEventListener("click", () => this.next(this.introDialogues));      
     }, dur + 4300);
   }
-
-  // adjustCarousel() {    [ DEPRECATED ]
-  //   this.carouselImages.forEach((img, i) => {
-  //     const faceRotation = this.angle * i;
-  //     const counterRotation = this.currentRotation + faceRotation;
-
-  //     img.style.transform = `rotateY(${-1 * counterRotation}deg)`
-  //     if (i !== this.frontFace) {
-  //       img.style.opacity = 0.1
-  //     }
-  //   })  
-  // }
 
   handleWheel(e) {
     e.preventDefault();
@@ -139,34 +101,6 @@ class Assistant {
     }
   }
 
-  // handleCarousel(e) {        [ DEPRECATED ]
-  //   const totalFaces = this.carouselImages.length;
-  //   const direction = e.deltaY > 0 ? 1 : -1;
-  
-  //   this.frontFace = (this.frontFace + direction + totalFaces) % totalFaces;
-  //   this.currentRotation += -direction * this.angle;
-  
-  //   this.carousel.style.transform = `rotateY(${this.currentRotation}deg)`;
-  
-  //   this.carouselImages.forEach((img, i) => {
-  //     const faceRotation = this.angle * i;
-  //     const counterRotation = this.currentRotation + faceRotation;
-  //     img.style.transform = `rotateY(${-1 * counterRotation}deg)`;
-  
-  //     const isFront = i === this.frontFace;
-  //     img.style.opacity = isFront ? 1 : 0.1;
-  
-  //     // 3D effect: adjust z-index and scale to simulate depth
-  //     img.style.zIndex = isFront ? 2 : 1;
-  //     img.style.transform += isFront ? " scale(1.1)" : " scale(0.9)";
-  //   });
-  
-  //   const labels = document.querySelectorAll('.carousel .face p');
-  //   labels.forEach((label, j) => {
-  //     label.style.visibility = j === this.frontFace ? 'visible' : 'hidden';
-  //   });
-  // }
-
   next = (dialogueSet) => {
     console.log(dialogueSet)
     if (this.isTyping) {
@@ -181,9 +115,9 @@ class Assistant {
     } else if (this.phase !== 1 && dialogueSet === this.introDialogues) {
       setTimeout(() => {
         this.dialogueBox.style.opacity = 0;
-        this.page3.asst.firstElementChild.classList.add('ver2')
-        this.page3.asst.firstElementChild.classList.remove('float')
-        this.page3.asst.classList.add('no-shadow')
+        this.page2.asst.firstElementChild.classList.add('ver2')
+        this.page2.asst.firstElementChild.classList.remove('float')
+        this.page2.asst.classList.add('no-shadow')
       }, 500);
       setTimeout(() => {
         window.location.href = "./simulator/tutorial_mode.html"
@@ -207,26 +141,7 @@ class Assistant {
     flash.style.animation = "none";
     flash.style.animation = `flash ${duration}s forwards`;
   } 
-
-  debug() {
-    this.adjustCarousel()
-
-    this.page3.gridWrapper.classList.add("grid-phase1")
-    // assistant styles
-    this.page3.asst.style.animation = "none"
-    this.page3.asst.style.transform = "none"
-    this.page3.asst.style.visibility = "visible"
-    this.page3.asst.firstElementChild.style.visibility = "visible"
-    // assistant scene
-    this.page3.scene.style.display = "block"    
-    this.page3.scene.style.animation = ""  
-
-    // mouse wheel
-    this.phase = 1      // PHASE HANDLE
-    window.addEventListener('wheel', (e) => this.handleWheel(e), {passive: false})
-  }
 }
 
 const assistant = new Assistant();
 assistant.init();  
-// assistant.debug()

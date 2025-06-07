@@ -132,6 +132,7 @@ class Main {
         // main code here
         this.shop.init() 
         this.inventory.init()
+        this.portsTab.init()
         this.displayArea.init()
         this.canvas.animate()
         // this.showSetupWizard()

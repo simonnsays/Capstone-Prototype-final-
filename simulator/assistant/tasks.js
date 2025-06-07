@@ -420,7 +420,7 @@ const tasks = [
         trigger: 'portsTabOpened',
         title: {
             imageSrc: './assets/Assistant/Wires.png',
-            text: 'Port Categories'
+            text: 'Port Groups'
         },
         description: [
             {type: 'text', content: "This is where all ports of the component from the main area is handled. It is categorized by component."},
@@ -432,13 +432,100 @@ const tasks = [
     // STEP 28- Port Items
     {
         id: 'portItems',
-        trigger: 'categoriesNavigated',
+        trigger: 'portGroupsNavigated',
         title: {
             imageSrc: './assets/Assistant/Wires.png',
             text: 'Ports'
         },
         description: [
             {type: 'text', content: "Now, these are all the ports that are found per component. To proeced, try hovering on one of the ports to reveal what kind of port it is."},
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 29- Drawer
+    {
+        id: 'drawer',
+        trigger: 'cellHovered',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Drawer'
+        },
+        description: [
+            {type: 'text', content: "Catch that name? take note of it because you'll need the proper to connect to that port. Open the drawer to find the connectors that we are going to use."},
+        ],
+        highlight: ['#pulley'],
+        status: 'incomplete'
+    },
+    // STEP 30- Connectors
+    {
+        id: 'connectorsIntroduction',
+        trigger: 'drawerPulled',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connector cables'
+        },
+        description: [
+            {type: 'text', content: "Alright, here are your connectors. These usually came with the box along with the component you bought"},
+            {type: 'text', content: "To attach a connector, simply click one and it will get highlighted. Corresponding ports will then light up."},
+            {type: 'text', content: "Hover over the connectors to find its name, then try clicking on the 24-pin-power cable"},
+        ],
+        highlight: ['[data-type="24-pin-power"]'],
+        status: 'incomplete'
+    },
+    // STEP 31- 24-pin-power mobo attachment
+    {
+        id: '24pinMobo',
+        trigger: '24pinSelected',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connecting to motherboard'
+        },
+        description: [
+            {type: 'text', content: "Click on the Highlight to attach the connector"}
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 32- 24-pin-power psu attachment
+    {
+        id: 'navigatePsu',
+        trigger: '24pinMoboAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Navigate to PSU page'
+        },
+        description: [
+            {type: 'text', content: "Great, it's now attached to the motherboard. The 24-pin connector is the main source of power of the motherboard."},
+            {type: 'text', content: "But it can only draw power if it is also connected to the PSU. Try navigating towards the PSU ports page"}
+        ],
+        highlight: ['#portLeft', '#portRight'],
+        status: 'incomplete'
+    },
+    // STEP 33- 24-pin psu attachment
+    {
+        id: '24pinPsu',
+        trigger: 'psuNavigated',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connecting to PSU'
+        },
+        description: [
+            {type: 'text', content: "Most components connect to the psu to draw power from it. Try connecting the 24-pin cable towards the PSU port"}
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 34- attach every component
+    {
+        id: 'attachOtherConnectors',
+        trigger: '24pinPsuAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'aa'
+        },
+        description: [
+            {type: 'text', content: "aa"}
         ],
         highlight: [],
         status: 'incomplete'

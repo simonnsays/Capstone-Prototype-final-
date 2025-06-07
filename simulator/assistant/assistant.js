@@ -89,7 +89,19 @@ class Assistant {
                 this.overlay.classList.add('labels-mask')
                 break
             case 'portCategories':
+            case 'navigatePsu':
                 this.overlay.classList.add('port-label-mask')
+                break
+            case 'portItems':
+            case 'drawer':
+                this.overlay.classList.add('ports-mask')
+                break
+            case 'connectorsIntroduction':
+                this.overlay.classList.add('drawer-mask')
+                break
+            case '24pinMobo':
+            case '24pinPsu':
+                this.overlay.classList.add('port-highlight-mask')
                 break
         }
     }
@@ -151,6 +163,30 @@ class Assistant {
             window.addEventListener('mousemove', this.boundMouseHover)
         }, 100)
     }
+ 
+    showCurrentTask(task) {
+        this.createTask(task)
+
+        this.eventBus.emit('gamePause')
+
+        this.toggleOverlay(true)
+        this.toggleMiniDisplay(true)
+
+        // Proceed with showing the task
+        if(task.highlight) this.highlightCurrentTask(task.highlight, true)
+        
+        window.removeEventListener('mousemove', this.boundMouseHover)
+        window.removeEventListener('click', this.boundClick)
+
+        this.boundClickWithTask = this.handleClickWithTask.bind(this, task)
+        window.addEventListener('click', this.boundClickWithTask)
+    }
+
+    toggleOverlay(bool) {
+        bool
+        ? this.overlay.classList.remove('invisible')
+        : this.overlay.classList.add('invisible')
+    }
 
     toggleTaskCellStates() {
         if (!this.tasksContainer.children.length > 0) {
@@ -181,30 +217,6 @@ class Assistant {
                 taskCell.dataset.listenerAttached = true // Mark as handled
             }
         })
-    }
-       
-    showCurrentTask(task) {
-        this.createTask(task)
-
-        this.eventBus.emit('gamePause')
-
-        this.toggleOverlay(true)
-        this.toggleMiniDisplay(true)
-
-        // Proceed with showing the task
-        if(task.highlight) this.highlightCurrentTask(task.highlight, true)
-        
-        window.removeEventListener('mousemove', this.boundMouseHover)
-        window.removeEventListener('click', this.boundClick)
-
-        this.boundClickWithTask = this.handleClickWithTask.bind(this, task)
-        window.addEventListener('click', this.boundClickWithTask)
-    }
-
-    toggleOverlay(bool) {
-        bool
-        ? this.overlay.classList.remove('invisible')
-        : this.overlay.classList.add('invisible')
     }
 
     createTask(task) {
