@@ -496,6 +496,7 @@ class DisplayArea {
             
             currTableComponents.push(tableComponent.type)
             fill(tableComponent)
+            this.eventBus.emit('mainUnitUpdated', this.table.component)
         }
 
         // create bounding boxes for components inside shelf

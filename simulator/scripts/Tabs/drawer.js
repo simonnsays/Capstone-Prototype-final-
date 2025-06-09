@@ -30,7 +30,19 @@ class Drawer {
     }
 
     subscribeToEventHub() {
-        // this.eventBus.on('') 
+        this.eventBus.on('addEpsPinHighlight', (data) => {
+            foundEls = [...this.cableContainer.querySelectorAll(`[data-type="${data}"]`)]
+            if(!foundEl) return
+
+            foundEls.forEach(element => {
+                element.classList.add('highlight-element')
+            })
+        }) 
+
+        this.eventBus.on('taskAdvanced', () => {
+            elements = this.cableContainer.querySelectorAll('.cableCell')
+            element.classList.remove('highlight-element')
+        })
     }
     
     // Open Drawer

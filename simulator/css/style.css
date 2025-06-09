@@ -245,9 +245,20 @@ dialog {
   background-color: rgba(0,0,0, .5);
   z-index: 15;
 
+  
 }
 
-.port-highlight-mask {
+.port-eps-mobo-mask {
+  mask: linear-gradient(#000 24%, transparent 27% 56%, #000 59%),
+        linear-gradient(to left, #000 37%, transparent 39% 58%, #000 60%);
+}
+
+.port-eps-psu-mask {
+  mask: linear-gradient(#000 19%, transparent 22% 58%, #000 61% 70%, transparent 72% 97%, #000 99%),
+        linear-gradient(to left, #000 18%, transparent 20% 58%, #000 60%);
+}
+
+.port-atx-mask {
   mask: linear-gradient(#000 19%, transparent 22% 58%, #000 61% ),
         linear-gradient(to left, #000 56%, transparent 58% 78%, #000 80%);
 }
@@ -2341,7 +2352,7 @@ input[type=checkbox] {
 .restart-btn { background: #4CAF50; color: white; }
 .reset-btn { background: #f44336; color: white; }
 .continue-btn { background: #2196F3; color: white; }
-.close-btn { background: #757575; color: white; }
+.close-btn { color: #757575; }
 
 .summary-btn:hover {
   filter: brightness(0.9);

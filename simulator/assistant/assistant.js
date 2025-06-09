@@ -104,7 +104,8 @@ class Assistant {
                 this.overlay.classList.add('labels-mask')
                 break
             case 'portCategories':
-            case 'navigatePsu':
+            case 'atxNavigatePsu':
+            case 'epsNavigateMobo':
                 this.overlay.classList.add('port-label-mask')
                 break
             case 'portItems':
@@ -114,11 +115,18 @@ class Assistant {
             case 'connectorsIntroduction':
                 this.overlay.classList.add('drawer-mask')
                 break
-            case '24pinMobo':
-            case '24pinPsu':
-                this.overlay.classList.add('port-highlight-mask')
+            case 'atxPinMobo':
+            case 'atxPinPsu':
+                this.overlay.classList.add('port-atx-mask')
                 break
-        }
+            case 'epsPinPsu':
+                this.overlay.classList.add('.port-eps-psu-mask')
+                break
+            case 'epsPinMobo':
+                this.overlay.classList.add('.port-eps-mobo-mask')
+                break
+            
+        }   
     }
 
     handleClick(e) {   
@@ -190,8 +198,8 @@ class Assistant {
         // Proceed with showing the task
         if(task.highlight) this.highlightCurrentTask(task.highlight, true)
             
-            window.removeEventListener('mousemove', this.boundMouseHover)
-            window.removeEventListener('click', this.boundClick)
+        window.removeEventListener('mousemove', this.boundMouseHover)
+        window.removeEventListener('click', this.boundClick)
             
         this.boundClickWithTask = this.handleClickWithTask.bind(this, task)
         window.addEventListener('click', this.boundClickWithTask)

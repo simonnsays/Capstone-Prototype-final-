@@ -227,7 +227,7 @@ const tasks = [
     },  
     // STEP 16- Open Inventory
     {
-        id: 'openInv',
+        id: 'openInvTab',
         trigger: 'gpuBought',
         title: {
             imageSrc: './assets/Assistant/shop.png',
@@ -396,7 +396,7 @@ const tasks = [
         description: [
             {type: 'text', content: "Alright, now go buy an SSD from the shop, place it in the work area and continue attaching the components that were left"},
         ],
-        highlight: ['Seagate Barracuda SSD'],
+        highlight: ['Seagate Barracuda SSD', '[data-id="storage"]'],
         status: 'incomplete'
     },
     // STEP 26- Ports Introduction
@@ -432,7 +432,7 @@ const tasks = [
     // STEP 28- Port Items
     {
         id: 'portItems',
-        trigger: 'portGroupsNavigated',
+        trigger: 'portMoboNavigated',
         title: {
             imageSrc: './assets/Assistant/Wires.png',
             text: 'Ports'
@@ -475,13 +475,14 @@ const tasks = [
     },
     // STEP 31- 24-pin-power mobo attachment
     {
-        id: '24pinMobo',
+        id: 'atxPinMobo',
         trigger: '24pinSelected',
         title: {
             imageSrc: './assets/Assistant/Wires.png',
             text: 'Connecting to motherboard'
         },
         description: [
+            {type: 'text', content: "This is the 24-pin Cable, Also known as the ATX power cable. It usually will be the connector with the highest pin count and looks the biggest among other connectors."},
             {type: 'text', content: "Click on the Highlight to attach the connector"}
         ],
         highlight: [],
@@ -489,7 +490,7 @@ const tasks = [
     },
     // STEP 32- 24-pin-power psu attachment
     {
-        id: 'navigatePsu',
+        id: 'atxNavigatePsu',
         trigger: '24pinMoboAttached',
         title: {
             imageSrc: './assets/Assistant/Wires.png',
@@ -504,21 +505,21 @@ const tasks = [
     },
     // STEP 33- 24-pin psu attachment
     {
-        id: '24pinPsu',
-        trigger: 'psuNavigated',
+        id: 'atxPinPsu',
+        trigger: 'portPsuNavigated',
         title: {
             imageSrc: './assets/Assistant/Wires.png',
             text: 'Connecting to PSU'
         },
         description: [
-            {type: 'text', content: "Most components connect to the psu to draw power from it. Try connecting the 24-pin cable towards the PSU port"}
+            {type: 'text', content: "Most components connect to the psu to draw power from it.Connect the 24-pin cable towards the PSU port"}
         ],
-        highlight: [],
+        highlight: ['[data-type="24-pin-power"'],
         status: 'incomplete'
     },
-    // STEP 34- attach every component
+    // STEP 34- EPS Connector 
     {
-        id: 'attachOtherConnectors ',
+        id: 'attachEpsConnectors',
         trigger: '24pinPsuAttached',
         title: {
             imageSrc: './assets/Assistant/Wires.png',
@@ -531,10 +532,123 @@ const tasks = [
                 './assets/Assistant/wires4.2.png',
             ]},
             {type: 'break'},
-            {type: 'text', content: "now, try connecting every other connector you see. Power Cables are usually meant to connect to the PSU while other types connects to other components"},
+            {type: 'text', content: "now, let's connect the CPU connectors. Click on the 8-pin-power cable"},
 
         ],
+        highlight: ['[data-type="8-pin-power"]'],
+        status: 'incomplete'
+    },
+    // STEP 35- EPS PSU attachment
+    {
+        id: 'epsPinPsu',
+        trigger: 'epsSelected',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect other connectors'
+        },
+        description: [
+            {type: 'text', content: "This is the 8-pin-power cable, also known as the Entry-Level Power Supply(EPS) connector."},
+            {type: 'break'},
+            {type: 'text', content: "Unlike the ATX connector, the EPS connector has less number of pins. It contains of 4 square pins and 4 rounded D-shaped pins. It is used to power the CPU through the motherboard and from the PSU."},
+            {type: 'break'},
+            {type: 'text', content: "Some builds run with only one EPS cable connected, but for this case, connect the [ TWO ] 8-pin-power cables for use avalable to the highlighted PSU ports"},
+            
+        ],
         highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 36- EPS Mobo navigate
+    {
+        id: 'epsNavigateMobo',
+        trigger: 'epsPsuAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Navigate to motherboard page'
+        },
+        description: [
+            {type: 'text', content: "Again, this connector powers the CPU and the port where it handles that is located at the motherboard, Navigate to to the motherboard page."},
+            
+        ],
+        highlight: ['#portLeft', '#portRight'],
+        status: 'incomplete'
+    },
+    // STEP 37- EPS Motherboard attachment
+    {
+        id: 'epsPinMobo',
+        trigger: 'portMoboNavigated',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'EPS to Motherboard ports'
+        },
+        description: [
+            {type: 'text', content: "CPU connector ports from the motherboard are usually close together rather than having two separate individual ports"},           
+            {type: 'text', content: "Connect the same cables you use to connect to the psu"},           
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 38- CPU Cooling connection
+    {
+        id: 'cpuCoolingPinMobo',
+        trigger: 'epsMoboAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the cooling fan'
+        },
+        description: [
+            {type: 'text', content: "Now that we've connected the cpu connector, let's go on ahead and connect the cooling fan."},                     
+            {type: 'text', content: "The CPU cooling fan usually comes in 3-pins or 4-pins and goes on a motherboard port, scroll down the ports page to find the cooling port and attach the 3-pin cooling cable"},                     
+        ],
+        highlight: ['[data-type="3-pin-cooling"]'],
+        status: 'incomplete'
+    },
+    // STEP 39- Front Panel connection
+    {
+        id: 'frontPanelPinMobo',
+        trigger: 'cpuCoolingAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the Front Panel'
+        },
+        description: [
+            {type: 'text', content: "Okay, while we're at it, why don't you go ahead and connect the front panel connector"},                   
+            {type: 'break',},                   
+            {type: 'text', content: "The Front Panel connector connects the motherboard and the chassis. It is because of this connection that we can use the buttons of a computer case and access its jacks."},                   
+        ],
+        highlight: ['[data-type="frontPanel"]'],
+        status: 'incomplete'
+    },
+    // STEP 40- Front Panel connection
+    {
+        id: 'frontPanelPinMobo',
+        trigger: 'cpuCoolingAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the Front Panel'
+        },
+        description: [
+            {type: 'text', content: "Okay, while we're at it, why don't you go ahead and connect the front panel connector"},                   
+            {type: 'break',},                   
+            {type: 'text', content: "The Front Panel connector connects the motherboard and the chassis. It is because of this connection that we can use the buttons of a computer case and access its jacks."},                   
+        ],
+        highlight: ['[data-type="frontPanel"]'],
+        status: 'incomplete'
+    },
+    // STEP 41- sata data connection
+    {
+        id: 'sataDataPinMobo',
+        trigger: 'frontPanelAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the SSD'
+        },
+        description: [
+            {type: 'text', content: "Now to connect the SSD. Storage devices uses the SATA type of connectors and use two kinds of sata connectors: "},                   
+            {type: 'text', content: "Sata-data is used to connect to the motherboard so that it can transfer files. Sata-power is used to connect to the PSU to power the device itself."},                   
+            {type: 'break',},                   
+            {type: 'text', content: "Use the scroll bar to navigate through the cables until you find the Sata-data cable, connect it to one of the available Sata-data ports"},                   
+        ],
+        highlight: ['[data-type="sata-data"]'],
         status: 'incomplete'
     }
 ]

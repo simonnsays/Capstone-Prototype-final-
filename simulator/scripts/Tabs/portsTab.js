@@ -147,10 +147,6 @@ class PortsTab {
         if(!this.currentGroupPage) return
 
         this.emitPageName(this.currentGroupPage.component)
-        // if(this.currentGroupPage.component === 'motherboard') {
-        //     this.eventBus.emit('portGroupsNavigated')
-        // }
-        // update port page
         this.updatePage()
     }
 
@@ -163,20 +159,16 @@ class PortsTab {
         if (!this.currentGroupPage) return
         
         this.emitPageName(this.currentGroupPage.component)
-        // if(this.currentGroupPage.component === 'motherboard') {
-        //     this.eventBus.emit('portGroupsNavigated')
-        // }
-        // update port page
         this.updatePage()
     }
     
     emitPageName(name) {
         switch(name) {
             case 'motherboard':
-                this.eventBus.emit('portGroupsNavigated')
+                this.eventBus.emit('portMoboNavigated')
                 break
             case 'psu':
-                this.eventBus.emit('psuNavigated')
+                this.eventBus.emit('portPsuNavigated')
         }
     }
 
@@ -281,7 +273,6 @@ class PortsTab {
             cellObj.appendChild(celllSlider)
 
             cellObj.addEventListener('mouseenter', () => {
-                console.log('mouseEntered')
                 setTimeout(() => 
                     this.eventBus.emit('cellHovered')
                     , 1000)   
@@ -290,23 +281,65 @@ class PortsTab {
             this.portsContainer.appendChild(cellObj)
             port.div = cellObj
         })
+    }    
+    
+    // monitorHighlightEvents(port, currentPage, offset) {
+    //     switch(port.type) {
+    //         case '24-pin-power': 
+    //             if(currentPage === 'motherboard') offset.highlight.addEventListener('click', () => {this.eventBus.emit('24pinMoboAttached')})
+    //             if(currentPage === 'psu') offset.highlight.addEventListener('click', () => {this.eventBus.emit('24pinPsuAttached')})
+    //                 break
+    //         case '8-pin-power':
+    //             if(currentPage === 'motherboard') offset.highlight.addEventListener('click', () => {this.eventBus.emit('epsMoboAttached')})
+    //             if(currentPage === 'psu') offset.highlight.addEventListener('click', () => {this.eventBus.emit('epsPsuAttached')})
+    //     }
+    // }
+
+    emitAttached(cable, page) {
+        switch(cable.type) {
+            case '24-pin-power': 
+                if(page === 'motherboard') this.eventBus.emit('24pinMoboAttached')
+                if(page === 'psu') this.eventBus.emit('24pinPsuAttached')
+                    console.log('ATX Connector is attached')
+                break
+            case '8-pin-power':
+                if(page === 'motherboard') this.eventBus.emit('epsMoboAttached')
+                if(page === 'psu') this.eventBus.emit('epsPsuAttached')
+                console.log('EPS connector is attached')
+                break
+            case '3-pin-cooling':
+                this.eventBus.emit('cpuCoolingAttached')
+                break
+            case 'frontPanel':
+                this.eventBus.emit('frontPanelAttached')
+                break
+            case 'sata-data': 
+                if(page === 'motherboard') this.eventBus.emit('sDataPinMoboAttached')
+                if(page === 'storage') this.eventBus.emit('sDataPinRomAttached')
+                break
+            case 'sata-power': 
+                if(page === 'psu') this.eventBus.emit('sPowerPinPsuAttached')
+                if(page === 'storage') this.eventBus.emit('sPowerPinRomAttached')
+                break
+        }
     }
 
     // Attach Cable
     attachCable(port, cable) {
-        const component = this.currentGroupPage.component;
+        const componentPage = this.currentGroupPage.component;
         // Verify if the cable has an end for this component type
-        if (!cable.ends[component]) {
-            console.warn(`Cable end not valid for component: ${component}; \n\nChange CurrentGroupPage`);
+        if (!cable.ends[componentPage]) {
+            console.warn(`Cable end not valid for component: ${componentPage}; \n\nChange CurrentGroupPage`);
             return;
         }
     
         // Attach cable in logic
         port.cableAttached = cable
+        this.emitAttached(cable, componentPage)
     
         // Update cable connection state
-        cable.ends[component].connected = true
-        cable.ends[component].portAttachedTo = port
+        cable.ends[componentPage].connected = true
+        cable.ends[componentPage].portAttachedTo = port
     }       
     
     // Method to get the current attached cables status
@@ -367,17 +400,6 @@ class PortsTab {
                 // highlight port when matched and no attached cable yet
                 if (!offset.cableAttached && cable.type === offset.takes) {
                     offset.highlight = this.createHighlight(offset, 'port-highlight') 
-                    console.log(port)
-                    if(this.portsMonitoring && port.type == "24-pin-power") {
-                        switch (currentPage.component) {
-                            case 'motherboard':
-                                offset.highlight.addEventListener('click', () => {this.eventBus.emit('24pinMoboAttached')})
-                                break
-                            case 'psu':
-                                offset.highlight.addEventListener('click', () => {this.eventBus.emit('24pinPsuAttached')})
-                                break
-                        }
-                    }
                     baseDiv.appendChild(offset.highlight)
                 } 
             })
@@ -549,6 +571,18 @@ class PortsTab {
         })
     }
 
+    emitDivType(cable) {
+        switch(cable.div.dataset.type) {
+            case '24-pin-power':
+                this.eventBus.emit('24pinSelected')
+                break
+            case '8-pin-power':
+                this.eventBus.emit('epsSelected')
+                break
+            
+        }
+    }
+
     // Main Update Function
     update(table, shelf) {
         // Get drawer scroll position BEFORE update
@@ -594,9 +628,9 @@ class PortsTab {
         // listen if one of the cable cells are clicked
         this.drawer.cables.forEach(cable => {
             cable.div.addEventListener('click', () => { 
-                // Share if 24-pin-power cable is being selected
-                if(this.portsMonitoring && cable.div.dataset.type === '24-pin-power') {
-                    this.eventBus.emit('24pinSelected')
+                if(this.portsMonitoring) {
+                    // Share if a cable element is being selected
+                    this.emitDivType(cable)
                 }
 
                 // clear previously selected cable
@@ -627,7 +661,6 @@ class PortsTab {
         setTimeout(() => {
         this.detachmentListener();
         }, 0);
-
     }
 }
 export default PortsTab

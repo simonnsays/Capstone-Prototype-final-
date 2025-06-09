@@ -5,42 +5,101 @@ class TutorialManager {
         this.tasks = tasks  
         this.taskIndex = 0
         // this.taskIndex = 11
+        this.currentTask = tasks[this.taskIndex]
+
+        this.currentUnit = {}
     }
     
     init() {
         this.subscribeToEvents()
-        this.eventBus.emit('tutManagerInit', this.tasks[this.taskIndex])
-        this.tryToAdvance('init')
+
+        this.startTutorial()
         
         // TEST STEP FAST FORWARD
         // this.tryToAdvance('quickBuyChecked')
     }
-
+    
+    startTutorial() {
+        this.eventBus.emit('tutManagerInit', this.tasks[this.taskIndex])
+        this.tryToAdvance('init')
+        this.eventBus.emit('gameResume')
+    }
+    
     subscribeToEvents() {
-
-        ['tabsMenuOpened', 'shopOpened', 'chassisExpanded', 'chassisBought',
+        this.eventBus.on('mainUnitUpdated', (data) => {this.currentUnit = data})
+        
+        const events = ['tabsMenuOpened', 'shopOpened', 'chassisExpanded', 'chassisBought',
             'motherboardExpanded', 'motherboardBought', 'cpuExpanded', 'cpuBought',
             'psuExpanded', 'psuBought', 'quickBuyChecked', 'romBought', 
             'coolingDeviceBought', 'gpuBought', 'invOpened', 'motherboardPlaced',
-            'workAreaIntroduced', 'motherboardPlaced', 'set1Placed', 'set1Attached',
-            'set2Placed', 'chassisPlacedInMain', 'rightSideAccessed', 'storageError',
-            'storageRemoved', 'ssdBought', 'assemblyCompleted', 'portsTabOpened', 
-            'portGroupsNavigated', 'cellHovered', 'drawerPulled', '24pinSelected',
-            '24pinMoboAttached', 'psuNavigated', '24pinPsuAttached'
-        ].forEach(event => {
+            'set1Placed', 'set1Attached','set2Placed', 'chassisPlacedInMain', 
+            'rightSideAccessed', 'storageError','storageRemoved', 'ssdBought', 
+            'assemblyCompleted', 'portsTabOpened', 'portMoboNavigated', 'cellHovered', 
+            'drawerPulled', '24pinSelected','24pinMoboAttached', 'portPsuNavigated', 
+            '24pinPsuAttached', 'epsSelected', 'portMoboNavigated', 'cpuCoolingAttached',
+            'forntPanelAttached'
+        ]
+        events.forEach(event => {
             this.eventBus.on(event, () =>{
                 this.tryToAdvance(event)
             } )  
         })
 
+        // RAM Condition
         this.eventBus.on('ramBought', () => {
             // This is saying that we are currently in step[buyRama]
-            const ramTask = tasks.find(task => task.condition)
-            ramTask.condition.amount++
-            if(ramTask.condition.amount == ramTask.condition.amountRequired) {
+            // const ramTask = tasks.find(task => task.condition)
+            // const this.currentTask = this.currentTask
+            this.currentTask.condition.amount++
+            if(this.currentTask.condition.amount == this.currentTask.condition.amountRequired) {
                 this.tryToAdvance('ramBought')
             }
         })
+
+        // EPS PSU  port condition
+        this.eventBus.on('epsPsuAttached', () => {
+            const psu = this.findComponent(this.currentUnit, 'psu')
+            let allCablesAttached = false
+            if(!psu) return 
+
+            const psuPorts = psu.ports.filter(port => port.type === '8-pin-power')
+            allCablesAttached = psuPorts.every(port => {
+                const offsets = port.offsets
+                if(!offsets) return false                         
+                return offsets.every(offset => offset.cableAttached)
+            })
+
+            if(allCablesAttached) this.tryToAdvance('epsPsuAttached')
+        })
+
+        // EPS Motherboard port condition
+        this.eventBus.on('epsMoboAttached', () => {
+            const motherboard = this.findComponent(this.currentUnit, 'motherboard')
+            let allCablesAttached = false
+            if(!motherboard) return 
+
+            const moboPorts = motherboard.ports.filter(port => port.type === '8-pin-power')
+            console.log(motherboard)
+            allCablesAttached = moboPorts.every(port => {
+                const offsets = port.offsets
+                if(!offsets) return false                         
+                return offsets.every(offset => offset.cableAttached)
+            })
+            
+            if(allCablesAttached) this.tryToAdvance('epsMoboAttached')
+        })
+    }
+
+    findComponent(component, type) {
+        if(component.type === type) return component
+
+        for(let slot of component.slots || []) {
+            if (slot.component) {
+                const found = this.findComponent(slot.component, type)
+                if(found) return found
+            }
+        }
+        return null
     }
 
     tryToAdvance(triggerName = null) {
@@ -50,20 +109,20 @@ class TutorialManager {
             tasks[this.taskIndex-1].status = 'complete'
         }
 
-        const currentTask = this.tasks[this.taskIndex]
-        console.log('step: ', this.taskIndex + 1)
-
+        this.currentTask = this.tasks[this.taskIndex]
+        
         // if(triggerName === 'workAreaIntroduced') {
-        //     console.log('step' + this.taskIndex)
-        //     console.log(currentTask)
-        // }
-
-        if (!currentTask) return
-        if (currentTask.trigger && currentTask.trigger !== triggerName) return
-
+            //     console.log('step' + this.taskIndex)
+            //     console.log(currentTask)
+            // }
+            
+        if (!this.currentTask) return
+        if (this.currentTask.trigger && this.currentTask.trigger !== triggerName) return
+        
+        console.log('step: ', this.taskIndex + 1)
         // Succeed to advance
-        this.emitTaskId(currentTask.id)
-        this.eventBus.emit('taskAdvanced', currentTask)
+        this.emitTaskId(this.currentTask.id)
+        this.eventBus.emit('taskAdvanced', this.currentTask)
                 
         // Automatically prep next task for the next trigger
         this.taskIndex++
@@ -115,6 +174,8 @@ class TutorialManager {
             case 'completeAssembly':
                 this.eventBus.emit('addSsdHighlight', "Seagate Barracuda SSD")
                 break   
+            case 'epsPinPsu':
+                this.eventBus.emit('addEpsPinHighlight', "8-pin-power")
         }
     }
 }
