@@ -146,6 +146,8 @@ class Main {
         // TEST: BOOT UP
         // this.testStep36()
         // this.testStep37()
+        // this.testStep47()
+        this.testStep48()
         //this.hideGameContainer()
         // this.testBootUp()
         //this.testFanSpeed()
@@ -163,7 +165,30 @@ class Main {
         // TEST: ADD BASIC COMPONENT
         //this.addBasicComponents()
     }
+    
+    testStep48() {
+        this.shop.buyComponent(this.shop.items.find(a => a.name === 'NZXT H5 Flow'))
+        this.shop.buyComponent(this.shop.items.find(a => a.name === 'ASRock X570 PG Velocita'))
+        this.shop.buyComponent(this.shop.items.find(a => a.name === 'Gigabyte Radeon RX 7900 XTX'))
+        this.shop.buyComponent(this.shop.items.find(a => a.name === 'EVGA Supernova 1300 P+'))
+        this.inventory.placeComponent(this.inventory.items[0])
+        this.inventory.placeComponent(this.inventory.items[1])
+        this.inventory.placeComponent(this.inventory.items[2])
+        this.inventory.placeComponent(this.inventory.items[3])
+        this.inventory.items = []
+        this.inventory.update()
+        this.displayArea.update()
+        this.assistant.overlay.className = ''
+    }
 
+    testStep47() {
+        this.shop.buyComponent(this.shop.items.find(a => a.name === 'EVGA Supernova 1300 P+'))
+        this.inventory.placeComponent(this.inventory.items[0])
+        this.inventory.items = []
+        this.inventory.update()
+        this.displayArea.update()
+        this.assistant.overlay.className = ''
+    }
 
     testStep37() {
         this.shop.buyComponent(this.shop.items.find(a => a.name === 'NZXT H5 Flow'))

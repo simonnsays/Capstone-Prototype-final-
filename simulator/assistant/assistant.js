@@ -91,42 +91,74 @@ class Assistant {
     }
 
     adjustOverlayElement(data) {
-        this.overlay.className = 'overlay'
-        switch(data.id) {
-            case 'workAreaIntroduction':
-                this.overlay.classList.add('table-mask')
-                break
-            case 'shelfIntroduction':
-            case 'attachSet2':
-                this.overlay.classList.add('shelf-mask')
-                break
-            case 'labelsIntroduction':
-                this.overlay.classList.add('labels-mask')
-                break
-            case 'portCategories':
-            case 'atxNavigatePsu':
-            case 'epsNavigateMobo':
-                this.overlay.classList.add('port-label-mask')
-                break
-            case 'portItems':
-            case 'drawer':
-                this.overlay.classList.add('ports-mask')
-                break
-            case 'connectorsIntroduction':
-                this.overlay.classList.add('drawer-mask')
-                break
-            case 'atxPinMobo':
-            case 'atxPinPsu':
-                this.overlay.classList.add('port-atx-mask')
-                break
-            case 'epsPinPsu':
-                this.overlay.classList.add('.port-eps-psu-mask')
-                break
-            case 'epsPinMobo':
-                this.overlay.classList.add('.port-eps-mobo-mask')
-                break
+        // this.overlay.className = 'overlay'
+        // switch(data.id) {
+        //     case 'workAreaIntroduction':
+        //         this.overlay.classList.add('table-mask')
+        //         break
+        //     case 'shelfIntroduction':
+        //     case 'attachSet2':
+        //         this.overlay.classList.add('shelf-mask')
+        //         break
+        //     case 'labelsIntroduction':
+        //         this.overlay.classList.add('labels-mask')
+        //         break
+        //     case 'portCategories':
+        //     case 'atxNavigatePsu':
+        //     case 'epsNavigateMobo':
+        //         this.overlay.classList.add('port-label-mask')
+        //         break
+        //     case 'portItems':
+        //     case 'drawer':
+        //     case 'attachEpsConnectors':
+        //         this.overlay.classList.add('ports-mask')
+        //         break
+        //     case 'connectorsIntroduction':
+        //         this.overlay.classList.add('drawer-mask')
+        //         break
+        //     case 'atxPinMobo':
+        //     case 'atxPinPsu':
+        //         this.overlay.classList.add('port-atx-mask')
+        //         break
+        //     case 'epsPinPsu':
+        //         this.overlay.classList.add('port-eps-psu-mask')
+        //         break
+        //     case 'epsPinMobo':
+        //         this.overlay.classList.add('port-eps-mobo-mask')
+        //         break
+        // }   
+
+        const overlayClassMap = {
+            workAreaIntroduction: 'table-mask',
+
+            shelfIntroduction: 'shelf-mask',
+            attachSet2: 'shelf-mask',
+
+            labelsIntroduction: 'labels-mask',
+
+            portCategories: 'port-label-mask',
+            atxNavigatePsu: 'port-label-mask',
+            epsNavigateMobo: 'port-label-mask',
             
-        }   
+            portItems: 'ports-mask',
+            drawer: 'ports-mask',
+            attachEpsConnectors: 'ports-mask',
+
+            connectorsIntroduction: 'drawer-mask',
+
+            atxPinMobo: 'port-atx-mask',
+            atxPinPsu: 'port-atx-mask',
+            
+            epsPinPsu: 'port-eps-psu-mask',
+            epsPinMobo: 'port-eps-mobo-mask'
+        }
+
+        this.overlay.className = 'overlay'
+
+        const newClass = overlayClassMap[data.id]
+        if (newClass) {
+            this.overlay.classList.add(newClass)
+        }
     }
 
     handleClick(e) {   

@@ -36,8 +36,9 @@ class TutorialManager {
             'rightSideAccessed', 'storageError','storageRemoved', 'ssdBought', 
             'assemblyCompleted', 'portsTabOpened', 'portMoboNavigated', 'cellHovered', 
             'drawerPulled', '24pinSelected','24pinMoboAttached', 'portPsuNavigated', 
-            '24pinPsuAttached', 'epsSelected', 'portMoboNavigated', 'cpuCoolingAttached',
-            'forntPanelAttached'
+            '24pinPsuAttached', 'epsSelected', 'cpuCoolingAttached', 'frontPanelAttached', 
+            'sDataMoboAttached', 'portRomNavigated', 'sDataRomAttached', 'sPowerRomAttached', 
+            'sPowerPsuAttached', 'pciePsuAttached', 'portGpuNavigated'
         ]
         events.forEach(event => {
             this.eventBus.on(event, () =>{
@@ -88,6 +89,54 @@ class TutorialManager {
             
             if(allCablesAttached) this.tryToAdvance('epsMoboAttached')
         })
+
+        // PCIe PSU port condition
+        this.eventBus.on('pciePsuAttached', () => {
+            const psu = this.findComponent(this.currentUnit, 'psu')
+            let cablesAttachedCount = 0
+            if(!psu) return 
+
+            const psuPorts = psu.ports.filter(port => port.type === '8-pin-pcie')
+            psuPorts.forEach(port => {
+                const offsets = port.offsets
+                offsets.forEach(offset => {
+                    if(offset.cableAttached) {
+                        cablesAttachedCount++
+                    }
+                })
+            })
+
+            if(cablesAttachedCount === 2) this.tryToAdvance('pciePsuAttached')
+        })
+
+        // PCIe GPU port condition
+        this.eventBus.on('pcieGpuAttached', () => {
+            const gpu = this.findComponent(this.currentUnit, 'gpu')
+            const psu = this.findComponent(this.currentUnit, 'psu')
+
+            if (!psu || !gpu) return
+
+            let gpuFoundCables = gpu.ports.filter(port => port.type === '16-pin-pcie' &&
+                port.offsets.every(offset => offset.cableAttached))
+
+            let psuFoundCables = psu.ports.filter(port => port.type === '8-pin-pcie' &&
+                port.offsets.every(offset => offset.cableAttached))
+
+            console.log(gpu.ports)
+            console.log(gpuFoundCables)
+            console.log(psuFoundCables)
+
+            // Extract cable IDs for comparison
+            let gpuCableIds = gpuFoundCables.flatMap(port => port.offsets.map(offset => offset.cableId))
+            let psuCableIds = psuFoundCables.flatMap(port => port.offsets.map(offset => offset.cableId))
+
+            // Ensure both sets have exactly 2 cables and their IDs match
+            if (gpuCableIds.length === 2 && psuCableIds.length === 2 &&
+                JSON.stringify(gpuCableIds.sort()) === JSON.stringify(psuCableIds.sort())) {
+                this.tryToAdvance('pciePsuAttached')
+            }
+        })
+
     }
 
     findComponent(component, type) {

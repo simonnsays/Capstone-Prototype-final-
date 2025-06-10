@@ -544,14 +544,14 @@ const tasks = [
         trigger: 'epsSelected',
         title: {
             imageSrc: './assets/Assistant/Wires.png',
-            text: 'Connect other connectors'
+            text: 'Connect 8-pin-power connectors'
         },
         description: [
             {type: 'text', content: "This is the 8-pin-power cable, also known as the Entry-Level Power Supply(EPS) connector."},
             {type: 'break'},
             {type: 'text', content: "Unlike the ATX connector, the EPS connector has less number of pins. It contains of 4 square pins and 4 rounded D-shaped pins. It is used to power the CPU through the motherboard and from the PSU."},
             {type: 'break'},
-            {type: 'text', content: "Some builds run with only one EPS cable connected, but for this case, connect the [ TWO ] 8-pin-power cables for use avalable to the highlighted PSU ports"},
+            {type: 'text', content: "Some builds run with only one EPS cable connected, but for this case, connect the [ TWO ] 8-pin-power cables avalable for use to the highlighted PSU ports"},
             
         ],
         highlight: [],
@@ -618,23 +618,7 @@ const tasks = [
         highlight: ['[data-type="frontPanel"]'],
         status: 'incomplete'
     },
-    // STEP 40- Front Panel connection
-    {
-        id: 'frontPanelPinMobo',
-        trigger: 'cpuCoolingAttached',
-        title: {
-            imageSrc: './assets/Assistant/Wires.png',
-            text: 'Connect the Front Panel'
-        },
-        description: [
-            {type: 'text', content: "Okay, while we're at it, why don't you go ahead and connect the front panel connector"},                   
-            {type: 'break',},                   
-            {type: 'text', content: "The Front Panel connector connects the motherboard and the chassis. It is because of this connection that we can use the buttons of a computer case and access its jacks."},                   
-        ],
-        highlight: ['[data-type="frontPanel"]'],
-        status: 'incomplete'
-    },
-    // STEP 41- sata data connection
+    // STEP 40- sata data mobo connection
     {
         id: 'sataDataPinMobo',
         trigger: 'frontPanelAttached',
@@ -649,6 +633,139 @@ const tasks = [
             {type: 'text', content: "Use the scroll bar to navigate through the cables until you find the Sata-data cable, connect it to one of the available Sata-data ports"},                   
         ],
         highlight: ['[data-type="sata-data"]'],
+        status: 'incomplete'
+    },
+    // STEP 41- navigate Storage
+    {
+        id: 'sDataNavigateStorage',
+        trigger: 'sDataMoboAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the SSD'
+        },
+        description: [
+            {type: 'text', content: "Navigate to the storage page"},                   
+        ],
+        highlight: ['#portLeft', '#portRight'],
+        status: 'incomplete'
+    },
+    // STEP 42- sata data storage connection
+    {
+        id: 'sataDataPinRom',
+        trigger: 'portRomNavigated',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the SSD'
+        },
+        description: [
+            {type: 'text', content: "Use the Sata-data cable to connect to the storage(SSD) device"},                   
+        ],
+        highlight: ['[data-type="sata-data"]'],
+        status: 'incomplete'
+    },
+    // STEP 43- sata power storage connection
+    {
+        id: 'sataPowerPinRom',
+        trigger: 'sDataRomAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the SSD'
+        },
+        description: [
+            {type: 'text', content: "Now to power the SSD, select the Sata-power cable and attach it to the port in the storage page."},                   
+        ],
+        highlight: ['[data-type="sata-power"]'],
+        status: 'incomplete'
+    },
+    // STEP 44- sata navigate psu
+    {
+        id: 'sPowerNavigatePsu',
+        trigger: 'sPowerRomAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the SSD'
+        },
+        description: [
+            {type: 'text', content: "Navigate to the PSU page."},                   
+        ],
+        highlight: ['#portLeft', '#portRight'],
+        status: 'incomplete'
+    },
+    // STEP 45- sata navigate psu
+    {
+        id: 'sPowerNavigatePsu',
+        trigger: 'portPsuNavigated',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the SSD'
+        },
+        description: [
+            {type: 'text', content: "Finally, connect the Sata-power cable to its corresponding port. Scroll down on the page to see the rest of the ports"},                   
+        ],
+        highlight: ['[data-type="sata-power"]'],
+        status: 'incomplete'
+    },
+    // STEP 46- GPU Connector
+    {
+        id: 'pciePinPsu',
+        trigger: 'sPowerPsuAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the GPU'
+        },
+        description: [
+            {type: 'text', content: "Alright, we're almost done connecting everything. All that's left is connecting the GPU."},                   
+            {type: 'break'},                   
+            {type: 'text', content: "GPU connectors use different connectors depending on the GPU installed. On usual cases, it use an 8-pin-PCIe cable which looks similar the the CPU connector"},                   
+            {type: 'text', content: "with the only difference being that CPU connectors have 4 square and 4 rounded pins while GPU connectors have 5 rounded and 3 squared pins or vice versa."},                   
+            {type: 'break'},                   
+            {type: 'text', content: "To continue, attach two among the 8-pin-pcie cables available in the drawer to their ports."},                   
+            {type: 'break'},                   
+            {type: 'text', content: "NOTE: PCIe ports may not have the same label visually, look for their labels instead or inspect their pins"}                   
+        ],
+        highlight: ['data-type="8-pin-pcie"', 'data-type="8-pin-pcie"'],
+        status: 'incomplete'
+    },
+    // STEP 47- PCIe Navigate to GPU
+    {
+        id: 'pcieNavigatePsu',
+        trigger: 'pciePsuAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the GPU'
+        },
+        description: [
+            {type: 'text', content: "Now go to the GPU port page"}                   
+        ],
+        highlight: ['#portLeft', '#portRight'],
+        status: 'incomplete'
+    },
+    // STEP 48- GPU connection
+    {
+        id: 'pciePinGpu',
+        trigger: 'portGpuNavigated',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the GPU'
+        },
+        description: [
+            {type: 'text', content: "Connect the 2 cables you used in the PSU in the GPU ports"},                                                   
+        ],
+        highlight: ['data-type="8-pin-pcie"', 'data-type="8-pin-pcie"'],
+        status: 'incomplete'
+    },
+    // STEP 49- Boot Up Tab
+    {
+        id: 'openBootUpTab',
+        trigger: 'pcieGpuAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the GPU'
+        },
+        description: [
+            {type: 'text', content: "Connect the 2 cables you used in the PSU in the GPU ports"},                                                   
+        ],
+        highlight: ['data-type="8-pin-pcie"', 'data-type="8-pin-pcie"'],
         status: 'incomplete'
     }
 ]
