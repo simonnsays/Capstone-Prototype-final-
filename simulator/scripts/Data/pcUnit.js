@@ -772,7 +772,7 @@ class PCUnit {
         ) || bootableDevices.find(device => !device.component.osInstalled);
 
         if (!installTarget) {
-            return { success: false, error: 'ERR-504' };
+            return { success: false, error: 'You already have OS in the selected device' };
         }
 
         // Install OS on target device

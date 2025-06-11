@@ -133,7 +133,7 @@ class TutorialManager {
             // Ensure both sets have exactly 2 cables and their IDs match
             if (gpuCableIds.length === 2 && psuCableIds.length === 2 &&
                 JSON.stringify(gpuCableIds.sort()) === JSON.stringify(psuCableIds.sort())) {
-                this.tryToAdvance('pciePsuAttached')
+                this.tryToAdvance('pcieGpuAttached')
             }
         })
 

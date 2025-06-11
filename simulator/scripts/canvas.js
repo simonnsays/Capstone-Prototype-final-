@@ -26,7 +26,6 @@ class Canvas {
         this.alertBox = document.getElementById('customAlert')
         this.alertMessage = document.getElementById('alertMessage')
         this.alertOkButton = document.querySelector('#alertOKButton')
-
         // User
         this.user = user;
 
@@ -44,6 +43,11 @@ class Canvas {
         // only accept left click
         if(e.button !== 0 || !this.isActive) return
 
+        // Check if system is powered on
+        if (this.displayArea.bootUpTab.pcUnit.power === 'on') {
+            return
+        }
+        
        // Unmount mode    
        if(!this.displayArea.isInMountMode) {
             if(!this.user.componentToDetach) return
@@ -134,7 +138,10 @@ class Canvas {
     handleMouseUp() {
         // return if no selected component
         if (!this.user.componentSelected) return;
-
+         // Check if system is powered on
+        if (this.displayArea.bootUpTab.pcUnit.power === 'on') {
+            return;
+        }
         // Check if component is dropped on the trash icon
         if (this.utilityTool.isInsideBox(this.user.mousePoint, this.displayArea.trashBin.area)) {
             this.displayArea.showConfirmationDialog(this.user.componentSelected); // Show confirmation dialog

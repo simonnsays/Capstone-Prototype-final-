@@ -723,7 +723,7 @@ const tasks = [
             {type: 'break'},                   
             {type: 'text', content: "NOTE: PCIe ports may not have the same label visually, look for their labels instead or inspect their pins"}                   
         ],
-        highlight: ['data-type="8-pin-pcie"', 'data-type="8-pin-pcie"'],
+        highlight: ['[data-type="8-pin-pcie"]', '[data-type="8-pin-pcie"]'],
         status: 'incomplete'
     },
     // STEP 47- PCIe Navigate to GPU
@@ -751,7 +751,7 @@ const tasks = [
         description: [
             {type: 'text', content: "Connect the 2 cables you used in the PSU in the GPU ports"},                                                   
         ],
-        highlight: ['data-type="8-pin-pcie"', 'data-type="8-pin-pcie"'],
+        highlight: ['[data-type="8-pin-pcie"]', '[data-type="8-pin-pcie"]'],
         status: 'incomplete'
     },
     // STEP 49- Boot Up Tab
@@ -765,7 +765,7 @@ const tasks = [
         description: [
             {type: 'text', content: "Connect the 2 cables you used in the PSU in the GPU ports"},                                                   
         ],
-        highlight: ['data-type="8-pin-pcie"', 'data-type="8-pin-pcie"'],
+        highlight: ['[data-type="8-pin-pcie"]', '[data-type="8-pin-pcie"]'],
         status: 'incomplete'
     }
 ]

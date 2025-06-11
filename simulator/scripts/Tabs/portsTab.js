@@ -1,14 +1,13 @@
 import Drawer from "./drawer.js"
 
 class PortsTab {
-    constructor(elementHandler, utilityTool, eventBus, pcUnit) {
+    constructor(elementHandler, utilityTool, eventBus, bootUpTab) {
         // Utility
         this.utilityTool = utilityTool
         this.eventBus = eventBus
         this.elements = elementHandler.getWiresElements()
         if(!this.elements) throw new Error('Missing Connections Elements')
-        this.pcUnit = pcUnit
-
+        this.bootUpTab = bootUpTab
         // Open / Close tab buttons
         this.openBtn = this.elements.openBtn
         this.closeBtn = this.elements.closeBtn
@@ -58,6 +57,10 @@ class PortsTab {
             this.turnPortPageRight()
         })
         this.pageLeftBtn.addEventListener('click', () => this.turnPortPageLeft())
+    }
+
+    isSystemPoweredOn() {
+        return this.bootUpTab.pcUnit.power === 'on';
     }
 
     init() {
@@ -251,7 +254,16 @@ class PortsTab {
     updateTabUI() { 
         if(!this.currentGroupPage) return
         let groupDuplicates = this.portGroups.filter(group => group.component === this.currentGroupPage.component).reverse()
-
+        
+        // Add power state indicator
+        const isPoweredOn = this.isSystemPoweredOn();
+        if (isPoweredOn) {
+            const warning = document.createElement('div');
+            warning.className = 'power-warning';
+            warning.textContent = '❌ System must be powered off to modify cables';
+            this.portsContainer.appendChild(warning);
+        }
+        
         // set title to the group component of the current group page
         if(groupDuplicates.length === 1) {
             this.portsGroupLabel.innerHTML = this.currentGroupPage.component.toUpperCase()
@@ -479,6 +491,10 @@ class PortsTab {
                     // highlight onclick
                     if(offset.highlight) {
                         const clickHandler = () => {
+                             // Check system power state
+                            if (this.isSystemPoweredOn()) {
+                                return
+                            }
                             // attempt to attach cable
                             this.attachCable(offset, cable)
                             // remove port highlight
@@ -544,6 +560,10 @@ class PortsTab {
                         
                         // Highlight onClick 
                         const clickHandler = () => {
+                            // Check system power state
+                            if (this.isSystemPoweredOn()) {
+                                return
+                            }
                             // detach cable
                             cableAttached.ends[this.currentGroupPage.component].connected = false
                             offset.cableAttached = null
@@ -634,6 +654,10 @@ class PortsTab {
         // listen if one of the cable cells are clicked
         this.drawer.cables.forEach(cable => {
             cable.div.addEventListener('click', () => { 
+                // Check system power state
+                if (this.isSystemPoweredOn()) {
+                    return
+                }
                 if(this.portsMonitoring) {
                     // Share if a cable element is being selected
                     this.emitDivType(cable)

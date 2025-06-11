@@ -1058,6 +1058,7 @@ input[type=checkbox] {
 }
 
 .reportCell {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   background-color: rgba(171, 214, 153, 0.8);
@@ -2459,6 +2460,33 @@ input[type=checkbox] {
     gap: 10px;
     align-items: center;
     margin-top: 5px;
+}
+
+.power-status-banner {
+    position: absolute;
+    top: -5px; 
+    left: 100px;
+    color: red;
+    text-align: center;
+    font-size: 1px;
+    padding: 5px;
+    z-index: 1000;
+}
+
+.power-icon {
+    margin-right: 8px;
+}
+
+.power-warning {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: red;
+    padding: 5px;
+    text-align: center;
+    font-size: 14px;
+    z-index: 10;
 }
 
 @keyframes slideIn {

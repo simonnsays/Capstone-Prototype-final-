@@ -442,6 +442,7 @@ class Bios{
         // Power on with delay
         setTimeout(() => {
             this.bootUpTab.powerBtnClick(this.pcUnit.availableUnit);
+            this.bootUpTab.openTab();
         }, 2000);
     }
     

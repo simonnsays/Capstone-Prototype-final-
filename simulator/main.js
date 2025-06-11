@@ -25,22 +25,23 @@ class Main {
         // Event Bus
         this.eventBus = new EventBus()
 
-        // Wires Tab
-        this.portsTab = new PortsTab(
-            this.elementHandler, 
-            this.utilityTool, 
-            this.eventBus,
-            this.pcUnit)
-
         // Boot Up Tab
         this.bootUpTab = new BootUpTab(
             this.elementHandler, 
             this.utilityTool, 
+            this,
             this.pcUnit,
             this.bios, 
             this.portsTab, 
             this.drawer)
-      
+
+       // Wires Tab
+        this.portsTab = new PortsTab(
+            this.elementHandler, 
+            this.utilityTool, 
+            this.eventBus,
+            this.bootUpTab)
+            
         // Display Area
         this.displayArea = new DisplayArea(
             this.elementHandler, 
@@ -147,9 +148,9 @@ class Main {
         // this.testStep36()
         // this.testStep37()
         // this.testStep47()
-        this.testStep48()
+       // this.testStep48()
         //this.hideGameContainer()
-        // this.testBootUp()
+         this.testBootUp()
         //this.testFanSpeed()
         //this.testTemperature()
         //this.testBootOrder()
@@ -217,6 +218,59 @@ class Main {
         gameContainer.style.visibility = "hidden"
         const labelWrapper = document.querySelector('.rotate-wrapper')
         labelWrapper.style.visibility = "hidden"
+    }
+
+    resetBuild() {
+        // Clear table and shelf
+        if (this.displayArea) {
+            this.displayArea.table.component = null;
+            this.displayArea.shelf.forEach(spot => spot.component = null);
+            this.displayArea.update();
+        }
+
+        // Clear inventory
+        if (this.inventory) {
+            this.inventory.items = [];
+            this.inventory.update();
+        }
+
+        // Reset boot tab state
+        if (this.bootUpTab && this.bootUpTab.pcUnit) {
+            // Reset PCUnit state
+            this.bootUpTab.pcUnit.power = 'off';
+            this.bootUpTab.pcUnit.reports = [];
+            // Reset component status
+            for (let key in this.bootUpTab.pcUnit.componentsStatus) {
+                if (Array.isArray(this.bootUpTab.pcUnit.componentsStatus[key])) {
+                    this.bootUpTab.pcUnit.componentsStatus[key] = [];
+                } else {
+                    this.bootUpTab.pcUnit.componentsStatus[key] = null;
+                }
+            }
+            // Remove any error overlays or modals
+            this.bootUpTab.clearReportsArea?.();
+            this.bootUpTab.closeTab?.();
+            this.bootUpTab.pcUnit.powerOffMonitor()
+        }
+
+        // Reset ports/wires
+        if (this.portsTab && typeof this.portsTab.reset === 'function') {
+            this.portsTab.reset();
+        } 
+
+        // Reset wattage calculator
+        if (this.wattageCalculator && typeof this.wattageCalculator.reset === 'function') {
+            this.wattageCalculator.reset();
+        }
+
+        // Reset chatbot
+        if (this.chatbot) {
+            this.chatbot.clearMessages();
+        }
+
+        // Update UI
+        if (this.displayArea) this.displayArea.update();
+        if (this.inventory) this.inventory.update();
     }
 
     showSetupWizard() {
@@ -386,7 +440,7 @@ class Main {
         // Sample boot up reqs
         const fullSet = this.bootUpTab.pcUnit.bootUpRequirements
         fullSet.push('ram')
-        fullSet.push('storage')
+        //fullSet.push('storage')
         fullSet.push('storage')
         fullSet.unshift('chassis')
 

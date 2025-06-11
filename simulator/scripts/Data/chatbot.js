@@ -157,12 +157,19 @@ class chatbot{
                 }
             },
             openBIOS: {
-                intent: ['/open bios', 'bios', 'settings'],
+                intent: ['/open bios', 'bios', 'settings'], 
                 action: () => {
                     if (this.bootUpTab.pcUnit.power === 'off') {
                         return "Please power on the system first!";
                     }
-                    this.openBIOS();
+                    // check if the motherboard,cpu, and psu is available
+                    if (!this.bootUpTab.pcUnit.componentsStatus.motherboard?.component){return 'please install a Motherboard first'}
+                    if (!this.bootUpTab.pcUnit.componentsStatus.cpu?.component){return 'please install a CPU first'}
+                    if (!this.bootUpTab.pcUnit.componentsStatus.ram?.length){return 'please install a RAM first'}
+                    if (!this.bootUpTab.pcUnit.componentsStatus.cpuCooling?.component){return 'please install CPU cooling first'}
+                    if (!this.bootUpTab.pcUnit.componentsStatus.gpu?.component){return 'please install a GPU first'}
+                    if (!this.bootUpTab.pcUnit.componentsStatus.psu?.component){return 'please install a PSU first'}
+                    this.openBIOS();    
                     return "Opening the BIOS for you...";
                 }
             },
