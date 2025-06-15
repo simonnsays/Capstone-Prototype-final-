@@ -452,7 +452,7 @@ const tasks = [
             text: 'Drawer'
         },
         description: [
-            {type: 'text', content: "Catch that name? take note of it because you'll need the proper to connect to that port. Open the drawer to find the connectors that we are going to use."},
+            {type: 'text', content: "Catch that name? take note of it because you'll need the proper cable to connect to that port. Open the drawer to find the connectors that we are going to use."},
         ],
         highlight: ['#pulley'],
         status: 'incomplete'
@@ -760,12 +760,96 @@ const tasks = [
         trigger: 'pcieGpuAttached',
         title: {
             imageSrc: './assets/Assistant/Wires.png',
-            text: 'Connect the GPU'
+            text: 'Boot Up Tab'
         },
         description: [
-            {type: 'text', content: "Connect the 2 cables you used in the PSU in the GPU ports"},                                                   
+            {type: 'text', content: "Alright, You got everyything connected and powered. Let's now try to power it on and see if you got it all correct."},                                                   
+            {type: 'text', content: "Open the Boot Up Tab from the menu buttons"},                                                   
         ],
-        highlight: ['[data-type="8-pin-pcie"]', '[data-type="8-pin-pcie"]'],
+        highlight: ['#openBootTab'],
+        status: 'incomplete'
+    },
+    // STEP 50- Boot Up Tab
+    {
+        id: 'bootTabIntroduction',
+        trigger: 'bootUpTabOpened',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Boot Up Tab'
+        },
+        description: [
+            {type: 'text', content: "This is the boot up interface. The area on the left serves as your reports area, and on the right are the peripherals display"},                                                   
+            {type: 'break'},                                                   
+            {type: 'text', content: "The reports area will report if the unit the you have built operates perfectly or it may have errors and you have to adjust some more things."},                                                   
+            {type: 'text', content: "To continue, click on the Power button seen on the corner of the peripherals display area."},                                                   
+        ],
+        highlight: ['#powerButton'],
+        status: 'incomplete'
+    },
+    // STEP 51- Chat Bot
+    {
+        id: 'openChatBot',
+        trigger: 'attemptedPower',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Operating System'
+        },
+        description: [
+            {type: 'text', content: "The reports area just reported an error. It says you don't have an OS installed. "},                                                   
+            {type: 'break'},                                                   
+            {type: 'text', content: "Operating System, or OS, is like the middle man between you and the PC's hardware. It allows you to do everything else aside from just turning it on."},                                                   
+            {type: 'text', content: "Let's install one for our use, open the chat bubble by the lower right of the screen"},                                                   
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 52- Open Bios
+    {
+        id: 'openChatBios',
+        trigger: 'chatOpened',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Operating System'
+        },
+        description: [
+            {type: 'text', content: "This is the chat bubble, if you have any queries or need help on something, don't hesitate to ask here."},                                                   
+            {type: 'break'},                                                   
+            {type: 'text', content: "to install the OS, type '/open bios' on the chat box. You can also use '/help' to find more useful tools"},                                                   
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 52- Open Bios
+    {
+        id: 'installOS',
+        trigger: 'biosOpened',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Operating System'
+        },
+        description: [
+            {type: 'text', content: "This is the BIOS, this is where you can access what your hardware can do on the very basic level."},                                                   
+            {type: 'break'},                                                   
+            {type: 'text', content: "In real life building, you install the OS on a different device and then place it inside your SSD or other storage device."},                                                   
+            {type: 'text', content: "but in this case, we will be installing it in the BIOS interface itself, locate the boot category and then click on Install OS"},                                                   
+        ],
+        highlight: ['#biosBoot','#installOS'],
+        status: 'incomplete'
+    },
+    // STEP 53- SHOW BUILD
+    {
+        id: 'showBuild',
+        trigger: 'poweredOn',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'CONGRATS!'
+        },
+        description: [
+            {type: 'text', content: "Alright! that's it, you've copmpletely and successfully built a PC with proper connctions and all"},                                                   
+            {type: 'break'},                                                   
+            {type: 'text', content: "Click on the success report cell to finally show get the summarry of your build"}                                                   
+        ],
+        highlight: ['#biosBoot','#installOS'],
         status: 'incomplete'
     }
 ]

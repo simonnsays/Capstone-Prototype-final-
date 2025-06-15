@@ -16,7 +16,7 @@ class TutorialManager {
         this.startTutorial()
         
         // TEST STEP FAST FORWARD
-        // this.tryToAdvance('quickBuyChecked')
+        // this.tryToAdvance('sPowerPsuAttached')
     }
     
     startTutorial() {
@@ -38,7 +38,8 @@ class TutorialManager {
             'drawerPulled', '24pinSelected','24pinMoboAttached', 'portPsuNavigated', 
             '24pinPsuAttached', 'epsSelected', 'cpuCoolingAttached', 'frontPanelAttached', 
             'sDataMoboAttached', 'portRomNavigated', 'sDataRomAttached', 'sPowerRomAttached', 
-            'sPowerPsuAttached', 'pciePsuAttached', 'portGpuNavigated'
+            'sPowerPsuAttached', 'portGpuNavigated', 'bootUpTabOpened', 'attemptedPower',
+            'chatOpened', 'biosOpened', 'poweredOn'
         ]
         events.forEach(event => {
             this.eventBus.on(event, () =>{
@@ -48,9 +49,6 @@ class TutorialManager {
 
         // RAM Condition
         this.eventBus.on('ramBought', () => {
-            // This is saying that we are currently in step[buyRama]
-            // const ramTask = tasks.find(task => task.condition)
-            // const this.currentTask = this.currentTask
             this.currentTask.condition.amount++
             if(this.currentTask.condition.amount == this.currentTask.condition.amountRequired) {
                 this.tryToAdvance('ramBought')
@@ -80,7 +78,6 @@ class TutorialManager {
             if(!motherboard) return 
 
             const moboPorts = motherboard.ports.filter(port => port.type === '8-pin-power')
-            console.log(motherboard)
             allCablesAttached = moboPorts.every(port => {
                 const offsets = port.offsets
                 if(!offsets) return false                         
@@ -106,7 +103,9 @@ class TutorialManager {
                 })
             })
 
-            if(cablesAttachedCount === 2) this.tryToAdvance('pciePsuAttached')
+            if(cablesAttachedCount === 2) {
+                this.tryToAdvance('pciePsuAttached')
+            } 
         })
 
         // PCIe GPU port condition
@@ -116,27 +115,35 @@ class TutorialManager {
 
             if (!psu || !gpu) return
 
-            let gpuFoundCables = gpu.ports.filter(port => port.type === '16-pin-pcie' &&
-                port.offsets.every(offset => offset.cableAttached))
+            const gpuFoundCables = []
+            const psuFoundCables = []
 
-            let psuFoundCables = psu.ports.filter(port => port.type === '8-pin-pcie' &&
-                port.offsets.every(offset => offset.cableAttached))
+            gpu.ports.forEach(port => {
+                port.offsets.forEach(offset => {
+                    if (port.type === '16-pin-pcie' && offset.cableAttached) {
+                        gpuFoundCables.push(offset.cableAttached)
+                    }
+                })
+            })
 
-            console.log(gpu.ports)
-            console.log(gpuFoundCables)
-            console.log(psuFoundCables)
+            psu.ports.forEach(port => {
+                port.offsets.forEach(offset => {
+                    if (port.type === '8-pin-pcie' && offset.cableAttached) {
+                        psuFoundCables.push(offset.cableAttached)
+                    }
+                })
+            })
 
-            // Extract cable IDs for comparison
-            let gpuCableIds = gpuFoundCables.flatMap(port => port.offsets.map(offset => offset.cableId))
-            let psuCableIds = psuFoundCables.flatMap(port => port.offsets.map(offset => offset.cableId))
+            // Check that we have exactly 2 cables on each side
+            const correctCableCount = gpuFoundCables.length === 2 && psuFoundCables.length === 2
 
-            // Ensure both sets have exactly 2 cables and their IDs match
-            if (gpuCableIds.length === 2 && psuCableIds.length === 2 &&
-                JSON.stringify(gpuCableIds.sort()) === JSON.stringify(psuCableIds.sort())) {
+            // Check that all GPU cables are found in the PSU cables by object reference
+            const allGpuCablesMatch = gpuFoundCables.every(cable => psuFoundCables.includes(cable))
+
+            if (correctCableCount && allGpuCablesMatch) {
                 this.tryToAdvance('pcieGpuAttached')
             }
         })
-
     }
 
     findComponent(component, type) {

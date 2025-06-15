@@ -1,5 +1,6 @@
 class chatbot{
-    constructor( pcUnit, portsTab, bootUpTab, drawer, inventory, shop, main) {
+    constructor(eventBus, pcUnit, portsTab, bootUpTab, drawer, inventory, shop, main) {
+        this.eventBus = eventBus
         this.pcUnit = pcUnit
         this.portsTab = portsTab
         this.bootUpTab = bootUpTab
@@ -169,6 +170,7 @@ class chatbot{
                     if (!this.bootUpTab.pcUnit.componentsStatus.cpuCooling?.component){return 'please install CPU cooling first'}
                     if (!this.bootUpTab.pcUnit.componentsStatus.gpu?.component){return 'please install a GPU first'}
                     if (!this.bootUpTab.pcUnit.componentsStatus.psu?.component){return 'please install a PSU first'}
+                    console.log('reaching')
                     this.openBIOS();    
                     return "Opening the BIOS for you...";
                 }
@@ -236,12 +238,19 @@ class chatbot{
             MAX_MEMORY: 5 // Maximum number of intents to remember
         };
 
+        this.chatSend.disabled = true
+        this.chatSend.style.opacity = '0.5'
+    }
+
+    init() {
         // Initialize Fuse.js for fuzzy matching
         this.initializeFuzzyMatcher();
 
+        this.subscibeToEventHub() 
+    }
 
-        this.chatSend.disabled = true
-        this.chatSend.style.opacity = '0.5'
+    subscibeToEventHub() {
+
     }
 
     createPc() {
@@ -300,6 +309,7 @@ class chatbot{
             setTimeout(() => {
                 biosModal.showModal();
                 this.bootUpTab.pcUnit.bios.updateBiosDisplay()
+                this.eventBus.emit('biosOpened')
             }, 1800);
         } else {
             console.error("BIOS modal not found!"); 
@@ -780,8 +790,14 @@ class chatbot{
 
     // Show/hide chatbot
     toggleChat() {
+        const wasCollapsed = this.chatbot.classList.contains("collapsed")
+
         this.chatbot.classList.toggle("collapsed")
         this.toggleButton.classList.toggle("online")
+
+        if (wasCollapsed) {
+            this.eventBus.emit('chatOpened')
+        }
     }
 
     // Send message

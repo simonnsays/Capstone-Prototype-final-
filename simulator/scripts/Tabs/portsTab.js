@@ -65,6 +65,7 @@ class PortsTab {
 
     init() {
         this.subscribeToEvents() 
+        this.drawer.init()
     }
 
     subscribeToEvents() {
@@ -303,17 +304,16 @@ class PortsTab {
     }    
 
     emitAttached(cable, page) {
-        console.log(cable.type)
         const typeMap = {
             '24-pin-power': {
                 motherboard: '24pinMoboAttached',
                 psu: '24pinPsuAttached',
-                log: 'ATX Connector is attached'
+                // log: 'ATX Connector is attached'
             },
             '8-pin-power': {
                 motherboard: 'epsMoboAttached',
                 psu: 'epsPsuAttached',
-                log: 'EPS connector is attached'
+                // log: 'EPS connector is attached'
             },
             '3-pin-cooling': { 
                 any: 'cpuCoolingAttached' 
@@ -331,7 +331,8 @@ class PortsTab {
             },
             '8-pin-pcie': {
                 psu: 'pciePsuAttached',
-                gpu: 'pcieGpuAttached'
+                gpu: 'pcieGpuAttached',
+                // log: '8-pin-pcie e is attached'
             }
         }
 

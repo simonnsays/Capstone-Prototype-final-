@@ -31,17 +31,24 @@ class Drawer {
 
     subscribeToEventHub() {
         this.eventBus.on('addEpsPinHighlight', (data) => {
-            foundEls = [...this.cableContainer.querySelectorAll(`[data-type="${data}"]`)]
-            if(!foundEl) return
+            const foundEls = [...this.cableContainer.querySelectorAll(`[data-type="${data}"]`)]
+            if(foundEls.length === 0) return
 
             foundEls.forEach(element => {
                 element.classList.add('highlight-element')
             })
         }) 
 
-        this.eventBus.on('taskAdvanced', () => {
-            elements = this.cableContainer.querySelectorAll('.cableCell')
-            element.classList.remove('highlight-element')
+        // this.eventBus.on('taskAdvanced', () => {
+        //     const elements = this.cableContainer.querySelectorAll('.cableCell')
+        //     for(let el of elements) {
+        //         elements[el]?.classList.remove('highlight-element')
+        //     }
+        // })
+
+        this.eventBus.on('bootUpTabOpened', () => {
+            const image = this.pullBtn?.querySelector('img')
+            if (image) this.closeDrawer(image)
         })
     }
     

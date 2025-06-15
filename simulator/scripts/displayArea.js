@@ -266,13 +266,6 @@ class DisplayArea {
 
     // Update Slot Box
     updateSlotBox(baseComponent, slot) {    
-        /*
-        /
-        /
-        /       CHANGE YOU SLOT CREATION LOGIC SOMEBODY PLEASE HELP
-        /
-        /
-        */
         const side = slot.sides[this.currentSide]
 
         if(!side) {
@@ -329,10 +322,6 @@ class DisplayArea {
             }
             return
         }
-
-        /*
-        *   Might Change and have a better connection logic  
-        */
 
         if(baseComponent.isAttached) {
 
@@ -497,12 +486,17 @@ class DisplayArea {
             currTableComponents.push(tableComponent.type)
             fill(tableComponent)
             this.eventBus.emit('mainUnitUpdated', this.table.component)
+
+            console.log('Table Component: ')
+            console.log(tableComponent)
         }
 
+        console.log('Shelf Components')
         // create bounding boxes for components inside shelf
         this.shelf.forEach(spot => {
             const shelfComponent = spot.component
             if(shelfComponent) {
+                console.log(shelfComponent)
                 currShelfItems.push(shelfComponent.type)
 
                 this.createBox(shelfComponent, spot, shelfComponent.defaultSource)

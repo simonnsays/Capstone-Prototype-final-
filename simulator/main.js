@@ -29,11 +29,8 @@ class Main {
         this.bootUpTab = new BootUpTab(
             this.elementHandler, 
             this.utilityTool, 
-            this,
-            this.pcUnit,
-            this.bios, 
-            this.portsTab, 
-            this.drawer)
+            this.eventBus,
+            this)
 
        // Wires Tab
         this.portsTab = new PortsTab(
@@ -90,6 +87,7 @@ class Main {
         
         // Chatbot
         this.chatbot = new chatbot(
+            this.eventBus,
             this.pcUnit,
             this.portsTab,
             this.bootUpTab,
@@ -134,26 +132,27 @@ class Main {
         this.shop.init() 
         this.inventory.init()
         this.portsTab.init()
+        this.bootUpTab.init()
         this.displayArea.init()
         this.canvas.animate()
-        // this.showSetupWizard()
-
         this.assistant.init()
+        this.chatbot.init()
+        
         this.tutorialManager.init()
-
+        // this.showSetupWizard()
         // console.log(this.eventBus.listeners)
-        //this.assistant.endTutorial()   
+        // this.assistant.endTutorial()   
         
         // TEST: BOOT UP
         // this.testStep36()
         // this.testStep37()
-        // this.testStep47()
-       // this.testStep48()
-        //this.hideGameContainer()
-         this.testBootUp()
-        //this.testFanSpeed()
-        //this.testTemperature()
-        //this.testBootOrder()
+        // this.testStep46()
+        // this.testStep48()
+        // this.hideGameContainer()
+        // this.testBootUp()
+        // this.testFanSpeed()
+        // this.testTemperature()
+        // this.testBootOrder()
         // TEST: MISSING COMPONENTS
         // this.testMissingComponents()
 
@@ -164,7 +163,7 @@ class Main {
         // this.assistant.openModal()
 
         // TEST: ADD BASIC COMPONENT
-        //this.addBasicComponents()
+        // this.addBasicComponents()
     }
     
     testStep48() {
@@ -182,7 +181,7 @@ class Main {
         this.assistant.overlay.className = ''
     }
 
-    testStep47() {
+    testStep46() {
         this.shop.buyComponent(this.shop.items.find(a => a.name === 'EVGA Supernova 1300 P+'))
         this.inventory.placeComponent(this.inventory.items[0])
         this.inventory.items = []

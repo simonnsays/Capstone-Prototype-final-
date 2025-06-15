@@ -3,16 +3,17 @@ import PCUnit from "../Data/pcUnit.js"
 import errorCodes from "../Data/errorCodes.js"
 import Bios from "../Data/bios.js"
 class BootUpTab {
-    constructor(elementHandler, utilityTool, main) {
+    constructor(elementHandler, utilityTool, eventBus, main) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
+        this.eventBus = eventBus
         this.elements = this.elementHandler.getBootUpTabElements()
         this.main = main
 
         // Elements
         this.isActive = false
-        this.modal = this.elements.modal
+        this.modal =  this.elements.modal
         this.openBtn = this.elements.openBtn
         this.closeBtn = this.elements.closeBtn
         this.pcPlaceHolder = this.elements.pcPlaceHolder
@@ -20,10 +21,9 @@ class BootUpTab {
         this.powerBtn.disabled = true
         this.reportArea = this.elements.reportArea
 
-        
         // PC Unit
-        this.pcUnit = new PCUnit(this.elements)
-        this.bios = new Bios(this.pcUnit, this)
+        this.pcUnit = new PCUnit(this.elements, eventBus)
+        this.bios = new Bios(this.eventBus,this.pcUnit, this)
         this.pcUnit.setBios(this.bios)
                 
         // Power notification
@@ -31,9 +31,30 @@ class BootUpTab {
         this.updatePowerStatus();
 
         // Events
-        this.openBtn.addEventListener('click', () => this.openTab())
-        window.addEventListener('mousedown', (e) => this.handleOfBounds(e, this.modal))
+        this.openBtn.addEventListener('click', () => {
+            this.openTab()
+            this.eventBus.emit('bootUpTabOpened')
+        })
+        this.boundHandleOutofBounds = (e) => this.handleOfBounds(e, this.modal)
+        window.addEventListener('mousedown', this.boundHandleOutofBounds)
         this.closeBtn.addEventListener('click', () => this.closeTab())
+    }
+
+    init() {
+        this.subscribeToEventBus()
+    }
+
+    subscribeToEventBus() {
+        this.eventBus.on('gamePause', () => this.pause())
+        this.eventBus.on('gameResume', () => this.resume())
+    }
+
+    pause() {
+        window.removeEventListener('mousedown', this.boundHandleOutofBounds)
+    }
+
+    resume() {
+        window.addEventListener('mousedown', this.boundHandleOutofBounds)
     }
     
     // show power notification
@@ -268,17 +289,17 @@ class BootUpTab {
     }
 
     createReportCell(report) {
-    const cell = document.createElement('div')
-    cell.classList = 'reportCell'
-    
-    // Get error code data
-    //const errorData = errorCodes[report.code] || {
-    //    code: 'ERR-00',
-    //    severity: 'error',
-    //};
+        const cell = document.createElement('div')
+        cell.classList = 'reportCell'
+        
+        // Get error code data
+        //const errorData = errorCodes[report.code] || {
+        //    code: 'ERR-00',
+        //    severity: 'error',
+        //};
 
-    // Add severity class
-    //cell.classList.add(`report-${errorData.severity.toLowerCase()}`);
+        // Add severity class
+        //cell.classList.add(`report-${errorData.severity.toLowerCase()}`);
 
        //console.log(report)
        switch(report.tag.toLowerCase()) {
@@ -301,12 +322,10 @@ class BootUpTab {
                         this.showFinalBuildSummary();
                 });
             break
-       }
-       // only attach errorview click if report has a code
-       if(report.code){cell.addEventListener('click', () => this.openErrorView(report.code)); // Add event listener to report cells opening error view
         }
-    //    console.log(cell)
-/////////////////////////////////////////////////// dan code ///////////////////////////////////////////////////
+        // only attach errorview click if report has a code
+        if(report.code){cell.addEventListener('click', () => this.openErrorView(report.code)); // Add event listener to report cells opening error view
+        }
         const tag = document.createElement('div')
         tag.classList = 'reportCellTag'
         tag.innerHTML = report.tag
@@ -320,57 +339,23 @@ class BootUpTab {
         this.reportArea?.appendChild(cell)
     }
 
-        showFinalBuildSummary() {
+    showFinalBuildSummary() {
         const modal = document.createElement('div');
         modal.className = 'tutorial-summary-modal';
 
         // Get components status
         const components = this.pcUnit.componentsStatus;
         const summaryHTML = Object.entries(components).map(([key, info]) => {
-            if (Array.isArray(info)) {
-                // Handle array components like RAM or storage
-                return info.map((slot, i) => {
-                    const component = slot?.component;
-                    const imageSrc = component?.images?.[0]?.imageSrc
-                    const specs = component?.specs || {};
-                    return `
-                        <div class="component-card ${component ? 'installed' : 'empty'}">
-                            <div class="card-header">
-                                <h3>${key.toUpperCase()} SLOT ${i + 1}</h3>
-                                <span class="status-badge">${component ? '🟢' : '🔴'}</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="component-image">
-                                    <img src="${imageSrc}" alt="${component?.name || 'Not Installed'}">
-                                </div>
-                                <div class="component-details">
-                                    <h4>${component?.name || 'Not Installed'}</h4>
-                                    ${component ? `
-                                        <div class="specs-list">
-                                            ${Object.entries(specs)
-                                                .filter(([key]) => !key.includes('image'))
-                                                .map(([key, value]) => `
-                                                    <div class="spec-item">
-                                                        <span class="spec-label">${key}:</span>
-                                                        <span class="spec-value">${value}</span>
-                                                    </div>
-                                                `).join('')}
-                                        </div>
-                                    ` : ''}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            } else {
-                // Handle regular component objects
-                const component = info?.component;
-                const imageSrc = component?.images?.[0]?.imageSrc;
+        if (Array.isArray(info)) {
+            // Handle array components like RAM or storage
+            return info.map((slot, i) => {
+                const component = slot?.component;
+                const imageSrc = component?.images?.[0]?.imageSrc
                 const specs = component?.specs || {};
                 return `
                     <div class="component-card ${component ? 'installed' : 'empty'}">
                         <div class="card-header">
-                            <h3>${key.toUpperCase()}</h3>
+                            <h3>${key.toUpperCase()} SLOT ${i + 1}</h3>
                             <span class="status-badge">${component ? '🟢' : '🔴'}</span>
                         </div>
                         <div class="card-content">
@@ -395,8 +380,41 @@ class BootUpTab {
                         </div>
                     </div>
                 `;
-            }
-        }).join('');
+            }).join('');
+        } else {
+            // Handle regular component objects
+            const component = info?.component;
+            const imageSrc = component?.images?.[0]?.imageSrc;
+            const specs = component?.specs || {};
+            return `
+                <div class="component-card ${component ? 'installed' : 'empty'}">
+                    <div class="card-header">
+                        <h3>${key.toUpperCase()}</h3>
+                        <span class="status-badge">${component ? '🟢' : '🔴'}</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="component-image">
+                            <img src="${imageSrc}" alt="${component?.name || 'Not Installed'}">
+                        </div>
+                        <div class="component-details">
+                            <h4>${component?.name || 'Not Installed'}</h4>
+                            ${component ? `
+                                <div class="specs-list">
+                                    ${Object.entries(specs)
+                                        .filter(([key]) => !key.includes('image'))
+                                        .map(([key, value]) => `
+                                            <div class="spec-item">
+                                                <span class="spec-label">${key}:</span>
+                                                <span class="spec-value">${value}</span>
+                                            </div>
+                                        `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }}).join('');
 
         // Calculate total power and get warnings
         const totalPower = this.main.wattageCalculator.calculateWattage() || 0;
