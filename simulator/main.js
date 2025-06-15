@@ -144,15 +144,7 @@ class Main {
         // this.assistant.endTutorial()   
         
         // TEST: BOOT UP
-        // this.testStep36()
-        // this.testStep37()
-        // this.testStep46()
-        // this.testStep48()
-        // this.hideGameContainer()
-        // this.testBootUp()
-        // this.testFanSpeed()
-        // this.testTemperature()
-        // this.testBootOrder()
+      
         // TEST: MISSING COMPONENTS
         // this.testMissingComponents()
 
@@ -164,59 +156,6 @@ class Main {
 
         // TEST: ADD BASIC COMPONENT
         // this.addBasicComponents()
-    }
-    
-    testStep48() {
-        this.shop.buyComponent(this.shop.items.find(a => a.name === 'NZXT H5 Flow'))
-        this.shop.buyComponent(this.shop.items.find(a => a.name === 'ASRock X570 PG Velocita'))
-        this.shop.buyComponent(this.shop.items.find(a => a.name === 'Gigabyte Radeon RX 7900 XTX'))
-        this.shop.buyComponent(this.shop.items.find(a => a.name === 'EVGA Supernova 1300 P+'))
-        this.inventory.placeComponent(this.inventory.items[0])
-        this.inventory.placeComponent(this.inventory.items[1])
-        this.inventory.placeComponent(this.inventory.items[2])
-        this.inventory.placeComponent(this.inventory.items[3])
-        this.inventory.items = []
-        this.inventory.update()
-        this.displayArea.update()
-        this.assistant.overlay.className = ''
-    }
-
-    testStep46() {
-        this.shop.buyComponent(this.shop.items.find(a => a.name === 'EVGA Supernova 1300 P+'))
-        this.inventory.placeComponent(this.inventory.items[0])
-        this.inventory.items = []
-        this.inventory.update()
-        this.displayArea.update()
-        this.assistant.overlay.className = ''
-    }
-
-    testStep37() {
-        this.shop.buyComponent(this.shop.items.find(a => a.name === 'NZXT H5 Flow'))
-        this.shop.buyComponent(this.shop.items.find(a => a.name === 'EVGA Supernova 1300 P+'))
-        this.shop.buyComponent(this.shop.items.find(a => a.name === 'ASRock X570 PG Velocita'))
-        this.inventory.placeComponent(this.inventory.items[0])
-        this.inventory.placeComponent(this.inventory.items[1])
-        this.inventory.placeComponent(this.inventory.items[2])
-        this.inventory.items = []
-        this.inventory.update()
-        this.displayArea.update()
-        this.assistant.overlay.className = ''
-    }
-
-    testStep36() {
-        this.shop.buyComponent(this.shop.items.find(a => a.name === 'EVGA Supernova 1300 P+'))
-        this.inventory.placeComponent(this.inventory.items[0])
-        this.inventory.items = []
-        this.inventory.update()
-        this.displayArea.update()
-        this.assistant.overlay.className = ''
-    }
-    
-    hideGameContainer() {
-        const gameContainer = document.querySelector('.game-container')
-        gameContainer.style.visibility = "hidden"
-        const labelWrapper = document.querySelector('.rotate-wrapper')
-        labelWrapper.style.visibility = "hidden"
     }
 
     resetBuild() {
@@ -266,6 +205,27 @@ class Main {
         if (this.chatbot) {
             this.chatbot.clearMessages();
         }
+
+        // Reset canvas 
+        if( this.canvas && typeof this.canvas.reset === 'function') {
+            this.canvas.reset();
+        }
+
+        this.shop.compatibilityFilters = {
+            buildType: null,
+            motherboard: null,
+            cpu: null,
+            ram: null,
+            gpu: null,
+            psu: null,
+            storage: null,
+            chassis: null,
+            cooling: null,
+        };
+
+        // Hide power notification banner
+        const powerBanner = document.getElementById('powerNotification');
+        if (powerBanner) powerBanner.classList.add('hidden');
 
         // Update UI
         if (this.displayArea) this.displayArea.update();
@@ -359,6 +319,7 @@ class Main {
                 this.setupWizard.close();
                 this.shop.setCompatibilityFilters(this.setupWizardState.buildType);
                 this.assistant.init();
+                this.eventBus.emit('setupWizard')
             }
         });
 
@@ -377,18 +338,6 @@ class Main {
         nextBtn.disabled = true;
     }
 
-    testBootOrder(){
-        this.bootUpTab.pcUnit.componentsStatus.storage.osInstalled === false
-    }
-
-    testTemperature(){
-        //this.bootUpTab.pcUnit.biosSettings.temperatures.cpu = 86
-        this.bootUpTab.pcUnit.bios.biosSettings.gpuSettings.temperatures.current = 95
-        //this.bootUpTab.pcUnit.biosSettings.temperatures.system = 76
-    }
-    testFanSpeed(){
-        this.bootUpTab.pcUnit.bios.fanSpeed = 10
-    }
 
     addBasicComponents() {
         const itemsToBuy = []
@@ -434,242 +383,6 @@ class Main {
         // this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'gpu'),1)[0])
     }
 
-    /////////////////// TEST: BOOT UP
-    testBootUp() {
-        // Sample boot up reqs
-        const fullSet = this.bootUpTab.pcUnit.bootUpRequirements
-        fullSet.push('ram')
-        //fullSet.push('storage')
-        fullSet.push('storage')
-        fullSet.unshift('chassis')
-
-        
-        // buy the full set
-        fullSet.forEach(reqItem => {      
-            const itemToBuy = this.shop.items.find(shopItem => {
-                
-                if(reqItem === 'cpuCooling' && shopItem.specs?.category == 'cpu' || reqItem === shopItem.type) {
-                    return shopItem
-                }
-                return null
-            } )
-            this.shop.buyComponent(itemToBuy)
-        })
-
-        // place everything in motherboard first
-        this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'motherboard'),1)[0])
-        this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'ram'),1)[0])
-        this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'ram'),1)[0])
-        this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'cpu'),1)[0])
-        this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'cooling'),1)[0])
-        this.inventory.placeComponent(this.inventory.items.splice(this.inventory.items.findIndex(component => component.type === 'gpu'),1)[0])
-
-        // attach components to motherboard
-        this.displayArea.table.component.slots.forEach(slot => {
-            if(slot.type == 'ram' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'ram')) {
-                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'ram').component, slot)
-            }
-            if(slot.type == 'cpu' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'cpu')) {
-                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'cpu').component, slot)
-            }
-            if(slot.type == 'cooling' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'cooling')) {
-                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'cooling').component, slot)
-            }
-            if(slot.type == 'gpu' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'gpu')) {
-                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'gpu').component, slot)
-            }
-        })
-
-        // place other components
-        this.inventory.items.forEach(item => {
-            this.inventory.placeComponent(item)
-        })
-        this.inventory.items = []
-        
-        // swap chassis to table
-        this.displayArea.swapComponents(this.displayArea.shelf.find(spot => spot.component && spot.component.type === 'chassis').component)
-
-        this.displayArea.table.component.slots.forEach(slot =>  {
-            if(slot.type == 'motherboard' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'motherboard')) {
-                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'motherboard').component, slot)
-            }
-            if(slot.type == 'storage' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'storage')) {
-                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'storage').component, slot)
-            }
-            if(slot.type == 'psu' && this.displayArea.shelf.some(spot => spot.component && spot.component.type == 'psu')) {
-                this.displayArea.attachComponent(this.displayArea.shelf.find(spot => spot.component && spot.component.type == 'psu').component, slot)
-            }
-        }) 
-       
-        this.connectCables()
-        this.testOS()
-        this.inventory.update()
-        this.displayArea.update()
-
-        this.bootUpTab.powerOff()
-        //this.bootUpTab.togglePower(this.displayArea.table.component)
-        this.bootUpTab.openTab()
-    }
-    // ^^^
-    connectCables() {
-        this.bootUpTab.pcUnit.fillComponentStatus(this.displayArea.table.component)
-        // connect cables
-        let motherboardPortsGroup = this.portsTab.portGroups.find(group => group.component === 'motherboard')
-        let psuPortsGroup = this.bootUpTab.pcUnit.componentsStatus.psu.component
-        let storageTwoPorts = this.portsTab.portGroups.find(group => group.component === 'storage')
-        let storageOnePorts = this.portsTab.portGroups.find(group => group.component === 'storage' && group.id !== storageTwoPorts.id)
-        let gpuPortsGroup = this.portsTab.portGroups.find(group => group.component === 'gpu')
-
-        /////////////// MOTHERBOARD to PSU
-        // connect ATX cables
-        // to mobo
-        const atxCable = this.portsTab.drawer.cables.find(cable => cable.type === '24-pin-power')
-        let motherboardAtxPort = motherboardPortsGroup.ports.find(port => port.type === '24-pin-power')
-        this.portsTab.attachCable(motherboardAtxPort.offsets[0], atxCable)
-        // to  psu
-        const psuATXPort = psuPortsGroup.ports.find(port => port.type === '24-pin-power')
-        this.portsTab.attachCable(psuATXPort.offsets[0], atxCable)
-
-        // connect cpu power cables
-        const motherboardCPUPort = motherboardPortsGroup.ports.find(port => port.type === '8-pin-power')
-        motherboardCPUPort.offsets.forEach(offset => {
-            const cpuCable = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-power' && !cable.ends['motherboard'].connected)
-            this.portsTab.attachCable(offset, cpuCable)
-        })
-        const psuCPUPort = psuPortsGroup.ports.find(port => port.type === '8-pin-power')
-        psuCPUPort.offsets.forEach(offset => {
-            const cpuCable = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-power' && cable.ends['psu'].connected)
-            this.portsTab.attachCable(offset, cpuCable)
-        })
-
-
-        /////////////// MOTHERBOARD TO STORAGE
-        // connect sata data
-        motherboardPortsGroup.ports.forEach(port => {
-            if(port.type === 'sata-data') {
-                const sataDataCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-data' && !cable.ends['motherboard'].connected) 
-                if(sataDataCable) {
-                    this.portsTab.attachCable(port.offsets[0], sataDataCable)
-                }
-            }
-        })
-        storageOnePorts.ports.forEach(port => {
-            const sataDataCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-data' && !cable.ends['storage'].connected)
-            this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
-            this.portsTab.attachCable(port.offsets[0], sataDataCable)
-        })
-        storageTwoPorts.ports.forEach(port => {
-            const sataDataCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-data' && !cable.ends['storage'].connected) 
-            this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
-            this.portsTab.attachCable(port.offsets[0], sataDataCable)
-        })
-
-        // connect sata power
-        this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === psuPortsGroup.id)
-        psuPortsGroup.ports.forEach(port => {
-            if(port.type === 'sata-power') {
-                const sataPowerCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-power' && !cable.ends['psu'].connected) 
-                if(sataPowerCable) {
-                    this.portsTab.attachCable(port.offsets[0], sataPowerCable)
-                }
-            }
-        })
-        storageOnePorts.ports.forEach(port => {
-            const sataPowerCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-power' && !cable.ends['storage'].connected)
-            this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
-            this.portsTab.attachCable(port.offsets[1], sataPowerCable)
-        })
-        storageTwoPorts.ports.forEach(port => {
-            const sataPowerCable = this.portsTab.drawer.cables.find(cable => cable.type === 'sata-power' && !cable.ends['storage'].connected) 
-            this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === storageOnePorts.id)
-            this.portsTab.attachCable(port.offsets[1], sataPowerCable)
-        })
-
-        /////////////// MOTHERBOARD TO FRONT PANEL
-        this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.component === 'motherboard')
-        const frontPanelPort = motherboardPortsGroup.ports.find(port => port.type === 'frontPanel')
-        const panelCable = this.portsTab.drawer.cables.find(cable => cable.type === 'frontPanel')
-        this.portsTab.attachCable(frontPanelPort.offsets[0], panelCable)
-
-        /////////////// MOTHERBOARD TO COOLING
-        const coolingPort = motherboardPortsGroup.ports.find(port => port.type === 'cooling')
-        const coolingCable = this.portsTab.drawer.cables.find(cable => cable.type === '3-pin-cooling')
-        this.portsTab.attachCable(coolingPort.offsets[0], coolingCable)
-
-        /////////////// PSU TO GPU
-        // connect to psu
-        this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === psuPortsGroup.id)
-        const gpuPortPsu = psuPortsGroup.ports.find(port => port.type === '8-pin-pcie')
-        const gpuCablePsu = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-pcie')
-        this.portsTab.attachCable(gpuPortPsu.offsets[0], gpuCablePsu)
-        // connect to gpu
-        this.portsTab.currentGroupPage = this.portsTab.portGroups.find(group => group.id === gpuPortsGroup.id)
-        const gpuPortGpu = gpuPortsGroup.ports.find(port => port.type === '8-pin-pcie')
-        const gpuCableGpu = this.portsTab.drawer.cables.find(cable => cable.type === '8-pin-pcie')
-        this.portsTab.attachCable(gpuPortGpu.offsets[0], gpuCableGpu)
-
-    }
-    /////////////////// TEST: OS INSTALLED
-    testOS(){
-        const primaryStorage = this.bootUpTab.pcUnit.componentsStatus.storage[0]
-        if (primaryStorage && primaryStorage.component) {
-            // check device
-            primaryStorage.isPowered = true
-            primaryStorage.component.specs.bootable = true
-            primaryStorage.component.osInstalled = true
-            primaryStorage.component.bootPriority = 0
-
-            // check bios
-            if (!this.bootUpTab.pcUnit.biosSettings) {
-                this.bootUpTab.pcUnit.biosSettings = {}
-            }
-            
-            // set boot order
-            this.bootUpTab.pcUnit.biosSettings.bootOrder = [{
-                device: primaryStorage.component.name,
-                deviceType: primaryStorage.component.type,
-                isBootable: true,
-                osInstalled: true,
-                isPrimary: true
-            }]
-
-            // see if second storage is active
-            const secondaryStorage = this.bootUpTab.pcUnit.componentsStatus.storage[1]
-            if (secondaryStorage && secondaryStorage.component) {
-                secondaryStorage.isPowered = true
-                secondaryStorage.component.specs.bootable = true
-                secondaryStorage.component.bootPriority = 1
-                
-                this.bootUpTab.pcUnit.biosSettings.bootOrder.push({
-                    device: secondaryStorage.component.name,
-                    deviceType: secondaryStorage.component.type,
-                    isBootable: true,
-                    osInstalled: false,
-                    isPrimary: false
-                })
-            }
-        }
-    }
-
-    /////////////////// TEST: BOOT UP
-    testMissingComponents() {
-        this.testBootUp()
-        this.displayArea.table.component.slots.find(slot => slot.type === 'psu').component = null
-        this.displayArea.update()
-    }
-
-    /////////////////// TEST: TRASH BIN
-    testTrashBin() {
-        this.shop.buyComponent(this.shop.items[3])
-        this.shop.buyComponent(this.shop.items[1])
-        this.inventory.items.forEach(item => {
-            this.inventory.placeComponent(item)
-        })
-        this.inventory.items = []
-        
-        this.inventory.update()
-        this.displayArea.update()
-    }
 }
 
 const game = new Main()

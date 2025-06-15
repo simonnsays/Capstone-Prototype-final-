@@ -317,9 +317,11 @@ class BootUpTab {
                cell.appendChild(exlaimElement)
                break
             case 'success':
-                cell.classList.add('reportSuccess') 
+                cell.classList.add('reportSuccess')
+                cell.id = 'reportSuccess' 
                 cell.addEventListener('click', () => {
                         this.showFinalBuildSummary();
+                        this.eventBus.emit('reportSuccessClicked')
                 });
             break
         }
@@ -342,6 +344,11 @@ class BootUpTab {
     showFinalBuildSummary() {
         const modal = document.createElement('div');
         modal.className = 'tutorial-summary-modal';
+        
+        // Event listener for tutorial summary 
+        modal.addEventListener('click', () => {
+            this.eventBus.emit('resetBuild');
+        })
 
         // Get components status
         const components = this.pcUnit.componentsStatus;
@@ -458,10 +465,14 @@ class BootUpTab {
         modal.querySelector('.reset-btn').addEventListener('click', () => {
             modal.remove();
             this.main.resetBuild();
+            this.main.showSetupWizard()
+            this.eventBus.emit('setupWizard');
         });
         //continue
         modal.querySelector('.continue-btn').addEventListener('click', () => {
             modal.remove();
+            this.main.showSetupWizard()
+            this.eventBus.emit('setupWizard');
         });
     }
 

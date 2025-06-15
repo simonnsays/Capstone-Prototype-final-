@@ -2233,7 +2233,7 @@ input[type=checkbox] {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 10;
 }
 
 .summary-content * {
@@ -2486,7 +2486,7 @@ input[type=checkbox] {
     text-align: center;
     font-size: 1px;
     padding: 5px;
-    z-index: 1000;
+    z-index: 10;
 }
 
 .power-icon {

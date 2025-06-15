@@ -39,7 +39,8 @@ class TutorialManager {
             '24pinPsuAttached', 'epsSelected', 'cpuCoolingAttached', 'frontPanelAttached', 
             'sDataMoboAttached', 'portRomNavigated', 'sDataRomAttached', 'sPowerRomAttached', 
             'sPowerPsuAttached', 'portGpuNavigated', 'bootUpTabOpened', 'attemptedPower',
-            'chatOpened', 'biosOpened', 'poweredOn'
+            'chatOpened', 'biosOpened', 'poweredOn' , 'showBuild', 'reportSuccessClicked', 'showBuildSummary', 'resetBuild', 'exitTutorial',
+            'setupWizard'
         ]
         events.forEach(event => {
             this.eventBus.on(event, () =>{
@@ -144,6 +145,10 @@ class TutorialManager {
                 this.tryToAdvance('pcieGpuAttached')
             }
         })
+        
+        this.eventBus.on('reportSuccessClicked', () => this.tryToAdvance('reportSuccessClicked'));
+        this.eventBus.on('showBuildSummary', () => this.tryToAdvance('showBuildSummary'));
+        this.eventBus.on('exitTutorial', () => this.tryToAdvance('exitTutorial'));
     }
 
     findComponent(component, type) {

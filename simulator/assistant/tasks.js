@@ -845,11 +845,72 @@ const tasks = [
             text: 'CONGRATS!'
         },
         description: [
-            {type: 'text', content: "Alright! that's it, you've copmpletely and successfully built a PC with proper connctions and all"},                                                   
+            {type: 'text', content: "Alright! that's it, you've completely and successfully built a PC with proper connections and all"},                                                   
             {type: 'break'},                                                   
             {type: 'text', content: "Click on the success report cell to finally show get the summarry of your build"}                                                   
         ],
         highlight: ['#biosBoot','#installOS'],
+        status: 'incomplete'
+    },
+    // STEP 54- SHOW BUILD SUMMARY
+    {
+        id: 'showBuildSummary',
+        trigger: 'reportSuccessClicked',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Enter Build Summary'
+        },
+        description: [
+            {type: 'text', content: "Great Job! You can now see the summary of your build. It will show you the components you used, the connections you made, and the overall status of your build."},
+            {type: 'break'},
+            {type: 'text', content: "You can now exit the tutorial by clicking on the reset build or continue building button located below."},   
+            {type: 'break'},
+            {type: 'text', content: "Simply scroll down the summary build and click on the Reset Build or continue button to exit the tutorial and start building your own PC."},
+            {type: 'break'},
+            {type: 'text', content: "If you want to reset the tutorial, you can click on the Restart button below. This will reset the tutorial and allow you to start over."},
+            {type: 'break'},
+            {type: 'text', content: "If you want to reset the entire build, you can click on the Reset Build button below. This will only reset the entire build not the whole tutorial."},
+            {type: 'break'},
+            {type: 'text', content: "If you want to continue building your own PC, you can click on the Continue Building button below. This will take you back to the canvas where you can start building your own PC."},
+            {type: 'break'},                                                        
+        ],  
+        highlight: ['#reportSuccess'], 
+        status: 'incomplete'
+    },
+    // STEP 55- EXIT TUTORIAL
+    {
+        id: 'exitTutorial',
+        trigger: 'resetBuild',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Exit Tutorial'
+        },
+        description: [           
+            {type: 'text', content: "Congratulations! You have successfully completed the tutorial. Finish up the set-up for your components."},
+            {type: 'break'},
+            {type: 'text', content: "You can also access this tutorial again by clicking on the Assistant button on the lower left corner of the screen."},                                                   
+        ],
+        highlight: ['#summary-btn', '#restart-btn', '#reset-btn', '#continue-btn'],
+        status: 'incomplete'
+    },
+    // STEP 56- SETUP WIZARD
+    {
+        id: 'setupWizard',
+        trigger: 'setupWizard',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Setup Wizard'
+        },
+        description: [
+            {type: 'text', content: "Now try building your own PC! You can start by selecting the categories and price range of your selected components in the Setup Wizard."},                                                   
+            {type: 'break'},
+            {type: 'text', content: "After you finished selecting the category and price range, you can now start building your own PC"},
+            {type: 'break'},
+            {type: 'text', content: "If you are having trouble, you can always come back to this tutorial by clicking on the Assistant button on the lower left corner of the screen."},  
+            {type: 'break'},
+            {type: 'text', content: "You can also try to get help from the chatbot located on the right corner of the screen that will be all and enjoy building your Personal Computer."},                                                                                     
+        ],
+        highlight: ['.nextStep'],
         status: 'incomplete'
     }
 ]
