@@ -112,9 +112,6 @@ class PCUnit {
         // Monitor display poweron
         this.powerOnMonitor()
         this.bootStatus = true
-
-        // emit power on
-        this.eventBus.emit('poweredOn')
         return true
     }
    

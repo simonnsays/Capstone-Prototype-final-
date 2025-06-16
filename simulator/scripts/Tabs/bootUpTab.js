@@ -132,6 +132,7 @@ class BootUpTab {
             if(pcState) {
                 // console.log('All components are good, Booting up')
                 // this.powerOn()
+                setTimeout(() => this.eventBus.emit('poweredOn'), 1900)
             } else {
                 //////////// AREA OF REPORT ERRORS 
                 this.pcUnit.displayErrorScreen() // display error screen if no power is detected
@@ -144,13 +145,6 @@ class BootUpTab {
         // turn off
         this.power = 'off' 
         this.powerOff()
-    }
-
-    powerOn() {
-        this.pcUnit.power = 'on'
-
-        this.pcUnit.screen?.classList.add('screen-on')
-        setTimeout(() => this.report(), 500)
     }
 
     powerOff() {

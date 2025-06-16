@@ -849,7 +849,7 @@ const tasks = [
             {type: 'break'},                                                   
             {type: 'text', content: "Click on the success report cell to finally show get the summarry of your build"}                                                   
         ],
-        highlight: ['#biosBoot','#installOS'],
+        highlight: ['#reportSuccess'],
         status: 'incomplete'
     },
     // STEP 54- SHOW BUILD SUMMARY
@@ -874,7 +874,7 @@ const tasks = [
             {type: 'text', content: "If you want to continue building your own PC, you can click on the Continue Building button below. This will take you back to the canvas where you can start building your own PC."},
             {type: 'break'},                                                        
         ],  
-        highlight: ['#reportSuccess'], 
+        highlight: ['.summary-btn', '.summary-btn', '.summary-btn'], 
         status: 'incomplete'
     },
     // STEP 55- EXIT TUTORIAL
@@ -890,7 +890,7 @@ const tasks = [
             {type: 'break'},
             {type: 'text', content: "You can also access this tutorial again by clicking on the Assistant button on the lower left corner of the screen."},                                                   
         ],
-        highlight: ['#summary-btn', '#restart-btn', '#reset-btn', '#continue-btn'],
+        highlight: ['.summary-btn'],
         status: 'incomplete'
     },
     // STEP 56- SETUP WIZARD

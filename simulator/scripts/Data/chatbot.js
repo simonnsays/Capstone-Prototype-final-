@@ -244,6 +244,8 @@ class chatbot{
 
     init() {
         // Initialize Fuse.js for fuzzy matching
+
+        console.trace('hey')
         this.initializeFuzzyMatcher();
 
         this.subscibeToEventHub() 

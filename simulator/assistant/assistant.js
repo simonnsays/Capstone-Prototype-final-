@@ -118,7 +118,8 @@ class Assistant {
             bootTabIntroduction: 'boot-tab-mask',
 
             openChatBot: 'chat-mask',
-            openChatBios: '.chat-bubble-mask'
+            openChatBios: 'chat-bubble-mask',
+            showBuildSummary: 'build-summary-mask'
         }
 
         this.overlay.className = 'overlay'

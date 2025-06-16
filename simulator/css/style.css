@@ -245,8 +245,11 @@ dialog {
   background-color: rgba(0,0,0, .5);
   z-index: 15;
 
-  /* mask: linear-gradient(#000 43%, transparent 45% 98%, #000 100%),
-        linear-gradient(to left, #000 1%, transparent 3% 35%, #000 37% ); */
+}
+
+.build-summary-mask {
+  mask: linear-gradient(#000 1%, transparent 3% 97%, #000 100%),
+        linear-gradient(to right, #000 15%, transparent 17% 84%, #000 86% );
 }
 
 .chat-bubble-mask {
