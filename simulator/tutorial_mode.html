@@ -85,6 +85,10 @@
             <button  id="mountUnmount" data-type="button">Mount Mode</button>
         </div>
 
+        <div id="powerNotification" class="power-status-banner hidden">
+            <span class="power-icon">⚡</span>
+            <span class="power-message">System is powered on. Power off to modify components.</span>
+        </div>
         <!-- canvas -->
         <canvas id="simCanvas"></canvas>
 
@@ -322,9 +326,9 @@
             <div class="bios-container">
                 <div class="bios-sidebar">
                     <ul class="bios-menu">
-                        <li class="show">Main</li>
-                        <li>Fan Control</li>
-                        <li>Boot</li>
+                        <li id="biosMain" class="show">Main</li>
+                        <li id="biosFControl">Fan Control</li>
+                        <li id="biosBoot">Boot</li>
                     </ul>
                 </div>
                 <!--Main content-->
@@ -461,13 +465,51 @@
             <div id="asstClose">&times;</div>
         </div>
         <div class="asst-body">
-                <div id="tasksContainer" class="asst-container">
+            <div id="tasksContainer" class="asst-container">
+                <!--               TASKS CONTAINER                      -->
+                <div class="task-cell">
+                    <div class="task-title">
+                        <div class="task-icon">
+                            <img src="./assets/Assistant/shop.png">
+                        </div>
+                        <div class="task-name">
+                            <h3>Enter the Shop</h3>
+                            <p class="task-status">Completed </p>
+                        </div>
+                    </div>
+                    <div class="task-description">
+                        <!-- <div class="description-container"> -->
+                            <p>Look for your PC components and buy them.</p>
+                            <br>
+                            <p>Ensure to check prices and specifications before making a purchase.</p>
+                            <p>The components that you will need are the following:</p>
+                            <p>1. Case</p>
+                            <p>2. motherboard</p>
+                            <p>3. processor</p>
+                            <p>4. Power Supply Unit</p>
+                            <p>5. RAM</p>
+                            <p>6. Storage Device - HDD or SSD</p>
+                            <p>7. Cooling</p>
+                            <p>8. GPU or Graphics card</p>
+                            <br>
+                            <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
+                            <div class="desc-image-carousel">
+                                <img src="assets/Assistant/shop1.png" id="id1" class="desc-image">
+                                <!-- <img src="assets/Assistant/shop2.png" id="id2" class="desc-image"> -->
+                                <!-- <img src="assets/Assistant/shop3.png" id="id3" class="desc-image"> -->
+                                <img src="./assets/svg/leftArr.svg" class="desc-left">
+                                <img src="./assets/svg/rightArr.svg" class="desc-right">
+                            </div>
 
+                            <!-- New Task Button -->
+                            <button class="start-task-btn" data-task="openShop">Start Task</button>
+                        <!-- </div> -->
+                    </div>
                 </div>
+            </div>
             <div id="errorsContainer" class="error-container">
 
                 <!--               ERRORS CONTAINER                      -->
-
             </div>
         </div>
     </dialog>
@@ -511,14 +553,6 @@
         });
 
     </script>
-    <script>
-        fetch('./assets/svg/overlay-masked.svg')
-        .then(res => res.text())
-        .then(svg => {
-            const el = document.createElement('div');
-            el.innerHTML = svg;
-            document.body.appendChild(el.firstElementChild);
-        });
     </script>
 </body>
 </html>

@@ -2,10 +2,10 @@ import errorCodes from "../Data/errorCodes.js"
 import BootUpTab from "../Tabs/bootUpTab.js"
 import Bios from "../Data/bios.js"
 class PCUnit {
-    constructor(bootUpElements,assistant) {
+    constructor(bootUpElements,eventBus) {
         // utilityTool, displayArea, Canvas, portsTab, drawer, assistant
         this.bootUpElements = bootUpElements
-        this.assistant = assistant
+        this.eventBus = eventBus
         this.power = 'off'
         this.availableUnit = null
         this.screen = bootUpElements.screen || null
@@ -17,10 +17,8 @@ class PCUnit {
         // - if components are compatible (compatibility)
         // - if components are working fine (defect)
 
-        /////////////////////////// dan code ///////////////////////////
         this.reports = []
         this.currentErrorCode = null
-        /////////////////////////// dan code ///////////////////////////
 
         this.componentsStatus = {
             motherboard: {},
@@ -74,6 +72,7 @@ class PCUnit {
         this.bios = bios
     }
     attemptPowerOn(unit) {
+        this.eventBus.emit('attemptedPower')
         let bootStatus = true
         let errorQueue = [] // now store errors inside an array to show inside reports area
         
@@ -772,7 +771,7 @@ class PCUnit {
         ) || bootableDevices.find(device => !device.component.osInstalled);
 
         if (!installTarget) {
-            return { success: false, error: 'ERR-504' };
+            return { success: false, error: 'You already have OS in the selected device' };
         }
 
         // Install OS on target device

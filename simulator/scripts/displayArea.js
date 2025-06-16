@@ -102,8 +102,6 @@ class DisplayArea {
     }
 
     confirmRemoval() {
-        console.log(this.user.componentToTrash)
-        console.log(this.monitoringTableTutorial)
         if(this.monitoringTableTutorial && this.user.componentToTrash.name == 'Seagate Barracuda') {
             console.log('ready to emit removal of ssd')
             this.eventBus.emit('storageRemoved')
@@ -268,13 +266,6 @@ class DisplayArea {
 
     // Update Slot Box
     updateSlotBox(baseComponent, slot) {    
-        /*
-        /
-        /
-        /       CHANGE YOU SLOT CREATION LOGIC SOMEBODY PLEASE HELP
-        /
-        /
-        */
         const side = slot.sides[this.currentSide]
 
         if(!side) {
@@ -331,10 +322,6 @@ class DisplayArea {
             }
             return
         }
-
-        /*
-        *   Might Change and have a better connection logic  
-        */
 
         if(baseComponent.isAttached) {
 
@@ -498,12 +485,18 @@ class DisplayArea {
             
             currTableComponents.push(tableComponent.type)
             fill(tableComponent)
+            this.eventBus.emit('mainUnitUpdated', this.table.component)
+
+            console.log('Table Component: ')
+            console.log(tableComponent)
         }
 
+        console.log('Shelf Components')
         // create bounding boxes for components inside shelf
         this.shelf.forEach(spot => {
             const shelfComponent = spot.component
             if(shelfComponent) {
+                console.log(shelfComponent)
                 currShelfItems.push(shelfComponent.type)
 
                 this.createBox(shelfComponent, spot, shelfComponent.defaultSource)
@@ -529,10 +522,8 @@ class DisplayArea {
             const proceedReq2 = ['chassis', 'psu', 'storage']
             if(proceedReq1.every(item => currShelfItems.includes(item))) {
                 this.eventBus.emit('set1Placed')
-                console.log('set1 is Placed, continue step18')
             } else if (proceedReq2.every(item => currShelfItems.includes(item))) {
                 this.eventBus.emit('set2Placed')
-                console.log('set2 is Placed, continue step 20')
             }
         }
     }

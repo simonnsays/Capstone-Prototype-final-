@@ -3,15 +3,17 @@ import PCUnit from "../Data/pcUnit.js"
 import errorCodes from "../Data/errorCodes.js"
 import Bios from "../Data/bios.js"
 class BootUpTab {
-    constructor(elementHandler, utilityTool) {
+    constructor(elementHandler, utilityTool, eventBus, main) {
         // Utility
         this.elementHandler = elementHandler
         this.utilityTool = utilityTool
+        this.eventBus = eventBus
         this.elements = this.elementHandler.getBootUpTabElements()
-        
+        this.main = main
+
         // Elements
         this.isActive = false
-        this.modal = this.elements.modal
+        this.modal =  this.elements.modal
         this.openBtn = this.elements.openBtn
         this.closeBtn = this.elements.closeBtn
         this.pcPlaceHolder = this.elements.pcPlaceHolder
@@ -19,17 +21,50 @@ class BootUpTab {
         this.powerBtn.disabled = true
         this.reportArea = this.elements.reportArea
 
-        
         // PC Unit
-        this.pcUnit = new PCUnit(this.elements)
-        this.bios = new Bios(this.pcUnit, this)
+        this.pcUnit = new PCUnit(this.elements, eventBus)
+        this.bios = new Bios(this.eventBus,this.pcUnit, this)
         this.pcUnit.setBios(this.bios)
-        
+                
+        // Power notification
+        this.powerBanner = document.getElementById('powerNotification')
+        this.updatePowerStatus();
+
         // Events
-        this.openBtn.addEventListener('click', () => this.openTab())
-        window.addEventListener('mousedown', (e) => this.handleOfBounds(e, this.modal))
+        this.openBtn.addEventListener('click', () => {
+            this.openTab()
+            this.eventBus.emit('bootUpTabOpened')
+        })
+        this.boundHandleOutofBounds = (e) => this.handleOfBounds(e, this.modal)
+        window.addEventListener('mousedown', this.boundHandleOutofBounds)
         this.closeBtn.addEventListener('click', () => this.closeTab())
     }
+
+    init() {
+        this.subscribeToEventBus()
+    }
+
+    subscribeToEventBus() {
+        this.eventBus.on('gamePause', () => this.pause())
+        this.eventBus.on('gameResume', () => this.resume())
+    }
+
+    pause() {
+        window.removeEventListener('mousedown', this.boundHandleOutofBounds)
+    }
+
+    resume() {
+        window.addEventListener('mousedown', this.boundHandleOutofBounds)
+    }
+    
+    // show power notification
+    updatePowerStatus() {
+          if (this.pcUnit.power === 'on') {
+            this.powerBanner.classList.remove('hidden');
+        } else {
+            this.powerBanner.classList.add('hidden');
+        }
+    }   
 
     openTab() {
         this.modal.style.display = 'block'
@@ -92,10 +127,12 @@ class BootUpTab {
             /*  Main Power on Sequence */
             // attempt power on
             this.pcUnit.power = 'on'
+            this.updatePowerStatus();
             const pcState = this.pcUnit.attemptPowerOn(unit)
             if(pcState) {
                 // console.log('All components are good, Booting up')
                 // this.powerOn()
+                setTimeout(() => this.eventBus.emit('poweredOn'), 1900)
             } else {
                 //////////// AREA OF REPORT ERRORS 
                 this.pcUnit.displayErrorScreen() // display error screen if no power is detected
@@ -110,19 +147,12 @@ class BootUpTab {
         this.powerOff()
     }
 
-    powerOn() {
-        this.pcUnit.power = 'on'
-
-        this.pcUnit.screen?.classList.add('screen-on')
-        setTimeout(() => this.report(), 500)
-    }
-
     powerOff() {
         this.pcUnit.power = 'off'
         this.screen?.classList.remove('screen-on')
         this.clearReportsArea()
         this.pcUnit.powerOffMonitor()
-
+        this.updatePowerStatus();
         for(let key in this.pcUnit.componentsStatus) {
             if(Array.isArray(this.pcUnit.componentsStatus[key])) {
                 this.pcUnit.componentsStatus[key] = []
@@ -253,17 +283,17 @@ class BootUpTab {
     }
 
     createReportCell(report) {
-    const cell = document.createElement('div')
-    cell.classList = 'reportCell'
-    
-    // Get error code data
-    //const errorData = errorCodes[report.code] || {
-    //    code: 'ERR-00',
-    //    severity: 'error',
-    //};
+        const cell = document.createElement('div')
+        cell.classList = 'reportCell'
+        
+        // Get error code data
+        //const errorData = errorCodes[report.code] || {
+        //    code: 'ERR-00',
+        //    severity: 'error',
+        //};
 
-    // Add severity class
-    //cell.classList.add(`report-${errorData.severity.toLowerCase()}`);
+        // Add severity class
+        //cell.classList.add(`report-${errorData.severity.toLowerCase()}`);
 
        //console.log(report)
        switch(report.tag.toLowerCase()) {
@@ -280,11 +310,18 @@ class BootUpTab {
                exlaimElement.innerHTML = '!'
                cell.appendChild(exlaimElement)
                break
-       }
-
-       cell.addEventListener('click', () => this.openErrorView(report.code)); // Add event listener to report cells opening error view
-    //    console.log(cell)
-/////////////////////////////////////////////////// dan code ///////////////////////////////////////////////////
+            case 'success':
+                cell.classList.add('reportSuccess')
+                cell.id = 'reportSuccess' 
+                cell.addEventListener('click', () => {
+                        this.showFinalBuildSummary();
+                        this.eventBus.emit('reportSuccessClicked')
+                });
+            break
+        }
+        // only attach errorview click if report has a code
+        if(report.code){cell.addEventListener('click', () => this.openErrorView(report.code)); // Add event listener to report cells opening error view
+        }
         const tag = document.createElement('div')
         tag.classList = 'reportCellTag'
         tag.innerHTML = report.tag
@@ -296,6 +333,141 @@ class BootUpTab {
         cell.appendChild(def)
 
         this.reportArea?.appendChild(cell)
+    }
+
+    showFinalBuildSummary() {
+        const modal = document.createElement('div');
+        modal.className = 'tutorial-summary-modal';
+        
+        // Event listener for tutorial summary 
+        modal.addEventListener('click', () => {
+            this.eventBus.emit('resetBuild');
+        })
+
+        // Get components status
+        const components = this.pcUnit.componentsStatus;
+        const summaryHTML = Object.entries(components).map(([key, info]) => {
+        if (Array.isArray(info)) {
+            // Handle array components like RAM or storage
+            return info.map((slot, i) => {
+                const component = slot?.component;
+                const imageSrc = component?.images?.[0]?.imageSrc
+                const specs = component?.specs || {};
+                return `
+                    <div class="component-card ${component ? 'installed' : 'empty'}">
+                        <div class="card-header">
+                            <h3>${key.toUpperCase()} SLOT ${i + 1}</h3>
+                            <span class="status-badge">${component ? '🟢' : '🔴'}</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="component-image">
+                                <img src="${imageSrc}" alt="${component?.name || 'Not Installed'}">
+                            </div>
+                            <div class="component-details">
+                                <h4>${component?.name || 'Not Installed'}</h4>
+                                ${component ? `
+                                    <div class="specs-list">
+                                        ${Object.entries(specs)
+                                            .filter(([key]) => !key.includes('image'))
+                                            .map(([key, value]) => `
+                                                <div class="spec-item">
+                                                    <span class="spec-label">${key}:</span>
+                                                    <span class="spec-value">${value}</span>
+                                                </div>
+                                            `).join('')}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        } else {
+            // Handle regular component objects
+            const component = info?.component;
+            const imageSrc = component?.images?.[0]?.imageSrc;
+            const specs = component?.specs || {};
+            return `
+                <div class="component-card ${component ? 'installed' : 'empty'}">
+                    <div class="card-header">
+                        <h3>${key.toUpperCase()}</h3>
+                        <span class="status-badge">${component ? '🟢' : '🔴'}</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="component-image">
+                            <img src="${imageSrc}" alt="${component?.name || 'Not Installed'}">
+                        </div>
+                        <div class="component-details">
+                            <h4>${component?.name || 'Not Installed'}</h4>
+                            ${component ? `
+                                <div class="specs-list">
+                                    ${Object.entries(specs)
+                                        .filter(([key]) => !key.includes('image'))
+                                        .map(([key, value]) => `
+                                            <div class="spec-item">
+                                                <span class="spec-label">${key}:</span>
+                                                <span class="spec-value">${value}</span>
+                                            </div>
+                                        `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }}).join('');
+
+        // Calculate total power and get warnings
+        const totalPower = this.main.wattageCalculator.calculateWattage() || 0;
+        const psuWattage = components.psu?.component?.specs?.wattage || 0;
+        const powerWarning = totalPower > psuWattage ? 
+            `<div class="build-warning">⚠️ PSU may be underpowered (${psuWattage}W PSU, ${totalPower}W required)</div>` : 
+            `<div class="build-success">⚡ Power requirements met (${totalPower}W of ${psuWattage}W)</div>`;
+
+        modal.innerHTML = `
+            <div class="summary-content">
+                <div class="summary-header">
+                    <h2>PC Build Summary</h2>
+                    <div class="power-status">
+                        ${powerWarning}
+                    </div>
+                </div>
+                <div class="components-grid">
+                    ${summaryHTML}
+                </div>
+                <div class="summary-footer">
+                    <div class="summary-buttons">
+                        <button class="summary-btn restart-btn">Restart Tutorial</button>
+                        <button class="summary-btn reset-btn">Reset Build</button>
+                        <button class="summary-btn continue-btn">Continue Building</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    
+        document.body.appendChild(modal);
+    
+        // Add event listeners to all buttons 
+
+        //restart
+        modal.querySelector('.restart-btn').addEventListener('click', () => {
+            modal.remove();
+            window.location.href = '../index.html';
+            //this.main.start();
+        });
+        //reset
+        modal.querySelector('.reset-btn').addEventListener('click', () => {
+            modal.remove();
+            this.main.resetBuild();
+            this.main.showSetupWizard()
+            this.eventBus.emit('setupWizard');
+        });
+        //continue
+        modal.querySelector('.continue-btn').addEventListener('click', () => {
+            modal.remove();
+            this.main.showSetupWizard()
+            this.eventBus.emit('setupWizard');
+        });
     }
 
     clearReportsArea() {

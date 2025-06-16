@@ -1,5 +1,6 @@
 class chatbot{
-    constructor( pcUnit, portsTab, bootUpTab, drawer, inventory, shop, main) {
+    constructor(eventBus, pcUnit, portsTab, bootUpTab, drawer, inventory, shop, main) {
+        this.eventBus = eventBus
         this.pcUnit = pcUnit
         this.portsTab = portsTab
         this.bootUpTab = bootUpTab
@@ -157,12 +158,20 @@ class chatbot{
                 }
             },
             openBIOS: {
-                intent: ['/open bios', 'bios', 'settings'],
+                intent: ['/open bios', 'bios', 'settings'], 
                 action: () => {
                     if (this.bootUpTab.pcUnit.power === 'off') {
                         return "Please power on the system first!";
                     }
-                    this.openBIOS();
+                    // check if the motherboard,cpu, and psu is available
+                    if (!this.bootUpTab.pcUnit.componentsStatus.motherboard?.component){return 'please install a Motherboard first'}
+                    if (!this.bootUpTab.pcUnit.componentsStatus.cpu?.component){return 'please install a CPU first'}
+                    if (!this.bootUpTab.pcUnit.componentsStatus.ram?.length){return 'please install a RAM first'}
+                    if (!this.bootUpTab.pcUnit.componentsStatus.cpuCooling?.component){return 'please install CPU cooling first'}
+                    if (!this.bootUpTab.pcUnit.componentsStatus.gpu?.component){return 'please install a GPU first'}
+                    if (!this.bootUpTab.pcUnit.componentsStatus.psu?.component){return 'please install a PSU first'}
+                    console.log('reaching')
+                    this.openBIOS();    
                     return "Opening the BIOS for you...";
                 }
             },
@@ -229,12 +238,21 @@ class chatbot{
             MAX_MEMORY: 5 // Maximum number of intents to remember
         };
 
-        // Initialize Fuse.js for fuzzy matching
-        this.initializeFuzzyMatcher();
-
-
         this.chatSend.disabled = true
         this.chatSend.style.opacity = '0.5'
+    }
+
+    init() {
+        // Initialize Fuse.js for fuzzy matching
+
+        console.trace('hey')
+        this.initializeFuzzyMatcher();
+
+        this.subscibeToEventHub() 
+    }
+
+    subscibeToEventHub() {
+
     }
 
     createPc() {
@@ -291,8 +309,9 @@ class chatbot{
         let biosModal = document.getElementById("biosModal");
          if (biosModal) {
             setTimeout(() => {
-                biosModal.showModal();
+                biosModal.show();
                 this.bootUpTab.pcUnit.bios.updateBiosDisplay()
+                this.eventBus.emit('biosOpened')
             }, 1800);
         } else {
             console.error("BIOS modal not found!"); 
@@ -773,8 +792,14 @@ class chatbot{
 
     // Show/hide chatbot
     toggleChat() {
+        const wasCollapsed = this.chatbot.classList.contains("collapsed")
+
         this.chatbot.classList.toggle("collapsed")
         this.toggleButton.classList.toggle("online")
+
+        if (wasCollapsed) {
+            this.eventBus.emit('chatOpened')
+        }
     }
 
     // Send message

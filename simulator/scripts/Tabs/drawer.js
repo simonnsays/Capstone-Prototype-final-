@@ -1,13 +1,13 @@
 import cableRef from "../Data/cableReference.js";
 
 class Drawer {
-    constructor(elementHandler, utilityTool, pcUnit) {
+    constructor(elementHandler, utilityTool, eventBus) {
         // Utility
         this.utilityTool = utilityTool
+        this.eventBus = eventBus
         this.elementHandler = elementHandler
         this.elements = this.elementHandler.getDrawerElements()
         if(!this.elements) throw new Error('Missing Drawer Elements');
-        this.pcUnit = pcUnit
        
         // Elements
         this.modal = this.elements.modal
@@ -19,7 +19,37 @@ class Drawer {
         this.cableSelected = null
 
         // Events
-        this.pullBtn.addEventListener('click', () => this.toggleDrawer())
+        this.pullBtn.addEventListener('click', () => {
+            this.eventBus.emit('drawerPulled')
+            this.toggleDrawer()
+        })
+    }
+
+    init() {
+        this.subscribeToEventHub()
+    }
+
+    subscribeToEventHub() {
+        this.eventBus.on('addEpsPinHighlight', (data) => {
+            const foundEls = [...this.cableContainer.querySelectorAll(`[data-type="${data}"]`)]
+            if(foundEls.length === 0) return
+
+            foundEls.forEach(element => {
+                element.classList.add('highlight-element')
+            })
+        }) 
+
+        // this.eventBus.on('taskAdvanced', () => {
+        //     const elements = this.cableContainer.querySelectorAll('.cableCell')
+        //     for(let el of elements) {
+        //         elements[el]?.classList.remove('highlight-element')
+        //     }
+        // })
+
+        this.eventBus.on('bootUpTabOpened', () => {
+            const image = this.pullBtn?.querySelector('img')
+            if (image) this.closeDrawer(image)
+        })
     }
     
     // Open Drawer
@@ -200,6 +230,7 @@ class Drawer {
             // create cells 
             const cableCell = document.createElement('div')
             cableCell.className = 'cableCell'
+            cableCell.dataset.type = cable.type
 
             // adjust cable background to indicate what state it is in
             this.adjustCableStateStyle(cable, cableCell)

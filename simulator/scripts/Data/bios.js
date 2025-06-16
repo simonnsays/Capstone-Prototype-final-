@@ -1,5 +1,6 @@
 class Bios{
-    constructor(pcUnit,bootUpTab){
+    constructor(eventBus, pcUnit, bootUpTab){
+        this.eventBus = eventBus
         this.bootUpTab = bootUpTab
         this.pcUnit = pcUnit
         this.isBiosOpen = false
@@ -331,17 +332,18 @@ class Bios{
         }
     }
 
-    openBIOS() {
-        let biosModal = document.getElementById("biosModal");
-         if (biosModal) {
-            setTimeout(() => {
-                biosModal.toggleBios();
-                this.updateBiosDisplay(); // Update BIOS display when opened
-            }, 1800);
-        } else {
-            console.error("BIOS modal not found!");
-        }
-    }
+    // openBIOS() {     [ UNUSED / CANDITATE FOR DEPRACATION ]
+    //     let biosModal = document.getElementById("biosModal");
+    //      if (biosModal) {
+    //         setTimeout(() => {
+
+    //             biosModal.toggleBios();
+    //             this.updateBiosDisplay(); // Update BIOS display when opened
+    //         }, 1800);
+    //     } else {
+    //         console.error("BIOS modal not found!");
+    //     }
+    // }
 
     toggleBios(show) {
         const biosEl = this.biosElements;
@@ -442,6 +444,7 @@ class Bios{
         // Power on with delay
         setTimeout(() => {
             this.bootUpTab.powerBtnClick(this.pcUnit.availableUnit);
+            this.bootUpTab.openTab();
         }, 2000);
     }
     

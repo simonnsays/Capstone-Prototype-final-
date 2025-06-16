@@ -1,14 +1,13 @@
 import Drawer from "./drawer.js"
 
 class PortsTab {
-    constructor(elementHandler, utilityTool, eventBus, pcUnit) {
+    constructor(elementHandler, utilityTool, eventBus, bootUpTab) {
         // Utility
         this.utilityTool = utilityTool
         this.eventBus = eventBus
         this.elements = elementHandler.getWiresElements()
         if(!this.elements) throw new Error('Missing Connections Elements')
-        this.pcUnit = pcUnit
-
+        this.bootUpTab = bootUpTab
         // Open / Close tab buttons
         this.openBtn = this.elements.openBtn
         this.closeBtn = this.elements.closeBtn
@@ -22,7 +21,7 @@ class PortsTab {
         this.pageLeftBtn = this.elements.pageLeftBtn
 
         // Drawer
-        this.drawer = new Drawer(elementHandler, utilityTool)
+        this.drawer = new Drawer(elementHandler, utilityTool, this.eventBus)
         
         // Wires
         this.wires = []
@@ -41,6 +40,7 @@ class PortsTab {
             table: null,
             shelf: null
         }
+        this.portsMonitoring = false
 
         // Events
         this.openBtn.addEventListener('click', () => {
@@ -59,21 +59,28 @@ class PortsTab {
         this.pageLeftBtn.addEventListener('click', () => this.turnPortPageLeft())
     }
 
+    isSystemPoweredOn() {
+        return this.bootUpTab.pcUnit.power === 'on';
+    }
+
     init() {
         this.subscribeToEvents() 
+        this.drawer.init()
     }
 
     subscribeToEvents() {
         this.eventBus.on('gamePause', () => this.pause())
         this.eventBus.on('gameResume', () => this.resume())
+
+        this.eventBus.on('portsTabOpened', () => {this.portsMonitoring = true})
     }
 
     pause() {
-        this.removeEventListener('mousedown', this.boundHandleOutofBounds)
+        window.removeEventListener('mousedown', this.boundHandleOutofBounds)
     }
 
     resume() {
-        this.addEventListener('mousedown', this.boundHandleOutofBounds)
+        window.addEventListener('mousedown', this.boundHandleOutofBounds)
     }
 
     // Open Tab
@@ -143,7 +150,7 @@ class PortsTab {
 
         if(!this.currentGroupPage) return
 
-        // update port page
+        this.emitPageName(this.currentGroupPage.component)
         this.updatePage()
     }
 
@@ -152,11 +159,28 @@ class PortsTab {
         // adjust this.i and this.currentGroupPage to iterate to the previous page
         this.i = (this.i + 1) % this.portGroups.length
         this.currentGroupPage = this.portGroups[this.i]
-
+        
         if (!this.currentGroupPage) return
-
-        // update port page
+        
+        this.emitPageName(this.currentGroupPage.component)
         this.updatePage()
+    }
+    
+    emitPageName(name) {
+        switch(name) {
+            case 'motherboard':
+                this.eventBus.emit('portMoboNavigated')
+                break
+            case 'psu':
+                this.eventBus.emit('portPsuNavigated')
+                break
+            case 'storage':
+                this.eventBus.emit('portRomNavigated')
+                break
+            case 'gpu':
+                this.eventBus.emit('portGpuNavigated')
+                break
+        }
     }
 
     // Update Port Page
@@ -231,7 +255,16 @@ class PortsTab {
     updateTabUI() { 
         if(!this.currentGroupPage) return
         let groupDuplicates = this.portGroups.filter(group => group.component === this.currentGroupPage.component).reverse()
-
+        
+        // Add power state indicator
+        const isPoweredOn = this.isSystemPoweredOn();
+        if (isPoweredOn) {
+            const warning = document.createElement('div');
+            warning.className = 'power-warning';
+            warning.textContent = '❌ System must be powered off to modify cables';
+            this.portsContainer.appendChild(warning);
+        }
+        
         // set title to the group component of the current group page
         if(groupDuplicates.length === 1) {
             this.portsGroupLabel.innerHTML = this.currentGroupPage.component.toUpperCase()
@@ -259,27 +292,73 @@ class PortsTab {
             cellObj.appendChild(cellImg)
             cellObj.appendChild(celllSlider)
 
+            cellObj.addEventListener('mouseenter', () => {
+                setTimeout(() => 
+                    this.eventBus.emit('cellHovered')
+                    , 1000)   
+            })
             // append to container
             this.portsContainer.appendChild(cellObj)
             port.div = cellObj
         })
+    }    
+
+    emitAttached(cable, page) {
+        const typeMap = {
+            '24-pin-power': {
+                motherboard: '24pinMoboAttached',
+                psu: '24pinPsuAttached',
+                // log: 'ATX Connector is attached'
+            },
+            '8-pin-power': {
+                motherboard: 'epsMoboAttached',
+                psu: 'epsPsuAttached',
+                // log: 'EPS connector is attached'
+            },
+            '3-pin-cooling': { 
+                any: 'cpuCoolingAttached' 
+            },
+            'frontPanel': { 
+                any: 'frontPanelAttached' 
+            },
+            'sata-data': {
+                motherboard: 'sDataMoboAttached',
+                storage: 'sDataRomAttached'
+            },
+            'sata-power': {
+                psu: 'sPowerPsuAttached',
+                storage: 'sPowerRomAttached'
+            },
+            '8-pin-pcie': {
+                psu: 'pciePsuAttached',
+                gpu: 'pcieGpuAttached',
+                // log: '8-pin-pcie e is attached'
+            }
+        }
+
+        const config = typeMap[cable.type]
+        if (!config) return console.warn(`Unknown cable type: ${cable.type}`)
+
+        this.eventBus.emit(config[page] || config.any)
+        if(config.log) console.log(config.log)
     }
 
     // Attach Cable
     attachCable(port, cable) {
-        const component = this.currentGroupPage.component;
+        const componentPage = this.currentGroupPage.component;
         // Verify if the cable has an end for this component type
-        if (!cable.ends[component]) {
-            console.warn(`Cable end not valid for component: ${component}; \n\nChange CurrentGroupPage`);
+        if (!cable.ends[componentPage]) {
+            console.warn(`Cable end not valid for component: ${componentPage}; \n\nChange CurrentGroupPage`);
             return;
         }
     
         // Attach cable in logic
         port.cableAttached = cable
+        this.emitAttached(cable, componentPage)
     
         // Update cable connection state
-        cable.ends[component].connected = true
-        cable.ends[component].portAttachedTo = port
+        cable.ends[componentPage].connected = true
+        cable.ends[componentPage].portAttachedTo = port
     }       
     
     // Method to get the current attached cables status
@@ -413,6 +492,10 @@ class PortsTab {
                     // highlight onclick
                     if(offset.highlight) {
                         const clickHandler = () => {
+                             // Check system power state
+                            if (this.isSystemPoweredOn()) {
+                                return
+                            }
                             // attempt to attach cable
                             this.attachCable(offset, cable)
                             // remove port highlight
@@ -478,6 +561,10 @@ class PortsTab {
                         
                         // Highlight onClick 
                         const clickHandler = () => {
+                            // Check system power state
+                            if (this.isSystemPoweredOn()) {
+                                return
+                            }
                             // detach cable
                             cableAttached.ends[this.currentGroupPage.component].connected = false
                             offset.cableAttached = null
@@ -511,8 +598,25 @@ class PortsTab {
         })
     }
 
+    emitDivType(cable) {
+        switch(cable.div.dataset.type) {
+            case '24-pin-power':
+                this.eventBus.emit('24pinSelected')
+                break
+            case '8-pin-power':
+                this.eventBus.emit('epsSelected')
+                break
+            
+        }
+    }
+
     // Main Update Function
     update(table, shelf) {
+        // Get drawer scroll position BEFORE update
+        const drawerElement = this.drawer.cableContainer || document.querySelector('.drawer-container') // adjust selector as needed
+        const scrollTop = drawerElement ? drawerElement.scrollTop : 0
+        const scrollLeft = drawerElement ? drawerElement.scrollLeft : 0
+
         // delete port cells
         this.clearCells()
         this.portGroups = []
@@ -546,11 +650,20 @@ class PortsTab {
         this.drawer.update(table, shelf)
 
         // Listen for Cable detachment
-        this.detachmentListener()
+        // this.detachmentListener()
 
         // listen if one of the cable cells are clicked
         this.drawer.cables.forEach(cable => {
             cable.div.addEventListener('click', () => { 
+                // Check system power state
+                if (this.isSystemPoweredOn()) {
+                    return
+                }
+                if(this.portsMonitoring) {
+                    // Share if a cable element is being selected
+                    this.emitDivType(cable)
+                }
+
                 // clear previously selected cable
                 if(this.drawer.cableSelected) {
                     this.drawer.clearSelectedCable()
@@ -568,6 +681,17 @@ class PortsTab {
                 this.cableAttachmentListener(cable)
             })
         })
+
+        // Restore scroll AFTER drawer update
+        if (drawerElement) {
+            drawerElement.scrollTop = scrollTop
+            drawerElement.scrollLeft = scrollLeft
+        }
+
+        // at the end of update()
+        setTimeout(() => {
+        this.detachmentListener();
+        }, 0);
     }
 }
 export default PortsTab

@@ -30,6 +30,8 @@ class Assistant {
         this.closeBtn = this.elements.closeBtn
         this.closeBtn.addEventListener('click', () => this.closeModal())
 
+        this.tasks = []
+
         this.dialogues = [
             "Hey there! Need a hand with anything today?",
             "You’ve got this—just take it one step at a time.",
@@ -72,25 +74,59 @@ class Assistant {
             this.adjustOverlayElement(data)
             this.showCurrentTask(data)
         } )
+        this.eventBus.on('taskCompleted', (data) => {
+            if (!data) return
+            
+            const foundElement = document.querySelector(`#${data.id}`)
+            if(!foundElement) return
+            if(foundElement.dataset.completed === 'true') return
 
+            foundElement.style.opacity = 0.4
+            foundElement.dataset.completed = 'true'
+            const taskNameStatus = document.createElement('p')
+            taskNameStatus.textContent = 'Completed'
+            taskNameStatus.classList.add('task-complete')
+            foundElement.querySelector(`.task-name`)?.appendChild(taskNameStatus)
+        })
     }
 
-    adjustOverlayElement(data) {
+    adjustOverlayElement(data) { 
+        const overlayClassMap = {
+            workAreaIntroduction: 'table-mask',
+
+            shelfIntroduction: 'shelf-mask',
+            attachSet2: 'shelf-mask',
+
+            labelsIntroduction: 'labels-mask',
+
+            portCategories: 'port-label-mask',
+            atxNavigatePsu: 'port-label-mask',
+            epsNavigateMobo: 'port-label-mask',
+            
+            portItems: 'ports-mask',
+            drawer: 'ports-mask',
+            attachEpsConnectors: 'ports-mask',
+
+            connectorsIntroduction: 'drawer-mask',
+
+            atxPinMobo: 'port-atx-mask',
+            atxPinPsu: 'port-atx-mask',
+            
+            epsPinPsu: 'port-eps-psu-mask',
+            epsPinMobo: 'port-eps-mobo-mask',
+
+            bootTabIntroduction: 'boot-tab-mask',
+
+            openChatBot: 'chat-mask',
+            openChatBios: 'chat-bubble-mask',
+            showBuildSummary: 'build-summary-mask'
+        }
+
         this.overlay.className = 'overlay'
-        switch(data.id) {
-            case 'workAreaIntroduction':
-                this.overlay.classList.add('table-mask')
-                break
-            case 'shelfIntroduction':
-            case 'attachSet2':
-                this.overlay.classList.add('shelf-mask')
-                break
-            case 'labelsIntroduction':
-                this.overlay.classList.add('labels-mask')
-                break
-            case 'portCategories':
-                this.overlay.classList.add('port-label-mask')
-                break
+
+        const newClass = overlayClassMap[data.id]
+        if (newClass) {
+            this.overlay.classList.add(newClass)
         }
     }
 
@@ -114,10 +150,10 @@ class Assistant {
         if (!task.descIndex) task.descIndex = 0
 
         if (this.onTutorial) {
-            // Skip 'break' steps
+            // Skip non-'text' steps
             while (
                 task.descIndex < task.description.length &&
-                task.description[task.descIndex].type === 'break'
+                task.description[task.descIndex].type !== 'text'
             ) {
                 task.descIndex++
             }
@@ -152,6 +188,30 @@ class Assistant {
         }, 100)
     }
 
+    
+    showCurrentTask(task) {
+        this.createTask(task)
+        this.eventBus.emit('gamePause')
+
+        this.toggleOverlay(true)
+        this.toggleMiniDisplay(true)
+
+        // Proceed with showing the task
+        if(task.highlight) this.highlightCurrentTask(task.highlight, true)
+            
+        window.removeEventListener('mousemove', this.boundMouseHover)
+        window.removeEventListener('click', this.boundClick)
+            
+        this.boundClickWithTask = this.handleClickWithTask.bind(this, task)
+        window.addEventListener('click', this.boundClickWithTask)
+    }
+
+    toggleOverlay(bool) {
+        bool
+        ? this.overlay.classList.remove('invisible')
+        : this.overlay.classList.add('invisible')
+    }
+
     toggleTaskCellStates() {
         if (!this.tasksContainer.children.length > 0) {
             return
@@ -182,34 +242,11 @@ class Assistant {
             }
         })
     }
-       
-    showCurrentTask(task) {
-        this.createTask(task)
-
-        this.eventBus.emit('gamePause')
-
-        this.toggleOverlay(true)
-        this.toggleMiniDisplay(true)
-
-        // Proceed with showing the task
-        if(task.highlight) this.highlightCurrentTask(task.highlight, true)
-        
-        window.removeEventListener('mousemove', this.boundMouseHover)
-        window.removeEventListener('click', this.boundClick)
-
-        this.boundClickWithTask = this.handleClickWithTask.bind(this, task)
-        window.addEventListener('click', this.boundClickWithTask)
-    }
-
-    toggleOverlay(bool) {
-        bool
-        ? this.overlay.classList.remove('invisible')
-        : this.overlay.classList.add('invisible')
-    }
 
     createTask(task) {
         const taskCell = document.createElement('div')
         taskCell.classList.add('task-cell')
+        taskCell.id = task.id
 
         // title element
         const cellTitle = this.createTaskTtitle(task)
@@ -223,7 +260,7 @@ class Assistant {
         const cellDescription = this.createTaskDescription(task)
         taskCell.appendChild(cellDescription)
 
-        this.tasksContainer.appendChild(taskCell)
+        this.tasksContainer.insertBefore(taskCell, this.tasksContainer.firstChild)
     }
 
     createTaskTtitle(task) {
@@ -245,14 +282,6 @@ class Assistant {
         const taskNameText = document.createElement('h3')
         taskNameText.textContent = task.title.text
         taskName.appendChild(taskNameText)
-        // > > task name status
-        if(task.status === 'complete') {
-            const taskNameStatus = document.createElement('p')
-            taskNameStatus.textContent = 'Completed'
-            taskNameStatus.classList.add('task-status')
-            taskNameStatus.visibility = 'hidden'
-            taskName.appendChild(taskNameStatus)
-        }
 
         cellTitle.appendChild(taskIcon)
         cellTitle.appendChild(taskName)
@@ -504,138 +533,5 @@ class Assistant {
 
         return { singles, multiples };
     }
-    
-    showFinalBuildSummary() {
-        const modal = document.createElement('div');
-        modal.className = 'tutorial-summary-modal';
-
-        // Get components status
-        const components = this.main.bootUpTab.pcUnit.componentsStatus;
-        const summaryHTML = Object.entries(components).map(([key, info]) => {
-            if (Array.isArray(info)) {
-                // Handle array components like RAM or storage
-                return info.map((slot, i) => {
-                    const component = slot?.component;
-                    const imageSrc = component?.images?.[0]?.imageSrc
-                    const specs = component?.specs || {};
-                    return `
-                        <div class="component-card ${component ? 'installed' : 'empty'}">
-                            <div class="card-header">
-                                <h3>${key.toUpperCase()} SLOT ${i + 1}</h3>
-                                <span class="status-badge">${component ? '🟢' : '🔴'}</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="component-image">
-                                    <img src="${imageSrc}" alt="${component?.name || 'Not Installed'}">
-                                </div>
-                                <div class="component-details">
-                                    <h4>${component?.name || 'Not Installed'}</h4>
-                                    ${component ? `
-                                        <div class="specs-list">
-                                            ${Object.entries(specs)
-                                                .filter(([key]) => !key.includes('image'))
-                                                .map(([key, value]) => `
-                                                    <div class="spec-item">
-                                                        <span class="spec-label">${key}:</span>
-                                                        <span class="spec-value">${value}</span>
-                                                    </div>
-                                                `).join('')}
-                                        </div>
-                                    ` : ''}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            } else {
-                // Handle regular component objects
-                const component = info?.component;
-                const imageSrc = component?.images?.[0]?.imageSrc;
-                const specs = component?.specs || {};
-                return `
-                    <div class="component-card ${component ? 'installed' : 'empty'}">
-                        <div class="card-header">
-                            <h3>${key.toUpperCase()}</h3>
-                            <span class="status-badge">${component ? '🟢' : '🔴'}</span>
-                        </div>
-                        <div class="card-content">
-                            <div class="component-image">
-                                <img src="${imageSrc}" alt="${component?.name || 'Not Installed'}">
-                            </div>
-                            <div class="component-details">
-                                <h4>${component?.name || 'Not Installed'}</h4>
-                                ${component ? `
-                                    <div class="specs-list">
-                                        ${Object.entries(specs)
-                                            .filter(([key]) => !key.includes('image'))
-                                            .map(([key, value]) => `
-                                                <div class="spec-item">
-                                                    <span class="spec-label">${key}:</span>
-                                                    <span class="spec-value">${value}</span>
-                                                </div>
-                                            `).join('')}
-                                    </div>
-                                ` : ''}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-        }).join('');
-
-        // Calculate total power and get warnings
-        const totalPower = this.main.wattageCalculator.calculateWattage() || 0;
-        const psuWattage = components.psu?.component?.specs?.wattage || 0;
-        const powerWarning = totalPower > psuWattage ? 
-            `<div class="build-warning">⚠️ PSU may be underpowered (${psuWattage}W PSU, ${totalPower}W required)</div>` : 
-            `<div class="build-success">⚡ Power requirements met (${totalPower}W of ${psuWattage}W)</div>`;
-
-        modal.innerHTML = `
-            <div class="summary-content">
-                <div class="summary-header">
-                    <h2>PC Build Summary</h2>
-                    <div class="power-status">
-                        ${powerWarning}
-                    </div>
-                </div>
-                <div class="components-grid">
-                    ${summaryHTML}
-                </div>
-                <div class="summary-footer">
-                    <div class="summary-buttons">
-                        <button class="summary-btn restart-btn">Restart Tutorial</button>
-                        <button class="summary-btn reset-btn">Reset Build</button>
-                        <button class="summary-btn continue-btn">Continue Building</button>
-                    </div>
-                </div>
-            </div>
-        `;
-    
-        document.body.appendChild(modal);
-    
-        // Add event listeners to all buttons 
-
-        //restart
-        modal.querySelector('.restart-btn').addEventListener('click', () => {
-            modal.remove();
-            window.location.href = '../index.html';
-            //this.main.start();
-        });
-        //reset
-        modal.querySelector('.reset-btn').addEventListener('click', () => {
-            modal.remove();
-            this.closeModal();
-            this.main.resetBuild();
-            this.main.refreshSimulator?.();
-        });
-        //continue
-        modal.querySelector('.continue-btn').addEventListener('click', () => {
-            modal.remove();
-            this.closeModal();
-        });
-    
-        
-    }
-
 }
 export default Assistant

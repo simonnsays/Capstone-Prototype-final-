@@ -42,9 +42,9 @@ const components = [
                     },
                     right:{
                         offsets: {
-                        default: {x: 221, y: 62, width: 180, height: 129}
-                    },
-                    accessible: false
+                            default: {x: 221, y: 62, width: 180, height: 129}
+                        },
+                        accessible: false
                     } // for cases with back view of motherboards
                 }
             },

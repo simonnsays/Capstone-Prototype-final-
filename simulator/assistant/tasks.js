@@ -23,7 +23,7 @@ const tasks = [
     },
     // STEP 2 - Open shop
     {
-        id: 'openShop',
+        id: 'openShopTab',
         trigger: 'tabsMenuOpened',
         title: {
             imageSrc: './assets/Assistant/shop.png',
@@ -227,7 +227,7 @@ const tasks = [
     },  
     // STEP 16- Open Inventory
     {
-        id: 'openInv',
+        id: 'openInvTab',
         trigger: 'gpuBought',
         title: {
             imageSrc: './assets/Assistant/shop.png',
@@ -396,7 +396,7 @@ const tasks = [
         description: [
             {type: 'text', content: "Alright, now go buy an SSD from the shop, place it in the work area and continue attaching the components that were left"},
         ],
-        highlight: ['Seagate Barracuda SSD'],
+        highlight: ['Seagate Barracuda SSD', '[data-id="storage"]'],
         status: 'incomplete'
     },
     // STEP 26- Ports Introduction
@@ -419,13 +419,498 @@ const tasks = [
         id: 'portCategories',
         trigger: 'portsTabOpened',
         title: {
-            imageSrc: './assets/Assistant/inventory.png',
-            text: 'Port Categories'
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Port Groups'
         },
         description: [
-            {type: 'text', content: "This is where all ports of the component from the main area is handled. It looks overwhelming at first but really "}
+            {type: 'text', content: "This is where all ports of the component from the main area is handled. It is categorized by component."},
+            {type: 'text', content: "Use the arrows to navigate through each component page. Try navigating until you reach the motherboard once more"}
         ],
         highlight: ['#portLeft', '#portRight'],
+        status: 'incomplete'
+    },
+    // STEP 28- Port Items
+    {
+        id: 'portItems',
+        trigger: 'portMoboNavigated',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Ports'
+        },
+        description: [
+            {type: 'text', content: "Now, these are all the ports that are found per component. To proeced, try hovering on one of the ports to reveal what kind of port it is."},
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 29- Drawer
+    {
+        id: 'drawer',
+        trigger: 'cellHovered',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Drawer'
+        },
+        description: [
+            {type: 'text', content: "Catch that name? take note of it because you'll need the proper cable to connect to that port. Open the drawer to find the connectors that we are going to use."},
+        ],
+        highlight: ['#pulley'],
+        status: 'incomplete'
+    },
+    // STEP 30- Connectors
+    {
+        id: 'connectorsIntroduction',
+        trigger: 'drawerPulled',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connector cables'
+        },
+        description: [
+            {type: 'text', content: "Alright, here are your connectors. These usually came with the box along with the component you bought"},
+            {type: 'text', content: "To attach a connector, simply click one and it will get highlighted. Corresponding ports will then light up."},
+            {type: 'text', content: "Hover over the connectors to find its name, then try clicking on the 24-pin-power cable"},
+        ],
+        highlight: ['[data-type="24-pin-power"]'],
+        status: 'incomplete'
+    },
+    // STEP 31- 24-pin-power mobo attachment
+    {
+        id: 'atxPinMobo',
+        trigger: '24pinSelected',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connecting to motherboard'
+        },
+        description: [
+            {type: 'text', content: "This is the 24-pin Cable, Also known as the ATX power cable. It usually will be the connector with the highest pin count and looks the biggest among other connectors."},
+            {type: 'text', content: "Click on the Highlight to attach the connector"}
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 32- 24-pin-power psu attachment
+    {
+        id: 'atxNavigatePsu',
+        trigger: '24pinMoboAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Navigate to PSU page'
+        },
+        description: [
+            {type: 'text', content: "Great, it's now attached to the motherboard. The 24-pin connector is the main source of power of the motherboard."},
+            {type: 'text', content: "But it can only draw power if it is also connected to the PSU. Try navigating towards the PSU ports page"}
+        ],
+        highlight: ['#portLeft', '#portRight'],
+        status: 'incomplete'
+    },
+    // STEP 33- 24-pin psu attachment
+    {
+        id: 'atxPinPsu',
+        trigger: 'portPsuNavigated',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connecting to PSU'
+        },
+        description: [
+            {type: 'text', content: "Most components connect to the psu to draw power from it.Connect the 24-pin cable towards the PSU port"}
+        ],
+        highlight: ['[data-type="24-pin-power"'],
+        status: 'incomplete'
+    },
+    // STEP 34- EPS Connector 
+    {
+        id: 'attachEpsConnectors',
+        trigger: '24pinPsuAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect other connectors'
+        },
+        description: [
+            {type: 'text', content: "The green indicator on the connector's background means that BOTH ends are connected to components while the orange indicator means only one end of the cable is connected"},
+            {type: 'break'},
+            {type: 'imageGroup',  index: 0, images: [
+                './assets/Assistant/wires4.2.png',
+            ]},
+            {type: 'break'},
+            {type: 'text', content: "now, let's connect the CPU connectors. Click on the 8-pin-power cable"},
+
+        ],
+        highlight: ['[data-type="8-pin-power"]'],
+        status: 'incomplete'
+    },
+    // STEP 35- EPS PSU attachment
+    {
+        id: 'epsPinPsu',
+        trigger: 'epsSelected',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect 8-pin-power connectors'
+        },
+        description: [
+            {type: 'text', content: "This is the 8-pin-power cable, also known as the Entry-Level Power Supply(EPS) connector."},
+            {type: 'break'},
+            {type: 'text', content: "Unlike the ATX connector, the EPS connector has less number of pins. It contains of 4 square pins and 4 rounded D-shaped pins. It is used to power the CPU through the motherboard and from the PSU."},
+            {type: 'break'},
+            {type: 'text', content: "Some builds run with only one EPS cable connected, but for this case, connect the [ TWO ] 8-pin-power cables avalable for use to the highlighted PSU ports"},
+            
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 36- EPS Mobo navigate
+    {
+        id: 'epsNavigateMobo',
+        trigger: 'epsPsuAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Navigate to motherboard page'
+        },
+        description: [
+            {type: 'text', content: "Again, this connector powers the CPU and the port where it handles that is located at the motherboard, Navigate to to the motherboard page."},
+            
+        ],
+        highlight: ['#portLeft', '#portRight'],
+        status: 'incomplete'
+    },
+    // STEP 37- EPS Motherboard attachment
+    {
+        id: 'epsPinMobo',
+        trigger: 'portMoboNavigated',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'EPS to Motherboard ports'
+        },
+        description: [
+            {type: 'text', content: "CPU connector ports from the motherboard are usually close together rather than having two separate individual ports"},           
+            {type: 'text', content: "Connect the same cables you use to connect to the psu"},           
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 38- CPU Cooling connection
+    {
+        id: 'cpuCoolingPinMobo',
+        trigger: 'epsMoboAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the cooling fan'
+        },
+        description: [
+            {type: 'text', content: "Now that we've connected the cpu connector, let's go on ahead and connect the cooling fan."},                     
+            {type: 'text', content: "The CPU cooling fan usually comes in 3-pins or 4-pins and goes on a motherboard port, scroll down the ports page to find the cooling port and attach the 3-pin cooling cable"},                     
+        ],
+        highlight: ['[data-type="3-pin-cooling"]'],
+        status: 'incomplete'
+    },
+    // STEP 39- Front Panel connection
+    {
+        id: 'frontPanelPinMobo',
+        trigger: 'cpuCoolingAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the Front Panel'
+        },
+        description: [
+            {type: 'text', content: "Okay, while we're at it, why don't you go ahead and connect the front panel connector"},                   
+            {type: 'break',},                   
+            {type: 'text', content: "The Front Panel connector connects the motherboard and the chassis. It is because of this connection that we can use the buttons of a computer case and access its jacks."},                   
+        ],
+        highlight: ['[data-type="frontPanel"]'],
+        status: 'incomplete'
+    },
+    // STEP 40- sata data mobo connection
+    {
+        id: 'sataDataPinMobo',
+        trigger: 'frontPanelAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the SSD'
+        },
+        description: [
+            {type: 'text', content: "Now to connect the SSD. Storage devices uses the SATA type of connectors and use two kinds of sata connectors: "},                   
+            {type: 'text', content: "Sata-data is used to connect to the motherboard so that it can transfer files. Sata-power is used to connect to the PSU to power the device itself."},                   
+            {type: 'break',},                   
+            {type: 'text', content: "Use the scroll bar to navigate through the cables until you find the Sata-data cable, connect it to one of the available Sata-data ports"},                   
+        ],
+        highlight: ['[data-type="sata-data"]'],
+        status: 'incomplete'
+    },
+    // STEP 41- navigate Storage
+    {
+        id: 'sDataNavigateStorage',
+        trigger: 'sDataMoboAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the SSD'
+        },
+        description: [
+            {type: 'text', content: "Navigate to the storage page"},                   
+        ],
+        highlight: ['#portLeft', '#portRight'],
+        status: 'incomplete'
+    },
+    // STEP 42- sata data storage connection
+    {
+        id: 'sataDataPinRom',
+        trigger: 'portRomNavigated',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the SSD'
+        },
+        description: [
+            {type: 'text', content: "Use the Sata-data cable to connect to the storage(SSD) device"},                   
+        ],
+        highlight: ['[data-type="sata-data"]'],
+        status: 'incomplete'
+    },
+    // STEP 43- sata power storage connection
+    {
+        id: 'sataPowerPinRom',
+        trigger: 'sDataRomAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the SSD'
+        },
+        description: [
+            {type: 'text', content: "Now to power the SSD, select the Sata-power cable and attach it to the port in the storage page."},                   
+        ],
+        highlight: ['[data-type="sata-power"]'],
+        status: 'incomplete'
+    },
+    // STEP 44- sata navigate psu
+    {
+        id: 'sPowerNavigatePsu',
+        trigger: 'sPowerRomAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the SSD'
+        },
+        description: [
+            {type: 'text', content: "Navigate to the PSU page."},                   
+        ],
+        highlight: ['#portLeft', '#portRight'],
+        status: 'incomplete'
+    },
+    // STEP 45- sata navigate psu
+    {
+        id: 'sPowerNavigatePsu',
+        trigger: 'portPsuNavigated',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the SSD'
+        },
+        description: [
+            {type: 'text', content: "Finally, connect the Sata-power cable to its corresponding port. Scroll down on the page to see the rest of the ports"},                   
+        ],
+        highlight: ['[data-type="sata-power"]'],
+        status: 'incomplete'
+    },
+    // STEP 46- GPU Connector
+    {
+        id: 'pciePinPsu',
+        trigger: 'sPowerPsuAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the GPU'
+        },
+        description: [
+            {type: 'text', content: "Alright, we're almost done connecting everything. All that's left is connecting the GPU."},                   
+            {type: 'break'},                   
+            {type: 'text', content: "GPU connectors use different connectors depending on the GPU installed. On usual cases, it use an 8-pin-PCIe cable which looks similar the the CPU connector"},                   
+            {type: 'text', content: "with the only difference being that CPU connectors have 4 square and 4 rounded pins while GPU connectors have 5 rounded and 3 squared pins or vice versa."},                   
+            {type: 'break'},                   
+            {type: 'text', content: "To continue, attach two among the 8-pin-pcie cables available in the drawer to their ports."},                   
+            {type: 'break'},                   
+            {type: 'text', content: "NOTE: PCIe ports may not have the same label visually, look for their labels instead or inspect their pins"}                   
+        ],
+        highlight: ['[data-type="8-pin-pcie"]', '[data-type="8-pin-pcie"]'],
+        status: 'incomplete'
+    },
+    // STEP 47- PCIe Navigate to GPU
+    {
+        id: 'pcieNavigatePsu',
+        trigger: 'pciePsuAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the GPU'
+        },
+        description: [
+            {type: 'text', content: "Now go to the GPU port page"}                   
+        ],
+        highlight: ['#portLeft', '#portRight'],
+        status: 'incomplete'
+    },
+    // STEP 48- GPU connection
+    {
+        id: 'pciePinGpu',
+        trigger: 'portGpuNavigated',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Connect the GPU'
+        },
+        description: [
+            {type: 'text', content: "Connect the 2 cables you used in the PSU in the GPU ports"},                                                   
+        ],
+        highlight: ['[data-type="8-pin-pcie"]', '[data-type="8-pin-pcie"]'],
+        status: 'incomplete'
+    },
+    // STEP 49- Boot Up Tab
+    {
+        id: 'openBootUpTab',
+        trigger: 'pcieGpuAttached',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Boot Up Tab'
+        },
+        description: [
+            {type: 'text', content: "Alright, You got everyything connected and powered. Let's now try to power it on and see if you got it all correct."},                                                   
+            {type: 'text', content: "Open the Boot Up Tab from the menu buttons"},                                                   
+        ],
+        highlight: ['#openBootTab'],
+        status: 'incomplete'
+    },
+    // STEP 50- Boot Up Tab
+    {
+        id: 'bootTabIntroduction',
+        trigger: 'bootUpTabOpened',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Boot Up Tab'
+        },
+        description: [
+            {type: 'text', content: "This is the boot up interface. The area on the left serves as your reports area, and on the right are the peripherals display"},                                                   
+            {type: 'break'},                                                   
+            {type: 'text', content: "The reports area will report if the unit the you have built operates perfectly or it may have errors and you have to adjust some more things."},                                                   
+            {type: 'text', content: "To continue, click on the Power button seen on the corner of the peripherals display area."},                                                   
+        ],
+        highlight: ['#powerButton'],
+        status: 'incomplete'
+    },
+    // STEP 51- Chat Bot
+    {
+        id: 'openChatBot',
+        trigger: 'attemptedPower',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Operating System'
+        },
+        description: [
+            {type: 'text', content: "The reports area just reported an error. It says you don't have an OS installed. "},                                                   
+            {type: 'break'},                                                   
+            {type: 'text', content: "Operating System, or OS, is like the middle man between you and the PC's hardware. It allows you to do everything else aside from just turning it on."},                                                   
+            {type: 'text', content: "Let's install one for our use, open the chat bubble by the lower right of the screen"},                                                   
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 52- Open Bios
+    {
+        id: 'openChatBios',
+        trigger: 'chatOpened',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Operating System'
+        },
+        description: [
+            {type: 'text', content: "This is the chat bubble, if you have any queries or need help on something, don't hesitate to ask here."},                                                   
+            {type: 'break'},                                                   
+            {type: 'text', content: "to install the OS, type '/open bios' on the chat box. You can also use '/help' to find more useful tools"},                                                   
+        ],
+        highlight: [],
+        status: 'incomplete'
+    },
+    // STEP 52- Open Bios
+    {
+        id: 'installOS',
+        trigger: 'biosOpened',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Operating System'
+        },
+        description: [
+            {type: 'text', content: "This is the BIOS, this is where you can access what your hardware can do on the very basic level."},                                                   
+            {type: 'break'},                                                   
+            {type: 'text', content: "In real life building, you install the OS on a different device and then place it inside your SSD or other storage device."},                                                   
+            {type: 'text', content: "but in this case, we will be installing it in the BIOS interface itself, locate the boot category and then click on Install OS"},                                                   
+        ],
+        highlight: ['#biosBoot','#installOS'],
+        status: 'incomplete'
+    },
+    // STEP 53- SHOW BUILD
+    {
+        id: 'showBuild',
+        trigger: 'poweredOn',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'CONGRATS!'
+        },
+        description: [
+            {type: 'text', content: "Alright! that's it, you've completely and successfully built a PC with proper connections and all"},                                                   
+            {type: 'break'},                                                   
+            {type: 'text', content: "Click on the success report cell to finally show get the summarry of your build"}                                                   
+        ],
+        highlight: ['#reportSuccess'],
+        status: 'incomplete'
+    },
+    // STEP 54- SHOW BUILD SUMMARY
+    {
+        id: 'showBuildSummary',
+        trigger: 'reportSuccessClicked',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Enter Build Summary'
+        },
+        description: [
+            {type: 'text', content: "Great Job! You can now see the summary of your build. It will show you the components you used, the connections you made, and the overall status of your build."},
+            {type: 'break'},
+            {type: 'text', content: "You can now exit the tutorial by clicking on the reset build or continue building button located below."},   
+            {type: 'break'},
+            {type: 'text', content: "Simply scroll down the summary build and click on the Reset Build or continue button to exit the tutorial and start building your own PC."},
+            {type: 'break'},
+            {type: 'text', content: "If you want to reset the tutorial, you can click on the Restart button below. This will reset the tutorial and allow you to start over."},
+            {type: 'break'},
+            {type: 'text', content: "If you want to reset the entire build, you can click on the Reset Build button below. This will only reset the entire build not the whole tutorial."},
+            {type: 'break'},
+            {type: 'text', content: "If you want to continue building your own PC, you can click on the Continue Building button below. This will take you back to the canvas where you can start building your own PC."},
+            {type: 'break'},                                                        
+        ],  
+        highlight: ['.summary-btn', '.summary-btn', '.summary-btn'], 
+        status: 'incomplete'
+    },
+    // STEP 55- EXIT TUTORIAL
+    {
+        id: 'exitTutorial',
+        trigger: 'resetBuild',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Exit Tutorial'
+        },
+        description: [           
+            {type: 'text', content: "Congratulations! You have successfully completed the tutorial. Finish up the set-up for your components."},
+            {type: 'break'},
+            {type: 'text', content: "You can also access this tutorial again by clicking on the Assistant button on the lower left corner of the screen."},                                                   
+        ],
+        highlight: ['.summary-btn'],
+        status: 'incomplete'
+    },
+    // STEP 56- SETUP WIZARD
+    {
+        id: 'setupWizard',
+        trigger: 'setupWizard',
+        title: {
+            imageSrc: './assets/Assistant/Wires.png',
+            text: 'Setup Wizard'
+        },
+        description: [
+            {type: 'text', content: "Now try building your own PC! You can start by selecting the categories and price range of your selected components in the Setup Wizard."},                                                   
+            {type: 'break'},
+            {type: 'text', content: "After you finished selecting the category and price range, you can now start building your own PC"},
+            {type: 'break'},
+            {type: 'text', content: "If you are having trouble, you can always come back to this tutorial by clicking on the Assistant button on the lower left corner of the screen."},  
+            {type: 'break'},
+            {type: 'text', content: "You can also try to get help from the chatbot located on the right corner of the screen that will be all and enjoy building your Personal Computer."},                                                                                     
+        ],
+        highlight: ['.nextStep'],
         status: 'incomplete'
     }
 ]
