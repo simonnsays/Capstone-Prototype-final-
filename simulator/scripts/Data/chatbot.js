@@ -309,7 +309,7 @@ class chatbot{
         let biosModal = document.getElementById("biosModal");
          if (biosModal) {
             setTimeout(() => {
-                biosModal.showModal();
+                biosModal.show();
                 this.bootUpTab.pcUnit.bios.updateBiosDisplay()
                 this.eventBus.emit('biosOpened')
             }, 1800);

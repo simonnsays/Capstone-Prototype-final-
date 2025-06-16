@@ -1618,6 +1618,7 @@ input[type=checkbox] {
     width: 1000px;
     height: 650px;
     overflow: hidden;
+    z-index: 16;
 }
 .bios-wrapper {
     background-color: #000033;
@@ -1969,7 +1970,7 @@ input[type=checkbox] {
 .highlight-element {
   position: relative;
   animation: helpPulse 2s infinite;
-  z-index: 1000;
+  z-index: 15;
   box-shadow: 0 0 0 8px rgba(76, 175, 80, 0.5);
   border-radius: 8px;
 }
