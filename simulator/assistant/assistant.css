@@ -631,9 +631,7 @@ p {
 .asst-inactive {
     background-color: rgba(0, 0, 0, 0.2);
     opacity: 1;    
-
-    /* border-width: 2; */
-    /* border-bottom: 2.5px solid black; */
+    cursor: pointer;
 }
 .asst-active {
     background-color: rgba(0, 0, 0, 0.0);    

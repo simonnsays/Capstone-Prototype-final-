@@ -27,6 +27,11 @@
 ::-webkit-scrollbar-thumb {
   background: grey;
   border-radius: 10px;
+  cursor: grab;
+}
+
+::-webkit-scrollbar-thumb:active {
+  cursor: grabbing;
 }
 
 * {
@@ -44,6 +49,10 @@ body {
   margin: 0;
   animation: fadeInAnimation 1s ease;
   user-select: none;
+}
+
+button {
+  cursor: pointer;
 }
 
 .button {
@@ -80,6 +89,10 @@ dialog {
   position: absolute;
   right: 10px;
   top: 5px;
+}
+
+.quick-buy {
+  cursor: pointer;
 }
 
 /********************************* UTILITY *****************************/
@@ -342,6 +355,10 @@ dialog {
   border: 3px solid black;
   border-radius: 20px;
   margin: 5px;
+}
+
+#menuBtn {
+   cursor: pointer;
 }
 
 .button-wrapper > [data-type=button] {
@@ -882,6 +899,7 @@ button[data-category] {
   width: 9rem;
   border-radius: 20px;
   margin: 5px;
+  cursor: pointer;
 }
 
 button[data-category]:hover {
@@ -912,6 +930,7 @@ input[type=checkbox] {
   justify-content: center;
   overflow: hidden;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .content:hover {
