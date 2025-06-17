@@ -1,4 +1,3 @@
-import components from "../Data/data.js"
 import PCUnit from "../Data/pcUnit.js"
 import errorCodes from "../Data/errorCodes.js"
 import Bios from "../Data/bios.js"
@@ -10,7 +9,6 @@ class BootUpTab {
         this.eventBus = eventBus
         this.elements = this.elementHandler.getBootUpTabElements()
         this.main = main
-
         // Elements
         this.isActive = false
         this.modal =  this.elements.modal
@@ -20,16 +18,13 @@ class BootUpTab {
         this.powerBtn = this.elements.powerBtn
         this.powerBtn.disabled = true
         this.reportArea = this.elements.reportArea
-
         // PC Unit
         this.pcUnit = new PCUnit(this.elements, eventBus)
         this.bios = new Bios(this.eventBus,this.pcUnit, this)
-        this.pcUnit.setBios(this.bios)
-                
+        this.pcUnit.setBios(this.bios)       
         // Power notification
         this.powerBanner = document.getElementById('powerNotification')
         this.updatePowerStatus();
-
         // Events
         this.openBtn.addEventListener('click', () => {
             this.openTab()
@@ -79,7 +74,6 @@ class BootUpTab {
     handleOfBounds(e, modal) {
         const rawPoint = {x: e.clientX, y: e.clientY}
         const rect = modal.getBoundingClientRect()
-        
         if(!this.utilityTool.isInsideBox(rawPoint, rect)) {
             this.closeTab()
         }
@@ -112,11 +106,9 @@ class BootUpTab {
     createUnitElement(component) {
         // find front panel image source
         const componentSrc = component.images.find(image => image.side === 'front').imageSrc
-
         // create image element and set source 
         const newUnitImage = document.createElement('img')
         newUnitImage.src = componentSrc 
-
         this.pcPlaceHolder.appendChild(newUnitImage)
     }
 
@@ -124,17 +116,14 @@ class BootUpTab {
         this.pcUnit.reports = []
         // turn on
         if(this.pcUnit.power === 'off') {
-            /*  Main Power on Sequence */
             // attempt power on
             this.pcUnit.power = 'on'
             this.updatePowerStatus();
             const pcState = this.pcUnit.attemptPowerOn(unit)
             if(pcState) {
-                // console.log('All components are good, Booting up')
                 // this.powerOn()
                 setTimeout(() => this.eventBus.emit('poweredOn'), 1900)
             } else {
-                //////////// AREA OF REPORT ERRORS 
                 this.pcUnit.displayErrorScreen() // display error screen if no power is detected
             }
 
@@ -160,9 +149,7 @@ class BootUpTab {
                 this.pcUnit.componentsStatus[key] = null
             }
         }
-        // console.log(this.pcUnit.componentsStatus)
     }
-
 
     powerBtnClick = (unit) => {
         if(!this.powerBtn.disabled) {
@@ -173,9 +160,7 @@ class BootUpTab {
     report() {
         const initialDelay = 1200
         const decreaseFactor = 0.75
-
         this.clearReportsArea()
-
         this.pcUnit.reports.forEach((report, i) => {
             const delay = initialDelay * Math.pow(decreaseFactor, i)
             setTimeout(() => this.createReportCell(report), delay)
@@ -285,17 +270,6 @@ class BootUpTab {
     createReportCell(report) {
         const cell = document.createElement('div')
         cell.classList = 'reportCell'
-        
-        // Get error code data
-        //const errorData = errorCodes[report.code] || {
-        //    code: 'ERR-00',
-        //    severity: 'error',
-        //};
-
-        // Add severity class
-        //cell.classList.add(`report-${errorData.severity.toLowerCase()}`);
-
-       //console.log(report)
        switch(report.tag.toLowerCase()) {
            case 'hazard': 
                cell.classList.add('reportHazard')
@@ -480,17 +454,13 @@ class BootUpTab {
         // Set New PC Unit(Only accepting chassis)
         this.pcUnit.availableUnit = this.pcUnit.checkIfAvailableUnit(component) || null
         this.clearCurrentUnitElement()
-
         if(!this.pcUnit.availableUnit) {
             this.togglePowerButtonState('locked')
             this.pcUnit.availableUnit = null
             return
         } 
-
         this.togglePowerButtonState('unlocked')
-
         this.createUnitElement(this.pcUnit.availableUnit)
-
         // only turn on if power button is enabled
         if (!this.powerBtn.hasListener) {
             this.powerBtn.addEventListener('mouseup', () => this.powerBtnClick(this.pcUnit.availableUnit));

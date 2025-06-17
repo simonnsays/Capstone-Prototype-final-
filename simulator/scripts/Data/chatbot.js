@@ -170,7 +170,6 @@ class chatbot{
                     if (!this.bootUpTab.pcUnit.componentsStatus.cpuCooling?.component){return 'please install CPU cooling first'}
                     if (!this.bootUpTab.pcUnit.componentsStatus.gpu?.component){return 'please install a GPU first'}
                     if (!this.bootUpTab.pcUnit.componentsStatus.psu?.component){return 'please install a PSU first'}
-                    console.log('reaching')
                     this.openBIOS();    
                     return "Opening the BIOS for you...";
                 }
@@ -244,8 +243,6 @@ class chatbot{
 
     init() {
         // Initialize Fuse.js for fuzzy matching
-
-        console.trace('hey')
         this.initializeFuzzyMatcher();
 
         this.subscibeToEventHub() 

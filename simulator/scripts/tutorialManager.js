@@ -171,16 +171,10 @@ class TutorialManager {
         }
 
         this.currentTask = this.tasks[this.taskIndex]
-        
-        // if(triggerName === 'workAreaIntroduced') {
-            //     console.log('step' + this.taskIndex)
-            //     console.log(currentTask)
-            // }
             
         if (!this.currentTask) return
         if (this.currentTask.trigger && this.currentTask.trigger !== triggerName) return
         
-        console.log('step: ', this.taskIndex + 1)
         // Succeed to advance
         this.emitTaskId(this.currentTask.id)
         this.eventBus.emit('taskAdvanced', this.currentTask)
