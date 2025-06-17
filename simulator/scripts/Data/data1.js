@@ -10100,11 +10100,11 @@ const components = [
         ],
         slots: [],
         ports: [
-            {type: 'sata-power'},
             {type: 'sata'}
         ],
         cables: [
-            {type: 'sata-data'}
+            {type: 'sata-data'},
+            {type: 'sata-power'}
         ]
     },
     { //Toshiba P300
