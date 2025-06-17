@@ -486,17 +486,12 @@ class DisplayArea {
             currTableComponents.push(tableComponent.type)
             fill(tableComponent)
             this.eventBus.emit('mainUnitUpdated', this.table.component)
-
-            console.log('Table Component: ')
-            console.log(tableComponent)
         }
 
-        console.log('Shelf Components')
         // create bounding boxes for components inside shelf
         this.shelf.forEach(spot => {
             const shelfComponent = spot.component
             if(shelfComponent) {
-                console.log(shelfComponent)
                 currShelfItems.push(shelfComponent.type)
 
                 this.createBox(shelfComponent, spot, shelfComponent.defaultSource)
@@ -508,8 +503,6 @@ class DisplayArea {
 
         // update BOOT TAB
         this.bootUpTab.update(this.table.component)
-
-        
 
         // Table Emit Event
         if(this.monitoringTableTutorial) {
@@ -549,13 +542,10 @@ class DisplayArea {
             return true
         }
 
-
-        // console.log(currTableComponents)
-        // console.log(this.currentSide)
         const proceedReq1 = ['motherboard', 'cpu', 'cooling', 'ram', 'ram', 'gpu']
         const proceedReq2 = ['chassis', 'motherboard', 'cpu', 'cooling', 'ram', 'ram', 'gpu', 'psu', 'storage']
         if(hasRequiredItems(proceedReq2, currTableComponents)) {
-            console.log('returned 2: unit Assembled')
+            // console.log('returned 2: unit Assembled')
             this.eventBus.emit('assemblyCompleted')
             return
         } 
@@ -582,7 +572,6 @@ class DisplayArea {
         this.menuButton.appendChild(menuImg)
 
         this.hideButtons(this.tabButtons)
-        // this.bootUpTab.update()
 
         this.menuButton.addEventListener('click', () => {
             this.toggleMenu(this.menuButton, this.tabButtons, menuImg)

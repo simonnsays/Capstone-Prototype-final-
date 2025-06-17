@@ -1,9 +1,6 @@
 import errorCodes from "../Data/errorCodes.js"
-import BootUpTab from "../Tabs/bootUpTab.js"
-import Bios from "../Data/bios.js"
 class PCUnit {
     constructor(bootUpElements,eventBus) {
-        // utilityTool, displayArea, Canvas, portsTab, drawer, assistant
         this.bootUpElements = bootUpElements
         this.eventBus = eventBus
         this.power = 'off'
@@ -12,11 +9,6 @@ class PCUnit {
         this.isErrorDisplayed = false; 
         this.timeoutIds = []
         this.bios = null
-        // CHECKLIST:
-        // - if components are complete (status)
-        // - if components are compatible (compatibility)
-        // - if components are working fine (defect)
-
         this.reports = []
         this.currentErrorCode = null
 
@@ -42,6 +34,7 @@ class PCUnit {
         }
 
         this.bootUpRequirements = ['motherboard', 'cpu', 'ram', 'psu', 'cpuCooling', 'gpu']
+        this.errorTypes = []
 
         this.state = ['off','on']
         this.currentState = this.state[0]
@@ -60,13 +53,6 @@ class PCUnit {
             () => this.bootDeviceSelection(),
             () => this.osBootUp()
         ]
-
-        // Event Listeners
-        // this.troubleshootBtn?.addEventListener('click', () => this.startTroubleshooting());
-        // this.closeErrorDialogBtn?.addEventListener('click', () => this.closeErrorDialog());
-
-        this.errorTypes = []
-
     }
     setBios(bios) {
         this.bios = bios
@@ -82,19 +68,15 @@ class PCUnit {
         // POST Process
         for (let i = 0; i < this.bootSequence.length; i++) {
             let sequence = this.bootSequence[i] // Get function reference
-            
-            // Call the function: will only return either true if successful, else an error code 
             let result = sequence()
     
-            // immediately return if an error is found
             if (result != true) { 
                 errorQueue.push(result)
             }
         }
 
-        // Makes the error have a queue making reports show more errors. Errors prioritise missing components then not powered next in priority.
         if (errorQueue.length > 0) {
-            errorQueue.forEach(errorCode => { // Take all error codes and display each inside create error function as error cells which then populate errors will take and show inside assistant
+            errorQueue.forEach(errorCode => {
                 this.createError(errorCode)
                 this.populateErrors()
                 bootStatus = false
@@ -103,13 +85,11 @@ class PCUnit {
             return false; 
         }
 
-        // if all checks are successful
         this.reports.push({
             tag: 'Success',
             def: 'System Booted Successfully',
         })
 
-        // Monitor display poweron
         this.powerOnMonitor()
         this.bootStatus = true
         return true
@@ -118,7 +98,6 @@ class PCUnit {
     // Add error-cells into assistant tab errors view
     populateErrors() {
         const errorContainer = document.querySelector('#errorsContainer')
-        // console.log(errorContainer)
         // Remove first test error 1 before populating error-container with errors 
         const defaultError = errorContainer?.querySelector('.error-cell[data-error-action="error1"]')
         if (defaultError) {
@@ -152,7 +131,6 @@ class PCUnit {
 
             // Add click event listener to the error cell
             errorCell.addEventListener('click', () => {            
-                // Expand the clicked error to show troubleshooting
                 this.expandErrorCell(errorCell, errorData)
             })
             
@@ -332,8 +310,7 @@ class PCUnit {
         }
     }
     
-
-    powerOnMonitor(){ // takes everything from displaying the splashscreen to displayingos and shows it inside the div monitorScreen
+    powerOnMonitor(){ 
         this.displaySplashScreen();
     }
     
@@ -345,11 +322,11 @@ class PCUnit {
 
         // Clear all pending timeouts
         this.timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
-        this.timeoutIds = []; // Reset the timeout IDs array
-        this.isErrorDisplayed = false; // Reset the error display flag
+        this.timeoutIds = []; 
+        this.isErrorDisplayed = false;
     }
 
-    getMotherboardName(){ // logic to get motherboard name from component and check for the brandImages for a match
+    getMotherboardName(){ 
         const motherboardComponent = this.componentsStatus.motherboard;
         if (motherboardComponent && motherboardComponent.component && motherboardComponent.component.name) {
             return motherboardComponent.component.name;
@@ -357,7 +334,7 @@ class PCUnit {
         return '';
     }
 
-    displaySplashScreen(){ // get the component.type.monitor name and check the brand if it hits a brandImages then display the corresponding brand image and after 5 secs remove the img from the div
+    displaySplashScreen(){ 
         if (this.isErrorDisplayed) return;// Skip if error screen is displayed
         const splashScreen = document.getElementById('monitorScreen');
         const brandImages = {
@@ -370,7 +347,7 @@ class PCUnit {
             msi: 'msi.png',
         };
 
-       const motherboardName = this.getMotherboardName(); // Call out function getMotherboardName
+       const motherboardName = this.getMotherboardName();
        const brand = Object.keys(brandImages).find(brand => motherboardName.toLowerCase().includes(brand)); // Check brandImages const and include lowercases
 
         if (brand) {
@@ -382,16 +359,16 @@ class PCUnit {
             splashScreen.appendChild(image);
 
             const timeoutId = setTimeout(() => {
-                if (this.isErrorDisplayed) return; // Skip if error screen is displayed
+                if (this.isErrorDisplayed) return; 
                 image.remove()
-                this.displayOS(); // Proceed to display the OS
+                this.displayOS(); 
             }, 5000);
-            this.timeoutIds.push(timeoutId); // Store the timeout ID
+            this.timeoutIds.push(timeoutId); 
         } 
     }
     
-    displayOS(){ // display the operating system booting gif from ./assets/boot/os/windows_boot.gif and then show then after another 5 secs display the windows desktop img from ./assets/boot/os/desktop.png
-        if (this.isErrorDisplayed) return; //  Skip if error screen is displayed
+    displayOS(){ 
+        if (this.isErrorDisplayed) return; 
         const splashScreen = document.getElementById('monitorScreen');
         const osBootGif = './assets/boot/os/windows_boot.gif';
         const osDesktopImg = './assets/boot/os/desktop.png';
@@ -401,11 +378,8 @@ class PCUnit {
         image.style.maxHeight = '100%';
         image.src = osBootGif;
         splashScreen.appendChild(image);
-        // splashScreen.innerHTML = `<img src="${osBootGif}" alt="OS Booting">`;
         const timeoutId = setTimeout(() => {
-            if (this.isErrorDisplayed) return; // Skip if error screen is displayed
-            // splashScreen.innerHTML = `<img src="${osDesktopImg}" alt="OS Desktop">`;
-            
+            if (this.isErrorDisplayed) return;         
             image.src = osDesktopImg
         }, 5000);
         this.timeoutIds.push(timeoutId); // Store the timeout ID
@@ -415,16 +389,12 @@ class PCUnit {
         this.isErrorDisplayed = true; // Indicate that error screen is displayed
         const splashScreen = document.getElementById('monitorScreen');
         splashScreen.innerHTML = ''; // Clear the div before displaying the error screen
-        
-        //const errorMessage = `Missing components: ${Array.isArray(missingComponents) ? missingComponents.join(', ') : 'Unknown'}`;        
         const image = document.createElement('img');
-        // image.classList.add('.screen-error')
         image.src = './assets/boot/error_screen/warning3.png';
         image.style.width = '100px'
         image.style.height = '100px'
         splashScreen.appendChild(image);
 
-        // splashScreen.innerHTML = `<p id="warning"><img src = "${imgSrc}" alt="WARNING"></p>` //add for showing error message<p>${errorMessage}</p> 
     }
 
     createError(code) {
@@ -439,7 +409,6 @@ class PCUnit {
         this.currentErrorCode = code;
     }
 
-    ///////////////////////////////////////////////// dan code ////////////////////////////////////////////////////////
     fillComponentStatus(component) {
         let compStatus  = {
             component: component,

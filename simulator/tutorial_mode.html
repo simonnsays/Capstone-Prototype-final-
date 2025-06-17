@@ -250,23 +250,7 @@
         </div>
 
         <!-- cables / drawer contents -->
-        <div id="cableContainer">
-
-                            <!-- cells reference ||| -->
-                            <!--                 vvv -->
-            <!-- <div class="cableCell unused">
-                <img src="./assets/wires/sata-data/sata-data-default.png">
-                <div class="cable-slider"> 24-Pin Power Cable </div>
-            </div> -->
-            <!-- <div class="cableCell unused">
-                <img src="./assets/wires/ATX-power/ATX-power-default.png">
-                <div class="cable-slider"> 24-Pin Power Cable </div>
-            </div> -->
-            <!-- <div class="cableCell used">
-                <img src="./assets/wires/8pin-power/8pin-power-default.png">
-                <div class="cable-slider"> 24-Pin Power Cable </div>
-            </div> -->
-        </div>
+        <div id="cableContainer"> </div>
     </div>
 
     <!-- BOOT UP MODAL -->
@@ -277,14 +261,10 @@
                 BOOT UP
                 <span id="closeBootTab" class="closeBtn">&times;</span>
             </div>
-
             <!-- body -->
             <div class="bootTabBodyWrapper">
                 <!-- report -->
-                <div id="bootTabReport">
-                   
-                </div>
-    
+                <div id="bootTabReport"> </div>
                     <div class="vertLine"></div>
                     <div class = "errorDialog"></div>
                     <!-- display -->
@@ -295,21 +275,16 @@
 
                             <div id="monitorScreen"></div>
                         </div>
-                        <div id="unitPlaceHolder">
-                            <!-- image element here -->
-                        </div>
+                        <div id="unitPlaceHolder"></div>
                         <div id="powerButton">
                             <img src="./assets/svg/power-button.svg" alt="">
                         </div>
                     </div>
-
                     <!-- Troubleshooting -->
                     <div id="troubleShooting"></div>
-
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- BIOS -->
@@ -322,7 +297,6 @@
                     <p id="biosTime"></p>
                 </span>
             </div>
-            
             <div class="bios-container">
                 <div class="bios-sidebar">
                     <ul class="bios-menu">
@@ -358,7 +332,6 @@
                             </div>
                         </div>
                     </div> 
-
                     <!--Fan Control-->
                     <div class="bios-section">
                         <h3>Fan Control</h3>
@@ -401,7 +374,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!--Boot-->
                     <div class="bios-section">
                         <h3>Boot Configuration</h3>
@@ -423,10 +395,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-    
             <div class="bios-footer">
                 <div class="key-commands">
                     <span>↑↓: Select Item</span>
@@ -467,48 +437,8 @@
         <div class="asst-body">
             <div id="tasksContainer" class="asst-container">
                 <!--               TASKS CONTAINER                      -->
-                <div class="task-cell">
-                    <div class="task-title">
-                        <div class="task-icon">
-                            <img src="./assets/Assistant/shop.png">
-                        </div>
-                        <div class="task-name">
-                            <h3>Enter the Shop</h3>
-                            <p class="task-status">Completed </p>
-                        </div>
-                    </div>
-                    <div class="task-description">
-                        <!-- <div class="description-container"> -->
-                            <p>Look for your PC components and buy them.</p>
-                            <br>
-                            <p>Ensure to check prices and specifications before making a purchase.</p>
-                            <p>The components that you will need are the following:</p>
-                            <p>1. Case</p>
-                            <p>2. motherboard</p>
-                            <p>3. processor</p>
-                            <p>4. Power Supply Unit</p>
-                            <p>5. RAM</p>
-                            <p>6. Storage Device - HDD or SSD</p>
-                            <p>7. Cooling</p>
-                            <p>8. GPU or Graphics card</p>
-                            <br>
-                            <p style="padding-top: 3px;padding-bottom: 3px;">Check the images below for your reference:</p>
-                            <div class="desc-image-carousel">
-                                <img src="assets/Assistant/shop1.png" id="id1" class="desc-image">
-                                <!-- <img src="assets/Assistant/shop2.png" id="id2" class="desc-image"> -->
-                                <!-- <img src="assets/Assistant/shop3.png" id="id3" class="desc-image"> -->
-                                <img src="./assets/svg/leftArr.svg" class="desc-left">
-                                <img src="./assets/svg/rightArr.svg" class="desc-right">
-                            </div>
-
-                            <!-- New Task Button -->
-                            <button class="start-task-btn" data-task="openShop">Start Task</button>
-                        <!-- </div> -->
-                    </div>
-                </div>
             </div>
-            <div id="errorsContainer" class="error-container">
-
+            <div id="errorsContainer" class="error-container">]
                 <!--               ERRORS CONTAINER                      -->
             </div>
         </div>
@@ -522,7 +452,6 @@
 
     <!-- Assistant Reassure -->
     <dialog class="asst-reassure"></dialog>
-    
     <div class="chat-toggle">                
         <i class="fas fa-comment"> <img src="./assets/Assistant/chat-bot.png" alt="chatbot"></i>
     </div>
@@ -546,13 +475,5 @@
     <!-------------------------- S C R I P T S ------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
     <script type="module" src="main.js"></script>
-    <script>
-        [...document.querySelectorAll('*')].forEach(el => {
-            let z = window.getComputedStyle(el).zIndex;
-            // if (z !== 'auto') console.log(el.tagName, el.className, el.id, '=> z-index:', z);
-        });
-
-    </script>
-    </script>
 </body>
 </html>

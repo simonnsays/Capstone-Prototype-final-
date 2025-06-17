@@ -10,7 +10,6 @@ import BootUpTab from "./scripts/Tabs/bootUpTab.js"
 import Assistant from "./assistant/assistant.js"
 import wattageCalculator from "./scripts/Data/wattageCalculator.js"
 import chatbot from "./scripts/Data/chatbot.js"
-import bios from "./scripts/Data/bios.js"
 import EventBus from "./scripts/Utility/eventBus.js"
 import TutorialManager from "./scripts/tutorialManager.js"
 class Main {
@@ -126,8 +125,7 @@ class Main {
             }
     }
 
-    start() {
-        
+    start() { 
         // main code here
         this.shop.init() 
         this.inventory.init()
@@ -139,23 +137,6 @@ class Main {
         this.chatbot.init()
         
         this.tutorialManager.init()
-        // this.showSetupWizard()
-        // console.log(this.eventBus.listeners)
-        // this.assistant.endTutorial()   
-        
-        // TEST: BOOT UP
-      
-        // TEST: MISSING COMPONENTS
-        // this.testMissingComponents()
-
-        // TEST: TRASH BIN
-        // this.testTrashBin()
-        
-        // TEST: ASSISTANT
-        // this.assistant.openModal()
-
-        // TEST: ADD BASIC COMPONENT
-        // this.addBasicComponents()
     }
 
     resetBuild() {
@@ -337,7 +318,6 @@ class Main {
         prevBtn.style.display = 'none';
         nextBtn.disabled = true;
     }
-
 
     addBasicComponents() {
         const itemsToBuy = []
