@@ -554,25 +554,21 @@ class DisplayArea {
         // console.log(this.currentSide)
         const proceedReq1 = ['motherboard', 'cpu', 'cooling', 'ram', 'ram', 'gpu']
         const proceedReq2 = ['chassis', 'motherboard', 'cpu', 'cooling', 'ram', 'ram', 'gpu', 'psu', 'storage']
-        if(hasRequiredItems(proceedReq2, currTableComponents)) {
-            console.log('returned 2: unit Assembled')
-            this.eventBus.emit('assemblyCompleted')
-            return
-        } 
         if(hasRequiredItems(proceedReq1, currTableComponents)) {
             this.eventBus.emit('set1Attached')
             // console.log('returned 1')
-            return
         } 
         if (this.currentSide == 'right') {
             this.eventBus.emit('rightSideAccessed')
             // console.log('accessed')
-            return
         }
         if (currTableComponents.length === 1 && currTableComponents[0] === 'chassis') {
             this.eventBus.emit('chassisPlacedInMain')
             // console.log('returned 3')
-            return
+        }  
+        if(hasRequiredItems(proceedReq2, currTableComponents)) {
+            console.log('returned 2: unit Assembled')
+            this.eventBus.emit('assemblyCompleted')
         } 
     }
 
