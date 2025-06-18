@@ -71,6 +71,7 @@ class Assistant {
     subscribeToEventBus() {
         this.eventBus.on('tutManagerInit', (data) => this.updateMiniDsiplay(data))
         this.eventBus.on('taskAdvanced', (data) => {
+            this.clearHighlights()
             this.adjustOverlayElement(data)
             this.showCurrentTask(data)
         } )
@@ -87,6 +88,15 @@ class Assistant {
             taskNameStatus.textContent = 'Completed'
             taskNameStatus.classList.add('task-complete')
             foundElement.querySelector(`.task-name`)?.appendChild(taskNameStatus)
+        })
+    }
+
+    clearHighlights() {
+        this.overlay.className = 'overlay'
+
+        document.querySelectorAll('.highlight-element').forEach(el => {
+            el.classList.remove('highlight-element')
+            el.classList.remove('blocked')
         })
     }
 
@@ -507,9 +517,6 @@ class Assistant {
             }
 
         }) 
-
-          
-
     }
 
     splitSinglesAndMultiples(arr) {

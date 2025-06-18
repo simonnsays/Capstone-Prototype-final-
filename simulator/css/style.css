@@ -667,7 +667,7 @@ dialog {
 /********************** WIRES CABLE DRAWER **********************/
 #wiresDrawer {
   width: 80vw;
-  height: 280px;
+  height: 220px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -689,12 +689,12 @@ dialog {
 
 #pulley {
   width: 100px;
-  height: 70px;
+  height: 60px;
   background-color: var(--pastel-yellow);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: -1;
   border: 3px solid black;
   border-bottom: 0;
   border-top-left-radius: 100px;
@@ -704,6 +704,8 @@ dialog {
   animation-duration: 0.5s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
+  position: absolute;
+  top: -60px
 }
 
 #pulley:hover {
@@ -1988,9 +1990,9 @@ input[type=checkbox] {
 }
 .highlight-element {
   position: relative;
-  animation: helpPulse 2s infinite;
+  animation: helpPulse 1s infinite;
   z-index: 15;
-  box-shadow: 0 0 0 8px rgba(76, 175, 80, 0.5);
+  box-shadow: 0 0 0 200px rgba(76, 17, 80, 1);
   border-radius: 8px;
 }
 .highlight-element:active {

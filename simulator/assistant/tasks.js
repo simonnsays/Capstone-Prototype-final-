@@ -158,7 +158,7 @@ const tasks = [
         description: [
             {type: 'text', content: 'Quick Buy is a feature that allows you to buy components quickly'},
             {type: 'text', content: 'this is because you dont check for specs anymore'},
-            {type: 'text', content: 'to perform this, look for the checkbox on the lower left, make sure that is is checked to activate Quick Buy'},
+            {type: 'text', content: 'to perform this, look for the checkbox on the lower left, make sure that is checked to activate Quick Buy'},
         ],
         highlight: ['label[for="quickBuy"]'],
         status: 'incomplete'
@@ -173,7 +173,7 @@ const tasks = [
         },
         description: [
             {type: 'text', content: 'on the category filter, select Memory and then select the highlighted item'},
-            {type: 'text', content: 'Memory is usually preffered to be be used across multiple ram sticks so for this one, buy at least two'},
+            {type: 'text', content: 'Memory is usually preferred to be be used across multiple ram sticks so for this one, buy at least two'},
         ],
         condition: {
             amountRequired: 2,
