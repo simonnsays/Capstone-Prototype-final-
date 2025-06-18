@@ -260,6 +260,11 @@ dialog {
 
 }
 
+.drawer-mask {
+  mask: linear-gradient(#000 88%, transparent 90% 97%, #000 100%),
+        linear-gradient(to right, #000 40%, transparent 43% 58%, #000 60% );
+}
+
 .build-summary-mask {
   mask: linear-gradient(#000 1%, transparent 3% 97%, #000 100%),
         linear-gradient(to right, #000 15%, transparent 17% 84%, #000 86% );

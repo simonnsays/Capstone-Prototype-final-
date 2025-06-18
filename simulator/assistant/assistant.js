@@ -114,7 +114,7 @@ class Assistant {
             epsNavigateMobo: 'port-label-mask',
             
             portItems: 'ports-mask',
-            drawer: 'ports-mask',
+            drawer: '.drawer-mask',
             attachEpsConnectors: 'ports-mask',
 
             connectorsIntroduction: 'drawer-mask',
