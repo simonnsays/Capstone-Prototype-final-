@@ -1,5 +1,6 @@
 import Component from "../Data/component.js"
 import components from "../Data/data1.js"
+import tutComponents from "../Data/tutorialSet.js"
 import SearchBar from "../Utility/searchBar.js"
 
 class Shop{
@@ -47,6 +48,7 @@ class Shop{
 
         // State
         this.isActive = false
+        this.setUsage = 'tutorial'
 
         // Events
         this.openBtn.addEventListener('click', () => {
@@ -585,6 +587,18 @@ class Shop{
         this.eventBus.on('gamePause', () => this.pause())
         this.eventBus.on('gameResume', () => this.resume())
 
+        this.eventBus.on('tutorialFinished', () => {
+            this.setUsage === 'main'
+            this.items = []
+             while (this.itemsContainer.firstChild) {
+                this.itemsContainer.removeChild(this.itemsContainer.firstChild)
+            }
+            this.fillShopItems(components, this.items)
+
+            this.selectCategory('chassis')
+            this.update()
+        })
+
         // EMITs
         this.quickBuy.addEventListener('click', () => {
             if(this.quickBuy.checked) this.eventBus.emit('quickBuyChecked')
@@ -626,8 +640,18 @@ class Shop{
 
     // Main Shop Initialization Method
     init() {
+        if(this.setUsage === 'tutorial') {
+            this.fillShopItems(tutComponents, this.items)
+            console.log(this.items)
+        }
+        //  else if(this.setUsage === 'main') {
+        //     while (this.itemsContainer.firstChild) {
+        //         this.itemsContainer.removeChild(this.itemsContainer.firstChild)
+        //     }
+        //     this.fillShopItems(components, this.items)
+        // }
         // Fill Shop Items
-        this.fillShopItems(components, this.items)
+        // this.fillShopItems(components, this.items)
 
         // Subscribe to eventBus events
         this.subscribeToEvents()

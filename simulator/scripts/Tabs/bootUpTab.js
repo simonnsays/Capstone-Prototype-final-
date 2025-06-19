@@ -435,12 +435,14 @@ class BootUpTab {
             this.main.resetBuild();
             this.main.showSetupWizard()
             this.eventBus.emit('setupWizard');
+            this.eventBus.emit('tutorialFinished')
         });
         //continue
         modal.querySelector('.continue-btn').addEventListener('click', () => {
             modal.remove();
             this.main.showSetupWizard()
             this.eventBus.emit('setupWizard');
+            this.eventBus.emit('tutorialFinished')
         });
     }
 
