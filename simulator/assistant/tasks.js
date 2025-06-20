@@ -831,7 +831,7 @@ const tasks = [
             {type: 'text', content: "This is the BIOS, this is where you can access what your hardware can do on the very basic level."},                                                   
             {type: 'break'},                                                   
             {type: 'text', content: "In real life building, you install the OS on a different device and then place it inside your SSD or other storage device."},                                                   
-            {type: 'text', content: "but in this case, we will be installing it in the BIOS interface itself, locate the boot category and then click on Install OS"},                                                   
+            {type: 'text', content: "but in this case, we will be installing it in the BIOS interface itself, locate the boot category and then click on Install OS. BIOS stands for Basic Input Output System."},                                                   
         ],
         highlight: ['#biosBoot','#installOS'],
         status: 'incomplete'
