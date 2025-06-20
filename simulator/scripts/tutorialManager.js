@@ -40,7 +40,7 @@ class TutorialManager {
             'sDataMoboAttached', 'portRomNavigated', 'sDataRomAttached', 'sPowerRomAttached', 
             'sPowerPsuAttached', 'portGpuNavigated', 'bootUpTabOpened', 'attemptedPower',
             'chatOpened', 'biosOpened', 'poweredOn' , 'showBuild', 'reportSuccessClicked', 'showBuildSummary', 'resetBuild', 'exitTutorial',
-            'setupWizard'
+            'setupWizard', 'ramBought'
         ]
         events.forEach(event => {
             this.eventBus.on(event, () =>{
@@ -49,13 +49,13 @@ class TutorialManager {
         })
 
         // RAM Condition
-        this.eventBus.on('ramBought', () => {
-            if (!this.currentTask.condition) return
-            this.currentTask.condition.amount++
-            if(this.currentTask.condition.amount == this.currentTask.condition.amountRequired) {
-                this.tryToAdvance('ramBought')
-            }
-        })
+        // this.eventBus.on('ramBought', () => {
+        //     if (!this.currentTask.condition) return
+        //     this.currentTask.condition.amount++
+        //     if(this.currentTask.condition.amount == this.currentTask.condition.amountRequired) {
+        //         this.tryToAdvance('ramBought')
+        //     }
+        // })
 
         // EPS PSU  port condition
         this.eventBus.on('epsPsuAttached', () => {

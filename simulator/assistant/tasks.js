@@ -173,12 +173,11 @@ const tasks = [
         },
         description: [
             {type: 'text', content: 'on the category filter, select Memory and then select the highlighted item'},
-            {type: 'text', content: 'Memory is usually preferred to be be used across multiple ram sticks so for this one, buy at least two'},
         ],
-        condition: {
-            amountRequired: 2,
-            amount:0
-        },
+        // condition: {
+        //     amountRequired: 1,
+        //     amount:0
+        // },
         highlight: ['[data-id="ram"]','[data-name="Kingston HyperX Beast RGB DDR4"]'],
         status: 'incomplete'
     },  
