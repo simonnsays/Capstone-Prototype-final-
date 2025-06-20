@@ -50,6 +50,7 @@ class TutorialManager {
 
         // RAM Condition
         this.eventBus.on('ramBought', () => {
+            if (!this.currentTask.condition) return
             this.currentTask.condition.amount++
             if(this.currentTask.condition.amount == this.currentTask.condition.amountRequired) {
                 this.tryToAdvance('ramBought')

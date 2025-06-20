@@ -2567,10 +2567,10 @@ input[type=checkbox] {
       box-shadow: 0 0 0 10px rgba(238, 167, 122, 1);
   }
   70% {
-      box-shadow: 0 0 0 35px rgba(238, 167, 122, 0);
+      box-shadow: 0 0 0 35px rgba(238, 167, 122, 0.1);
   }
   100% {
-      box-shadow: 0 0 0 10px rgba(238, 167, 122, 0);
+      box-shadow: 0 0 0 15px rgba(238, 167, 122, 0.3);
   }
 }
 

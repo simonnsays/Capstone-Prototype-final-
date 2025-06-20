@@ -193,7 +193,7 @@ const tasks = [
         description: [
             {type: 'text', content: 'on the category filter, select Storage and then select the highlighted item'},
         ],
-        highlight: ['[data-id="storage"]','[data-name="Seagate Barracuda SSD"]'],
+        highlight: ['[data-id="storage"]','[data-name="Seagate Barracuda"]'],
         status: 'incomplete'
     },  
     // STEP 14- Buy Cooling Devices

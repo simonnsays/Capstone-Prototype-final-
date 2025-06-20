@@ -668,6 +668,7 @@ class Shop{
                 this.update()
             })
         })
+        this.selectCategory('chassis')
 
         // Purchase event
         this.itemsContainer.addEventListener('click', (e) => {
