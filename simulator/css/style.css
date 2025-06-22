@@ -892,6 +892,27 @@ hr {
   align-items: center;
 }
 
+.more-category {
+  width: 25px;
+  height: 25px;
+  border-radius: 50px;
+  position: absolute;
+  right: 60px;
+  top: 75px;
+  background-color:rgba(238, 167, 122, .9);
+  padding: 10px;
+  animation: bounce-right 1s ease-in-out infinite;
+}
+.more-category img{
+  width: 100%;
+}
+
+@keyframes bounce-right {
+  0% {transform: translateX(0)}
+  50% {transform: translateX(30px)}
+  100% {transform: translateX(0px)}
+}
+
 /********* BUTTONS *********/
 .btn-container {
   position: absolute;

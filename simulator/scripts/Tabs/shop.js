@@ -26,6 +26,7 @@ class Shop{
         // Component Categories
         this.categories = this.elements.shopCategories
         this.selectedCategory = ''
+        this.categoryMore = document.querySelector('.more-category')
 
         // Items
         this.items =  []
@@ -597,6 +598,16 @@ class Shop{
 
             this.selectCategory('chassis')
             this.update()
+        })
+
+        this.eventBus.on('emitTaskId', (data) => {
+            console.log(data)
+            if(data === 'buyCoolingDevice') {
+                this.categoryMore.classList.remove('invisible')
+                console.log(this.categoryMore)
+            } else if(data === 'buyGpu') {
+                this.categoryMore.classList.add('invisible')
+            }
         })
 
         // EMITs

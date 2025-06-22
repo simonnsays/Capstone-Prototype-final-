@@ -187,6 +187,7 @@ class TutorialManager {
     }
 
     emitTaskId(id) {
+        this.eventBus.emit('emitTaskId', id)
         // component highlight
         switch(id) {
             case 'expandChassis':
