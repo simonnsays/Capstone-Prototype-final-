@@ -1996,7 +1996,7 @@ input[type=checkbox] {
 .highlight-element {
   position: relative;
   animation: helpPulse 1s infinite;
-  z-index: 15;
+  /* z-index: 15; */
   box-shadow: 0 0 0 200px rgba(76, 17, 80, 1);
   border-radius: 8px;
 }

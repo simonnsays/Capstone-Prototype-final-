@@ -179,6 +179,8 @@ class TutorialManager {
         // Succeed to advance
         this.emitTaskId(this.currentTask.id)
         this.eventBus.emit('taskAdvanced', this.currentTask)
+
+        console.log('Step: ', this.taskIndex)
                 
         // Automatically prep next task for the next trigger
         this.taskIndex++
@@ -211,6 +213,26 @@ class TutorialManager {
             case 'buyGpu':
                 this.eventBus.emit('addGpuHighlight', "Gigabyte Radeon RX 7900 XTX")
                 break
+            case 'placeSet2':
+                this.eventBus.emit('addInvSetHighlights', [
+                        'NZXT H5 Flow',
+                        'EVGA Supernova 1300 P+',
+                        'Seagate Barracuda'
+                    ])
+                break
+            case 'completeAssembly':
+                this.eventBus.emit('addSsdHighlight', "Seagate Barracuda SSD")
+                break   
+            case 'epsPinPsu':
+                this.eventBus.emit('addEpsPinHighlight', "8-pin-power")
+                break
+            // display area conditionals
+            case 'openPortsTab':
+                this.eventBus.emit('findNoSet')
+                break
+            case 'attachSet2':
+                this.eventBus.emit('findSet2')
+                break
             case 'workAreaIntroduction':
                 this.eventBus.emit('addInvSetHighlights', [
                     'ASRock X570 PG Velocita',
@@ -219,19 +241,8 @@ class TutorialManager {
                     'AMD wraith Prism',
                     'Gigabyte Radeon RX 7900 XTX'
                 ])
+                this.eventBus.emit('findSet1')
                 break
-            case 'placeSet2':
-            this.eventBus.emit('addInvSetHighlights', [
-                    'NZXT H5 Flow',
-                    'EVGA Supernova 1300 P+',
-                    'Seagate Barracuda'
-                ])
-                break
-            case 'completeAssembly':
-                this.eventBus.emit('addSsdHighlight', "Seagate Barracuda SSD")
-                break   
-            case 'epsPinPsu':
-                this.eventBus.emit('addEpsPinHighlight', "8-pin-power")
         }
     }
 }
