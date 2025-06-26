@@ -136,7 +136,6 @@ class Main {
         this.assistant.init()
         this.chatbot.init()
         
-
         document.addEventListener("DOMContentLoaded", () => {
             this.tutorialManager.init()
         });

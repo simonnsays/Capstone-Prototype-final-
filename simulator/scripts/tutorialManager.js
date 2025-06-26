@@ -4,19 +4,32 @@ class TutorialManager {
         this.eventBus = eventBus
         this.tasks = tasks  
         this.taskIndex = 0
-        // this.taskIndex = 11
         this.currentTask = tasks[this.taskIndex]
-
         this.currentUnit = {}
+
+        // Skip Tutorial
+        this.skipElement = document.querySelector('.skip-container')
+        this.skipYes = document.querySelector('#skipYes')
+        this.skipNo = document.querySelector('#skipNo')
     }
     
     init() {
         this.subscribeToEvents()
+        this.askToSkip()
 
-        this.startTutorial()
         
-        // TEST STEP FAST FORWARD
-        // this.tryToAdvance('sPowerPsuAttached')
+    }
+
+    askToSkip() {
+        this.skipElement.style.right = '50%'
+        this.skipYes.addEventListener('click', () => {
+            this.skipElement.style.right = '-50%'
+            this.eventBus.emit('tutSkipped')
+        })
+        this.skipNo.addEventListener('click', () => {
+            this.skipElement.style.right = '-50%'
+            this.startTutorial()
+        })
     }
     
     startTutorial() {
@@ -228,6 +241,7 @@ class TutorialManager {
                 this.eventBus.emit('addEpsPinHighlight', "8-pin-power")
                 break
             // display area conditionals
+            case 'labelsIntroduction':
             case 'openPortsTab':
                 this.eventBus.emit('findNoSet')
                 break

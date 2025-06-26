@@ -631,7 +631,7 @@ const tasks = [
             {type: 'break',},                   
             {type: 'text', content: "Use the scroll bar to navigate through the cables until you find the Sata-data cable, connect it to one of the available Sata-data ports"},                   
         ],
-        highlight: ['[data-type="sata-data"]'],
+        highlight: ['#pulley','[data-type="sata-data"]'],
         status: 'incomplete'
     },
     // STEP 41- navigate Storage
@@ -868,10 +868,7 @@ const tasks = [
             {type: 'break'},
             {type: 'text', content: "If you want to reset the tutorial, you can click on the Restart button below. This will reset the tutorial and allow you to start over."},
             {type: 'break'},
-            {type: 'text', content: "If you want to reset the entire build, you can click on the Reset Build button below. This will only reset the entire build not the whole tutorial."},
-            {type: 'break'},
-            {type: 'text', content: "If you want to continue building your own PC, you can click on the Continue Building button below. This will take you back to the canvas where you can start building your own PC."},
-            {type: 'break'},                                                        
+            {type: 'text', content: "If you want to reset the entire build, you can click on the Reset Build button below. This will only reset the entire build not the whole tutorial."},                                                      
         ],  
         highlight: ['.summary-btn', '.summary-btn', '.summary-btn'], 
         status: 'incomplete'

@@ -12,7 +12,7 @@ class PortsTab {
         this.openBtn = this.elements.openBtn
         this.closeBtn = this.elements.closeBtn
         
-        // Wires / port tab
+        // port tab
         this.isActive = false
         this.modal = this.elements.modal
         this.portsContainer = this.elements.portsContainer

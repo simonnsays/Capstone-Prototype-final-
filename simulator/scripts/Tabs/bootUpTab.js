@@ -413,7 +413,6 @@ class BootUpTab {
                     <div class="summary-buttons">
                         <button class="summary-btn restart-btn">Restart Tutorial</button>
                         <button class="summary-btn reset-btn">Reset Build</button>
-                        <button class="summary-btn continue-btn">Continue Building</button>
                     </div>
                 </div>
             </div>
@@ -433,13 +432,6 @@ class BootUpTab {
         modal.querySelector('.reset-btn').addEventListener('click', () => {
             modal.remove();
             this.main.resetBuild();
-            this.main.showSetupWizard()
-            this.eventBus.emit('setupWizard');
-            this.eventBus.emit('tutorialFinished')
-        });
-        //continue
-        modal.querySelector('.continue-btn').addEventListener('click', () => {
-            modal.remove();
             this.main.showSetupWizard()
             this.eventBus.emit('setupWizard');
             this.eventBus.emit('tutorialFinished')

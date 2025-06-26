@@ -342,12 +342,6 @@ const tutComponents = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'},
-            {type: '6-pin-pcie'},
-            {type: '6-pin-pcie'},
-            {type: 'sata-power'},
-            {type: 'sata-power'},
             {type: 'sata-power'},
             {type: 'sata-power'},
         ],
@@ -357,10 +351,6 @@ const tutComponents = [
             {type: '8-pin-power'},
             {type: '8-pin-pcie'},
             {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'},
-            {type: '8-pin-pcie'},
-            {type: '6-pin-pcie'},
-            {type: '6-pin-pcie'},
         ]
     },
 

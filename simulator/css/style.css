@@ -70,6 +70,26 @@ dialog {
   animation-iteration-count: 1;
 }
 
+.skip-container {
+  position: fixed;
+  top: 50px;
+  right:-50%;
+  transform: translateX(50%);
+  width: 270px;
+  height: 150px;
+  background-color: white;
+  border-left: 10px solid var(--light-lime);
+  border-radius: 10px;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  transition: all .4s ease-in-out;
+}
+
 .modal {
   border-radius: 20px;
   animation: fadeInAnimation 0.1s ease-in;
@@ -892,18 +912,22 @@ hr {
   align-items: center;
 }
 
-.more-category {
+.more-category,
+.more-cables
+{
   width: 25px;
   height: 25px;
   border-radius: 50px;
   position: absolute;
   right: 60px;
   top: 75px;
-  background-color:rgba(238, 167, 122, .9);
+  background-color:rgba(238, 167, 122, .8);
   padding: 10px;
   animation: bounce-right 1s ease-in-out infinite;
 }
-.more-category img{
+.more-category img,
+.more-cables img
+{
   width: 100%;
 }
 

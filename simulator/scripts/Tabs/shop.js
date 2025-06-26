@@ -588,7 +588,9 @@ class Shop{
         this.eventBus.on('gamePause', () => this.pause())
         this.eventBus.on('gameResume', () => this.resume())
 
-        this.eventBus.on('tutorialFinished', () => {
+        const changeShopItemsEvents = ['tutSkipped','tutorialFinished']
+        changeShopItemsEvents.forEach(event => {
+            this.eventBus.on(event, () => {
             this.setUsage === 'main'
             this.items = []
              while (this.itemsContainer.firstChild) {
@@ -599,14 +601,16 @@ class Shop{
             this.selectCategory('chassis')
             this.update()
         })
+        })
 
         this.eventBus.on('emitTaskId', (data) => {
             console.log(data)
             if(data === 'buyCoolingDevice') {
                 this.categoryMore.classList.remove('invisible')
                 console.log(this.categoryMore)
-            } else if(data === 'buyGpu') {
+            } else  {
                 this.categoryMore.classList.add('invisible')
+                // console.log(`${parse}`)
             }
         })
 
@@ -616,6 +620,8 @@ class Shop{
         })
     }
 ///////////////////////////////////// event monitor ///////////////////////////////// 
+
+
 
     pause() {
         window.removeEventListener('mousedown', this.boundMouseDown)

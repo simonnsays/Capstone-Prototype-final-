@@ -554,13 +554,13 @@ class DisplayArea {
         } 
         if(hasRequiredItems(proceedReq1, currTableComponents) && this.set1check) {
             this.eventBus.emit('set1Attached')
-            // console.log('returned 1: procReq1')
+            console.log('returned 1: procReq1')
             return
         } 
 
         if (this.currentSide == 'right') {
             this.eventBus.emit('rightSideAccessed')
-            // console.log('accessed right ')
+            console.log('accessed right ')
             return
         }
         
