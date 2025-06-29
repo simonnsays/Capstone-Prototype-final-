@@ -103,7 +103,18 @@ class Shop{
     // Create Interactive Elements to Show in Shop Tab
     createItemElements(items, container) {
         items.forEach(item => {
-            const price = parseInt(item.specs?.price) || 0;
+            let price = 0;
+            let priceText = '';
+            // check if item has price in specs(array or single value)
+            if (Array.isArray(item.specs?.price)) {
+                const min = parseInt(item.specs.price[0]) || 0;
+                const max = parseInt(item.specs.price[1]) || 0;
+                price = min; // take min for filtering and dataset
+                priceText = `₱${min.toLocaleString()} to ₱${max.toLocaleString()}`;
+            } else {
+                price = parseInt(item.specs?.price) || 0;
+                priceText = `₱${price.toLocaleString()}`;
+            }
             const isInRange = price >= this.priceRange.min && 
                             price <= this.priceRange.max;
 
@@ -114,7 +125,7 @@ class Shop{
             const priceDisplay = document.createElement('div');
             priceDisplay.className = `item-price ${isInRange ? '' : 'price-out-of-range'}`;
             priceDisplay.dataset.price = price;
-            priceDisplay.textContent = `₱${price.toLocaleString()}`;
+            priceDisplay.textContent = priceText;
             element.appendChild(priceDisplay);
 
             element.component = item;

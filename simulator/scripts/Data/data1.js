@@ -7,7 +7,7 @@ const components = [
         type: 'chassis',
         size: 'mid-tower',
         specs:{
-            price: 4350,
+            price: [4350, 5220],
             color: 'White',
             size: 'Mid-Tower',
             dimensions:'430 mm (D) x 225 mm (W) x 465 mm (H)',      
@@ -20,7 +20,7 @@ const components = [
         isRotatable: true,
         isAttached: false,
         defaultSource: 'left',
-        images: [
+        images: [   
             {side: 'left', imageSrc: './assets/chassis/NZXT/NZXT-H5-Flow-left.png'}, 
             {side: 'front', imageSrc: './assets/chassis/NZXT/NZXT-H5-Flow-front.png'}, 
             {side: 'right', imageSrc: './assets/chassis/NZXT/NZXT-H5-Flow-right.png'}, 
@@ -112,7 +112,7 @@ const components = [
         type: 'chassis',
         size: 'mid-tower',
         specs:{
-            price: 4850,
+            price: [4850, 5820],            
             color: 'Black',
             size: 'Mid-Tower',
             dimensions:'462 mm (D) x 230 mm (W) x 466 mm (H)',          
@@ -225,7 +225,7 @@ const components = [
         type: 'chassis',
         size: 'mid-tower',
         specs:{
-            price: 5795,
+            price: [5795, 6954],
             color: 'Black and Orange',
             size: 'Mid-Tower',
             dimensions: '473.5 mm (D) x 215 mm (W) x 454 mm(H)', 
@@ -366,7 +366,7 @@ const components = [
         type: 'chassis',
         size: 'mid-tower',
         specs:{
-            price: 5295,
+            price: [5295,6354],
             color: 'Black',
             size: 'Mid-Tower',
             dimensions: '462 mm (D) x 215 mm (W) x 482 mm (H)',
@@ -493,7 +493,7 @@ const components = [
         type: 'chassis',
         size: 'mid-tower',
         specs:{
-            price: 6800,
+            price: [6800, 8160],
             color: 'Black',
             size: 'Mid-Tower',
             dimensions: '500 mm (D) x 235 mm(W) x 480 mm(H)', 
@@ -642,7 +642,7 @@ const components = [
         size: 'ATX',
         watts: '100',
         specs:{
-            price: 10150,
+            price: [10150, 12180],
             chipset: 'AMD B550',
             cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -811,7 +811,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 8995,
+            price: [8995, 10794],
             chipset: 'AMD X550',
             cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -980,7 +980,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 15950,
+            price: [15950, 19140],
             chipset: 'AMD X570',
             cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -1162,7 +1162,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 11950,
+            price: [11950, 14340],
             chipset: 'AMD B550',
             cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -1330,7 +1330,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 13599,
+            price: [13599, 16319],
             chipset: 'AMD B550',
             cpuslot: 'ADM AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -1498,7 +1498,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 6950,
+            price: [6950, 8340],
             chipset: 'AMD B550',
             cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -1666,7 +1666,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 8924,
+            price: [8924, 10709],
             chipset: 'AMD X570',
             cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -1820,7 +1820,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 27892,
+            price: [27892, 33470],
             chipset: 'AMD X570',
             cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -1988,7 +1988,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 7754,
+            price: [7754, 9305],
             chipset: 'AMD B550',
             cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -2154,7 +2154,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 13895,
+            price: [13895, 16674],
             chipset: 'AMD B550',
             cpuslot: 'AMD AM4',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -2324,7 +2324,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 15450,
+            price: [15450, 18540],
             chipset: 'AMD B650E',
             cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -2506,7 +2506,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 12830,
+            price: [12830, 15396],
             chipset: 'AMD B650',
             cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -2688,7 +2688,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 14448,
+            price: [14448, 17338],
             chipset: 'AMD X670E',
             cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -2856,7 +2856,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 21650,
+            price: [21650, 25980],
             chipset: 'AMD B650E',
             cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -3052,7 +3052,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 21477,
+            price: [21477, 25772],
             chipset: 'AMD X670E',
             cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -3234,7 +3234,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 22314,   
+            price: [22314, 26776],   
             chipset: 'AMD X870E',
             cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -3430,7 +3430,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 12850,
+            price: [12850, 15420],
             chipset: 'AMD B650',
             cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -3612,7 +3612,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 9423,
+            price: [9423, 11308],
             chipset: 'AMD B650',
             cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -3791,7 +3791,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 18401,
+            price: [18401, 22081],
             chipset: 'AMD B650',
             cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -3973,7 +3973,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 26709,   
+            price: [26709, 32051],   
             chipset: 'AMD X670E',
             cpuslot: 'AMD AM5',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -4171,7 +4171,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 22248,
+            price: [22248, 26697],
             chipset: 'Intel Z590',
             cpuslot: 'LGA 1200',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -4353,7 +4353,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 47397,
+            price: [47397, 56876],
             chipset: 'Intel Z590',
             cpuslot: 'LGA 1200',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -4536,7 +4536,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 25092,
+            price: [25092, 30110],
             chipset: 'Intel W480',
             cpuslot: 'LGA 1200',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -4718,7 +4718,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 16115,
+            price: [16115, 19338],
             chipset: 'Intel Z590',
             cpuslot: 'LGA 1200',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -4900,7 +4900,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 13940,
+            price: [13940, 16728],
             chipset: 'Intel B560-E',
             cpuslot: 'LGA 1200',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -5083,7 +5083,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 11709,
+            price: [11709, 14051],
             chipset: 'Intel Z490-A',
             cpuslot: 'LGA 1200',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -5250,7 +5250,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 20074,
+            price: [20074, 24088],
             chipset: 'Intel Z590',
             cpuslot: 'LGA 1200',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -5432,7 +5432,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 18598,
+            price: [18598, 22317],
             chipset: 'Intel Z590',
             cpuslot: 'LGA 1200',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -5611,7 +5611,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 9480,
+            price: [9480, 11376],
             chipset: 'Intel Z590',
             cpuslot: 'LGA 1200',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -5792,7 +5792,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 21693,
+            price: [21693, 26031],
             chipset: 'Intel Z590',
             cpuslot: 'LGA 1200',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -5974,7 +5974,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 11655,
+            price: [11655, 13986],
             chipset: 'Intel Z590',
             cpuslot: 'LGA 1200',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -6155,7 +6155,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 9995,
+            price: [9995, 11994],
             chipset: 'Intel Z590',
             cpuslot: 'LGA 1200',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -6324,7 +6324,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 26210,
+            price: [26210, 31452],
             chipset: 'Intel Z790',
             cpuslot: 'LGA 1700',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -6534,7 +6534,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 18403,
+            price: [18403, 22083],
             chipset: 'Intel Z790',
             cpuslot: 'LGA 1700',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -6744,7 +6744,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 25654,
+            price: [25654, 30785],
             chipset: 'Intel B760',
             cpuslot: 'LGA 1700',
             slots: 'Dual channel DDR4 DIMM slots, PCIe x16',
@@ -6926,7 +6926,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 24995,
+            price: [24995, 29994],
             chipset: 'Intel Z790',
             cpuslot: 'LGA 1700',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -7109,7 +7109,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 16995,
+            price: [16995, 20394],
             chipset: 'Intel Z790',
             cpuslot: 'LGA 1700',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -7305,7 +7305,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price:  13942,
+            price:  [13942, 16730],
             chipset: 'Intel Z790',
             cpuslot: 'LGA 1700',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -7500,7 +7500,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 20021,
+            price: [20021, 24025],
             chipset: 'Intel Z790-A',
             cpuslot: 'LGA 1700',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -7711,7 +7711,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 35693,
+            price: [35693, 42831],
             chipset: 'Intel Z790',
             cpuslot: 'LGA 1700',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -7922,7 +7922,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 32291,
+            price: [32291, 38749],
             chipset: 'Intel Z690-A',
             cpuslot: 'LGA 1700',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -8118,7 +8118,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 27829,
+            price: [27829, 33395],
             chipset: 'Intel Z790',
             cpuslot: 'LGA 1700',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -8314,7 +8314,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 8923,
+            price: [8923, 10708],
             chipset: 'Intel Z760',
             cpuslot: 'LGA 1700',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -8482,7 +8482,7 @@ const components = [
         size: 'ATX',        
         watts: '100',
         specs:{
-            price: 11154,
+            price: [11154, 13385],
             chipset: 'Intel Z790',
             cpuslot: 'LGA 1700',
             slots: 'Dual channel DDR5 DIMM slots, PCIe x16',
@@ -8664,7 +8664,7 @@ const components = [
         size: 'AM5',
         watts: '270',
         specs:{
-            price: 30690,
+            price: [30690, 36828],
             generation: 'Ryzen 9 Zen 4 (Raphael)',
             socket: 'AMD AM5',
             cores: '12',
@@ -8694,7 +8694,7 @@ const components = [
         size: 'AM4',
         watts: '255',
         specs:{
-            price: 18550,
+            price: [18550, 21950],
             generation: 'Ryzen 9 Zen 3 (Vermeer)',
             socket: 'AMD AM4',
             cores: '12',
@@ -8724,7 +8724,7 @@ const components = [
         size: 'AM5',
         watts: '270',
         specs:{
-            price: 29995,
+            price: [29995, 35500],
             generation: 'Ryzen 7 Zen 4 (Raphael)',
             socket: 'AMD AM5',
             cores: '8',
@@ -8754,7 +8754,7 @@ const components = [
         size: 'AM4',
         watts: '215',
         specs:{
-            price: 11580,
+            price: [11580, 13650],
             generation: 'Ryzen 7 Zen 3 (Cezanne)',
             socket: 'AMD AM4',
             cores: '8',
@@ -8784,7 +8784,7 @@ const components = [
         size: 'AM5',
         watts: '255',
         specs:{
-            price: 13895,
+            price: [13895, 16450],
             generation: 'Ryzen 5 Zen 4 (Raphael)',
             socket: 'AMD AM5',
             cores: '6',
@@ -8814,7 +8814,7 @@ const components = [
         size: 'AM4',
         watts: '215',
         specs:{
-            price: 8750,
+            price: [8750, 10350],
             generation: 'Ryzen 5 Zen 3 (Cezanne)',
             socket: 'AMD AM4',
             cores: '6',
@@ -8844,7 +8844,7 @@ const components = [
         size: 'AM5',
         watts: '250',
         specs:{
-            price: 9815,
+            price: [9815, 11550],
             generation: 'Ryzen 3 Zen 4 (Phoenix2)',
             socket: 'AMD AM5',
             cores: '4',
@@ -8874,7 +8874,7 @@ const components = [
         size: 'AM4',
         watts: '215',
         specs:{
-            price: 9050,
+            price: [9050, 10650],
             generation: 'Ryzen 3 Zen 3 (Cezanne)',
             socket: 'AMD AM4',
             cores: '4',
@@ -8906,7 +8906,7 @@ const components = [
         size: 'LGA 1700',
         watts: '275',
         specs:{
-            price: 32849,
+            price: [32849, 38650],
             generation: 'Core i9 (Raptor Lake)',
             socket: 'LGA 1700',
             cores: '24',
@@ -8937,7 +8937,7 @@ const components = [
         size: 'LGA 1200',
         watts: '275',
         specs:{
-            price: 30060,
+            price:[30060, 35350],
             generation: 'Core i9 (Rocket Lake)',
             socket: 'LGA 1200',
             cores: '8',
@@ -8967,7 +8967,7 @@ const components = [
         size: 'LGA 1700',
         watts: '275',
         specs:{
-            price: 22810,
+            price: [22810, 26850],
             generation: 'Core i7 (Raptor Lake-R)',
             socket: 'LGA 1700',
             cores: '20',
@@ -8998,7 +8998,7 @@ const components = [
         size: 'LGA 1200',
         watts: '275',
         specs:{
-            price: 25999,
+            price: [25999, 30650],
             generation: 'Core i7 (Rocket Lake)',
             socket: 'LGA 1700',
             cores: '8',
@@ -9029,7 +9029,7 @@ const components = [
         size: 'LGA 1700',
         watts: '215',
         specs:{
-            price: 12617,
+            price: [12617, 14850],
             generation: 'Core i5 (Raptor Lake-R)',
             socket: 'LGA 1700',
             cores: '16',
@@ -9060,7 +9060,7 @@ const components = [
         size: 'LGA 1200',      
         watts: '275',
         specs:{
-            price: 13159,
+            price: [13159, 15450],
             generation: 'Core i5 (Rocket Lake)',
             socket: 'LGA 1200',
             cores: '6',
@@ -9091,7 +9091,7 @@ const components = [
         size: 'LGA 1700',
         watts: '208',
         specs:{
-            price: 8849,
+            price: [8849, 10450],
             generation: 'Core i3 (Raptor Lake-R)',
             socket: 'LGA 1700',
             cores: '4',
@@ -9122,7 +9122,7 @@ const components = [
         size: 'LGA 1200',
         watts: '208',
         specs:{
-            price: 5450,
+            price: [5450, 6400],
             generation: 'Core i3 (Comet Lake)',
             socket: 'LGA 1200',
             cores: '4',
@@ -9154,7 +9154,7 @@ const components = [
         type: 'psu',
         size: 'ATX',
         specs:{
-            price: 12269,
+            price: [12269, 14450],
             wattage: 1300,
             cableModularity: 'modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9210,7 +9210,7 @@ const components = [
         type: 'psu',
         size: 'ATX',
         specs:{
-            price: 21349,
+            price: [21349, 25000],
             wattage: 1200,
             cableModularity: 'modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9259,7 +9259,7 @@ const components = [
         type: 'psu',
         size: 'ATX',
         specs:{
-            price: 33462,
+            price: [33462, 39350],
             wattage: 1600,
             cableModularity: 'modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9309,7 +9309,7 @@ const components = [
         type: 'psu',
         size: 'ATX',
         specs:{
-            price: 22308,
+            price: [22308, 26250],
             wattage: 1300,
             cableModularity: 'modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9361,7 +9361,7 @@ const components = [
         type: 'psu',
         size: 'ATX',
         specs:{
-            price: 17233,
+            price: [17233, 20250],
             wattage: 1600,
             cableModularity: 'modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9413,7 +9413,7 @@ const components = [
         type: 'psu',
         size: 'ATX',
         specs:{
-            price: 11540,
+            price: [11540, 13500],
             wattage: 1000,
             cableModularity: 'modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9465,7 +9465,7 @@ const components = [
         type: 'psu',
         size: 'ATX',
         specs:{
-            price: 5250,
+            price: [5250, 6150],
             wattage: 750,
             cableModularity: 'semi-modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9515,7 +9515,7 @@ const components = [
         type: 'psu',
         size: 'ATX',
         specs:{
-            price: 6692,
+            price: [6692, 7850],
             wattage: 850,
             cableModularity: 'semi-modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9567,7 +9567,7 @@ const components = [
         type: 'psu',
         size: 'ATX', 
         specs:{
-            price: 5776,
+            price: [5776, 6750],
             wattage: 750,
             cableModularity: 'semi-modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9617,7 +9617,7 @@ const components = [
         type: 'psu',
         size: 'ATX', 
         specs:{
-            price: 4460,
+            price: [4460, 5200],
             wattage: 850,
             cableModularity: 'semi-modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9668,7 +9668,7 @@ const components = [
         type: 'psu',
         size: 'ATX', 
         specs:{
-            price: 8980,
+            price: [8980, 10500],
             wattage: 1000,
             cableModularity: 'semi-modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9723,7 +9723,7 @@ const components = [
         type: 'psu',
         size: 'ATX', 
         specs:{
-            price: 2180,
+            price: [2180, 2550],
             wattage: 500,
             cableModularity: 'non-modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9771,7 +9771,7 @@ const components = [
         type: 'psu',
         size: 'ATX', 
         specs:{
-            price: 4180,
+            price: [4180, 4900],
             wattage: 600,
             cableModularity: 'non-modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9819,7 +9819,7 @@ const components = [
         type: 'psu',
         size: 'ATX', 
         specs:{
-            price: 3550,
+            price: [3550, 4150],
             wattage: 850,
             cableModularity: 'non-modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9867,7 +9867,7 @@ const components = [
         type: 'psu',
         size: 'ATX', 
         specs:{
-            price: 3520,
+            price: [3520, 4100],
             wattage: 500,
             cableModularity: 'non-modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9915,7 +9915,7 @@ const components = [
         type: 'psu',
         size: 'ATX', 
         specs:{
-            price: 3695,
+            price: [3695, 4300],
             wattage: 750,
             cableModularity: 'non-modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -9963,7 +9963,7 @@ const components = [
         type: 'psu',
         size: 'ATX', 
         specs:{
-            price: 2550,
+            price: [2550, 3000],
             wattage: 600,
             cableModularity: 'non-modular',
             cables: '24-pin-power,8-pin-power, 8-pin-pcie, 6-pin-pcie, sata-power',
@@ -10013,7 +10013,7 @@ const components = [
         size: 'hdd',
         watts: '10',
         specs:{ 
-            price: 2900,
+            price: [2900, 3400],
             bootable: true,
             rpm: '5400',
             interface: 'SATA',
@@ -10049,7 +10049,7 @@ const components = [
         size: 'hdd',
         watts: '10',
         specs:{ 
-            price: 3500,
+            price: [3500, 4100],
             bootable: true,
             rpm: '7200',
             interface: 'SATA',
@@ -10085,7 +10085,7 @@ const components = [
         size: 'hdd',
         watts: '10',
         specs:{ 
-            price: 8254,
+            price: [8254, 9600],
             bootable: true,
             rpm: '7200',
             interface: 'SATA',
@@ -10121,7 +10121,7 @@ const components = [
         size: 'hdd',
         watts: '10',
         specs:{ 
-            price: 5900,
+            price: [5900, 6900],
             bootable: true,
             rpm: '7200',
             interface: 'SATA',
@@ -10157,7 +10157,7 @@ const components = [
         size: 'hdd',
         watts: '10',
         specs:{ 
-            price: 4650,
+            price: [4650, 5400],
             bootable: true,
             rpm: '7200',
             interface: 'SATA',
@@ -10195,7 +10195,7 @@ const components = [
     size: 'ssd',
     watts: '4',
     specs:{ 
-        price: 3950,
+        price: [3950, 4600],
         bootable: true,
         formFactor: '2.5"',
         interface: 'SATA',
@@ -10232,7 +10232,7 @@ const components = [
     size: 'ssd',
     watts: '4',
     specs:{ 
-        price: 5750,
+        price: [5750, 6700],
         bootable: true,
         formFactor: '2.5"',
         interface: 'SATA',
@@ -10269,7 +10269,7 @@ const components = [
     size: 'ssd',
     watts: '4',
     specs:{ 
-        price: 2950,
+        price: [2950, 3400],
         bootable: true,
         formFactor: '2.5"',
         interface: 'SATA',
@@ -10305,7 +10305,7 @@ const components = [
     size: 'ssd',
     watts: '4',
     specs:{ 
-        price: 3898,
+        price: [3898, 4500],
         bootable: true,
         formFactor: '2.5"',
         interface: 'SATA',
@@ -10352,7 +10352,7 @@ const components = [
         defaultSource: 'pack',
         tableDisplay: 'pack',
         specs: { 
-            price: 5815,
+            price: [5815, 6800],
             bootable: true,
             readSpeed: '3500MB/s',
             writeSpeed: '3300MB/s',
@@ -10384,7 +10384,7 @@ const components = [
         defaultSource: 'pack',
         tableDisplay: 'pack',
         specs: { 
-            price: 8363,
+            price: [8363, 9800],
             bootable: true,
             readSpeed: '7300MB/s',
             writeSpeed: '6300MB/s',
@@ -10416,7 +10416,7 @@ const components = [
         defaultSource: 'pack',
         tableDisplay: 'pack',
         specs: { 
-            price: 5295,
+            price: [5295, 6200],
             bootable: true,
             readSpeed: '7000MB/s',
             writeSpeed: '7000MB/s',
@@ -10448,7 +10448,7 @@ const components = [
         defaultSource: 'pack',
         tableDisplay: 'pack',
         specs: { 
-            price: 3791,
+            price: [3791, 4400],
             bootable: true,
             readSpeed: '3500MB/s',
             writeSpeed: '3000MB/s',
@@ -10480,7 +10480,7 @@ const components = [
         defaultSource: 'pack',
         tableDisplay: 'pack',
         specs: { 
-            price: 5575,
+            price: [5575, 6500],
             bootable: true,
             readSpeed: '5000MB/s',
             writeSpeed: '4400MB/s',
@@ -10503,7 +10503,7 @@ const components = [
     type: 'cooling',
     size: 'amd',
     specs:{
-        price: 3122,
+        price: [3122, 3600],
         category: 'cpu',
         design: 'Tower Style with a copper base',
         fan: '120mm',
@@ -10538,7 +10538,7 @@ const components = [
     type: 'cooling',
     size: 'amd',
     specs:{
-        price: 1200,
+        price: [1200, 1400],
         category: 'cpu',
         design: 'Tower Style with a copper base',
         fan: '120mm',
@@ -10573,7 +10573,7 @@ const components = [
     type: 'cooling',
     size: 'amd',
     specs:{
-        price: 2500,
+        price: [2500, 3000],
         category: 'cpu',
         design: 'Dual-Tower design with a direct-touch copper base',
         fan: '120mm',
@@ -10608,7 +10608,7 @@ const components = [
     type: 'cooling',
     size: ['amd','intel'],
     specs:{
-        price: 2200, 
+        price: [2200, 2600], 
         category: 'cpu',
         design: 'Compact Tower Style with a copper base',
         fan: '120mm',
@@ -10643,7 +10643,7 @@ const components = [
     type: 'cooling',
     size: 'amd',
     specs:{
-        price: 3300,
+        price: [3300, 3800],
         category: 'cpu',
         design: 'Dual-Tower Style with 7 copper heat pipes',
         fan: '135mm',
@@ -10678,7 +10678,7 @@ const components = [
     type: 'cooling',
     size: 'amd',
     specs:{
-        price: 1300,
+        price: [1300, 1500],
         category: 'cpu',
         design: 'Tower Style with 4 copper heat pipes',
         fan: '120mm',
@@ -10713,7 +10713,7 @@ const components = [
     type: 'cooling',    
     size: 'amd',
     specs:{
-        price: 3750,
+        price: [3750, 4400],
         category: 'cpu',
         design: 'Tower Style with digital temperature display',
         fan: '120mm',
@@ -10749,7 +10749,7 @@ const components = [
      type: 'cooling',
      size: 'intel',
      specs:{
-        price: 2200,
+        price: [2200, 2600],
         category: 'cpu',
         design: 'Tower Style with a copper base',
         size: '103x103mm',
@@ -10784,7 +10784,7 @@ const components = [
     type: 'cooling',
     size: 'intel',
     specs:{
-        price: 1300,
+        price: [1300, 1500],
         category: 'cpu',
         design: 'Tower Style with a copper base',
         size: '100x100mm',
@@ -10820,7 +10820,7 @@ const components = [
     size: 'ddr4',
     watts: '3',
     specs:{
-        price: 3995,
+        price: [3995, 4600],
         color: 'RGB',
         type: 'DDR4',
         size: 'DIMM',
@@ -10846,7 +10846,7 @@ const components = [
     size: 'ddr4',
     watts: '3',
     specs:{
-        price: 9150,
+        price: [9150, 10500],
         color: 'RGB',
         type: 'DDR4',
         size: 'DIMM',
@@ -10872,7 +10872,7 @@ const components = [
     size: 'ddr4',
     watts: '3',
     specs:{
-        price: 2200,
+        price: [2200, 2500],
         heatsink: 'Aluminum',
         color: 'RGB',
         type: 'DDR4',
@@ -10899,7 +10899,7 @@ const components = [
     size: 'ddr4',
     watts: '3',
     specs:{
-        price: 2150,
+        price: [2150, 2500],
         heatsink: 'Aluminum',
         type: 'DDR4',
         size: 'DIMM',
@@ -10925,7 +10925,7 @@ const components = [
     size: 'ddr4',
     watts: '3',
     specs:{
-        price: 3230,
+        price: [3230, 3700],
         color: 'RGB',
         type: 'DDR4',
         size: 'DIMM',
@@ -10951,7 +10951,7 @@ const components = [
     size: 'ddr4',
     watts: '3',
     specs:{
-        price: 2050,
+        price: [2050, 2400],
         heatsink: 'Aluminum',        
         type: 'DDR4',
         size: 'DIMM',
@@ -10977,7 +10977,7 @@ const components = [
     size: 'ddr4',
     watts: '3',
     specs:{
-        price: 3995,
+        price: [3995, 4600],
         color: 'RGB',
         type: 'DDR4',
         size: 'DIMM',
@@ -11003,7 +11003,7 @@ const components = [
     size: 'ddr4',
     watts: '3',
     specs:{
-        price: 2695,
+        price: [2695, 3100],
         color: 'RGB',
         type: 'DDR4',
         size: 'DIMM',
@@ -11031,7 +11031,7 @@ const components = [
       size: 'ddr5',
       watts: '3',
       specs:{
-        price: 10195,
+        price: [10195, 12234],
         color: 'RGB',
         type: 'DDR5',
         size: 'DIMM',
@@ -11057,7 +11057,7 @@ const components = [
     size: 'ddr5',
     watts: '3',
     specs:{
-        price: 7595,
+        price: [7595, 8900],
         color: 'RGB',
         type: 'DDR5',
         size: 'DIMM',
@@ -11083,7 +11083,7 @@ const components = [
     size: 'ddr5',
     watts: '3',
     specs:{
-        price: 5750,
+        price: [5750, 6700],
         heatsink: 'Aluminum',
         type: 'DDR5',
         size: 'DIMM',
@@ -11109,7 +11109,7 @@ const components = [
     size: 'ddr5',
     watts: '3',
     specs:{
-        price: 3290,
+        price: [3290, 3800],
         color: 'RGB',
         type: 'DDR5',
         size: 'DIMM',
@@ -11135,7 +11135,7 @@ const components = [
     size: 'ddr5',
     watts: '3',
     specs:{
-        price: 2500,
+        price: [2500, 2900],
         heatsink: 'Aluminum',
         type: 'DDR5',
         size: 'DIMM',
@@ -11161,7 +11161,7 @@ const components = [
     size: 'ddr5',
     watts: '3',
     specs:{
-        price: 3950,
+        price: [3950, 4500],
         color: 'RGB',
         type: 'DDR5',
         size: 'DIMM',
@@ -11187,7 +11187,7 @@ const components = [
     size: 'ddr5',
     watts: '3',
     specs:{
-        price: 7950,
+        price: [7950, 9200],
         color: 'RGB',
         type: 'DDR5',
         size: 'DIMM',
@@ -11213,7 +11213,7 @@ const components = [
     size: 'ddr5',
     watts: '3',
     specs:{
-        price: 3995,
+        price: [3995, 4600],
         heatsink: 'Aluminum',
         type: 'DDR5',
         size: 'DIMM',
@@ -11240,7 +11240,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 66950,
+        price: [66950, 80340],
         portCount: 2,
         portType: '16-pin-pcie',
         architecture: 'AMD RDNA 3',
@@ -11277,7 +11277,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 18950,
+        price: [18950, 22000],
         portCount: 1,
         portType: '8-pin-pcie',
         architecture: 'NVIDIA Ada Lovelace',
@@ -11314,7 +11314,7 @@ const components = [
     type: 'gpu',
     size: 'ATX', 
     specs: {
-        price: 18895,
+        price: [18895, 22674],
         portCount: 1,
         portType: '8-pin-pcie',
         architecture: 'NVIDIA Ampere',
@@ -11351,7 +11351,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 36950,
+        price: [36950, 44340],
         portCount: 1,
         portType: '8-pin-pcie',
         architecture: 'NVIDIA Ada Lovelace',
@@ -11388,7 +11388,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 89178,
+        price: [89178, 107003],
         portCount: 1,
         portType: '12vhpwr',
         architecture: 'NVIDIA Ada Lovelace',
@@ -11425,7 +11425,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 18950,
+        price: [18950, 22674],
         portCount: 1,
         portType: '8-pin-pcie',
         architecture: 'NVIDIA Ampere',
@@ -11462,7 +11462,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 8800,
+        price: [8800, 10320],
         portCount: 1,
         portType: '8-pin-pcie',
         architecture: 'NVIDIA Turing',
@@ -11499,7 +11499,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 18495,
+        price: [18495, 21894],
         portCount: 1,
         portType: '8-pin-pcie',
         architecture: 'AMD RDNA 3',
@@ -11536,7 +11536,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 95313,
+        price: [95313, 114375],
         portCount: 1,
         portType: '8-pin-pcie',
         architecture: 'NVIDIA Ada Lovelace',
@@ -11573,7 +11573,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 20650,
+        price: [20650, 24380],
         portCount: 1,
         portType: '8-pin-pcie',
         architecture: 'NVIDIA Ada Lovelace',
@@ -11610,7 +11610,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 14500,
+        price: [14500, 17100],
         portCount: 1,
         portType: '8-pin-pcie',
         architecture: 'NVIDIA Turing',
@@ -11647,7 +11647,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 32291,
+        price: [32291, 38000],
         portCount: 1,
         portType: '8-pin-pcie',
         architecture: 'NVIDIA Ada Lovelace',
@@ -11684,7 +11684,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 58504,
+        price: [58504, 68800],
         portCount: 1,
         portType: '12vhpwr',
         architecture: 'NVIDIA Ada Lovelace',
@@ -11722,7 +11722,7 @@ const components = [
     size: 'ATX',
     watts: '130',
     specs: {
-        price: 9966,       
+        price: [9966, 11700],       
         architecture: 'NVIDIA Ampere',
         baseClock: '1.50 GHz',
         boostClock: '1.78 GHz',
@@ -11752,7 +11752,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 8695,
+        price: [8695, 10100],
         portCount: 1,
         portType: '6-pin-pcie',
         architecture: 'AMD RDNA 2',
@@ -11789,7 +11789,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 54432,
+        price: [54432, 64500],
         portCount: 1,
         portType: '6-pin-pcie',
         architecture: 'NVIDIA Turing',
@@ -11826,7 +11826,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 30490,
+        price: [30490, 36000],
         portCount: 1,
         portType: '6-pin-pcie',
         architecture: 'AMD RDNA 2',
@@ -11863,7 +11863,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 7194,
+        price: [7194, 8450],
         portCount: 1,
         portType: '6-pin-pcie',
         architecture: 'AMD RDNA 2',
@@ -11900,7 +11900,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 46290,
+        price: [46290, 54500],
         portCount: 1,
         portType: '6-pin-pcie',
         architecture: 'NVIDIA Turing',
@@ -11937,7 +11937,7 @@ const components = [
     type: 'gpu',
     size: 'ATX',
     specs: {
-        price: 21695,
+        price: [21695, 25500],
         portCount: 1,
         portType: '6-pin-pcie',
         architecture: 'NVIDIA Pascal',
