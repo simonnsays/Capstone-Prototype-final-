@@ -625,6 +625,12 @@ class Shop{
             }
         })
 
+        this.eventBus.on('priceRangeChanged', (data) => {
+            this.setPriceRange(data.min, data.max)
+        }) 
+
+        this.eventBus.on('filterSet', (data) => this.setCompatibilityFilters(data))
+
         // EMITs
         this.quickBuy.addEventListener('click', () => {
             if(this.quickBuy.checked) this.eventBus.emit('quickBuyChecked')

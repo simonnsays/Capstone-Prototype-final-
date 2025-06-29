@@ -12,6 +12,7 @@ import wattageCalculator from "./scripts/Data/wattageCalculator.js"
 import chatbot from "./scripts/Data/chatbot.js"
 import EventBus from "./scripts/Utility/eventBus.js"
 import TutorialManager from "./scripts/tutorialManager.js"
+import SetupWizard from "./scripts/Tabs/setUpWizard.js"
 class Main {
     constructor() {
         // Utility Modules
@@ -97,12 +98,8 @@ class Main {
         )
 
         // setup wizard
-        this.setupWizard = document.getElementById('setupWizard');
-        this.setupWizardState = {
-            buildType: null,
-            //budget: null, // optional if pricing of components is added
-            preferences: {}
-        };
+        this.setupWizard = new SetupWizard(this.eventBus);
+        
   
         // Prevent Canvas Interaction when tabs are open
         window.addEventListener('mousedown', () => this.handleMouseDown())
@@ -215,111 +212,7 @@ class Main {
         if (this.inventory) this.inventory.update();
     }
 
-    showSetupWizard() {
-        if (!this.setupWizard) return;
-
-        const stepBuild = this.setupWizard.querySelector('.step-build-type');
-        const stepPrice = this.setupWizard.querySelector('.step-price-range');
-
-        const minPriceInput = document.getElementById('minPriceInput');
-        const maxPriceInput = document.getElementById('maxPriceInput');
-        const minRange = document.getElementById('minRange');
-        const maxRange = document.getElementById('maxRange');
-        const track = document.querySelector('.range-track');
-        // Collect inputs
-        const updateFromSliders = () => {
-            const min = parseInt(minRange.value);
-            const max = parseInt(maxRange.value);
-            minPriceInput.value = min;
-            maxPriceInput.value = max;
-            updateTrack(min, max);
-            this.shop.setPriceRange(min, max);
-        };
-
-        // Update inputs and update range
-        const updateFromInputs = () => {
-            let min = parseInt(minPriceInput.value);
-            let max = parseInt(maxPriceInput.value);
-            if (min > max) [min, max] = [max, min];
-            minRange.value = min;
-            maxRange.value = max;
-            updateTrack(min, max);
-            this.shop.setPriceRange(min, max);
-        };
-
-        // Update track UI
-        const updateTrack = (min, max) => {
-            const maxRange = 100000
-            const minPercent = (min / maxRange) * 100;
-            const maxPercent = (max / maxRange) * 100;
-            track.style.background = `
-                    linear-gradient(
-                        to right,
-                        #ccc ${minPercent}%,
-                        var(--light-lime) ${minPercent}%,
-                        var(--light-lime) ${maxPercent}%,
-                        #ccc ${maxPercent}%
-                    )
-                `;        
-            };
-
-        // Bind input listeners once
-        minRange.addEventListener('input', updateFromSliders);
-        maxRange.addEventListener('input', updateFromSliders);
-        minPriceInput.addEventListener('input', updateFromInputs);
-        maxPriceInput.addEventListener('input', updateFromInputs);
-
-        // Initialize track and values
-        updateFromSliders();
-
-        // Wizard logic
-        const buildOptions = this.setupWizard.querySelectorAll('.build-option');
-        const nextBtn = document.getElementById('nextStep');
-        const prevBtn = document.getElementById('prevStep');
-
-        this.setupWizard.showModal();
-
-        // Build type selection
-        buildOptions.forEach(option => {
-            option.addEventListener('click', (e) => {
-                buildOptions.forEach(opt => opt.classList.remove('selected'));
-                e.currentTarget.classList.add('selected');
-                this.setupWizardState.buildType = e.currentTarget.dataset.type;
-                nextBtn.disabled = false;
-            });
-        });
-
-        // Next / Finish
-        nextBtn.addEventListener('click', () => {
-            if (stepBuild.style.display !== 'none') {
-                if (!this.setupWizardState.buildType) return;
-
-                stepBuild.style.display = 'none';
-                stepPrice.style.display = 'block';
-                prevBtn.style.display = 'inline-block';
-                nextBtn.textContent = 'Finish';
-            } else {
-                this.setupWizard.close();
-                this.shop.setCompatibilityFilters(this.setupWizardState.buildType);
-                this.assistant.init();
-                this.eventBus.emit('setupWizard')
-            }
-        });
-
-        // Previous
-        prevBtn.addEventListener('click', () => {
-            stepPrice.style.display = 'none';
-            stepBuild.style.display = 'block';
-            prevBtn.style.display = 'none';
-            nextBtn.textContent = 'Next';
-        });
-
-        // Initial UI state
-        stepBuild.style.display = 'block';
-        stepPrice.style.display = 'none';
-        prevBtn.style.display = 'none';
-        nextBtn.disabled = true;
-    }
+    
 
     addBasicComponents() {
         const itemsToBuy = []
