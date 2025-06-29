@@ -1,5 +1,3 @@
-import cableRef from "../Data/cableReference.js";
-
 class Drawer {
     constructor(elementHandler, utilityTool, eventBus) {
         // Utility
@@ -13,6 +11,7 @@ class Drawer {
         this.modal = this.elements.modal
         this.pullBtn = this.elements.pullBtn
         this.cableContainer = this.elements.cableContainer
+        this.cablesMore = document.querySelector('.more-cables')
         this.isActive = false
 
         this.cables = []
@@ -49,6 +48,15 @@ class Drawer {
         this.eventBus.on('bootUpTabOpened', () => {
             const image = this.pullBtn?.querySelector('img')
             if (image) this.closeDrawer(image)
+        })
+
+        this.eventBus.on('emitTaskId', (data) => {
+            console.log(data)
+            if(data === 'sataDataPinMobo') {
+                this.cablesMore.classList.remove('invisible')
+            } else {
+                this.cablesMore.classList.add('invisible')
+            }
         })
     }
     

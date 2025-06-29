@@ -216,7 +216,9 @@ const components = [
         ],
         
         ports: [],
-        cables: []
+        cables: [
+            {type: 'frontPanel'}
+        ]
     },
     {        // Fractal Designs Pop Air
         name: 'Fractal Designs Pop Air',
@@ -355,7 +357,9 @@ const components = [
         ],
         
         ports: [],
-        cables: []
+        cables: [
+            {type: 'frontPanel'}
+        ]
     },
     {        // Lian Li LanCool
         name: 'Lian Li LanCool',
@@ -480,7 +484,9 @@ const components = [
         ],
         
         ports: [],
-        cables: []
+        cables: [
+            {type: 'frontPanel'}
+        ]
     },
     {        // Phanteks Enthoo Pro M [different storage orientation]
         name: 'Phanteks Enthoo Pro M',
@@ -624,7 +630,9 @@ const components = [
         ],
         
         ports: [],
-        cables: []
+        cables: [
+            {type: 'frontPanel'}
+        ]
     },
 
     // MOTHERBOARD AM4

@@ -136,7 +136,9 @@ class Main {
         this.assistant.init()
         this.chatbot.init()
         
-        this.tutorialManager.init()
+        document.addEventListener("DOMContentLoaded", () => {
+            this.tutorialManager.init()
+        });
     }
 
     resetBuild() {

@@ -21,6 +21,15 @@
 
     <div class="overlay"></div>
 
+    <!-- SKIP TUTORIAL CONFIRM -->
+     <div class="skip-container">
+        <div class="skip-description">Skip Tutorial?</div>
+        <div class="buttons-container">
+            <button id="skipYes">Yes</button>
+            <button id="skipNo">No</button>
+        </div>
+     </div>
+
     <!-- GAME CONTAINER -->
     <div class="game-container">
 
@@ -165,7 +174,7 @@
             <div class="headline">
                 <h2 class="title">SHOP</h2>
                 <input type="search" class="search-bar" id="shopSearch" placeholder="Search.." autocomplete="off">
-                <h2 id="money">$9999</h2>
+                <!-- <h2 id="money">₱999,999</h2> -->
             </div>
 
             <div class="category-scroll">
@@ -177,7 +186,11 @@
                 <button data-category="shop" data-selected="false" data-id="storage" class="button2 category-btn">Storage</button>
                 <button data-category="shop" data-selected="false" data-id="cooling" class="button2 category-btn">Cooling</button>
                 <button data-category="shop" data-selected="false" data-id="gpu" class="button2 category-btn">GPU</button>
+                <div class="more-category invisible">
+                    <img src="./assets/svg/rightArr.svg">
+                </div>
             </div>
+
             <hr>
         </div>
         
@@ -251,21 +264,11 @@
 
         <!-- cables / drawer contents -->
         <div id="cableContainer">
-
-                            <!-- cells reference ||| -->
-                            <!--                 vvv -->
-            <!-- <div class="cableCell unused">
-                <img src="./assets/wires/sata-data/sata-data-default.png">
-                <div class="cable-slider"> 24-Pin Power Cable </div>
-            </div> -->
-            <!-- <div class="cableCell unused">
-                <img src="./assets/wires/ATX-power/ATX-power-default.png">
-                <div class="cable-slider"> 24-Pin Power Cable </div>
-            </div> -->
-            <!-- <div class="cableCell used">
-                <img src="./assets/wires/8pin-power/8pin-power-default.png">
-                <div class="cable-slider"> 24-Pin Power Cable </div>
-            </div> -->
+            <!-- ADD A MORE-CABLES ELEMENT -->
+            <!-- <div class="more-"></div>     -->
+        </div>
+        <div class="more-cables invisible">
+            <img src="./assets/svg/rightArr.svg">
         </div>
     </div>
 

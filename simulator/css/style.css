@@ -70,6 +70,26 @@ dialog {
   animation-iteration-count: 1;
 }
 
+.skip-container {
+  position: fixed;
+  top: 50px;
+  right:-50%;
+  transform: translateX(50%);
+  width: 270px;
+  height: 150px;
+  background-color: white;
+  border-left: 10px solid var(--light-lime);
+  border-radius: 10px;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  transition: all .4s ease-in-out;
+}
+
 .modal {
   border-radius: 20px;
   animation: fadeInAnimation 0.1s ease-in;
@@ -258,6 +278,11 @@ dialog {
   background-color: rgba(0,0,0, .5);
   z-index: 15;
 
+}
+
+.drawer-mask {
+  mask: linear-gradient(#000 88%, transparent 90% 97%, #000 100%),
+        linear-gradient(to right, #000 40%, transparent 43% 58%, #000 60% );
 }
 
 .build-summary-mask {
@@ -667,7 +692,7 @@ dialog {
 /********************** WIRES CABLE DRAWER **********************/
 #wiresDrawer {
   width: 80vw;
-  height: 280px;
+  height: 220px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -689,12 +714,12 @@ dialog {
 
 #pulley {
   width: 100px;
-  height: 70px;
+  height: 60px;
   background-color: var(--pastel-yellow);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: -1;
   border: 3px solid black;
   border-bottom: 0;
   border-top-left-radius: 100px;
@@ -704,6 +729,8 @@ dialog {
   animation-duration: 0.5s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
+  position: absolute;
+  top: -60px
 }
 
 #pulley:hover {
@@ -883,6 +910,31 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.more-category,
+.more-cables
+{
+  width: 25px;
+  height: 25px;
+  border-radius: 50px;
+  position: absolute;
+  right: 60px;
+  top: 75px;
+  background-color:rgba(238, 167, 122, .8);
+  padding: 10px;
+  animation: bounce-right 1s ease-in-out infinite;
+}
+.more-category img,
+.more-cables img
+{
+  width: 100%;
+}
+
+@keyframes bounce-right {
+  0% {transform: translateX(0)}
+  50% {transform: translateX(30px)}
+  100% {transform: translateX(0px)}
 }
 
 /********* BUTTONS *********/
@@ -1988,9 +2040,9 @@ input[type=checkbox] {
 }
 .highlight-element {
   position: relative;
-  animation: helpPulse 2s infinite;
-  z-index: 15;
-  box-shadow: 0 0 0 8px rgba(76, 175, 80, 0.5);
+  animation: helpPulse 1s infinite;
+  /* z-index: 15; */
+  box-shadow: 0 0 0 200px rgba(76, 17, 80, 1);
   border-radius: 8px;
 }
 .highlight-element:active {
@@ -2543,7 +2595,7 @@ input[type=checkbox] {
   to   { opacity: 1; transform: translate(-50%, 0);}
 }
 
-@keyframes helpPulse {
+/* @keyframes helpPulse {
   0% {
       box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.9);
   }
@@ -2552,6 +2604,18 @@ input[type=checkbox] {
   }
   100% {
       box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
+} */
+@keyframes helpPulse {
+  0% {
+    
+      box-shadow: 0 0 0 10px rgba(238, 167, 122, 1);
+  }
+  70% {
+      box-shadow: 0 0 0 35px rgba(238, 167, 122, 0.1);
+  }
+  100% {
+      box-shadow: 0 0 0 15px rgba(238, 167, 122, 0.3);
   }
 }
 

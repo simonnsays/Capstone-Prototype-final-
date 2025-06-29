@@ -54,6 +54,7 @@ class Assistant {
     init() {
         // Mini Element Listeners
         window.addEventListener('mousemove', this.boundMouseHover)
+        
 
         // subscribe to Event Bus
         this.subscribeToEventBus()
@@ -69,8 +70,13 @@ class Assistant {
     }
 
     subscribeToEventBus() {
+        this.eventBus.on('tutSkipped', () => {
+            this.adjustOverlayElement({id:'invisible'})
+            window.addEventListener('click', this.boundClick)
+        })
         this.eventBus.on('tutManagerInit', (data) => this.updateMiniDsiplay(data))
         this.eventBus.on('taskAdvanced', (data) => {
+            this.clearHighlights()
             this.adjustOverlayElement(data)
             this.showCurrentTask(data)
         } )
@@ -90,7 +96,17 @@ class Assistant {
         })
     }
 
+    clearHighlights() {
+        this.overlay.className = 'overlay'
+
+        document.querySelectorAll('.highlight-element').forEach(el => {
+            el.classList.remove('highlight-element')
+            el.classList.remove('blocked')
+        })
+    }
+
     adjustOverlayElement(data) { 
+        console.log('hit')
         const overlayClassMap = {
             workAreaIntroduction: 'table-mask',
 
@@ -104,7 +120,7 @@ class Assistant {
             epsNavigateMobo: 'port-label-mask',
             
             portItems: 'ports-mask',
-            drawer: 'ports-mask',
+            drawer: '.drawer-mask',
             attachEpsConnectors: 'ports-mask',
 
             connectorsIntroduction: 'drawer-mask',
@@ -119,10 +135,13 @@ class Assistant {
 
             openChatBot: 'chat-mask',
             openChatBios: 'chat-bubble-mask',
-            showBuildSummary: 'build-summary-mask'
+            // showBuildSummary: 'build-summary-mask'
+
+            invisible: 'invisible'
         }
 
         this.overlay.className = 'overlay'
+
 
         const newClass = overlayClassMap[data.id]
         if (newClass) {
@@ -507,9 +526,6 @@ class Assistant {
             }
 
         }) 
-
-          
-
     }
 
     splitSinglesAndMultiples(arr) {

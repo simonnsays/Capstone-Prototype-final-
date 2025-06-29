@@ -4,19 +4,32 @@ class TutorialManager {
         this.eventBus = eventBus
         this.tasks = tasks  
         this.taskIndex = 0
-        // this.taskIndex = 11
         this.currentTask = tasks[this.taskIndex]
-
         this.currentUnit = {}
+
+        // Skip Tutorial
+        this.skipElement = document.querySelector('.skip-container')
+        this.skipYes = document.querySelector('#skipYes')
+        this.skipNo = document.querySelector('#skipNo')
     }
     
     init() {
         this.subscribeToEvents()
+        this.askToSkip()
 
-        this.startTutorial()
         
-        // TEST STEP FAST FORWARD
-        // this.tryToAdvance('sPowerPsuAttached')
+    }
+
+    askToSkip() {
+        this.skipElement.style.right = '50%'
+        this.skipYes.addEventListener('click', () => {
+            this.skipElement.style.right = '-50%'
+            this.eventBus.emit('tutSkipped')
+        })
+        this.skipNo.addEventListener('click', () => {
+            this.skipElement.style.right = '-50%'
+            this.startTutorial()
+        })
     }
     
     startTutorial() {
@@ -40,7 +53,7 @@ class TutorialManager {
             'sDataMoboAttached', 'portRomNavigated', 'sDataRomAttached', 'sPowerRomAttached', 
             'sPowerPsuAttached', 'portGpuNavigated', 'bootUpTabOpened', 'attemptedPower',
             'chatOpened', 'biosOpened', 'poweredOn' , 'showBuild', 'reportSuccessClicked', 'showBuildSummary', 'resetBuild', 'exitTutorial',
-            'setupWizard'
+            'setupWizard', 'ramBought'
         ]
         events.forEach(event => {
             this.eventBus.on(event, () =>{
@@ -49,12 +62,13 @@ class TutorialManager {
         })
 
         // RAM Condition
-        this.eventBus.on('ramBought', () => {
-            this.currentTask.condition.amount++
-            if(this.currentTask.condition.amount == this.currentTask.condition.amountRequired) {
-                this.tryToAdvance('ramBought')
-            }
-        })
+        // this.eventBus.on('ramBought', () => {
+        //     if (!this.currentTask.condition) return
+        //     this.currentTask.condition.amount++
+        //     if(this.currentTask.condition.amount == this.currentTask.condition.amountRequired) {
+        //         this.tryToAdvance('ramBought')
+        //     }
+        // })
 
         // EPS PSU  port condition
         this.eventBus.on('epsPsuAttached', () => {
@@ -178,12 +192,15 @@ class TutorialManager {
         // Succeed to advance
         this.emitTaskId(this.currentTask.id)
         this.eventBus.emit('taskAdvanced', this.currentTask)
+
+        console.log('Step: ', this.taskIndex)
                 
         // Automatically prep next task for the next trigger
         this.taskIndex++
     }
 
     emitTaskId(id) {
+        this.eventBus.emit('emitTaskId', id)
         // component highlight
         switch(id) {
             case 'expandChassis':
@@ -210,6 +227,27 @@ class TutorialManager {
             case 'buyGpu':
                 this.eventBus.emit('addGpuHighlight', "Gigabyte Radeon RX 7900 XTX")
                 break
+            case 'placeSet2':
+                this.eventBus.emit('addInvSetHighlights', [
+                        'NZXT H5 Flow',
+                        'EVGA Supernova 1300 P+',
+                        'Seagate Barracuda'
+                    ])
+                break
+            case 'completeAssembly':
+                this.eventBus.emit('addSsdHighlight', "Seagate Barracuda SSD")
+                break   
+            case 'epsPinPsu':
+                this.eventBus.emit('addEpsPinHighlight', "8-pin-power")
+                break
+            // display area conditionals
+            case 'labelsIntroduction':
+            case 'openPortsTab':
+                this.eventBus.emit('findNoSet')
+                break
+            case 'attachSet2':
+                this.eventBus.emit('findSet2')
+                break
             case 'workAreaIntroduction':
                 this.eventBus.emit('addInvSetHighlights', [
                     'ASRock X570 PG Velocita',
@@ -218,19 +256,8 @@ class TutorialManager {
                     'AMD wraith Prism',
                     'Gigabyte Radeon RX 7900 XTX'
                 ])
+                this.eventBus.emit('findSet1')
                 break
-            case 'placeSet2':
-            this.eventBus.emit('addInvSetHighlights', [
-                    'NZXT H5 Flow',
-                    'EVGA Supernova 1300 P+',
-                    'Seagate Barracuda'
-                ])
-                break
-            case 'completeAssembly':
-                this.eventBus.emit('addSsdHighlight', "Seagate Barracuda SSD")
-                break   
-            case 'epsPinPsu':
-                this.eventBus.emit('addEpsPinHighlight', "8-pin-power")
         }
     }
 }

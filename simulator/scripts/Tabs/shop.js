@@ -1,5 +1,6 @@
 import Component from "../Data/component.js"
 import components from "../Data/data1.js"
+import tutComponents from "../Data/tutorialSet.js"
 import SearchBar from "../Utility/searchBar.js"
 
 class Shop{
@@ -25,6 +26,7 @@ class Shop{
         // Component Categories
         this.categories = this.elements.shopCategories
         this.selectedCategory = ''
+        this.categoryMore = document.querySelector('.more-category')
 
         // Items
         this.items =  []
@@ -47,6 +49,7 @@ class Shop{
 
         // State
         this.isActive = false
+        this.setUsage = 'tutorial'
 
         // Events
         this.openBtn.addEventListener('click', () => {
@@ -585,12 +588,40 @@ class Shop{
         this.eventBus.on('gamePause', () => this.pause())
         this.eventBus.on('gameResume', () => this.resume())
 
+        const changeShopItemsEvents = ['tutSkipped','tutorialFinished']
+        changeShopItemsEvents.forEach(event => {
+            this.eventBus.on(event, () => {
+            this.setUsage === 'main'
+            this.items = []
+             while (this.itemsContainer.firstChild) {
+                this.itemsContainer.removeChild(this.itemsContainer.firstChild)
+            }
+            this.fillShopItems(components, this.items)
+
+            this.selectCategory('chassis')
+            this.update()
+        })
+        })
+
+        this.eventBus.on('emitTaskId', (data) => {
+            console.log(data)
+            if(data === 'buyCoolingDevice') {
+                this.categoryMore.classList.remove('invisible')
+                console.log(this.categoryMore)
+            } else  {
+                this.categoryMore.classList.add('invisible')
+                // console.log(`${parse}`)
+            }
+        })
+
         // EMITs
         this.quickBuy.addEventListener('click', () => {
             if(this.quickBuy.checked) this.eventBus.emit('quickBuyChecked')
         })
     }
 ///////////////////////////////////// event monitor ///////////////////////////////// 
+
+
 
     pause() {
         window.removeEventListener('mousedown', this.boundMouseDown)
@@ -626,8 +657,18 @@ class Shop{
 
     // Main Shop Initialization Method
     init() {
+        if(this.setUsage === 'tutorial') {
+            this.fillShopItems(tutComponents, this.items)
+            console.log(this.items)
+        }
+        //  else if(this.setUsage === 'main') {
+        //     while (this.itemsContainer.firstChild) {
+        //         this.itemsContainer.removeChild(this.itemsContainer.firstChild)
+        //     }
+        //     this.fillShopItems(components, this.items)
+        // }
         // Fill Shop Items
-        this.fillShopItems(components, this.items)
+        // this.fillShopItems(components, this.items)
 
         // Subscribe to eventBus events
         this.subscribeToEvents()
@@ -644,6 +685,7 @@ class Shop{
                 this.update()
             })
         })
+        this.selectCategory('chassis')
 
         // Purchase event
         this.itemsContainer.addEventListener('click', (e) => {

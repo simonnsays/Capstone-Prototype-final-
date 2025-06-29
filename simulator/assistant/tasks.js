@@ -158,7 +158,7 @@ const tasks = [
         description: [
             {type: 'text', content: 'Quick Buy is a feature that allows you to buy components quickly'},
             {type: 'text', content: 'this is because you dont check for specs anymore'},
-            {type: 'text', content: 'to perform this, look for the checkbox on the lower left, make sure that is is checked to activate Quick Buy'},
+            {type: 'text', content: 'to perform this, look for the checkbox on the lower left, make sure that is checked to activate Quick Buy'},
         ],
         highlight: ['label[for="quickBuy"]'],
         status: 'incomplete'
@@ -173,12 +173,11 @@ const tasks = [
         },
         description: [
             {type: 'text', content: 'on the category filter, select Memory and then select the highlighted item'},
-            {type: 'text', content: 'Memory is usually preffered to be be used across multiple ram sticks so for this one, buy at least two'},
         ],
-        condition: {
-            amountRequired: 2,
-            amount:0
-        },
+        // condition: {
+        //     amountRequired: 1,
+        //     amount:0
+        // },
         highlight: ['[data-id="ram"]','[data-name="Kingston HyperX Beast RGB DDR4"]'],
         status: 'incomplete'
     },  
@@ -193,7 +192,7 @@ const tasks = [
         description: [
             {type: 'text', content: 'on the category filter, select Storage and then select the highlighted item'},
         ],
-        highlight: ['[data-id="storage"]','[data-name="Seagate Barracuda SSD"]'],
+        highlight: ['[data-id="storage"]','[data-name="Seagate Barracuda"]'],
         status: 'incomplete'
     },  
     // STEP 14- Buy Cooling Devices
@@ -632,7 +631,7 @@ const tasks = [
             {type: 'break',},                   
             {type: 'text', content: "Use the scroll bar to navigate through the cables until you find the Sata-data cable, connect it to one of the available Sata-data ports"},                   
         ],
-        highlight: ['[data-type="sata-data"]'],
+        highlight: ['#pulley','[data-type="sata-data"]'],
         status: 'incomplete'
     },
     // STEP 41- navigate Storage
@@ -831,7 +830,7 @@ const tasks = [
             {type: 'text', content: "This is the BIOS, this is where you can access what your hardware can do on the very basic level."},                                                   
             {type: 'break'},                                                   
             {type: 'text', content: "In real life building, you install the OS on a different device and then place it inside your SSD or other storage device."},                                                   
-            {type: 'text', content: "but in this case, we will be installing it in the BIOS interface itself, locate the boot category and then click on Install OS"},                                                   
+            {type: 'text', content: "but in this case, we will be installing it in the BIOS interface itself, locate the boot category and then click on Install OS. BIOS stands for Basic Input Output System."},                                                   
         ],
         highlight: ['#biosBoot','#installOS'],
         status: 'incomplete'
@@ -869,10 +868,7 @@ const tasks = [
             {type: 'break'},
             {type: 'text', content: "If you want to reset the tutorial, you can click on the Restart button below. This will reset the tutorial and allow you to start over."},
             {type: 'break'},
-            {type: 'text', content: "If you want to reset the entire build, you can click on the Reset Build button below. This will only reset the entire build not the whole tutorial."},
-            {type: 'break'},
-            {type: 'text', content: "If you want to continue building your own PC, you can click on the Continue Building button below. This will take you back to the canvas where you can start building your own PC."},
-            {type: 'break'},                                                        
+            {type: 'text', content: "If you want to reset the entire build, you can click on the Reset Build button below. This will only reset the entire build not the whole tutorial."},                                                      
         ],  
         highlight: ['.summary-btn', '.summary-btn', '.summary-btn'], 
         status: 'incomplete'

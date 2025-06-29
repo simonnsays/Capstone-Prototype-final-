@@ -66,6 +66,8 @@ class DisplayArea {
         // States
         this.monitoringShelfTutorial = false
         this.monitoringTableTutorial = false
+        this.set2Check = false
+        this.set1check = false
 
         // Events
         this.leftBtn.addEventListener('click', () => this.rotateLeft())
@@ -542,16 +544,26 @@ class DisplayArea {
             return true
         }
 
-        const proceedReq1 = ['motherboard', 'cpu', 'cooling', 'ram', 'ram', 'gpu']
-        const proceedReq2 = ['chassis', 'motherboard', 'cpu', 'cooling', 'ram', 'ram', 'gpu', 'psu', 'storage']
-        if(hasRequiredItems(proceedReq1, currTableComponents)) {
-            this.eventBus.emit('set1Attached')
-            // console.log('returned 1')
+        const proceedReq1 = ['motherboard', 'cpu', 'cooling', 'ram', 'gpu']
+        const proceedReq2 = ['chassis', 'motherboard', 'cpu', 'cooling', 'ram', 'gpu', 'psu', 'storage']
+     
+        if(hasRequiredItems(proceedReq2, currTableComponents) && this.set2Check) {
+            console.log('returned 2: procReq2')
+            this.eventBus.emit('assemblyCompleted')
+            return
         } 
+        if(hasRequiredItems(proceedReq1, currTableComponents) && this.set1check) {
+            this.eventBus.emit('set1Attached')
+            console.log('returned 1: procReq1')
+            return
+        } 
+
         if (this.currentSide == 'right') {
             this.eventBus.emit('rightSideAccessed')
-            // console.log('accessed')
+            console.log('accessed right ')
+            return
         }
+        
         if (currTableComponents.length === 1 && currTableComponents[0] === 'chassis') {
             this.eventBus.emit('chassisPlacedInMain')
             // console.log('returned 3')
@@ -581,6 +593,19 @@ class DisplayArea {
     subscribeToEvents() {
         this.eventBus.on('motherboardPlaced', () => this.monitoringShelfTutorial = true)
         this.eventBus.on('set1Placed', () => this.monitoringTableTutorial = true) 
+
+        this.eventBus.on('findSet2', () => {
+            this.set2Check = true
+            this.set1check = false
+        })
+        this.eventBus.on('findSet1', () => {
+            this.set2Check = false
+            this.set1check = true
+        })
+        this.eventBus.on('findNoSet', () => {
+            this.set2Check = false
+            this.set1check = false
+        })
     }
 }
 
