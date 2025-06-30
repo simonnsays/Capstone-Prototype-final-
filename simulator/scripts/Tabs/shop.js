@@ -615,13 +615,10 @@ class Shop{
         })
 
         this.eventBus.on('emitTaskId', (data) => {
-            console.log(data)
             if(data === 'buyCoolingDevice') {
                 this.categoryMore.classList.remove('invisible')
-                console.log(this.categoryMore)
             } else  {
                 this.categoryMore.classList.add('invisible')
-                // console.log(`${parse}`)
             }
         })
 
@@ -637,8 +634,6 @@ class Shop{
         })
     }
 ///////////////////////////////////// event monitor ///////////////////////////////// 
-
-
 
     pause() {
         window.removeEventListener('mousedown', this.boundMouseDown)
@@ -676,16 +671,7 @@ class Shop{
     init() {
         if(this.setUsage === 'tutorial') {
             this.fillShopItems(tutComponents, this.items)
-            console.log(this.items)
         }
-        //  else if(this.setUsage === 'main') {
-        //     while (this.itemsContainer.firstChild) {
-        //         this.itemsContainer.removeChild(this.itemsContainer.firstChild)
-        //     }
-        //     this.fillShopItems(components, this.items)
-        // }
-        // Fill Shop Items
-        // this.fillShopItems(components, this.items)
 
         // Subscribe to eventBus events
         this.subscribeToEvents()
